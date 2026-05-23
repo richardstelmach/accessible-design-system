@@ -1,0 +1,155 @@
+{
+    "spacing": {
+      "inset": {
+        "sm": {
+          "$value": "{spacing.3}",
+          "$type": "spacing",
+          "$description": "Small internal padding for compact non-interactive containers such as small cards, callouts or panels."
+        },
+        "md": {
+          "$value": "{spacing.4}",
+          "$type": "spacing",
+          "$description": "Default internal padding for standard non-interactive containers such as cards, panels and grouped content blocks."
+        },
+        "lg": {
+          "$value": "{spacing.6}",
+          "$type": "spacing",
+          "$description": "Large internal padding for more spacious containers, larger cards, feature blocks or modal content areas."
+        },
+        "xl": {
+          "$value": "{spacing.8}",
+          "$type": "spacing",
+          "$description": "Extra-large internal padding for prominent layout areas, hero panels or spacious feature sections."
+        }
+      },
+  
+      "stack": {
+        "xs": {
+          "$value": "{spacing.1}",
+          "$type": "spacing",
+          "$description": "Extra-small vertical gap between very closely related stacked items."
+        },
+        "sm": {
+          "$value": "{spacing.2}",
+          "$type": "spacing",
+          "$description": "Small vertical gap between closely related stacked items, such as label and helper text."
+        },
+        "md": {
+          "$value": "{spacing.4}",
+          "$type": "spacing",
+          "$description": "Default vertical gap between related stacked elements."
+        },
+        "lg": {
+          "$value": "{spacing.6}",
+          "$type": "spacing",
+          "$description": "Large vertical gap between grouped components or content blocks."
+        },
+        "xl": {
+          "$value": "{spacing.8}",
+          "$type": "spacing",
+          "$description": "Extra-large vertical gap between larger content groups."
+        }
+      },
+  
+      "inline": {
+        "xs": {
+          "$value": "{spacing.1}",
+          "$type": "spacing",
+          "$description": "Extra-small horizontal gap between tightly related inline items."
+        },
+        "sm": {
+          "$value": "{spacing.2}",
+          "$type": "spacing",
+          "$description": "Small horizontal gap between inline items such as icon and text, chips, tags or compact controls."
+        },
+        "md": {
+          "$value": "{spacing.4}",
+          "$type": "spacing",
+          "$description": "Default horizontal gap between related inline items such as buttons, navigation items or grouped actions."
+        },
+        "lg": {
+          "$value": "{spacing.6}",
+          "$type": "spacing",
+          "$description": "Large horizontal gap between inline groups where more separation is needed."
+        }
+      },
+  
+      "content": {
+        "headingToBody": {
+          "$value": "{spacing.3}",
+          "$type": "spacing",
+          "$description": "Vertical spacing between a heading and the body text that directly follows it."
+        },
+        "bodyToAction": {
+          "$value": "{spacing.6}",
+          "$type": "spacing",
+          "$description": "Vertical spacing between body content and a following action area such as buttons or links."
+        },
+        "paragraph": {
+          "$value": "{spacing.4}",
+          "$type": "spacing",
+          "$description": "Default vertical spacing between paragraphs or prose blocks."
+        }
+      },
+  
+      "control": {
+        "paddingBlock": {
+          "compact": {
+            "$value": "{spacing.2}",
+            "$type": "spacing",
+            "$description": "Compact vertical padding for interactive controls. Minimum target size should still be enforced with size.control.minBlockSize."
+          },
+          "default": {
+            "$value": "{spacing.3}",
+            "$type": "spacing",
+            "$description": "Default vertical padding for interactive controls such as buttons, inputs, selects and tabs."
+          },
+          "comfortable": {
+            "$value": "{spacing.4}",
+            "$type": "spacing",
+            "$description": "Comfortable vertical padding for larger or more prominent interactive controls."
+          }
+        },
+        "paddingInline": {
+          "compact": {
+            "$value": "{spacing.3}",
+            "$type": "spacing",
+            "$description": "Compact horizontal padding for interactive controls."
+          },
+          "default": {
+            "$value": "{spacing.4}",
+            "$type": "spacing",
+            "$description": "Default horizontal padding for interactive controls."
+          },
+          "comfortable": {
+            "$value": "{spacing.6}",
+            "$type": "spacing",
+            "$description": "Comfortable horizontal padding for larger or more prominent interactive controls."
+          }
+        },
+        "gap": {
+          "$value": "{spacing.2}",
+          "$type": "spacing",
+          "$description": "Default internal gap between elements inside an interactive control, such as icon and label."
+        }
+      },
+  
+      "section": {
+        "base": {
+          "$value": "{spacing.12}",
+          "$type": "spacing",
+          "$description": "Base vertical spacing between major page sections."
+        },
+        "md": {
+          "$value": "{spacing.16}",
+          "$type": "spacing",
+          "$description": "Medium breakpoint vertical spacing between major page sections."
+        },
+        "lg": {
+          "$value": "{spacing.20}",
+          "$type": "spacing",
+          "$description": "Large breakpoint vertical spacing between major page sections."
+        }
+      }
+    }
+  }

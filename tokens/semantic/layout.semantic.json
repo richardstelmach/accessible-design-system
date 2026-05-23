@@ -1,0 +1,68 @@
+{
+    "layout": {
+      "page": {
+        "padding": {
+          "base": {
+            "$value": "{spacing.4}",
+            "$type": "spacing",
+            "$description": "Base padding between the viewport edge and page content."
+          },
+          "md": {
+            "$value": "{spacing.6}",
+            "$type": "spacing",
+            "$description": "Medium breakpoint padding between the viewport edge and page content."
+          },
+          "lg": {
+            "$value": "{spacing.8}",
+            "$type": "spacing",
+            "$description": "Large breakpoint padding between the viewport edge and page content."
+          }
+        }
+      },
+  
+      "container": {
+        "maxWidth": {
+          "text": {
+            "$value": "38rem",
+            "$type": "dimension",
+            "$description": "Maximum width for readable prose/text blocks. Intended to keep line lengths broadly aligned with accessibility and readability guidance."
+          },
+          "narrow": {
+            "$value": "40rem",
+            "$type": "dimension",
+            "$description": "Maximum width for narrow layout containers such as forms, dialogs or focused content areas."
+          },
+          "default": {
+            "$value": "72rem",
+            "$type": "dimension",
+            "$description": "Default maximum width for standard page containers."
+          },
+          "wide": {
+            "$value": "96rem",
+            "$type": "dimension",
+            "$description": "Wide maximum width for complex layouts, dashboards or multi-column content."
+          }
+        }
+      },
+  
+      "grid": {
+        "gutter": {
+          "base": {
+            "$value": "{spacing.4}",
+            "$type": "spacing",
+            "$description": "Base spacing between grid columns."
+          },
+          "md": {
+            "$value": "{spacing.6}",
+            "$type": "spacing",
+            "$description": "Medium breakpoint spacing between grid columns."
+          },
+          "lg": {
+            "$value": "{spacing.8}",
+            "$type": "spacing",
+            "$description": "Large breakpoint spacing between grid columns."
+          }
+        }
+      }
+    }
+  }

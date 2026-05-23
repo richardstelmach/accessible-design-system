@@ -1,0 +1,36 @@
+{
+    "size": {
+      "target": {
+        "minimum": {
+          "$value": "1.5rem",
+          "$type": "dimension",
+          "$description": "Minimum pointer target size aligned to WCAG 2.2 AA target size guidance. At a default 16px root size, this equals 24px."
+        },
+        "comfortable": {
+          "$value": "2.75rem",
+          "$type": "dimension",
+          "$description": "Preferred comfortable interactive target size. At a default 16px root size, this equals 44px."
+        }
+      },
+  
+      "control": {
+        "minBlockSize": {
+          "compact": {
+            "$value": "{size.target.comfortable}",
+            "$type": "dimension",
+            "$description": "Minimum vertical size for compact interactive controls. Keeps controls accessible even when padding or text size is compact."
+          },
+          "default": {
+            "$value": "{size.target.comfortable}",
+            "$type": "dimension",
+            "$description": "Default minimum vertical size for interactive controls such as buttons, inputs, selects and tabs."
+          },
+          "comfortable": {
+            "$value": "3rem",
+            "$type": "dimension",
+            "$description": "Larger minimum vertical size for comfortable or prominent interactive controls."
+          }
+        }
+      }
+    }
+  }
