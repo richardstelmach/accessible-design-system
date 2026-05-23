@@ -1,0 +1,59 @@
+pattern: Card Grid
+
+description: >
+  Defines a responsive grid of card-like content containers using system spacing,
+  surface and layout tokens.
+
+purpose:
+  - Support consistent card-based layouts
+  - Provide predictable spacing between cards
+  - Keep card content visually grouped
+  - Guide AI-generated dashboard, listing and overview screens
+
+tokens:
+  surface:
+    card: color.surface.default
+    canvas: color.surface.canvas
+
+  border:
+    light: color.border.light
+    default: color.border.default
+
+  inset:
+    default: spacing.inset.md
+    large: spacing.inset.lg
+
+  grid:
+    gutter:
+      base: layout.grid.gutter.base
+      md: layout.grid.gutter.md
+      lg: layout.grid.gutter.lg
+
+  stack:
+    content: spacing.stack.md
+
+  radius:
+    default: radius.lg
+
+structure:
+  - Cards sit on surface.canvas
+  - Cards use color.surface.default as their background
+  - Cards may use color.border.light or color.border.default for outlines
+  - Card content should use spacing.inset.md by default
+  - Spacing between cards should use layout.grid.gutter
+  - Internal card content should use spacing.stack.md
+
+responsiveBehaviour:
+  - Single column layouts are preferred at narrow widths
+  - Multi-column layouts may be introduced at wider breakpoints
+  - Grid gutters should increase at md and lg breakpoints
+
+accessibility:
+  - Cards should not rely on visual grouping alone if they contain interactive areas
+  - Interactive elements inside cards must remain clearly focusable
+  - Avoid making entire cards interactive unless the interaction is clear
+
+aiGenerationRules:
+  - Use this pattern for dashboards, product lists, feature grids and content summaries
+  - Do not invent arbitrary card padding or gutters
+  - Use semantic surface, border, radius and spacing tokens

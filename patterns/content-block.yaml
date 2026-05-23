@@ -1,0 +1,61 @@
+pattern: Content Block
+
+description: >
+  Defines the relationship between headings, body text and optional action areas
+  inside a content group.
+
+purpose:
+  - Create consistent content hierarchy
+  - Control spacing between headings, prose and actions
+  - Support readable and accessible content composition
+  - Guide AI-generated layouts
+
+tokens:
+  heading:
+    h1: typography.heading.h1
+    h2: typography.heading.h2
+    h3: typography.heading.h3
+    h4: typography.heading.h4
+    h5: typography.heading.h5
+    h6: typography.heading.h6
+
+  body:
+    default: typography.body.default
+    small: typography.body.small
+    large: typography.body.large
+
+  text:
+    default: color.text.default
+
+  spacing:
+    headingToBody: spacing.content.headingToBody
+    bodyToAction: spacing.content.bodyToAction
+    paragraph: spacing.content.paragraph
+
+  maxWidth:
+    text: layout.container.maxWidth.text
+
+structure:
+  - Content block may contain a heading, body text and optional actions
+  - Heading should appear before body text
+  - Body text should use typography.body.default unless emphasis is needed
+  - Long-form text should be constrained by layout.container.maxWidth.text
+  - Actions should appear after body text with spacing.content.bodyToAction
+
+spacingRules:
+  - Use spacing.content.headingToBody between heading and body
+  - Use spacing.content.paragraph between paragraphs
+  - Use spacing.content.bodyToAction between body text and action area
+
+accessibility:
+  - Heading level should follow document structure
+  - Visual heading style may differ from semantic HTML level when required
+  - Text blocks should avoid overly long line lengths
+  - Do not rely on colour alone to communicate emphasis
+  - Heading levels should be nested properly to support assistive technologies
+  - Heading text should be meaningful and descriptive of the content that follows
+
+aiGenerationRules:
+  - Use this pattern for hero copy, section introductions, cards with text, forms with intro text and empty states
+  - Use semantic typography tokens only
+  - Do not invent heading or paragraph spacing

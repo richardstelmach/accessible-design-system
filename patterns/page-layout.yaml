@@ -1,0 +1,55 @@
+pattern: Page Layout
+
+description: >
+  Defines the default structure for page-level layouts, including viewport padding,
+  container width and vertical spacing between major sections.
+
+purpose:
+  - Provide a consistent page structure
+  - Keep content aligned to readable container widths
+  - Support responsive layout behaviour
+  - Prevent arbitrary page spacing in AI-generated designs
+
+tokens:
+  surface:
+    canvas: color.surface.canvas
+
+  pagePadding:
+    base: layout.page.padding.base
+    md: layout.page.padding.md
+    lg: layout.page.padding.lg
+
+  containerMaxWidth:
+    default: layout.container.maxWidth.default
+    wide: layout.container.maxWidth.wide
+    text: layout.container.maxWidth.text
+
+  sectionSpacing:
+    base: spacing.section.base
+    md: spacing.section.md
+    lg: spacing.section.lg
+
+structure:
+  - Page uses surface.canvas as the background
+  - Page content is inset from viewport edges using layout.page.padding
+  - Main content should be horizontally centred inside a container
+  - Standard pages should use layout.container.maxWidth.default
+  - Text-heavy pages should use layout.container.maxWidth.text
+  - Major sections should be separated using spacing.section
+
+responsiveBehaviour:
+  - Use base padding at the smallest viewport size
+  - Increase page padding at md and lg breakpoints
+  - Increase section spacing at md and lg breakpoints
+  - Do not assume breakpoint names map directly to devices
+
+accessibility:
+  - Maintain readable line lengths for text-heavy content
+  - Avoid edge-to-edge text on small viewports
+  - Ensure layout spacing supports visual grouping and scanning
+
+aiGenerationRules:
+  - Use this pattern for standard page layouts
+  - Do not invent page padding values
+  - Do not exceed layout.container.maxWidth.wide for main content
+  - Use layout.container.maxWidth.text for long-form prose

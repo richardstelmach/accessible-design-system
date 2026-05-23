@@ -1,0 +1,62 @@
+pattern: Form Layout
+
+description: >
+  Defines spacing and structure for accessible forms, including labels, fields,
+  helper text, validation messages and action areas.
+
+purpose:
+  - Provide consistent form layout
+  - Support accessible label and helper text relationships
+  - Ensure adequate spacing between fields and actions
+  - Guide AI-generated form screens
+
+tokens:
+  label:
+    default: typography.label.default
+
+  body:
+    default: typography.body.default
+    small: typography.body.small
+
+  text:
+    default: color.text.default
+
+  spacing:
+    fieldInternalGap: spacing.stack.sm
+    fieldGroupGap: spacing.stack.lg
+    formSectionGap: spacing.section.base
+    actionGap: spacing.inline.md
+    bodyToAction: spacing.content.bodyToAction
+
+  control:
+    minBlockSize: size.control.minBlockSize.default
+    paddingBlock: spacing.control.paddingBlock.default
+    paddingInline: spacing.control.paddingInline.default
+
+  border:
+    interactive: color.border.interactive
+
+structure:
+  - Each field should have a visible label
+  - Helper text should appear near the associated field
+  - Error messages should appear near the associated field
+  - Related fields should be grouped with clear spacing
+  - Primary actions should appear after the final field group
+
+spacingRules:
+  - Use spacing.stack.sm between label, helper text and field
+  - Use spacing.stack.lg between field groups
+  - Use spacing.content.bodyToAction before form actions
+  - Use spacing.inline.md between inline actions
+
+accessibility:
+  - Every input must have an accessible label
+  - Helper and error text must be programmatically associated where implemented in code
+  - Interactive controls should meet minimum target sizing
+  - Error states must not rely on colour alone
+
+aiGenerationRules:
+  - Do not create inputs without labels
+  - Do not invent custom field spacing
+  - Use status tokens for validation messaging
+  - Use control sizing and spacing tokens for interactive elements
