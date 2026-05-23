@@ -1,12 +1,19 @@
 # Token Structure
 
-## Token Layering
+## Overview
 
-The system uses layered token architecture:
+This design system uses a layered token architecture.
 
-1. Primitive Tokens
-2. Semantic Tokens
-3. Component Tokens (future)
+The goal is to keep raw values, semantic meaning, and component-specific implementation separate.
+
+```text
+Primitive Tokens
+↓
+Semantic Tokens
+↓
+Component Tokens
+↓
+Components
 
 ---
 
