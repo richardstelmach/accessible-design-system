@@ -77,3 +77,20 @@ This supports interoperability with:
 - Style Dictionary
 - frontend frameworks
 - AI tooling
+
+## Status Colour Pairing
+
+Status colours use light background tones with dark same-family foreground tones.
+
+This keeps success, warning, and error messaging visually related while preserving accessible contrast.
+
+Examples:
+
+- `status.success.background` → `color.success.100`
+- `status.success.foreground` → `color.success.950`
+- `status.warning.background` → `color.warning.100`
+- `status.warning.foreground` → `color.warning.950`
+- `status.error.background` → `color.error.100`
+- `status.error.foreground` → `color.error.950`
+
+Primary and featured backgrounds currently use black foreground text because their same-family darkest tones do not provide sufficient contrast against the 500 background colours for normal text.

@@ -1,0 +1,117 @@
+{
+    "color": {
+      "surface": {
+        "canvas": {
+          "$value": "{color.white}",
+          "$type": "color"
+        },
+        "default": {
+          "$value": "{color.white}",
+          "$type": "color"
+        },
+        "raised": {
+          "$value": "{color.white}",
+          "$type": "color"
+        }
+      },
+  
+      "text": {
+        "default": {
+          "$value": "{color.neutral.500}",
+          "$type": "color"
+        }
+      },
+  
+      "border": {
+        "light": {
+          "$value": "{color.neutral.100}",
+          "$type": "color"
+        },
+        "default": {
+          "$value": "{color.neutral.200}",
+          "$type": "color"
+        },
+        "interactive": {
+          "$value": "{color.neutral.500}",
+          "$type": "color"
+        }
+      },
+  
+      "interactive": {
+        "default": {
+          "foreground": {
+            "$value": "{color.neutral.500}",
+            "$type": "color"
+          },
+          "border": {
+            "$value": "{color.neutral.500}",
+            "$type": "color"
+          }
+        },
+  
+        "primary": {
+          "background": {
+            "$value": "{color.primary.500}",
+            "$type": "color"
+          },
+          "foreground": {
+            "$value": "{color.black}",
+            "$type": "color"
+          }
+        },
+  
+        "focus": {
+          "ring": {
+            "$value": "{color.primary.700}",
+            "$type": "color"
+          }
+        }
+      },
+  
+      "featured": {
+        "background": {
+          "$value": "{color.secondary.500}",
+          "$type": "color"
+        },
+        "foreground": {
+          "$value": "{color.black}",
+          "$type": "color"
+        }
+      },
+  
+      "status": {
+        "success": {
+          "background": {
+            "$value": "{color.success.500}",
+            "$type": "color"
+          },
+          "foreground": {
+            "$value": "{color.black}",
+            "$type": "color"
+          }
+        },
+  
+        "warning": {
+          "background": {
+            "$value": "{color.warning.500}",
+            "$type": "color"
+          },
+          "foreground": {
+            "$value": "{color.black}",
+            "$type": "color"
+          }
+        },
+  
+        "error": {
+          "background": {
+            "$value": "{color.error.500}",
+            "$type": "color"
+          },
+          "foreground": {
+            "$value": "{color.black}",
+            "$type": "color"
+          }
+        }
+      }
+    }
+  }
