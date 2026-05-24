@@ -10,7 +10,11 @@ const sourceFolders = [
 ];
 
 const outputFolder = path.join(repoRoot, "tokens/compiled");
-const outputFile = path.join(outputFolder, "tokens.json");
+
+const rawOutputFile = path.join(outputFolder, "tokens.raw.json");
+const studioOutputFile = path.join(outputFolder, "tokens.studio.json");
+
+const tokenStudioSetName = "global";
 
 function readJsonFile(filePath) {
   try {
@@ -49,6 +53,14 @@ function getJsonFiles(folderPath) {
     .map((file) => path.join(folderPath, file));
 }
 
+function writeJson(filePath, data) {
+  fs.writeFileSync(
+    filePath,
+    `${JSON.stringify(data, null, 2)}\n`,
+    "utf8"
+  );
+}
+
 function buildTokens() {
   let compiledTokens = {};
 
@@ -65,13 +77,14 @@ function buildTokens() {
 
   fs.mkdirSync(outputFolder, { recursive: true });
 
-  fs.writeFileSync(
-    outputFile,
-    `${JSON.stringify(compiledTokens, null, 2)}\n`,
-    "utf8"
-  );
+  writeJson(rawOutputFile, compiledTokens);
 
-  console.log(`\nCompiled tokens written to: ${path.relative(repoRoot, outputFile)}`);
+  writeJson(studioOutputFile, {
+    [tokenStudioSetName]: compiledTokens
+  });
+
+  console.log(`\nRaw compiled tokens written to: ${path.relative(repoRoot, rawOutputFile)}`);
+  console.log(`Tokens Studio compiled file written to: ${path.relative(repoRoot, studioOutputFile)}`);
 }
 
 buildTokens();
