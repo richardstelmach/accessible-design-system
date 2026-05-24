@@ -24,6 +24,21 @@
           "$value": "{color.neutral.500}",
           "$type": "color",
           "$description": "Default text colour for body copy and general content."
+        },
+        "heading": {
+          "$value": "{color.neutral.600}",
+          "$type": "color",
+          "$description": "Default heading colour for page, section and card headings."
+        },
+        "headingAccent": {
+          "$value": "{color.primary.700}",
+          "$type": "color",
+          "$description": "Accent heading colour for page titles, hero headings or selected brand moments on light surfaces."
+        },
+        "link": {
+          "$value": "{color.primary.700}",
+          "$type": "color",
+          "$description": "Default link colour used on light surfaces."
         }
       },
   
@@ -63,12 +78,12 @@
         "primary": {
           "$description": "Primary action colour pairing for the most important action in a section or flow.",
           "background": {
-            "$value": "{color.primary.500}",
+            "$value": "{color.primary.700}",
             "$type": "color",
             "$description": "Background colour for primary actions."
           },
           "foreground": {
-            "$value": "{color.black}",
+            "$value": "{color.white}",
             "$type": "color",
             "$description": "Foreground colour for content placed on the primary action background."
           }
