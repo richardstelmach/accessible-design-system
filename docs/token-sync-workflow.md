@@ -82,6 +82,34 @@ Component tokens should reference semantic tokens rather than primitive values d
 
 ---
 
+## Token Descriptions
+
+Token descriptions should live in the source token JSON files using `$description`.
+
+Descriptions should explain the purpose and intended usage of a token, not just repeat the value.
+
+Example:
+
+    "default": {
+      "$value": "{color.text.default}",
+      "$type": "color",
+      "$description": "Default text colour used for readable body content and standard interface text."
+    }
+
+For semantic token groups, a group-level `$description` may be used to describe the relationship between child tokens.
+
+Example:
+
+    "success": {
+      "$description": "Status colour pairing for positive feedback, successful actions or confirmation messages.",
+      "background": {},
+      "foreground": {}
+    }
+
+Figma documentation should display these descriptions, but GitHub remains the source of truth.
+
+Do not treat manually written Figma card descriptions as canonical if the token source contains a `$description`.
+
 ## Current Folder Structure
 
     tokens/
