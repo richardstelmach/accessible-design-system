@@ -219,104 +219,130 @@
     "surface": {
       "canvas": {
         "$value": "{color.white}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Used for the page background colour"
       },
       "default": {
         "$value": "{color.white}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Default surface colour for cards, panels and standard content containers."
       },
       "raised": {
         "$value": "{color.white}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Surface colour reserved for elevated areas such as dialogs, popovers, floating panels or layered content."
       }
     },
     "text": {
       "default": {
         "$value": "{color.neutral.500}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Default text colour for body copy and general content."
       }
     },
     "border": {
       "light": {
         "$value": "{color.neutral.100}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Subtle border colour for low-emphasis separation, card edges and decorative dividers."
       },
       "default": {
         "$value": "{color.neutral.200}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Default border colour for visible separation between surfaces, sections or grouped content."
       },
       "interactive": {
         "$value": "{color.neutral.500}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Border colour for interactive elements such as inputs, selectable controls and default action states."
       }
     },
     "interactive": {
+      "$description": "Default interactive foreground and border pairing for secondary or neutral actions.",
       "default": {
         "foreground": {
           "$value": "{color.neutral.500}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Default foreground colour for secondary or neutral interactive elements."
         },
         "border": {
           "$value": "{color.neutral.500}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Default border colour for secondary or neutral interactive elements."
         }
       },
       "primary": {
+        "$description": "Primary action colour pairing for the most important action in a section or flow.",
         "background": {
           "$value": "{color.primary.500}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Background colour for primary actions."
         },
         "foreground": {
           "$value": "{color.black}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Foreground colour for content placed on the primary action background."
         }
       },
       "focus": {
         "ring": {
           "$value": "{color.primary.700}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Focus indicator colour used to show keyboard focus and support accessible navigation."
         }
       }
     },
     "featured": {
+      "$description": "Featured colour pairing for highlighted content, promotional areas or visually distinctive callouts.",
       "background": {
         "$value": "{color.secondary.500}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Background colour for featured content areas."
       },
       "foreground": {
         "$value": "{color.black}",
-        "$type": "color"
+        "$type": "color",
+        "$description": "Foreground colour for content placed on featured backgrounds."
       }
     },
     "status": {
       "success": {
+        "$description": "Status colour pairing for positive feedback, successful actions or confirmation messages.",
         "background": {
           "$value": "{color.success.100}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Background colour for success messages."
         },
         "foreground": {
           "$value": "{color.success.950}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Foreground colour for content placed on success backgrounds."
         }
       },
       "warning": {
+        "$description": "Status colour pairing for cautionary feedback, warnings or important non-blocking messages.",
         "background": {
           "$value": "{color.warning.100}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Background colour for warning messages."
         },
         "foreground": {
           "$value": "{color.warning.950}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Foreground colour for content placed on warning backgrounds."
         }
       },
       "error": {
+        "$description": "Status colour pairing for errors, validation failures or destructive feedback.",
         "background": {
           "$value": "{color.error.100}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Background colour for error messages."
         },
         "foreground": {
           "$value": "{color.error.950}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Foreground colour for content placed on error backgrounds."
         }
       }
     }
