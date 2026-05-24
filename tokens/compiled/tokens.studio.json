@@ -89,27 +89,53 @@
       },
       "primary": {
         "100": {
-          "$value": "#feccaa",
+          "$value": "#bbd9fc",
           "$type": "color"
         },
         "300": {
-          "$value": "#fc9e5d",
+          "$value": "#82b9f9",
           "$type": "color"
         },
         "500": {
-          "$value": "#fc7518",
+          "$value": "#4496f5",
           "$type": "color"
         },
         "700": {
-          "$value": "#be5913",
+          "$value": "#0171f2",
           "$type": "color"
         },
         "900": {
-          "$value": "#90430e",
+          "$value": "#0055b9",
           "$type": "color"
         },
         "950": {
-          "$value": "#642e0a",
+          "$value": "#003b7f",
+          "$type": "color"
+        }
+      },
+      "accent": {
+        "100": {
+          "$value": "#ffcd96",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#ff9e33",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#e37800",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#b65f00",
+          "$type": "color"
+        },
+        "900": {
+          "$value": "#894800",
+          "$type": "color"
+        },
+        "950": {
+          "$value": "#5e3200",
           "$type": "color"
         }
       },
@@ -239,6 +265,21 @@
           "$value": "{color.neutral.500}",
           "$type": "color",
           "$description": "Default text colour for body copy and general content."
+        },
+        "heading": {
+          "$value": "{color.neutral.600}",
+          "$type": "color",
+          "$description": "Default heading colour for page, section and card headings."
+        },
+        "headingAccent": {
+          "$value": "{color.primary.700}",
+          "$type": "color",
+          "$description": "Accent heading colour for page titles, hero headings or selected brand moments on light surfaces."
+        },
+        "link": {
+          "$value": "{color.primary.700}",
+          "$type": "color",
+          "$description": "Default link colour used on light surfaces."
         }
       },
       "border": {
@@ -275,12 +316,12 @@
         "primary": {
           "$description": "Primary action colour pairing for the most important action in a section or flow.",
           "background": {
-            "$value": "{color.primary.500}",
+            "$value": "{color.primary.700}",
             "$type": "color",
             "$description": "Background colour for primary actions."
           },
           "foreground": {
-            "$value": "{color.black}",
+            "$value": "{color.white}",
             "$type": "color",
             "$description": "Foreground colour for content placed on the primary action background."
           }
