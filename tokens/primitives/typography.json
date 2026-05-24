@@ -83,17 +83,17 @@
   
       "lineHeight": {
         "tight": {
-          "$value": "1.2",
+          "$value": "120%",
           "$type": "lineHeight"
         },
   
         "normal": {
-          "$value": "1.5",
+          "$value": "150%",
           "$type": "lineHeight"
         },
   
         "relaxed": {
-          "$value": "1.7",
+          "$value": "170%",
           "$type": "lineHeight"
         }
       },
