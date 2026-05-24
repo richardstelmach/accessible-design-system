@@ -82,33 +82,33 @@
       "status": {
         "success": {
           "background": {
-            "$value": "{color.success.500}",
+            "$value": "{color.success.100}",
             "$type": "color"
           },
           "foreground": {
-            "$value": "{color.black}",
+            "$value": "{color.success.950}",
             "$type": "color"
           }
         },
   
         "warning": {
           "background": {
-            "$value": "{color.warning.500}",
+            "$value": "{color.warning.100}",
             "$type": "color"
           },
           "foreground": {
-            "$value": "{color.black}",
+            "$value": "{color.warning.950}",
             "$type": "color"
           }
         },
   
         "error": {
           "background": {
-            "$value": "{color.error.500}",
+            "$value": "{color.error.100}",
             "$type": "color"
           },
           "foreground": {
-            "$value": "{color.black}",
+            "$value": "{color.error.950}",
             "$type": "color"
           }
         }
