@@ -2,138 +2,384 @@ pattern: Page Layout
 
 description: >
   Defines the default structure for page-level layouts, including viewport padding,
-  container width and vertical spacing between major sections.
+  container width, grid gutters, readable text width and vertical spacing between
+  major sections.
 
 purpose:
   - Provide a consistent page structure.
   - Keep content aligned to readable container widths.
-  - Support responsive layout behaviour.
+  - Support responsive layout behaviour across standard viewport sizes.
   - Prevent arbitrary page spacing in AI-generated designs.
   - Explain when and why responsive layout tokens should be used.
+  - Separate breakpoint thresholds from practical Figma test frame sizes.
 
 tokens:
   surface:
     canvas: color.surface.canvas
 
   breakpoints:
-    sm:
-      token: breakpoint.sm
-      approximateValue: 40rem / 640px
-      purpose: Small viewport threshold. Used when layout rules need to change beyond the smallest layout.
-    md:
-      token: breakpoint.md
-      approximateValue: 48rem / 768px
-      purpose: Medium viewport threshold. Used when the page can support more padding, wider layouts or more spacious section rhythm.
-    lg:
-      token: breakpoint.lg
-      approximateValue: 64rem / 1024px
-      purpose: Large viewport threshold. Used when desktop-style layout rules are appropriate.
-    xl:
-      token: breakpoint.xl
-      approximateValue: 80rem / 1280px
-      purpose: Extra-large viewport threshold. Used for wide layouts where additional horizontal space is available.
-    2xl:
-      token: breakpoint.2xl
-      approximateValue: 96rem / 1536px
-      purpose: Very wide viewport threshold. Used sparingly for complex or wide layouts.
+    sm: breakpoint.sm
+    md: breakpoint.md
+    lg: breakpoint.lg
+    xl: breakpoint.xl
+    2xl: breakpoint.2xl
 
   pagePadding:
-    base:
-      token: layout.page.padding.base
-      appliesUntil: breakpoint.md
-      purpose: Provides safe spacing between the viewport edge and content on the smallest layouts.
-    md:
-      token: layout.page.padding.md
-      appliesFrom: breakpoint.md
-      purpose: Increases page breathing room once the viewport can support more horizontal space.
-    lg:
-      token: layout.page.padding.lg
-      appliesFrom: breakpoint.lg
-      purpose: Provides stronger desktop page framing and prevents content from feeling cramped on larger viewports.
+    base: layout.page.padding.base
+    md: layout.page.padding.md
+    lg: layout.page.padding.lg
 
   containerMaxWidth:
-    text:
-      token: layout.container.maxWidth.text
-      purpose: Limits long-form prose to a readable line length.
-      useFor:
-        - Long-form text
-        - Articles
-        - Documentation body copy
-        - Forms with explanatory content
-    narrow:
-      token: layout.container.maxWidth.narrow
-      purpose: Provides a focused width for constrained content.
-      useFor:
-        - Forms
-        - Dialog-style layouts
-        - Focused tasks
-    default:
-      token: layout.container.maxWidth.default
-      purpose: Provides the standard maximum width for most page layouts.
-      useFor:
-        - Standard content pages
-        - Documentation pages
-        - Mixed text and component examples
-    wide:
-      token: layout.container.maxWidth.wide
-      purpose: Allows wider content while still preventing uncontrolled full-width layouts.
-      useFor:
-        - Dashboards
-        - Complex grids
-        - Data-heavy layouts
-        - Multi-column layouts
+    text: layout.container.maxWidth.text
+    narrow: layout.container.maxWidth.narrow
+    default: layout.container.maxWidth.default
+    wide: layout.container.maxWidth.wide
+
+  gridGutter:
+    base: layout.grid.gutter.base
+    md: layout.grid.gutter.md
+    lg: layout.grid.gutter.lg
 
   sectionSpacing:
-    base:
-      token: spacing.section.base
-      appliesUntil: breakpoint.md
-      purpose: Provides clear separation between major sections on smaller layouts without wasting vertical space.
-    md:
-      token: spacing.section.md
-      appliesFrom: breakpoint.md
-      purpose: Increases separation between major sections as screen space becomes more available.
-    lg:
-      token: spacing.section.lg
-      appliesFrom: breakpoint.lg
-      purpose: Provides generous section rhythm for desktop layouts and documentation pages.
+    base: spacing.section.base
+    md: spacing.section.md
+    lg: spacing.section.lg
 
 structure:
   - Page uses color.surface.canvas as the background.
   - Page content is inset from viewport edges using layout.page.padding tokens.
   - Main content should be horizontally centred inside a container.
+  - Content inside the main container is usually left aligned.
   - Standard pages should use layout.container.maxWidth.default.
-  - Text-heavy pages should use layout.container.maxWidth.text.
-  - Wide or complex pages may use layout.container.maxWidth.wide.
+  - Long-form prose should use layout.container.maxWidth.text.
+  - Narrow task-focused layouts may use layout.container.maxWidth.narrow.
+  - Wide or complex layouts may use layout.container.maxWidth.wide.
   - Major sections should be separated using spacing.section tokens.
+  - Grid or repeated card layouts should use layout.grid.gutter tokens.
   - Breakpoint tokens define when layout behaviour changes; they are not fixed page widths.
 
-responsiveBehaviour:
-  - Use base layout tokens below breakpoint.md.
-  - Use md layout tokens from breakpoint.md and above.
-  - Use lg layout tokens from breakpoint.lg and above.
-  - Do not assume breakpoint names map directly to devices.
-  - Do not use breakpoint tokens as frame widths.
-  - Use realistic viewport widths for testing, then apply the appropriate responsive tokens inside those frames.
+alignment:
+  pageContainer: centred
+  content: left aligned
+  text: left aligned
+  notes:
+    - Centre the main page container within the viewport.
+    - Do not centre-align body copy by default.
+    - Left-aligned text is preferred for readability.
+    - Centred page container does not mean centred content.
 
-viewportExamples:
-  smallViewport:
-    exampleWidth: 390px
-    applicableRule: Below breakpoint.md.
-    pagePadding: layout.page.padding.base
-    sectionSpacing: spacing.section.base
-    containerMaxWidth: Fill available width, constrained by page padding.
-  mediumViewport:
-    exampleWidth: 768px
-    applicableRule: At or above breakpoint.md.
-    pagePadding: layout.page.padding.md
-    sectionSpacing: spacing.section.md
-    containerMaxWidth: layout.container.maxWidth.default where space allows.
-  largeViewport:
-    exampleWidth: 1440px
-    applicableRule: At or above breakpoint.lg.
-    pagePadding: layout.page.padding.lg
-    sectionSpacing: spacing.section.lg
-    containerMaxWidth: layout.container.maxWidth.default for standard pages.
+remAssumption:
+  value: 16px
+  description: >
+    Figma testing assumes the common browser default of 1rem = 16px. This allows
+    rem-based breakpoint and layout token values to be approximated in pixels for
+    design purposes. In implementation, rem values remain scalable and may respond
+    to user or browser font-size settings.
+  notes:
+    - Pixel values in this file are practical design references.
+    - Rem values remain the preferred source units for scalable implementation.
+    - Do not hardcode a browser root font size purely to match Figma.
+    - Figma does not naturally behave like a browser, so 1rem = 16px is used as a practical design assumption.
+
+breakpointReference:
+  description: >
+    Breakpoints are stored as rem values for scalability. Pixel values below assume
+    the common browser default of 1rem = 16px.
+
+  values:
+    sm:
+      token: breakpoint.sm
+      rem: 40rem
+      approximatePxAt16px: 640px
+      purpose: Small viewport threshold.
+    md:
+      token: breakpoint.md
+      rem: 48rem
+      approximatePxAt16px: 768px
+      purpose: Medium viewport threshold where medium layout rules begin.
+    lg:
+      token: breakpoint.lg
+      rem: 64rem
+      approximatePxAt16px: 1024px
+      purpose: Large viewport threshold where desktop-style layout rules begin.
+    xl:
+      token: breakpoint.xl
+      rem: 80rem
+      approximatePxAt16px: 1280px
+      purpose: Extra-large viewport threshold for wider layouts.
+    2xl:
+      token: breakpoint.2xl
+      rem: 96rem
+      approximatePxAt16px: 1536px
+      purpose: Very wide viewport threshold.
+
+  notes:
+    - Breakpoints describe when layout behaviour changes.
+    - Breakpoints are not standard Figma frame sizes.
+    - Use practical viewport test sizes to validate layouts.
+    - Do not use breakpoint tokens as static page frame widths.
+
+responsiveBehaviour:
+  - Use base layout, spacing and typography variants below breakpoint.md.
+  - Use md layout, spacing and typography variants from breakpoint.md and above.
+  - Use lg layout, spacing and typography variants from breakpoint.lg and above.
+  - Continue using lg variants at wider desktop sizes unless a more specific xl or 2xl token exists.
+  - Do not assume breakpoint names map directly to devices.
+  - Do not use breakpoint tokens as static frame widths.
+  - Use realistic viewport widths for testing, then apply the appropriate responsive tokens inside those frames.
+  - At 320px and 390px, use base variants.
+  - At 768px, use md variants.
+  - At 1024px and 1440px, use lg variants.
+  - At 1536px, continue to use lg variants unless the layout genuinely needs wide behaviour.
+
+responsiveTesting:
+  description: >
+    Defines the standard viewport widths used to test page layout behaviour in Figma.
+    These are practical design and testing sizes, not token values. Breakpoint tokens
+    define when layout behaviour changes; viewport test sizes validate those behaviours.
+
+  standardViewports:
+    minimumMobile:
+      width: 320px
+      description: >
+        Smallest supported mobile layout test. Used to check that content does not break,
+        overflow, or become unusable at very narrow widths.
+      tokenVariant: base
+      breakpointRange: Below breakpoint.md
+      pagePadding: layout.page.padding.base
+      sectionSpacing: spacing.section.base
+      gridGutter: layout.grid.gutter.base
+      typographyVariant: base
+      containerBehaviour: Fill available width within page padding.
+      layoutGuidance:
+        - Use single-column layouts.
+        - Avoid multi-column content.
+        - Avoid fixed-width content that can overflow.
+        - Keep content left aligned.
+        - Ensure controls remain usable.
+        - Check long token names, labels and buttons do not overflow.
+
+    mobile:
+      width: 390px
+      description: >
+        Common modern mobile viewport used for standard mobile validation.
+      tokenVariant: base
+      breakpointRange: Below breakpoint.md
+      pagePadding: layout.page.padding.base
+      sectionSpacing: spacing.section.base
+      gridGutter: layout.grid.gutter.base
+      typographyVariant: base
+      containerBehaviour: Fill available width within page padding.
+      layoutGuidance:
+        - Use single-column layouts.
+        - Keep content left aligned.
+        - Use base spacing without wasting vertical space.
+        - Avoid assuming cards or examples can sit side by side.
+        - Test readable text, form fields and control sizing.
+
+    tablet:
+      width: 768px
+      description: >
+        Standard tablet viewport and the point where medium layout rules begin.
+      tokenVariant: md
+      breakpointRange: At or above breakpoint.md
+      pagePadding: layout.page.padding.md
+      sectionSpacing: spacing.section.md
+      gridGutter: layout.grid.gutter.md
+      typographyVariant: md
+      containerBehaviour: Use available width up to the relevant container max width.
+      layoutGuidance:
+        - Medium spacing can be introduced.
+        - Some layouts may begin to use two columns where appropriate.
+        - Do not assume all tablet layouts need to become multi-column.
+        - Continue to constrain prose with layout.container.maxWidth.text.
+        - Check that card grids wrap cleanly.
+
+    smallestDesktop:
+      width: 1024px
+      description: >
+        Smallest desktop or large tablet landscape test. This is the first standard
+        viewport where large layout rules apply.
+      tokenVariant: lg
+      breakpointRange: At or above breakpoint.lg
+      pagePadding: layout.page.padding.lg
+      sectionSpacing: spacing.section.lg
+      gridGutter: layout.grid.gutter.lg
+      typographyVariant: lg
+      containerBehaviour: >
+        Use available width within page padding. The viewport may still be narrower than
+        layout.container.maxWidth.default, so the container should not overflow.
+      layoutGuidance:
+        - Use this to test the transition into desktop layout behaviour.
+        - Desktop spacing applies, but available width is still constrained.
+        - Check that grids and cards wrap cleanly.
+        - Do not force the full default container width if it causes overflow.
+        - Use the max-width as a maximum, not as a fixed width that must always apply.
+
+    regularDesktop:
+      width: 1440px
+      description: >
+        Standard desktop documentation and layout validation viewport.
+      tokenVariant: lg
+      breakpointRange: At or above breakpoint.lg
+      pagePadding: layout.page.padding.lg
+      sectionSpacing: spacing.section.lg
+      gridGutter: layout.grid.gutter.lg
+      typographyVariant: lg
+      containerBehaviour: >
+        Centre the main page container and use layout.container.maxWidth.default
+        for standard page content.
+      standardContainerWidth: layout.container.maxWidth.default
+      textMaxWidth: layout.container.maxWidth.text
+      layoutGuidance:
+        - This is the default desktop documentation template size.
+        - Main content container should be centred.
+        - Content inside the container should usually remain left aligned.
+        - Long-form prose should use layout.container.maxWidth.text.
+        - Cards and examples may use the wider layout.container.maxWidth.default space.
+        - Standard page content should not stretch uncontrolled across the viewport.
+
+    wideDesktop:
+      width: 1536px
+      description: >
+        Optional wide desktop test. Use this to check that layouts remain controlled on
+        larger screens.
+      tokenVariant: lg
+      breakpointRange: At or above breakpoint.2xl
+      pagePadding: layout.page.padding.lg
+      sectionSpacing: spacing.section.lg
+      gridGutter: layout.grid.gutter.lg
+      typographyVariant: lg
+      containerBehaviour: >
+        Standard pages should still use layout.container.maxWidth.default. Only use
+        layout.container.maxWidth.wide for genuinely complex, wide or data-heavy layouts.
+      layoutGuidance:
+        - Do not stretch normal prose or simple content to fill the viewport.
+        - Use wide containers only when the content benefits from extra horizontal space.
+        - Continue to centre standard page containers.
+        - Check that the page still feels intentionally composed.
+
+variantRules:
+  base:
+    appliesTo:
+      - 320px minimum mobile test
+      - 390px mobile test
+      - Viewports below breakpoint.md
+    use:
+      pagePadding: layout.page.padding.base
+      sectionSpacing: spacing.section.base
+      gridGutter: layout.grid.gutter.base
+      typographyVariant: base
+    rationale: >
+      Base variants keep small viewports usable by providing enough spacing without
+      consuming too much limited screen space.
+
+  md:
+    appliesTo:
+      - 768px tablet test
+      - Viewports at or above breakpoint.md
+      - Viewports below breakpoint.lg
+    use:
+      pagePadding: layout.page.padding.md
+      sectionSpacing: spacing.section.md
+      gridGutter: layout.grid.gutter.md
+      typographyVariant: md
+    rationale: >
+      Medium variants introduce more breathing room once the viewport can support it,
+      without assuming a full desktop layout.
+
+  lg:
+    appliesTo:
+      - 1024px smallest desktop test
+      - 1440px regular desktop test
+      - 1536px wide desktop test unless a more specific wide rule exists
+      - Viewports at or above breakpoint.lg
+    use:
+      pagePadding: layout.page.padding.lg
+      sectionSpacing: spacing.section.lg
+      gridGutter: layout.grid.gutter.lg
+      typographyVariant: lg
+    rationale: >
+      Large variants provide stronger page framing, clearer section rhythm and more
+      generous layout spacing for desktop-style experiences.
+
+containerRules:
+  text:
+    token: layout.container.maxWidth.text
+    approximatePxAt16px: 608px
+    useFor:
+      - Long-form prose
+      - Section descriptions
+      - Documentation body copy
+      - Reading-focused content
+    rationale: >
+      Long lines reduce readability. Use the text max width to keep prose comfortable
+      even when the overall page container is wider.
+
+  narrow:
+    token: layout.container.maxWidth.narrow
+    approximatePxAt16px: 640px
+    useFor:
+      - Forms
+      - Dialog-style layouts
+      - Focused tasks
+      - Narrow documentation examples
+    rationale: >
+      Narrow containers help focused tasks feel contained and reduce unnecessary
+      horizontal scanning.
+
+  default:
+    token: layout.container.maxWidth.default
+    approximatePxAt16px: 1152px
+    useFor:
+      - Standard content pages
+      - Documentation pages
+      - Mixed text and component examples
+      - Card grids
+    rationale: >
+      Default containers provide enough width for desktop layouts while preventing
+      content from stretching across the full viewport.
+
+  wide:
+    token: layout.container.maxWidth.wide
+    approximatePxAt16px: 1536px
+    useFor:
+      - Dashboards
+      - Complex grids
+      - Data-heavy layouts
+      - Multi-column layouts
+    rationale: >
+      Wide containers should be used only when the content benefits from additional
+      horizontal space. They should not be used for standard prose pages.
+
+desktopBehaviour:
+  viewportExample: 1440px
+  appliesFrom: breakpoint.lg
+  tokenVariant: lg
+  pagePadding: layout.page.padding.lg
+  pageVerticalPadding: spacing.section.lg
+  sectionSpacing: spacing.section.lg
+  containerMaxWidth: layout.container.maxWidth.default
+  textMaxWidth: layout.container.maxWidth.text
+  gridGutter: layout.grid.gutter.lg
+  alignment:
+    pageContainer: centred
+    content: left aligned
+  layoutGrid:
+    appliesTo: Page Container
+    columns: 12
+    gutter: layout.grid.gutter.lg
+    margin: 0
+    purpose: >
+      Provides a visual alignment guide for desktop documentation and layout work.
+      The grid helps align content but does not control layout behaviour.
+  notes:
+    - The 1440px frame represents a realistic desktop viewport.
+    - The page container should be centred inside the viewport.
+    - The page container should use layout.container.maxWidth.default.
+    - Long-form prose should use layout.container.maxWidth.text.
+    - Auto layout should control actual spacing, wrapping and behaviour.
+    - Layout grids should be treated as visual alignment guides.
 
 accessibility:
   - Maintain readable line lengths for text-heavy content.
@@ -141,20 +387,48 @@ accessibility:
   - Ensure layout spacing supports visual grouping and scanning.
   - Use layout.container.maxWidth.text for long-form prose.
   - Use section spacing to make page structure easier to understand.
+  - Keep body copy left aligned by default.
   - Do not rely on visual position alone to communicate hierarchy.
+  - Ensure layouts work at 320px without horizontal overflow.
+  - Ensure controls remain usable at all standard viewport sizes.
+
+figmaTestingRules:
+  - Create standard layout test frames at 320px, 390px, 768px, 1024px, 1440px and optionally 1536px.
+  - Use 320px as the smallest supported mobile stress test.
+  - Use 390px as the standard mobile test.
+  - Use 768px as the standard tablet test.
+  - Use 1024px as the smallest desktop test.
+  - Use 1440px as the regular desktop documentation and layout test.
+  - Use 1536px as an optional wide desktop test.
+  - Add a 12-column layout grid to the main Page Container for desktop documentation layouts.
+  - Use layout.grid.gutter.lg as the desktop grid gutter.
+  - Use layout grids as visual alignment guides only.
+  - Use auto layout to control spacing, wrapping and resizing.
 
 aiGenerationRules:
   - Use this pattern for standard page layouts.
   - Do not invent page padding values.
   - Do not invent section spacing values.
+  - Do not invent grid gutter values.
   - Do not use breakpoint tokens as static frame widths.
   - Use breakpoint tokens only to decide when layout behaviour changes.
+  - Test generated layouts at 320px, 390px, 768px, 1024px and 1440px.
+  - Use base variants for 320px and 390px layouts.
+  - Use md variants for 768px layouts.
+  - Use lg variants for 1024px and 1440px layouts.
+  - Continue using lg variants at 1536px unless a wide-specific rule exists.
   - Use layout.page.padding.base below breakpoint.md.
   - Use layout.page.padding.md from breakpoint.md.
   - Use layout.page.padding.lg from breakpoint.lg.
   - Use spacing.section.base below breakpoint.md.
   - Use spacing.section.md from breakpoint.md.
   - Use spacing.section.lg from breakpoint.lg.
+  - Use layout.grid.gutter.base below breakpoint.md.
+  - Use layout.grid.gutter.md from breakpoint.md.
+  - Use layout.grid.gutter.lg from breakpoint.lg.
   - Use layout.container.maxWidth.default for standard page content.
   - Use layout.container.maxWidth.text for long-form prose.
-  - Do not exceed layout.container.maxWidth.wide for main content.
+  - Do not stretch standard page content beyond layout.container.maxWidth.default on regular desktop layouts.
+  - Use layout.container.maxWidth.wide only for complex, wide or data-heavy layouts.
+  - Centre the page container, not the text content.
+  - Keep body copy left aligned unless there is a specific content reason not to.
