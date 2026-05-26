@@ -1187,6 +1187,28 @@
           "$description": "Larger minimum vertical size for comfortable or prominent interactive controls."
         }
       }
+    },
+    "icon": {
+      "sm": {
+        "$value": "1rem",
+        "$type": "dimension",
+        "$description": "Small icon size for compact inline icons, metadata, helper text or dense UI."
+      },
+      "md": {
+        "$value": "1.25rem",
+        "$type": "dimension",
+        "$description": "Default icon size for buttons, inputs, labels and standard inline UI."
+      },
+      "lg": {
+        "$value": "1.5rem",
+        "$type": "dimension",
+        "$description": "Large icon size for standalone actions, navigation items and prominent interface icons."
+      },
+      "xl": {
+        "$value": "2rem",
+        "$type": "dimension",
+        "$description": "Extra-large icon size for empty states, feature panels or illustrative UI moments."
+      }
     }
   }
 }
