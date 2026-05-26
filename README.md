@@ -40,12 +40,3 @@ Consumer tools:
 
 ---
 
-## Repository Structure
-
-design-system/
-├── tokens/
-├── components/
-├── patterns/
-├── accessibility/
-├── prompts/
-├── docs/
