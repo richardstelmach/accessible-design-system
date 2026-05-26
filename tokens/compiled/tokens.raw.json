@@ -139,7 +139,7 @@
       },
       "$description": "Accent colour pairing for warm highlights, badges, decorative emphasis or supporting brand moments.",
       "background": {
-        "$value": "{color.accent.500}",
+        "$value": "{color.orange.500}",
         "$type": "color",
         "$description": "Background colour for accent surfaces or highlighted moments."
       },
