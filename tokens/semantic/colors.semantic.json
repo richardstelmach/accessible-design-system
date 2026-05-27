@@ -167,63 +167,63 @@
             "$type": "color",
             "$description": "Foreground colour for content placed on error backgrounds."
           }
+        }
+      },
+      "icon": {
+        "default": {
+          "$value": "{color.text.default}",
+          "$type": "color",
+          "$description": "Default icon colour for standard icons on light surfaces."
         },
-        "icon": {
-          "default": {
-            "$value": "{color.text.default}",
-            "$type": "color",
-            "$description": "Default icon colour for standard icons on light surfaces."
-          },
-          "heading": {
-            "$value": "{color.text.heading}",
-            "$type": "color",
-            "$description": "Icon colour used alongside headings or strong content labels."
-          },
-          "subtle": {
-            "$value": "{color.neutral.400}",
-            "$type": "color",
-            "$description": "Subtle icon colour for low-emphasis or supporting icons. Do not use for icons that must carry critical meaning."
-          },
-          "link": {
-            "$value": "{color.text.link}",
-            "$type": "color",
-            "$description": "Icon colour used alongside links or link-like actions."
-          },
-          "inverse": {
-            "$value": "{color.white}",
-            "$type": "color",
-            "$description": "Icon colour used on dark or strong coloured backgrounds."
-          },
-          "onPrimary": {
-            "$value": "{color.interactive.primary.foreground}",
-            "$type": "color",
-            "$description": "Icon colour used on primary interactive backgrounds."
-          },
-          "onFeatured": {
-            "$value": "{color.featured.foreground}",
-            "$type": "color",
-            "$description": "Icon colour used on featured backgrounds."
-          },
-          "onAccent": {
-            "$value": "{color.accent.foreground}",
-            "$type": "color",
-            "$description": "Icon colour used on accent backgrounds."
-          },
-          "success": {
-            "$value": "{color.status.success.foreground}",
-            "$type": "color",
-            "$description": "Icon colour used inside success messages or on success backgrounds."
-          },
-          "warning": {
-            "$value": "{color.status.warning.foreground}",
-            "$type": "color",
-            "$description": "Icon colour used inside warning messages or on warning backgrounds."
-          },
-          "error": {
-            "$value": "{color.status.error.foreground}",
-            "$type": "color",
-            "$description": "Icon colour used inside error messages or on error backgrounds."
-          }
+        "heading": {
+          "$value": "{color.text.heading}",
+          "$type": "color",
+          "$description": "Icon colour used alongside headings or strong content labels."
+        },
+        "subtle": {
+          "$value": "{color.neutral.400}",
+          "$type": "color",
+          "$description": "Subtle icon colour for low-emphasis or supporting icons. Do not use for icons that must carry critical meaning."
+        },
+        "link": {
+          "$value": "{color.text.link}",
+          "$type": "color",
+          "$description": "Icon colour used alongside links or link-like actions."
+        },
+        "inverse": {
+          "$value": "{color.white}",
+          "$type": "color",
+          "$description": "Icon colour used on dark or strong coloured backgrounds."
+        },
+        "onPrimary": {
+          "$value": "{color.interactive.primary.foreground}",
+          "$type": "color",
+          "$description": "Icon colour used on primary interactive backgrounds."
+        },
+        "onFeatured": {
+          "$value": "{color.featured.foreground}",
+          "$type": "color",
+          "$description": "Icon colour used on featured backgrounds."
+        },
+        "onAccent": {
+          "$value": "{color.accent.foreground}",
+          "$type": "color",
+          "$description": "Icon colour used on accent backgrounds."
+        },
+        "success": {
+          "$value": "{color.status.success.foreground}",
+          "$type": "color",
+          "$description": "Icon colour used inside success messages or on success backgrounds."
+        },
+        "warning": {
+          "$value": "{color.status.warning.foreground}",
+          "$type": "color",
+          "$description": "Icon colour used inside warning messages or on warning backgrounds."
+        },
+        "error": {
+          "$value": "{color.status.error.foreground}",
+          "$type": "color",
+          "$description": "Icon colour used inside error messages or on error backgrounds."
         }
       }
     }
