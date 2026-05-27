@@ -113,7 +113,7 @@
           "$type": "color"
         }
       },
-      "accent": {
+      "tertiary": {
         "100": {
           "$value": "#ffcd96",
           "$type": "color"
@@ -137,17 +137,6 @@
         "950": {
           "$value": "#5e3200",
           "$type": "color"
-        },
-        "$description": "Accent colour pairing for warm highlights, badges, decorative emphasis or supporting brand moments.",
-        "background": {
-          "$value": "{color.orange.500}",
-          "$type": "color",
-          "$description": "Background colour for accent surfaces or highlighted moments."
-        },
-        "foreground": {
-          "$value": "{color.black}",
-          "$type": "color",
-          "$description": "Foreground colour for content placed on accent backgrounds."
         }
       },
       "secondary": {
@@ -356,6 +345,19 @@
           "$value": "{color.black}",
           "$type": "color",
           "$description": "Foreground colour for content placed on featured backgrounds."
+        }
+      },
+      "accent": {
+        "$description": "Accent colour pairing for warm highlights, badges, decorative emphasis or supporting brand moments.",
+        "background": {
+          "$value": "{color.tertiary.500}",
+          "$type": "color",
+          "$description": "Background colour for accent surfaces or highlighted moments."
+        },
+        "foreground": {
+          "$value": "{color.black}",
+          "$type": "color",
+          "$description": "Foreground colour for content placed on accent backgrounds."
         }
       },
       "status": {
