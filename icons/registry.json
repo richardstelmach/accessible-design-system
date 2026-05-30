@@ -1,0 +1,336 @@
+{
+    "$schema": "./registry.schema.json",
+    "name": "Accessible Design System Icon Registry",
+    "description": "Curated icon registry for the accessible design system. Icons should be selected from this registry rather than chosen ad hoc.",
+    "source": {
+        "library": "Phosphor Icons",
+        "defaultWeight": "regular",
+        "license": "MIT",
+        "url": "https://phosphoricons.com/"
+    },
+    "defaults": {
+      "size": "{size.icon.md}",
+      "standaloneSize": "{size.icon.lg}",
+      "color": "{color.icon.default}"
+    },
+    "rules": [
+      "Use only icons listed in this registry unless a new reusable need is identified.",
+      "If an additional icon is definitely needed, it should be added to the registry.",
+      "Use regular weight by default.",
+      "Use default icon colour by default.",
+      "Use semantic icon colour tokens rather than primitive colours.",
+      "Decorative icons should be hidden from assistive technology in implementation.",
+      "Meaningful icons must have an accessible name or visible text label.",
+      "If a visible text label is associated with an icon, there is no point in the icon object itself also having a text label, as this would be redundant and create duplication in the accessibility tree.",
+      "Icon size is not the same as interactive target size."
+    ],
+    "icons": [
+    {
+        "name": "arrow-left",
+        "sourceName": "ArrowLeft",
+        "category": "navigation",
+        "purpose": "Navigate backwards, return to a previous page or move to the previous item."
+    },
+    {
+        "name": "arrow-right",
+        "sourceName": "ArrowRight",
+        "category": "navigation",
+        "purpose": "Navigate forwards, continue to the next page or move to the next item."
+    },
+    {
+        "name": "caret-left",
+        "sourceName": "CaretLeft",
+        "category": "navigation",
+        "purpose": "Indicate leftward movement, previous nested item or collapsed navigation state."
+    },
+    {
+        "name": "caret-right",
+        "sourceName": "CaretRight",
+        "category": "navigation",
+        "purpose": "Indicate rightward movement, nested navigation or expandable content."
+    },
+    {
+        "name": "caret-up",
+        "sourceName": "CaretUp",
+        "category": "navigation",
+        "purpose": "Indicate upward movement, expanded state or content that can be collapsed."
+    },
+    {
+        "name": "caret-down",
+        "sourceName": "CaretDown",
+        "category": "navigation",
+        "purpose": "Indicate downward movement, dropdowns, menus or expandable content."
+    },
+    {
+        "name": "house",
+        "sourceName": "House",
+        "category": "navigation",
+        "purpose": "Represent home, start page or main landing area."
+    },
+    {
+        "name": "list",
+        "sourceName": "List",
+        "category": "navigation",
+        "purpose": "Represent menus, navigation lists or list views."
+    },
+    {
+        "name": "dots-three",
+        "sourceName": "DotsThree",
+        "category": "navigation",
+        "purpose": "Represent more options or an overflow menu."
+    },
+    {
+        "name": "dots-three-vertical",
+        "sourceName": "DotsThreeVertical",
+        "category": "navigation",
+        "purpose": "Represent vertical more options or a contextual overflow menu."
+    },
+
+    {
+        "name": "plus",
+        "sourceName": "Plus",
+        "category": "action",
+        "purpose": "Add, create or increase something."
+    },
+    {
+        "name": "minus",
+        "sourceName": "Minus",
+        "category": "action",
+        "purpose": "Remove, reduce or collapse something."
+    },
+    {
+        "name": "x",
+        "sourceName": "X",
+        "category": "action",
+        "purpose": "Close, dismiss, cancel or clear something."
+    },
+    {
+        "name": "check",
+        "sourceName": "Check",
+        "category": "action",
+        "purpose": "Confirm, apply, complete or indicate selection."
+    },
+    {
+        "name": "pencil-simple",
+        "sourceName": "PencilSimple",
+        "category": "action",
+        "purpose": "Edit, amend or modify content."
+    },
+    {
+        "name": "trash",
+        "sourceName": "Trash",
+        "category": "action",
+        "purpose": "Delete, remove or discard content."
+    },
+    {
+        "name": "copy",
+        "sourceName": "Copy",
+        "category": "action",
+        "purpose": "Copy content, values or links."
+    },
+    {
+        "name": "download-simple",
+        "sourceName": "DownloadSimple",
+        "category": "action",
+        "purpose": "Download a file, asset or exported item."
+    },
+    {
+        "name": "upload-simple",
+        "sourceName": "UploadSimple",
+        "category": "action",
+        "purpose": "Upload a file, asset or imported item."
+    },
+    {
+        "name": "arrow-square-out",
+        "sourceName": "ArrowSquareOut",
+        "category": "action",
+        "purpose": "Open an external link, new destination or separate view."
+    },
+
+    {
+        "name": "info",
+        "sourceName": "Info",
+        "category": "feedback",
+        "purpose": "Communicate neutral information, guidance or supporting context."
+    },
+    {
+        "name": "check-circle",
+        "sourceName": "CheckCircle",
+        "category": "feedback",
+        "purpose": "Communicate success, completion or positive confirmation."
+    },
+    {
+        "name": "warning-circle",
+        "sourceName": "WarningCircle",
+        "category": "feedback",
+        "purpose": "Communicate warnings, cautionary feedback or important non-blocking messages."
+    },
+    {
+        "name": "x-circle",
+        "sourceName": "XCircle",
+        "category": "feedback",
+        "purpose": "Communicate errors, failures or issues that need correction."
+    },
+    {
+        "name": "question",
+        "sourceName": "Question",
+        "category": "feedback",
+        "purpose": "Represent help, support, uncertainty or explanatory information."
+    },
+
+    {
+        "name": "magnifying-glass",
+        "sourceName": "MagnifyingGlass",
+        "category": "form",
+        "purpose": "Represent search, find or lookup functionality."
+    },
+    {
+        "name": "eye",
+        "sourceName": "Eye",
+        "category": "form",
+        "purpose": "Show hidden content or reveal a value."
+    },
+    {
+        "name": "eye-slash",
+        "sourceName": "EyeSlash",
+        "category": "form",
+        "purpose": "Hide visible content or conceal a value."
+    },
+    {
+        "name": "calendar-blank",
+        "sourceName": "CalendarBlank",
+        "category": "form",
+        "purpose": "Represent date selection, calendar views or scheduled events."
+    },
+    {
+        "name": "clock",
+        "sourceName": "Clock",
+        "category": "form",
+        "purpose": "Represent time, duration, scheduling or recent activity."
+    },
+    {
+        "name": "lock",
+        "sourceName": "Lock",
+        "category": "form",
+        "purpose": "Represent security, locked states, permissions or password fields."
+    },
+    {
+        "name": "funnel",
+        "sourceName": "Funnel",
+        "category": "form",
+        "purpose": "Represent filtering, narrowing results or applying criteria."
+    },
+    {
+        "name": "sliders-horizontal",
+        "sourceName": "SlidersHorizontal",
+        "category": "form",
+        "purpose": "Represent settings, controls, filters or adjustable preferences."
+    },
+
+    {
+        "name": "image",
+        "sourceName": "Image",
+        "category": "content",
+        "purpose": "Represent images, visual media or image placeholders."
+    },
+    {
+        "name": "file",
+        "sourceName": "File",
+        "category": "file",
+        "purpose": "Represent a generic file, document or attachment."
+    },
+    {
+        "name": "folder",
+        "sourceName": "Folder",
+        "category": "file",
+        "purpose": "Represent folders, grouped files or saved collections."
+    },
+    {
+        "name": "paperclip",
+        "sourceName": "Paperclip",
+        "category": "file",
+        "purpose": "Represent attachments or attached files."
+    },
+    {
+        "name": "link",
+        "sourceName": "Link",
+        "category": "utility",
+        "purpose": "Represent links, copied URLs or connected resources."
+    },
+
+    {
+        "name": "envelope-simple",
+        "sourceName": "EnvelopeSimple",
+        "category": "communication",
+        "purpose": "Represent email, messages or contact by email."
+    },
+    {
+        "name": "chat-circle",
+        "sourceName": "ChatCircle",
+        "category": "communication",
+        "purpose": "Represent chat, comments, messaging or conversation."
+    },
+    {
+        "name": "phone",
+        "sourceName": "Phone",
+        "category": "communication",
+        "purpose": "Represent phone contact, calling or telephone details."
+    },
+    {
+        "name": "bell",
+        "sourceName": "Bell",
+        "category": "communication",
+        "purpose": "Represent notifications, alerts or reminders."
+    },
+
+    {
+        "name": "user",
+        "sourceName": "User",
+        "category": "account",
+        "purpose": "Represent a person, profile, account or individual user."
+    },
+    {
+        "name": "users",
+        "sourceName": "Users",
+        "category": "account",
+        "purpose": "Represent multiple people, teams, groups or users."
+    },
+    {
+        "name": "gear-six",
+        "sourceName": "GearSix",
+        "category": "system",
+        "purpose": "Represent settings, preferences or system configuration."
+    },
+    {
+        "name": "sign-out",
+        "sourceName": "SignOut",
+        "category": "system",
+        "purpose": "Represent signing out, logging out or leaving an account."
+    },
+
+    {
+        "name": "chart-bar",
+        "sourceName": "ChartBar",
+        "category": "data",
+        "purpose": "Represent reports, analytics, charts or dashboard data."
+    },
+    {
+        "name": "shopping-cart",
+        "sourceName": "ShoppingCart",
+        "category": "commerce",
+        "purpose": "Represent basket, cart, checkout or ecommerce activity."
+    },
+    {
+        "name": "credit-card",
+        "sourceName": "CreditCard",
+        "category": "commerce",
+        "purpose": "Represent payment, billing, cards or financial transactions."
+    },
+    {
+        "name": "map-pin",
+        "sourceName": "MapPin",
+        "category": "utility",
+        "purpose": "Represent location, address, place or map position."
+    }
+    ]
+  }
