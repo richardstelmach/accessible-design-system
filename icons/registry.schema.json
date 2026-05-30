@@ -1,0 +1,183 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "./registry.schema.json",
+    "title": "Accessible Design System Icon Registry",
+    "description": "Schema for the curated icon registry used by the accessible design system.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "name",
+        "description",
+        "source",
+        "defaults",
+        "rules",
+        "icons"
+    ],
+    "properties": {
+      "$schema": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": {
+        "type": "string",
+        "minLength": 1
+      },
+      "source": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "library",
+          "defaultWeight",
+          "license",
+          "url"
+        ],
+        "properties": {
+          "library": {
+            "type": "string",
+            "minLength": 1
+          },
+          "defaultWeight": {
+            "type": "string",
+            "enum": [
+              "thin",
+              "light",
+              "regular",
+              "bold",
+              "fill",
+              "duotone"
+            ]
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "defaults": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "size",
+          "standaloneSize",
+          "color"
+        ],
+        "properties": {
+          "size": {
+            "$ref": "#/definitions/tokenReference"
+          },
+          "standaloneSize": {
+            "$ref": "#/definitions/tokenReference"
+          },
+          "color": {
+            "$ref": "#/definitions/tokenReference"
+          }
+        }
+      },
+      "rules": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "icons": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "$ref": "#/definitions/icon"
+        }
+      }
+    },
+    "definitions": {
+      "tokenReference": {
+        "type": "string",
+        "pattern": "^\\{[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)+\\}$",
+        "examples": [
+          "{size.icon.md}",
+          "{size.icon.lg}",
+          "{color.icon.default}"
+        ]
+      },
+      "icon": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "sourceName",
+          "category",
+          "purpose"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "System icon name in kebab-case."
+          },
+          "sourceName": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Za-z0-9]*$",
+            "description": "Original Phosphor icon name, usually matching the React component name."
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "navigation",
+              "action",
+              "feedback",
+              "form",
+              "content",
+              "media",
+              "file",
+              "communication",
+              "account",
+              "system",
+              "commerce",
+              "data",
+              "utility"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "accessibility": {
+            "type": "string",
+            "enum": [
+              "decorative",
+              "meaningful",
+              "context-dependent"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
