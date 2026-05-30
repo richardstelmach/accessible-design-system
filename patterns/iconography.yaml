@@ -1,0 +1,115 @@
+pattern: Iconography
+
+description: >
+  Defines how icons are selected, named, sized, coloured and used across the design system.
+
+source:
+  library: Phosphor Icons
+  registry: icons/registry.json
+  defaultWeight: regular
+  licence: MIT
+  url: https://phosphoricons.com/
+
+purpose:
+  - Provide a consistent icon style across products, components and documentation.
+  - Keep icon selection governed by the curated icon registry.
+  - Align icon size and colour with semantic design tokens.
+  - Support accessible icon usage in design and implementation.
+  - Give AI tools and developers a machine-readable source for icon decisions.
+
+registryRules:
+  - Use only icons listed in icons/registry.json unless a new reusable need is identified.
+  - If a new icon is needed, add it to the registry before using it in Figma or code.
+  - Use the registry name for Figma components.
+  - Use the registry sourceName to find the matching Phosphor icon.
+  - One registry icon should map to one Figma icon component.
+
+figmaComponentRules:
+  - Create one component per icon.
+  - Name icon components using the format Icon / icon-name.
+  - Use the registry name in kebab-case, for example Icon / arrow-left.
+  - Use a 24px by 24px master frame.
+  - Use Phosphor Regular weight by default.
+  - Use color.icon.default as the default icon colour.
+  - Do not create colour or size variants for every icon.
+  - Resize and recolour icon instances using semantic tokens based on context.
+  - Do not detach icon instances in normal design work.
+
+tokens:
+  size:
+    sm: size.icon.sm
+    md: size.icon.md
+    lg: size.icon.lg
+    xl: size.icon.xl
+
+  colour:
+    default: color.icon.default
+    heading: color.icon.heading
+    subtle: color.icon.subtle
+    link: color.icon.link
+    inverse: color.icon.inverse
+    onPrimary: color.icon.onPrimary
+    onFeatured: color.icon.onFeatured
+    onAccent: color.icon.onAccent
+    success: color.icon.success
+    warning: color.icon.warning
+    error: color.icon.error
+
+sizeRules:
+  - Use size.icon.sm for compact inline icons, metadata, helper text or dense UI.
+  - Use size.icon.md for icons inside buttons, inputs, labels and standard inline UI.
+  - Use size.icon.lg for standalone actions, navigation items and prominent interface icons.
+  - Use size.icon.xl sparingly for empty states, feature panels or illustrative moments.
+  - Icon size is not the same as interactive target size.
+  - Interactive controls must still meet target size rules even when the icon is smaller.
+
+colourRules:
+  - Use semantic icon colour tokens rather than primitive colours.
+  - Use color.icon.default for standard icons on light surfaces.
+  - Use color.icon.heading for icons aligned with headings or strong content labels.
+  - Use color.icon.subtle only for low-emphasis supporting icons.
+  - Use color.icon.link for icons used with links or link-like actions.
+  - Use color.icon.onPrimary for icons on primary interactive backgrounds.
+  - Use color.icon.onFeatured for icons on featured backgrounds.
+  - Use color.icon.onAccent for icons on accent backgrounds.
+  - Use color.icon.success, color.icon.warning and color.icon.error for status contexts.
+  - Do not use subtle icon colour for icons that carry critical meaning.
+  - Do not use primitive colours directly for normal icon styling.
+
+accessibility:
+  - Decorative icons should be hidden from assistive technology in implementation.
+  - Meaningful icons must have an accessible name or be accompanied by visible text.
+  - If an icon is paired with visible text that already communicates the meaning, the icon should usually be decorative.
+  - Do not rely on icon shape alone to communicate critical meaning.
+  - Do not rely on colour alone to communicate status.
+  - Icon-only interactive controls must have an accessible name.
+  - Icons inside interactive controls must be contained within accessible target sizes.
+
+usageExamples:
+  buttonWithIcon:
+    icon: arrow-right
+    size: size.icon.md
+    colour: color.icon.onPrimary
+    note: Use inside primary buttons when the icon supports the action label.
+
+  warningMessage:
+    icon: warning-circle
+    size: size.icon.lg
+    colour: color.icon.warning
+    note: Use with visible warning text and warning status colour pairing.
+
+  externalLink:
+    icon: arrow-square-out
+    size: size.icon.md
+    colour: color.icon.link
+    note: Use when a link opens a new destination or external resource.
+
+aiGenerationRules:
+  - Use only icons listed in icons/registry.json.
+  - Do not invent icon names.
+  - Match Figma component names to registry names.
+  - Use size.icon.md for icons inside controls unless another size is specified.
+  - Use size.icon.lg for standalone icons unless another size is specified.
+  - Use semantic icon colours.
+  - Use currentColor in code where possible so icons inherit the correct foreground colour.
+  - Treat icons as decorative when visible text already communicates the same meaning.
