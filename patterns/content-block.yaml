@@ -145,6 +145,48 @@ textMeasure:
     - Token names
     - Component examples
     - Visual sample areas
+    
+documentationCardGroups:
+  description: >
+    Defines how groups of internal documentation card components should be
+    arranged inside documentation pages.
+
+  component:
+    name: Documentation / Card
+    contract: components/internal/documentation-card/documentation-card.yaml
+
+  useWhen:
+    - Several short pieces of related guidance need to be scanned together.
+    - Cards contain summaries, examples, usage notes or decisions.
+    - Cards may include flexible Sample slot content.
+    - Content does not require table-like row and column relationships.
+
+  desktop:
+    preferredLayout: flex-style-wrap
+    description: >
+      Use wrapping Auto Layout or an equivalent card group layout. This may appear
+      visually similar to a grid, but it is not a data matrix.
+    rules:
+      - Use multiple columns where space allows.
+      - Prefer three cards per row inside the default desktop page container where card width allows.
+      - Do not stretch short cards to full page width.
+      - Do not convert card groups into a single vertical list on desktop unless content is long-form or sequential.
+
+  narrow:
+    preferredLayout: stacked
+    rules:
+      - Stack cards vertically on narrow frames.
+      - Preserve logical reading order.
+
+  tokens:
+    columnGap: layout.grid.gutter.lg
+    rowGap: spacing.stack.lg
+
+  aiGenerationRules:
+    - Treat documentation card groups as flow content, not state matrices.
+    - Use wrapping layout for desktop documentation card groups.
+    - Use stacked layout for narrow documentation card groups.
+    - Do not use a single-column desktop panel list for short documentation cards.
 
   rules:
     - Constrain prose and explanatory text to layout.container.maxWidth.text.

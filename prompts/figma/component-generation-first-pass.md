@@ -58,6 +58,20 @@ Rules:
 - Do not stretch explanatory body text across the full page container on desktop frames.
 - Wider layout containers may be used for component examples, state matrices, playgrounds and visual samples.
 
+Figma presentation of component:
+
+- Use `components/internal/documentation-card/documentation-card.yaml` when creating repeated documentation summary cards.
+- Create or reuse `Documentation / Card` instances rather than one-off frames.
+- Use the native Figma `Sample` slot for visual examples where slots are available.
+- If native slots are unavailable through the current AI/Figma MCP workflow, report the limitation and use the documented fallback temporarily.
+- Use the card Sample slot for visual examples such as icons, colour pairings, spacing, padding, radius, borders and swatches.
+- Do not create a new card variant or card style for every sample type.
+- Use wrapping documentation card groups for short documentation summaries on desktop frames.
+- Do not convert short documentation card groups into a single full-width vertical panel list.
+- Use grid-style layout only for true matrices, tables or row/column comparisons.
+- Card title semantic level is determined by page structure; do not infer semantic level from visual text style alone.
+- Documentation / Card is an internal documentation component, not a public product component.
+
 After creating the first pass, report:
 
 - What was created.

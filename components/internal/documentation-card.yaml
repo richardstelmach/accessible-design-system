@@ -1,0 +1,279 @@
+component: Documentation card
+
+status: active
+visibility: internal
+usageScope: figma-documentation
+publicComponent: false
+
+description: >
+  A reusable internal documentation component used to present short, scannable
+  guidance and flexible visual samples across design system documentation pages.
+  Documentation cards are for Figma documentation and system guidance only.
+  They are not currently part of the public product component library.
+
+purpose:
+  - Present short documentation guidance consistently.
+  - Pair guidance text with a flexible sample area.
+  - Avoid one-off documentation card styling.
+  - Support scannable design system pages.
+  - Give AI tools a reusable component to apply across documentation frames.
+  - Distinguish documentation cards from full-width panels, matrices and product UI cards.
+
+sourceOfTruth:
+  figmaComponentName: Documentation / Card
+  relatedPatterns:
+    - patterns/page-layout.yaml
+    - patterns/content-block.yaml
+  relatedAccessibility:
+    - accessibility/headings.yaml
+
+scope:
+  useFor:
+    - Documentation summaries
+    - Component usage guidance
+    - Token usage summaries
+    - Pattern guidance summaries
+    - Accessibility guidance summaries
+    - Short examples or decisions
+    - Visual token examples
+
+  doNotUseFor:
+    - Public product UI cards
+    - Marketing cards
+    - Data tables
+    - State matrices
+    - Long-form prose sections
+    - Interactive application components
+
+anatomy:
+  root:
+    description: Card container.
+    tokens:
+      fill: color.surface.default
+      borderColor: color.border.light
+      borderWidth: border.width.thin
+      radius: radius.lg
+      padding: spacing.inset.md
+      gap: spacing.stack.sm
+
+  title:
+    description: >
+      Short card heading. The semantic heading level is determined by the
+      surrounding page structure. The visual style is compact by default.
+    contentType: text
+    required: true
+    visualStyle:
+      base: typography.heading.h5.base
+      md: typography.heading.h5.md
+      lg: typography.heading.h5.lg
+    tokens:
+      color: color.text.heading
+
+  description:
+    description: Short supporting guidance text.
+    contentType: text
+    required: true
+    visualStyle:
+      base: typography.body.default.base
+      md: typography.body.default.md
+      lg: typography.body.default.lg
+    tokens:
+      color: color.text.default
+
+  sampleSlot:
+    description: >
+      Native Figma slot used to hold flexible sample content. The slot may show
+      icons, icon groups, colour pairings, swatches, spacing illustrations,
+      padding examples, radius examples, border examples, typography examples,
+      component examples or no content.
+    contentType: figma-slot
+    required: false
+    figmaPropertyName: Sample
+    allowedContent:
+      - icon
+      - icon group
+      - colour swatch
+      - colour pairing
+      - spacing illustration
+      - padding illustration
+      - border radius illustration
+      - border illustration
+      - typography sample
+      - component example
+      - empty
+    tokens:
+      gap: spacing.stack.sm
+      iconSizeDefault: size.icon.lg
+      iconColorDefault: color.icon.default
+
+figmaSlotModel:
+  status: use-native-figma-slots-where-available
+  betaCaution: >
+    Figma slots are currently in open beta, so behaviour may change. If an AI
+    agent or automation cannot create or update native slots yet, it should
+    report the limitation and use the documented fallback temporarily.
+
+  intendedImplementation:
+    - Create a nested frame inside the main Documentation / Card component.
+    - Convert that nested frame to a native Figma slot.
+    - Name the slot property Sample.
+    - Add a clear slot description explaining accepted sample content.
+    - Publish the card with either an empty slot or a simple default sample.
+    - Set preferred instances for common documentation sample components where possible.
+
+  fallbackImplementation:
+    useWhen:
+      - Native slots are unavailable.
+      - Figma MCP cannot create or edit slots.
+      - Slots create unstable behaviour during beta.
+    approach:
+      - Use a nested placeholder frame or instance swap property named Sample.
+      - Keep the same anatomy: Title, Description, Sample.
+      - Report that this is a temporary fallback and should be migrated to native slots later.
+
+  preferredInstances:
+    description: >
+      Preferred instances should guide designers toward approved sample content
+      without creating a separate card variant for every sample type.
+    examples:
+      - Documentation / Sample / Empty
+      - Documentation / Sample / Icon
+      - Documentation / Sample / Icon group
+      - Documentation / Sample / Colour swatch
+      - Documentation / Sample / Colour pairing
+      - Documentation / Sample / Spacing
+      - Documentation / Sample / Padding
+      - Documentation / Sample / Radius
+      - Documentation / Sample / Border
+      - Documentation / Sample / Typography
+      - Documentation / Sample / Component
+
+slotRules:
+  - The sample slot is optional.
+  - The sample slot should support different documentation sample types without creating a new card style.
+  - Slot content should use semantic tokens wherever possible.
+  - Slot content should be concise and should not turn the card into a long-form content section.
+  - If the sample needs complex layout, create a separate documentation sample component and place it in the slot.
+  - Do not detach icons or sample components where reusable components exist.
+  - Do not create a new card variant for every possible sample type.
+  - Prefer composition through the slot over variant explosion.
+  - If the sample slot is empty, collapse or hide it rather than leaving an unexplained empty space.
+
+sampleSlotExamples:
+  icon:
+    description: Single icon or icon group.
+    rules:
+      - Use icons from icons/registry.json.
+      - Use registered Figma icon components.
+      - Use semantic icon colour tokens.
+
+  colourPairing:
+    description: Background, foreground and icon colour pairing sample.
+    rules:
+      - Use semantic colour tokens.
+      - Include enough context to show the pairing clearly.
+      - Do not use raw hex values.
+
+  spacing:
+    description: Spacing or padding illustration.
+    rules:
+      - Use spacing tokens for rectangles, gaps or annotations.
+      - Do not use arbitrary spacing values.
+
+  radius:
+    description: Border radius illustration.
+    rules:
+      - Use radius tokens.
+      - Label or describe the token being shown where appropriate.
+
+  empty:
+    description: Card has no visual sample.
+    rules:
+      - Hide the sample slot or keep it collapsed.
+      - Do not leave an empty visible placeholder unless it is intentionally documenting absence.
+
+layout:
+  root:
+    display: auto-layout
+    direction: vertical
+    alignment: start
+    sizing:
+      width: fixed-or-fill-within-card-group
+      height: hug-content
+
+  desktopCardGroup:
+    description: >
+      On desktop documentation pages, documentation cards should normally appear
+      in a wrapping card group rather than a single full-width vertical list.
+    containerWidth: layout.container.maxWidth.default
+    preferredColumns: 3
+    columnGap: layout.grid.gutter.lg
+    rowGap: spacing.stack.lg
+    calculatedCardWidthExample:
+      container: 1152px
+      gutters: 32px, 32px
+      cardWidth: 362.67px
+
+  narrowCardGroup:
+    description: Stack cards vertically on narrow frames.
+    preferredColumns: 1
+    rowGap: spacing.stack.lg
+
+headingSemantics:
+  description: >
+    Documentation card titles may use a compact visual heading style, but their
+    semantic heading level depends on the surrounding page hierarchy.
+
+  rules:
+    - Card titles must describe the content that follows.
+    - Do not infer semantic heading level from the visual style name.
+    - typography.heading.h5.[breakpoint] is a compact visual style, not a requirement to implement the title as an h5.
+    - If the card sits directly under a page H1, the card title may be semantically H2.
+    - If the card sits inside an H2 section, the card title may be semantically H3.
+    - If the semantic level differs from the visual style, preserve the correct semantic level in implementation.
+
+contentGuidelines:
+  title:
+    - Keep titles short and scannable.
+    - Use sentence case unless a proper noun or token name requires otherwise.
+    - Make the title describe the guidance or sample inside the card.
+
+  description:
+    - Keep description text concise.
+    - Prefer one or two short sentences.
+    - Do not use long-form prose inside documentation cards.
+    - Move long guidance into a normal content section instead.
+
+  sampleSlot:
+    - Use the slot to show, not repeat, the written guidance.
+    - Keep sample content simple and easy to scan.
+    - Use token-bound sample content where possible.
+    - Avoid decorative samples that do not clarify the guidance.
+
+figmaRules:
+  - Create a reusable Figma component named Documentation / Card.
+  - The component should include Title, Description and a native Sample slot where slots are available.
+  - Use Documentation / Card instances across documentation pages.
+  - Do not create one-off documentation card frames.
+  - Use Auto Layout.
+  - Use semantic variables and text styles.
+  - Use the current frame breakpoint when choosing text styles.
+  - Use compact visual heading styles for card titles unless the page pattern says otherwise.
+  - Do not stretch short documentation cards to full page width on desktop.
+  - Arrange repeated documentation cards in a wrapping desktop card group.
+  - Stack cards on narrow frames.
+  - Do not use Documentation / Card for public product UI cards.
+  - Do not remove or rename a published slot without testing because slot removal can reset instance slot content.
+
+aiGenerationRules:
+  - Use Documentation / Card for repeated short documentation summaries.
+  - Use the native Sample slot for visual examples where Figma slots are supported.
+  - If native slots are not supported by the AI/Figma MCP workflow, report the limitation and use the fallback Sample placeholder.
+  - Do not replace documentation card groups with full-width panel lists on desktop.
+  - Do not create a new card style if Documentation / Card exists.
+  - Do not create a card variant for every sample type.
+  - Use wrapping card groups for desktop documentation pages.
+  - Use stacked card groups for narrow documentation pages.
+  - Use grid or table layout only for matrices, tables or true row/column comparisons.
+  - Determine card title semantic level from the page structure, not from the visual text style.
+  - Report any raw values, detached instances or unsupported slot content.
