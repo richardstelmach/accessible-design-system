@@ -20,7 +20,12 @@ purpose:
   - Distinguish documentation cards from full-width panels, matrices and product UI cards.
 
 sourceOfTruth:
-  figmaComponentName: Documentation / Card
+  figmaComponentName: _Documentation/Card
+  displayName: Documentation card
+  publicName: Documentation / Card
+  namingNote: >
+    The underscore prefix is used in Figma to identify internal documentation
+    components that are not part of the public product component library.
   relatedPatterns:
     - patterns/page-layout.yaml
     - patterns/content-block.yaml
@@ -54,7 +59,7 @@ anatomy:
       borderWidth: border.width.thin
       radius: radius.lg
       padding: spacing.inset.md
-      gap: spacing.stack.sm
+      gap: spacing.stack.md
 
   title:
     description: >
@@ -74,9 +79,9 @@ anatomy:
     contentType: text
     required: true
     visualStyle:
-      base: typography.body.default.base
-      md: typography.body.default.md
-      lg: typography.body.default.lg
+      base: typography.body.small.base
+      md: typography.body.small.md
+      lg: typography.body.small.lg
     tokens:
       color: color.text.default
 
@@ -240,9 +245,11 @@ contentGuidelines:
 
   description:
     - Keep description text concise.
+    - Use typography.body.small.[breakpoint] for short card descriptions.
+    - If the guidance needs longer prose, do not force it into a documentation card.
     - Prefer one or two short sentences.
     - Do not use long-form prose inside documentation cards.
-    - Move long guidance into a normal content section instead.
+    - Move long-form guidance into a readable text section using layout.container.maxWidth.text.
 
   sampleSlot:
     - Use the slot to show, not repeat, the written guidance.

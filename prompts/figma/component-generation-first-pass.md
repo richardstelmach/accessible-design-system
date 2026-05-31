@@ -60,8 +60,8 @@ Rules:
 
 Figma presentation of component:
 
-- Use `components/internal/documentation-card/documentation-card.yaml` when creating repeated documentation summary cards.
-- Create or reuse `Documentation / Card` instances rather than one-off frames.
+- Use `components/internal/documentation-card.yaml` when creating repeated documentation summary cards.
+- Create or reuse `_Documentation/Card` instances rather than one-off frames.
 - Use the native Figma `Sample` slot for visual examples where slots are available.
 - If native slots are unavailable through the current AI/Figma MCP workflow, report the limitation and use the documented fallback temporarily.
 - Use the card Sample slot for visual examples such as icons, colour pairings, spacing, padding, radius, borders and swatches.

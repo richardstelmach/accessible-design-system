@@ -46,12 +46,12 @@ Check:
 14. Check whether prose, section descriptions and guidance text use `layout.container.maxWidth.text`.
 15. Flag long-form text layers that stretch to the full page/container width without a documented reason.
 16. Do not make changes unless explicitly asked.
-17. Check whether repeated documentation cards use the shared `Documentation / Card` component.
+17. Check whether repeated documentation cards use the shared `_Documentation/Card` component.
 18. Check whether documentation cards use Title, Description and Sample structure.
 19. Check whether the Sample area is implemented as a native Figma slot where supported.
 20. If the Sample area is not a native slot, check whether this is documented as a temporary fallback.
 21. Check whether sample slot content uses reusable documentation sample components where possible.
-22. Check whether card groups follow `components/internal/documentation-card/documentation-card.yaml` and `patterns/content-block.yaml`.
+22. Check whether card groups follow `components/internal/documentation-card.yaml` and `patterns/content-block.yaml`.
 23. Flag full-width panel lists where short documentation cards should use a wrapping card group.
 24. Check that card titles are meaningful.
 25. Check that card title semantics are determined by page structure, not visual style name alone.
