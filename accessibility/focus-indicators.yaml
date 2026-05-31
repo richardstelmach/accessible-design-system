@@ -1,0 +1,71 @@
+standard: Focus Indicators
+
+description: >
+  Defines how keyboard focus indicators should appear across interactive components.
+  Focus indicators must be visible, consistent and sufficiently distinguishable from
+  both the component and surrounding surface.
+
+purpose:
+  - Make keyboard focus clearly visible.
+  - Support users navigating with keyboard, switch control or assistive technology.
+  - Avoid focus styles that only work on some component colours.
+  - Provide a reusable focus treatment for components.
+
+tokens:
+  ring: color.interactive.focus.ring
+  separator: color.interactive.focus.separator
+  ringWidth: border.width.medium
+  separatorWidth: border.width.medium
+
+defaultTreatment:
+  type: double-ring
+  description: >
+    Use a two-part focus indicator where a separator ring sits between the component
+    and the outer focus ring. This helps the focus indicator remain visible on strong,
+    dark, destructive or highly saturated component backgrounds.This ensures contrast 
+    between the focus indicator and the object in focus, such as coloured buttons, as 
+    well as the surrounding, external area.
+  layers:
+    - name: component
+      description: The focused interactive component.
+    - name: separator
+      colour: color.interactive.focus.separator
+      width: border.width.medium
+      description: Separates the component fill from the outer focus ring.
+    - name: focusRing
+      colour: color.interactive.focus.ring
+      width: border.width.medium
+      description: Outer visible focus indicator.
+
+rules:
+  - Focus indicators must be visible when an interactive component receives keyboard focus.
+  - Focus indicators must be distinguishable from adjacent colours.
+  - Do not rely on a single focus colour if it does not contrast with the component fill.
+  - Use the double-ring treatment for buttons and other controls with strong coloured fills.
+  - The separator ring should not be used as the only visible focus indicator.
+  - The outer focus ring should remain visible against the surrounding surface.
+  - Focus indicators must not rely on colour alone where shape, outline or spacing can improve visibility.
+  - Disabled native controls are usually not focusable, but aria-disabled controls may still need a visible focus treatment if they remain focusable.
+
+figmaRules:
+  - Represent the double-ring treatment with a wrapper frame, nested frames or effects.
+  - Use semantic variables for focus ring and separator colours.
+  - Do not use raw blue, raw white or raw stroke values for focus indicators.
+  - For standard rounded controls, match the focus shape to the component radius.
+  - For circular icon-only controls, use a circular focus indicator.
+  - The focus indicator may sit outside the component bounds.
+
+implementationGuidance:
+  cssExample: >
+    A web implementation can use layered box-shadow values, such as an inner
+    separator ring followed by an outer focus ring.
+  example:
+    - "0 0 0 2px var(--color-interactive-focus-separator)"
+    - "0 0 0 4px var(--color-interactive-focus-ring)"
+
+aiGenerationRules:
+  - Use the documented double-ring focus treatment for Button focus states.
+  - Do not create a focus ring that directly touches a strong component fill unless contrast has been verified.
+  - Use color.interactive.focus.separator and color.interactive.focus.ring.
+  - Use border.width.medium for both separator and focus ring widths unless a component specification says otherwise.
+  - Report unclear or failing focus contrast rather than inventing raw colours.

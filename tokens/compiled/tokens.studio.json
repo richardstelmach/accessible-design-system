@@ -466,6 +466,11 @@
             "$value": "{color.primary.700}",
             "$type": "color",
             "$description": "Focus indicator colour used to show keyboard focus and support accessible navigation."
+          },
+          "separator": {
+            "$value": "{color.surface.default}",
+            "$type": "color",
+            "$description": "Separator colour used between a component and the focus ring when a single focus colour may not contrast sufficiently against the component fill."
           }
         }
       },

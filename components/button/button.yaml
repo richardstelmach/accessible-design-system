@@ -139,10 +139,25 @@ states:
     description: Pressed or actively triggered state.
 
   focus:
-    description: Keyboard focus must be clearly visible.
+    description: >
+      Keyboard focus must be clearly visible. Buttons use a double-ring focus
+      treatment so the indicator remains visible against both the component fill
+      and the surrounding surface.
     tokens:
+      focusSeparator: color.interactive.focus.separator
+      focusSeparatorWidth: border.width.medium
       focusRing: color.interactive.focus.ring
       focusRingWidth: border.width.medium
+    treatment:
+      type: double-ring
+      description: >
+        A separator ring sits between the button and the outer focus ring.
+        This prevents the focus ring from failing where it touches strong button
+        fills such as destructive or primary backgrounds.
+      layers:
+        - component
+        - separator
+        - focusRing
 
   disabled:
     description: >
@@ -189,6 +204,8 @@ accessibility:
   - Button text should be meaningful out of context for assistive technologies such as screen readers.
   - Semantic code should be used in implementation, such as <button> elements for buttons.
   - Focus colour should meet WCAG contrast requirements against both the button background and surrounding content.
+  - Focus indicators must remain visible against both the component and surrounding surface.
+  - Use the documented double-ring focus treatment where a single focus colour may not contrast sufficiently.
 
 figmaRules:
   - Use Auto Layout.
@@ -203,6 +220,10 @@ figmaRules:
   - Do not use raw colour, spacing, radius or typography values.
   - Do not swap button typography styles by breakpoint.
   - Use responsive layout behaviour outside the button component rather than changing the internal label style.
+  - Use the documented double-ring focus treatment for focused buttons.
+  - Use color.interactive.focus.separator for the inner separator ring.
+  - Use color.interactive.focus.ring for the outer focus ring.
+  - Do not use a single focus ring directly against strong button fills unless contrast has been verified.
 
 aiGenerationRules:
   - Use only documented variants, sizes and states.
@@ -211,3 +232,6 @@ aiGenerationRules:
   - Do not use unregistered icons.
   - Report missing token needs rather than inventing new raw values.
   - Apply accessibility guidelines in generated code
+  - Apply the double-ring focus treatment to focused Button and Icon Button examples.
+  - Do not use raw colours for focus separator or focus ring.
+  - Use color.interactive.focus.separator and color.interactive.focus.ring.
