@@ -968,6 +968,7 @@
           }
         },
         "h2": {
+          "$description": "Visual style for H2-level section headings at the selected breakpoint. Use for direct sections under a page title by default. Heading semantics should follow document structure and should not be chosen only by visual size.",
           "base": {
             "$type": "typography",
             "$value": {
@@ -1000,6 +1001,7 @@
           }
         },
         "h3": {
+          "$description": "Visual style for H3-level subsection headings at the selected breakpoint. Use for grouped examples or subsections nested inside an H2 section.",
           "base": {
             "$type": "typography",
             "$value": {
@@ -1064,6 +1066,7 @@
           }
         },
         "h5": {
+          "$description": "Visual style for smaller headings such as card titles or compact nested headings at the selected breakpoint. Do not use as a substitute for H2 or H3 when the content is structurally a main section or subsection.",
           "base": {
             "$type": "typography",
             "$value": {
