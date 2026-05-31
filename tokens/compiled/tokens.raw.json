@@ -299,8 +299,12 @@
       }
     },
     "interactive": {
-      "$description": "Default interactive foreground and border pairing for secondary or neutral actions.",
       "default": {
+        "background": {
+          "$value": "{color.surface.default}",
+          "$type": "color",
+          "$description": "Default background colour for secondary or neutral interactive elements."
+        },
         "foreground": {
           "$value": "{color.neutral.500}",
           "$type": "color",
@@ -310,10 +314,43 @@
           "$value": "{color.neutral.500}",
           "$type": "color",
           "$description": "Default border colour for secondary or neutral interactive elements."
+        },
+        "hover": {
+          "background": {
+            "$value": "{color.neutral.100}",
+            "$type": "color",
+            "$description": "Hover background colour for secondary or neutral interactive elements."
+          },
+          "foreground": {
+            "$value": "{color.neutral.600}",
+            "$type": "color",
+            "$description": "Hover foreground colour for secondary or neutral interactive elements."
+          },
+          "border": {
+            "$value": "{color.neutral.600}",
+            "$type": "color",
+            "$description": "Hover border colour for secondary or neutral interactive elements."
+          }
+        },
+        "active": {
+          "background": {
+            "$value": "{color.neutral.200}",
+            "$type": "color",
+            "$description": "Active background colour for secondary or neutral interactive elements."
+          },
+          "foreground": {
+            "$value": "{color.neutral.600}",
+            "$type": "color",
+            "$description": "Active foreground colour for secondary or neutral interactive elements."
+          },
+          "border": {
+            "$value": "{color.neutral.600}",
+            "$type": "color",
+            "$description": "Active border colour for secondary or neutral interactive elements."
+          }
         }
       },
       "primary": {
-        "$description": "Primary action colour pairing for the most important action in a section or flow.",
         "background": {
           "$value": "{color.primary.700}",
           "$type": "color",
@@ -323,6 +360,104 @@
           "$value": "{color.white}",
           "$type": "color",
           "$description": "Foreground colour for content placed on the primary action background."
+        },
+        "hover": {
+          "background": {
+            "$value": "{color.primary.900}",
+            "$type": "color",
+            "$description": "Hover background colour for primary actions."
+          },
+          "foreground": {
+            "$value": "{color.white}",
+            "$type": "color",
+            "$description": "Hover foreground colour for primary actions."
+          }
+        },
+        "active": {
+          "background": {
+            "$value": "{color.primary.950}",
+            "$type": "color",
+            "$description": "Active background colour for primary actions."
+          },
+          "foreground": {
+            "$value": "{color.white}",
+            "$type": "color",
+            "$description": "Active foreground colour for primary actions."
+          }
+        }
+      },
+      "destructive": {
+        "background": {
+          "$value": "{color.error.700}",
+          "$type": "color",
+          "$description": "Background colour for destructive actions."
+        },
+        "foreground": {
+          "$value": "{color.white}",
+          "$type": "color",
+          "$description": "Foreground colour for content placed on destructive action backgrounds."
+        },
+        "hover": {
+          "background": {
+            "$value": "{color.error.900}",
+            "$type": "color",
+            "$description": "Hover background colour for destructive actions."
+          },
+          "foreground": {
+            "$value": "{color.white}",
+            "$type": "color",
+            "$description": "Hover foreground colour for destructive actions."
+          }
+        },
+        "active": {
+          "background": {
+            "$value": "{color.error.950}",
+            "$type": "color",
+            "$description": "Active background colour for destructive actions."
+          },
+          "foreground": {
+            "$value": "{color.white}",
+            "$type": "color",
+            "$description": "Active foreground colour for destructive actions."
+          }
+        }
+      },
+      "text": {
+        "foreground": {
+          "$value": "{color.text.link}",
+          "$type": "color",
+          "$description": "Foreground colour for low-emphasis text-like actions."
+        },
+        "hover": {
+          "foreground": {
+            "$value": "{color.primary.900}",
+            "$type": "color",
+            "$description": "Hover foreground colour for low-emphasis text-like actions."
+          }
+        },
+        "active": {
+          "foreground": {
+            "$value": "{color.primary.950}",
+            "$type": "color",
+            "$description": "Active foreground colour for low-emphasis text-like actions."
+          }
+        }
+      },
+      "disabled": {
+        "background": {
+          "$value": "{color.neutral.100}",
+          "$type": "color",
+          "$description": "Background colour for disabled interactive elements."
+        },
+        "foreground": {
+          "$value": "{color.neutral.400}",
+          "$type": "color",
+          "$description": "Foreground colour for disabled interactive elements."
+        },
+        "border": {
+          "$value": "{color.neutral.200}",
+          "$type": "color",
+          "$description": "Border colour for disabled interactive elements."
         }
       },
       "focus": {
@@ -430,6 +565,16 @@
         "$value": "{color.interactive.primary.foreground}",
         "$type": "color",
         "$description": "Icon colour used on primary interactive backgrounds."
+      },
+      "onDestructive": {
+        "$value": "{color.interactive.destructive.foreground}",
+        "$type": "color",
+        "$description": "Icon colour used on destructive interactive backgrounds."
+      },
+      "onDisabled": {
+        "$value": "{color.interactive.disabled.foreground}",
+        "$type": "color",
+        "$description": "Icon colour used in disabled interactive elements."
       },
       "onFeatured": {
         "$value": "{color.featured.foreground}",

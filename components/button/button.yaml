@@ -1,0 +1,203 @@
+component: Button
+version: 1.0.0
+
+description: >
+  Buttons allow users to trigger actions, submit information or move through a flow.
+  Button styling should make the action hierarchy clear while remaining accessible,
+  consistent and token-driven.
+
+purpose:
+  - Trigger a user action.
+  - Communicate action hierarchy.
+  - Support text-only, icon-supported and icon-only actions.
+  - Provide clear hover, active, focus and disabled states.
+  - Support responsive and accessible interaction patterns.
+
+variants:
+  primary:
+    description: Used for the main action in a section, form or flow.
+    tokens:
+      background: color.interactive.primary.background
+      foreground: color.interactive.primary.foreground
+      icon: color.icon.onPrimary
+      hoverBackground: color.interactive.primary.hover.background
+      hoverForeground: color.interactive.primary.hover.foreground
+      activeBackground: color.interactive.primary.active.background
+      activeForeground: color.interactive.primary.active.foreground
+      border: none
+
+  default:
+    description: Used for secondary or neutral actions.
+    tokens:
+      background: color.interactive.default.background
+      foreground: color.interactive.default.foreground
+      icon: color.icon.default
+      border: color.interactive.default.border
+      hoverBackground: color.interactive.default.hover.background
+      hoverForeground: color.interactive.default.hover.foreground
+      hoverBorder: color.interactive.default.hover.border
+      activeBackground: color.interactive.default.active.background
+      activeForeground: color.interactive.default.active.foreground
+      activeBorder: color.interactive.default.active.border
+
+  destructive:
+    description: Used for destructive or irreversible actions such as delete or remove.
+    tokens:
+      background: color.interactive.destructive.background
+      foreground: color.interactive.destructive.foreground
+      icon: color.icon.onDestructive
+      hoverBackground: color.interactive.destructive.hover.background
+      hoverForeground: color.interactive.destructive.hover.foreground
+      activeBackground: color.interactive.destructive.active.background
+      activeForeground: color.interactive.destructive.active.foreground
+      border: none
+
+  text:
+    description: Used for low-emphasis actions that should visually behave like text links.
+    tokens:
+      background: none
+      foreground: color.interactive.text.foreground
+      icon: color.icon.link
+      hoverForeground: color.interactive.text.hover.foreground
+      activeForeground: color.interactive.text.active.foreground
+      border: none
+
+sizes:
+  compact:
+    description: Compact button size for dense interfaces where space is limited.
+    tokens:
+      paddingBlock: spacing.control.paddingBlock.compact
+      paddingInline: spacing.control.paddingInline.compact
+      minBlockSize: size.control.minBlockSize.compact
+      icon: size.icon.md
+
+  default:
+    description: Default button size for most product interfaces.
+    tokens:
+      paddingBlock: spacing.control.paddingBlock.default
+      paddingInline: spacing.control.paddingInline.default
+      minBlockSize: size.control.minBlockSize.default
+      icon: size.icon.md
+
+  comfortable:
+    description: Larger button size for prominent actions or spacious interfaces.
+    tokens:
+      paddingBlock: spacing.control.paddingBlock.comfortable
+      paddingInline: spacing.control.paddingInline.comfortable
+      minBlockSize: size.control.minBlockSize.comfortable
+      icon: size.icon.md
+
+structure:
+  root:
+    element: button
+    layout: inline-flex
+    align: center
+    justify: center
+    gap: spacing.control.gap
+    radius: radius.lg
+    borderWidth: border.width.thin
+    typography: typography.label.default
+
+  label:
+    required: true
+    typography: typography.label.default
+
+  leadingIcon:
+    optional: true
+    source: icons/registry.json
+    size: size.icon.md
+    colour: inherits variant icon token
+
+  trailingIcon:
+    optional: true
+    source: icons/registry.json
+    size: size.icon.md
+    colour: inherits variant icon token
+
+  iconOnly:
+    description: >
+      Icon-only button configuration for actions where the icon is the visible control.
+      The button must be circular and must have an accessible name.
+    label:
+      visible: false
+      requiredAccessibleName: true
+    dimensions:
+      inlineSize: use selected size minBlockSize
+      blockSize: use selected size minBlockSize
+    radius: radius.full
+    iconSize: size.icon.md
+
+states:
+  default:
+    description: Normal resting state.
+
+  hover:
+    description: Pointer hover state for devices that support hover.
+    note: Hover must not be the only way to communicate meaning.
+
+  active:
+    description: Pressed or actively triggered state.
+
+  focus:
+    description: Keyboard focus must be clearly visible.
+    tokens:
+      focusRing: color.interactive.focus.ring
+      focusRingWidth: border.width.medium
+
+  disabled:
+    description: >
+      Indicates that an action is currently unavailable.
+      Disabled buttons must not rely on opacity alone.
+    tokens:
+      background: color.interactive.disabled.background
+      foreground: color.interactive.disabled.foreground
+      icon: color.icon.onDisabled
+      border: color.interactive.disabled.border
+
+contentGuidelines:
+  - Use clear action-oriented labels.
+  - Prefer short labels, usually one to three words.
+  - Use sentence case.
+  - Avoid vague labels such as "Click here".
+  - Do not rely on an icon alone unless the icon-only button has an accessible name.
+
+iconGuidelines:
+  - Use approved icons from icons/registry.json.
+  - Use leading icons when the icon supports recognition of the action.
+  - Use trailing icons for directional actions such as continue, next or external link.
+  - Use icon-only buttons only for common, recognisable actions.
+  - Icon-only buttons must have an accessible name in implementation.
+  - Icons paired with visible text should usually be decorative in implementation.
+
+accessibility:
+  - Buttons must have a clear accessible name.
+  - Visible button text should normally provide the accessible name.
+  - Icon-only buttons must provide an accessible name.
+  - Keyboard focus must be visible.
+  - Disabled state must be communicated programmatically in implementation.
+  - Button target size should meet or exceed size.control.minBlockSize.default where possible.
+  - Do not rely on colour alone to communicate destructive or disabled meaning.
+  - Should not be able to tab to disabled buttons but must be announced to screen readers as disabled.
+  - Button text should be meaningful out of context for assistive technologies such as screen readers.
+  - Semantic code should be used in implementation, such as <button> elements for buttons.
+  - Focus colour should meet WCAG contrast requirements against both the button background and surrounding content.
+
+figmaRules:
+  - Use Auto Layout.
+  - Use semantic colour variables.
+  - Use typography.label.default for visible labels.
+  - Use spacing.control.gap between icon and label.
+  - Use selected size tokens for padding and min height.
+  - Use radius.lg for standard buttons.
+  - Use radius.full for circular icon-only buttons.
+  - Use approved icon components from the icon registry.
+  - Do not detach icon instances.
+  - Do not use raw colour, spacing, radius or typography values.
+
+aiGenerationRules:
+  - Use only documented variants, sizes and states.
+  - Use semantic tokens rather than raw values.
+  - Do not invent new button variants.
+  - Do not use unregistered icons.
+  - Report missing token needs rather than inventing new raw values.
+  - Apply accessibility guidelines in generated code
