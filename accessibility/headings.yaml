@@ -1,0 +1,191 @@
+standard: Headings
+
+description: >
+  Defines how headings should be used across documentation pages, patterns and
+  component examples. Heading levels describe content structure. Typography
+  styles describe visual appearance and should be selected for the current
+  breakpoint or frame size.
+
+wcagReferences:
+  - id: WCAG 1.3.1
+    name: Info and Relationships
+    level: A
+    relevance: >
+      Heading structure and relationships conveyed visually must be programmatically
+      determinable or available in text.
+
+  - id: WCAG 2.4.1
+    name: Bypass Blocks
+    level: A
+    relevance: >
+      Clear page structure and headings can support navigation and help users move
+      past repeated or grouped blocks of content. Other mechanisms such as skip
+      links or landmarks may also be needed.
+
+  - id: WCAG 2.4.6
+    name: Headings and Labels
+    level: AA
+    relevance: >
+      Headings must describe the topic or purpose of the content that follows.
+
+  - id: WCAG 2.4.10
+    name: Section Headings
+    level: AAA
+    relevance: >
+      Section headings are used to organise content. This is AAA, but should be
+      treated as a design system best practice.
+
+principles:
+  - Treat each Figma documentation frame as a page-like structure.
+  - Use heading levels to describe content hierarchy.
+  - Use typography styles to describe visual appearance.
+  - Choose heading typography for the current breakpoint or frame size.
+  - Prefer matching semantic heading level and visual typography style.
+  - Do not choose heading levels based only on visual size.
+  - Do not skip heading levels for visual styling reasons.
+  - Headings should clearly describe the content that follows.
+  - Visual heading hierarchy should not contradict semantic heading hierarchy.
+  - If the visual heading style differs from the semantic level, document the intended semantic level.
+
+breakpointStyleMapping:
+  description: >
+    Heading visual styles should use the heading token for the semantic level and
+    the current frame breakpoint.
+
+  base:
+    appliesTo: Frames below breakpoint.md.
+    example: Mobile or narrow documentation frames.
+    stylePattern: typography.heading.[level].base
+
+  md:
+    appliesTo: Frames from breakpoint.md and above.
+    example: Tablet documentation frames.
+    stylePattern: typography.heading.[level].md
+
+  lg:
+    appliesTo: Frames from breakpoint.lg and above.
+    example: Desktop documentation frames such as 1024px, 1440px and wider.
+    stylePattern: typography.heading.[level].lg
+
+semanticHierarchy:
+  pageTitle:
+    semanticLevel: h1
+    defaultVisualStyle:
+      base: typography.heading.h1.base
+      md: typography.heading.h1.md
+      lg: typography.heading.h1.lg
+    description: The main title of a page or documentation frame.
+
+  sectionHeading:
+    semanticLevel: h2
+    defaultVisualStyle:
+      base: typography.heading.h2.base
+      md: typography.heading.h2.md
+      lg: typography.heading.h2.lg
+    description: A direct section under the page title.
+
+  subsectionHeading:
+    semanticLevel: h3
+    defaultVisualStyle:
+      base: typography.heading.h3.base
+      md: typography.heading.h3.md
+      lg: typography.heading.h3.lg
+    description: A subsection nested inside an H2 section.
+
+  nestedSubsectionHeading:
+    semanticLevel: h4
+    defaultVisualStyle:
+      base: typography.heading.h4.base
+      md: typography.heading.h4.md
+      lg: typography.heading.h4.lg
+    description: A subsection nested inside an H3 section.
+
+  cardHeading:
+    semanticLevel: context-dependent
+    defaultVisualStyle:
+      base: typography.heading.h5.base
+      md: typography.heading.h5.md
+      lg: typography.heading.h5.lg
+    description: >
+      Card headings may use a smaller visual style, but their semantic level
+      depends on where the card sits in the page hierarchy.
+
+visualStyleRules:
+  samePage:
+    - Headings at the same semantic level should usually use the same visual style on the same page.
+    - Different visual styles for the same semantic level are allowed only where the page structure remains clear.
+    - Do not style one H2 like a major section and another H2 like a minor card label unless the difference is documented and intentional.
+    - If different visual styles are used for the same semantic level, the implementation must still expose the correct semantic heading level.
+
+  acrossPages:
+    - Heading visual styles may vary across different page templates where context requires it.
+    - The semantic heading level must still follow the document structure.
+    - Repeated templates should use consistent heading treatment where possible.
+
+  exceptions:
+    - A semantic H2 may use a smaller visual style if the design requires it.
+    - When visual style differs from semantic level, document both the semantic level and visual style.
+    - Example: semanticLevel h2, visualStyle typography.heading.h4.lg.
+    - Visual exceptions must not make the page hierarchy harder to understand.
+
+spacing:
+  headingToBody:
+    token: spacing.content.headingToBody
+    usage: Space between a heading and the content immediately following it.
+
+  bodyToAction:
+    token: spacing.content.bodyToAction
+    usage: Space between explanatory content and a following action.
+
+  paragraph:
+    token: spacing.content.paragraph
+    usage: Space between related paragraphs.
+
+  sectionToSection:
+    token:
+      base: spacing.section.base
+      md: spacing.section.md
+      lg: spacing.section.lg
+    usage: Space between major page sections at the current breakpoint.
+
+  subsectionStack:
+    token: spacing.stack.lg
+    usage: Space between grouped subsection examples or cards.
+
+rules:
+  - A page or documentation frame should normally start with one H1.
+  - Direct sections under the H1 should use H2.
+  - Sections nested under an H2 should use H3.
+  - Card titles inside an H2 section are usually H3 semantically, even if visually styled smaller.
+  - Do not use H4, H5 or H6 just because the text should look smaller.
+  - Do not use heading styles for non-heading text.
+  - Headings should not be empty or vague.
+  - Headings should describe the content that follows.
+  - Use spacing.content.headingToBody between headings and their supporting text.
+  - Use section spacing tokens to separate major page regions.
+  - Select heading visual styles using the current frame breakpoint.
+
+figmaRules:
+  - Use typography.heading.h1.[breakpoint] for page titles by default.
+  - Use typography.heading.h2.[breakpoint] for main section headings by default.
+  - Use typography.heading.h3.[breakpoint] for nested subsection headings by default.
+  - For desktop documentation frames, use the lg heading style.
+  - For tablet documentation frames, use the md heading style.
+  - For narrow/mobile documentation frames, use the base heading style.
+  - Do not use typography.heading.h5.[breakpoint] for main page sections.
+  - If a visually smaller heading is required, add a note indicating the intended semantic heading level.
+  - Figma text style names are visual tokens; implementation must still use the correct semantic heading level.
+  - Use spacing.content.headingToBody between section headings and descriptions.
+  - Use spacing.section.[breakpoint] between major documentation sections.
+
+aiGenerationRules:
+  - Treat each Figma documentation frame as a page.
+  - Determine the frame breakpoint before choosing heading typography.
+  - Create one H1-style page title per documentation frame.
+  - Use H2-style headings for direct sections.
+  - Use H3-style headings for subsections inside H2 sections.
+  - Use the heading style that matches both the semantic level and the frame breakpoint.
+  - Do not choose H4, H5 or H6 styles only because a heading appears visually smaller.
+  - If a smaller visual style is needed, preserve and report the intended semantic heading level.
+  - Use meaningful heading text that describes the content that follows.
+  - Report unclear heading hierarchy rather than inventing heading levels.

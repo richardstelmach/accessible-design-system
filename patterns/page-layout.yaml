@@ -381,6 +381,50 @@ desktopBehaviour:
     - Auto layout should control actual spacing, wrapping and behaviour.
     - Layout grids should be treated as visual alignment guides.
 
+headingHierarchy:
+  description: >
+    Page layout patterns must support a clear heading hierarchy. Heading levels
+    describe page structure. Visual typography should normally match the semantic
+    level and current breakpoint.
+
+  breakpointStyleMapping:
+    base: Use typography.heading.[level].base below breakpoint.md.
+    md: Use typography.heading.[level].md from breakpoint.md and above.
+    lg: Use typography.heading.[level].lg from breakpoint.lg and above.
+
+  rules:
+    - Treat each page frame as a page-like structure.
+    - Use one H1 for the page title.
+    - Use H2 for direct page sections.
+    - Use H3 for subsections nested inside H2 sections.
+    - Do not skip heading levels for visual styling reasons.
+    - Do not use smaller heading styles such as H5 for main page sections.
+    - Select heading typography using the current frame breakpoint.
+    - If a heading is visually styled differently from its semantic level, document the intended semantic level.
+
+  desktopDocumentationDefault:
+    frameWidth: 1440px
+    breakpoint: lg
+    pageTitle: typography.heading.h1.lg
+    sectionHeading: typography.heading.h2.lg
+    subsectionHeading: typography.heading.h3.lg
+
+headingSpacing:
+  headingToBody:
+    token: spacing.content.headingToBody
+    usage: Use between a heading and its supporting description.
+
+  sectionSpacing:
+    base: spacing.section.base
+    md: spacing.section.md
+    lg: spacing.section.lg
+    usage: Use between major page sections at the current breakpoint.
+
+  rules:
+    - Do not use arbitrary vertical gaps between headings and content.
+    - Use headingToBody when a heading is followed by explanatory text.
+    - Use section spacing for major page regions.
+
 accessibility:
   - Maintain readable line lengths for text-heavy content.
   - Avoid edge-to-edge text on small viewports.

@@ -35,6 +35,94 @@ tokens:
   maxWidth:
     text: layout.container.maxWidth.text
 
+headingUsage:
+  description: >
+    Content blocks may include headings, but heading level must follow the
+    surrounding page structure. Heading visual style must also match the current
+    breakpoint unless an exception is documented.
+
+  breakpointStyleMapping:
+    base: Use typography.heading.[level].base below breakpoint.md.
+    md: Use typography.heading.[level].md from breakpoint.md and above.
+    lg: Use typography.heading.[level].lg from breakpoint.lg and above.
+
+  rules:
+    - A content block directly inside a page section should not reset heading hierarchy.
+    - If the content block sits under an H2 section, its heading is usually H3.
+    - Use typography heading tokens as visual styles, not as the only source of semantic structure.
+    - Responsive suffixes such as base, md and lg describe viewport sizing, not heading hierarchy.
+    - Do not use H5 as a compact heading substitute when the content is structurally an H2 or H3.
+    - Select the visual heading style using both semantic level and frame breakpoint.
+
+headingSpacing:
+  description: >
+    Defines spacing between headings, descriptions and following content.
+
+  headingToDescription:
+    token: spacing.content.headingToBody
+    usage: Use between a heading and its supporting description.
+
+  descriptionToAction:
+    token: spacing.content.bodyToAction
+    usage: Use between descriptive text and a following action.
+
+  paragraphSpacing:
+    token: spacing.content.paragraph
+    usage: Use between related paragraphs.
+
+  sectionSpacing:
+    token:
+      base: spacing.section.base
+      md: spacing.section.md
+      lg: spacing.section.lg
+    usage: Use between major documentation sections at the current breakpoint.
+
+  stackSpacing:
+    token: spacing.stack.lg
+    usage: Use between grouped examples, cards or subsection blocks.
+
+  rules:
+    - Do not use arbitrary vertical gaps between headings and content.
+    - Use headingToDescription when a heading is followed by explanatory text.
+    - Use stack spacing for groups of related examples.
+    - Use section spacing for major page regions.
+
+layoutSelection:
+  description: >
+    Defines when to use flow-based layout versus grid-based layout in documentation
+    and component examples.
+
+  flexStyleLayout:
+    useWhen:
+      - Content should flow naturally in reading order.
+      - Items are examples, cards, controls or text blocks.
+      - Items may wrap or stack across viewport sizes.
+      - The layout is primarily one-dimensional.
+    examples:
+      - Documentation sections
+      - Button groups
+      - QA playground examples
+      - Icon rows
+      - Form control groups
+
+  gridStyleLayout:
+    useWhen:
+      - Content has a meaningful two-dimensional relationship.
+      - Rows and columns need to be compared.
+      - The layout represents a matrix, table or scale.
+      - Alignment across both rows and columns is essential.
+    examples:
+      - Variant-by-state matrices
+      - Breakpoint comparison tables
+      - Token scale tables
+      - Accessibility pass/fail matrices
+
+  rules:
+    - Prefer flex-style Auto Layout for normal documentation flow.
+    - Use grid-style layout only when row and column relationships are meaningful.
+    - Do not use grid simply to position unrelated content.
+    - Reading order must remain logical when content is inspected or implemented.
+
 structure:
   - Content block may contain a heading, body text and optional actions
   - Heading should appear before body text
