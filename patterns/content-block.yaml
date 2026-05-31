@@ -123,6 +123,46 @@ layoutSelection:
     - Do not use grid simply to position unrelated content.
     - Reading order must remain logical when content is inspected or implemented.
 
+textMeasure:
+  description: >
+    Defines maximum readable width for text inside content blocks.
+
+  tokens:
+    maxWidth: layout.container.maxWidth.text
+
+  appliesTo:
+    - Introductory text
+    - Section descriptions
+    - Explanatory prose
+    - Help text blocks
+    - Documentation notes
+    - Accessibility guidance copy
+
+  doesNotApplyTo:
+    - Button labels
+    - Short control labels
+    - Icon names
+    - Token names
+    - Component examples
+    - Visual sample areas
+
+  rules:
+    - Constrain prose and explanatory text to layout.container.maxWidth.text.
+    - Do not stretch paragraphs to fill wide desktop containers.
+    - Keep headings and their supporting descriptions aligned within the same readable text area where appropriate.
+    - Use layout.container.maxWidth.text instead of arbitrary fixed widths.
+    - Wider containers may be used for example grids, state matrices and component demonstrations.
+
+  figmaRules:
+    - Set section description text width to layout.container.maxWidth.text where the content is prose-like.
+    - Use Fill container for the section frame, but constrain the text layer or text group.
+    - Do not use full-width text layers for long descriptions on desktop frames.
+
+  aiGenerationRules:
+    - Before creating a prose text layer, check whether it should use layout.container.maxWidth.text.
+    - Use text max width for documentation descriptions and guidance paragraphs.
+    - Do not apply text max width to short labels or component samples.
+
 structure:
   - Content block may contain a heading, body text and optional actions
   - Heading should appear before body text

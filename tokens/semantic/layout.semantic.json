@@ -25,8 +25,7 @@
           "text": {
             "$value": "38rem",
             "$type": "dimension",
-            "$description": "Maximum width for readable prose/text blocks. Intended to keep line lengths broadly aligned with accessibility and readability guidance."
-          },
+            "$description": "Maximum width for readable prose, section descriptions, documentation notes and long-form text blocks. Use to prevent text from stretching across wide layouts. At a default 16px root size, 38rem equals 608px."          },
           "narrow": {
             "$value": "40rem",
             "$type": "dimension",

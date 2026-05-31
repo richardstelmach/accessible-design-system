@@ -425,6 +425,35 @@ headingSpacing:
     - Use headingToBody when a heading is followed by explanatory text.
     - Use section spacing for major page regions.
 
+textReadability:
+  description: >
+    Defines readable text width rules for page layouts and documentation frames.
+    Long lines of text can reduce readability and make it harder for users to
+    keep their place while reading.
+
+  tokens:
+    textMaxWidth: layout.container.maxWidth.text
+
+  rules:
+    - Use layout.container.maxWidth.text for prose, introductions, section descriptions and explanatory content.
+    - Do not allow long-form text blocks to stretch across the full page container.
+    - Page sections may use the wider page container, but their text content should be constrained to the text max width.
+    - Headings and descriptions should usually sit in a text container constrained by layout.container.maxWidth.text.
+    - Component examples, grids and visual samples may use wider layout containers when needed.
+    - Do not use layout.container.maxWidth.text for component labels, buttons, badges or short UI text.
+    - Do not manually set arbitrary text widths when a text max-width token exists.
+
+  desktopDocumentationDefault:
+    frameWidth: 1440px
+    pageContainer: layout.container.maxWidth.default
+    textContainer: layout.container.maxWidth.text
+
+  aiGenerationRules:
+    - Apply layout.container.maxWidth.text to prose and explanatory text blocks.
+    - Do not stretch body copy or section descriptions to the full page container width.
+    - If a section contains both text and examples, constrain the text area and allow the examples to use the wider layout area.
+    - Report missing or unclear text width rules rather than using arbitrary widths.
+
 accessibility:
   - Maintain readable line lengths for text-heavy content.
   - Avoid edge-to-edge text on small viewports.

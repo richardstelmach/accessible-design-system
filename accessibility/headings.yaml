@@ -152,6 +152,22 @@ spacing:
     token: spacing.stack.lg
     usage: Space between grouped subsection examples or cards.
 
+readability:
+  description: >
+    Headings and supporting text should be arranged to support scanning and
+    reading. Supporting prose should not become too wide on large screens.
+
+  tokens:
+    textMaxWidth: layout.container.maxWidth.text
+    headingToBody: spacing.content.headingToBody
+
+  rules:
+    - Supporting text after a heading should usually be constrained to layout.container.maxWidth.text.
+    - Use spacing.content.headingToBody between a heading and the content that directly follows it.
+    - Do not stretch explanatory text across wide desktop layouts.
+    - Heading width may follow the text container unless a page or hero pattern defines otherwise.
+    - Long headings should wrap naturally within the readable content area.
+
 rules:
   - A page or documentation frame should normally start with one H1.
   - Direct sections under the H1 should use H2.
