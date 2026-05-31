@@ -154,6 +154,14 @@ states:
       icon: color.icon.onDisabled
       border: color.interactive.disabled.border
 
+responsiveBehaviour:
+  - Button typography does not change across breakpoints by default.
+  - Button labels use typography.label.default across all viewport sizes.
+  - Breakpoints may affect button layout, grouping, wrapping or width.
+  - On narrow viewports, buttons may become full width where this improves usability.
+  - Button size variants are selected by context and density, not automatically by breakpoint.
+  - Do not use heading or body responsive typography tokens for button labels.
+
 contentGuidelines:
   - Use clear action-oriented labels.
   - Prefer short labels, usually one to three words.
@@ -193,6 +201,8 @@ figmaRules:
   - Use approved icon components from the icon registry.
   - Do not detach icon instances.
   - Do not use raw colour, spacing, radius or typography values.
+  - Do not swap button typography styles by breakpoint.
+  - Use responsive layout behaviour outside the button component rather than changing the internal label style.
 
 aiGenerationRules:
   - Use only documented variants, sizes and states.
