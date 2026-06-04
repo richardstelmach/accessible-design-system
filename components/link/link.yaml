@@ -257,6 +257,28 @@ figmaImplementation:
       - Use registered icons only.
       - Do not use the Link component for buttons or action triggers.
 
+  standaloneLinkFocus:
+    description: >
+      Focus treatment must not resize or shift the standalone Link component.
+      The focus indicator should appear as an overlay, effect or non-layout-affecting
+      layer around the link content.
+    rules:
+      - Focus state must preserve the same component dimensions as default, hover and active states.
+      - Do not add focus strokes or frames that change the component bounding box.
+      - The resting link must not appear as a button, pill or chip.
+      - Border radius may be used for the focus indicator shape only.
+      - Use color.interactive.focus.ring for the visible focus indicator.
+      - Use color.interactive.focus.separator only where needed for contrast.
+
+  underline:
+    description: >
+      Link underline should use text decoration rather than a separate line layer.
+    rules:
+      - Use text underline for default inline and standalone links.
+      - Do not draw underlines as separate line or rectangle layers.
+      - Hover and active states may remove underline.
+      - Focus state must remain visibly identifiable.
+
 devImplementation:
   description: >
     In implementation, links should use semantic link elements when they navigate.
@@ -285,3 +307,7 @@ aiGenerationRules:
   - Prefer link text that makes sense on its own.
   - Only rely on context when it is programmatically determinable.
   - Report ambiguous link purpose rather than inventing destination text.
+  - Use text decoration for link underlines; do not draw separate underline layers.
+  - Focus state must not change the component size or cause layout shift.
+  - Radius may apply to the focus indicator, not to the resting link container.
+  - Documentation frames must follow the shared Figma documentation page template, including eyebrow text, headingAccent H1 colour and readable intro width.
