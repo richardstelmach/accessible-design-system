@@ -477,6 +477,20 @@ figmaTestingRules:
   - Use layout.grid.gutter.lg as the desktop grid gutter.
   - Use layout grids as visual alignment guides only.
   - Use auto layout to control spacing, wrapping and resizing.
+  
+documentationPages:
+  description: >
+    Documentation pages should use the shared documentation page pattern and
+    page header component.
+
+  pattern: patterns/documentation-page.yaml
+  headerComponent: components/internal/documentation-page-header.yaml
+
+  rules:
+    - Use the shared documentation page template for Figma documentation frames.
+    - Do not create ad hoc page headers.
+    - Component documentation pages must include the "Components" eyebrow.
+    - Documentation page H1s use color.text.headingAccent.
 
 aiGenerationRules:
   - Use this pattern for standard page layouts.

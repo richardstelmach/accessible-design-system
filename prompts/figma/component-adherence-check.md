@@ -58,6 +58,19 @@ Check:
 26. Check that grid-style layout is only used for true matrices, tables or comparisons.
 27. Check that internal documentation components are not confused with public product components.
 
+## Documentation page template checks
+
+For component documentation frames, check:
+
+- Eyebrow text exists above the H1.
+- Eyebrow text is `Components`.
+- H1 uses `color.text.headingAccent`.
+- H1 uses the correct heading style for the frame breakpoint.
+- Intro text uses the correct body large style for the frame breakpoint.
+- Intro text is constrained to `layout.container.maxWidth.text`.
+- The frame follows `patterns/documentation-page.yaml`.
+- `_Documentation/Page Header` is used where available.
+- No ad hoc documentation header has been created.
 
 Report findings under:
 

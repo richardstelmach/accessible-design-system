@@ -58,6 +58,21 @@ Rules:
 - Do not stretch explanatory body text across the full page container on desktop frames.
 - Wider layout containers may be used for component examples, state matrices, playgrounds and visual samples.
 
+## Documentation page template rules
+
+When creating component documentation frames:
+
+- Use `patterns/documentation-page.yaml`.
+- Use or create `_Documentation/Page Header`.
+- Do not create ad hoc page headers.
+- Include eyebrow text above the H1.
+- For component documentation pages, eyebrow text must be `Components`.
+- Use `color.text.headingAccent` for the documentation H1.
+- Use `typography.heading.h1.[breakpoint]` for the H1.
+- Use `typography.body.large.[breakpoint]` for intro text.
+- Constrain intro text to `layout.container.maxWidth.text`.
+- Use the shared Figma documentation template from the `00 Templates` page where available.
+
 Figma presentation of component:
 
 - Use `components/internal/documentation-card.yaml` when creating repeated documentation summary cards.
