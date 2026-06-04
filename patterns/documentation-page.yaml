@@ -1,0 +1,90 @@
+pattern: Documentation page
+
+status: active
+visibility: internal
+usageScope: figma-documentation
+
+description: >
+  Defines the standard structure for Figma documentation pages in the design
+  system. Component documentation pages should follow this template unless a
+  specific exception is documented.
+
+sourceOfTruth:
+  figmaTemplatePage: 00 Templates
+  templateName: Figma documentation page template
+
+pageStructure:
+  required:
+    - pageHeader
+    - contentSections
+
+  pageHeader:
+    description: Standard header used at the top of documentation pages.
+    anatomy:
+      eyebrow:
+        required: true
+        visualStyle: typography.label.default
+        colour: color.text.default
+        examples:
+          - Components
+          - Foundations
+          - Patterns
+          - Accessibility
+
+      title:
+        required: true
+        semanticLevel: h1
+        visualStyle:
+          base: typography.heading.h1.base
+          md: typography.heading.h1.md
+          lg: typography.heading.h1.lg
+        colour: color.text.headingAccent
+
+      intro:
+        required: true
+        visualStyle:
+          base: typography.body.large.base
+          md: typography.body.large.md
+          lg: typography.body.large.lg
+        colour: color.text.default
+        maxWidth: layout.container.maxWidth.text
+
+layout:
+  desktopDocumentationDefault:
+    frameWidth: 1440px
+    pagePaddingInline: layout.page.padding.lg
+    pagePaddingBlock: spacing.section.lg
+    pageContainerWidth: layout.container.maxWidth.default
+    sectionGap: spacing.section.lg
+    breakpoint: lg
+
+rules:
+  - Documentation pages must include an eyebrow above the H1.
+  - Component documentation pages use the eyebrow text "Components".
+  - Foundation documentation pages use the eyebrow text "Foundations".
+  - Pattern documentation pages use the eyebrow text "Patterns".
+  - Accessibility documentation pages use the eyebrow text "Accessibility".
+  - The page title is the only H1 in the documentation frame.
+  - The H1 must use color.text.headingAccent.
+  - Intro text must use layout.container.maxWidth.text.
+  - Do not stretch intro text across the full page container.
+  - Do not replace the standard page header with an ad hoc title block.
+  - Use the current frame breakpoint when choosing typography styles.
+
+figmaRules:
+  - Use the documentation page template from the 00 Templates page.
+  - Reuse _Documentation/Page Header if available.
+  - Do not omit the eyebrow text.
+  - Do not use color.text.heading for the page H1 unless there is a documented exception.
+  - On desktop documentation frames, use typography.heading.h1.lg for the H1.
+  - On desktop documentation frames, use typography.body.large.lg for the intro.
+  - Keep the header content aligned to the page container.
+
+aiGenerationRules:
+  - Before creating a component documentation page, inspect or reference the shared documentation page template.
+  - Always include eyebrow, H1 and intro text.
+  - For component documentation pages, set eyebrow text to "Components".
+  - Use color.text.headingAccent for the H1.
+  - Use the correct heading token for the frame breakpoint.
+  - Use layout.container.maxWidth.text for intro copy.
+  - Report if the Figma template or _Documentation/Page Header component cannot be found.
