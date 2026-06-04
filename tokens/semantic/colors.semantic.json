@@ -41,6 +41,30 @@
           "$description": "Default link colour used on light surfaces."
         }
       },
+
+      "link": {
+        "default": {
+          "foreground": {
+            "$value": "{color.text.link}",
+            "$type": "color",
+            "$description": "Default foreground colour for links."
+          }
+        },
+        "hover": {
+          "foreground": {
+            "$value": "{color.primary.900}",
+            "$type": "color",
+            "$description": "Foreground colour for links on hover."
+          }
+        },
+        "active": {
+          "foreground": {
+            "$value": "{color.primary.950}",
+            "$type": "color",
+            "$description": "Foreground colour for links while active or pressed."
+          }
+        }
+      },
   
       "border": {
         "light": {

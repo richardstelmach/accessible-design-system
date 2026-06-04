@@ -1,0 +1,287 @@
+component: Link
+
+status: active
+
+description: >
+  Links allow users to navigate to another page, section, file or resource.
+  Links are for navigation. Buttons are for actions.
+
+purpose:
+  - Navigate to another location or resource.
+  - Support inline navigation inside body text.
+  - Support standalone navigation outside paragraphs.
+  - Provide clear, accessible link purpose.
+
+scope:
+  includes:
+    - Inline links
+    - Standalone links
+    - External links
+    - Links with supporting icons
+    - Visited links where useful
+
+  excludes:
+    - Buttons that trigger actions
+    - Icon-only navigation controls
+    - Complex menu items
+    - Breadcrumb links
+    - Pagination links
+
+principles:
+  - Links navigate to another page, section, file or resource.
+  - Buttons trigger actions, submit data, open dialogs or change state.
+  - In Figma, inline links are styled text ranges inside paragraph text rather than component instances.
+  - In Figma, standalone links may be represented as reusable components.
+  - In implementation, inline and standalone links should use semantic link elements when they navigate.
+  - In implementation, visual presentation may differ between inline and standalone links, but the underlying role should remain link when the purpose is navigation.
+  - Link text must describe the destination or purpose.
+  - Links must not rely on colour alone.
+  - Links must have visible keyboard focus.
+
+variants:
+  inline:
+    description: Link inside a paragraph or sentence.
+    figmaTreatment: styled-text-range
+    rules:
+      - Inherit surrounding body typography.
+      - Use color.text.link.
+      - Use underline by default.
+      - Do not insert a Figma component into paragraph text.
+
+  standalone:
+    description: Link outside paragraph text, used as a standalone navigation element.
+    figmaTreatment: component
+    anatomy:
+      - label
+      - optional trailing icon
+    rules:
+      - Use the Link Figma component.
+      - Use typography.body.default.[breakpoint] by default.
+      - Use color.text.link.
+      - Use underline by default unless a documented standalone treatment says otherwise.
+
+  external:
+    description: Link to an external site, file or new context.
+    figmaTreatment: styled-text-or-component
+    rules:
+      - Use descriptive link text.
+      - Consider a trailing arrow-square-out icon where it helps clarify behaviour.
+      - The icon is decorative when the visible link text already describes the purpose.
+      - Warn users when opening a new window or changing context where appropriate.
+
+states:
+  default:
+    description: Resting link state.
+    tokens:
+      foreground: color.interactive.link.default.foreground
+      decoration: underline
+    rules:
+      - Inline links must be visually distinguishable from surrounding text without relying on colour alone.
+      - Use underline by default for inline links.
+
+  hover:
+    description: Pointer hover state.
+    tokens:
+      foreground: color.interactive.link.hover.foreground
+      decoration: none
+    rules:
+      - Hover may remove underline when the default state is already underlined.
+      - Hover colour must maintain sufficient text contrast.
+      - Do not rely on hover styling to be the only indication that text is a link.
+
+  active:
+    description: Pressed or active interaction state.
+    tokens:
+      foreground: color.interactive.link.active.foreground
+      decoration: none
+    rules:
+      - Active may remove underline as a temporary pressed state.
+      - Active colour must maintain sufficient text contrast.
+      - Active styling must not replace visible keyboard focus.
+
+  focus:
+    description: Keyboard focus state.
+    tokens:
+      foreground: color.interactive.link.default.foreground
+      focusRing: color.interactive.focus.ring
+      focusSeparator: color.interactive.focus.separator
+    rules:
+      - Keyboard focus must be visible.
+      - Do not remove the browser or system focus indicator unless replacing it with an accessible equivalent.
+      - Focus must not rely on colour alone.
+      - Focus styling should be clearly visible for both inline and standalone links.
+
+  visited:
+    description: Optional state for links that have already been visited.
+    rules:
+      - Use where visited state helps users understand browsing history.
+      - Visited links should remain underlined when inline.
+      - Do not rely on visited colour alone to communicate critical information.
+      - Visited links must still meet text contrast requirements.
+
+tokens:
+  text:
+    defaultForeground: color.interactive.link.default.foreground
+    hoverForeground: color.interactive.link.hover.foreground
+    activeForeground: color.interactive.link.active.foreground
+    bodyTypography:
+      base: typography.body.default.base
+      md: typography.body.default.md
+      lg: typography.body.default.lg
+
+  icon:
+    colour: color.icon.link
+    size: size.icon.md
+
+  focus:
+    ring: color.interactive.focus.ring
+    separator: color.interactive.focus.separator
+
+accessibility:
+  wcag:
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Links must not rely on colour alone when presented in surrounding text.
+    - id: WCAG 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Link text must have sufficient contrast against its background.
+    - id: WCAG 2.4.4
+      name: Link Purpose In Context
+      level: A
+      relevance: Link purpose must be clear from the link text or its programmatically determinable context.
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: Keyboard focus must be visible.
+
+  rules:
+    - Link text must describe the destination or purpose.
+    - Avoid vague link text such as "click here" or "read more" unless the surrounding context makes the purpose clear.
+    - Links with the same destination should use consistent wording where possible.
+    - Links with different destinations should not use identical vague text.
+    - Inline links must be visually distinguishable from surrounding text without relying on colour alone.
+    - Use underline by default for inline links.
+    - External-link icons must not duplicate the accessible name when visible text is sufficient.
+    - Icon-only links are out of scope for Link v1.
+  linkPurposeContext:
+    description: >
+      Link purpose must be understandable from the link text alone or from the link
+      text together with programmatically determinable context. Visual proximity
+      alone is not enough.
+
+    preferredApproach:
+      - Write link text that makes sense on its own wherever practical.
+      - Use context only when the link text and surrounding content are programmatically associated.
+      - Put helpful context before the link where possible.
+
+    acceptableContext:
+      - same sentence
+      - same paragraph
+      - same list item
+      - same table cell
+      - associated table header cell
+      - aria-labelledby association
+      - aria-label where a visible label cannot provide enough purpose
+
+    riskyContext:
+      - nearby visual heading that is not programmatically associated
+      - card title visually near a vague link but not associated in markup
+      - layout position alone
+      - icon alone
+      - repeated links such as "Read more" without a programmatic relationship to the relevant item
+
+    rules:
+      - Prefer descriptive link text such as "View order details" or "Read accessibility guidance".
+      - Avoid vague link text such as "click here", "more" or "read more" unless the surrounding programmatic context makes the destination clear.
+      - Multiple links with the same destination should use consistent wording where possible.
+      - Multiple links with different destinations should not use the same vague label.
+      - If a card uses a vague link such as "Read more", the card title or description must be programmatically associated with the link.
+      - Do not rely on visual layout alone to provide link context.
+      - Link text should be understandable when encountered while tabbing through the page.
+      - Where possible, link text should also make sense in a screen reader list of links.
+
+    examples:
+      good:
+        - linkText: "View order details"
+          reason: The destination is clear from the link text alone.
+
+        - linkText: "Read accessibility guidance"
+          reason: The destination is clear from the link text alone.
+
+        - linkText: "Read more"
+          context: Same paragraph describes the specific article before the link.
+          reason: The link purpose can be determined from programmatic paragraph context.
+
+      avoid:
+        - linkText: "Click here"
+          reason: The link text does not describe the destination or purpose.
+
+        - linkText: "Read more"
+          context: Repeated across many cards without programmatic association to each card title.
+          reason: Each link has a different destination but the accessible purpose may be unclear.
+
+        - linkText: "PDF"
+          context: Repeated in a list without associated document title.
+          reason: The file type alone does not identify the destination.
+
+contentGuidelines:
+  - Use concise, destination-focused link text.
+  - Prefer "View order details" over "Click here".
+  - Prefer "Read accessibility guidance" over "Read more" when the link is isolated.
+  - Link text should still make sense when read out of context where possible.
+  - Do not use a URL as link text unless the URL itself is meaningful or necessary.
+
+figmaImplementation:
+  inlineLinks:
+    description: >
+      In Figma, inline links appear inside paragraph text and are styled as text
+      ranges. They should not be inserted as component instances inside text.
+    rules:
+      - Apply color.interactive.link.default.foreground to the linked text range.
+      - Apply underline to the linked text range in the default state.
+      - Use color.interactive.link.hover.foreground and no underline for hover examples.
+      - Use color.interactive.link.active.foreground and no underline for active examples.
+      - Inherit the surrounding typography.
+      - Keep the link inside the paragraph text layer where possible.
+
+  standaloneLinks:
+    description: >
+      In Figma, standalone links may be represented as reusable components because
+      they sit outside paragraph text.
+    componentName: Link
+    rules:
+      - Use the Link component for links outside paragraph text.
+      - Use optional trailing icon for external or directional links.
+      - Use registered icons only.
+      - Do not use the Link component for buttons or action triggers.
+
+devImplementation:
+  description: >
+    In implementation, links should use semantic link elements when they navigate.
+    Styling may vary between inline and standalone links, but the accessible role
+    and purpose should remain clear.
+
+  rules:
+    - Use an anchor element with href for navigation.
+    - Do not use a link element for actions that submit, save, delete, open dialogs or change state.
+    - Use a button element for actions.
+    - Inline links should remain part of the surrounding text content.
+    - Standalone links may use a reusable link component or class, but should still render as a semantic link when navigating.
+    - If additional context is needed for link purpose, associate it programmatically.
+
+aiGenerationRules:
+  - Determine whether the link is inline or standalone before creating Figma elements.
+  - In Figma, inline links must be styled text ranges inside paragraph text, not component instances.
+  - In Figma, standalone links may use the Link component.
+  - In implementation guidance, links should render as semantic links when they navigate.
+  - Links navigate; buttons act.
+  - Do not use Button for navigation links unless the experience intentionally uses a button-styled link and this is documented.
+  - Do not use Link for actions that submit, save, delete, open dialogs or change state.
+  - Use underline by default for inline links.
+  - Use no underline for hover and active states if the default state is underlined and focus remains clearly visible.
+  - Use color.interactive.link.default.foreground, color.interactive.link.hover.foreground and color.interactive.link.active.foreground.
+  - Prefer link text that makes sense on its own.
+  - Only rely on context when it is programmatically determinable.
+  - Report ambiguous link purpose rather than inventing destination text.
