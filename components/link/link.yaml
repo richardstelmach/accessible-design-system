@@ -167,6 +167,41 @@ accessibility:
       name: Focus Visible
       level: AA
       relevance: Keyboard focus must be visible.
+    - id: WCAG 2.5.8
+      name: Target Size
+      level: AA
+      relevance: Pointer targets should be at least 24 by 24 CSS pixels unless an exception applies.
+
+targetSize:
+  wcag:
+    id: WCAG 2.5.8
+    name: Target Size Minimum
+    level: AA
+    requirement: >
+      Pointer targets should be at least 24 by 24 CSS pixels unless an exception applies.
+
+  standaloneLinks:
+    description: >
+      Standalone links behave as individual interactive targets and should meet
+      target-size guidance where practical.
+    rules:
+      - Standalone links should provide a minimum pointer target of 24 by 24 CSS pixels.
+      - Use transparent padding or an equivalent hit area where needed.
+      - Do not make the resting link look like a button, pill, chip or tag just to meet target size.
+      - The visual text may remain compact, but the interactive target should be large enough to activate reliably.
+      - Where a standalone link is placed near other interactive targets, ensure sufficient spacing or target size.
+
+  inlineLinks:
+    description: >
+      Inline links inside sentences or blocks of text may use the WCAG inline
+      target-size exception because increasing their hit area can disrupt text
+      layout and readability.
+    rules:
+      - Inline links are not required to force a 24 by 24 CSS pixel box when they sit inside flowing text.
+      - Do not add padding that disrupts paragraph line height or text wrapping.
+      - Inline links must still be visually distinguishable from surrounding text.
+      - Inline links must still have sufficient contrast and visible focus.
+      - Inline link text must still describe the destination or purpose, or have programmatically determinable context.
 
   rules:
     - Link text must describe the destination or purpose.
@@ -257,6 +292,8 @@ figmaImplementation:
       - Use color.interactive.link.active.foreground and no underline for active examples.
       - Inherit the surrounding typography.
       - Keep the link inside the paragraph text layer where possible.
+      - Inline links inside paragraph text do not need a forced component-sized target area in Figma.
+      - Do not disrupt paragraph line height to meet target size for inline links.
 
   standaloneLinks:
     description: >
@@ -268,6 +305,8 @@ figmaImplementation:
       - Use optional trailing icon for external or directional links.
       - Use registered icons only.
       - Do not use the Link component for buttons or action triggers.
+      - Standalone Link components should include a minimum target area of 24 by 24px where practical.
+      - Use transparent padding or a persistent wrapper to provide target size without making the link look like a button.
 
   standaloneLinkFocus:
     description: >
@@ -334,3 +373,7 @@ aiGenerationRules:
   - Use a persistent wrapper or non-layout-affecting focus layer for standalone Link focus states.
   - Link icons must match the current link foreground token for each state.
   - Do not use a static icon colour if the link text changes colour by state.
+  - Apply WCAG 2.5.8 target-size guidance to standalone Link components.
+  - Do not force WCAG target-size boxes around inline links inside paragraph text.
+  - Inline links may use the WCAG inline exception, but still need contrast, underline/default affordance, visible focus and meaningful purpose.
+  - Use transparent padding or a persistent wrapper for standalone Link target area where needed.
