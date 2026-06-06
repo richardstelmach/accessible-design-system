@@ -1,0 +1,78 @@
+component: Documentation page header
+
+status: active
+visibility: internal
+usageScope: figma-documentation
+publicComponent: false
+
+description: >
+  Internal Figma documentation component used at the top of design system
+  documentation pages. It standardises eyebrow text, page title and introductory
+  copy.
+
+sourceOfTruth:
+  figmaComponentName: _Documentation/Page Header
+  relatedPattern: patterns/documentation-page.yaml
+
+anatomy:
+  root:
+    description: Header container.
+    layout: vertical
+    alignment: start
+    gap: spacing.stack.sm
+    maxWidth: layout.container.maxWidth.text
+
+  eyebrow:
+    required: true
+    description: Small label indicating the documentation area.
+    visualStyle: typography.label.default
+    colour: color.text.default
+    examples:
+      - Components
+      - Foundations
+      - Patterns
+      - Accessibility
+
+  title:
+    required: true
+    semanticLevel: h1
+    description: Main page title.
+    visualStyle:
+      base: typography.heading.h1.base
+      md: typography.heading.h1.md
+      lg: typography.heading.h1.lg
+    colour: color.text.headingAccent
+
+  intro:
+    required: true
+    description: Short page introduction.
+    visualStyle:
+      base: typography.body.large.base
+      md: typography.body.large.md
+      lg: typography.body.large.lg
+    colour: color.text.default
+    maxWidth: layout.container.maxWidth.text
+
+rules:
+  - Use this component for Figma documentation page headers.
+  - Do not omit the eyebrow.
+  - Use "Components" as the eyebrow for component documentation pages.
+  - The title must use color.text.headingAccent.
+  - The title represents the page H1.
+  - The intro should be concise and constrained to layout.container.maxWidth.text.
+  - Do not create one-off documentation headers when this component exists.
+
+figmaRules:
+  - Create or reuse _Documentation/Page Header.
+  - Expose eyebrow, title and intro as text properties.
+  - Use Auto Layout.
+  - Use semantic text styles and colour variables.
+  - Do not use raw colours or unbound text styles.
+  - Select typography styles based on the current frame breakpoint.
+
+aiGenerationRules:
+  - Use _Documentation/Page Header at the top of component documentation frames.
+  - If the component does not exist, create it from this contract before creating new documentation pages.
+  - Do not create ad hoc page headers.
+  - Do not use color.text.heading for the H1 unless explicitly documented.
+  - Do not omit the eyebrow text.

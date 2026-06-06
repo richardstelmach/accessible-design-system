@@ -74,6 +74,7 @@ states:
     description: Resting link state.
     tokens:
       foreground: color.interactive.link.default.foreground
+      icon: color.interactive.link.default.foreground
       decoration: underline
     rules:
       - Inline links must be visually distinguishable from surrounding text without relying on colour alone.
@@ -83,6 +84,7 @@ states:
     description: Pointer hover state.
     tokens:
       foreground: color.interactive.link.hover.foreground
+      icon: color.interactive.link.hover.foreground
       decoration: none
     rules:
       - Hover may remove underline when the default state is already underlined.
@@ -93,6 +95,7 @@ states:
     description: Pressed or active interaction state.
     tokens:
       foreground: color.interactive.link.active.foreground
+      icon: color.interactive.link.active.foreground
       decoration: none
     rules:
       - Active may remove underline as a temporary pressed state.
@@ -130,8 +133,17 @@ tokens:
       lg: typography.body.default.lg
 
   icon:
-    colour: color.icon.link
+    description: Optional trailing icon for external or directional standalone links.
+    source: icons/registry.json
     size: size.icon.md
+    colour: inherits current link foreground token
+    rules:
+      - Link icons should match the current link text colour.
+      - Default icons use color.link.default.foreground.
+      - Hover icons use color.link.hover.foreground.
+      - Active icons use color.link.active.foreground.
+      - Focus icons use the current focused link foreground.
+      - Icons paired with visible link text are usually decorative in implementation.
 
   focus:
     ring: color.interactive.focus.ring
@@ -259,16 +271,22 @@ figmaImplementation:
 
   standaloneLinkFocus:
     description: >
-      Focus treatment must not resize or shift the standalone Link component.
-      The focus indicator should appear as an overlay, effect or non-layout-affecting
-      layer around the link content.
+      Standalone Link focus treatment must be visible without changing component
+      dimensions or colliding with the link text or underline.
+
+    tokens:
+      focusRing: color.interactive.focus.ring
+      focusSeparator: color.interactive.focus.separator
+      focusRingWidth: border.width.medium
+      radius: radius.sm
+
     rules:
-      - Focus state must preserve the same component dimensions as default, hover and active states.
-      - Do not add focus strokes or frames that change the component bounding box.
-      - The resting link must not appear as a button, pill or chip.
-      - Border radius may be used for the focus indicator shape only.
-      - Use color.interactive.focus.ring for the visible focus indicator.
-      - Use color.interactive.focus.separator only where needed for contrast.
+      - Focus state must not resize or shift the Link component.
+      - Use a persistent wrapper or non-layout-affecting focus layer so all states share the same dimensions.
+      - Offset the focus indicator from the text by approximately 2px to 4px.
+      - The focus indicator should not collide with the underline, descenders or icon.
+      - Radius applies to the focus indicator shape only.
+      - The resting link must not appear as a button, pill, tag or chip.
 
   underline:
     description: >
@@ -311,3 +329,8 @@ aiGenerationRules:
   - Focus state must not change the component size or cause layout shift.
   - Radius may apply to the focus indicator, not to the resting link container.
   - Documentation frames must follow the shared Figma documentation page template, including eyebrow text, headingAccent H1 colour and readable intro width.
+  - Link focus indicators should be offset from the text and must not collide with underlines or descenders.
+  - Link focus states must not resize or shift compared with other states.
+  - Use a persistent wrapper or non-layout-affecting focus layer for standalone Link focus states.
+  - Link icons must match the current link foreground token for each state.
+  - Do not use a static icon colour if the link text changes colour by state.
