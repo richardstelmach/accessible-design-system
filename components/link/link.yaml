@@ -73,8 +73,8 @@ states:
   default:
     description: Resting link state.
     tokens:
-      foreground: color.interactive.link.default.foreground
-      icon: color.interactive.link.default.foreground
+      foreground: color.link.default.foreground
+      icon: color.link.default.foreground
       decoration: underline
     rules:
       - Inline links must be visually distinguishable from surrounding text without relying on colour alone.
@@ -83,8 +83,8 @@ states:
   hover:
     description: Pointer hover state.
     tokens:
-      foreground: color.interactive.link.hover.foreground
-      icon: color.interactive.link.hover.foreground
+      foreground: color.link.hover.foreground
+      icon: color.link.hover.foreground
       decoration: none
     rules:
       - Hover may remove underline when the default state is already underlined.
@@ -94,8 +94,8 @@ states:
   active:
     description: Pressed or active interaction state.
     tokens:
-      foreground: color.interactive.link.active.foreground
-      icon: color.interactive.link.active.foreground
+      foreground: color.link.active.foreground
+      icon: color.link.active.foreground
       decoration: none
     rules:
       - Active may remove underline as a temporary pressed state.
@@ -105,7 +105,7 @@ states:
   focus:
     description: Keyboard focus state.
     tokens:
-      foreground: color.interactive.link.default.foreground
+      foreground: color.link.default.foreground
       focusRing: color.interactive.focus.ring
       focusSeparator: color.interactive.focus.separator
     rules:
@@ -124,9 +124,9 @@ states:
 
 tokens:
   text:
-    defaultForeground: color.interactive.link.default.foreground
-    hoverForeground: color.interactive.link.hover.foreground
-    activeForeground: color.interactive.link.active.foreground
+    defaultForeground: color.link.default.foreground
+    hoverForeground: color.link.hover.foreground
+    activeForeground: color.link.active.foreground
     bodyTypography:
       base: typography.body.default.base
       md: typography.body.default.md
@@ -273,6 +273,25 @@ targetSize:
           context: Repeated in a list without associated document title.
           reason: The file type alone does not identify the destination.
 
+targetArea:
+  description: >
+    Standalone links use a transparent target area to support pointer target size
+    and focus visibility without making the link look like a button.
+
+  tokens:
+    minBlockSize: size.target.minimum
+    paddingBlock: component.link.targetPaddingBlock
+    paddingInline: component.link.targetPaddingInline
+    gap: component.link.gap
+
+  rules:
+    - Use component.link.targetPaddingBlock for top and bottom transparent padding.
+    - Use component.link.targetPaddingInline for left and right transparent padding.
+    - Use component.link.gap between link text and trailing icon.
+    - Do not use spacing.inline.* as all-side padding.
+    - Do not use button/control padding tokens unless the link is intentionally presented as a button-like control.
+    - The resting link must still look like a text link, not a button, pill, chip or tag.
+
 contentGuidelines:
   - Use concise, destination-focused link text.
   - Prefer "View order details" over "Click here".
@@ -286,10 +305,10 @@ figmaImplementation:
       In Figma, inline links appear inside paragraph text and are styled as text
       ranges. They should not be inserted as component instances inside text.
     rules:
-      - Apply color.interactive.link.default.foreground to the linked text range.
+      - Apply color.link.default.foreground to the linked text range.
       - Apply underline to the linked text range in the default state.
-      - Use color.interactive.link.hover.foreground and no underline for hover examples.
-      - Use color.interactive.link.active.foreground and no underline for active examples.
+      - Use color.link.hover.foreground and no underline for hover examples.
+      - Use color.link.active.foreground and no underline for active examples.
       - Inherit the surrounding typography.
       - Keep the link inside the paragraph text layer where possible.
       - Inline links inside paragraph text do not need a forced component-sized target area in Figma.
@@ -318,6 +337,8 @@ figmaImplementation:
       focusSeparator: color.interactive.focus.separator
       focusRingWidth: border.width.medium
       radius: radius.sm
+      paddingBlock: component.link.targetPaddingBlock
+      paddingInline: component.link.targetPaddingInline
 
     rules:
       - Focus state must not resize or shift the Link component.
@@ -360,7 +381,7 @@ aiGenerationRules:
   - Do not use Link for actions that submit, save, delete, open dialogs or change state.
   - Use underline by default for inline links.
   - Use no underline for hover and active states if the default state is underlined and focus remains clearly visible.
-  - Use color.interactive.link.default.foreground, color.interactive.link.hover.foreground and color.interactive.link.active.foreground.
+  - Use color.link.default.foreground, color.link.hover.foreground and color.link.active.foreground.
   - Prefer link text that makes sense on its own.
   - Only rely on context when it is programmatically determinable.
   - Report ambiguous link purpose rather than inventing destination text.
@@ -377,3 +398,6 @@ aiGenerationRules:
   - Do not force WCAG target-size boxes around inline links inside paragraph text.
   - Inline links may use the WCAG inline exception, but still need contrast, underline/default affordance, visible focus and meaningful purpose.
   - Use transparent padding or a persistent wrapper for standalone Link target area where needed.
+  - Use component.link.targetPaddingBlock and component.link.targetPaddingInline for standalone Link transparent target padding.
+  - Use component.link.gap between standalone link text and trailing icon.
+  - Do not use spacing.inline.xs as all-side padding.

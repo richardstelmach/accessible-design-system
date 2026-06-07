@@ -1,0 +1,21 @@
+{
+    "component": {
+      "link": {
+        "targetPaddingBlock": {
+          "$value": "{spacing.1}",
+          "$type": "spacing",
+          "$description": "Transparent block-axis padding for standalone links. Supports target size and focus breathing room without making the link look like a button."
+        },
+        "targetPaddingInline": {
+          "$value": "{spacing.1}",
+          "$type": "spacing",
+          "$description": "Transparent inline-axis padding for standalone links. Supports target size and focus breathing room without making the link look like a button."
+        },
+        "gap": {
+          "$value": "{spacing.inline.xs}",
+          "$type": "spacing",
+          "$description": "Gap between standalone link text and a trailing icon."
+        }
+      }
+    }
+  }

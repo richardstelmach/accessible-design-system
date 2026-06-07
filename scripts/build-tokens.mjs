@@ -6,6 +6,7 @@ const repoRoot = process.cwd();
 const sourceFolders = [
   "tokens/primitives",
   "tokens/semantic",
+  "tokens/components",
   "tokens/themes"
 ];
 
