@@ -48,6 +48,40 @@ Semantic tokens will enforce:
 
 ---
 
+---
+
+## Component Tokens
+
+Component tokens define decisions that belong to a specific component.
+
+Use component tokens when a value is too specific for a broad semantic token, but still needs to be named, documented, reused and available to Figma or implementation.
+
+Examples:
+
+- component.link.targetPaddingBlock
+- component.link.targetPaddingInline
+- component.link.gap
+
+Component tokens should:
+- reference primitive or semantic tokens where possible
+- describe a component-specific purpose
+- avoid duplicating broad semantic tokens
+- avoid turning one-off implementation details into global semantics
+
+Component tokens are useful when a component needs a value for a specific reason that would not make sense across the whole system.
+
+For example, the Link component uses transparent target padding to support pointer target size and focus breathing room without making a standalone text link look like a button. This is specific to Link, so it belongs in `component.link.*` rather than `spacing.inline.*`, `spacing.control.*` or a broad semantic spacing token.
+
+Component tokens live in:
+
+tokens/components/
+
+They compile into the same token output as primitive and semantic tokens, and may be used by Figma, documentation, implementation and AI tooling.
+
+Do not create component tokens for every value by default. Start with semantic tokens where the meaning is shared across components. Create component tokens when the decision is component-specific.
+
+---
+
 ## Naming Conventions
 
 Color scales use:

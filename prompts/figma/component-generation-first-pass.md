@@ -26,6 +26,7 @@ Use these source files:
 - `components/[component-name]/[component-name].yaml`
 - `tokens/primitives/`
 - `tokens/semantic/`
+- `tokens/components/`
 - `patterns/page-layout.yaml`
 - `patterns/content-block.yaml`
 - `accessibility/headings.yaml`
@@ -45,6 +46,10 @@ Rules:
 
 - Use the component contract as the source of truth.
 - Use semantic tokens, not raw values.
+- Use primitive tokens for raw values, semantic tokens for reusable system roles, and component tokens for component-specific decisions.
+- When documented component tokens exist for a component, prefer them over generic semantic tokens.
+- Do not use generic spacing, sizing, colour or typography tokens for component-specific purposes when a component-level token exists.
+- Check the rendered result, not only the displayed variable name. If a layer appears to have the correct variable but renders incorrectly, remove and re-apply the variable binding.
 - Use approved icon components only.
 - Do not detach icon instances.
 - Do not invent variants, states or sizes that are not documented.
