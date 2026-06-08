@@ -41,7 +41,8 @@ tokens:
 
 structure:
   - Each field should have a visible label by default
-  - If a visible label is not possible, follow patterns/forms/form-field-patterns.yaml for programmatic labelling  - Helper text should appear near the associated field
+  - If a visible label is not possible, follow patterns/forms/form-field-patterns.yaml for programmatic labelling
+  - Helper text should appear near the associated field
   - Error messages should appear near the associated field
   - Related fields should be grouped with clear spacing
   - Primary actions should appear after the final field group
