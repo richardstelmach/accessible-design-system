@@ -1,5 +1,24 @@
 {
     "form": {
+      "layout": {
+        "column": {
+          "maxWidth": {
+            "$value": "{layout.container.maxWidth.narrow}",
+            "$type": "dimension",
+            "$description": "Default maximum width for single-column forms. Full-width fields fill this column, not the full page."
+          },
+          "compactMaxWidth": {
+            "$value": "{layout.container.maxWidth.text}",
+            "$type": "dimension",
+            "$description": "Compact maximum width for short forms, authentication forms, cards, modals and drawers."
+          },
+          "wideMaxWidth": {
+            "$value": "{layout.container.maxWidth.default}",
+            "$type": "dimension",
+            "$description": "Wider maximum width for complex forms where the default form column is too constrained."
+          }
+        }
+      },
       "label": {
         "typography": {
           "$value": "{typography.label.default}",
@@ -12,7 +31,7 @@
           "$description": "Default text colour for form labels."
         }
       },
-        "legend": {
+      "legend": {
         "typography": {
             "default": {
             "$value": "{typography.label.default}",

@@ -1,0 +1,43 @@
+{
+    "component": {
+      "textInput": {
+        "width": {
+          "full": {
+            "$value": "100%",
+            "$type": "dimension",
+            "$description": "Default Text Input width. The input fills the available form column, not the full page viewport."
+          },
+          "2ch": {
+            "$value": "2ch",
+            "$type": "dimension",
+            "$description": "Text Input width for very short known-length values such as day or month fields inside a grouped date pattern."
+          },
+          "3ch": {
+            "$value": "3ch",
+            "$type": "dimension",
+            "$description": "Text Input width for short known-length values where three characters are expected."
+          },
+          "4ch": {
+            "$value": "4ch",
+            "$type": "dimension",
+            "$description": "Text Input width for known-length values such as a year field or short four-character code."
+          },
+          "5ch": {
+            "$value": "5ch",
+            "$type": "dimension",
+            "$description": "Text Input width for short codes, small quantities or values that need slightly more room than four characters."
+          },
+          "10ch": {
+            "$value": "10ch",
+            "$type": "dimension",
+            "$description": "Text Input width for short to medium structured values such as UK postcodes, short reference numbers or one-time codes."
+          },
+          "20ch": {
+            "$value": "20ch",
+            "$type": "dimension",
+            "$description": "Text Input width for medium-length structured values such as telephone numbers, longer reference numbers or account identifiers."
+          }
+        }
+      }
+    }
+  }
