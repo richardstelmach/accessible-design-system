@@ -187,9 +187,6 @@ legends:
     compact:
       token: form.legend.typography.compact
       use: Dense grouped controls such as filters, cards or settings panels.
-    page:
-      token: form.legend.typography.page
-      use: Optional variant for one-question-per-page flows if needed.
 
 helperText:
   required: false
