@@ -1015,6 +1015,30 @@ figmaRules:
   - Use realistic example values for filled examples, not placeholder text.
   - Use character-width variants only when the expected answer length is known.
 
+figmaImplementation:
+  status: not-directly-bindable
+  reason: >
+    Text Input width tokens use CSS layout units such as %, ch and character-based
+    sizing. Figma numeric dimension variables may not preserve these units as
+    bindable width values.
+
+  rules:
+    - Do not treat missing Figma variables for component.textInput.width.full or character-width tokens as a design-system mismatch.
+    - In Figma, full width should use Fill container.
+    - In Figma, character widths should be represented as named width variants.
+    - Figma variant names must match the documented width options: full, 2ch, 3ch, 4ch, 5ch, 10ch and 20ch.
+    - The GitHub tokens remain the source of truth for CSS and code generation.
+    - Do not replace CSS ch or percentage values with raw Figma numbers in the source token JSON.
+
+  figmaMapping:
+    full: Fill container
+    2ch: Manual fixed width variant named "2ch"
+    3ch: Manual fixed width variant named "3ch"
+    4ch: Manual fixed width variant named "4ch"
+    5ch: Manual fixed width variant named "5ch"
+    10ch: Manual fixed width variant named "10ch"
+    20ch: Manual fixed width variant named "20ch"
+
 implementationRules:
   html:
     - Use an input element for the control.
