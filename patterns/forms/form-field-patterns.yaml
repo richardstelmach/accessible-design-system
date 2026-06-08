@@ -1,0 +1,463 @@
+pattern: Form Field Patterns
+version: 1.0.0
+status: draft
+
+description: >
+  Defines shared form field behaviour, accessibility rules and AI generation
+  constraints for individual controls, grouped controls, labels, legends,
+  helper text, validation, error summaries, disabled states, read-only states
+  and input attributes.
+
+purpose:
+  - Provide a shared contract for accessible form fields.
+  - Support consistent form field generation by humans and AI.
+  - Prevent inconsistent labelling, validation and error handling across components.
+  - Define the difference between individual controls and grouped controls.
+  - Ensure form components consume shared semantic form tokens.
+
+sourceDocumentation:
+  humanReadable:
+    - patterns/forms/README.md
+    - patterns/forms/form-field-patterns.md
+    - patterns/forms/single-control-pattern.md
+    - patterns/forms/grouped-control-pattern.md
+    - patterns/forms/labels.md
+    - patterns/forms/legends-and-fieldsets.md
+    - patterns/forms/helper-text.md
+    - patterns/forms/required-and-optional.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/error-summary.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/disabled-and-readonly.md
+    - patterns/forms/input-types-and-keyboards.md
+    - patterns/forms/accessibility-checklist.md
+    - patterns/forms/tokens.md
+
+relatedPatterns:
+  - patterns/form-layout.yaml
+
+scope:
+  includes:
+    - Text input
+    - Textarea
+    - Select
+    - Search input
+    - Password input
+    - Currency input
+    - Stepper
+    - Single checkbox
+    - Radio group
+    - Checkbox group
+    - Date of birth
+    - Address group
+    - Multi-part questions
+    - Error summary
+  excludes:
+    - Full page layout
+    - Form submission business logic
+    - Server-side validation rules
+    - Complex conditional form flows
+    - Component-specific visual variants
+
+corePrinciples:
+  - Every form control must have an accessible name.
+  - Visible labels are the default and preferred pattern.
+  - Helper text is optional.
+  - Placeholder text must not be used as a label.
+  - Labels and legends are not interchangeable.
+  - Labels identify individual controls.
+  - Legends identify groups of related controls inside a fieldset.
+  - Errors must be available visually and programmatically.
+  - Error states must not rely on colour alone.
+  - Required and optional status must be communicated consistently.
+  - Disabled and read-only fields must be distinct.
+
+patterns:
+  singleControl:
+    description: >
+      Use when one form control answers one question.
+    appliesTo:
+      - text-input
+      - textarea
+      - select
+      - search-input
+      - password-input
+      - currency-input
+      - stepper
+      - single-checkbox
+    anatomy:
+      - label
+      - helperText
+      - errorMessage
+      - control
+    order:
+      - label
+      - helperText
+      - errorMessage
+      - control
+    rules:
+      - A visible label is required by default.
+      - The label must be associated with the control.
+      - Helper text is optional.
+      - Helper text must be associated with the control when present.
+      - Error text must be associated with the control when present.
+      - Invalid controls must use aria-invalid="true".
+      - Placeholder text must not be used as the label.
+    requiredImplementation:
+      accessibleName: true
+      visibleLabelDefault: true
+      describedByForHelper: true
+      describedByForError: true
+      ariaInvalidWhenInvalid: true
+
+  groupedControl:
+    description: >
+      Use when several controls answer one shared question.
+    appliesTo:
+      - radio-group
+      - checkbox-group
+      - date-of-birth
+      - address-group
+      - multi-part-question
+    anatomy:
+      - fieldset
+      - legend
+      - groupHelperText
+      - groupErrorMessage
+      - relatedControls
+    rules:
+      - Use fieldset and legend when several controls answer one shared question.
+      - The legend describes the group.
+      - Each child control may still need its own label.
+      - Group helper text should be associated with the fieldset or group.
+      - Group-level errors should be associated with the fieldset or group.
+      - Child-field errors should be associated with the specific invalid child field.
+    requiredImplementation:
+      fieldset: true
+      legend: true
+      describedByForGroupHelper: true
+      describedByForGroupError: true
+
+labels:
+  purpose: Identify individual form controls.
+  defaultVisibility: visible
+  allowedVisibility:
+    visible:
+      preference: 1
+      rule: Use for most form controls.
+    visuallyHidden:
+      preference: 2
+      rule: >
+        Use only when visible context already makes the purpose clear and
+        showing a visible label would create unnecessary repetition.
+    ariaLabelledby:
+      preference: 3
+      rule: >
+        Use when visible text elsewhere labels the control.
+    ariaLabel:
+      preference: 4
+      rule: >
+        Use only as a last resort when there is no practical visible label
+        and no suitable visible text to reference.
+  rules:
+    - Every control must have an accessible name.
+    - If visible label text exists, the accessible name should include the visible text.
+    - Do not use placeholder text as the label.
+    - Do not use aria-label when a visible label can be used.
+
+legends:
+  purpose: Identify a group of related controls inside a fieldset.
+  rules:
+    - Use a legend for a fieldset.
+    - Do not use a legend for a standalone control.
+    - Do not use a label as a substitute for a group legend.
+    - Do not use a legend as a substitute for every child label.
+    - Legends may have different visual sizes depending on context.
+    - Legend typography variants must not change the semantic purpose of the legend.
+  typographyVariants:
+    default:
+      token: form.legend.typography.default
+      use: Standard grouped form controls.
+    section:
+      token: form.legend.typography.section
+      use: Grouped question inside a larger H2-level section.
+    subsection:
+      token: form.legend.typography.subsection
+      use: Grouped question inside a larger H3-level subsection.
+    compact:
+      token: form.legend.typography.compact
+      use: Dense grouped controls such as filters, cards or settings panels.
+    page:
+      token: form.legend.typography.page
+      use: Optional variant for one-question-per-page flows if needed.
+
+helperText:
+  required: false
+  rules:
+    - Helper text is optional.
+    - Use helper text only when it helps users answer correctly.
+    - Helper text should sit between the label or legend and the control.
+    - Helper text should be short.
+    - Helper text must be associated with the control or group using aria-describedby.
+    - Helper text must not repeat the label.
+    - Helper text must not replace the label.
+  goodUses:
+    - Format guidance
+    - Where to find information
+    - How the answer will be used
+    - Clarifying a confusing label
+    - Constraints users should know before answering
+  avoid:
+    - Repeating the label
+    - Replacing the label
+    - Long instructions
+    - Critical validation that only appears after an error
+    - Placeholder text as helper text
+
+requiredAndOptional:
+  defaultAssumption: requiredUnlessMarkedOptional
+  optionalMarker:
+    text: "(optional)"
+    location:
+      - label
+      - legend
+  rules:
+    - Use “(optional)” in the label or legend when a field is optional.
+    - Required fields do not need extra text if the form pattern states fields are required unless marked optional.
+    - Do not rely on an asterisk alone.
+    - Do not rely on colour alone.
+    - Do not hide required or optional status from assistive technology.
+    - Keep wording consistent across all field types.
+
+validation:
+  inlineErrors:
+    required: true
+    order:
+      - label
+      - helperText
+      - errorMessage
+      - control
+    rules:
+      - Show the error close to the relevant field or group.
+      - The error must be written in text.
+      - The error should explain what went wrong.
+      - Where possible, the error should explain how to fix it.
+      - The error must be associated using aria-describedby.
+      - Invalid controls should use aria-invalid="true".
+      - Error state must not rely on colour alone.
+      - Inline errors must still appear when an error summary is used.
+
+  groupErrors:
+    wholeGroupInvalid:
+      example: Radio or checkbox group where no option has been selected.
+      association: fieldsetOrGroup
+      summaryTarget: firstInteractiveControlOrGroupTarget
+    childFieldInvalid:
+      example: Date of birth is missing a year.
+      association: specificInvalidChildField
+      summaryTarget: specificInvalidChildField
+    combinationInvalid:
+      example: Date of birth is not a real date or is in the future.
+      association: fieldsetOrGroup
+      summaryTarget: firstRelevantFieldInGroup
+
+errorSummary:
+  useWhen:
+    - More than one field or group has an error.
+  rules:
+    - Place the error summary at the top of the page or form.
+    - Move focus to the error summary after failed submit.
+    - Use a clear heading such as “There is a problem”.
+    - List each error.
+    - Each error should link to the relevant field or group.
+    - Each field or group should still show its own inline error.
+    - The error summary must not replace inline errors.
+  linkTargets:
+    singleInputError: input
+    textareaError: textarea
+    selectError: select
+    radioGroupError: firstRadioOptionOrGroupTarget
+    checkboxGroupError: firstCheckboxOptionOrGroupTarget
+    dateOfBirthSpecificError: specificField
+    dateOfBirthWholeDateError: firstFieldInGroup
+    addressSpecificError: specificField
+    addressWholeGroupError: firstRelevantFieldInGroup
+
+focusManagement:
+  rules:
+    - Do not move focus while the user is typing.
+    - After failed submit, move focus to the error summary when there are multiple errors.
+    - If there is only one error and no error summary is used, focus may move to the invalid field.
+    - When focus lands on an invalid field, its associated error should be available through aria-describedby.
+    - Focus must be visible.
+    - Focus styling must not rely on colour alone.
+    - When a field is both focused and in error, both states must remain clear.
+    - The focus indicator must not be hidden by the error border.
+
+disabledAndReadonly:
+  disabled:
+    behaviour:
+      - Cannot be edited.
+      - Cannot receive keyboard focus.
+      - Is not submitted with the form.
+    rules:
+      - Disabled fields must still have a label.
+      - Disabled fields must visually communicate that they are unavailable.
+      - Disabled fields must not rely on colour alone.
+      - Avoid making disabled content so low contrast that users cannot read it.
+      - Do not use disabled fields when the value needs to be submitted.
+  readonly:
+    behaviour:
+      - Cannot be edited.
+      - Can receive focus.
+      - Is submitted with the form.
+    rules:
+      - Use read-only instead of disabled when the value still needs to be submitted.
+      - Read-only fields should have a distinct visual treatment from disabled fields.
+      - Do not use disabled styling for read-only fields.
+      - Read-only fields must still have a label.
+
+inputAttributes:
+  description: >
+    Field components should use appropriate HTML attributes to help users enter
+    information accurately, especially on mobile and touch devices.
+  attributes:
+    - type
+    - inputmode
+    - autocomplete
+    - autocapitalize
+    - enterkeyhint
+  mappings:
+    email:
+      type: email
+      autocomplete: email
+    telephone:
+      type: tel
+      autocomplete: tel
+    search:
+      type: search
+    url:
+      type: url
+      inputmode: url
+    postcode:
+      type: text
+      autocomplete: postal-code
+    dateOfBirthPart:
+      type: text
+      inputmode: numeric
+    oneTimeCode:
+      type: text
+      inputmode: numeric
+      autocomplete: one-time-code
+    money:
+      type: text
+      inputmode: decimal
+  avoidTypeNumberFor:
+    - date of birth
+    - phone number
+    - card number
+    - account number
+    - sort code
+    - National Insurance number
+    - one-time code
+    - reference number
+    - postcode
+    - values that may include leading zeros
+
+tokens:
+  label:
+    typography: form.label.typography
+    color: form.label.color
+  legend:
+    typographyDefault: form.legend.typography.default
+    typographySection: form.legend.typography.section
+    typographySubsection: form.legend.typography.subsection
+    typographyCompact: form.legend.typography.compact
+    color: form.legend.color
+  helper:
+    typography: form.helper.typography
+    color: form.helper.color
+  error:
+    typography: form.error.typography
+    color: form.error.color
+    background: form.error.background
+  fieldSpacing:
+    labelToHelper: form.field.gap.labelToHelper
+    helperToError: form.field.gap.helperToError
+    errorToControl: form.field.gap.errorToControl
+    controlToNextField: form.field.gap.controlToNextField
+  groupSpacing:
+    betweenOptions: form.group.gap.betweenOptions
+    betweenFields: form.group.gap.betweenFields
+  control:
+    background: form.control.background
+    foreground: form.control.foreground
+    borderColor: form.control.border.color
+    borderWidth: form.control.border.width
+    borderRadius: form.control.border.radius
+    paddingBlock: form.control.padding.block
+    paddingInline: form.control.padding.inline
+  states:
+    hoverBorder: form.state.hover.border
+    focusRing: form.state.focus.ring
+    focusSeparator: form.state.focus.separator
+    errorBorder: form.state.error.border
+    disabledBackground: form.state.disabled.background
+    disabledForeground: form.state.disabled.foreground
+    disabledBorder: form.state.disabled.border
+    readonlyBackground: form.state.readonly.background
+    readonlyForeground: form.state.readonly.foreground
+    readonlyBorder: form.state.readonly.border
+  errorSummary:
+    background: form.errorSummary.background
+    foreground: form.errorSummary.foreground
+    borderColor: form.errorSummary.border.color
+    borderWidth: form.errorSummary.border.width
+    padding: form.errorSummary.padding
+
+accessibility:
+  - Every control must have an accessible name.
+  - Visible labels should be used unless there is a documented reason not to.
+  - Placeholder text must not be used as a label.
+  - Individual controls must use labels.
+  - Related groups of controls must use fieldset and legend.
+  - Helper text must be associated using aria-describedby.
+  - Error text must be associated using aria-describedby.
+  - Invalid controls should use aria-invalid="true".
+  - Inline errors must be shown beside invalid fields or groups.
+  - More than one error should use an error summary.
+  - Focus must be visible.
+  - Disabled and read-only states must be distinct.
+  - Required or optional status must not rely on colour alone.
+  - Error state must not rely on colour alone.
+  - Relevant fields should document type, inputmode and autocomplete.
+
+figmaRules:
+  - Use semantic form tokens.
+  - Do not use raw colour, spacing, radius or typography values.
+  - Use the single control pattern for one field answering one question.
+  - Use the grouped control pattern for groups answering one shared question.
+  - Use label components for individual controls.
+  - Use legend styling for grouped controls.
+  - Use helper text only when it helps users answer correctly.
+  - Use consistent inline error placement.
+  - Show both error and focus states when a field is focused and invalid.
+  - Do not create a visual-only required or optional indicator.
+  - Do not use disabled styling for read-only fields.
+
+aiGenerationRules:
+  - Do not create form controls without an accessible name.
+  - Use visible labels by default.
+  - Do not use placeholder text as a label.
+  - Do not treat labels and legends as interchangeable.
+  - Use fieldset and legend for related groups of controls.
+  - Associate helper text and error text using aria-describedby in generated code.
+  - Use aria-invalid="true" on invalid controls.
+  - Use an error summary when more than one field or group has an error.
+  - Keep inline errors even when an error summary is present.
+  - Move focus to the error summary after failed submit when there are multiple errors.
+  - Do not move focus while the user is typing.
+  - Do not use type="number" for identifiers or structured text values.
+  - Use documented semantic tokens rather than raw values.
+  - Report missing token needs rather than inventing new raw values.
+  - Do not invent form field variants outside the documented pattern.

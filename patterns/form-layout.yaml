@@ -1,5 +1,8 @@
 pattern: Form Layout
 
+relatedPatterns:
+  - patterns/forms/form-field-patterns.yaml
+
 description: >
   Defines spacing and structure for accessible forms, including labels, fields,
   helper text, validation messages and action areas.
@@ -60,3 +63,4 @@ aiGenerationRules:
   - Do not invent custom field spacing
   - Use status tokens for validation messaging
   - Use control sizing and spacing tokens for interactive elements
+  - Follow patterns/forms/form-field-patterns.yaml for labels, legends, helper text, validation and fieldset behaviour
