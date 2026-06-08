@@ -1,43 +1,55 @@
 # Form tokens
 
-This page documents the shared form token requirements.
+This page documents the shared semantic form tokens.
 
-The actual token source files should live in the `tokens/` folder.
-
-This page explains which form tokens are needed and why.
-
-## Token location
-
-Use this split:
+The actual token source file is:
 
 ```text
-patterns/forms/tokens.md = explains which form tokens are needed and why
-tokens/ = actual token source files
+tokens/semantic/forms.semantic.json
 ```
+
+These tokens support the shared form patterns documented in:
+
+```text
+patterns/forms/
+```
+
+## Token naming
+
+Use semantic token paths as the canonical source of truth.
+
+For example:
+
+```text
+form.label.typography
+form.label.color
+form.control.border.color
+```
+
+Do not treat CSS custom property names as the source token names unless they are generated as an output format.
 
 ## Label tokens
 
+Use label tokens for individual form control labels.
+
 ```text
---form-label-font-size
---form-label-font-weight
---form-label-line-height
---form-label-color
+form.label.typography
+form.label.color
 ```
 
 ## Legend tokens
 
-Keep legend tokens separate from label tokens.
+Use legend tokens for grouped controls inside a fieldset.
+
+Legends are separate from labels because a legend identifies a group of related controls, while a label identifies an individual control.
 
 ```text
---form-legend-font-size
---form-legend-font-weight
---form-legend-line-height
---form-legend-color
+form.legend.typography.default
+form.legend.typography.section
+form.legend.typography.subsection
+form.legend.typography.compact
+form.legend.color
 ```
-
-Labels and legends may share values at first, but they are different concepts.
-
-Legends may need to behave like question text or headings in some patterns.
 
 ## Legend typography variants
 
@@ -45,134 +57,122 @@ Legend typography supports variants because a legend may appear in different str
 
 The legend always identifies a grouped form control inside a fieldset. The typography variant only changes its visual emphasis.
 
+Use:
+
 ```text
---form-legend-typography-default
---form-legend-typography-section
---form-legend-typography-subsection
---form-legend-typography-compact
+form.legend.typography.default
 ```
+
+For standard grouped form controls.
 
 Use:
 
-default = normal grouped form controls
-section = grouped question inside an H2-level section
-subsection = grouped question inside an H3-level subsection
-compact = dense grouped controls, filters or settings panels
+```text
+form.legend.typography.section
+```
+
+For a grouped question inside a larger H2-level section.
+
+Use:
+
+```text
+form.legend.typography.subsection
+```
+
+For a grouped question inside a larger H3-level subsection.
+
+Use:
+
+```text
+form.legend.typography.compact
+```
+
+For dense grouped controls, filters, cards or settings panels.
 
 Do not choose a legend size only to make something look more important.
 
 Use the variant that matches the fieldset’s context in the page structure.
 
----
-
 ## Helper text tokens
 
+Use helper tokens for optional helper text.
+
 ```text
---form-helper-font-size
---form-helper-line-height
---form-helper-color
+form.helper.typography
+form.helper.color
 ```
 
 ## Error text tokens
 
+Use error tokens for inline field and group error messages.
+
 ```text
---form-error-font-size
---form-error-font-weight
---form-error-line-height
---form-error-color
+form.error.typography
+form.error.color
+form.error.background
 ```
 
 ## Field spacing tokens
 
+Use field spacing tokens for vertical spacing inside and between form fields.
+
 ```text
---form-field-gap-label-to-helper
---form-field-gap-helper-to-error
---form-field-gap-error-to-control
---form-field-gap-control-to-next-field
---form-group-gap-between-options
---form-group-gap-between-fields
+form.field.gap.labelToHelper
+form.field.gap.helperToError
+form.field.gap.errorToControl
+form.field.gap.controlToNextField
+```
+
+## Group spacing tokens
+
+Use group spacing tokens for grouped controls such as radios, checkboxes and multi-part questions.
+
+```text
+form.group.gap.betweenOptions
+form.group.gap.betweenFields
 ```
 
 ## Control shell tokens
 
-Use these for components such as text input, textarea and select.
+Use control shell tokens for components such as text input, textarea and select.
 
 ```text
---form-control-border-width
---form-control-border-radius
---form-control-padding-inline
---form-control-padding-block
---form-control-height-sm
---form-control-height-md
---form-control-height-lg
---form-control-background-color
---form-control-text-color
---form-control-border-color
+form.control.background
+form.control.foreground
+form.control.border.color
+form.control.border.width
+form.control.border.radius
+form.control.padding.block
+form.control.padding.inline
 ```
 
 ## Control state tokens
 
-```text
---form-control-border-color-hover
---form-control-border-color-focus
---form-control-border-color-error
---form-control-border-color-disabled
---form-control-background-color-disabled
---form-control-text-color-disabled
-```
-
-## Focus tokens
-
-Focus tokens may be global rather than form-only.
+Use state tokens for shared form control states.
 
 ```text
---focus-ring-color
---focus-ring-width
---focus-ring-offset
---focus-ring-style
-```
-
-## Group error tokens
-
-Use these for fieldsets and grouped questions.
-
-```text
---form-group-error-border-color
---form-group-error-border-width
---form-group-error-padding-inline
---form-group-error-padding-block
+form.state.hover.border
+form.state.focus.ring
+form.state.focus.separator
+form.state.error.border
+form.state.disabled.background
+form.state.disabled.foreground
+form.state.disabled.border
+form.state.readonly.background
+form.state.readonly.foreground
+form.state.readonly.border
 ```
 
 ## Error summary tokens
 
-```text
---form-error-summary-border-color
---form-error-summary-border-width
---form-error-summary-background-color
---form-error-summary-padding
---form-error-summary-margin-block
---form-error-summary-title-font-size
---form-error-summary-title-font-weight
---form-error-summary-link-color
-```
-
-## Disabled tokens
+Use error summary tokens for the error summary component or shell.
 
 ```text
---form-disabled-label-color
---form-disabled-helper-color
---form-disabled-control-text-color
---form-disabled-control-background-color
---form-disabled-control-border-color
-```
-
-## Read-only tokens
-
-```text
---form-readonly-label-color
---form-readonly-control-text-color
---form-readonly-control-background-color
---form-readonly-control-border-color
+form.errorSummary.background
+form.errorSummary.foreground
+form.errorSummary.border.color
+form.errorSummary.border.width
+form.errorSummary.padding
 ```
 
 ## Disabled colour warning
@@ -181,18 +181,41 @@ Avoid relying on a generic opacity token for disabled fields because it can redu
 
 Prefer explicit disabled colour tokens.
 
+## Future token candidates
+
+Only add these if a component proves they are needed:
+
+```text
+form.control.height.sm
+form.control.height.md
+form.control.height.lg
+form.group.error.border.color
+form.group.error.border.width
+form.group.error.padding.block
+form.group.error.padding.inline
+form.errorSummary.marginBlock
+form.errorSummary.title.typography
+form.errorSummary.link.color
+form.disabled.label.color
+form.disabled.helper.color
+form.readonly.label.color
+form.readonly.helper.color
+```
+
+Do not document future token candidates as available tokens until they exist in `tokens/semantic/forms.semantic.json`.
+
 ## Component-specific tokens
 
-Component-specific tokens should live with the component.
+Component-specific tokens should live with the component token file when needed.
 
 For example, text input may later need tokens for:
 
 ```text
---text-input-width-xs
---text-input-width-sm
---text-input-width-md
---text-input-width-lg
---text-input-width-full
+textInput.width.xs
+textInput.width.sm
+textInput.width.md
+textInput.width.lg
+textInput.width.full
 ```
 
 Only create component-specific tokens when the shared form tokens are not enough.
