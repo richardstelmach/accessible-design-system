@@ -555,20 +555,17 @@ width:
         - component.textInput.width.20ch
 
     fluidFraction:
+      status: deferred
       description: >
-        Uses a percentage of the form field container where a field should be
-        narrower than full width but does not map cleanly to a known character count.
-      tokens:
+        Fractional Text Input widths are intentionally deferred. Add these only
+        when there is a proven need for percentage-based field widths that do
+        not map cleanly to expected character length.
+      deferredTokens:
         - component.textInput.width.oneQuarter
         - component.textInput.width.oneThird
         - component.textInput.width.oneHalf
         - component.textInput.width.twoThirds
         - component.textInput.width.threeQuarters
-      status: optional
-      rules:
-        - Use sparingly.
-        - Prefer full width or fixedCharacter widths first.
-        - Do not use fractional widths to create decorative staggered forms.
 
   allowedWidths:
     - full
@@ -578,11 +575,6 @@ width:
     - 5ch
     - 10ch
     - 20ch
-    - oneQuarter
-    - oneThird
-    - oneHalf
-    - twoThirds
-    - threeQuarters
 
   recommendedUse:
     full:
@@ -698,8 +690,8 @@ width:
         - Do not let error text become detached from a short input.
         - For very short inputs, helper and error text may use the form column width while the input itself remains short.
 
-  tokenStatus: pending
-  recommendedTokenNeeds:
+  tokenStatus: partially-available
+  availableTokens:
     - component.textInput.width.full
     - component.textInput.width.2ch
     - component.textInput.width.3ch
@@ -707,13 +699,16 @@ width:
     - component.textInput.width.5ch
     - component.textInput.width.10ch
     - component.textInput.width.20ch
+    - form.layout.column.maxWidth
+    - form.layout.column.compactMaxWidth
+    - form.layout.column.wideMaxWidth
+
+  deferredTokenNeeds:
     - component.textInput.width.oneQuarter
     - component.textInput.width.oneThird
     - component.textInput.width.oneHalf
     - component.textInput.width.twoThirds
     - component.textInput.width.threeQuarters
-    - form.layout.column.maxWidth
-    - form.layout.column.compactMaxWidth
 
   aiGenerationRules:
     - Use full width by default.
