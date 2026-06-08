@@ -39,6 +39,32 @@ Labels and legends may share values at first, but they are different concepts.
 
 Legends may need to behave like question text or headings in some patterns.
 
+## Legend typography variants
+
+Legend typography supports variants because a legend may appear in different structural contexts.
+
+The legend always identifies a grouped form control inside a fieldset. The typography variant only changes its visual emphasis.
+
+```text
+--form-legend-typography-default
+--form-legend-typography-section
+--form-legend-typography-subsection
+--form-legend-typography-compact
+```
+
+Use:
+
+default = normal grouped form controls
+section = grouped question inside an H2-level section
+subsection = grouped question inside an H3-level subsection
+compact = dense grouped controls, filters or settings panels
+
+Do not choose a legend size only to make something look more important.
+
+Use the variant that matches the fieldset’s context in the page structure.
+
+---
+
 ## Helper text tokens
 
 ```text

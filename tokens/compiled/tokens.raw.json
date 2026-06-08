@@ -1270,6 +1270,272 @@
       }
     }
   },
+  "form": {
+    "label": {
+      "typography": {
+        "$value": "{typography.label.default}",
+        "$type": "typography",
+        "$description": "Typography for labels used by individual form controls."
+      },
+      "color": {
+        "$value": "{color.text.default}",
+        "$type": "color",
+        "$description": "Default text colour for form labels."
+      }
+    },
+    "legend": {
+      "typography": {
+        "default": {
+          "$value": "{typography.label.default}",
+          "$type": "typography",
+          "$description": "Default typography for legends used by standard grouped form controls."
+        },
+        "section": {
+          "base": {
+            "$value": "{typography.heading.h3.base}",
+            "$type": "typography",
+            "$description": "Legend typography for a grouped form question inside a larger H2-level section."
+          },
+          "md": {
+            "$value": "{typography.heading.h3.md}",
+            "$type": "typography",
+            "$description": "Medium breakpoint legend typography for a grouped form question inside a larger H2-level section."
+          },
+          "lg": {
+            "$value": "{typography.heading.h3.lg}",
+            "$type": "typography",
+            "$description": "Large breakpoint legend typography for a grouped form question inside a larger H2-level section."
+          }
+        },
+        "subsection": {
+          "base": {
+            "$value": "{typography.heading.h4.base}",
+            "$type": "typography",
+            "$description": "Legend typography for a grouped form question inside a larger H3-level subsection."
+          },
+          "md": {
+            "$value": "{typography.heading.h4.md}",
+            "$type": "typography",
+            "$description": "Medium breakpoint legend typography for a grouped form question inside a larger H3-level subsection."
+          },
+          "lg": {
+            "$value": "{typography.heading.h4.lg}",
+            "$type": "typography",
+            "$description": "Large breakpoint legend typography for a grouped form question inside a larger H3-level subsection."
+          }
+        },
+        "compact": {
+          "$value": "{typography.label.default}",
+          "$type": "typography",
+          "$description": "Compact legend typography for dense grouped controls such as filters, cards or settings panels."
+        }
+      },
+      "color": {
+        "$value": "{color.text.default}",
+        "$type": "color",
+        "$description": "Default text colour for form legends."
+      }
+    },
+    "helper": {
+      "typography": {
+        "$value": "{typography.body.small.base}",
+        "$type": "typography",
+        "$description": "Typography for optional helper text used with form controls."
+      },
+      "color": {
+        "$value": "{color.text.default}",
+        "$type": "color",
+        "$description": "Text colour for form helper text."
+      }
+    },
+    "error": {
+      "typography": {
+        "$value": "{typography.body.small.base}",
+        "$type": "typography",
+        "$description": "Typography for inline form error messages."
+      },
+      "color": {
+        "$value": "{color.status.error.foreground}",
+        "$type": "color",
+        "$description": "Text colour for inline form error messages."
+      },
+      "background": {
+        "$value": "{color.status.error.background}",
+        "$type": "color",
+        "$description": "Background colour for form error surfaces, such as error summary or grouped error containers."
+      }
+    },
+    "field": {
+      "gap": {
+        "labelToHelper": {
+          "$value": "{spacing.stack.xs}",
+          "$type": "spacing",
+          "$description": "Vertical gap between a form label and helper text."
+        },
+        "helperToError": {
+          "$value": "{spacing.stack.xs}",
+          "$type": "spacing",
+          "$description": "Vertical gap between helper text and an inline error message."
+        },
+        "errorToControl": {
+          "$value": "{spacing.stack.sm}",
+          "$type": "spacing",
+          "$description": "Vertical gap between an inline error message and the control."
+        },
+        "controlToNextField": {
+          "$value": "{spacing.stack.lg}",
+          "$type": "spacing",
+          "$description": "Vertical gap between one form field and the next."
+        }
+      }
+    },
+    "group": {
+      "gap": {
+        "betweenOptions": {
+          "$value": "{spacing.stack.sm}",
+          "$type": "spacing",
+          "$description": "Vertical gap between related options in grouped controls such as radios and checkboxes."
+        },
+        "betweenFields": {
+          "$value": "{spacing.stack.md}",
+          "$type": "spacing",
+          "$description": "Vertical gap between child fields inside a grouped form control."
+        }
+      }
+    },
+    "control": {
+      "background": {
+        "$value": "{color.surface.default}",
+        "$type": "color",
+        "$description": "Default background colour for form controls."
+      },
+      "foreground": {
+        "$value": "{color.text.default}",
+        "$type": "color",
+        "$description": "Default text colour for form controls."
+      },
+      "border": {
+        "color": {
+          "$value": "{color.border.interactive}",
+          "$type": "color",
+          "$description": "Default border colour for form controls."
+        },
+        "width": {
+          "$value": "{border.width.thin}",
+          "$type": "borderWidth",
+          "$description": "Default border width for form controls."
+        },
+        "radius": {
+          "$value": "{radius.md}",
+          "$type": "borderRadius",
+          "$description": "Default border radius for form controls."
+        }
+      },
+      "padding": {
+        "block": {
+          "$value": "{spacing.control.paddingBlock.default}",
+          "$type": "spacing",
+          "$description": "Default vertical padding for form controls."
+        },
+        "inline": {
+          "$value": "{spacing.control.paddingInline.default}",
+          "$type": "spacing",
+          "$description": "Default horizontal padding for form controls."
+        }
+      }
+    },
+    "state": {
+      "hover": {
+        "border": {
+          "$value": "{color.interactive.default.hover.border}",
+          "$type": "color",
+          "$description": "Border colour for form controls on hover."
+        }
+      },
+      "focus": {
+        "ring": {
+          "$value": "{color.interactive.focus.ring}",
+          "$type": "color",
+          "$description": "Focus ring colour for form controls."
+        },
+        "separator": {
+          "$value": "{color.interactive.focus.separator}",
+          "$type": "color",
+          "$description": "Separator colour between a form control and focus ring."
+        }
+      },
+      "error": {
+        "border": {
+          "$value": "{color.status.error.foreground}",
+          "$type": "color",
+          "$description": "Border colour for invalid form controls."
+        }
+      },
+      "disabled": {
+        "background": {
+          "$value": "{color.interactive.disabled.background}",
+          "$type": "color",
+          "$description": "Background colour for disabled form controls."
+        },
+        "foreground": {
+          "$value": "{color.interactive.disabled.foreground}",
+          "$type": "color",
+          "$description": "Text colour for disabled form controls."
+        },
+        "border": {
+          "$value": "{color.interactive.disabled.border}",
+          "$type": "color",
+          "$description": "Border colour for disabled form controls."
+        }
+      },
+      "readonly": {
+        "background": {
+          "$value": "{color.surface.default}",
+          "$type": "color",
+          "$description": "Background colour for read-only form controls."
+        },
+        "foreground": {
+          "$value": "{color.text.default}",
+          "$type": "color",
+          "$description": "Text colour for read-only form controls."
+        },
+        "border": {
+          "$value": "{color.border.default}",
+          "$type": "color",
+          "$description": "Border colour for read-only form controls."
+        }
+      }
+    },
+    "errorSummary": {
+      "background": {
+        "$value": "{color.status.error.background}",
+        "$type": "color",
+        "$description": "Background colour for the error summary."
+      },
+      "foreground": {
+        "$value": "{color.status.error.foreground}",
+        "$type": "color",
+        "$description": "Text colour for the error summary."
+      },
+      "border": {
+        "color": {
+          "$value": "{color.status.error.foreground}",
+          "$type": "color",
+          "$description": "Border colour for the error summary."
+        },
+        "width": {
+          "$value": "{border.width.medium}",
+          "$type": "borderWidth",
+          "$description": "Border width for the error summary."
+        }
+      },
+      "padding": {
+        "$value": "{spacing.inset.md}",
+        "$type": "spacing",
+        "$description": "Padding inside the error summary."
+      }
+    }
+  },
   "layout": {
     "page": {
       "padding": {
