@@ -39,6 +39,49 @@ tokens:
   border:
     interactive: color.border.interactive
 
+formColumn:
+  default:
+    token: form.layout.column.maxWidth
+    aliases: layout.container.maxWidth.narrow
+    value: "{layout.container.maxWidth.narrow}"
+    description: >
+      Default maximum width for a single-column form. This aligns forms with
+      the system narrow container width, which is intended for forms, dialogs
+      and focused content areas.
+
+    rules:
+      - Use for most single-column forms.
+      - Full-width inputs fill this form column, not the full page.
+      - Do not set a separate max width on ordinary full-width text inputs.
+      - Use shorter input width tokens only when the expected answer length is known.
+      - Keep the form column close to the readable text measure so labels, helper text and errors remain easy to read.
+
+  readableTextRelationship:
+    token: layout.container.maxWidth.text
+    value: "{layout.container.maxWidth.text}"
+    description: >
+      The readable prose width is slightly narrower than the default form column.
+      Use it for long-form text, documentation notes and prose blocks. Do not
+      use it as the default Text Input width directly.
+
+  compact:
+    token: form.layout.column.compactMaxWidth
+    value: "{layout.container.maxWidth.text}"
+    description: >
+      Compact form column for short forms, authentication forms, small modals,
+      drawers or card-based forms where a narrower layout is more appropriate.
+
+  wide:
+    token: form.layout.column.wideMaxWidth
+    value: "{layout.container.maxWidth.default}"
+    description: >
+      Wider form layout for complex forms where the default narrow column is
+      too constrained.
+    rules:
+      - Use only when the form genuinely needs more horizontal space.
+      - Do not use wide forms just to fill available page space.
+      - Consider whether the form should be split into sections before making the whole form wider.
+
 structure:
   - Each field should have a visible label by default
   - If a visible label is not possible, follow patterns/forms/form-field-patterns.yaml for programmatic labelling

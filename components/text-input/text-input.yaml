@@ -1,0 +1,1076 @@
+component: Text Input
+id: text-input
+version: 0.1.0
+status: draft
+
+description: >
+  Text Inputs allow users to enter a single line of text or text-like data.
+  They are used for names, email addresses, telephone numbers, postcodes,
+  reference numbers and other short free-text answers.
+
+purpose:
+  - Collect a single line of text from a user.
+  - Provide a consistent single-control form field pattern.
+  - Support accessible labels, helper text, validation text and error states.
+  - Support required and optional field indication consistently.
+  - Support appropriate HTML input attributes for better mobile keyboards and autofill.
+  - Provide a reusable foundation for other form components such as date of birth, search input and currency input.
+
+sourceDocumentation:
+  sharedPattern:
+    - patterns/forms/form-field-patterns.yaml
+  humanReadable:
+    - patterns/forms/form-field-patterns.md
+    - patterns/forms/single-control-pattern.md
+    - patterns/forms/labels.md
+    - patterns/forms/helper-text.md
+    - patterns/forms/required-and-optional.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/disabled-and-readonly.md
+    - patterns/forms/input-types-and-keyboards.md
+    - patterns/forms/tokens.md
+
+relatedPatterns:
+  - patterns/forms/form-field-patterns.yaml
+  - patterns/form-layout.yaml
+
+scope:
+  includes:
+    - Single-line text inputs
+    - Required text inputs
+    - Optional text inputs
+    - Inputs with helper text
+    - Inputs with inline validation errors
+    - Disabled text inputs
+    - Read-only text inputs
+    - Text-like input purposes such as name, email, telephone, URL, postcode, one-time code and reference number
+    - Text input controls reused inside grouped components, where the parent group owns the fieldset and legend
+
+  excludes:
+    - Multi-line text entry
+    - Textarea
+    - Select
+    - Radio group
+    - Checkbox group
+    - Single checkbox
+    - Stepper
+    - Search input with search-specific behaviour
+    - Password input with reveal or conceal behaviour
+    - Currency input with prefix, suffix or formatting behaviour
+    - Date of birth as a complete grouped component
+    - Full form layout
+    - Form submission business logic
+    - Server-side validation rules
+
+principles:
+  - A Text Input is a single-control form field.
+  - Every Text Input must have an accessible name.
+  - A visible label is required by default.
+  - The label must identify the information being requested.
+  - Helper text is optional and should only be used when it helps users answer correctly.
+  - Placeholder text must not be used.
+  - Required fields are the default unless marked optional.
+  - Optional fields must include "(optional)" in the visible label.
+  - Required fields do not need "(required)" in the label when the form pattern states that fields are required unless marked optional.
+  - Error messages must be visible and programmatically associated with the input.
+  - Error states must not rely on colour alone.
+  - Disabled and read-only states must be visually and programmatically distinct.
+  - Use appropriate input attributes to support mobile keyboards, autofill and accurate data entry.
+  - Do not use type="number" for text-like values that may contain leading zeros, spaces, punctuation or non-numeric characters.
+
+pattern:
+  type: single-control
+  anatomy:
+    - label
+    - helperText
+    - errorMessage
+    - control
+
+  order:
+    - label
+    - helperText
+    - errorMessage
+    - control
+
+  requiredImplementation:
+    accessibleName: true
+    visibleLabelDefault: true
+    labelAssociation: true
+    describedByForHelper: true
+    describedByForError: true
+    ariaInvalidWhenInvalid: true
+
+anatomy:
+  root:
+    description: >
+      Wrapper for the complete field, including label, helper text, error text
+      and the input control.
+    layout: vertical-stack
+    tokens:
+      gap: form.field.gap.labelToHelper
+    rules:
+      - Use Auto Layout in Figma.
+      - Use a vertical layout.
+      - Do not place unrelated content between the label, helper text, error text and control.
+      - Do not use raw spacing values.
+
+  label:
+    description: >
+      Visible text label that identifies the input.
+    required: true
+    element: label
+    tokens:
+      typography: form.label.typography
+      color: form.label.color
+    rules:
+      - Use a visible label by default.
+      - The visible label must be programmatically associated with the input.
+      - The accessible name should include the visible label text.
+      - Do not use placeholder text as the label.
+      - Do not use aria-label when a visible label can be used.
+      - Add "(optional)" to the label when the field is optional.
+      - Do not add "(required)" by default when the form states that fields are required unless marked optional.
+
+  helperText:
+    description: >
+      Optional supporting text that helps users answer correctly.
+    required: false
+    tokens:
+      typography: form.helper.typography
+      color: form.helper.color
+    rules:
+      - Use helper text only when it helps the user answer correctly.
+      - Helper text should sit between the label and the control.
+      - Helper text must be associated with the input using aria-describedby.
+      - Helper text must not repeat the label.
+      - Helper text must not replace the label.
+      - Helper text must not be placed in placeholder text.
+      - Keep helper text short and specific.
+
+  errorMessage:
+    description: >
+      Inline validation message shown when the input has an error.
+    requiredWhenInvalid: true
+    tokens:
+      typography: form.error.typography
+      color: form.error.color
+      background: form.error.background
+    rules:
+      - Show the error close to the relevant input.
+      - The error must be written in text.
+      - The error should explain what went wrong.
+      - Where possible, the error should explain how to fix it.
+      - The error must be associated with the input using aria-describedby.
+      - Inline errors must still be shown when an error summary is present.
+      - Error state must not rely on colour alone.
+      - Use an "Error:" prefix or equivalent accessible error cue where this improves clarity.
+
+  control:
+    description: >
+      The single-line input element where the user enters text.
+    element: input
+    typeDefault: text
+    tokens:
+      background: form.control.background
+      foreground: form.control.foreground
+      borderColor: form.control.border.color
+      borderWidth: form.control.border.width
+      borderRadius: form.control.border.radius
+      paddingBlock: form.control.padding.block
+      paddingInline: form.control.padding.inline
+      typography: typography.body.default
+      minBlockSize: size.control.minBlockSize.default
+    rules:
+      - Use a semantic input element in implementation.
+      - The input must have an id.
+      - The label must reference the input id using for.
+      - The input name must describe the submitted value.
+      - The input must not use placeholder text.
+      - The input must not remove the visible focus indicator.
+      - The input must not use type="number" for text-like values.
+      - The input should preserve the user's value when validation fails.
+
+requiredAndOptional:
+  defaultAssumption: requiredUnlessMarkedOptional
+
+  required:
+    labelSuffix: none
+    requiredAttribute: true
+    rules:
+      - Required fields do not need extra visible text by default.
+      - Use the HTML required attribute when the user must complete the field before submitting.
+      - Do not rely on an asterisk alone.
+      - Do not rely on colour alone.
+      - Do not hide required status from assistive technology when the field is programmatically required.
+
+  optional:
+    labelSuffix: "(optional)"
+    requiredAttribute: false
+    rules:
+      - Optional fields must include "(optional)" in the visible label.
+      - The optional marker must be part of the accessible name.
+      - Do not use colour alone to show optional status.
+      - Keep the wording consistent across all field types.
+
+placeholder:
+  allowed: false
+  rules:
+    - Do not use placeholder text.
+    - Do not use placeholder text as a label.
+    - Do not use placeholder text for helper text.
+    - Do not use placeholder text for examples or formatting guidance.
+    - Use helper text instead when guidance is useful.
+
+configurations:
+  withHelperText:
+    description: Text Input with supporting guidance.
+    anatomy:
+      - label
+      - helperText
+      - control
+    rules:
+      - Associate helper text with the input using aria-describedby.
+      - Keep helper text visible while the user is entering a value.
+
+  withError:
+    description: Text Input with an inline validation error.
+    anatomy:
+      - label
+      - helperText
+      - errorMessage
+      - control
+    rules:
+      - Set aria-invalid="true" on the input.
+      - Associate the error message with the input using aria-describedby.
+      - Keep helper text associated when helper text is still useful.
+      - The error message should appear before the control in the visual field order.
+      - The error summary link should target this input when the error belongs to this input.
+
+  optional:
+    description: Optional Text Input.
+    rules:
+      - Add "(optional)" to the visible label.
+      - Do not use the required attribute.
+      - Do not add hidden required text.
+
+  disabled:
+    description: Text Input that cannot be edited, focused or submitted.
+    rules:
+      - Use the disabled attribute in implementation.
+      - Keep the label visible.
+      - Do not rely on opacity alone.
+      - Do not use disabled if the value still needs to be submitted.
+      - Disabled inputs should not receive keyboard focus.
+
+  readonly:
+    description: Text Input that cannot be edited but can receive focus and is submitted with the form.
+    rules:
+      - Use the readonly attribute in implementation.
+      - Keep the label visible.
+      - Use read-only styling, not disabled styling.
+      - Use read-only instead of disabled when the value still needs to be submitted.
+      - Read-only inputs may receive keyboard focus.
+
+states:
+  default:
+    description: Resting state.
+    tokens:
+      background: form.control.background
+      foreground: form.control.foreground
+      borderColor: form.control.border.color
+      borderWidth: form.control.border.width
+    rules:
+      - The input must be clearly identifiable as an editable field.
+      - Text contrast must meet WCAG requirements.
+
+  hover:
+    description: Pointer hover state for devices that support hover.
+    tokens:
+      borderColor: form.state.hover.border
+    rules:
+      - Hover must not be the only way to communicate that the field is interactive.
+      - Hover styling must not reduce contrast.
+      - Hover styling must not replace focus styling.
+
+  focus:
+    description: Keyboard focus state.
+    tokens:
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+    treatment:
+      type: double-ring
+      description: >
+        A separator sits between the input border and the outer focus ring so
+        focus remains visible against both the control and the surrounding surface.
+      layers:
+        - control
+        - separator
+        - focusRing
+    rules:
+      - Keyboard focus must be visible.
+      - Do not remove the browser or system focus indicator unless replacing it with an accessible equivalent.
+      - Focus styling must not rely on colour alone.
+      - Focus styling must remain visible when the input is also in error.
+
+  filled:
+    description: Input contains a user-entered or prefilled value.
+    rules:
+      - A filled input must keep the same label position.
+      - Do not move the label into the input.
+      - Do not rely on value text alone to explain what the input is for.
+
+  error:
+    description: Invalid state when the input has a validation error.
+    tokens:
+      borderColor: form.state.error.border
+      errorText: form.error.color
+      errorBackground: form.error.background
+    rules:
+      - Show an inline error message.
+      - Set aria-invalid="true" on the input.
+      - Associate the error message with the input using aria-describedby.
+      - Error styling must not rely on colour alone.
+      - The input value should remain visible and editable.
+
+  errorFocus:
+    description: Invalid input while focused.
+    tokens:
+      borderColor: form.state.error.border
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+    treatment:
+      type: error-border-with-double-ring-focus
+    rules:
+      - Show both error and focus states.
+      - The focus indicator must not be hidden by the error border.
+      - Do not replace the error state with the focus state.
+      - Do not replace the focus state with the error state.
+
+  disabled:
+    description: Unavailable input that cannot be edited, focused or submitted.
+    tokens:
+      background: form.state.disabled.background
+      foreground: form.state.disabled.foreground
+      borderColor: form.state.disabled.border
+    rules:
+      - Disabled text must remain readable.
+      - Disabled styling must not rely on opacity alone.
+      - Disabled inputs must still have visible labels.
+      - Disabled inputs must not receive keyboard focus.
+      - Disabled inputs are not submitted with the form.
+
+  readonly:
+    description: Read-only input that cannot be edited but can be focused and submitted.
+    tokens:
+      background: form.state.readonly.background
+      foreground: form.state.readonly.foreground
+      borderColor: form.state.readonly.border
+    rules:
+      - Read-only styling must be distinct from disabled styling.
+      - Read-only inputs must still have visible labels.
+      - Read-only inputs may receive keyboard focus.
+      - Read-only values are submitted with the form.
+
+inputPurposes:
+  text:
+    description: General short text.
+    html:
+      type: text
+    examples:
+      - Full name
+      - Town or city
+      - Reference
+
+  email:
+    description: Email address.
+    html:
+      type: email
+      autocomplete: email
+    rules:
+      - Use type="email" for email addresses.
+      - Use autocomplete="email" where appropriate.
+
+  telephone:
+    description: Telephone number.
+    html:
+      type: tel
+      autocomplete: tel
+    rules:
+      - Use type="tel" for telephone numbers.
+      - Do not use type="number".
+      - Telephone numbers may include spaces, plus signs, brackets or leading zeros.
+
+  url:
+    description: Web address.
+    html:
+      type: url
+      inputmode: url
+    rules:
+      - Use type="url" for URLs where browser URL validation is useful.
+      - Use inputmode="url" where supported.
+
+  postcode:
+    description: UK or international postcode.
+    html:
+      type: text
+      autocomplete: postal-code
+    rules:
+      - Use type="text".
+      - Do not use type="number".
+      - Postcodes may contain letters, spaces and numbers.
+
+  oneTimeCode:
+    description: One-time passcode or verification code.
+    html:
+      type: text
+      inputmode: numeric
+      autocomplete: one-time-code
+    rules:
+      - Use type="text".
+      - Use inputmode="numeric" where a numeric keyboard helps.
+      - Do not use type="number".
+      - Preserve leading zeros.
+
+  referenceNumber:
+    description: Reference number, account number or identifier.
+    html:
+      type: text
+    rules:
+      - Use type="text".
+      - Do not use type="number".
+      - Preserve leading zeros.
+      - Allow spaces or punctuation where users may enter them.
+
+inputAttributes:
+  supported:
+    - type
+    - name
+    - id
+    - autocomplete
+    - inputmode
+    - autocapitalize
+    - enterkeyhint
+    - required
+    - disabled
+    - readonly
+    - aria-describedby
+    - aria-invalid
+
+  requiredByDefault:
+    - id
+    - name
+
+  rules:
+    - Use the most appropriate type, inputmode and autocomplete values for the input purpose.
+    - Use autocomplete where the value has a recognised autocomplete purpose.
+    - Use inputmode to improve touch keyboard behaviour where appropriate.
+    - Do not use type="number" for identifiers or structured text values.
+    - Do not add ARIA when native HTML provides the required behaviour.
+    - Do not use aria-label when a visible label can be associated with the input.
+    - Use aria-describedby for helper text and error text.
+    - Use aria-invalid="true" only when the input is currently invalid.
+
+describedBy:
+  description: >
+    Helper text and error text must be programmatically associated with the input.
+  rules:
+    - When helper text is present, include the helper text id in aria-describedby.
+    - When error text is present, include the error text id in aria-describedby.
+    - When both helper text and error text are present, include both ids in aria-describedby.
+    - Keep aria-describedby ids in a stable and predictable order.
+    - Do not associate unrelated page text with the input.
+
+validation:
+  inlineErrors:
+    required: true
+    rules:
+      - Show the error close to the relevant input.
+      - Write the error in plain language.
+      - Explain what went wrong.
+      - Explain how to fix it where possible.
+      - Keep inline errors visible until the error is resolved.
+      - Inline errors must not be replaced by an error summary.
+      - Do not move focus while the user is typing.
+      - Preserve the user's entered value when showing an error.
+
+  errorSummary:
+    useWhen:
+      - More than one field or group has an error.
+    rules:
+      - Each error summary item should link to the relevant input.
+      - The relevant input should still show its inline error.
+      - After failed submit, focus may move to the error summary when there are multiple errors.
+      - The error summary must not replace inline errors.
+
+width:
+  strategy: controlled-contextual
+  description: >
+    Text Input width should help users understand the expected answer length
+    without creating inconsistent or decorative form layouts. Width is a sizing
+    decision based on expected content, not a visual style variant.
+
+  principles:
+    - Default to filling the available form field container.
+    - Control the maximum width of the form column at layout level.
+    - Use shorter input widths when the expected answer length is known.
+    - Use the same width for fields with similar expected answer lengths.
+    - Do not invent one-off widths for individual fields.
+    - Do not use width as the only cue for validation or required format.
+    - Do not make an input so narrow that valid content is clipped.
+    - On narrow viewports, inputs must not overflow their container.
+
+  default:
+    value: full
+    behaviour: >
+      The input fills the available width of its parent form field container.
+      The parent form layout controls the maximum readable width.
+    useFor:
+      - Names
+      - Email addresses
+      - URLs
+      - Address lines
+      - Free text values where the length is unknown
+      - Any field in a narrow card, drawer, modal or mobile layout where full width improves usability
+
+  sizingModel:
+    full:
+      description: >
+        Fills the available form field container. This should be the default for
+        most text inputs.
+      cssBehaviour: width: 100%
+      token: component.textInput.width.full
+
+    fixedCharacter:
+      description: >
+        Uses a controlled character-based width when the expected answer length
+        is known. The input must still shrink safely within narrow containers.
+      cssBehaviour: max-width based on expected character count; width: 100% when constrained
+      tokens:
+        - component.textInput.width.2ch
+        - component.textInput.width.3ch
+        - component.textInput.width.4ch
+        - component.textInput.width.5ch
+        - component.textInput.width.10ch
+        - component.textInput.width.20ch
+
+    fluidFraction:
+      description: >
+        Uses a percentage of the form field container where a field should be
+        narrower than full width but does not map cleanly to a known character count.
+      tokens:
+        - component.textInput.width.oneQuarter
+        - component.textInput.width.oneThird
+        - component.textInput.width.oneHalf
+        - component.textInput.width.twoThirds
+        - component.textInput.width.threeQuarters
+      status: optional
+      rules:
+        - Use sparingly.
+        - Prefer full width or fixedCharacter widths first.
+        - Do not use fractional widths to create decorative staggered forms.
+
+  allowedWidths:
+    - full
+    - 2ch
+    - 3ch
+    - 4ch
+    - 5ch
+    - 10ch
+    - 20ch
+    - oneQuarter
+    - oneThird
+    - oneHalf
+    - twoThirds
+    - threeQuarters
+
+  recommendedUse:
+    full:
+      useFor:
+        - Full name
+        - Email address
+        - Confirm email address
+        - URL
+        - Address line 1
+        - Address line 2
+        - Organisation name
+        - Free text answer with unknown length
+      rationale: Expected answer length is variable or may be long.
+
+    2ch:
+      useFor:
+        - Day field inside a date input group
+        - Month field inside a date input group
+      rationale: Expected value is usually 1 or 2 digits.
+      rules:
+        - Use only when the field has a clear individual label.
+        - Do not use as a standalone date input.
+
+    3ch:
+      useFor:
+        - Short numeric fragments where 3 digits are expected
+      rationale: Expected value is short and structured.
+      rules:
+        - Use only where the expected length is known.
+
+    4ch:
+      useFor:
+        - Year field inside a date input group
+        - Short verification fragments where 4 characters are expected
+      rationale: Expected value is commonly 4 characters.
+
+    5ch:
+      useFor:
+        - Short codes
+        - Small numeric quantities
+        - Currency values where the expected value is short
+      rationale: Expected value is short but may need slightly more room than 4 characters.
+
+    10ch:
+      useFor:
+        - UK postcode
+        - Short reference number
+        - One-time code where 6 to 8 characters are expected
+      rationale: Expected value is short to medium length and structured.
+
+    20ch:
+      useFor:
+        - Telephone number
+        - Longer reference number
+        - Account or membership identifier
+      rationale: Expected value has a known upper range but may include spaces or punctuation.
+
+    oneHalf:
+      useFor:
+        - Medium-length values inside wide form containers
+      rationale: The field benefits from being narrower than the form column but does not need character-based sizing.
+
+    twoThirds:
+      useFor:
+        - Medium to long values where full width feels excessive in a wide container
+      rationale: The expected answer is variable but not usually very long.
+
+  consistencyRules:
+    - In a vertical form, fields with similar expected answer lengths should use the same width.
+    - Email and confirm email fields should normally use the same width.
+    - Address lines should normally use the same width.
+    - Day and month fields in the same date group should use the same width.
+    - Do not alternate widths simply for visual rhythm.
+    - Width changes are acceptable when the answer type clearly changes, such as postcode followed by address line.
+    - Short fields may align to the start of the form column rather than stretching to match longer fields.
+    - Do not centre short fields unless the surrounding layout pattern specifically requires it.
+
+  responsiveRules:
+    - Inputs must never exceed the available container width.
+    - Character-based widths should behave as max-width values, not forced widths.
+    - On narrow viewports, use width: 100% with max-inline-size set to the selected width token where supported.
+    - Full-width inputs should fill the form field container, not the full page viewport.
+    - Form layout should define the maximum readable form column width.
+
+  layoutRelationship:
+    formColumn:
+      description: >
+        Text Inputs fill the available form column by default. The form column
+        maximum width is owned by the form layout pattern.
+
+      default:
+        formLayoutToken: form.layout.column.maxWidth
+        aliases: layout.container.maxWidth.narrow
+        rules:
+          - Full-width Text Inputs fill the form column, not the full page.
+          - Do not set a separate max width on ordinary full-width Text Inputs.
+          - Use shorter input width tokens only when the expected answer length is known.
+          - Width is a sizing decision, not a visual style variant.
+
+    readableTextReference:
+      token: layout.container.maxWidth.text
+      rules:
+        - Use the readable text container width for prose, documentation notes and long text blocks.
+        - Do not make Text Input consume the prose width token directly unless the field sits inside a prose-only layout.
+
+    field:
+      description: >
+        The field wrapper, label, helper text, error text and input should share
+        the same available inline space unless a component-specific pattern says
+        otherwise.
+      rules:
+        - Do not let helper text become much wider than the input when this would reduce comprehension.
+        - Do not let error text become detached from a short input.
+        - For very short inputs, helper and error text may use the form column width while the input itself remains short.
+
+  tokenStatus: pending
+  recommendedTokenNeeds:
+    - component.textInput.width.full
+    - component.textInput.width.2ch
+    - component.textInput.width.3ch
+    - component.textInput.width.4ch
+    - component.textInput.width.5ch
+    - component.textInput.width.10ch
+    - component.textInput.width.20ch
+    - component.textInput.width.oneQuarter
+    - component.textInput.width.oneThird
+    - component.textInput.width.oneHalf
+    - component.textInput.width.twoThirds
+    - component.textInput.width.threeQuarters
+    - form.layout.column.maxWidth
+    - form.layout.column.compactMaxWidth
+
+  aiGenerationRules:
+    - Use full width by default.
+    - Choose a shorter width only when the expected answer length is known.
+    - Base width on expected user input, not visual decoration.
+    - Do not invent custom widths.
+    - Do not use width as a substitute for helper text or validation.
+    - Keep similar fields the same width.
+    - Allow width variation only when the answer type clearly changes.
+    - Do not make short fields full width merely for visual consistency when a shorter width improves comprehension.
+    - Do not make long or unknown-length fields short.
+
+composition:
+  canBeUsedInside:
+    - date-of-birth
+    - address-group
+    - multi-part-question
+
+  groupedControlRules:
+    - When Text Input is used inside a grouped component, the parent component owns the fieldset and legend.
+    - Child Text Inputs still need individual labels where each child field needs its own accessible name.
+    - For date of birth, child labels may be short labels such as "Day", "Month" and "Year".
+    - Group-level helper text and group-level errors belong to the parent grouped component.
+    - Child-field errors should be associated with the specific invalid child input.
+    - Do not replace a group legend with repeated child labels.
+    - Do not replace child labels with a group legend.
+
+tokens:
+  label:
+    typography: form.label.typography
+    color: form.label.color
+
+  helper:
+    typography: form.helper.typography
+    color: form.helper.color
+
+  error:
+    typography: form.error.typography
+    color: form.error.color
+    background: form.error.background
+
+  fieldSpacing:
+    labelToHelper: form.field.gap.labelToHelper
+    helperToError: form.field.gap.helperToError
+    errorToControl: form.field.gap.errorToControl
+    controlToNextField: form.field.gap.controlToNextField
+
+  control:
+    background: form.control.background
+    foreground: form.control.foreground
+    borderColor: form.control.border.color
+    borderWidth: form.control.border.width
+    borderRadius: form.control.border.radius
+    paddingBlock: form.control.padding.block
+    paddingInline: form.control.padding.inline
+    typography: typography.body.default
+    minBlockSize: size.control.minBlockSize.default
+
+  states:
+    hoverBorder: form.state.hover.border
+    focusRing: form.state.focus.ring
+    focusSeparator: form.state.focus.separator
+    errorBorder: form.state.error.border
+    disabledBackground: form.state.disabled.background
+    disabledForeground: form.state.disabled.foreground
+    disabledBorder: form.state.disabled.border
+    readonlyBackground: form.state.readonly.background
+    readonlyForeground: form.state.readonly.foreground
+    readonlyBorder: form.state.readonly.border
+
+accessibility:
+  wcag:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: Labels, helper text and errors must be programmatically associated with the input.
+
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Required, optional and error states must not rely on colour alone.
+
+    - id: WCAG 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Label, helper, error and input text must have sufficient contrast.
+
+    - id: WCAG 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: Input borders and focus indicators must have sufficient contrast.
+
+    - id: WCAG 2.1.1
+      name: Keyboard
+      level: A
+      relevance: Inputs must be usable with a keyboard.
+
+    - id: WCAG 2.4.3
+      name: Focus Order
+      level: A
+      relevance: Focus order should follow the visual and logical form order.
+
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: Keyboard focus must be visible.
+
+    - id: WCAG 2.5.3
+      name: Label in Name
+      level: A
+      relevance: The accessible name should include the visible label text.
+
+    - id: WCAG 2.5.8
+      name: Target Size Minimum
+      level: AA
+      relevance: Inputs should meet or exceed the documented control minimum block size.
+
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: Input errors must be identified in text.
+
+    - id: WCAG 3.3.2
+      name: Labels or Instructions
+      level: A
+      relevance: Inputs must have labels or instructions where needed.
+
+    - id: WCAG 3.3.3
+      name: Error Suggestion
+      level: AA
+      relevance: Error messages should suggest how to fix the problem where possible.
+
+    - id: WCAG 4.1.2
+      name: Name, Role, Value
+      level: A
+      relevance: Inputs must expose a correct accessible name, role and state.
+
+  rules:
+    - Every Text Input must have an accessible name.
+    - Use visible labels by default.
+    - Associate the label with the input using for and id.
+    - Do not use placeholder text.
+    - Helper text must be associated using aria-describedby.
+    - Error text must be associated using aria-describedby.
+    - Invalid inputs must use aria-invalid="true".
+    - Error states must include visible error text.
+    - Error states must not rely on colour alone.
+    - Required or optional status must not rely on colour alone.
+    - Disabled and read-only states must be distinct.
+    - Focus must be visible.
+    - Focus must remain visible when the input is in error.
+    - Use type, inputmode and autocomplete attributes where they help users enter data.
+    - Do not use type="number" for text-like values, identifiers or values that may include leading zeros.
+
+contentGuidelines:
+  labels:
+    - Use clear, concise labels.
+    - Ask for one thing per Text Input.
+    - Use sentence case.
+    - Avoid vague labels such as "Details".
+    - Do not include implementation terms such as "field" or "input" unless useful to users.
+    - Add "(optional)" only when the field is optional.
+
+  helperText:
+    - Use helper text for format guidance, where to find information or how the answer will be used.
+    - Keep helper text short.
+    - Do not repeat the label.
+    - Do not hide essential instructions in placeholder text.
+    - Do not use helper text for critical validation that only appears after an error.
+
+  errors:
+    - Be specific about what is wrong.
+    - Tell the user how to fix the problem where possible.
+    - Avoid blaming the user.
+    - Do not use technical validation language such as "invalid input".
+    - Prefer "Enter an email address in the correct format" over "Invalid email".
+
+examples:
+  requiredEmail:
+    label: Email address
+    requirement: required
+    helperText: none
+    html:
+      type: email
+      autocomplete: email
+      required: true
+    avoid:
+      - Email address (required)
+      - Placeholder-only label
+
+  optionalMiddleName:
+    label: Middle name (optional)
+    requirement: optional
+    helperText: none
+    html:
+      type: text
+      required: false
+    avoid:
+      - Middle name
+      - Middle name *
+      - Optional status shown only by colour
+
+  postcodeWithHelper:
+    label: Postcode
+    requirement: required
+    helperText: For example, SW1A 1AA
+    html:
+      type: text
+      autocomplete: postal-code
+      required: true
+    avoid:
+      - Placeholder text containing the example
+      - type="number"
+
+  oneTimeCode:
+    label: Security code
+    requirement: required
+    helperText: Enter the 6 digit code we sent you.
+    html:
+      type: text
+      inputmode: numeric
+      autocomplete: one-time-code
+      required: true
+    avoid:
+      - type="number"
+      - Removing leading zeros
+
+  error:
+    label: Email address
+    requirement: required
+    errorMessage: "Error: Enter an email address in the correct format"
+    html:
+      type: email
+      required: true
+      aria-invalid: true
+      aria-describedby:
+        - email-error
+    avoid:
+      - Red border with no error text
+      - Error text not associated with the input
+      - Removing the user's entered value
+
+figmaProperties:
+  state:
+    type: variant
+    values:
+      - default
+      - hover
+      - focus
+      - filled
+      - error
+      - errorFocus
+      - disabled
+      - readonly
+
+  requirement:
+    type: variant
+    values:
+      - required
+      - optional
+
+  helperText:
+    type: boolean
+    values:
+      - true
+      - false
+
+  errorMessage:
+    type: boolean
+    values:
+      - true
+      - false
+
+  value:
+    type: variant
+    values:
+      - empty
+      - filled
+
+  width:
+    type: variant
+    values:
+      - full
+      - content
+      - characterWidth
+
+  inputPurpose:
+    type: property
+    values:
+      - text
+      - email
+      - telephone
+      - url
+      - postcode
+      - oneTimeCode
+      - referenceNumber
+
+figmaRules:
+  - Use Auto Layout.
+  - Use the anatomy order: label, helper text, error message, control.
+  - Use semantic form tokens.
+  - Do not use raw colour, spacing, radius or typography values.
+  - Do not create inputs without visible labels by default.
+  - Do not use placeholder text.
+  - Put "(optional)" directly in the label text when the field is optional.
+  - Do not add "(required)" by default.
+  - Use helper text only when it helps users answer correctly.
+  - Use consistent inline error placement.
+  - Show both error and focus styling for the errorFocus state.
+  - Do not hide the focus ring behind the error border.
+  - Do not use disabled styling for read-only fields.
+  - Do not detach internal parts of the component.
+  - Do not create new visual variants outside the documented state and requirement properties.
+  - Use realistic example values for filled examples, not placeholder text.
+  - Use character-width variants only when the expected answer length is known.
+
+implementationRules:
+  html:
+    - Use an input element for the control.
+    - Use a label element for the visible label.
+    - Connect the label to the input using for and id.
+    - Use the required attribute when the field is required.
+    - Do not use the required attribute when the field is optional.
+    - Use disabled for disabled inputs.
+    - Use readonly for read-only inputs.
+    - Use aria-describedby for helper text and error text.
+    - Use aria-invalid="true" only when the input is invalid.
+    - Use appropriate type, inputmode and autocomplete values.
+    - Do not use placeholder text.
+    - Do not use type="number" for text-like values.
+
+  validation:
+    - Keep validation messages close to the relevant input.
+    - Keep inline errors visible when an error summary is present.
+    - Move focus to the error summary after failed submit when there are multiple errors.
+    - Do not move focus while the user is typing.
+    - Preserve user-entered values after validation fails.
+
+aiGenerationRules:
+  - Use the Text Input component only for single-line text entry.
+  - Follow the single-control form field pattern.
+  - Use visible labels by default.
+  - Do not generate a Text Input without an accessible name.
+  - Do not use placeholder text.
+  - Do not use placeholder text as a label.
+  - Do not use placeholder text as helper text.
+  - Do not add "(required)" by default.
+  - Add "(optional)" to the label when the field is optional.
+  - Use helper text only when it helps the user answer correctly.
+  - Use aria-describedby when helper text or error text is present.
+  - Use aria-invalid="true" when the input is invalid.
+  - Keep inline errors even when an error summary is present.
+  - Use an error summary when more than one field or group has an error.
+  - Do not rely on colour alone for errors, required status, optional status, disabled state or read-only state.
+  - Use disabled and readonly correctly.
+  - Use appropriate input attributes for the input purpose.
+  - Do not use type="number" for date parts, phone numbers, postcodes, account numbers, sort codes, National Insurance numbers, one-time codes, reference numbers or values that may include leading zeros.
+  - Use documented semantic tokens rather than raw values.
+  - Report missing token needs rather than inventing raw values.
+  - Do not invent new Text Input variants outside this specification.
