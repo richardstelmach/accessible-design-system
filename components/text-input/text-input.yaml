@@ -632,16 +632,6 @@ width:
         - Account or membership identifier
       rationale: Expected value has a known upper range but may include spaces or punctuation.
 
-    oneHalf:
-      useFor:
-        - Medium-length values inside wide form containers
-      rationale: The field benefits from being narrower than the form column but does not need character-based sizing.
-
-    twoThirds:
-      useFor:
-        - Medium to long values where full width feels excessive in a wide container
-      rationale: The expected answer is variable but not usually very long.
-
   consistencyRules:
     - In a vertical form, fields with similar expected answer lengths should use the same width.
     - Email and confirm email fields should normally use the same width.
