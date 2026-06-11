@@ -1464,13 +1464,6 @@
       }
     },
     "state": {
-      "hover": {
-        "border": {
-          "$value": "{color.interactive.default.hover.border}",
-          "$type": "color",
-          "$description": "Border colour for form controls on hover."
-        }
-      },
       "focus": {
         "ring": {
           "$value": "{color.interactive.focus.ring}",
