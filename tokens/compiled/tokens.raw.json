@@ -1387,9 +1387,18 @@
     },
     "helper": {
       "typography": {
-        "$value": "{typography.body.small}",
-        "$type": "typography",
-        "$description": "Responsive typography for optional helper text used with form controls. Helper text uses the small body scale because it is supporting content."
+        "base": {
+          "$value": "{typography.body.small.base}",
+          "$type": "typography"
+        },
+        "md": {
+          "$value": "{typography.body.small.md}",
+          "$type": "typography"
+        },
+        "lg": {
+          "$value": "{typography.body.small.lg}",
+          "$type": "typography"
+        }
       },
       "color": {
         "$value": "{color.text.default}",
@@ -1399,9 +1408,18 @@
     },
     "error": {
       "typography": {
-        "$value": "{typography.body.default}",
-        "$type": "typography",
-        "$description": "Responsive typography for inline form error messages. Error text uses the default body scale because validation feedback is critical task content."
+        "base": {
+          "$value": "{typography.body.default.base}",
+          "$type": "typography"
+        },
+        "md": {
+          "$value": "{typography.body.default.md}",
+          "$type": "typography"
+        },
+        "lg": {
+          "$value": "{typography.body.default.lg}",
+          "$type": "typography"
+        }
       },
       "color": {
         "$value": "{color.status.error.foreground}",
@@ -1464,9 +1482,18 @@
         "$description": "Default text colour for form controls."
       },
       "typography": {
-        "$value": "{typography.body.default}",
-        "$type": "typography",
-        "$description": "Responsive typography for text entered into form controls. Uses the default body scale so input values align with surrounding content."
+        "base": {
+          "$value": "{typography.body.default.base}",
+          "$type": "typography"
+        },
+        "md": {
+          "$value": "{typography.body.default.md}",
+          "$type": "typography"
+        },
+        "lg": {
+          "$value": "{typography.body.default.lg}",
+          "$type": "typography"
+        }
       },
       "border": {
         "color": {
