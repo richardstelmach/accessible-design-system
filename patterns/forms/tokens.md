@@ -151,7 +151,6 @@ form.control.padding.inline
 Use state tokens for shared form control states.
 
 ```text
-form.state.hover.border
 form.state.focus.ring
 form.state.focus.separator
 form.state.error.border
@@ -162,6 +161,7 @@ form.state.readonly.background
 form.state.readonly.foreground
 form.state.readonly.border
 ```
+Hover is not currently documented as a shared form control state. If a future form component needs a visibly distinct hover treatment, add it deliberately as part of that component’s specification.
 
 ## Error summary tokens
 

@@ -395,7 +395,6 @@ tokens:
     paddingBlock: form.control.padding.block
     paddingInline: form.control.padding.inline
   states:
-    hoverBorder: form.state.hover.border
     focusRing: form.state.focus.ring
     focusSeparator: form.state.focus.separator
     errorBorder: form.state.error.border

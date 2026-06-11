@@ -284,15 +284,6 @@ states:
       - The input must be clearly identifiable as an editable field.
       - Text contrast must meet WCAG requirements.
 
-  hover:
-    description: Pointer hover state for devices that support hover.
-    tokens:
-      borderColor: form.state.hover.border
-    rules:
-      - Hover must not be the only way to communicate that the field is interactive.
-      - Hover styling must not reduce contrast.
-      - Hover styling must not replace focus styling.
-
   focus:
     description: Keyboard focus state.
     tokens:
@@ -758,7 +749,6 @@ tokens:
     minBlockSize: size.control.minBlockSize.default
 
   states:
-    hoverBorder: form.state.hover.border
     focusRing: form.state.focus.ring
     focusSeparator: form.state.focus.separator
     errorBorder: form.state.error.border
@@ -941,14 +931,26 @@ examples:
       - Error text not associated with the input
       - Removing the user's entered value
 
+  valueBehaviour:
+    filled:
+      description: >
+        A Text Input is considered filled when it contains a user-entered,
+        prefilled or saved value. Filled is a content condition, not a separate
+        visual state.
+      rules:
+        - Do not create a separate filled visual state unless the component has a distinct filled treatment.
+        - A filled input must keep the same label position.
+        - Do not move the label into the input.
+        - Do not rely on value text alone to explain what the input is for.
+        - In Figma, use the editable value text property to show filled examples.
+        - In code, the value is handled by the input value, not by a filled class or token.
+
 figmaProperties:
   state:
     type: variant
     values:
       - default
-      - hover
       - focus
-      - filled
       - error
       - errorFocus
       - disabled
@@ -966,35 +968,41 @@ figmaProperties:
       - true
       - false
 
-  errorMessage:
-    type: boolean
-    values:
-      - true
-      - false
+  textProperties:
+    labelText:
+      type: text
+      required: true
+      default: Email address
 
-  value:
-    type: variant
-    values:
-      - empty
-      - filled
+    helperTextContent:
+      type: text
+      required: false
+      default: Use helper text only when it helps users answer correctly.
 
-  width:
-    type: variant
-    values:
-      - full
-      - content
-      - characterWidth
+    errorText:
+      type: text
+      requiredWhen:
+        - state: error
+        - state: errorFocus
+      default: "Error: Enter a value in the correct format."
 
-  inputPurpose:
-    type: property
-    values:
-      - text
-      - email
-      - telephone
-      - url
-      - postcode
-      - oneTimeCode
-      - referenceNumber
+    valueText:
+      type: text
+      required: false
+      default: ""
+
+figmaStateRules:
+  - Do not include hover as a Figma component state.
+  - Do not include filled as a Figma component state.
+  - Filled examples are created by adding text to the valueText property.
+  - Error text visibility is driven by state.
+  - State error shows error text.
+  - State errorFocus shows error text.
+  - Non-error states hide error text.
+  - Helper text visibility is controlled by the helperText boolean property.
+  - Label text must remain visible by default.
+  - Optional marker appears when requirement is optional.
+  - Required fields do not show "(required)" by default.
 
 figmaRules:
   - Use Auto Layout.
@@ -1012,32 +1020,42 @@ figmaRules:
   - Do not use disabled styling for read-only fields.
   - Do not detach internal parts of the component.
   - Do not create new visual variants outside the documented state and requirement properties.
-  - Use realistic example values for filled examples, not placeholder text.
+  - Use realistic example values in the valueText property, not placeholder text.
   - Use character-width variants only when the expected answer length is known.
 
 figmaImplementation:
-  status: not-directly-bindable
-  reason: >
-    Text Input width tokens use CSS layout units such as %, ch and character-based
-    sizing. Figma numeric dimension variables may not preserve these units as
-    bindable width values.
+  width:
+    status: documented-not-variant-axis
+    reason: >
+      Text Input width tokens use CSS layout units such as %, ch and character-based
+      sizing. Figma numeric dimension variables may not preserve these units as
+      bindable width values, and width variants create an unnecessarily large
+      component API.
 
-  rules:
-    - Do not treat missing Figma variables for component.textInput.width.full or character-width tokens as a design-system mismatch.
-    - In Figma, full width should use Fill container.
-    - In Figma, character widths should be represented as named width variants.
-    - Figma variant names must match the documented width options: full, 2ch, 3ch, 4ch, 5ch, 10ch and 20ch.
-    - The GitHub tokens remain the source of truth for CSS and code generation.
-    - Do not replace CSS ch or percentage values with raw Figma numbers in the source token JSON.
+    rules:
+      - Do not expose width as a top-level Figma variant axis.
+      - The main Text Input should be resizable.
+      - In Figma, full width should use Fill container where the parent layout supports it.
+      - In Figma, short-width examples should be shown in documentation and QA frames.
+      - Designers may manually resize the input to match documented short-width guidance.
+      - The GitHub width tokens remain the source of truth for CSS and code generation.
+      - Do not replace CSS ch or percentage values with raw Figma numbers in the source token JSON.
 
-  figmaMapping:
-    full: Fill container
-    2ch: Manual fixed width variant named "2ch"
-    3ch: Manual fixed width variant named "3ch"
-    4ch: Manual fixed width variant named "4ch"
-    5ch: Manual fixed width variant named "5ch"
-    10ch: Manual fixed width variant named "10ch"
-    20ch: Manual fixed width variant named "20ch"
+    documentedExamples:
+      full: Fill container
+      2ch: Short day or month field example
+      3ch: Short numeric fragment example
+      4ch: Year field example
+      5ch: Short code example
+      10ch: Postcode or one-time code example
+      20ch: Telephone number or longer reference example
+
+    chExplanation:
+      - The CSS ch unit is based on the advance width of the "0" character in the current font.
+      - 10ch is roughly the width of 10 zero characters in that font.
+      - ch is useful when the expected answer length is known.
+      - ch is not a fixed pixel value because it depends on font, font size and rendering.
+      - Figma examples are illustrative; code should use the GitHub token values.
 
 implementationRules:
   html:
