@@ -139,6 +139,7 @@ Use control shell tokens for components such as text input, textarea and select.
 ```text
 form.control.background
 form.control.foreground
+form.control.typography
 form.control.border.color
 form.control.border.width
 form.control.border.radius
@@ -219,3 +220,14 @@ textInput.width.full
 ```
 
 Only create component-specific tokens when the shared form tokens are not enough.
+
+## Form typography
+
+Form labels, control values, helper text and error text should follow the responsive typography system.
+
+- `form.label.typography` uses body-sized text with medium weight because labels are primary task content.
+- `form.control.typography` uses the default body scale so entered values align with surrounding content.
+- `form.helper.typography` uses the responsive small body scale because helper text is supporting content.
+- `form.error.typography` uses the default body scale because validation feedback is critical task content.
+
+Do not lock form text to base-only typography tokens unless the component has a documented compact mode.

@@ -1292,9 +1292,39 @@
     },
     "label": {
       "typography": {
-        "$value": "{typography.label.default}",
-        "$type": "typography",
-        "$description": "Typography for labels used by individual form controls."
+        "base": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{typography.family.sans}",
+            "fontWeight": "{typography.weight.medium}",
+            "fontSize": "{typography.size.md}",
+            "lineHeight": "{typography.lineHeight.normal}",
+            "letterSpacing": "{typography.letterSpacing.normal}"
+          },
+          "$description": "Base typography for labels used by individual form controls. Form labels use body-sized text because labels are primary task content."
+        },
+        "md": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{typography.family.sans}",
+            "fontWeight": "{typography.weight.medium}",
+            "fontSize": "{typography.size.md}",
+            "lineHeight": "{typography.lineHeight.normal}",
+            "letterSpacing": "{typography.letterSpacing.normal}"
+          },
+          "$description": "Medium breakpoint typography for labels used by individual form controls."
+        },
+        "lg": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{typography.family.sans}",
+            "fontWeight": "{typography.weight.medium}",
+            "fontSize": "{typography.size.lg}",
+            "lineHeight": "{typography.lineHeight.normal}",
+            "letterSpacing": "{typography.letterSpacing.normal}"
+          },
+          "$description": "Large breakpoint typography for labels used by individual form controls."
+        }
       },
       "color": {
         "$value": "{color.text.default}",
@@ -1357,9 +1387,9 @@
     },
     "helper": {
       "typography": {
-        "$value": "{typography.body.small.base}",
+        "$value": "{typography.body.small}",
         "$type": "typography",
-        "$description": "Typography for optional helper text used with form controls."
+        "$description": "Responsive typography for optional helper text used with form controls. Helper text uses the small body scale because it is supporting content."
       },
       "color": {
         "$value": "{color.text.default}",
@@ -1369,9 +1399,9 @@
     },
     "error": {
       "typography": {
-        "$value": "{typography.body.small.base}",
+        "$value": "{typography.body.default}",
         "$type": "typography",
-        "$description": "Typography for inline form error messages."
+        "$description": "Responsive typography for inline form error messages. Error text uses the default body scale because validation feedback is critical task content."
       },
       "color": {
         "$value": "{color.status.error.foreground}",
@@ -1432,6 +1462,11 @@
         "$value": "{color.text.default}",
         "$type": "color",
         "$description": "Default text colour for form controls."
+      },
+      "typography": {
+        "$value": "{typography.body.default}",
+        "$type": "typography",
+        "$description": "Responsive typography for text entered into form controls. Uses the default body scale so input values align with surrounding content."
       },
       "border": {
         "color": {

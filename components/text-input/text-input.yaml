@@ -179,7 +179,7 @@ anatomy:
       borderRadius: form.control.border.radius
       paddingBlock: form.control.padding.block
       paddingInline: form.control.padding.inline
-      typography: typography.body.default
+      typography: form.control.typography
       minBlockSize: size.control.minBlockSize.default
     rules:
       - Use a semantic input element in implementation.
