@@ -27,3 +27,11 @@ Most form controls should have a visible label.
 If a visible label is not possible, the control must still have a clear programmatic label.
 
 Labels and legends are different HTML mechanisms. A label identifies an individual control. A legend identifies a group of related controls inside a fieldset.
+
+Form typography follows the shared responsive typography pattern:
+
+- `base` applies below `breakpoint.md`
+- `md` applies at `48rem` and above
+- `lg` applies at `64rem` and above
+
+See `patterns/typography/responsive-typography.md`.

@@ -1,0 +1,86 @@
+id: responsive-typography
+name: Responsive typography
+status: draft
+type: pattern
+
+description: >
+Defines how typography breakpoint variants are interpreted across the design
+system. Use this pattern for semantic typography tokens that include base, md
+and lg variants.
+
+sourceOfTruth:
+breakpoints: tokens/primitives/breakpoints.json
+typography: tokens/semantic/typography.semantic.json
+
+breakpointMapping:
+base:
+description: Default typography value used below the md breakpoint.
+primitiveToken: null
+applies: below breakpoint.md
+minWidth: null
+
+md:
+description: Medium viewport typography value.
+primitiveToken: breakpoint.md
+minWidth: 48rem
+approximatePixels: 768px
+applies: at and above breakpoint.md
+
+lg:
+description: Large viewport typography value.
+primitiveToken: breakpoint.lg
+minWidth: 64rem
+approximatePixels: 1024px
+applies: at and above breakpoint.lg
+
+rules:
+
+* base is not a primitive breakpoint token; it is the default typography value.
+* Use semantic typography tokens for component text whenever possible.
+* Do not lock scalable component text to a base-only typography token unless the component has a documented compact mode.
+* Do not use raw primitive font-size tokens directly in components when a semantic typography token exists.
+* Component text should not appear smaller than surrounding body text unless it is genuinely supporting content.
+* Typography breakpoint variants should be implemented using min-width media queries.
+* Breakpoint values must come from primitive breakpoint tokens.
+* Figma examples may show one breakpoint at a time, but implementation should use the responsive token set.
+
+cssMapping:
+base: default styles
+md: "@media (min-width: 48rem)"
+lg: "@media (min-width: 64rem)"
+
+formControlGuidance:
+label:
+recommendedToken: form.label.typography
+behaviour: Responsive, body-sized, medium weight.
+rationale: Labels are primary task content.
+
+controlValue:
+recommendedToken: form.control.typography
+behaviour: Responsive body default.
+rationale: Input values should align with surrounding body text.
+
+helperText:
+recommendedToken: form.helper.typography
+behaviour: Responsive body small.
+rationale: Helper text is supporting content.
+
+errorText:
+recommendedToken: form.error.typography
+behaviour: Responsive body default.
+rationale: Error text is critical task feedback.
+
+accessibility:
+
+* REM-based breakpoints support browser zoom and user font-size preferences.
+* Typography should remain readable when users resize text or zoom the page.
+* Do not reduce form text size in a way that makes task completion harder.
+
+aiGenerationRules:
+
+* When a typography token has base, md and lg values, treat it as responsive.
+* Use base below breakpoint.md.
+* Use md at and above breakpoint.md.
+* Use lg at and above breakpoint.lg.
+* Do not invent viewport values; use the primitive breakpoint tokens.
+* Prefer semantic typography tokens over primitive font-size values.
