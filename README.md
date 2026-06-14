@@ -38,5 +38,14 @@ Consumer tools:
 - Figma → visual refinement and composition
 - Claude Design → AI-assisted concept generation
 
----
+## Responsive modes
 
+Responsive design tokens are authored in GitHub using `base`, `md` and `lg` branches.
+
+Figma represents these branches through a manual `Breakpoint` variable collection with `base`, `md` and `lg` modes. Designers apply semantic styles and switch the parent frame’s breakpoint mode to preview responsive values.
+
+Code should consume the same GitHub tokens as default values plus media query overrides.
+
+While using the free version of Tokens Studio, the Figma `Breakpoint` collection is maintained manually from the GitHub token mapping. GitHub remains the source of truth.
+
+---

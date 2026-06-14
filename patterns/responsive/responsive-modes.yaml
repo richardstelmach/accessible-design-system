@@ -1,0 +1,242 @@
+```yaml
+pattern: responsive-modes
+version: 1.0.0
+status: draft
+
+description: >
+  Responsive modes define how layout, spacing and typography tokens change
+  across defined breakpoint ranges. They are based on available content width,
+  not device type.
+
+sourceOfTruth:
+  system: GitHub
+  rule: >
+    GitHub token files are the canonical source of truth. Figma Breakpoint
+    modes are a design-tool representation of GitHub responsive token branches.
+
+modes:
+  base:
+    order: 1
+    minWidth: null
+    range: "below md"
+    description: Default mode used below the medium breakpoint.
+    development:
+      mediaQuery: none
+      cssRole: default value
+
+  md:
+    order: 2
+    minWidth: "{breakpoint.md}"
+    minWidthRem: "48rem"
+    commonPixelReference: "768px"
+    range: "48rem and above"
+    description: Medium breakpoint mode.
+    development:
+      mediaQuery: "@media (min-width: 48rem)"
+      cssRole: media query override
+
+  lg:
+    order: 3
+    minWidth: "{breakpoint.lg}"
+    minWidthRem: "64rem"
+    commonPixelReference: "1024px"
+    range: "64rem and above"
+    description: Large breakpoint mode.
+    development:
+      mediaQuery: "@media (min-width: 64rem)"
+      cssRole: media query override
+
+representation:
+  github:
+    description: >
+      Responsive tokens are authored as explicit base, md and lg token branches.
+    format:
+      - "token.path.base"
+      - "token.path.md"
+      - "token.path.lg"
+    example:
+      - "form.label.typography.base"
+      - "form.label.typography.md"
+      - "form.label.typography.lg"
+
+  figma:
+    description: >
+      Figma represents responsive GitHub token branches as one semantic variable
+      in the Breakpoint collection with base, md and lg modes.
+    collection: Breakpoint
+    modes:
+      - base
+      - md
+      - lg
+    naming:
+      sourceFormat: "token.path.mode"
+      figmaFormat: "token/path/property"
+      note: >
+        Figma variable names use slash-separated paths because Figma does not
+        support dots in variable names.
+    example:
+      github:
+        base: "form.label.typography.base.$value.fontSize"
+        md: "form.label.typography.md.$value.fontSize"
+        lg: "form.label.typography.lg.$value.fontSize"
+      figmaVariable: "form/label/typography/fontSize"
+
+  code:
+    description: >
+      Code should use the same GitHub responsive token branches as default
+      CSS custom property values plus media query overrides.
+    example:
+      base: "default CSS variable value"
+      md: "@media (min-width: 48rem)"
+      lg: "@media (min-width: 64rem)"
+    unitRule: >
+      Development implementations should use rem-based breakpoints, not fixed
+      pixel breakpoints, so breakpoints continue to respect user zoom and root
+      font-size settings.
+
+  ai:
+    description: >
+      AI agents should treat GitHub token files, pattern files and component
+      specifications as the source of truth.
+    rules:
+      - Use GitHub token names when reasoning about implementation.
+      - Use Figma variable names only when generating or auditing Figma work.
+      - Do not infer responsive behaviour unless the GitHub token or pattern explicitly defines it.
+
+allowedResponsiveCategories:
+  typography:
+    allowed: true
+    examples:
+      - "typography.heading.h1"
+      - "typography.body.default"
+      - "form.label.typography"
+      - "form.control.typography"
+      - "component.button.typography.default"
+    figmaRepresentation:
+      textStyleRule: >
+        Designers should apply semantic text styles, not breakpoint-specific
+        text styles.
+      modeRule: >
+        The parent frame Breakpoint mode controls whether base, md or lg values
+        are shown.
+
+  layout:
+    allowed: true
+    examples:
+      - "layout.page.padding"
+      - "layout.grid.gutter"
+
+  spacing:
+    allowed: true
+    examples:
+      - "spacing.section"
+
+  colour:
+    allowed: false
+    reason: >
+      Colour changes belong to theme or state tokens, not breakpoint modes,
+      unless a future GitHub token explicitly documents a responsive colour.
+
+  radius:
+    allowed: false
+    reason: Border radius is not currently responsive.
+
+  border:
+    allowed: false
+    reason: Border width and border colour are not currently responsive.
+
+  state:
+    allowed: false
+    reason: >
+      Component states such as hover, focus, error, disabled and readonly are
+      interaction or status states, not breakpoint modes.
+
+figmaGuidance:
+  designersShould:
+    - Apply semantic styles such as "typography/body/default" or "form/label/typography".
+    - Set the parent frame's Breakpoint mode to base, md or lg to preview responsive values.
+    - Use one component variant for component behaviour and let Breakpoint mode control responsive values.
+
+  designersShouldNot:
+    - Manually choose base, md or lg text styles for normal design work.
+    - Create base, md or lg component variants unless the component layout itself changes.
+    - Treat Figma Breakpoint variables as a separate source of truth.
+    - Mix Breakpoint modes with future Theme modes such as light and dark.
+
+componentVariantRule:
+  rule: >
+    Do not create component variants for base, md and lg unless the component
+    layout, structure or behaviour changes at that breakpoint.
+  examples:
+    correct:
+      - "Text Input state=default uses Breakpoint mode for typography."
+      - "Button size=default uses Breakpoint mode for label typography."
+    incorrect:
+      - "Text Input state=default breakpoint=base"
+      - "Text Input state=default breakpoint=md"
+      - "Text Input state=default breakpoint=lg"
+
+themeSeparation:
+  rule: >
+    Breakpoint modes and theme modes must be separate axes.
+  current:
+    breakpointCollection: Breakpoint
+    breakpointModes:
+      - base
+      - md
+      - lg
+  future:
+    themeCollection: Theme
+    possibleThemeModes:
+      - light
+      - dark
+  prohibited:
+    - "base-light"
+    - "base-dark"
+    - "md-light"
+    - "md-dark"
+    - "lg-light"
+    - "lg-dark"
+
+manualFigmaMaintenance:
+  currentStatus: manual
+  reason: >
+    The project currently uses the free version of Tokens Studio. The standard
+    global token sync does not currently automate the Figma Breakpoint collection.
+  rule: >
+    Manual Figma Breakpoint variables must be mapped back to GitHub tokens in
+    tokens/figma/breakpoint.mapping.json.
+  futureEnhancement: >
+    A future build step or upgraded Token Studio workflow may generate Figma
+    mode-ready output automatically.
+
+requiredMappingFile:
+  path: "tokens/figma/breakpoint.mapping.json"
+  purpose: >
+    Documents how each Figma Breakpoint variable maps to GitHub source tokens.
+  required: true
+  rule: >
+    Every variable in the Figma Breakpoint collection must have a corresponding
+    mapping entry.
+
+testing:
+  requiredChecks:
+    - Switch a parent frame between base, md and lg.
+    - Confirm semantic text styles update without changing component variants.
+    - Confirm responsive spacing variables update without changing component variants.
+    - Confirm old breakpoint-specific text styles are not used for normal design work.
+    - Confirm all Figma Breakpoint variables have GitHub mapping entries.
+
+relatedFiles:
+  tokenSources:
+    - "tokens/primitives/breakpoints.json"
+    - "tokens/semantic/typography.semantic.json"
+    - "tokens/semantic/layout.semantic.json"
+    - "tokens/semantic/spacing.semantic.json"
+    - "tokens/semantic/forms.semantic.json"
+    - "tokens/components/button.json"
+  figmaMapping:
+    - "tokens/figma/breakpoint.mapping.json"
+  humanGuidance:
+    - "patterns/responsive/responsive-modes.md"
+```

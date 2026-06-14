@@ -1,0 +1,647 @@
+{
+  "collection": "Breakpoint",
+  "modes": ["base", "md", "lg"],
+  "status": "manual",
+  "sourceOfTruth": "GitHub tokens",
+  "note": "Figma Breakpoint variables mirror GitHub responsive token branches. This collection is currently maintained manually while using the free Token Studio plan.",
+  "unitNote": "rawValuePx is included for Figma setup. GitHub token values remain the source of truth. Development should use rem-based breakpoint media queries.",
+  "variables": [
+    {
+      "figmaVariable": "typography/heading/h1/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h1.base.$value.fontSize",
+          "alias": "typography.size.3xl",
+          "rawValuePx": 30
+        },
+        "md": {
+          "source": "typography.heading.h1.md.$value.fontSize",
+          "alias": "typography.size.4xl",
+          "rawValuePx": 36
+        },
+        "lg": {
+          "source": "typography.heading.h1.lg.$value.fontSize",
+          "alias": "typography.size.5xl",
+          "rawValuePx": 48
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/heading/h2/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h2.base.$value.fontSize",
+          "alias": "typography.size.2xl",
+          "rawValuePx": 24
+        },
+        "md": {
+          "source": "typography.heading.h2.md.$value.fontSize",
+          "alias": "typography.size.3xl",
+          "rawValuePx": 30
+        },
+        "lg": {
+          "source": "typography.heading.h2.lg.$value.fontSize",
+          "alias": "typography.size.4xl",
+          "rawValuePx": 36
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/heading/h3/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h3.base.$value.fontSize",
+          "alias": "typography.size.xl",
+          "rawValuePx": 20
+        },
+        "md": {
+          "source": "typography.heading.h3.md.$value.fontSize",
+          "alias": "typography.size.2xl",
+          "rawValuePx": 24
+        },
+        "lg": {
+          "source": "typography.heading.h3.lg.$value.fontSize",
+          "alias": "typography.size.3xl",
+          "rawValuePx": 30
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/heading/h3/letterSpacing",
+      "type": "letterSpacing",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h3.base.$value.letterSpacing",
+          "alias": "typography.letterSpacing.normal",
+          "rawValue": "0"
+        },
+        "md": {
+          "source": "typography.heading.h3.md.$value.letterSpacing",
+          "alias": "typography.letterSpacing.tight",
+          "rawValue": "-0.02em"
+        },
+        "lg": {
+          "source": "typography.heading.h3.lg.$value.letterSpacing",
+          "alias": "typography.letterSpacing.tight",
+          "rawValue": "-0.02em"
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/heading/h4/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h4.base.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        },
+        "md": {
+          "source": "typography.heading.h4.md.$value.fontSize",
+          "alias": "typography.size.xl",
+          "rawValuePx": 20
+        },
+        "lg": {
+          "source": "typography.heading.h4.lg.$value.fontSize",
+          "alias": "typography.size.2xl",
+          "rawValuePx": 24
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/heading/h4/lineHeight",
+      "type": "lineHeight",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h4.base.$value.lineHeight",
+          "alias": "typography.lineHeight.normal",
+          "rawValue": "150%"
+        },
+        "md": {
+          "source": "typography.heading.h4.md.$value.lineHeight",
+          "alias": "typography.lineHeight.tight",
+          "rawValue": "120%"
+        },
+        "lg": {
+          "source": "typography.heading.h4.lg.$value.lineHeight",
+          "alias": "typography.lineHeight.tight",
+          "rawValue": "120%"
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/heading/h5/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h5.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "typography.heading.h5.md.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        },
+        "lg": {
+          "source": "typography.heading.h5.lg.$value.fontSize",
+          "alias": "typography.size.xl",
+          "rawValuePx": 20
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/heading/h5/lineHeight",
+      "type": "lineHeight",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h5.base.$value.lineHeight",
+          "alias": "typography.lineHeight.normal",
+          "rawValue": "150%"
+        },
+        "md": {
+          "source": "typography.heading.h5.md.$value.lineHeight",
+          "alias": "typography.lineHeight.normal",
+          "rawValue": "150%"
+        },
+        "lg": {
+          "source": "typography.heading.h5.lg.$value.lineHeight",
+          "alias": "typography.lineHeight.tight",
+          "rawValue": "120%"
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/heading/h6/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.heading.h6.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "typography.heading.h6.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "typography.heading.h6.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/body/small/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.body.small.base.$value.fontSize",
+          "alias": "typography.size.sm",
+          "rawValuePx": 14
+        },
+        "md": {
+          "source": "typography.body.small.md.$value.fontSize",
+          "alias": "typography.size.sm",
+          "rawValuePx": 14
+        },
+        "lg": {
+          "source": "typography.body.small.lg.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/body/default/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.body.default.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "typography.body.default.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "typography.body.default.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "typography/body/large/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.body.large.base.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        },
+        "md": {
+          "source": "typography.body.large.md.$value.fontSize",
+          "alias": "typography.size.xl",
+          "rawValuePx": 20
+        },
+        "lg": {
+          "source": "typography.body.large.lg.$value.fontSize",
+          "alias": "typography.size.xl",
+          "rawValuePx": 20
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/label/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "form.label.typography.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "form.label.typography.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "form.label.typography.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/control/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "form.control.typography.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "form.control.typography.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "form.control.typography.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/helper/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "form.helper.typography.base.$value.fontSize",
+          "alias": "typography.size.sm",
+          "rawValuePx": 14
+        },
+        "md": {
+          "source": "form.helper.typography.md.$value.fontSize",
+          "alias": "typography.size.sm",
+          "rawValuePx": 14
+        },
+        "lg": {
+          "source": "form.helper.typography.lg.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/error/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "form.error.typography.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "form.error.typography.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "form.error.typography.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/legend/default/typography/fontSize",
+      "type": "fontSize",
+      "requiresGitHubUpdate": true,
+      "modes": {
+        "base": {
+          "source": "form.legend.typography.default.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "form.legend.typography.default.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "form.legend.typography.default.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/legend/section/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "form.legend.typography.section.base",
+          "resolvedSource": "typography.heading.h3.base.$value.fontSize",
+          "alias": "typography.size.xl",
+          "rawValuePx": 20
+        },
+        "md": {
+          "source": "form.legend.typography.section.md",
+          "resolvedSource": "typography.heading.h3.md.$value.fontSize",
+          "alias": "typography.size.2xl",
+          "rawValuePx": 24
+        },
+        "lg": {
+          "source": "form.legend.typography.section.lg",
+          "resolvedSource": "typography.heading.h3.lg.$value.fontSize",
+          "alias": "typography.size.3xl",
+          "rawValuePx": 30
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/legend/section/typography/letterSpacing",
+      "type": "letterSpacing",
+      "modes": {
+        "base": {
+          "source": "form.legend.typography.section.base",
+          "resolvedSource": "typography.heading.h3.base.$value.letterSpacing",
+          "alias": "typography.letterSpacing.normal",
+          "rawValue": "0"
+        },
+        "md": {
+          "source": "form.legend.typography.section.md",
+          "resolvedSource": "typography.heading.h3.md.$value.letterSpacing",
+          "alias": "typography.letterSpacing.tight",
+          "rawValue": "-0.02em"
+        },
+        "lg": {
+          "source": "form.legend.typography.section.lg",
+          "resolvedSource": "typography.heading.h3.lg.$value.letterSpacing",
+          "alias": "typography.letterSpacing.tight",
+          "rawValue": "-0.02em"
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/legend/subsection/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "form.legend.typography.subsection.base",
+          "resolvedSource": "typography.heading.h4.base.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        },
+        "md": {
+          "source": "form.legend.typography.subsection.md",
+          "resolvedSource": "typography.heading.h4.md.$value.fontSize",
+          "alias": "typography.size.xl",
+          "rawValuePx": 20
+        },
+        "lg": {
+          "source": "form.legend.typography.subsection.lg",
+          "resolvedSource": "typography.heading.h4.lg.$value.fontSize",
+          "alias": "typography.size.2xl",
+          "rawValuePx": 24
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/legend/subsection/typography/lineHeight",
+      "type": "lineHeight",
+      "modes": {
+        "base": {
+          "source": "form.legend.typography.subsection.base",
+          "resolvedSource": "typography.heading.h4.base.$value.lineHeight",
+          "alias": "typography.lineHeight.normal",
+          "rawValue": "150%"
+        },
+        "md": {
+          "source": "form.legend.typography.subsection.md",
+          "resolvedSource": "typography.heading.h4.md.$value.lineHeight",
+          "alias": "typography.lineHeight.tight",
+          "rawValue": "120%"
+        },
+        "lg": {
+          "source": "form.legend.typography.subsection.lg",
+          "resolvedSource": "typography.heading.h4.lg.$value.lineHeight",
+          "alias": "typography.lineHeight.tight",
+          "rawValue": "120%"
+        }
+      }
+    },
+    {
+      "figmaVariable": "component/button/compact/typography/fontSize",
+      "type": "fontSize",
+      "requiresGitHubUpdate": true,
+      "modes": {
+        "base": {
+          "source": "component.button.typography.compact.base.$value.fontSize",
+          "alias": "typography.size.sm",
+          "rawValuePx": 14
+        },
+        "md": {
+          "source": "component.button.typography.compact.md.$value.fontSize",
+          "alias": "typography.size.sm",
+          "rawValuePx": 14
+        },
+        "lg": {
+          "source": "component.button.typography.compact.lg.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        }
+      }
+    },
+    {
+      "figmaVariable": "component/button/default/typography/fontSize",
+      "type": "fontSize",
+      "requiresGitHubUpdate": true,
+      "modes": {
+        "base": {
+          "source": "component.button.typography.default.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "component.button.typography.default.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "component.button.typography.default.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "component/button/comfortable/typography/fontSize",
+      "type": "fontSize",
+      "requiresGitHubUpdate": true,
+      "modes": {
+        "base": {
+          "source": "component.button.typography.comfortable.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "component.button.typography.comfortable.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "component.button.typography.comfortable.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "component/link/standalone/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "typography.body.default.base.$value.fontSize",
+          "semanticSource": "component.link.standalone.typography.base",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "typography.body.default.md.$value.fontSize",
+          "semanticSource": "component.link.standalone.typography.md",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "typography.body.default.lg.$value.fontSize",
+          "semanticSource": "component.link.standalone.typography.lg",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
+        }
+      }
+    },
+    {
+      "figmaVariable": "layout/page/padding",
+      "type": "spacing",
+      "modes": {
+        "base": {
+          "source": "layout.page.padding.base",
+          "alias": "spacing.4",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "layout.page.padding.md",
+          "alias": "spacing.6",
+          "rawValuePx": 24
+        },
+        "lg": {
+          "source": "layout.page.padding.lg",
+          "alias": "spacing.8",
+          "rawValuePx": 32
+        }
+      }
+    },
+    {
+      "figmaVariable": "layout/grid/gutter",
+      "type": "spacing",
+      "modes": {
+        "base": {
+          "source": "layout.grid.gutter.base",
+          "alias": "spacing.4",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "layout.grid.gutter.md",
+          "alias": "spacing.6",
+          "rawValuePx": 24
+        },
+        "lg": {
+          "source": "layout.grid.gutter.lg",
+          "alias": "spacing.8",
+          "rawValuePx": 32
+        }
+      }
+    },
+    {
+      "figmaVariable": "spacing/section",
+      "type": "spacing",
+      "modes": {
+        "base": {
+          "source": "spacing.section.base",
+          "alias": "spacing.12",
+          "rawValuePx": 48
+        },
+        "md": {
+          "source": "spacing.section.md",
+          "alias": "spacing.16",
+          "rawValuePx": 64
+        },
+        "lg": {
+          "source": "spacing.section.lg",
+          "alias": "spacing.20",
+          "rawValuePx": 80
+        }
+      }
+    }
+  ],
+  "excludedFromBreakpointCollection": [
+    {
+      "tokenOrStyle": "form/legend/compact/typography",
+      "reason": "Compact legend typography is intentionally fixed and compact."
+    },
+    {
+      "tokenOrStyle": "colour tokens",
+      "reason": "Colour belongs to theme or state decisions, not breakpoint mode."
+    },
+    {
+      "tokenOrStyle": "radius tokens",
+      "reason": "Radius is not currently responsive."
+    },
+    {
+      "tokenOrStyle": "border tokens",
+      "reason": "Border width and border colour are not currently responsive."
+    },
+    {
+      "tokenOrStyle": "component state tokens",
+      "reason": "States such as focus, error, disabled and readonly are interaction/status states, not responsive modes."
+    },
+    {
+      "tokenOrStyle": "form field gaps",
+      "reason": "Internal form field spacing is not currently responsive."
+    },
+    {
+      "tokenOrStyle": "control padding",
+      "reason": "Control internal padding is not currently responsive."
+    }
+  ]
+}

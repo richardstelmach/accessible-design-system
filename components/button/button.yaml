@@ -70,6 +70,10 @@ sizes:
       paddingInline: spacing.control.paddingInline.compact
       minBlockSize: size.control.minBlockSize.compact
       icon: size.icon.md
+      typography:
+        base: component.button.typography.compact.base
+        md: component.button.typography.compact.md
+        lg: component.button.typography.compact.lg
 
   default:
     description: Default button size for most product interfaces.
@@ -78,6 +82,10 @@ sizes:
       paddingInline: spacing.control.paddingInline.default
       minBlockSize: size.control.minBlockSize.default
       icon: size.icon.md
+      typography:
+        base: component.button.typography.default.base
+        md: component.button.typography.default.md
+        lg: component.button.typography.default.lg
 
   comfortable:
     description: Larger button size for prominent actions or spacious interfaces.
@@ -86,6 +94,10 @@ sizes:
       paddingInline: spacing.control.paddingInline.comfortable
       minBlockSize: size.control.minBlockSize.comfortable
       icon: size.icon.md
+      typography:
+        base: component.button.typography.comfortable.base
+        md: component.button.typography.comfortable.md
+        lg: component.button.typography.comfortable.lg
 
 structure:
   root:
@@ -96,11 +108,18 @@ structure:
     gap: spacing.control.gap
     radius: radius.lg
     borderWidth: border.width.thin
-    typography: typography.label.default
+    typography:
+    source: selected size
+    compact: component.button.typography.compact
+    default: component.button.typography.default
+    comfortable: component.button.typography.comfortable
 
   label:
     required: true
-    typography: typography.label.default
+    source: selected size
+    compact: component.button.typography.compact
+    default: component.button.typography.default
+    comfortable: component.button.typography.comfortable
 
   leadingIcon:
     optional: true
@@ -170,12 +189,14 @@ states:
       border: color.interactive.disabled.border
 
 responsiveBehaviour:
-  - Button typography does not change across breakpoints by default.
-  - Button labels use typography.label.default across all viewport sizes.
+  - Button typography does change across breakpoints by default.
+  - Button labels use component level tokens, according to button size
   - Breakpoints may affect button layout, grouping, wrapping or width.
   - On narrow viewports, buttons may become full width where this improves usability.
   - Button size variants are selected by context and density, not automatically by breakpoint.
   - Do not use heading or body responsive typography tokens for button labels.
+  - Figma: Use semantic button typography styles and the Breakpoint variable mode. Do not create base/md/lg button variants.
+  - Code: Use default CSS values plus breakpoint media query overrides from the responsive typography tokens.
 
 contentGuidelines:
   - Use clear action-oriented labels.

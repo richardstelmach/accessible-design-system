@@ -356,6 +356,10 @@ figmaImplementation:
       - Do not draw underlines as separate line or rectangle layers.
       - Hover and active states may remove underline.
       - Focus state must remain visibly identifiable.
+      
+  figmaTypography:
+    standalone: component/link/standalone/typography
+    responsiveMode: Breakpoint
 
 devImplementation:
   description: >
@@ -370,6 +374,10 @@ devImplementation:
     - Inline links should remain part of the surrounding text content.
     - Standalone links may use a reusable link component or class, but should still render as a semantic link when navigating.
     - If additional context is needed for link purpose, associate it programmatically.
+    - figma:
+        textStyle: component/link/standalone/typography
+        responsiveMode: Breakpoint
+        rule: Use the semantic standalone link text style. Do not create base, md or lg standalone link variants.
 
 aiGenerationRules:
   - Determine whether the link is inline or standalone before creating Figma elements.

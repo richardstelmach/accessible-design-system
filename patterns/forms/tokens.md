@@ -14,6 +14,24 @@ These tokens support the shared form patterns documented in:
 patterns/forms/
 ```
 
+## Responsive form typography
+
+Some form typography tokens have `base`, `md` and `lg` branches.
+
+In GitHub, use the full responsive token path:
+
+```text
+form.label.typography.base
+form.label.typography.md
+form.label.typography.lg
+```
+
+In Figma, apply the semantic text style:
+
+form/label/typography
+
+Then use the parent frame’s Breakpoint mode to preview base, md or lg.
+
 ## Token naming
 
 Use semantic token paths as the canonical source of truth.
@@ -33,7 +51,9 @@ Do not treat CSS custom property names as the source token names unless they are
 Use label tokens for individual form control labels.
 
 ```text
-form.label.typography
+form.label.typography.base
+form.label.typography.md
+form.label.typography.lg
 form.label.color
 ```
 
@@ -60,35 +80,17 @@ The legend always identifies a grouped form control inside a fieldset. The typog
 Use:
 
 ```text
-form.legend.typography.default
-```
-
-For standard grouped form controls.
-
-Use:
-
-```text
-form.legend.typography.section
-```
-
-For a grouped question inside a larger H2-level section.
-
-Use:
-
-```text
-form.legend.typography.subsection
-```
-
-For a grouped question inside a larger H3-level subsection.
-
-Use:
-
-```text
+form.legend.typography.default.base
+form.legend.typography.default.md
+form.legend.typography.default.lg
+form.legend.typography.section.base
+form.legend.typography.section.md
+form.legend.typography.section.lg
+form.legend.typography.subsection.base
+form.legend.typography.subsection.md
+form.legend.typography.subsection.lg
 form.legend.typography.compact
 ```
-
-For dense grouped controls, filters, cards or settings panels.
-
 Do not choose a legend size only to make something look more important.
 
 Use the variant that matches the fieldset’s context in the page structure.
@@ -98,7 +100,9 @@ Use the variant that matches the fieldset’s context in the page structure.
 Use helper tokens for optional helper text.
 
 ```text
-form.helper.typography
+form.helper.typography.base
+form.helper.typography.md
+form.helper.typography.lg
 form.helper.color
 ```
 
@@ -107,7 +111,9 @@ form.helper.color
 Use error tokens for inline field and group error messages.
 
 ```text
-form.error.typography
+form.error.typography.base
+form.error.typography.md
+form.error.typography.lg
 form.error.color
 form.error.background
 ```
@@ -139,7 +145,9 @@ Use control shell tokens for components such as text input, textarea and select.
 ```text
 form.control.background
 form.control.foreground
-form.control.typography
+form.control.typography.base
+form.control.typography.md
+form.control.typography.lg
 form.control.border.color
 form.control.border.width
 form.control.border.radius
