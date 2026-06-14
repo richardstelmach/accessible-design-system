@@ -114,21 +114,25 @@
     {
       "figmaVariable": "typography/heading/h4/lineHeight",
       "type": "lineHeight",
+      "figmaImplementation": "resolved-px",
       "modes": {
         "base": {
           "source": "typography.heading.h4.base.$value.lineHeight",
-          "alias": "typography.lineHeight.normal",
-          "rawValue": "150%"
+          "sourceValue": "150%",
+          "fontSizeSource": "typography.heading.h4.base.$value.fontSize",
+          "rawValuePx": 27    
         },
         "md": {
           "source": "typography.heading.h4.md.$value.lineHeight",
-          "alias": "typography.lineHeight.tight",
-          "rawValue": "120%"
+          "sourceValue": "120%",
+          "fontSizeSource": "typography.heading.h4.md.$value.fontSize",
+          "rawValuePx": 24
         },
         "lg": {
           "source": "typography.heading.h4.lg.$value.lineHeight",
-          "alias": "typography.lineHeight.tight",
-          "rawValue": "120%"
+          "sourceValue": "120%",
+          "fontSizeSource": "typography.heading.h4.lg.$value.fontSize",
+          "rawValuePx": 28.8
         }
       }
     },
@@ -156,21 +160,32 @@
     {
       "figmaVariable": "typography/heading/h5/lineHeight",
       "type": "lineHeight",
+      "figmaImplementation": "resolved-px",
+      "sourceUnit": "percentage",
       "modes": {
         "base": {
           "source": "typography.heading.h5.base.$value.lineHeight",
-          "alias": "typography.lineHeight.normal",
-          "rawValue": "150%"
+          "sourceValue": "150%",
+          "fontSizeSource": "typography.heading.h5.base.$value.fontSize",
+          "fontSizeAlias": "typography.size.md",
+          "fontSizePx": 16,
+          "rawValuePx": 24
         },
         "md": {
           "source": "typography.heading.h5.md.$value.lineHeight",
-          "alias": "typography.lineHeight.normal",
-          "rawValue": "150%"
+          "sourceValue": "150%",
+          "fontSizeSource": "typography.heading.h5.md.$value.fontSize",
+          "fontSizeAlias": "typography.size.lg",
+          "fontSizePx": 18,
+          "rawValuePx": 27
         },
         "lg": {
           "source": "typography.heading.h5.lg.$value.lineHeight",
-          "alias": "typography.lineHeight.tight",
-          "rawValue": "120%"
+          "sourceValue": "120%",
+          "fontSizeSource": "typography.heading.h5.lg.$value.fontSize",
+          "fontSizeAlias": "typography.size.xl",
+          "fontSizePx": 20,
+          "rawValuePx": 24
         }
       }
     },
@@ -439,24 +454,35 @@
     {
       "figmaVariable": "form/legend/subsection/typography/lineHeight",
       "type": "lineHeight",
+      "figmaImplementation": "resolved-px",
+      "sourceUnit": "percentage",
       "modes": {
         "base": {
           "source": "form.legend.typography.subsection.base",
           "resolvedSource": "typography.heading.h4.base.$value.lineHeight",
-          "alias": "typography.lineHeight.normal",
-          "rawValue": "150%"
+          "sourceValue": "150%",
+          "fontSizeSource": "typography.heading.h4.base.$value.fontSize",
+          "fontSizeAlias": "typography.size.lg",
+          "fontSizePx": 18,
+          "rawValuePx": 27
         },
         "md": {
           "source": "form.legend.typography.subsection.md",
           "resolvedSource": "typography.heading.h4.md.$value.lineHeight",
-          "alias": "typography.lineHeight.tight",
-          "rawValue": "120%"
+          "sourceValue": "120%",
+          "fontSizeSource": "typography.heading.h4.md.$value.fontSize",
+          "fontSizeAlias": "typography.size.xl",
+          "fontSizePx": 20,
+          "rawValuePx": 24
         },
         "lg": {
           "source": "form.legend.typography.subsection.lg",
           "resolvedSource": "typography.heading.h4.lg.$value.lineHeight",
-          "alias": "typography.lineHeight.tight",
-          "rawValue": "120%"
+          "sourceValue": "120%",
+          "fontSizeSource": "typography.heading.h4.lg.$value.fontSize",
+          "fontSizeAlias": "typography.size.2xl",
+          "fontSizePx": 24,
+          "rawValuePx": 28.8
         }
       }
     },
