@@ -231,7 +231,7 @@ accessibility:
 figmaRules:
   - Use Auto Layout.
   - Use semantic colour variables.
-  - Use typography.label.default for visible labels.
+  - Use button component tokens for visible labels.
   - Use spacing.control.gap between icon and label.
   - Use selected size tokens for padding and min height.
   - Use radius.lg for standard buttons.
