@@ -204,7 +204,7 @@ manualFigmaMaintenance:
     global token sync does not currently automate the Figma Breakpoint collection.
   rule: >
     Manual Figma Breakpoint variables must be mapped back to GitHub tokens in
-    tokens/figma/breakpoint.mapping.json.
+    tokens/figma/breakpoint-mapping.json.
   futureEnhancement: >
     A future build step or upgraded Token Studio workflow may generate Figma
     mode-ready output automatically.
@@ -235,6 +235,6 @@ relatedFiles:
     - "tokens/semantic/forms.semantic.json"
     - "tokens/components/button.json"
   figmaMapping:
-    - "tokens/figma/breakpoint.mapping.json"
+    - "tokens/figma/breakpoint-mapping.json"
   humanGuidance:
     - "patterns/responsive/responsive-modes.md"
