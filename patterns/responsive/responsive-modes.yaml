@@ -211,7 +211,7 @@ manualFigmaMaintenance:
     mode-ready output automatically.
 
 requiredMappingFile:
-  path: "tokens/figma/breakpoint.mapping.json"
+  path: "tokens/figma/breakpoint-mapping.json"
   purpose: >
     Documents how each Figma Breakpoint variable maps to GitHub source tokens.
   required: true
