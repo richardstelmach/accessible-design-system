@@ -1335,9 +1335,39 @@
     "legend": {
       "typography": {
         "default": {
-          "$value": "{typography.label.default}",
-          "$type": "typography",
-          "$description": "Default typography for legends used by standard grouped form controls."
+          "base": {
+            "$type": "typography",
+            "$value": {
+              "fontFamily": "{typography.family.sans}",
+              "fontWeight": "{typography.weight.medium}",
+              "fontSize": "{typography.size.md}",
+              "lineHeight": "{typography.lineHeight.normal}",
+              "letterSpacing": "{typography.letterSpacing.normal}"
+            },
+            "$description": "Base typography for legends used by standard grouped form controls."
+          },
+          "md": {
+            "$type": "typography",
+            "$value": {
+              "fontFamily": "{typography.family.sans}",
+              "fontWeight": "{typography.weight.medium}",
+              "fontSize": "{typography.size.md}",
+              "lineHeight": "{typography.lineHeight.normal}",
+              "letterSpacing": "{typography.letterSpacing.normal}"
+            },
+            "$description": "Medium breakpoint typography for legends used by standard grouped form controls."
+          },
+          "lg": {
+            "$type": "typography",
+            "$value": {
+              "fontFamily": "{typography.family.sans}",
+              "fontWeight": "{typography.weight.medium}",
+              "fontSize": "{typography.size.lg}",
+              "lineHeight": "{typography.lineHeight.normal}",
+              "letterSpacing": "{typography.letterSpacing.normal}"
+            },
+            "$description": "Large breakpoint typography for legends used by standard grouped form controls."
+          }
         },
         "section": {
           "base": {
