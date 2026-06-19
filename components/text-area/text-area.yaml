@@ -1,0 +1,1029 @@
+component: Textarea
+id: textarea
+version: 0.1.0
+status: active
+
+description: >
+  Textareas allow users to enter multiple lines of plain text. They are used
+  for longer free-text answers that cannot be collected appropriately through
+  a single-line Text Input.
+
+purpose:
+  - Collect multiple lines of plain text from a user.
+  - Provide a consistent multi-line single-control form field pattern.
+  - Support accessible labels, helper text, validation text and error states.
+  - Support required and optional field indication consistently.
+  - Support disabled and read-only textarea states.
+  - Provide a predictable initial size while allowing users to expand the control vertically.
+  - Reuse the shared form field behaviour and semantic tokens used by Text Input.
+
+sourceDocumentation:
+  sharedPattern:
+    - patterns/forms/form-field-patterns.yaml
+  humanReadable:
+    - patterns/forms/form-field-patterns.md
+    - patterns/forms/single-control-pattern.md
+    - patterns/forms/labels.md
+    - patterns/forms/helper-text.md
+    - patterns/forms/required-and-optional.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/disabled-and-readonly.md
+    - patterns/forms/input-types-and-keyboards.md
+    - patterns/forms/tokens.md
+
+relatedPatterns:
+  - patterns/forms/form-field-patterns.yaml
+  - patterns/form-layout.yaml
+
+relatedComponents:
+  - components/text-input/text-input.yaml
+
+scope:
+  includes:
+    - Multi-line plain text entry
+    - Required textareas
+    - Optional textareas
+    - Textareas with helper text
+    - Textareas with inline validation errors
+    - Disabled textareas
+    - Read-only textareas
+    - Textareas with genuine minimum or maximum character constraints
+    - Textareas that allow vertical resizing
+  excludes:
+    - Single-line text entry
+    - Rich text editing
+    - Markdown editors
+    - Code editors
+    - WYSIWYG editors
+    - File uploads
+    - Structured multi-part answers
+    - Search input
+    - Automatically expanding textareas as default behaviour
+    - Live character count in the initial component version
+    - Full form layout
+    - Form submission business logic
+    - Server-side validation rules
+
+principles:
+  - A Textarea is a single-control form field.
+  - Use a Textarea only when users may need to enter more than one line of text.
+  - Use a Text Input when the expected answer is short and single-line.
+  - Every Textarea must have an accessible name.
+  - A visible label is required by default.
+  - The label must identify the information being requested.
+  - Helper text is optional and should only be used when it helps users answer correctly.
+  - Placeholder text must not be used.
+  - Required fields are the default unless marked optional.
+  - Optional fields must include "(optional)" in the visible label.
+  - Required fields do not need "(required)" in the label when the form states that fields are required unless marked optional.
+  - Error messages must be visible and programmatically associated with the textarea.
+  - Error states must not rely on colour alone.
+  - Disabled and read-only states must be visually and programmatically distinct.
+  - The initial size must make multi-line entry apparent.
+  - The default block size must use the documented Textarea component token.
+  - The control must not be reduced below the documented minimum block size.
+  - The standard component does not impose a maximum block size.
+  - Users should be allowed to resize the textarea vertically by default.
+  - Horizontal resizing should not be allowed by default.
+  - Width is owned by the parent form layout.
+  - The Textarea fills its available form-field container by default.
+  - Do not impose a character limit unless there is a genuine content or system constraint.
+  - Preserve the user's entered value when validation fails.
+
+pattern:
+  type: single-control
+  anatomy:
+    - label
+    - helperText
+    - errorMessage
+    - control
+  order:
+    - label
+    - helperText
+    - errorMessage
+    - control
+  requiredImplementation:
+    accessibleName: true
+    visibleLabelDefault: true
+    labelAssociation: true
+    describedByForHelper: true
+    describedByForError: true
+    ariaInvalidWhenInvalid: true
+
+anatomy:
+  root:
+    description: >
+      Wrapper for the complete field, including label, helper text, error text
+      and the textarea control.
+    layout: vertical-stack
+    tokens:
+      gap: form.field.gap.labelToHelper
+    rules:
+      - Use Auto Layout in Figma.
+      - Use a vertical layout.
+      - Do not place unrelated content between the label, helper text, error text and control.
+      - Do not detach the internal parts of the component.
+      - Do not use raw spacing values.
+
+  label:
+    description: >
+      Visible text label that identifies the textarea.
+    required: true
+    element: label
+    tokens:
+      typography: form.label.typography
+      color: form.label.color
+    rules:
+      - Use a visible label by default.
+      - The visible label must be programmatically associated with the textarea.
+      - The accessible name should include the visible label text.
+      - Do not use placeholder text as the label.
+      - Do not use aria-label when a visible label can be used.
+      - Add "(optional)" to the label when the field is optional.
+      - Do not add "(required)" by default when the form states that fields are required unless marked optional.
+      - Keep the label visible while the user enters text.
+
+  helperText:
+    description: >
+      Optional supporting text that helps users understand what information
+      to provide, why it is needed or any constraint they need to know before
+      entering an answer.
+    required: false
+    tokens:
+      typography: form.helper.typography
+      color: form.helper.color
+    rules:
+      - Use helper text only when it helps the user answer correctly.
+      - Helper text should sit between the label and the textarea.
+      - Helper text must be associated with the textarea using aria-describedby.
+      - Helper text must not repeat the label.
+      - Helper text must not replace the label.
+      - Helper text must not be placed in placeholder text.
+      - Keep helper text short and specific.
+      - Communicate genuine character limits before the textarea.
+      - Do not hide essential instructions until validation fails.
+
+  errorMessage:
+    description: >
+      Inline validation message shown when the textarea has an error.
+    requiredWhenInvalid: true
+    tokens:
+      typography: form.error.typography
+      color: form.error.color
+      background: form.error.background
+    rules:
+      - Show the error close to the relevant textarea.
+      - The error must be written in text.
+      - The error should explain what went wrong.
+      - Where possible, the error should explain how to fix it.
+      - The error must be associated with the textarea using aria-describedby.
+      - Inline errors must still be shown when an error summary is present.
+      - Error state must not rely on colour alone.
+      - Use an "Error:" prefix or equivalent accessible error cue where this improves clarity.
+      - Keep the user's entered value visible and editable.
+
+  control:
+    description: >
+      The multi-line textarea element where the user enters plain text.
+    element: textarea
+    fallbackRows: 5
+    tokens:
+      background: form.control.background
+      foreground: form.control.foreground
+      borderColor: form.control.border.color
+      borderWidth: form.control.border.width
+      borderRadius: form.control.border.radius
+      paddingBlock: form.control.padding.block
+      paddingInline: form.control.padding.inline
+      typography: form.control.typography
+      minimumBlockSize: component.textarea.blockSize.minimum
+      defaultBlockSize: component.textarea.blockSize.default
+    rules:
+      - Use a semantic textarea element in implementation.
+      - The textarea must have an id.
+      - The label must reference the textarea id using for.
+      - The textarea name must describe the submitted value.
+      - The textarea must not use placeholder text.
+      - The textarea must not remove the visible focus indicator.
+      - The textarea should preserve line breaks entered by the user.
+      - The textarea should preserve the user's value when validation fails.
+      - Apply the default block-size token as the initial rendered height.
+      - Prevent the control from becoming shorter than the minimum block-size token.
+      - Do not set a maximum block size on the standard component.
+      - Use rows="5" as a resilient native HTML fallback when CSS is unavailable.
+      - Allow vertical resizing by default.
+      - Do not allow horizontal resizing by default.
+      - Do not use contenteditable as a replacement for a native textarea.
+      - Do not add rich text formatting controls to the Textarea component.
+
+requiredAndOptional:
+  defaultAssumption: requiredUnlessMarkedOptional
+
+  required:
+    labelSuffix: none
+    requiredAttribute: true
+    rules:
+      - Required fields do not need extra visible text by default.
+      - Use the HTML required attribute when the user must complete the field before submitting.
+      - Do not rely on an asterisk alone.
+      - Do not rely on colour alone.
+      - Do not hide required status from assistive technology when the field is programmatically required.
+
+  optional:
+    labelSuffix: "(optional)"
+    requiredAttribute: false
+    rules:
+      - Optional fields must include "(optional)" in the visible label.
+      - The optional marker must be part of the accessible name.
+      - Do not use colour alone to show optional status.
+      - Keep the wording consistent across all field types.
+
+placeholder:
+  allowed: false
+  rules:
+    - Do not use placeholder text.
+    - Do not use placeholder text as a label.
+    - Do not use placeholder text for helper text.
+    - Do not use placeholder text for examples or formatting guidance.
+    - Do not use placeholder text to show an example answer.
+    - Use helper text instead when guidance is useful.
+
+configurations:
+  default:
+    description: Required Textarea without helper text or an error.
+    anatomy:
+      - label
+      - control
+
+  withHelperText:
+    description: Textarea with supporting guidance.
+    anatomy:
+      - label
+      - helperText
+      - control
+    rules:
+      - Associate helper text with the textarea using aria-describedby.
+      - Keep helper text visible while the user is entering a value.
+
+  withError:
+    description: Textarea with an inline validation error.
+    anatomy:
+      - label
+      - helperText
+      - errorMessage
+      - control
+    rules:
+      - Set aria-invalid="true" on the textarea.
+      - Associate the error message with the textarea using aria-describedby.
+      - Keep helper text associated when it is still useful.
+      - The error message should appear before the control in the visual field order.
+      - The error summary link should target the textarea when the error belongs to it.
+      - Preserve the user's entered text.
+
+  optional:
+    description: Optional Textarea.
+    rules:
+      - Add "(optional)" to the visible label.
+      - Do not use the required attribute.
+      - Do not add hidden required text.
+
+  disabled:
+    description: Textarea that cannot be edited, focused or submitted.
+    rules:
+      - Use the disabled attribute in implementation.
+      - Keep the label visible.
+      - Do not rely on opacity alone.
+      - Do not use disabled if the value still needs to be submitted.
+      - Disabled textareas should not receive keyboard focus.
+
+  readonly:
+    description: Textarea that cannot be edited but can receive focus and is submitted with the form.
+    rules:
+      - Use the readonly attribute in implementation.
+      - Keep the label visible.
+      - Use read-only styling, not disabled styling.
+      - Use read-only instead of disabled when the value still needs to be submitted.
+      - Read-only textareas may receive keyboard focus.
+      - Preserve line breaks and allow the content to be selected and copied.
+
+states:
+  default:
+    description: Resting editable state.
+    tokens:
+      background: form.control.background
+      foreground: form.control.foreground
+      borderColor: form.control.border.color
+      borderWidth: form.control.border.width
+      blockSize: component.textarea.blockSize.default
+      minimumBlockSize: component.textarea.blockSize.minimum
+    rules:
+      - The textarea must be clearly identifiable as an editable field.
+      - Text contrast must meet WCAG requirements.
+      - The initial block size must make multi-line entry apparent.
+
+  focus:
+    description: Keyboard focus state.
+    tokens:
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+    treatment:
+      type: double-ring
+      description: >
+        A separator sits between the textarea border and the outer focus ring
+        so focus remains visible against both the control and the surrounding surface.
+      layers:
+        - control
+        - separator
+        - focusRing
+    rules:
+      - Keyboard focus must be visible.
+      - Do not remove the browser or system focus indicator unless replacing it with an accessible equivalent.
+      - Focus styling must not rely on colour alone.
+      - Focus styling must remain visible when the textarea is also in error.
+
+  filled:
+    description: Textarea contains user-entered, prefilled or saved text.
+    rules:
+      - A filled textarea must keep the same label position.
+      - Do not move the label into the textarea.
+      - Do not rely on value text alone to explain what the textarea is for.
+      - Preserve line breaks in example values.
+
+  error:
+    description: Invalid state when the textarea has a validation error.
+    tokens:
+      borderColor: form.state.error.border
+      errorText: form.error.color
+      errorBackground: form.error.background
+    rules:
+      - Show an inline error message.
+      - Set aria-invalid="true" on the textarea.
+      - Associate the error message with the textarea using aria-describedby.
+      - Error styling must not rely on colour alone.
+      - The textarea value should remain visible and editable.
+
+  errorFocus:
+    description: Invalid textarea while focused.
+    tokens:
+      borderColor: form.state.error.border
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+    treatment:
+      type: error-border-with-double-ring-focus
+    rules:
+      - Show both error and focus states.
+      - The focus indicator must not be hidden by the error border.
+      - Do not replace the error state with the focus state.
+      - Do not replace the focus state with the error state.
+
+  disabled:
+    description: Unavailable textarea that cannot be edited, focused or submitted.
+    tokens:
+      background: form.state.disabled.background
+      foreground: form.state.disabled.foreground
+      borderColor: form.state.disabled.border
+    rules:
+      - Disabled text must remain readable.
+      - Disabled styling must not rely on opacity alone.
+      - Disabled textareas must still have visible labels.
+      - Disabled textareas must not receive keyboard focus.
+      - Disabled textareas are not submitted with the form.
+
+  readonly:
+    description: Read-only textarea that cannot be edited but can be focused and submitted.
+    tokens:
+      background: form.state.readonly.background
+      foreground: form.state.readonly.foreground
+      borderColor: form.state.readonly.border
+    rules:
+      - Read-only styling must be distinct from disabled styling.
+      - Read-only textareas must still have visible labels.
+      - Read-only textareas may receive keyboard focus.
+      - Read-only values are submitted with the form.
+      - Read-only text should remain selectable and copyable.
+
+textareaAttributes:
+  supported:
+    - id
+    - name
+    - rows
+    - cols
+    - required
+    - disabled
+    - readonly
+    - minlength
+    - maxlength
+    - autocomplete
+    - autocapitalize
+    - enterkeyhint
+    - inputmode
+    - spellcheck
+    - wrap
+    - aria-describedby
+    - aria-invalid
+  requiredByDefault:
+    - id
+    - name
+  defaults:
+    rows: 5
+    resize: vertical
+    wrap: soft
+  rules:
+    - Use rows="5" as the native HTML fallback.
+    - Do not use rows as the design-system source of truth for rendered height.
+    - Do not use cols as the primary layout mechanism in responsive interfaces.
+    - Use CSS and the parent form layout to control available width.
+    - Use minlength or maxlength only when a genuine content constraint exists.
+    - Communicate a minimum or maximum length before the user enters text.
+    - Use autocomplete when the textarea collects a recognised autocomplete purpose.
+    - Do not disable spelling support without a strong content-specific reason.
+    - Do not add ARIA when native HTML provides the required behaviour.
+    - Do not use aria-label when a visible label can be associated with the textarea.
+    - Use aria-describedby for helper text and error text.
+    - Use aria-invalid="true" only when the textarea is currently invalid.
+
+describedBy:
+  description: >
+    Helper text and error text must be programmatically associated with the textarea.
+  rules:
+    - When helper text is present, include the helper text id in aria-describedby.
+    - When error text is present, include the error text id in aria-describedby.
+    - When both helper text and error text are present, include both ids in aria-describedby.
+    - Keep aria-describedby ids in a stable and predictable order.
+    - Do not associate unrelated page text with the textarea.
+
+validation:
+  inlineErrors:
+    required: true
+    rules:
+      - Show the error close to the relevant textarea.
+      - Write the error in plain language.
+      - Explain what went wrong.
+      - Explain how to fix it where possible.
+      - Keep inline errors visible until the error is resolved.
+      - Inline errors must not be replaced by an error summary.
+      - Do not move focus while the user is typing.
+      - Preserve the user's entered text when showing an error.
+      - Do not clear long-form answers after failed validation.
+
+  errorSummary:
+    useWhen:
+      - More than one field or group has an error.
+    rules:
+      - Each error summary item should link to the relevant textarea.
+      - The relevant textarea should still show its inline error.
+      - After failed submit, focus may move to the error summary when there are multiple errors.
+      - The error summary must not replace inline errors.
+
+lengthConstraints:
+  default:
+    minimum: none
+    maximum: none
+
+  principles:
+    - Do not impose a character limit by default.
+    - Add a limit only when the service, content model or downstream system has a genuine constraint.
+    - Tell users about the limit before they enter text.
+    - Do not wait until validation fails to reveal the limit.
+    - Do not use an arbitrary limit only to simplify visual layout.
+    - Consider whether users need to paste existing text into the textarea.
+
+  minimumLength:
+    supported: true
+    attribute: minlength
+    rules:
+      - Use only when a genuine minimum amount of information is needed.
+      - Explain the expected information rather than relying only on a number.
+      - Do not use minimum length as a substitute for checking whether the answer is useful.
+
+  maximumLength:
+    supported: true
+    attribute: maxlength
+    rules:
+      - Use only when a genuine upper limit exists.
+      - Communicate the maximum in helper text before the textarea.
+      - Make the limit available programmatically.
+      - Use a specific error if submitted content exceeds the accepted limit.
+      - Do not truncate submitted text silently.
+
+  characterCount:
+    status: deferred
+    includedInVersion: false
+    reason: >
+      A live character count requires defined announcement behaviour, threshold
+      behaviour, visual placement and validation rules. It should be documented
+      as a dedicated optional sub-pattern before being added to the core component.
+    rules:
+      - Do not create an undocumented character count inside the Figma component.
+      - Do not announce every keystroke through an assertive live region.
+      - Do not use a character count as a replacement for helper text or validation.
+      - Add this feature only after the shared behaviour has been documented.
+
+sizing:
+  width:
+    ownership: parent-layout
+    default: fill-container
+    minimum: none
+    maximum: parent-container
+    parentMaximumToken: form.layout.column.maxWidth
+    css:
+      inlineSize: 100%
+      minInlineSize: 0
+      maxInlineSize: 100%
+    rules:
+      - The Textarea fills the available width of its form-field container.
+      - The Textarea does not own an independent minimum inline size.
+      - The Textarea does not own an independent maximum inline size.
+      - The parent form layout controls the practical maximum width.
+      - The default form column maximum is provided by form.layout.column.maxWidth.
+      - Do not use the short character-width options defined for Text Input.
+      - Do not create width variants for the Textarea.
+      - Do not invent decorative fractional widths.
+      - The Textarea must not overflow its container.
+      - Helper and error text should share the same available inline space as the Textarea.
+
+  height:
+    ownership: component
+    minimum:
+      token: component.textarea.blockSize.minimum
+      description: >
+        The smallest supported rendered block size. This prevents the control
+        from collapsing to a size that no longer communicates multi-line entry.
+    default:
+      token: component.textarea.blockSize.default
+      description: >
+        The standard initial rendered block size for the Textarea component.
+    maximum:
+      value: none
+      description: >
+        The standard Textarea does not impose a maximum block size.
+    fallbackRows: 5
+    resize: vertical
+    css:
+      blockSize: component.textarea.blockSize.default
+      minBlockSize: component.textarea.blockSize.minimum
+      maxBlockSize: none
+      resize: vertical
+    rules:
+      - Apply component.textarea.blockSize.default as the initial rendered height.
+      - Apply component.textarea.blockSize.minimum as the minimum rendered height.
+      - Do not allow the Textarea to be resized below its minimum block size.
+      - Do not set a maximum block size on the standard component.
+      - Use rows="5" only as a native HTML fallback.
+      - Do not create compact, default or extended height variants.
+      - Do not use line count as the design-system sizing API.
+      - Allow the user to resize the Textarea vertically.
+      - Prevent horizontal resizing by default.
+      - Resizing must not cause content to overlap or become unavailable.
+      - A resized Textarea must retain its focus and error styling.
+
+  responsiveRules:
+    - The Textarea must remain within the available container width.
+    - The parent form column may become narrower at smaller viewports.
+    - The Textarea block-size tokens do not change by breakpoint.
+    - Text wrapping should adapt naturally as the available width changes.
+    - The control must remain usable at supported zoom and text-resize settings.
+
+composition:
+  patternType: single-control
+  rules:
+    - Use Textarea as a standalone single-control form field.
+    - Use a label, not a legend, for a standalone Textarea.
+    - Do not wrap a standalone Textarea in a fieldset unless it belongs to a genuine grouped question.
+    - When a Textarea is used inside a larger grouped component, the parent owns the fieldset and legend.
+    - A Textarea inside a group still needs its own label when it asks for a distinct answer.
+    - Group-level helper text and errors belong to the parent group.
+    - Textarea-specific errors must be associated with the Textarea itself.
+
+tokens:
+  label:
+    typography: form.label.typography
+    color: form.label.color
+
+  helper:
+    typography: form.helper.typography
+    color: form.helper.color
+
+  error:
+    typography: form.error.typography
+    color: form.error.color
+    background: form.error.background
+
+  fieldSpacing:
+    labelToHelper: form.field.gap.labelToHelper
+    helperToError: form.field.gap.helperToError
+    errorToControl: form.field.gap.errorToControl
+    controlToNextField: form.field.gap.controlToNextField
+
+  control:
+    background: form.control.background
+    foreground: form.control.foreground
+    typography: form.control.typography
+    borderColor: form.control.border.color
+    borderWidth: form.control.border.width
+    borderRadius: form.control.border.radius
+    paddingBlock: form.control.padding.block
+    paddingInline: form.control.padding.inline
+
+  sizing:
+    minimumBlockSize: component.textarea.blockSize.minimum
+    defaultBlockSize: component.textarea.blockSize.default
+    parentMaximumWidth: form.layout.column.maxWidth
+
+  states:
+    focusRing: form.state.focus.ring
+    focusSeparator: form.state.focus.separator
+    errorBorder: form.state.error.border
+    disabledBackground: form.state.disabled.background
+    disabledForeground: form.state.disabled.foreground
+    disabledBorder: form.state.disabled.border
+    readonlyBackground: form.state.readonly.background
+    readonlyForeground: form.state.readonly.foreground
+    readonlyBorder: form.state.readonly.border
+
+accessibility:
+  wcag:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: Labels, helper text and errors must be programmatically associated with the textarea.
+
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Required, optional and error states must not rely on colour alone.
+
+    - id: WCAG 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Label, helper, error and textarea text must have sufficient contrast.
+
+    - id: WCAG 1.4.10
+      name: Reflow
+      level: AA
+      relevance: The textarea must remain usable without horizontal page scrolling at supported viewport sizes.
+
+    - id: WCAG 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: Textarea borders and focus indicators must have sufficient contrast.
+
+    - id: WCAG 2.1.1
+      name: Keyboard
+      level: A
+      relevance: The textarea must be usable with a keyboard.
+
+    - id: WCAG 2.4.3
+      name: Focus Order
+      level: A
+      relevance: Focus order should follow the visual and logical form order.
+
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: Keyboard focus must be visible.
+
+    - id: WCAG 2.5.3
+      name: Label in Name
+      level: A
+      relevance: The accessible name should include the visible label text.
+
+    - id: WCAG 2.5.8
+      name: Target Size Minimum
+      level: AA
+      relevance: The textarea exceeds the documented minimum control target size.
+
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: Textarea errors must be identified in text.
+
+    - id: WCAG 3.3.2
+      name: Labels or Instructions
+      level: A
+      relevance: The textarea must have a label and instructions where needed.
+
+    - id: WCAG 3.3.3
+      name: Error Suggestion
+      level: AA
+      relevance: Error messages should suggest how to fix the problem where possible.
+
+    - id: WCAG 4.1.2
+      name: Name, Role, Value
+      level: A
+      relevance: The textarea must expose the correct accessible name, role and state.
+
+  rules:
+    - Every Textarea must have an accessible name.
+    - Use visible labels by default.
+    - Associate the label with the textarea using for and id.
+    - Do not use placeholder text.
+    - Helper text must be associated using aria-describedby.
+    - Error text must be associated using aria-describedby.
+    - Invalid textareas must use aria-invalid="true".
+    - Error states must include visible error text.
+    - Error states must not rely on colour alone.
+    - Required or optional status must not rely on colour alone.
+    - Disabled and read-only states must be distinct.
+    - Focus must be visible.
+    - Focus must remain visible when the textarea is in error.
+    - The textarea must support keyboard text entry and navigation.
+    - Do not replace a native textarea with contenteditable.
+    - Do not clear the user's text after validation fails.
+    - Do not prevent users from pasting text without a documented security or content reason.
+
+contentGuidelines:
+  labels:
+    - Use clear, concise labels.
+    - Ask for one thing per Textarea.
+    - Use sentence case.
+    - Prefer a specific label such as "Tell us what happened" over a vague label such as "Details".
+    - Do not include implementation terms such as "field" or "textarea".
+    - Add "(optional)" only when the field is optional.
+
+  helperText:
+    - Explain what information users should include when this is not clear from the label.
+    - Explain how the answer will be used when that helps users respond.
+    - Communicate genuine minimum or maximum length constraints.
+    - Keep helper text short.
+    - Do not repeat the label.
+    - Do not provide a complete model answer that users may copy without understanding.
+    - Do not hide essential instructions in placeholder text.
+    - Do not use helper text for critical validation that only appears after an error.
+
+  errors:
+    - Be specific about what is wrong.
+    - Tell the user how to fix the problem where possible.
+    - Avoid blaming the user.
+    - Do not use technical validation language such as "invalid input".
+    - Prefer "Enter a description" over "This field is required".
+    - Prefer "Enter 500 characters or fewer" over "Maximum length exceeded".
+    - Do not remove or replace the user's entered text.
+
+examples:
+  required:
+    label: Tell us what happened
+    requirement: required
+    helperText: Include the main events in the order they happened.
+    html:
+      rows: 5
+      required: true
+    avoid:
+      - Tell us what happened (required)
+      - Placeholder instructions
+      - A single-line Text Input for a potentially long answer
+
+  optional:
+    label: Additional information (optional)
+    requirement: optional
+    helperText: none
+    html:
+      rows: 5
+      required: false
+    avoid:
+      - Additional information
+      - "Additional information *"
+      - Optional status shown only by colour
+
+  withLimit:
+    label: Short description
+    requirement: required
+    helperText: Enter 500 characters or fewer.
+    html:
+      rows: 5
+      maxlength: 500
+      required: true
+    avoid:
+      - Revealing the limit only after validation fails
+      - An arbitrary limit with no content or system need
+      - Silently truncating submitted content
+
+  error:
+    label: Tell us what happened
+    requirement: required
+    helperText: Include the main events in the order they happened.
+    errorMessage: "Error: Enter a description of what happened"
+    html:
+      rows: 5
+      required: true
+      aria-invalid: true
+      aria-describedby:
+        - incident-hint
+        - incident-error
+    avoid:
+      - Error border with no error text
+      - Error text not associated with the textarea
+      - Clearing the user's entered text
+      - Moving focus while the user is typing
+
+valueBehaviour:
+  filled:
+    description: >
+      A Textarea is considered filled when it contains user-entered, prefilled
+      or saved text. Filled is a content condition, not a separate visual state.
+    rules:
+      - Do not create a separate filled visual state unless the component has a distinct filled treatment.
+      - A filled Textarea must keep the same label position.
+      - Do not move the label into the Textarea.
+      - Do not rely on value text alone to explain what the Textarea is for.
+      - Preserve line breaks in the displayed value.
+      - In Figma, use the editable value text property to show filled examples.
+      - In code, the value is handled by the textarea value, not by a filled class or token.
+
+figmaProperties:
+  state:
+    type: variant
+    values:
+      - default
+      - focus
+      - error
+      - errorFocus
+      - disabled
+      - readonly
+
+  requirement:
+    type: variant
+    values:
+      - required
+      - optional
+
+  helperText:
+    type: boolean
+    values:
+      - true
+      - false
+
+  textProperties:
+    labelText:
+      type: text
+      required: true
+      default: Tell us what happened
+
+    helperTextContent:
+      type: text
+      required: false
+      default: Include the main events in the order they happened.
+
+    errorText:
+      type: text
+      requiredWhen:
+        - state: error
+        - state: errorFocus
+      default: "Error: Enter a description."
+
+    valueText:
+      type: text
+      required: false
+      default: ""
+
+figmaStateRules:
+  - Do not include hover as a Figma component state.
+  - Do not include filled as a Figma component state.
+  - Filled examples are created by adding text to the valueText property.
+  - Error text visibility is driven by state.
+  - State error shows error text.
+  - State errorFocus shows error text.
+  - Non-error states hide error text.
+  - Helper text visibility is controlled by the helperText boolean property.
+  - Label text must remain visible by default.
+  - Optional marker appears when requirement is optional.
+  - Required fields do not show "(required)" by default.
+  - Do not expose width or height as top-level variant axes.
+  - Do not include character count in the initial Figma component.
+
+figmaRules:
+  - Use Auto Layout.
+  - Use the anatomy order of label, helper text, error message and control.
+  - Use semantic form tokens and documented component sizing tokens.
+  - Do not use raw colour, spacing, radius, typography or Textarea block-size values.
+  - Do not create Textareas without visible labels by default.
+  - Do not use placeholder text.
+  - Put "(optional)" directly in the label text when the field is optional.
+  - Do not add "(required)" by default.
+  - Use helper text only when it helps users answer correctly.
+  - Use consistent inline error placement.
+  - Show both error and focus styling for the errorFocus state.
+  - Do not hide the focus ring behind the error border.
+  - Do not use disabled styling for read-only fields.
+  - Do not detach internal parts of the component.
+  - Do not create new visual variants outside the documented state and requirement properties.
+  - Use realistic multi-line example values in the valueText property.
+  - Do not use example value text as placeholder text.
+  - Bind the default Textarea height to component.textarea.blockSize.default.
+  - Set the Textarea minimum height from component.textarea.blockSize.minimum.
+  - Use Fill container for the Textarea width.
+  - Do not add a decorative browser resize handle to the Figma component.
+  - Do not add a character-count property until the character-count pattern is documented.
+
+figmaImplementation:
+  width:
+    status: layout-controlled
+    value: Fill container
+    minimum: none
+    maximum: parent container
+    parentMaximumToken: form.layout.column.maxWidth
+    rules:
+      - Do not expose width as a top-level Figma variant axis.
+      - Set the control to Fill container inside the form-field component.
+      - The main Textarea component should remain horizontally resizable through its parent.
+      - The form layout controls the practical maximum width.
+      - Do not reuse Text Input character-width variants for Textarea.
+
+  height:
+    status: token-controlled-and-resizable
+    defaultToken: component.textarea.blockSize.default
+    minimumToken: component.textarea.blockSize.minimum
+    maximum: none
+    rules:
+      - Do not expose height as a top-level Figma variant axis.
+      - Set the initial control height from component.textarea.blockSize.default.
+      - Set or document component.textarea.blockSize.minimum as the minimum permitted height.
+      - Do not allow instances to be reduced below the minimum height.
+      - Do not define a maximum height.
+      - Keep the control vertically resizable.
+      - Do not detach the component to change its height.
+      - Do not create compact, default or extended height variants.
+
+  resize:
+    codeDefault: "resize: vertical"
+    figmaRepresentation: Vertically resizable component instance
+    rules:
+      - Figma does not reproduce native browser resize-handle behaviour.
+      - Do not add a decorative resize handle as part of the Figma component.
+      - Document vertical resizing as implementation behaviour.
+      - Keep the control within the parent container when manually resized.
+
+implementationRules:
+  html:
+    - Use a textarea element for the control.
+    - Use a label element for the visible label.
+    - Connect the label to the textarea using for and id.
+    - Use the required attribute when the field is required.
+    - Do not use the required attribute when the field is optional.
+    - Use disabled for disabled textareas.
+    - Use readonly for read-only textareas.
+    - Use aria-describedby for helper text and error text.
+    - Use aria-invalid="true" only when the textarea is invalid.
+    - Use rows="5" as the native fallback height.
+    - Use maxlength or minlength only when a genuine constraint exists.
+    - Do not use placeholder text.
+    - Do not use contenteditable as a replacement for a native textarea.
+    - Preserve line breaks and user-entered text.
+
+  css:
+    - Use box-sizing="border-box".
+    - Use inline-size="100%".
+    - Use min-inline-size="0".
+    - Use max-inline-size="100%".
+    - Use component.textarea.blockSize.default for block-size.
+    - Use component.textarea.blockSize.minimum for min-block-size.
+    - Do not set max-block-size on the standard component.
+    - Use resize="vertical".
+    - Ensure the textarea does not overflow its container.
+    - Ensure focus and error styling remains visible after resizing.
+    - Reuse shared semantic form control tokens.
+
+  validation:
+    - Keep validation messages close to the relevant textarea.
+    - Keep inline errors visible when an error summary is present.
+    - Move focus to the error summary after failed submit when there are multiple errors.
+    - Do not move focus while the user is typing.
+    - Preserve user-entered text after validation fails.
+    - Do not reveal known content limits only after submission.
+    - Do not truncate text silently.
+
+aiGenerationRules:
+  - Use the Textarea component only for multi-line plain text entry.
+  - Use Text Input for short single-line answers.
+  - Follow the single-control form field pattern.
+  - Use visible labels by default.
+  - Do not generate a Textarea without an accessible name.
+  - Do not use placeholder text.
+  - Do not use placeholder text as a label.
+  - Do not use placeholder text as helper text.
+  - Do not add "(required)" by default.
+  - Add "(optional)" to the label when the field is optional.
+  - Use helper text only when it helps users answer correctly.
+  - Use aria-describedby when helper text or error text is present.
+  - Use aria-invalid="true" when the textarea is invalid.
+  - Keep inline errors even when an error summary is present.
+  - Use an error summary when more than one field or group has an error.
+  - Do not rely on colour alone for errors, required status, optional status, disabled state or read-only state.
+  - Use disabled and readonly correctly.
+  - Preserve the user's entered text when validation fails.
+  - Fill the available form-field container width by default.
+  - Let the parent form layout control the practical maximum width.
+  - Use component.textarea.blockSize.default for the initial height.
+  - Use component.textarea.blockSize.minimum for the minimum height.
+  - Do not set a maximum height on the standard component.
+  - Use rows="5" only as the native HTML fallback.
+  - Allow vertical resizing by default.
+  - Prevent horizontal resizing by default.
+  - Do not invent width or height variants.
+  - Do not impose arbitrary character limits.
+  - Communicate genuine character limits before the textarea.
+  - Do not generate a live character count until the character-count sub-pattern is documented.
+  - Use documented semantic and component tokens rather than raw values.
+  - Report missing token needs rather than inventing raw values.
+  - Do not invent new Textarea variants outside this specification.

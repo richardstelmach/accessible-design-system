@@ -1,7 +1,7 @@
 component: Text Input
 id: text-input
 version: 0.1.0
-status: draft
+status: active
 
 description: >
   Text Inputs allow users to enter a single line of text or text-like data.

@@ -1,0 +1,19 @@
+{
+"component": {
+    "textarea": {
+        "blockSize": {
+                "minimum": {
+                    "$value": "8rem",
+                    "$type": "dimension",
+                    "$description": "Minimum Textarea block size. Prevents the control from becoming too short to communicate multi-line text entry. At a default 16px root size, 8rem equals 128px."
+                },
+                "default": {
+                    "$value": "10rem",
+                    "$type": "dimension",
+                    "$description": "Default initial Textarea block size. Provides a clear multi-line writing area while allowing vertical resizing. At a default 16px root size, 10rem equals 160px."
+                }
+            }
+        }
+    }
+}
+    
