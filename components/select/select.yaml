@@ -1,0 +1,698 @@
+component: Select
+id: select
+version: 0.1.0
+status: active
+
+description: >
+  Selects allow users to choose one value from a finite list of options.
+  The component uses a native single-selection HTML select element and follows
+  the shared single-control form-field pattern.
+
+purpose:
+  - Allow a user to choose one value from a predefined list.
+  - Reuse the shared form-field anatomy, validation and state model.
+  - Preserve native keyboard, browser and assistive-technology behaviour.
+  - Provide an unanswered state without preselecting a valid answer for questions.
+
+relatedDocumentation:
+  - patterns/forms/form-field-patterns.yaml
+  - patterns/forms/single-control-pattern.md
+  - patterns/forms/labels.md
+  - patterns/forms/helper-text.md
+  - patterns/forms/required-and-optional.md
+  - patterns/forms/validation-and-errors.md
+  - patterns/forms/focus-management.md
+  - patterns/forms/tokens.md
+  - patterns/form-layout.yaml
+  - components/text-input/text-input.yaml
+  - components/textarea/textarea.yaml
+
+scope:
+  includes:
+    - Native single-selection select controls
+    - Required and optional selects
+    - Helper text and inline errors
+    - Disabled selects
+    - Empty prompt options
+    - Saved selected values
+    - Settings with a genuine default
+    - Native disabled options and option groups
+  excludes:
+    - Multiple selection
+    - Select elements with size greater than one
+    - Custom listboxes or comboboxes
+    - Searchable selects or autocomplete
+    - Option creation or rich option content
+    - Read-only select state
+    - Open-menu visual specification
+
+principles:
+  - A Select is a single-control form field.
+  - Use a native select element.
+  - Prefer a Radio group when a small set of options can be displayed clearly.
+  - Do not preselect a valid answer when asking a question.
+  - Use an empty-value prompt option for the unanswered state.
+  - The prompt is not placeholder text and must not replace the label.
+  - Every Select must have a visible, programmatically associated label.
+  - Enabled Selects must be reachable and operable using a keyboard alone.
+  - Keyboard focus must be visible.
+  - Error states must include visible text and must not rely on colour alone.
+  - Native Select does not support a read-only state.
+  - Prompt and selected values are content conditions, not visual states.
+  - The opened option menu is controlled by the browser and operating system.
+
+pattern:
+  type: single-control
+  anatomy:
+    - label
+    - helperText
+    - errorMessage
+    - control
+  order:
+    - label
+    - helperText
+    - errorMessage
+    - control
+  requiredImplementation:
+    accessibleName: true
+    visibleLabelDefault: true
+    labelAssociation: true
+    sequentialFocusNavigation: true
+    keyboardOperable: true
+    visibleFocus: true
+    describedByForHelper: true
+    describedByForError: true
+    ariaInvalidWhenInvalid: true
+    nativeNameRoleValue: true
+
+anatomy:
+  root:
+    layout: vertical-stack
+    rules:
+      - Use Auto Layout in Figma.
+      - Do not place unrelated content between field parts.
+      - Do not use raw spacing values.
+
+  label:
+    element: label
+    required: true
+    tokens:
+      typography: form.label.typography
+      color: form.label.color
+    rules:
+      - Associate the label using matching for and id values.
+      - The accessible name must include the visible label text.
+      - Do not use the prompt option as the label.
+      - Do not use aria-label when a visible label can be used.
+      - Add "(optional)" when the field is optional.
+      - Do not add "(required)" by default.
+      - Keep the label visible after selection.
+
+  helperText:
+    required: false
+    tokens:
+      typography: form.helper.typography
+      color: form.helper.color
+    rules:
+      - Use helper text only when it helps users choose correctly.
+      - Place it between the label and the Select.
+      - Associate it using aria-describedby.
+      - Do not repeat or replace the label.
+
+  errorMessage:
+    requiredWhenInvalid: true
+    tokens:
+      typography: form.error.typography
+      color: form.error.color
+      background: form.error.background
+    rules:
+      - Show the error close to the Select.
+      - Explain what went wrong and how to fix it where possible.
+      - Associate it using aria-describedby.
+      - Keep it visible when an error summary is present.
+      - Preserve the prompt or selected value.
+
+  control:
+    element: select
+    multiple: false
+    size: 1
+    tokens:
+      background: form.control.background
+      foreground: form.control.foreground
+      borderColor: form.control.border.color
+      borderWidth: form.control.border.width
+      borderRadius: form.control.border.radius
+      paddingBlock: form.control.padding.block
+      paddingInline: form.control.padding.inline
+      typography: form.control.typography
+      minBlockSize: size.control.minBlockSize.default
+    rules:
+      - Use a native select element.
+      - Give the Select an id and name.
+      - Keep enabled Selects in the sequential focus order.
+      - Do not set tabindex to -1 on an enabled Select.
+      - Do not use a positive tabindex value.
+      - Do not suppress native keyboard operation.
+      - Do not remove the visible focus indicator.
+      - Do not replace the native Select with a custom control.
+      - Do not set multiple or size greater than one.
+
+  valueText:
+    rules:
+      - Use normal control typography for prompt and selected values.
+      - Do not style the prompt as low-contrast placeholder text.
+      - Do not create prompt, selected or filled visual variants.
+      - Prevent long values from overlapping the indicator.
+
+  indicator:
+    semanticRole: decorative
+    tokens:
+      size: size.icon.md
+      color: form.control.foreground
+    rules:
+      - The indicator must not receive focus or have an accessible name.
+      - It must not intercept pointer interaction.
+      - Do not add a separate button for it.
+      - If replacing the native indicator, retain the native select element.
+      - Keep it perceivable in forced-colour and high-contrast modes.
+
+requiredAndOptional:
+  defaultAssumption: requiredUnlessMarkedOptional
+
+  required:
+    labelSuffix: none
+    requiredAttribute: true
+    rules:
+      - Use the required attribute.
+      - Use an empty-value prompt when there is no saved answer.
+      - Do not preselect a valid answer for a question.
+
+  optional:
+    labelSuffix: "(optional)"
+    requiredAttribute: false
+    rules:
+      - Include "(optional)" in the visible label.
+      - Include an empty option so users can retain or return to no selection.
+      - Use "No selection" unless context requires clearer wording.
+
+promptOption:
+  requiredSelect:
+    textPattern: "Select {option type}"
+    value: ""
+    selectedWhenNoSavedValue: true
+  optionalSelect:
+    textDefault: No selection
+    value: ""
+    selectedWhenNoSavedValue: true
+  rules:
+    - The prompt must be the first direct option in a required Select.
+    - The prompt value must be an empty string.
+    - Do not use artificial values such as prompt, choose, select or none.
+    - Do not disable or hide the prompt.
+    - Keep it available so users can return to the unanswered state.
+    - Do not use it as the visible label.
+    - Prefer context-specific wording such as "Select a country".
+
+preselection:
+  question:
+    validOptionPreselected: false
+  savedValue:
+    validOptionPreselected: true
+  setting:
+    validOptionPreselected: allowed
+    rules:
+      - Allow a valid default only for an existing setting or genuine system default.
+      - Document the default intentionally.
+
+options:
+  rules:
+    - Give every real option a non-empty stable value.
+    - Reserve the empty value for the unanswered or no-selection option.
+    - Use concise, distinct, sentence-case labels.
+    - Use a predictable logical, alphabetical, chronological or numerical order.
+    - Do not put instructions or validation messages inside option labels.
+
+  disabledOptions:
+    supported: true
+    rules:
+      - Use rarely.
+      - Do not disable the prompt.
+      - Do not rely on colour alone to communicate unavailability.
+
+  optionGroups:
+    supported: true
+    element: optgroup
+    rules:
+      - Use only when genuine categories improve navigation.
+      - Give every group a label.
+      - Do not use groups to compensate for a poorly organised list.
+
+states:
+  default:
+    rules:
+      - Show either the prompt or current selected value.
+      - Make the Select clearly identifiable as interactive.
+
+  focus:
+    tokens:
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+    rules:
+      - Show a visible focus indicator for as long as the Select has focus.
+      - Keep focus visible when the Select is invalid.
+      - Do not remove the native indicator unless replacing it accessibly.
+
+  error:
+    tokens:
+      borderColor: form.state.error.border
+    rules:
+      - Show a visible inline error.
+      - Set aria-invalid to true.
+      - Associate the error using aria-describedby.
+      - Preserve the current value.
+
+  errorFocus:
+    rules:
+      - Show both error and focus treatments.
+      - Do not allow either treatment to hide the other.
+
+  disabled:
+    tokens:
+      background: form.state.disabled.background
+      foreground: form.state.disabled.foreground
+      borderColor: form.state.disabled.border
+    rules:
+      - Use the disabled attribute.
+      - Keep the label and displayed value readable.
+      - Do not rely on opacity alone.
+      - Disabled Selects must not receive keyboard focus.
+      - Disabled Selects are not submitted.
+
+unsupportedStates:
+  readonly:
+    supported: false
+    reason: Native HTML select does not support readonly.
+    rules:
+      - Do not create a read-only Select variant.
+      - Display an unchangeable value as static text instead.
+
+  open:
+    supportedAsComponentState: false
+    reason: The popup is controlled by the browser and operating system.
+
+  prompt:
+    supportedAsVisualState: false
+
+  selected:
+    supportedAsVisualState: false
+
+  filled:
+    supportedAsVisualState: false
+
+keyboardInteraction:
+  requirement: fully-keyboard-operable
+  nativeBehaviourRequired: true
+
+  sequentialFocus:
+    - Tab reaches an enabled Select in logical document order.
+    - Shift+Tab reaches the preceding focusable element.
+    - Tab moves to the next focusable element.
+    - Disabled Selects are skipped.
+
+  operation:
+    - A keyboard-only user must be able to inspect and select an option.
+    - Preserve native arrow-key navigation.
+    - Preserve character-key navigation where the platform supports it.
+    - Preserve native Enter, Space and Escape behaviour.
+    - Do not require pointer input for any Select function.
+    - Do not require timed keystrokes.
+    - Do not add custom key handlers that conflict with native behaviour.
+    - Do not trap keyboard focus.
+
+  testing:
+    - Reach the Select using Tab without a pointer.
+    - Confirm a visible focus indicator appears.
+    - Change the selected option using the keyboard alone.
+    - Confirm the chosen value is exposed and submitted.
+    - Move focus away using Tab and Shift+Tab.
+    - Confirm no keyboard trap occurs.
+    - Confirm disabled Selects are not focusable.
+
+focusManagement:
+  rules:
+    - Keep the Select in the natural document focus order.
+    - Do not use positive tabindex values.
+    - Do not set tabindex to -1 on an enabled Select.
+    - Do not move focus when the selected option changes.
+    - Do not move focus while users navigate options.
+    - Error-summary links should move focus to the relevant Select.
+    - Do not allow author-created content to obscure the focused Select completely.
+
+accessibleName:
+  required: true
+  preferredMethod: visible-label
+  implementation:
+    - label.for equals select.id
+  rules:
+    - The visible label must provide the accessible name.
+    - The accessible name must include the visible label text.
+    - The prompt must not be the only accessible name.
+    - Do not duplicate the name using both label and aria-label.
+    - Keep optional wording in the visible label.
+
+accessibleDescription:
+  helperText:
+    method: aria-describedby
+  errorText:
+    method: aria-describedby
+  rules:
+    - Include the helper id when helper text is present.
+    - Include the error id when an error is present.
+    - Include both ids when both are present.
+    - Do not associate unrelated text.
+
+semantics:
+  implementation: native-html
+  rules:
+    - Do not add an explicit role to the select element.
+    - Expose the selected value programmatically.
+    - Expose required, disabled and invalid states programmatically.
+    - Use aria-invalid only while invalid.
+    - Do not add ARIA that duplicates or conflicts with native HTML.
+
+validation:
+  requiredEmptyState:
+    invalidWhen:
+      - The Select has the required attribute.
+      - The selected option has an empty value.
+    rules:
+      - Do not treat the prompt as a valid answer.
+      - Do not give the prompt a non-empty artificial value.
+
+  inlineErrors:
+    rules:
+      - Show the error close to the Select.
+      - Use specific plain language.
+      - Keep inline errors when an error summary is present.
+      - Preserve the current selected value.
+      - Do not move focus while users choose an option.
+
+attributes:
+  select:
+    supported:
+      - id
+      - name
+      - required
+      - disabled
+      - autocomplete
+      - form
+      - aria-describedby
+      - aria-invalid
+    excluded:
+      - multiple
+      - size greater than 1
+      - readonly
+
+  option:
+    supported:
+      - value
+      - selected
+      - disabled
+      - label
+
+  optgroup:
+    supported:
+      - label
+      - disabled
+
+sizing:
+  width:
+    ownership: parent-layout
+    default: fill-container
+    parentMaximumToken: form.layout.column.maxWidth
+    css:
+      inlineSize: 100%
+      minInlineSize: 0
+      maxInlineSize: 100%
+    rules:
+      - Do not create width variants.
+      - Do not allow text to overlap the indicator.
+      - Do not allow the control to overflow its container.
+
+  height:
+    ownership: shared-control
+    minimumToken: size.control.minBlockSize.default
+    rules:
+      - Align with Text Input and other single-line controls.
+      - Do not create Select-specific height variants.
+
+openedMenu:
+  ownership: browser-and-operating-system
+  componentState: false
+  figmaVariant: false
+  rules:
+    - Do not define popup dimensions, placement, shadows or animation.
+    - Do not define option hover or selected styling inside the popup.
+    - Documentation illustrations must be labelled platform dependent.
+
+tokens:
+  label:
+    typography: form.label.typography
+    color: form.label.color
+
+  helper:
+    typography: form.helper.typography
+    color: form.helper.color
+
+  error:
+    typography: form.error.typography
+    color: form.error.color
+    background: form.error.background
+
+  control:
+    background: form.control.background
+    foreground: form.control.foreground
+    typography: form.control.typography
+    borderColor: form.control.border.color
+    borderWidth: form.control.border.width
+    borderRadius: form.control.border.radius
+    paddingBlock: form.control.padding.block
+    paddingInline: form.control.padding.inline
+    minBlockSize: size.control.minBlockSize.default
+
+  indicator:
+    size: size.icon.md
+    gap: spacing.control.gap
+    color: form.control.foreground
+
+  states:
+    focusRing: form.state.focus.ring
+    focusSeparator: form.state.focus.separator
+    errorBorder: form.state.error.border
+    disabledBackground: form.state.disabled.background
+    disabledForeground: form.state.disabled.foreground
+    disabledBorder: form.state.disabled.border
+
+tokenDecision:
+  newSelectSpecificTokensRequired: false
+  rules:
+    - Reuse shared form, sizing, spacing and icon tokens.
+    - Report a token gap rather than introducing a raw value.
+
+accessibility:
+  conformanceTarget: WCAG 2.2 AA
+
+  wcag:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: The label, helper text and error text must be programmatically associated.
+
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Error and disabled states must not rely on colour alone.
+
+    - id: WCAG 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Label, helper, error, prompt and selected-value text need sufficient contrast.
+
+    - id: WCAG 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: The control boundary and focus indicator need sufficient contrast.
+
+    - id: WCAG 2.1.1
+      name: Keyboard
+      level: A
+      relevance: The Select and all selection functionality must work with a keyboard alone.
+
+    - id: WCAG 2.1.2
+      name: No Keyboard Trap
+      level: A
+      relevance: Keyboard focus must enter and leave normally.
+
+    - id: WCAG 2.4.3
+      name: Focus Order
+      level: A
+      relevance: The Select must appear in a logical focus order.
+
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: A visible focus indicator must be shown while focused.
+
+    - id: WCAG 2.4.11
+      name: Focus Not Obscured Minimum
+      level: AA
+      relevance: Author-created content must not entirely hide the focused Select.
+
+    - id: WCAG 2.5.3
+      name: Label in Name
+      level: A
+      relevance: The accessible name must include the visible label text.
+
+    - id: WCAG 2.5.8
+      name: Target Size Minimum
+      level: AA
+      relevance: The closed Select should meet the shared minimum control size.
+
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: Selection errors must be identified in visible text.
+
+    - id: WCAG 3.3.2
+      name: Labels or Instructions
+      level: A
+      relevance: The Select must have a visible label and instructions where needed.
+
+    - id: WCAG 3.3.3
+      name: Error Suggestion
+      level: AA
+      relevance: Errors should explain how to correct the selection.
+
+    - id: WCAG 4.1.2
+      name: Name, Role, Value
+      level: A
+      relevance: The name, native role, selected value and states must be exposed.
+
+figmaProperties:
+  state:
+    type: variant
+    values:
+      - default
+      - focus
+      - error
+      - errorFocus
+      - disabled
+
+  requirement:
+    type: variant
+    values:
+      - required
+      - optional
+
+  helperText:
+    type: boolean
+    values:
+      - true
+      - false
+
+  textProperties:
+    labelText:
+      type: text
+      default: Country
+
+    helperTextContent:
+      type: text
+      default: Select the country where you currently live.
+
+    errorText:
+      type: text
+      default: "Error: Select a country"
+
+    valueText:
+      type: text
+      default: Select a country
+
+figmaStateRules:
+  - Do not include hover, open, selected, prompt, filled or readonly states.
+  - Use valueText for prompt and selected examples.
+  - Show error text only for error and errorFocus.
+  - Control helper text with the helperText Boolean property.
+  - Add "(optional)" only for the optional requirement.
+
+figmaStructure:
+  root: Select field
+  children:
+    - Label
+    - Helper text
+    - Error message
+    - Select control
+  controlChildren:
+    - Value text
+    - Dropdown indicator
+
+figmaRules:
+  - Use Auto Layout.
+  - Set the field wrapper to Fill container and Hug contents.
+  - Set the Select control to Fill container.
+  - Apply size.control.minBlockSize.default.
+  - Reuse shared semantic tokens.
+  - Do not use raw visual values.
+  - Do not model the opened popup.
+  - Do not create width, height or read-only variants.
+  - Keep the indicator decorative.
+  - Show error and focus together for errorFocus.
+
+qa:
+  examples:
+    - Required prompt
+    - Required selected value
+    - Optional no selection
+    - Optional selected value
+    - With helper text
+    - Error
+    - Error focus
+    - Disabled
+    - Saved value
+    - Setting with default
+    - Long selected value
+    - Narrow container
+
+  keyboardChecks:
+    - Tab reaches an enabled Select.
+    - Focus is visibly indicated.
+    - Options can be selected without a pointer.
+    - Tab and Shift+Tab move focus away normally.
+    - No keyboard trap occurs.
+    - Disabled Selects are skipped.
+
+  screenReaderChecks:
+    - The visible label is announced as the name.
+    - Required, disabled and invalid states are announced when present.
+    - Helper and error text are available as descriptions.
+    - The current selected value is announced.
+    - The prompt is not the only accessible name.
+
+acceptanceCriteria:
+  - The component uses a native single-selection select element.
+  - Every enabled Select is in the logical sequential focus order.
+  - Every Select can be completed using a keyboard alone.
+  - Keyboard focus is clearly visible.
+  - Every Select has a visible, associated label.
+  - The accessible name includes the visible label text.
+  - Helper and error text are programmatically associated.
+  - The selected value and states are exposed to assistive technologies.
+  - Required questions begin with an empty-value prompt.
+  - No valid answer is preselected for a question without a saved value.
+  - Optional Selects provide a no-selection option.
+  - The component has no read-only or open-menu variant.
+  - Prompt and selected values are content conditions, not visual variants.
+  - Width is Fill container and controlled by the parent layout.
+  - Shared form, sizing, spacing and icon tokens are reused.
+  - The dropdown indicator is decorative.
+  - Error focus shows both error and focus treatments.
+  - The YAML, Markdown, Figma component and implementation guidance agree.
