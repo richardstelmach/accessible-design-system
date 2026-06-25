@@ -1,0 +1,131 @@
+pattern: Component documentation page
+
+status: active
+visibility: internal
+usageScope: figma-component-documentation
+
+description: >
+  Defines the repeatable Figma page composition for documenting a design system
+  component. This pattern composes existing page, header, card and card-grid
+  patterns rather than redefining their anatomy, dimensions or token values.
+
+sourceOfTruth:
+  primary: component machine-readable contract
+  sharedPatterns:
+    - patterns/page-layout.yaml
+    - patterns/documentation-page.yaml
+    - patterns/card-grid.yaml
+    - components/internal/documentation-page-header.yaml
+    - components/internal/documentation-card.yaml
+  primaryFigmaReference: "10 - Components - Select"
+  secondaryFigmaReference: "09 Components - Textarea"
+
+pageNaming:
+  pattern: "{number} - Components - {componentName}"
+  examples:
+    - "10 - Components - Select"
+  rules:
+    - Use a two-digit page number that follows the existing component page order.
+    - Use "Components" as the page category.
+    - Use the public component name from the component contract.
+    - Do not create a generic forms or component group page unless the contract explicitly requires it.
+    - Do not rename existing pages unless the task explicitly asks for migration.
+
+sourcePrecedence:
+  order:
+    - component YAML contract
+    - shared machine-readable patterns and token contracts
+    - component Markdown documentation
+    - existing Figma implementation references
+    - generation prompt
+  rules:
+    - Treat the live component YAML as canonical for component API, anatomy, states and QA examples.
+    - Use shared patterns for page layout, header, card and grid composition.
+    - If Figma and GitHub disagree, report the discrepancy before inventing a new pattern.
+
+composes:
+  pageLayout: patterns/page-layout.yaml
+  documentationPage: patterns/documentation-page.yaml
+  cardGrid: patterns/card-grid.yaml
+  pageHeader: components/internal/documentation-page-header.yaml
+  documentationCard: components/internal/documentation-card.yaml
+
+figmaStructure:
+  requiredTopLevelAreas:
+    - name: "01 - Component set"
+      purpose: Production component masters and component set.
+    - name: "02 - Documentation examples"
+      purpose: Contract-defined usage examples and guidance.
+    - name: "03 - QA and responsive tests"
+      purpose: Contract-defined QA, wrapping, resizing and responsive checks.
+    - name: "04 - Accessibility notes"
+      purpose: Component-specific accessibility guidance.
+
+  areaRules:
+    - Each area should use the shared documentation page template structure.
+    - Each area should use a Page container from the shared page layout pattern.
+    - Each area should use _Documentation/Page Header.
+    - Component page headers use the eyebrow text "Components".
+    - Component masters, documentation examples, QA tests and accessibility notes must remain separated.
+    - Production component sets must not be mixed into documentation card grids or QA-only frames.
+    - Documentation and QA examples should be component instances, not extra master variants.
+
+componentSetArea:
+  rules:
+    - Create or reuse the component set named exactly as the component contract.
+    - Build the production component API before documentation examples.
+    - Do not add undocumented variants, states or properties.
+    - Keep QA-only stress cases outside the production component set.
+
+documentationExamplesArea:
+  rules:
+    - Use examples defined by the component contract where available.
+    - Use _Documentation/Card instances for repeated short summaries or paired sample guidance.
+    - Use the established wrapping documentation-card grid on desktop.
+    - Do not create one-off card frames when _Documentation/Card exists.
+    - Use prose sections for long guidance rather than forcing long content into cards.
+
+qaAndResponsiveArea:
+  rules:
+    - Use QA examples defined by the component contract.
+    - Include responsive, wrapping, overflow and long-content checks where relevant.
+    - Keep QA examples separate from production masters.
+    - Use component instances for QA examples.
+    - Report missing contract-defined QA examples rather than inventing undocumented requirements.
+
+accessibilityArea:
+  rules:
+    - Use _Documentation/Card instances for short accessibility notes.
+    - Arrange repeated notes in the established wrapping card grid.
+    - Include only component-relevant accessibility guidance from the contract and shared patterns.
+    - Do not place accessibility notes inside production component masters.
+
+aiGenerationWorkflow:
+  - Read the live main branch component YAML and Markdown before editing Figma.
+  - Read the shared page, documentation page, card grid, page header and card contracts.
+  - Inspect the Figma template page and the nearest completed component page.
+  - Locate existing variables, text styles, icons and internal documentation components.
+  - Create or reuse the numbered component page.
+  - Build or update the production component set first.
+  - Add documentation examples as instances.
+  - Add QA and responsive tests as instances.
+  - Add accessibility notes using Documentation Card instances.
+  - Verify page structure, component API, card usage, overflow, token bindings and source alignment.
+  - Report gaps, limitations and any source/Figma discrepancies.
+
+acceptanceCriteria:
+  - The page follows the numbered component-page naming pattern.
+  - The page contains the four required top-level areas.
+  - Each area uses the shared documentation page template structure.
+  - Each area uses _Documentation/Page Header.
+  - The component page eyebrow is "Components".
+  - Documentation cards are _Documentation/Card instances.
+  - Repeated cards use the established wrapping documentation-card grid.
+  - Production component masters are separate from documentation and QA examples.
+  - Documentation and QA examples use component instances.
+  - QA examples come from the component contract where defined.
+  - Accessibility guidance is present and component-specific.
+  - No duplicate production variants are created for documentation-only examples.
+  - No raw layout, card, header or token values are introduced where shared patterns apply.
+  - Frames expand or wrap so visible content does not overflow its container.
+  - Any missing Figma variables, styles, icons or component gaps are reported.
