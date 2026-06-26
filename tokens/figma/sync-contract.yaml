@@ -1,0 +1,155 @@
+schemaVersion: "1.0"
+id: figma-token-sync
+status: active
+
+purpose: >-
+  Define the machine-readable contract for compiling design tokens, syncing
+  ordinary tokens through Tokens Studio, and maintaining responsive Figma
+  variables through the manual Breakpoint collection.
+
+sourceOfTruth:
+  system: github
+  repository: richardstelmach/accessible-design-system
+  canonicalSourceFolders:
+    - tokens/primitives/
+    - tokens/semantic/
+    - tokens/components/
+    - tokens/themes/
+  compiledFilesAreEditable: false
+
+build:
+  command: node scripts/build-tokens.mjs
+  breakpointMapping: tokens/figma/breakpoint-mapping.json
+
+outputs:
+  canonical:
+    path: tokens/compiled/tokens.raw.json
+    purpose:
+      - development
+      - documentation
+      - validation
+      - ai-consumption
+    tokenSetWrapper: false
+    mappedResponsiveTokens: retained
+
+  tokensStudio:
+    path: tokens/compiled/tokens.studio.json
+    purpose:
+      - tokens-studio-sync
+      - figma-global-collection
+    tokenSetWrapper: global
+    mappedResponsiveTokens: excluded
+    exclusionSource: tokens/figma/breakpoint-mapping.json
+    retainedAliasesMustResolve: true
+
+figma:
+  collections:
+    global:
+      managedBy: tokens-studio
+      contains: ordinary-non-responsive-tokens
+
+    Breakpoint:
+      managedBy: manual
+      sourceOfTruth: github
+      mapping: tokens/figma/breakpoint-mapping.json
+      modes:
+        - base
+        - md
+        - lg
+      contains: mapped-responsive-tokens
+
+  productionRules:
+    semanticTextStylesUseBreakpointSuffixes: false
+    componentsUseBreakpointVariantsForTokenChanges: false
+    responsiveValuesInheritFromParentFrameMode: true
+    fixedSpacingUsesResponsiveLayoutTokensOnlyWhenResponsive: false
+
+tokensStudio:
+  provider: github
+  branch: main
+  storageFile: tokens/compiled/tokens.studio.json
+  direction: pull-only
+  tokenSets:
+    - global
+
+  routineExport:
+    destructive: false
+    variables:
+      color: true
+      string: true
+      number: true
+      boolean: true
+    styles:
+      color: false
+      typography: true
+      effects: true
+      gradients: true
+    options:
+      ignoreFirstPartOfTokenNameForStyles: false
+      prefixStylesWithActiveThemeName: false
+      createStylesWithVariableReferences: false
+      updateExistingStyleAndVariableNames: true
+      removeItemsWithoutTokenConnection: false
+
+  destructiveExport:
+    allowedFor:
+      - intentional-token-deletion
+      - intentional-token-renaming
+      - figma-reconciliation
+    options:
+      removeItemsWithoutTokenConnection: true
+    prerequisites:
+      - figma-backup
+      - duplicate-file-test
+      - active-binding-migration
+      - zero-stale-reference-audit
+      - named-figma-version
+    requiredFollowUp:
+      - post-export-audit
+      - rollback-on-damage
+
+workflows:
+  nonResponsiveTokenChange:
+    - edit-source-json
+    - run-build
+    - review-raw-output
+    - review-tokens-studio-output
+    - commit-and-push
+    - pull-in-tokens-studio
+    - run-routine-export
+    - validate-in-figma
+
+  responsiveTokenChange:
+    - edit-base-md-lg-source-branches
+    - update-breakpoint-mapping
+    - run-build
+    - confirm-responsive-branches-in-raw-output
+    - confirm-mapped-branches-absent-from-tokens-studio-output
+    - commit-and-push
+    - update-figma-breakpoint-variable-manually
+    - validate-base-md-lg-modes
+
+  tokenDeletionOrRename:
+    - identify-figma-consumers
+    - migrate-active-bindings
+    - confirm-zero-stale-references
+    - test-in-duplicate-figma-file
+    - create-named-production-version
+    - run-destructive-export
+    - run-post-export-audit
+
+validation:
+  invariants:
+    - tokens.raw.json retains mapped responsive tokens
+    - tokens.studio.json contains one global token set
+    - tokens.studio.json excludes mapped responsive tokens
+    - retained aliases resolve
+    - Breakpoint collection uses base, md and lg modes
+    - active Figma bindings do not reference deleted variables
+    - production semantic text styles do not use breakpoint suffixes
+
+references:
+  humanWorkflow: docs/token-sync-workflow.md
+  responsiveMapping: tokens/figma/breakpoint-mapping.json
+  architectureSummary: README.md
+  notionDecision: https://app.notion.com/p/382e6c123db38154abd7ec7bad18ec74

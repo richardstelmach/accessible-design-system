@@ -55,6 +55,12 @@ Responsive mappings between GitHub and Figma live in:
 tokens/figma/breakpoint-mapping.json
 ```
 
+Machine-readable token sync rules live in:
+
+```text
+tokens/figma/sync-contract.yaml
+```
+
 Do not manually edit compiled token files.
 
 Do not treat Figma variables as the canonical source of token decisions.
