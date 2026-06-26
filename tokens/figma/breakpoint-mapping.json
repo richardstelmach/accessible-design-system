@@ -299,17 +299,20 @@
       "type": "fontSize",
       "modes": {
         "base": {
-          "source": "form.control.typography.base.$value.fontSize",
+          "source": "form.control.typography.base",
+          "resolvedSource": "typography.body.default.base.$value.fontSize",
           "alias": "typography.size.md",
           "rawValuePx": 16
         },
         "md": {
-          "source": "form.control.typography.md.$value.fontSize",
+          "source": "form.control.typography.md",
+          "resolvedSource": "typography.body.default.md.$value.fontSize",
           "alias": "typography.size.md",
           "rawValuePx": 16
         },
         "lg": {
-          "source": "form.control.typography.lg.$value.fontSize",
+          "source": "form.control.typography.lg",
+          "resolvedSource": "typography.body.default.lg.$value.fontSize",
           "alias": "typography.size.lg",
           "rawValuePx": 18
         }
@@ -320,17 +323,20 @@
       "type": "fontSize",
       "modes": {
         "base": {
-          "source": "form.helper.typography.base.$value.fontSize",
+          "source": "form.helper.typography.base",
+          "resolvedSource": "typography.body.small.base.$value.fontSize",
           "alias": "typography.size.sm",
           "rawValuePx": 14
         },
         "md": {
-          "source": "form.helper.typography.md.$value.fontSize",
+          "source": "form.helper.typography.md",
+          "resolvedSource": "typography.body.small.md.$value.fontSize",
           "alias": "typography.size.sm",
           "rawValuePx": 14
         },
         "lg": {
-          "source": "form.helper.typography.lg.$value.fontSize",
+          "source": "form.helper.typography.lg",
+          "resolvedSource": "typography.body.small.lg.$value.fontSize",
           "alias": "typography.size.md",
           "rawValuePx": 16
         }
@@ -341,17 +347,20 @@
       "type": "fontSize",
       "modes": {
         "base": {
-          "source": "form.error.typography.base.$value.fontSize",
+          "source": "form.error.typography.base",
+          "resolvedSource": "typography.body.default.base.$value.fontSize",
           "alias": "typography.size.md",
           "rawValuePx": 16
         },
         "md": {
-          "source": "form.error.typography.md.$value.fontSize",
+          "source": "form.error.typography.md",
+          "resolvedSource": "typography.body.default.md.$value.fontSize",
           "alias": "typography.size.md",
           "rawValuePx": 16
         },
         "lg": {
-          "source": "form.error.typography.lg.$value.fontSize",
+          "source": "form.error.typography.lg",
+          "resolvedSource": "typography.body.default.lg.$value.fontSize",
           "alias": "typography.size.lg",
           "rawValuePx": 18
         }

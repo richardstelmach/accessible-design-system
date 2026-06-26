@@ -843,23 +843,6 @@
           "$type": "spacing",
           "$description": "Default internal gap between elements inside an interactive control, such as icon and label."
         }
-      },
-      "section": {
-        "base": {
-          "$value": "{spacing.12}",
-          "$type": "spacing",
-          "$description": "Base vertical spacing between major page sections."
-        },
-        "md": {
-          "$value": "{spacing.16}",
-          "$type": "spacing",
-          "$description": "Medium breakpoint vertical spacing between major page sections."
-        },
-        "lg": {
-          "$value": "{spacing.20}",
-          "$type": "spacing",
-          "$description": "Large breakpoint vertical spacing between major page sections."
-        }
       }
     },
     "typography": {
@@ -957,301 +940,6 @@
           "$type": "letterSpacing"
         }
       },
-      "heading": {
-        "h1": {
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.bold}",
-              "fontSize": "{typography.size.3xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.tight}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.bold}",
-              "fontSize": "{typography.size.4xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.tight}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.bold}",
-              "fontSize": "{typography.size.5xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.tight}"
-            }
-          }
-        },
-        "h2": {
-          "$description": "Visual style for H2-level section headings at the selected breakpoint. Use for direct sections under a page title by default. Heading semantics should follow document structure and should not be chosen only by visual size.",
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.bold}",
-              "fontSize": "{typography.size.2xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.tight}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.bold}",
-              "fontSize": "{typography.size.3xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.tight}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.bold}",
-              "fontSize": "{typography.size.4xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.tight}"
-            }
-          }
-        },
-        "h3": {
-          "$description": "Visual style for H3-level subsection headings at the selected breakpoint. Use for grouped examples or subsections nested inside an H2 section.",
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.2xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.tight}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.3xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.tight}"
-            }
-          }
-        },
-        "h4": {
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.lg}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.2xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          }
-        },
-        "h5": {
-          "$description": "Visual style for smaller headings such as card titles or compact nested headings at the selected breakpoint. Do not use as a substitute for H2 or H3 when the content is structurally a main section or subsection.",
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.lg}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.xl}",
-              "lineHeight": "{typography.lineHeight.tight}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          }
-        },
-        "h6": {
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.semibold}",
-              "fontSize": "{typography.size.lg}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          }
-        }
-      },
-      "body": {
-        "small": {
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.sm}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.sm}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          }
-        },
-        "default": {
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.lg}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          }
-        },
-        "large": {
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.lg}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.xl}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.regular}",
-              "fontSize": "{typography.size.xl}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            }
-          }
-        }
-      },
       "label": {
         "default": {
           "$type": "typography",
@@ -1292,41 +980,6 @@
         }
       },
       "label": {
-        "typography": {
-          "base": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.medium}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            },
-            "$description": "Base typography for labels used by individual form controls. Form labels use body-sized text because labels are primary task content."
-          },
-          "md": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.medium}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            },
-            "$description": "Medium breakpoint typography for labels used by individual form controls."
-          },
-          "lg": {
-            "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.medium}",
-              "fontSize": "{typography.size.lg}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            },
-            "$description": "Large breakpoint typography for labels used by individual form controls."
-          }
-        },
         "color": {
           "$value": "{color.text.default}",
           "$type": "color",
@@ -1335,75 +988,6 @@
       },
       "legend": {
         "typography": {
-          "default": {
-            "base": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.md}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              },
-              "$description": "Base typography for legends used by standard grouped form controls."
-            },
-            "md": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.md}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              },
-              "$description": "Medium breakpoint typography for legends used by standard grouped form controls."
-            },
-            "lg": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.lg}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              },
-              "$description": "Large breakpoint typography for legends used by standard grouped form controls."
-            }
-          },
-          "section": {
-            "base": {
-              "$value": "{typography.heading.h3.base}",
-              "$type": "typography",
-              "$description": "Legend typography for a grouped form question inside a larger H2-level section."
-            },
-            "md": {
-              "$value": "{typography.heading.h3.md}",
-              "$type": "typography",
-              "$description": "Medium breakpoint legend typography for a grouped form question inside a larger H2-level section."
-            },
-            "lg": {
-              "$value": "{typography.heading.h3.lg}",
-              "$type": "typography",
-              "$description": "Large breakpoint legend typography for a grouped form question inside a larger H2-level section."
-            }
-          },
-          "subsection": {
-            "base": {
-              "$value": "{typography.heading.h4.base}",
-              "$type": "typography",
-              "$description": "Legend typography for a grouped form question inside a larger H3-level subsection."
-            },
-            "md": {
-              "$value": "{typography.heading.h4.md}",
-              "$type": "typography",
-              "$description": "Medium breakpoint legend typography for a grouped form question inside a larger H3-level subsection."
-            },
-            "lg": {
-              "$value": "{typography.heading.h4.lg}",
-              "$type": "typography",
-              "$description": "Large breakpoint legend typography for a grouped form question inside a larger H3-level subsection."
-            }
-          },
           "compact": {
             "$value": "{typography.label.default}",
             "$type": "typography",
@@ -1417,20 +1001,6 @@
         }
       },
       "helper": {
-        "typography": {
-          "base": {
-            "$value": "{typography.body.small.base}",
-            "$type": "typography"
-          },
-          "md": {
-            "$value": "{typography.body.small.md}",
-            "$type": "typography"
-          },
-          "lg": {
-            "$value": "{typography.body.small.lg}",
-            "$type": "typography"
-          }
-        },
         "color": {
           "$value": "{color.text.default}",
           "$type": "color",
@@ -1438,20 +1008,6 @@
         }
       },
       "error": {
-        "typography": {
-          "base": {
-            "$value": "{typography.body.default.base}",
-            "$type": "typography"
-          },
-          "md": {
-            "$value": "{typography.body.default.md}",
-            "$type": "typography"
-          },
-          "lg": {
-            "$value": "{typography.body.default.lg}",
-            "$type": "typography"
-          }
-        },
         "color": {
           "$value": "{color.status.error.foreground}",
           "$type": "color",
@@ -1511,20 +1067,6 @@
           "$value": "{color.text.default}",
           "$type": "color",
           "$description": "Default text colour for form controls."
-        },
-        "typography": {
-          "base": {
-            "$value": "{typography.body.default.base}",
-            "$type": "typography"
-          },
-          "md": {
-            "$value": "{typography.body.default.md}",
-            "$type": "typography"
-          },
-          "lg": {
-            "$value": "{typography.body.default.lg}",
-            "$type": "typography"
-          }
         },
         "border": {
           "color": {
@@ -1642,25 +1184,6 @@
       }
     },
     "layout": {
-      "page": {
-        "padding": {
-          "base": {
-            "$value": "{spacing.4}",
-            "$type": "spacing",
-            "$description": "Base padding between the viewport edge and page content."
-          },
-          "md": {
-            "$value": "{spacing.6}",
-            "$type": "spacing",
-            "$description": "Medium breakpoint padding between the viewport edge and page content."
-          },
-          "lg": {
-            "$value": "{spacing.8}",
-            "$type": "spacing",
-            "$description": "Large breakpoint padding between the viewport edge and page content."
-          }
-        }
-      },
       "container": {
         "maxWidth": {
           "text": {
@@ -1682,25 +1205,6 @@
             "$value": "96rem",
             "$type": "dimension",
             "$description": "Wide maximum width for complex layouts, dashboards or multi-column content."
-          }
-        }
-      },
-      "grid": {
-        "gutter": {
-          "base": {
-            "$value": "{spacing.4}",
-            "$type": "spacing",
-            "$description": "Base spacing between grid columns."
-          },
-          "md": {
-            "$value": "{spacing.6}",
-            "$type": "spacing",
-            "$description": "Medium breakpoint spacing between grid columns."
-          },
-          "lg": {
-            "$value": "{spacing.8}",
-            "$type": "spacing",
-            "$description": "Large breakpoint spacing between grid columns."
           }
         }
       }
@@ -1761,106 +1265,6 @@
       }
     },
     "component": {
-      "button": {
-        "typography": {
-          "compact": {
-            "base": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.sm}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            },
-            "md": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.sm}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            },
-            "lg": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.md}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            }
-          },
-          "default": {
-            "base": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.md}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            },
-            "md": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.md}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            },
-            "lg": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.lg}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            }
-          },
-          "comfortable": {
-            "base": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.md}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            },
-            "md": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.md}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            },
-            "lg": {
-              "$type": "typography",
-              "$value": {
-                "fontFamily": "{typography.family.sans}",
-                "fontWeight": "{typography.weight.medium}",
-                "fontSize": "{typography.size.lg}",
-                "lineHeight": "{typography.lineHeight.normal}",
-                "letterSpacing": "{typography.letterSpacing.normal}"
-              }
-            }
-          }
-        }
-      },
       "link": {
         "targetPaddingBlock": {
           "$value": "{spacing.1}",
