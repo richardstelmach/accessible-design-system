@@ -48,4 +48,19 @@ Code should consume the same GitHub tokens as default values plus media query ov
 
 While using the free version of Tokens Studio, the Figma `Breakpoint` collection is maintained manually from the GitHub token mapping. GitHub remains the source of truth.
 
+### Compiled responsive-token outputs
+
+The token build produces two outputs with different purposes:
+
+- `tokens/compiled/tokens.raw.json` contains the complete canonical token tree, including responsive `base`, `md` and `lg` branches.
+- `tokens/compiled/tokens.studio.json` contains one `global` token set and excludes responsive nodes represented by the Figma `Breakpoint` collection.
+
+Responsive exclusions are derived from:
+
+`tokens/figma/breakpoint-mapping.json`
+
+This prevents Tokens Studio from recreating separate `/base`, `/md` and `/lg` Figma variables and styles while preserving the explicit responsive structure in GitHub.
+
+See [`docs/token-sync-workflow.md`](docs/token-sync-workflow.md) for the complete build, sync, export and validation workflow.
+
 ---

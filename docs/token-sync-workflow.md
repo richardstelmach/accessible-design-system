@@ -2,21 +2,37 @@
 
 This document explains how design tokens move from source files in this repository into Figma.
 
-The intended workflow is:
+The standard workflow is:
 
-    Source token JSON files
-    ↓
-    Build script
-    ↓
-    Compiled token outputs
-    ↓
-    GitHub
-    ↓
-    Tokens Studio pull
-    ↓
-    Figma variables and text styles
+```text
+Source token JSON files
+↓
+Build script
+↓
+Compiled token outputs
+↓
+GitHub
+↓
+Tokens Studio pull
+↓
+Figma global variables and text styles
+```
 
-GitHub is the source of truth. Figma is a consumer.
+Responsive tokens use a related but deliberately different Figma implementation:
+
+```text
+Responsive source tokens in GitHub
+↓
+Breakpoint mapping
+↓
+Manual Figma Breakpoint collection
+↓
+Semantic variables and styles responding to parent-frame modes
+```
+
+GitHub is the source of truth.
+
+Figma is a visual implementation and validation layer.
 
 ---
 
@@ -24,13 +40,33 @@ GitHub is the source of truth. Figma is a consumer.
 
 Editable token source files live in:
 
-    tokens/primitives/
-    tokens/semantic/
-    tokens/themes/
+```text
+tokens/primitives/
+tokens/semantic/
+tokens/components/
+tokens/themes/
+```
 
 These are the canonical token files.
 
-Do not manually edit Figma variables as the source of truth. If a token value, name or reference needs to change, update the source JSON files and rebuild.
+Responsive mappings between GitHub and Figma live in:
+
+```text
+tokens/figma/breakpoint-mapping.json
+```
+
+Do not manually edit compiled token files.
+
+Do not treat Figma variables as the canonical source of token decisions.
+
+When a token value, name, alias or responsive decision changes:
+
+1. Update the source JSON.
+2. Update the Figma breakpoint mapping when applicable.
+3. Run the token build.
+4. Review the compiled output.
+5. Commit and push the changes.
+6. Update or sync Figma using the appropriate workflow.
 
 ---
 
@@ -38,101 +74,140 @@ Do not manually edit Figma variables as the source of truth. If a token value, n
 
 The system uses a layered token architecture:
 
-    Primitive tokens
-    ↓
-    Semantic tokens
-    ↓
-    Component tokens
-    ↓
-    Components
+```text
+Primitive tokens
+↓
+Semantic tokens
+↓
+Component tokens
+↓
+Components
+```
+
+### Primitive tokens
 
 Primitive tokens define raw reusable values.
 
 Examples:
 
-    color.primary.500
-    color.neutral.500
-    spacing.4
-    typography.size.md
-    radius.lg
+```text
+color.primary.500
+color.neutral.500
+spacing.4
+typography.size.md
+radius.lg
+```
 
 Primitive tokens do not define usage.
+
+### Semantic tokens
 
 Semantic tokens define approved usage roles.
 
 Examples:
 
-    color.surface.default
-    color.text.default
-    spacing.content.headingToBody
-    typography.heading.h1.base
-    layout.container.maxWidth.text
+```text
+color.surface.default
+color.text.default
+spacing.content.headingToBody
+typography.heading.h1.base
+layout.container.maxWidth.text
+```
 
-Semantic tokens should reference primitive tokens.
+Semantic tokens should normally reference primitive tokens.
 
-Component tokens will be introduced later.
+### Component tokens
+
+Component tokens define decisions specific to a component or component family.
 
 Examples:
 
-    button.primary.background
-    button.primary.foreground
-    input.border.default
+```text
+component.button.typography.default.base
+component.link.targetPaddingBlock
+component.textInput.width.full
+component.textarea.blockSize.default
+```
 
-Component tokens should reference semantic tokens rather than primitive values directly.
+Component tokens should normally reference semantic or primitive tokens rather than duplicate raw values.
 
 ---
 
 ## Token Descriptions
 
-Token descriptions should live in the source token JSON files using `$description`.
+Token descriptions should live in source token JSON using `$description`.
 
-Descriptions should explain the purpose and intended usage of a token, not just repeat the value.
-
-Example:
-
-    "default": {
-      "$value": "{color.text.default}",
-      "$type": "color",
-      "$description": "Default text colour used for readable body content and standard interface text."
-    }
-
-For semantic token groups, a group-level `$description` may be used to describe the relationship between child tokens.
+Descriptions should explain the purpose and intended usage of a token, rather than merely repeating its value.
 
 Example:
 
-    "success": {
-      "$description": "Status colour pairing for positive feedback, successful actions or confirmation messages.",
-      "background": {},
-      "foreground": {}
-    }
+```json
+{
+  "default": {
+    "$value": "{color.text.default}",
+    "$type": "color",
+    "$description": "Default text colour used for readable body content and standard interface text."
+  }
+}
+```
 
-Figma documentation should display these descriptions, but GitHub remains the source of truth.
+A group-level `$description` may be used to explain the relationship between child tokens.
 
-Do not treat manually written Figma card descriptions as canonical if the token source contains a `$description`.
+Example:
+
+```json
+{
+  "success": {
+    "$description": "Status colour pairing for positive feedback, successful actions or confirmation messages.",
+    "background": {},
+    "foreground": {}
+  }
+}
+```
+
+Figma documentation may display these descriptions, but GitHub remains canonical.
+
+Do not treat manually written Figma descriptions as canonical when the source token contains a `$description`.
+
+---
 
 ## Current Folder Structure
 
-    tokens/
-    ├── primitives/
-    │   ├── colors.json
-    │   ├── typography.json
-    │   ├── spacing.json
-    │   ├── radius.json
-    │   ├── borders.json
-    │   └── breakpoints.json
-    │
-    ├── semantic/
-    │   ├── colors.semantic.json
-    │   ├── typography.semantic.json
-    │   ├── spacing.semantic.json
-    │   ├── layout.semantic.json
-    │   └── sizing.semantic.json
-    │
-    ├── themes/
-    │
-    └── compiled/
-        ├── tokens.raw.json
-        └── tokens.studio.json
+```text
+tokens/
+├── primitives/
+│   ├── colors.json
+│   ├── typography.json
+│   ├── spacing.json
+│   ├── radius.json
+│   ├── borders.json
+│   └── breakpoints.json
+│
+├── semantic/
+│   ├── colors.semantic.json
+│   ├── typography.semantic.json
+│   ├── forms.semantic.json
+│   ├── spacing.semantic.json
+│   ├── layout.semantic.json
+│   └── sizing.semantic.json
+│
+├── components/
+│   ├── button.json
+│   ├── link.json
+│   ├── text-input.json
+│   └── textarea.json
+│
+├── themes/
+│
+├── figma/
+│   └── breakpoint-mapping.json
+│
+└── compiled/
+    ├── tokens.raw.json
+    └── tokens.studio.json
+```
+
+The contents of these folders will grow as the design system develops.
 
 ---
 
@@ -140,101 +215,361 @@ Do not treat manually written Figma card descriptions as canonical if the token 
 
 Compiled files are generated into:
 
-    tokens/compiled/
+```text
+tokens/compiled/
+```
 
-Current generated files:
+Current outputs:
 
-    tokens.raw.json
-    tokens.studio.json
+```text
+tokens.raw.json
+tokens.studio.json
+```
 
-### tokens.raw.json
+### `tokens.raw.json`
 
-`tokens.raw.json` is the clean compiled token output.
+`tokens.raw.json` is the complete canonical compiled token tree.
 
-It is intended for future developer use, AI consumption, documentation, validation scripts or build tools.
+It:
 
-### tokens.studio.json
+- merges primitive, semantic, component and theme token sources;
+- retains all responsive `base`, `md` and `lg` branches;
+- retains the complete GitHub token architecture;
+- is intended for code, documentation, validation tools and AI consumption.
 
-`tokens.studio.json` is the Tokens Studio-specific compiled output.
+Responsive tokens remain explicit in this file.
 
-This file wraps the compiled tokens in a `global` token set so Tokens Studio can read the file correctly when syncing from GitHub.
+Example:
 
-Tokens Studio should point to:
+```text
+typography.heading.h1.base
+typography.heading.h1.md
+typography.heading.h1.lg
+```
 
-    tokens/compiled/tokens.studio.json
+### `tokens.studio.json`
 
-Tokens Studio should not point to:
+`tokens.studio.json` is the Tokens Studio-facing compiled output.
 
-    tokens/compiled/tokens.raw.json
+It:
 
-Do not manually edit compiled token files during normal work. Update the source token files, then regenerate the compiled files.
+- contains one top-level token set named `global`;
+- retains ordinary non-responsive tokens;
+- excludes responsive token nodes represented by Figma's `Breakpoint` collection;
+- derives responsive exclusions from `tokens/figma/breakpoint-mapping.json`;
+- validates that retained aliases do not point to removed token nodes;
+- does not modify or flatten the canonical source structure.
+
+The relationship is:
+
+```text
+Source tokens and tokens.raw.json
+→ responsive branches retained
+
+tokens.studio.json
+→ mapped responsive branches excluded
+
+Figma
+→ responsive decisions represented as Breakpoint modes
+```
+
+Tokens Studio must point to:
+
+```text
+tokens/compiled/tokens.studio.json
+```
+
+Tokens Studio must not point to:
+
+```text
+tokens/compiled/tokens.raw.json
+```
+
+Do not manually edit either compiled file during normal work.
+
+Update the source token files and regenerate the compiled outputs.
+
+---
+
+## Responsive Token Architecture
+
+Responsive design decisions are represented differently in GitHub and Figma. This difference is intentional.
+
+### GitHub representation
+
+GitHub uses explicit branches:
+
+```text
+typography.heading.h1.base
+typography.heading.h1.md
+typography.heading.h1.lg
+```
+
+The same pattern is used for responsive layout tokens:
+
+```text
+layout.page.padding.base
+layout.page.padding.md
+layout.page.padding.lg
+```
+
+This structure is explicit, platform-agnostic and suitable for code generation.
+
+### Figma representation
+
+Figma represents the same decision as one variable in the `Breakpoint` collection:
+
+```text
+typography/heading/h1/fontSize
+```
+
+with modes:
+
+```text
+base
+md
+lg
+```
+
+For layout:
+
+```text
+layout/page/padding
+```
+
+with values controlled by the active mode.
+
+### Breakpoint definitions
+
+The current breakpoint policy is:
+
+```text
+base = below 48rem
+md = 48rem and above
+lg = 64rem and above
+```
+
+Equivalent pixel reference values are:
+
+```text
+md = 768px
+lg = 1024px
+```
+
+### Figma Breakpoint collection
+
+The Figma collection is named:
+
+```text
+Breakpoint
+```
+
+It contains these modes:
+
+```text
+base
+md
+lg
+```
+
+The collection is maintained manually while the design system uses the free Tokens Studio workflow.
+
+GitHub remains the source of truth for the values.
+
+### Breakpoint mapping
+
+The mapping between GitHub source tokens and Figma variables is documented in:
+
+```text
+tokens/figma/breakpoint-mapping.json
+```
+
+A mapping entry identifies:
+
+- the Figma variable;
+- its type;
+- the source token for each mode;
+- aliases or resolved values where useful;
+- any intentional Figma implementation detail.
+
+The compiler uses each mode's `source` field to determine which token node is excluded from `tokens.studio.json`.
+
+Fields such as `resolvedSource` and `semanticSource` are explanatory metadata and are not used as deletion instructions.
+
+### Production text styles
+
+Production semantic text styles must not use breakpoint suffixes.
+
+Correct:
+
+```text
+typography/heading/h1
+typography/body/default
+form/label/typography
+form/control/typography
+component/button/default/typography
+component/link/standalone/typography
+```
+
+Incorrect for production use:
+
+```text
+typography/heading/h1/base
+typography/heading/h1/md
+typography/heading/h1/lg
+```
+
+The production style should bind responsive properties to variables in the `Breakpoint` collection.
+
+The parent frame's active mode controls the resulting value.
+
+### Component variants
+
+Do not create `base`, `md` or `lg` component variants merely to represent responsive token values.
+
+Components should use semantic variables and styles and inherit the responsive mode from their surrounding frame.
+
+### Resolved Figma values
+
+Some GitHub values may need a resolved Figma implementation.
+
+For example, a percentage line height may be represented as a pixel value in Figma.
+
+This is acceptable when:
+
+- the GitHub percentage remains canonical;
+- the resolved Figma value is documented in the mapping;
+- the relationship remains deterministic.
+
+A value such as `28.8` may be displayed as `29` in parts of the Figma interface because of rounding.
 
 ---
 
 ## Why Tokens Studio Needs a Specific File
 
-Tokens Studio treats the outermost keys in a single synced JSON file as token set names.
+Tokens Studio treats the outermost keys in a single synced JSON file as token-set names.
 
-A raw compiled file like this:
+A raw compiled file such as:
 
-    {
-      "border": {},
-      "color": {},
-      "spacing": {}
-    }
+```json
+{
+  "border": {},
+  "color": {},
+  "spacing": {}
+}
+```
 
 may be interpreted as separate token sets:
 
-    border
-    color
-    spacing
+```text
+border
+color
+spacing
+```
 
-This caused Tokens Studio to appear as though it only pulled in border tokens when the `border` set was selected.
+The Tokens Studio-specific file uses one `global` wrapper:
 
-The fix is to generate a Tokens Studio-specific file with a `global` wrapper:
-
-    {
-      "global": {
-        "border": {},
-        "breakpoint": {},
-        "color": {},
-        "radius": {},
-        "spacing": {},
-        "typography": {},
-        "layout": {},
-        "size": {}
-      }
-    }
+```json
+{
+  "global": {
+    "border": {},
+    "breakpoint": {},
+    "color": {},
+    "radius": {},
+    "spacing": {},
+    "typography": {},
+    "layout": {},
+    "size": {},
+    "form": {},
+    "component": {}
+  }
+}
+```
 
 Once pulled into Tokens Studio, the left panel should show one token set:
 
-    global
+```text
+global
+```
 
-Inside the `global` token set, the JSON view should show:
-
-    border
-    breakpoint
-    color
-    radius
-    spacing
-    typography
-    layout
-    size
+Responsive nodes represented by Figma modes are intentionally absent from that set.
 
 ---
 
 ## Build Tokens
 
-After editing source token files, run this command from the repository root:
+After editing source token files, run the following command from the repository root:
 
-    node scripts/build-tokens.mjs
+```bash
+node scripts/build-tokens.mjs
+```
 
-This regenerates:
+The build script:
 
-    tokens/compiled/tokens.raw.json
-    tokens/compiled/tokens.studio.json
+1. Reads token JSON from:
+   - `tokens/primitives`
+   - `tokens/semantic`
+   - `tokens/components`
+   - `tokens/themes`
+2. Merges the complete token tree.
+3. Writes the complete tree to `tokens.raw.json`.
+4. Reads `tokens/figma/breakpoint-mapping.json`.
+5. Derives the responsive token nodes represented by Figma modes.
+6. Removes those nodes only from the Tokens Studio-facing copy.
+7. Prunes empty metadata-only groups.
+8. Checks retained aliases.
+9. Writes the filtered tree inside the `global` set in `tokens.studio.json`.
 
-The build script merges primitive, semantic and theme token files into compiled outputs.
+A successful build reports:
+
+- raw token count;
+- Tokens Studio token count;
+- number of mode-managed nodes excluded;
+- number of retained aliases checked;
+- zero broken retained aliases;
+- the paths excluded from the Tokens Studio output.
+
+The exact token counts will change as the system develops.
+
+Do not use fixed token counts as permanent success criteria.
+
+The important invariants are:
+
+- the raw output remains complete;
+- the Studio output contains one `global` set;
+- mapped responsive nodes are absent from the Studio output;
+- mapped responsive nodes remain in the raw output;
+- retained aliases resolve;
+- unrelated tokens remain unchanged.
+
+---
+
+## Reviewing Compiled Output
+
+After running the compiler, review:
+
+```bash
+git diff -- tokens/compiled/tokens.raw.json
+git diff -- tokens/compiled/tokens.studio.json
+```
+
+When only the compiler filtering logic changes:
+
+- `tokens.raw.json` should remain unchanged;
+- `tokens.studio.json` should show only the intended responsive exclusions.
+
+When source tokens change:
+
+- both outputs may change;
+- responsive source decisions must still remain in `tokens.raw.json`;
+- mapped responsive branches must remain absent from `tokens.studio.json`.
+
+Do not continue to Figma when the compiler reports:
+
+- a missing mapping source;
+- an unexpected token boundary;
+- a responsive group missing a required mode;
+- a retained alias pointing to a removed token.
 
 ---
 
@@ -244,11 +579,21 @@ After rebuilding tokens, commit both source and compiled changes.
 
 Example:
 
-    git add .
-    git commit -m "Update design tokens"
-    git push
+```bash
+git add .
+git commit -m "Update design tokens"
+git push
+```
 
 Tokens Studio pulls from GitHub, so changes must be pushed before they can be pulled into Figma.
+
+Commit together:
+
+- changed source tokens;
+- mapping changes;
+- compiler changes when applicable;
+- regenerated compiled files;
+- related documentation changes.
 
 ---
 
@@ -258,27 +603,33 @@ Tokens Studio should use the GitHub sync provider.
 
 Recommended settings:
 
-    Repository:
-    richardstelmach/accessible-design-system
+```text
+Repository:
+richardstelmach/accessible-design-system
 
-    Branch:
-    main
+Branch:
+main
 
-    Token storage location:
-    tokens/compiled/tokens.studio.json
+Token storage location:
+tokens/compiled/tokens.studio.json
 
-    Base URL:
-    blank
+Base URL:
+blank
+```
 
 Do not use a leading slash in the token storage location.
 
 Correct:
 
-    tokens/compiled/tokens.studio.json
+```text
+tokens/compiled/tokens.studio.json
+```
 
 Incorrect:
 
-    /tokens/compiled/tokens.studio.json
+```text
+/tokens/compiled/tokens.studio.json
+```
 
 ---
 
@@ -286,27 +637,27 @@ Incorrect:
 
 Use:
 
-    Pull from provider
+```text
+Pull from provider
+```
 
 Do not push from Tokens Studio back to GitHub.
 
-The workflow should remain:
+The workflow must remain:
 
-    GitHub → Tokens Studio → Figma
+```text
+GitHub → Tokens Studio → Figma
+```
 
 not:
 
-    Figma → Tokens Studio → GitHub
+```text
+Figma → Tokens Studio → GitHub
+```
 
-Tokens Studio may transform token type names internally. For example:
+Tokens Studio may transform token type names internally. For example, `fontFamily` may appear as `fontFamilies`.
 
-    fontFamily
-
-may appear as:
-
-    fontFamilies
-
-This is acceptable inside Tokens Studio, but it is another reason not to push from Tokens Studio back to the repository.
+This is acceptable inside Tokens Studio, but it is another reason not to push from Tokens Studio back into the repository.
 
 ---
 
@@ -314,275 +665,575 @@ This is acceptable inside Tokens Studio, but it is another reason not to push fr
 
 In Tokens Studio, go to:
 
-    Styles & Variables
-    → Export styles & variables
+```text
+Styles & Variables
+→ Export styles & variables
+```
 
-Recommended export settings:
+Two export workflows are supported:
+
+1. Routine non-destructive export.
+2. Exceptional destructive reconciliation.
+
+---
+
+## Routine Non-Destructive Export
+
+Use this for normal token additions and value updates.
 
 ### Variables
 
-    Color: on
-    Number: on
-    String: off
-    Boolean: off
+```text
+Color: on
+String: on
+Number: on
+Boolean: on
+```
 
 ### Styles
 
-    Color: off
-    Typography: on
-    Effects: off
-    Gradients: off
+```text
+Color: off
+Typography: on
+Effects: on
+Gradients: on
+```
 
 ### Options
 
-    Ignore first part of token name for styles: off
-    Prefix styles with active theme name: off
-    Create styles with variable references: on
-    Update existing style and variable names: off
-    Remove styles and variables without connection to token: off
+```text
+Ignore first part of token name for styles: off
+Prefix styles with active theme name: off
+Create styles with variable references: off
+Update existing style and variable names: on
+Remove styles and variables without connection to a token: off
+```
+
+Select only the `global` token set.
+
+Do not include or recreate the `Breakpoint` collection through Tokens Studio.
+
+The most important routine setting is:
+
+```text
+Remove styles and variables without connection to a token: off
+```
+
+Routine syncing must not delete existing Figma resources.
+
+---
+
+## Exceptional Destructive Reconciliation
+
+A destructive export is used only when intentionally deleting or renaming tokens or reconciling previously generated Figma artefacts.
+
+It is not part of the standard token-sync workflow.
+
+For a destructive export, this setting is enabled:
+
+```text
+Remove styles and variables without connection to a token: on
+```
+
+A destructive export may be performed only after all of the following:
+
+1. Create a duplicate or backup of the Figma file.
+2. Test the exact compiled JSON in the duplicate.
+3. Identify every active binding to the variables or styles being removed.
+4. Migrate active bindings before deletion.
+5. Confirm zero stale or orphaned references.
+6. Create a named Figma version.
+7. Perform the destructive export.
+8. Confirm the Breakpoint collection remains unchanged.
+9. Run a post-export audit.
+10. Restore the pre-export version immediately if active content is damaged.
+
+Never assume that removing a token from JSON safely removes it from Figma.
+
+Active Figma consumers must be migrated first.
 
 ---
 
 ## Why Colours Are Exported as Variables
 
-Colours should be exported as Figma variables rather than legacy colour styles.
+Colours are exported as Figma variables rather than legacy colour styles.
 
-This keeps colour usage more flexible and better aligned with modern Figma variable workflows.
+This:
+
+- supports semantic binding;
+- works well with modern Figma variable workflows;
+- supports future themes or modes;
+- avoids maintaining duplicate colour styles and variables.
 
 ---
 
-## Why Typography Is Exported as Styles
+## Why Typography Uses Semantic Styles
 
-Typography tokens are composite tokens.
+Typography tokens are composite decisions that may include:
 
-They include:
+```text
+font family
+font weight
+font size
+line height
+letter spacing
+```
 
-    font family
-    font weight
-    font size
-    line height
-    letter spacing
+In Figma, these are represented through semantic text styles.
 
-These are better represented in Figma as text styles.
+Production examples include:
 
-Expected style examples:
+```text
+typography/heading/h1
+typography/heading/h2
+typography/heading/h3
+typography/body/small
+typography/body/default
+typography/body/large
 
-    typography/heading/h1/base
-    typography/heading/h1/md
-    typography/heading/h1/lg
-    typography/body/default/base
-    typography/body/default/md
-    typography/body/default/lg
-    typography/label/default
+form/label/typography
+form/control/typography
+form/helper/typography
+form/error/typography
+
+form/legend/default/typography
+form/legend/section/typography
+form/legend/subsection/typography
+form/legend/compact/typography
+
+component/button/compact/typography
+component/button/default/typography
+component/button/comfortable/typography
+component/link/standalone/typography
+```
+
+Responsive properties within these styles bind to the `Breakpoint` collection.
+
+Do not use separate production styles for `base`, `md` and `lg`.
+
+Responsive composite typography tokens are excluded from `tokens.studio.json` so Tokens Studio does not recreate breakpoint-suffixed styles.
+
+Fixed, non-responsive typography tokens may still be exported through the ordinary Studio workflow.
 
 ---
 
 ## Expected Figma Result
 
-A successful export should create one Figma variable collection called:
+A successful implementation contains two Figma Variable Collections:
 
-    global
+```text
+global
+Breakpoint
+```
 
-The first successful setup created:
+### `global`
 
-    1 collection
-    149 variables
+The `global` collection:
 
-This number may change as tokens are added or removed.
+- is managed through Tokens Studio;
+- contains ordinary non-responsive variables;
+- may change in size as tokens are added or removed;
+- must not contain duplicate responsive `base`, `md` and `lg` variables already represented by Breakpoint modes.
+
+### `Breakpoint`
+
+The `Breakpoint` collection:
+
+- is maintained manually;
+- contains modes `base`, `md` and `lg`;
+- contains responsive typography and layout variables;
+- is mapped to GitHub through `tokens/figma/breakpoint-mapping.json`;
+- must not be removed, renamed or recreated by Tokens Studio.
+
+Variable counts are diagnostic rather than contractual.
+
+Do not document a specific variable count as a permanent requirement.
 
 ---
 
 ## Figma Validation
 
-Use the Figma file to visually validate tokens.
+Use the Figma file to visually validate token behaviour.
 
 Suggested page:
 
-    01 Token Sync Test
+```text
+01 Token Sync Test
+```
 
-The test page is a smoke test. It is not intended to be a polished design system page.
+The test page is a smoke test rather than a polished documentation page.
 
-It should confirm that tokens import, resolve and behave correctly in Figma.
+It should confirm that:
+
+- Tokens Studio pulled the expected `global` token set;
+- ordinary variables exist and resolve;
+- production semantic text styles still exist;
+- the `Breakpoint` collection still exists;
+- responsive values change with the parent frame mode;
+- no unexpected `/base`, `/md` or `/lg` production artefacts were created;
+- no active variable or style bindings are broken.
 
 ---
 
 ## Colour Validation Checklist
 
-Check the following colour tokens:
+Check representative colour tokens:
 
-    color.surface.canvas
-    color.surface.default
-    color.surface.raised
+```text
+color.surface.canvas
+color.surface.default
+color.surface.raised
 
-    color.text.default
+color.text.default
 
-    color.border.light
-    color.border.default
-    color.border.interactive
+color.border.light
+color.border.default
+color.border.interactive
 
-    color.interactive.default.foreground
-    color.interactive.default.border
+color.interactive.default.foreground
+color.interactive.default.border
 
-    color.interactive.primary.background
-    color.interactive.primary.foreground
+color.interactive.primary.background
+color.interactive.primary.foreground
 
-    color.interactive.focus.ring
+color.interactive.focus.ring
 
-    color.featured.background
-    color.featured.foreground
+color.featured.background
+color.featured.foreground
 
-    color.status.success.background
-    color.status.success.foreground
+color.status.success.background
+color.status.success.foreground
 
-    color.status.warning.background
-    color.status.warning.foreground
+color.status.warning.background
+color.status.warning.foreground
 
-    color.status.error.background
-    color.status.error.foreground
+color.status.error.background
+color.status.error.foreground
+```
 
-Validate foreground and background pairs together, not just as isolated swatches.
+Validate foreground and background pairs together rather than only as isolated swatches.
 
 ---
 
 ## Typography Validation Checklist
 
-Check the following typography styles:
+Validate production semantic styles rather than separate breakpoint-suffixed styles.
 
-    typography.heading.h1.base
-    typography.heading.h1.md
-    typography.heading.h1.lg
+Check:
 
-    typography.heading.h2.base
-    typography.heading.h2.md
-    typography.heading.h2.lg
+```text
+typography/heading/h1
+typography/heading/h2
+typography/heading/h3
+typography/heading/h4
+typography/heading/h5
+typography/heading/h6
 
-    typography.heading.h3.base
-    typography.heading.h3.md
-    typography.heading.h3.lg
+typography/body/small
+typography/body/default
+typography/body/large
 
-    typography.heading.h4.base
-    typography.heading.h4.md
-    typography.heading.h4.lg
+form/label/typography
+form/control/typography
+form/helper/typography
+form/error/typography
 
-    typography.heading.h5.base
-    typography.heading.h5.md
-    typography.heading.h5.lg
+form/legend/default/typography
+form/legend/section/typography
+form/legend/subsection/typography
+form/legend/compact/typography
 
-    typography.heading.h6.base
-    typography.heading.h6.md
-    typography.heading.h6.lg
+component/button/compact/typography
+component/button/default/typography
+component/button/comfortable/typography
+component/link/standalone/typography
+```
 
-    typography.body.small.base
-    typography.body.small.md
-    typography.body.small.lg
+Validate representative styles inside parent frames using:
 
-    typography.body.default.base
-    typography.body.default.md
-    typography.body.default.lg
+```text
+Breakpoint = base
+Breakpoint = md
+Breakpoint = lg
+```
 
-    typography.body.large.base
-    typography.body.large.md
-    typography.body.large.lg
+Check:
 
-    typography.label.default
+- font family;
+- font weight;
+- font size;
+- line height;
+- letter spacing;
+- variable bindings;
+- text wrapping;
+- clipping.
 
-Use real sample text when validating typography.
-
-Example:
-
-    Design systems should support readable, accessible interfaces.
+Use real sample text.
 
 ---
 
 ## Spacing and Layout Validation Checklist
 
-Check the following spacing and layout tokens:
+### Fixed semantic spacing
 
-    spacing.inset.sm
-    spacing.inset.md
-    spacing.inset.lg
-    spacing.inset.xl
+Check:
 
-    spacing.stack.xs
-    spacing.stack.sm
-    spacing.stack.md
-    spacing.stack.lg
-    spacing.stack.xl
+```text
+spacing.inset.sm
+spacing.inset.md
+spacing.inset.lg
+spacing.inset.xl
 
-    spacing.inline.xs
-    spacing.inline.sm
-    spacing.inline.md
-    spacing.inline.lg
+spacing.stack.xs
+spacing.stack.sm
+spacing.stack.md
+spacing.stack.lg
+spacing.stack.xl
 
-    spacing.content.headingToBody
-    spacing.content.bodyToAction
-    spacing.content.paragraph
+spacing.inline.xs
+spacing.inline.sm
+spacing.inline.md
+spacing.inline.lg
 
-    spacing.control.paddingBlock.compact
-    spacing.control.paddingBlock.default
-    spacing.control.paddingBlock.comfortable
+spacing.content.headingToBody
+spacing.content.bodyToAction
+spacing.content.paragraph
 
-    spacing.control.paddingInline.compact
-    spacing.control.paddingInline.default
-    spacing.control.paddingInline.comfortable
+spacing.control.paddingBlock.compact
+spacing.control.paddingBlock.default
+spacing.control.paddingBlock.comfortable
 
-    spacing.control.gap
+spacing.control.paddingInline.compact
+spacing.control.paddingInline.default
+spacing.control.paddingInline.comfortable
 
-    spacing.section.base
-    spacing.section.md
-    spacing.section.lg
+spacing.control.gap
+```
 
-    layout.page.padding.base
-    layout.page.padding.md
-    layout.page.padding.lg
+These remain ordinary non-responsive variables in `global`.
 
-    layout.container.maxWidth.text
-    layout.container.maxWidth.narrow
-    layout.container.maxWidth.default
-    layout.container.maxWidth.wide
+### Responsive layout variables
 
-    layout.grid.gutter.base
-    layout.grid.gutter.md
-    layout.grid.gutter.lg
+Validate these variables in the `Breakpoint` collection:
+
+```text
+spacing/section
+layout/page/padding
+layout/grid/gutter
+```
+
+Expected values:
+
+| Variable | base | md | lg |
+|---|---:|---:|---:|
+| `layout/page/padding` | 16 | 24 | 32 |
+| `layout/grid/gutter` | 16 | 24 | 32 |
+| `spacing/section` | 48 | 64 | 80 |
+
+Do not expect these fixed responsive branches in the Figma `global` collection:
+
+```text
+spacing/section/base
+spacing/section/md
+spacing/section/lg
+
+layout/page/padding/base
+layout/page/padding/md
+layout/page/padding/lg
+
+layout/grid/gutter/base
+layout/grid/gutter/md
+layout/grid/gutter/lg
+```
+
+These branches remain in GitHub and `tokens.raw.json`, but are represented through modes in Figma.
+
+### Container widths
+
+Also validate:
+
+```text
+layout.container.maxWidth.text
+layout.container.maxWidth.narrow
+layout.container.maxWidth.default
+layout.container.maxWidth.wide
+```
+
+---
+
+## Choosing Responsive or Fixed Spacing
+
+Use responsive layout tokens only when a value genuinely changes with viewport or breakpoint context.
+
+Appropriate responsive uses include:
+
+- page padding;
+- page-grid gutter;
+- spacing between major page sections;
+- typography that scales by breakpoint.
+
+Use fixed semantic spacing for:
+
+- component internals;
+- icon-to-label gaps;
+- documentation matrices;
+- card internals;
+- fixed horizontal gaps;
+- fixed vertical gaps;
+- layouts requiring different horizontal and vertical values at the same time.
+
+Example:
+
+```text
+Correct:
+itemSpacing → spacing/inline/lg
+counterAxisSpacing → spacing/stack/xl
+```
+
+Avoid using responsive grid-gutter tokens merely because their numeric values happen to match the desired fixed spacing.
+
+A responsive page-grid token communicates a different purpose from fixed component or documentation spacing.
 
 ---
 
 ## Sizing Validation Checklist
 
-Check the following sizing tokens:
+Check:
 
-    size.target.minimum
-    size.target.comfortable
+```text
+size.target.minimum
+size.target.comfortable
 
-    size.control.minBlockSize.compact
-    size.control.minBlockSize.default
-    size.control.minBlockSize.comfortable
+size.control.minBlockSize.compact
+size.control.minBlockSize.default
+size.control.minBlockSize.comfortable
+
+component.textarea.blockSize.minimum
+component.textarea.blockSize.default
+```
 
 ---
 
 ## Radius and Border Validation Checklist
 
-Check the following radius tokens:
+Check radius tokens:
 
-    radius.none
-    radius.sm
-    radius.md
-    radius.lg
-    radius.xl
-    radius.2xl
-    radius.full
+```text
+radius.none
+radius.sm
+radius.md
+radius.lg
+radius.xl
+radius.2xl
+radius.full
+```
 
-Check the following border tokens:
+Check border tokens:
 
-    border.width.none
-    border.width.thin
-    border.width.medium
-    border.width.thick
+```text
+border.width.none
+border.width.thin
+border.width.medium
+border.width.thick
 
-    border.style.solid
-    border.style.dashed
+border.style.solid
+border.style.dashed
+```
 
-Note: border style tokens may be more useful for code and documentation than for Figma variables.
+Border-style tokens may be more useful for code and documentation than as Figma variables.
+
+---
+
+## Standard Workflow for Non-Responsive Token Changes
+
+Use this workflow for colours, radii, borders, fixed spacing, sizes, states and non-responsive component tokens.
+
+```text
+Edit source JSON
+↓
+Run node scripts/build-tokens.mjs
+↓
+Review tokens.raw.json
+↓
+Review tokens.studio.json
+↓
+Commit and push
+↓
+Pull from GitHub in Tokens Studio
+↓
+Run a non-destructive Figma export
+↓
+Validate visually
+```
+
+Keep:
+
+```text
+Remove styles and variables without connection to a token: off
+```
+
+---
+
+## Standard Workflow for Responsive Token Changes
+
+Use this workflow when editing or adding a responsive token.
+
+```text
+Edit base, md and lg source branches
+↓
+Update tokens/figma/breakpoint-mapping.json
+↓
+Run node scripts/build-tokens.mjs
+↓
+Confirm the responsive branches remain in tokens.raw.json
+↓
+Confirm the mapped branches are absent from tokens.studio.json
+↓
+Commit and push
+↓
+Manually update the matching Figma Breakpoint variable
+↓
+Validate base, md and lg modes
+```
+
+A responsive token is not complete until:
+
+- all required source branches exist;
+- the mapping exists;
+- the raw output retains the branches;
+- the Studio output excludes the branches;
+- the Figma Breakpoint variable exists;
+- all modes have been validated.
+
+Do not use Tokens Studio to recreate responsive variable branches in `global`.
+
+---
+
+## Workflow for Token Deletion or Renaming
+
+Token deletion and renaming require additional care because Figma objects may still reference old variable or style IDs.
+
+Use:
+
+```text
+Identify affected Figma consumers
+↓
+Migrate active bindings
+↓
+Confirm zero stale references
+↓
+Create a duplicate Figma test file
+↓
+Test the destructive export
+↓
+Create a named production version
+↓
+Run the production destructive export
+↓
+Run a post-export audit
+```
+
+Do not delete or rename a token in production Figma before its consumers have been migrated.
 
 ---
 
@@ -590,149 +1241,185 @@ Note: border style tokens may be more useful for code and documentation than for
 
 Figma can import design tokens directly from JSON into variables.
 
-This is not the main workflow for this system at the moment.
+This is not the primary workflow for this system.
 
-Reasons:
+Reasons include:
 
-    Native Figma import is a manual file import process.
-    It does not provide the GitHub pull workflow currently used here.
-    It is stricter about token format.
-    It may require a separate Figma-specific compiled file.
-    Tokens Studio already provides GitHub sync and exports variables/styles into Figma.
+- native Figma import is a manual file-import process;
+- it does not provide the current GitHub pull workflow;
+- it is stricter about token format;
+- it may require a separate Figma-specific compiled output;
+- Tokens Studio currently provides the practical GitHub-to-Figma bridge.
 
-Native Figma import may become useful later as an additional export target.
+A future compiled output structure could include:
 
-A future compiled output structure could be:
+```text
+tokens.raw.json
+tokens.studio.json
+tokens.figma.json
+```
 
-    tokens.raw.json
-    tokens.studio.json
-    tokens.figma.json
-
-For now, Tokens Studio remains the practical bridge between GitHub and Figma.
+For now, Tokens Studio remains the practical bridge for the `global` collection, while the `Breakpoint` collection is maintained manually.
 
 ---
 
 ## Troubleshooting
 
-### Tokens Studio Only Shows Border Tokens
+### Tokens Studio only shows border tokens
 
-Likely cause:
+Tokens Studio is probably pointed at the raw compiled file without a token-set wrapper.
 
-    Tokens Studio is pointed at a raw compiled file without a token set wrapper.
+Point it at:
 
-Fix:
+```text
+tokens/compiled/tokens.studio.json
+```
 
-    Point Tokens Studio at:
+The file should contain one top-level `global` set.
 
-    tokens/compiled/tokens.studio.json
-
-The file should contain a top-level `global` wrapper.
-
----
-
-### Tokens Studio Does Not Show the Latest Changes
+### Tokens Studio does not show the latest changes
 
 Likely causes:
 
-    The source files were changed but the build script was not run.
-    The compiled files were rebuilt but not committed.
-    The changes were committed but not pushed.
-    Tokens Studio has not pulled from GitHub.
+- the build was not run;
+- compiled files were not committed or pushed;
+- Tokens Studio has not pulled from GitHub;
+- Tokens Studio is connected to the wrong branch.
 
-Fix:
+Run:
 
-    node scripts/build-tokens.mjs
-    git add .
-    git commit -m "Update compiled tokens"
-    git push
+```bash
+node scripts/build-tokens.mjs
+git add .
+git commit -m "Update compiled tokens"
+git push
+```
 
 Then pull again in Tokens Studio.
 
----
+### Separate `/base`, `/md` and `/lg` variables or styles reappear
 
-### Tokens Studio Changes Token Type Names
+Check that:
 
-Tokens Studio may convert some token type names internally.
+- the responsive branches remain in `tokens.raw.json`;
+- they are absent from `tokens.studio.json`;
+- `breakpoint-mapping.json` contains all three modes;
+- Tokens Studio points to the latest `tokens.studio.json`.
 
-For example:
+### Build fails because a breakpoint mapping source does not exist
 
-    fontFamily
+The source path may point inside an alias token rather than at its owning token node.
 
-may appear as:
+Use the owning token as `source`, and use `resolvedSource` only as explanatory metadata where useful.
 
-    fontFamilies
+Do not weaken the build validation merely to accept an invalid path.
+
+### Build reports broken retained aliases
+
+A token retained in `tokens.studio.json` points to a token that has been excluded.
+
+Do not bypass the error. Resolve the underlying mapping or alias decision.
+
+### Removed variables still appear in Figma
+
+Possible causes:
+
+- destructive removal was disabled;
+- the variables already existed and were intentionally retained;
+- an active object still references the old variable ID;
+- Figma contains an orphaned or stale binding.
+
+Audit active consumers before deleting the variable.
+
+### Destructive export breaks active content
+
+1. Restore the named pre-export Figma version.
+2. Identify active bindings to removed variables or styles.
+3. Migrate those consumers.
+4. Test again in a duplicate file.
+5. Confirm zero stale references.
+6. Repeat the production export only after the duplicate passes.
+
+### Tokens Studio changes token type names
+
+Tokens Studio may convert token type names internally, such as `fontFamily` to `fontFamilies`.
 
 This is acceptable inside Tokens Studio.
 
 Do not push from Tokens Studio back to GitHub.
 
----
+### Figma shows `rem` values as numbers
 
-### Figma Shows rem Values as Numbers
+Tokens Studio converts `rem` values into Figma-compatible numbers.
 
-Tokens Studio converts rem-based values into Figma-friendly numbers.
+For example, `1.5rem` may appear as `24`. This is expected.
 
-For example:
+### Figma rounds a resolved value
 
-    1.5rem
+A resolved value such as `28.8` may appear as `29` in parts of the Figma interface.
 
-may appear in Figma as:
+Check `breakpoint-mapping.json` to confirm whether the value is intentionally documented as a resolved-pixel implementation.
 
-    24
+### Figma values look wrong
 
-This is expected.
+For ordinary Tokens Studio-managed values:
 
----
+```text
+Edit source JSON
+↓
+Run node scripts/build-tokens.mjs
+↓
+Review compiled output
+↓
+Commit and push
+↓
+Pull from GitHub
+↓
+Export non-destructively
+↓
+Validate again
+```
 
-### Figma Values Look Wrong
+For responsive values:
 
-Do not manually fix the values in Figma.
+```text
+Edit source JSON
+↓
+Update breakpoint-mapping.json
+↓
+Run node scripts/build-tokens.mjs
+↓
+Review compiled output
+↓
+Commit and push
+↓
+Manually update the Figma Breakpoint variable
+↓
+Validate all modes
+```
 
-Fix the problem at source:
-
-    Edit source JSON files
-    ↓
-    Run node scripts/build-tokens.mjs
-    ↓
-    Review compiled output
-    ↓
-    Commit and push
-    ↓
-    Pull from provider in Tokens Studio
-    ↓
-    Export variables and styles to Figma
-    ↓
-    Validate again
-
----
-
-## Standard Workflow for Changing Tokens
-
-When changing tokens:
-
-    Edit source JSON files
-    ↓
-    Run node scripts/build-tokens.mjs
-    ↓
-    Review compiled output
-    ↓
-    Commit and push
-    ↓
-    Pull from provider in Tokens Studio
-    ↓
-    Export variables and styles to Figma
-    ↓
-    Validate visually
-    ↓
-    Fix issues at source
+Do not invent a replacement value directly in Figma.
 
 ---
 
-## Core Rule
+## Core Rules
 
-Do not fix token problems directly in Figma.
+1. GitHub is the source of truth.
+2. Do not manually edit compiled token files.
+3. Do not push from Tokens Studio into GitHub.
+4. Routine Figma exports must be non-destructive.
+5. Responsive branches remain explicit in GitHub.
+6. Responsive Figma values use the `Breakpoint` collection.
+7. Production text styles do not use breakpoint suffixes.
+8. Components do not use breakpoint variants merely to represent responsive tokens.
+9. Fixed semantic spacing must not be replaced with responsive layout tokens solely because the current values match.
+10. Token deletion or renaming requires binding migration and duplicate-file validation.
 
-Fix token problems in the source JSON files, rebuild, commit, push, pull into Tokens Studio, and export again.
+Because the free Tokens Studio workflow cannot maintain the Figma `Breakpoint` collection, responsive values are manually mirrored into Figma after being updated in GitHub.
+
+This does not make Figma the source of truth.
+
+The source decision must exist in GitHub and the mapping before the Figma value is changed.
 
 ---
 
@@ -740,15 +1427,22 @@ Fix token problems in the source JSON files, rebuild, commit, push, pull into To
 
 This workflow may later evolve to include:
 
-    Automated token validation
-    Style Dictionary transforms
-    CSS variable output
-    Tailwind config output
-    React theme output
-    Automatic contrast checks
-    Automated Figma variable creation
-    GitHub Actions token builds
-    Custom Figma plugin integration
-    Native Figma import output
+- automated token validation;
+- automatic detection of unmapped responsive groups;
+- Style Dictionary transforms;
+- CSS variable output;
+- Tailwind configuration output;
+- React theme output;
+- automatic contrast checks;
+- GitHub Actions token builds;
+- automated Figma Breakpoint variable creation;
+- custom Figma plugin integration;
+- native Figma import output.
 
-For now, the compiled Tokens Studio file provides a practical bridge between the multi-file source structure and Figma consumption.
+For now:
+
+- `tokens.raw.json` provides the complete canonical token tree;
+- `tokens.studio.json` provides the filtered Tokens Studio input;
+- `breakpoint-mapping.json` defines the GitHub-to-Figma responsive bridge;
+- Tokens Studio manages the `global` collection;
+- the `Breakpoint` collection is maintained manually from GitHub.
