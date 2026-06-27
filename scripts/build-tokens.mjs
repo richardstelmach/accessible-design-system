@@ -37,6 +37,13 @@ function isObject(value) {
   return value && typeof value === "object" && !Array.isArray(value);
 }
 
+function isDtcgToken(value) {
+  return (
+    isObject(value) &&
+    Object.prototype.hasOwnProperty.call(value, "$value")
+  );
+}
+
 function deepMerge(target, source) {
   for (const key of Object.keys(source)) {
     if (isObject(source[key]) && isObject(target[key])) {
@@ -123,10 +130,7 @@ function findOwningTokenPath(root, sourcePath) {
     const candidateSegments = segments.slice(0, end);
     const candidate = getValueAtPath(root, candidateSegments);
 
-    if (
-      isObject(candidate) &&
-      Object.prototype.hasOwnProperty.call(candidate, "$value")
-    ) {
+    if (isDtcgToken(candidate)) {
       return candidateSegments.join(".");
     }
   }
@@ -274,6 +278,149 @@ function deriveModeManagedTokenPaths(mapping, compiledTokens) {
   return [...excludedPaths].sort();
 }
 
+function deriveMappedResponsiveGroupPaths(modeManagedTokenPaths) {
+  const responsiveGroupPaths = new Set();
+
+  for (const tokenPath of modeManagedTokenPaths) {
+    const segments = tokenPath.split(".");
+
+    if (segments.length < 2) {
+      throw new Error(
+        `Cannot derive responsive group from token path: ${tokenPath}`
+      );
+    }
+
+    responsiveGroupPaths.add(segments.slice(0, -1).join("."));
+  }
+
+  return [...responsiveGroupPaths].sort();
+}
+
+function collectResponsiveGroupPaths(root, modes) {
+  const responsiveGroupPaths = [];
+
+  function hasEveryModeAsToken(node) {
+    return modes.every(
+      (mode) =>
+        Object.prototype.hasOwnProperty.call(node, mode) &&
+        isDtcgToken(node[mode])
+    );
+  }
+
+  function walk(node, currentPath = []) {
+    if (!isObject(node) || isDtcgToken(node)) {
+      return;
+    }
+
+    const groupPath = currentPath.join(".");
+
+    if (groupPath !== "breakpoint" && hasEveryModeAsToken(node)) {
+      responsiveGroupPaths.push(groupPath);
+    }
+
+    for (const [key, child] of Object.entries(node)) {
+      if (!key.startsWith("$")) {
+        walk(child, [...currentPath, key]);
+      }
+    }
+  }
+
+  walk(root);
+
+  return responsiveGroupPaths.filter(Boolean).sort();
+}
+
+function validateNonFigmaResponsiveGroups(
+  mapping,
+  detectedResponsiveGroupPaths,
+  mappedResponsiveGroupPaths
+) {
+  const fieldName = "nonFigmaResponsiveGroups";
+
+  if (!Array.isArray(mapping[fieldName])) {
+    throw new Error(
+      `tokens/figma/breakpoint-mapping.json must define a ${fieldName} array.`
+    );
+  }
+
+  const detectedResponsiveGroups = new Set(
+    detectedResponsiveGroupPaths
+  );
+  const mappedResponsiveGroups = new Set(mappedResponsiveGroupPaths);
+  const nonFigmaResponsiveGroups = new Set();
+  const errors = [];
+
+  for (const entry of mapping[fieldName]) {
+    const displayEntry =
+      typeof entry === "string" ? entry : JSON.stringify(entry);
+
+    if (typeof entry !== "string" || entry.trim() === "") {
+      errors.push(`- ${displayEntry} is not a non-empty string`);
+      continue;
+    }
+
+    if (nonFigmaResponsiveGroups.has(entry)) {
+      errors.push(`- ${entry} is listed more than once`);
+      continue;
+    }
+
+    nonFigmaResponsiveGroups.add(entry);
+
+    if (!detectedResponsiveGroups.has(entry)) {
+      errors.push(`- ${entry} is not a detected responsive group`);
+    }
+
+    if (mappedResponsiveGroups.has(entry)) {
+      errors.push(
+        `- ${entry} is already mapped to the Figma Breakpoint collection`
+      );
+    }
+  }
+
+  if (errors.length > 0) {
+    throw new Error(
+      `Invalid nonFigmaResponsiveGroups entries:\n${errors.join("\n")}`
+    );
+  }
+
+  return [...nonFigmaResponsiveGroups].sort();
+}
+
+function validateResponsiveGroupCoverage(
+  detectedResponsiveGroupPaths,
+  mappedResponsiveGroupPaths,
+  nonFigmaResponsiveGroupPaths
+) {
+  const declaredResponsiveGroups = new Set([
+    ...mappedResponsiveGroupPaths,
+    ...nonFigmaResponsiveGroupPaths
+  ]);
+
+  const unmappedResponsiveGroupPaths =
+    detectedResponsiveGroupPaths.filter(
+      (groupPath) => !declaredResponsiveGroups.has(groupPath)
+    );
+
+  if (unmappedResponsiveGroupPaths.length > 0) {
+    const details = unmappedResponsiveGroupPaths
+      .map((groupPath) => `- ${groupPath}`)
+      .join("\n");
+
+    throw new Error(
+      [
+        "Responsive token groups are not declared for Figma handling:",
+        details,
+        "",
+        "Add each group to tokens/figma/breakpoint-mapping.json as either:",
+        "- a mapped Breakpoint variable source, or",
+        "- an intentional nonFigmaResponsiveGroups entry."
+      ].join("\n")
+    );
+  }
+
+  return unmappedResponsiveGroupPaths;
+}
+
 /**
  * Delete one exact dot-separated path from an object.
  */
@@ -321,7 +468,7 @@ function pruneMetadataOnlyGroups(root) {
      * A real token must always be retained, including composite tokens whose
      * $value is itself an object.
      */
-    if (Object.prototype.hasOwnProperty.call(node, "$value")) {
+    if (isDtcgToken(node)) {
       return false;
     }
 
@@ -400,7 +547,7 @@ function validateRetainedAliases(tokens) {
       return;
     }
 
-    if (Object.prototype.hasOwnProperty.call(node, "$value")) {
+    if (isDtcgToken(node)) {
       inspectValue(node.$value, currentPath.join("."));
       return;
     }
@@ -443,7 +590,7 @@ function collectTokenPaths(root) {
       return;
     }
 
-    if (Object.prototype.hasOwnProperty.call(node, "$value")) {
+    if (isDtcgToken(node)) {
       tokenPaths.push(currentPath.join("."));
       return;
     }
@@ -477,20 +624,6 @@ function buildTokens() {
     }
   }
 
-  fs.mkdirSync(outputFolder, { recursive: true });
-
-  /*
-   * tokens.raw.json remains complete.
-   *
-   * All base, md and lg branches remain present for development,
-   * documentation, source control and AI interpretation.
-   */
-  writeJson(rawOutputFile, compiledTokens);
-
-  /*
-   * Start the Tokens Studio output as a clone of the full canonical tree.
-   */
-  const studioTokens = structuredClone(compiledTokens);
   const breakpointMapping = readJsonFile(breakpointMappingFile);
 
   /*
@@ -500,6 +633,33 @@ function buildTokens() {
     breakpointMapping,
     compiledTokens
   );
+
+  const detectedResponsiveGroupPaths = collectResponsiveGroupPaths(
+    compiledTokens,
+    breakpointMapping.modes
+  );
+
+  const mappedResponsiveGroupPaths =
+    deriveMappedResponsiveGroupPaths(excludedTokenPaths);
+
+  const nonFigmaResponsiveGroupPaths =
+    validateNonFigmaResponsiveGroups(
+      breakpointMapping,
+      detectedResponsiveGroupPaths,
+      mappedResponsiveGroupPaths
+    );
+
+  const unmappedResponsiveGroupPaths =
+    validateResponsiveGroupCoverage(
+      detectedResponsiveGroupPaths,
+      mappedResponsiveGroupPaths,
+      nonFigmaResponsiveGroupPaths
+    );
+
+  /*
+   * Start the Tokens Studio output as a clone of the full canonical tree.
+   */
+  const studioTokens = structuredClone(compiledTokens);
 
   /*
    * Remove those tokens only from the Tokens Studio-facing copy.
@@ -548,6 +708,16 @@ function buildTokens() {
     );
   }
 
+  fs.mkdirSync(outputFolder, { recursive: true });
+
+  /*
+   * tokens.raw.json remains complete.
+   *
+   * All base, md and lg branches remain present for development,
+   * documentation, source control and AI interpretation.
+   */
+  writeJson(rawOutputFile, compiledTokens);
+
   /*
    * Keep the existing single global Tokens Studio set.
    */
@@ -576,6 +746,19 @@ function buildTokens() {
 
   console.log(
     `Mode-managed token nodes excluded from Tokens Studio: ${excludedTokenPaths.length}`
+  );
+
+  console.log(
+    `Responsive groups detected: ${detectedResponsiveGroupPaths.length}`
+  );
+  console.log(
+    `Responsive groups mapped to Figma Breakpoint: ${mappedResponsiveGroupPaths.length}`
+  );
+  console.log(
+    `Responsive groups explicitly excluded from Figma: ${nonFigmaResponsiveGroupPaths.length}`
+  );
+  console.log(
+    `Unmapped responsive groups: ${unmappedResponsiveGroupPaths.length}`
   );
 
   console.log(`Retained aliases checked: ${checkedAliasCount}`);
