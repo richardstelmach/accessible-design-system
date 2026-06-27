@@ -263,6 +263,7 @@ It:
 - retains ordinary non-responsive tokens;
 - excludes responsive token nodes represented by Figma's `Breakpoint` collection;
 - derives responsive exclusions from `tokens/figma/breakpoint-mapping.json`;
+- validates that every complete responsive group is declared for Figma handling;
 - validates that retained aliases do not point to removed token nodes;
 - does not modify or flatten the canonical source structure.
 
@@ -402,6 +403,15 @@ The compiler uses each mode's `source` field to determine which token node is ex
 
 Fields such as `resolvedSource` and `semanticSource` are explanatory metadata and are not used as deletion instructions.
 
+The compiler also scans the complete canonical token tree for objects with direct `base`, `md` and `lg` DTCG token children.
+
+Every detected responsive group must be declared in one of two ways:
+
+- mapped to a Figma `Breakpoint` variable through the mapping's mode `source` fields;
+- listed in `nonFigmaResponsiveGroups` when it intentionally exists only in GitHub and is not represented through the Figma `Breakpoint` collection.
+
+Do not use `nonFigmaResponsiveGroups` to hide missing Figma work.
+
 ### Production text styles
 
 Production semantic text styles must not use breakpoint suffixes.
@@ -518,19 +528,25 @@ The build script:
    - `tokens/components`
    - `tokens/themes`
 2. Merges the complete token tree.
-3. Writes the complete tree to `tokens.raw.json`.
-4. Reads `tokens/figma/breakpoint-mapping.json`.
-5. Derives the responsive token nodes represented by Figma modes.
-6. Removes those nodes only from the Tokens Studio-facing copy.
-7. Prunes empty metadata-only groups.
-8. Checks retained aliases.
-9. Writes the filtered tree inside the `global` set in `tokens.studio.json`.
+3. Reads `tokens/figma/breakpoint-mapping.json`.
+4. Derives the responsive token nodes represented by Figma modes.
+5. Scans the complete canonical tree for full `base`, `md` and `lg` responsive groups.
+6. Validates that every detected group is mapped or explicitly listed in `nonFigmaResponsiveGroups`.
+7. Removes mapped responsive nodes only from the Tokens Studio-facing copy.
+8. Prunes empty metadata-only groups.
+9. Checks retained aliases.
+10. Writes the complete tree to `tokens.raw.json`.
+11. Writes the filtered tree inside the `global` set in `tokens.studio.json`.
 
 A successful build reports:
 
 - raw token count;
 - Tokens Studio token count;
 - number of mode-managed nodes excluded;
+- number of responsive groups detected;
+- number of responsive groups mapped to the Figma `Breakpoint` collection;
+- number of responsive groups explicitly excluded from Figma;
+- zero unmapped responsive groups;
 - number of retained aliases checked;
 - zero broken retained aliases;
 - the paths excluded from the Tokens Studio output.
@@ -545,6 +561,7 @@ The important invariants are:
 - the Studio output contains one `global` set;
 - mapped responsive nodes are absent from the Studio output;
 - mapped responsive nodes remain in the raw output;
+- detected responsive groups are either mapped or intentionally listed as non-Figma;
 - retained aliases resolve;
 - unrelated tokens remain unchanged.
 
@@ -575,6 +592,7 @@ Do not continue to Figma when the compiler reports:
 - a missing mapping source;
 - an unexpected token boundary;
 - a responsive group missing a required mode;
+- a responsive group that is not declared for Figma handling;
 - a retained alias pointing to a removed token.
 
 ---
@@ -1202,7 +1220,7 @@ Manually update the matching Figma Breakpoint variable
 Validate base, md and lg modes
 ```
 
-A responsive token is not complete until:
+A responsive token represented in Figma is not complete until:
 
 - all required source branches exist;
 - the mapping exists;
@@ -1210,6 +1228,10 @@ A responsive token is not complete until:
 - the Studio output excludes the branches;
 - the Figma Breakpoint variable exists;
 - all modes have been validated.
+
+The compiler fails when a complete responsive group is neither mapped nor listed in `nonFigmaResponsiveGroups`.
+
+Prefer adding the correct Breakpoint mapping. Use `nonFigmaResponsiveGroups` only when the group should intentionally remain GitHub-only.
 
 Do not use Tokens Studio to recreate responsive variable branches in `global`.
 
@@ -1311,6 +1333,19 @@ Check that:
 - they are absent from `tokens.studio.json`;
 - `breakpoint-mapping.json` contains all three modes;
 - Tokens Studio points to the latest `tokens.studio.json`.
+
+### Build fails because a responsive group is not declared
+
+The compiler scans the canonical token tree for complete responsive groups with direct `base`, `md` and `lg` DTCG token children.
+
+Every detected group must be declared for Figma handling.
+
+Valid fixes are:
+
+1. Add the appropriate Breakpoint mapping in `tokens/figma/breakpoint-mapping.json`.
+2. List the group under `nonFigmaResponsiveGroups` only when it is intentionally GitHub-only and should not be represented through the Figma `Breakpoint` collection.
+
+Do not use the allowlist to hide missing Figma work.
 
 ### Build fails because a breakpoint mapping source does not exist
 
@@ -1434,7 +1469,6 @@ The source decision must exist in GitHub and the mapping before the Figma value 
 This workflow may later evolve to include:
 
 - automated token validation;
-- automatic detection of unmapped responsive groups;
 - Style Dictionary transforms;
 - CSS variable output;
 - Tailwind configuration output;

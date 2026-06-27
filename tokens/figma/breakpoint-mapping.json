@@ -1,6 +1,7 @@
 {
   "collection": "Breakpoint",
   "modes": ["base", "md", "lg"],
+  "nonFigmaResponsiveGroups": [],
   "status": "manual",
   "sourceOfTruth": "GitHub tokens",
   "note": "Figma Breakpoint variables mirror GitHub responsive token branches. This collection is currently maintained manually while using the free Token Studio plan.",

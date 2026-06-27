@@ -20,6 +20,29 @@ sourceOfTruth:
 build:
   command: node scripts/build-tokens.mjs
   breakpointMapping: tokens/figma/breakpoint-mapping.json
+  responsiveGroupCoverage:
+    detectionSource: complete-canonical-token-tree
+    modesSource: tokens/figma/breakpoint-mapping.json#modes
+    groupDefinition:
+      - directly owns every configured mode key
+      - each mode child is a DTCG token with $value
+      - metadata keys are allowed
+      - DTCG token subtrees are not traversed
+      - primitive breakpoint group is excluded
+    mappedGroups:
+      derivedFrom: variable.modes.*.source
+      pathRule: owning-token-parent-path
+      ignoredMetadata:
+        - semanticSource
+        - resolvedSource
+        - fontSizeSource
+        - requiresGitHubUpdate
+    nonFigmaGroups:
+      field: tokens/figma/breakpoint-mapping.json#nonFigmaResponsiveGroups
+      purpose: intentional-github-only-responsive-groups
+      mustNotHideMissingFigmaWork: true
+    failurePolicy: undeclared-responsive-groups-fail-build
+    validateBeforeWritingOutputs: true
 
 outputs:
   canonical:
@@ -52,6 +75,7 @@ figma:
       managedBy: manual
       sourceOfTruth: github
       mapping: tokens/figma/breakpoint-mapping.json
+      nonFigmaResponsiveGroups: tokens/figma/breakpoint-mapping.json#nonFigmaResponsiveGroups
       modes:
         - base
         - md
@@ -122,6 +146,7 @@ workflows:
   responsiveTokenChange:
     - edit-base-md-lg-source-branches
     - update-breakpoint-mapping
+    - declare-responsive-group-as-mapped-or-intentionally-non-figma
     - run-build
     - confirm-responsive-branches-in-raw-output
     - confirm-mapped-branches-absent-from-tokens-studio-output
@@ -145,6 +170,11 @@ validation:
     - tokens.studio.json excludes mapped responsive tokens
     - retained aliases resolve
     - Breakpoint collection uses base, md and lg modes
+    - every detected responsive group is mapped or listed as non-Figma
+    - nonFigmaResponsiveGroups is an array of unique non-empty strings
+    - nonFigmaResponsiveGroups entries match detected responsive groups
+    - nonFigmaResponsiveGroups entries do not overlap mapped Breakpoint groups
+    - undeclared responsive groups fail the build before compiled outputs are written
     - active Figma bindings do not reference deleted variables
     - production semantic text styles do not use breakpoint suffixes
 
