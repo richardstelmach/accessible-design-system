@@ -987,13 +987,6 @@
         }
       },
       "legend": {
-        "typography": {
-          "compact": {
-            "$value": "{typography.label.default}",
-            "$type": "typography",
-            "$description": "Compact legend typography for dense grouped controls such as filters, cards or settings panels."
-          }
-        },
         "color": {
           "$value": "{color.text.default}",
           "$type": "color",
