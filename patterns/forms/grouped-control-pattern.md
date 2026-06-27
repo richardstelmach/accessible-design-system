@@ -2,21 +2,26 @@
 
 Use the grouped control pattern when several controls answer one shared question.
 
+Fieldset is the semantic grouping primitive for this pattern. It uses a native `<fieldset>` and `<legend>`.
+
 ## Use this pattern for
 
-- radio group
-- checkbox group
+- radio groups
+- checkbox groups
 - date of birth
-- address group
+- address groups
 - multi-part questions
+- genuine parent-child grouped questions
 
 ## Core rule
 
-A grouped control uses a `fieldset` and `legend`.
+A grouped control uses a native `<fieldset>` and `<legend>`.
 
 The legend gives the group its accessible question or purpose.
 
 Each child control may still need its own label.
+
+Do not use Fieldset as a generic layout wrapper.
 
 ## Anatomy
 
@@ -25,9 +30,20 @@ Grouped form control
 ├── Fieldset
 │   ├── Legend
 │   ├── Group helper text, optional
-│   ├── Group error message, optional
-│   └── Related controls
+│   ├── Group error message, error state only
+│   └── Content slot
 ```
+
+Required order:
+
+1. Legend
+2. Group helper text, when present
+3. Group error message, when present
+4. Content slot
+
+The content slot contains the related controls or grouped child component that answers the legend question.
+
+Omitted optional elements must not leave empty markup or empty spacing.
 
 ## Label and legend distinction
 
@@ -37,7 +53,133 @@ A label identifies an individual control.
 
 They are not interchangeable.
 
-## Example: radio group
+The legend does not replace child labels. Child labels remain present where the child component requires them.
+
+## Heading semantics
+
+Plain legend text is the default.
+
+A heading may be nested inside the legend when the grouped question genuinely participates in the page heading structure.
+
+Do not add a heading to every legend automatically.
+
+Do not choose a heading level only for visual size.
+
+Do not duplicate identical text in a heading before the Fieldset and in the legend.
+
+Visual legend style and semantic heading level are separate decisions.
+
+## Required, optional and mixed groups
+
+Fields are required unless marked optional.
+
+Required grouped controls do not need `(required)` in the legend by default.
+
+Optional grouped controls include `(optional)` in the visible legend.
+
+Mixed groups are used when child controls have different requirement states. Do not add `(required)` or `(optional)` to the group legend in a mixed group; child labels communicate their own statuses.
+
+Fieldset itself does not support the native `required` attribute. Required implementation belongs to child controls or to the grouped child component.
+
+## Group helper text
+
+Group helper text is optional.
+
+Place it after the legend and before any group error.
+
+Give it a stable ID and reference it from the Fieldset using `aria-describedby`.
+
+Do not automatically repeat group helper text on every child control. Child-specific help stays with the relevant child.
+
+## Group errors
+
+Grouped controls can have different error ownership.
+
+### Whole-group error
+
+Use a group-level error when the whole grouped answer is missing or invalid.
+
+Examples:
+
+- no required Radio selected;
+- no required Checkbox selected;
+- no part of a required group answered.
+
+Associate the group error with the Fieldset using `aria-describedby`.
+
+Do not make the Fieldset focusable. Do not apply `aria-invalid` to the Fieldset by default.
+
+### Child-field error
+
+Use a child-field error when one child control is invalid.
+
+Examples:
+
+- Date of birth year is missing;
+- one address field contains an invalid value.
+
+The affected child component owns the error, error association and `aria-invalid` behaviour.
+
+Do not create a vague group error just because one child is invalid.
+
+### Combination error
+
+Use a group-level error when the combined answer is invalid.
+
+Examples:
+
+- the entered date is not real;
+- a start date is later than an end date;
+- two answers conflict.
+
+Associate the message with the Fieldset. The child component contract determines whether any individual children also receive invalid treatment.
+
+## Helper and error association
+
+When helper text and a group error are both present, include both IDs in `aria-describedby`.
+
+Put the helper ID before the error ID:
+
+```html
+<fieldset aria-describedby="dob-hint dob-error">
+  <legend>What is your date of birth?</legend>
+  ...
+</fieldset>
+```
+
+## Error summary targeting
+
+An error summary supplements inline errors. It does not replace them.
+
+Error-summary links normally target the first relevant interactive child or a documented grouped-control target, not the non-focusable Fieldset.
+
+Do not add `tabindex` to Fieldset merely to make it a summary target.
+
+## Disabled Fieldset
+
+Use native `disabled` only when the whole group is unavailable.
+
+Native descendant controls become disabled and are not submitted.
+
+Disabled is not read-only.
+
+Child components own disabled visual presentation.
+
+Do not rely on opacity alone.
+
+## Nested Fieldsets
+
+Nested Fieldsets are allowed only for a genuine parent-child question structure.
+
+Every nested Fieldset needs its own legend.
+
+Avoid nesting where separate sibling Fieldsets would be clearer.
+
+Do not nest Fieldsets merely to create spacing or borders.
+
+Test nested groups with screen readers because repeated group announcements can become verbose.
+
+## Example: Radio group
 
 ```text
 Legend: How would you like to be contacted?
@@ -46,7 +188,7 @@ Radio label: Phone
 Radio label: Post
 ```
 
-## Example: date of birth
+## Example: Date of birth
 
 ```text
 Legend: What is your date of birth?
@@ -86,19 +228,3 @@ Label: Year
   >
 </fieldset>
 ```
-
-## Rules
-
-Use `fieldset` and `legend` when several controls answer one shared question.
-
-Do not use a legend for a single standalone control.
-
-Do not use a label as a substitute for a group legend.
-
-Do not use a legend as a substitute for every child label.
-
-Associate group helper text with the group.
-
-Associate group-level errors with the group.
-
-Associate child-field errors with the specific invalid child field.

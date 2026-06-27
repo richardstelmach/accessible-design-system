@@ -16,6 +16,8 @@ List each error.
 
 Each error should link to the relevant field or group.
 
+For grouped controls, the link normally targets a relevant interactive child or a documented grouped-control target rather than the non-focusable Fieldset.
+
 Each field or group should still show its own inline error.
 
 The error summary does not replace inline errors.
@@ -44,9 +46,12 @@ Radio group error → link to the first radio option or group target
 Checkbox group error → link to the first checkbox option or group target
 Date of birth specific error → link to the specific field
 Date of birth whole-date error → link to the first field in the group
+Combination error → link to the first relevant child
 Address specific error → link to the specific field
 Address whole-group error → link to the first relevant field in the group
 ```
+
+Do not add `tabindex` to a Fieldset merely to make it an error-summary target.
 
 ## Focus behaviour
 
@@ -63,6 +68,8 @@ When focus lands on an invalid field, the associated error should be available t
 The error summary does not replace inline errors.
 
 Each invalid field or group must still show its own inline error message.
+
+For a Fieldset group-level error, keep the inline group error associated with the Fieldset using `aria-describedby`.
 
 ## Error wording
 

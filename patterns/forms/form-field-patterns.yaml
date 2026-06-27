@@ -114,6 +114,7 @@ patterns:
     description: >
       Use when several controls answer one shared question.
     appliesTo:
+      - fieldset
       - radio-group
       - checkbox-group
       - date-of-birth
@@ -124,19 +125,40 @@ patterns:
       - legend
       - groupHelperText
       - groupErrorMessage
-      - relatedControls
+      - contentSlot
+    terminology:
+      contentSlot: >
+        Generic slot for controls or grouped components that answer the shared
+        legend question. Earlier references to relatedControls are equivalent.
+    order:
+      - legend
+      - groupHelperText
+      - groupErrorMessage
+      - contentSlot
     rules:
-      - Use fieldset and legend when several controls answer one shared question.
-      - The legend describes the group.
+      - Use a native fieldset and legend when several controls answer one shared question.
+      - Fieldset is the semantic grouping primitive for grouped controls.
+      - The native legend must be the first direct child of the fieldset.
+      - The legend describes the whole group.
       - Each child control may still need its own label.
-      - Group helper text should be associated with the fieldset or group.
-      - Group-level errors should be associated with the fieldset or group.
+      - Group helper text should be associated with the fieldset using aria-describedby.
+      - Group-level errors should be associated with the fieldset using aria-describedby.
+      - When helper and error text are both present, list the helper ID before the error ID in aria-describedby.
       - Child-field errors should be associated with the specific invalid child field.
+      - Summary links normally target the first relevant interactive child or a documented grouped-control target, not the non-focusable fieldset.
+      - Do not make the fieldset focusable.
+      - Do not add role="group" to the native fieldset.
+      - Do not use fieldset as a generic layout container.
+      - Use native disabled fieldset behaviour only when the whole group is unavailable.
     requiredImplementation:
-      fieldset: true
-      legend: true
+      nativeFieldset: true
+      nativeLegend: true
+      legendFirstDirectChild: true
+      groupAccessibleName: true
+      childLabelsPreserved: true
       describedByForGroupHelper: true
       describedByForGroupError: true
+      contentRelatedToLegend: true
 
 labels:
   purpose: Identify individual form controls.
@@ -169,24 +191,71 @@ legends:
   purpose: Identify a group of related controls inside a fieldset.
   rules:
     - Use a legend for a fieldset.
+    - The legend must be the first direct child of the fieldset.
     - Do not use a legend for a standalone control.
     - Do not use a label as a substitute for a group legend.
     - Do not use a legend as a substitute for every child label.
+    - Keep the legend visible by default.
+    - Do not put interactive content inside the legend.
     - Legends may have different visual sizes depending on context.
     - Legend typography variants must not change the semantic purpose of the legend.
+    - Semantic heading level and visual legend style are separate decisions.
+    - A legend may contain one heading element when the grouped question genuinely participates in the document heading structure.
+    - Allowed semantic heading levels are none and h1 through h6.
+    - Do not choose a heading level only for visual size.
+    - Do not duplicate identical text in a separate heading before the fieldset and in the legend.
   typographyVariants:
+    page:
+      tokens:
+        base: form.legend.typography.page.base
+        md: form.legend.typography.page.md
+        lg: form.legend.typography.page.lg
+      use: Grouped question that is also the page heading.
+      visualMapping: H1-aligned responsive typography.
     default:
-      token: form.legend.typography.default
-      use: Standard grouped form controls.
+      tokens:
+        base: form.legend.typography.default.base
+        md: form.legend.typography.default.md
+        lg: form.legend.typography.default.lg
+      use: Plain default legend or grouped question directly beneath the page heading.
+      visualMapping: H2-aligned responsive typography.
     section:
-      token: form.legend.typography.section
+      tokens:
+        base: form.legend.typography.section.base
+        md: form.legend.typography.section.md
+        lg: form.legend.typography.section.lg
       use: Grouped question inside a larger H2-level section.
+      visualMapping: H3-aligned responsive typography.
     subsection:
-      token: form.legend.typography.subsection
+      tokens:
+        base: form.legend.typography.subsection.base
+        md: form.legend.typography.subsection.md
+        lg: form.legend.typography.subsection.lg
       use: Grouped question inside a larger H3-level subsection.
+      visualMapping: H4-aligned responsive typography.
     compact:
-      token: form.legend.typography.compact
+      tokens:
+        base: form.legend.typography.compact.base
+        md: form.legend.typography.compact.md
+        lg: form.legend.typography.compact.lg
       use: Dense grouped controls such as filters, cards or settings panels.
+      visualMapping: Responsive form-label typography.
+  headingBehaviour:
+    default: none
+    allowed:
+      - none
+      - h1
+      - h2
+      - h3
+      - h4
+      - h5
+      - h6
+    recommendedPairings:
+      page: h1
+      default: h2 or none
+      section: h3
+      subsection: h4
+      compact: none
 
 helperText:
   required: false
@@ -196,6 +265,10 @@ helperText:
     - Helper text should sit between the label or legend and the control.
     - Helper text should be short.
     - Helper text must be associated with the control or group using aria-describedby.
+    - For grouped controls, group helper text appears after the legend and before any group error.
+    - For grouped controls, give group helper text a stable ID and reference it from the fieldset.
+    - When group helper text and a group error are both present, put the helper ID before the error ID in aria-describedby.
+    - Do not automatically repeat group helper text on every child control.
     - Helper text must not repeat the label.
     - Helper text must not replace the label.
   goodUses:
@@ -225,6 +298,26 @@ requiredAndOptional:
     - Do not rely on colour alone.
     - Do not hide required or optional status from assistive technology.
     - Keep wording consistent across all field types.
+  groupedControls:
+    required:
+      legendSuffix: none
+      fieldsetRequiredAttribute: false
+      rules:
+        - Fieldset does not support the native required attribute.
+        - Required implementation remains with the child controls or grouped component.
+        - Do not add "(required)" to the legend by default.
+    optional:
+      legendSuffix: "(optional)"
+      rules:
+        - Put "(optional)" in the visible legend.
+        - The optional wording must be part of the group accessible name.
+    mixed:
+      legendSuffix: none
+      rules:
+        - Use when child controls have different requirement statuses.
+        - Do not add "(required)" or "(optional)" to the group legend.
+        - Child labels communicate their own statuses.
+        - Do not describe the whole group as required or optional when that would be misleading.
 
 validation:
   inlineErrors:
@@ -247,16 +340,29 @@ validation:
   groupErrors:
     wholeGroupInvalid:
       example: Radio or checkbox group where no option has been selected.
-      association: fieldsetOrGroup
-      summaryTarget: firstInteractiveControlOrGroupTarget
+      association: fieldsetAriaDescribedBy
+      fieldsetAriaInvalidDefault: false
+      summaryTarget: firstRelevantInteractiveChildOrDocumentedGroupTarget
+      rules:
+        - Use one group error when the grouped answer as a whole is missing or invalid.
+        - Do not make the fieldset focusable.
     childFieldInvalid:
       example: Date of birth is missing a year.
       association: specificInvalidChildField
       summaryTarget: specificInvalidChildField
+      rules:
+        - The affected child component owns the error.
+        - Do not create a second vague group error merely because one child is invalid.
     combinationInvalid:
       example: Date of birth is not a real date or is in the future.
-      association: fieldsetOrGroup
-      summaryTarget: firstRelevantFieldInGroup
+      association: fieldsetAriaDescribedBy
+      summaryTarget: firstRelevantInteractiveChild
+      rules:
+        - Use a group-level message when the error concerns the combined answer.
+        - The child component contract determines whether individual children also receive invalid treatment.
+    describedByOrder:
+      - groupHelperText
+      - groupErrorMessage
 
 errorSummary:
   useWhen:
@@ -277,8 +383,13 @@ errorSummary:
     checkboxGroupError: firstCheckboxOptionOrGroupTarget
     dateOfBirthSpecificError: specificField
     dateOfBirthWholeDateError: firstFieldInGroup
+    combinationError: firstRelevantInteractiveChild
     addressSpecificError: specificField
     addressWholeGroupError: firstRelevantFieldInGroup
+  groupedControlRules:
+    - Summary links normally target an interactive child rather than a non-focusable fieldset.
+    - Do not add tabindex to the fieldset merely to make it an error-summary target.
+    - Inline group and child errors remain visible when an error summary is present.
 
 focusManagement:
   rules:
@@ -366,10 +477,26 @@ tokens:
     typography: form.label.typography
     color: form.label.color
   legend:
-    typographyDefault: form.legend.typography.default
-    typographySection: form.legend.typography.section
-    typographySubsection: form.legend.typography.subsection
-    typographyCompact: form.legend.typography.compact
+    typographyPage:
+      base: form.legend.typography.page.base
+      md: form.legend.typography.page.md
+      lg: form.legend.typography.page.lg
+    typographyDefault:
+      base: form.legend.typography.default.base
+      md: form.legend.typography.default.md
+      lg: form.legend.typography.default.lg
+    typographySection:
+      base: form.legend.typography.section.base
+      md: form.legend.typography.section.md
+      lg: form.legend.typography.section.lg
+    typographySubsection:
+      base: form.legend.typography.subsection.base
+      md: form.legend.typography.subsection.md
+      lg: form.legend.typography.subsection.lg
+    typographyCompact:
+      base: form.legend.typography.compact.base
+      md: form.legend.typography.compact.md
+      lg: form.legend.typography.compact.lg
     color: form.legend.color
   helper:
     typography: form.helper.typography

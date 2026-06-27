@@ -10,9 +10,11 @@ The error should explain what went wrong.
 
 Where possible, the error should explain how to fix it.
 
-The error must be associated with the control using `aria-describedby`.
+The error must be associated with the relevant control or group using `aria-describedby`.
 
 Invalid controls should use `aria-invalid="true"`.
+
+For Fieldset group-level errors, associate the error with the Fieldset using `aria-describedby`. Do not apply `aria-invalid` to the Fieldset by default.
 
 Do not rely on colour alone.
 
@@ -28,6 +30,17 @@ Helper text, optional
 Error message
 Control
 ```
+
+Use this order for a grouped control:
+
+```text
+Legend
+Helper text, optional
+Group error message
+Related controls
+```
+
+When helper and error text are both present, put the helper ID before the error ID in `aria-describedby`.
 
 ## Single field error example
 
@@ -106,6 +119,14 @@ Pattern:
 </fieldset>
 ```
 
+Rules:
+
+- show one group-level error;
+- associate it with the Fieldset using `aria-describedby`;
+- do not make the Fieldset focusable;
+- do not apply `aria-invalid` to the Fieldset by default;
+- preserve the user's existing selections and values.
+
 ### One child field is invalid
 
 Example:
@@ -120,6 +141,7 @@ Pattern:
 - the group has a legend
 - the specific invalid child field has the error association
 - the invalid child field uses `aria-invalid="true"`
+- do not create a second vague Fieldset error merely because one child is invalid
 
 Example:
 
@@ -162,8 +184,9 @@ Error: Date of birth must be in the past.
 Pattern:
 
 - treat this as a group-level error
-- associate the error with the group
-- the error summary link should usually target the first field in the group
+- associate the error with the Fieldset using `aria-describedby`
+- the error summary link should usually target the first relevant interactive control
+- the child component contract determines whether relevant child controls also receive invalid styling or `aria-invalid`
 
 Example:
 
@@ -186,3 +209,28 @@ Example:
   <input id="dob-year" name="dob-year" inputmode="numeric">
 </fieldset>
 ```
+
+## Group helper text with errors
+
+When a grouped control has both helper text and a group error, keep the helper visible when it still helps users correct the answer.
+
+List the helper ID first and the error ID second:
+
+```html
+<fieldset aria-describedby="contact-hint contact-error">
+  <legend>How would you like to be contacted?</legend>
+  ...
+</fieldset>
+```
+
+## Error summary targets
+
+An error summary supplements inline errors. Inline field and group errors remain visible.
+
+Summary wording should match or clearly correspond to the inline error.
+
+For group-level Fieldset errors, the summary link normally targets the first relevant interactive child or a documented grouped-control target.
+
+For child-field errors, the summary link targets the invalid child.
+
+Do not add `tabindex` to Fieldset merely to make it an error-summary target.
