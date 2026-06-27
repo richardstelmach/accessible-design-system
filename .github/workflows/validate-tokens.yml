@@ -1,0 +1,61 @@
+name: Validate compiled tokens
+
+on:
+  pull_request:
+    paths:
+      - "tokens/**"
+      - "scripts/build-tokens.mjs"
+      - ".github/workflows/validate-tokens.yml"
+
+  push:
+    branches:
+      - main
+    paths:
+      - "tokens/**"
+      - "scripts/build-tokens.mjs"
+      - ".github/workflows/validate-tokens.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-tokens-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Build and compare token outputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build tokens
+        run: node scripts/build-tokens.mjs
+
+      - name: Confirm compiled outputs are current
+        shell: bash
+        run: |
+          if [[ -n "$(git status --porcelain -- tokens/compiled)" ]]; then
+            echo "::error::Compiled token files are out of date."
+            echo ""
+            echo "Run this command locally:"
+            echo "  node scripts/build-tokens.mjs"
+            echo ""
+            echo "Then review and commit the generated changes in tokens/compiled/."
+            echo ""
+            git status --short -- tokens/compiled
+            git diff -- tokens/compiled
+            exit 1
+          fi
+
+          echo "Compiled token outputs are current."
