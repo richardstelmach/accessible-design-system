@@ -1,0 +1,886 @@
+component: Fieldset
+id: fieldset
+version: 0.1.0
+status: draft
+
+description: >
+  Fieldset groups related form controls that answer one shared question. It
+  uses native fieldset and legend elements, supports optional group helper text
+  and group-level errors, and provides a generic content slot for related form
+  components.
+
+purpose:
+  - Group several related controls under one shared question.
+  - Expose the group relationship programmatically.
+  - Provide a mandatory legend for every grouped question.
+  - Support optional group helper text.
+  - Support group-level validation without replacing child-field validation.
+  - Support a generic content slot for related form controls or grouped components.
+  - Support legends that may also participate in the document heading hierarchy.
+  - Provide a reusable foundation for Radio group, Checkbox group, Date of birth, Address group and other multi-part questions.
+
+sourceDocumentation:
+  sharedPattern:
+    - patterns/forms/form-field-patterns.yaml
+  humanReadable:
+    - patterns/forms/grouped-control-pattern.md
+    - patterns/forms/legends-and-fieldsets.md
+    - patterns/forms/helper-text.md
+    - patterns/forms/required-and-optional.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/error-summary.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/tokens.md
+
+relatedDocumentation:
+  - patterns/forms/form-field-patterns.yaml
+  - patterns/forms/grouped-control-pattern.md
+  - patterns/forms/legends-and-fieldsets.md
+  - patterns/forms/helper-text.md
+  - patterns/forms/required-and-optional.md
+  - patterns/forms/validation-and-errors.md
+  - patterns/forms/error-summary.md
+  - patterns/forms/focus-management.md
+  - patterns/forms/tokens.md
+  - patterns/form-layout.yaml
+
+conceptualConsumers:
+  status: future-components
+  rules:
+    - These consumers describe intended reuse and do not claim implemented component files.
+  examples:
+    - Radio group
+    - Checkbox group
+    - Date of birth
+    - Address group
+    - Other multi-part questions
+
+scope:
+  includes:
+    - Native HTML fieldsets
+    - A mandatory native legend
+    - Related groups of form controls
+    - Radio groups
+    - Checkbox groups
+    - Date of birth and other multi-part inputs
+    - Address and related-field groups
+    - Optional group helper text
+    - Group-level inline errors
+    - Required, optional and mixed-requirement groups
+    - Plain legends
+    - Legends containing a semantically appropriate heading
+    - Disabled fieldset semantics
+    - Generic slotted child content
+  excludes:
+    - Standalone single controls that should use a label
+    - Using Fieldset purely for visual layout
+    - Arbitrary page content unrelated to one shared form question
+    - Child control implementation
+    - Radio, Checkbox, Text Input, Select or Date Input interaction behaviour
+    - Child-field labels
+    - Child-field focus states
+    - Child-field validation styling
+    - Page-level error summary implementation
+    - Automatic form validation business logic
+    - Unconditional or unnecessary nested fieldsets
+    - A standalone published Legend component API
+
+principles:
+  - Use Fieldset when several controls answer one shared question.
+  - Do not use Fieldset as a generic layout container.
+  - Use a native fieldset element.
+  - The first direct child must be a native legend element.
+  - The legend identifies the whole group.
+  - The legend does not replace labels required by child controls.
+  - A standalone control should use a label rather than a legend.
+  - Helper text is optional.
+  - Group error text is shown only when the group has a group-level error.
+  - Child-field errors remain owned by the affected child component.
+  - Visual grouping must not replace native semantics.
+  - Related controls in the slot must all relate to the legend.
+  - Avoid unnecessary nested fieldsets.
+  - Do not make the Fieldset focusable.
+  - Do not add an explicit ARIA role to native fieldset or legend elements.
+  - Do not rely on colour alone for errors or disabled states.
+
+pattern:
+  type: grouped-control
+  anatomy:
+    - fieldset
+    - legend
+    - groupHelperText
+    - groupErrorMessage
+    - contentSlot
+  order:
+    - legend
+    - groupHelperText
+    - groupErrorMessage
+    - contentSlot
+  requiredImplementation:
+    nativeFieldset: true
+    nativeLegend: true
+    legendFirstDirectChild: true
+    groupAccessibleName: true
+    childLabelsPreserved: true
+    describedByForGroupHelper: true
+    describedByForGroupError: true
+    contentRelatedToLegend: true
+  rules:
+    - The public component is Fieldset.
+    - Legend is mandatory anatomy within Fieldset.
+    - Omitted optional elements must not leave empty spacing or empty DOM nodes.
+    - Unrelated content must not appear between the legend, helper, error and related controls.
+
+defaults:
+  state: default
+  requirement: required
+  legendStyle: default
+  headingLevel: none
+  helperText: false
+
+anatomy:
+  fieldset:
+    description: >
+      Native grouped form container for controls that answer one shared
+      question.
+    element: fieldset
+    layout: vertical-stack
+    required: true
+    rules:
+      - Do not remove native group semantics.
+      - Reset browser-default visual border, margin and padding only if the design system supplies the layout explicitly.
+      - Resetting visual styles must not remove semantics.
+      - Do not add a decorative border by default.
+      - Do not give the Fieldset a focus state.
+      - Do not add tabindex.
+      - Width is controlled by the parent form layout.
+      - Use Fill container in Figma.
+      - Allow content to determine block size.
+      - Allow legend, helper and error text to wrap.
+      - Do not truncate critical text.
+
+  legend:
+    description: >
+      Native legend that gives the Fieldset its visible and programmatic group
+      name.
+    element: legend
+    required: true
+    tokens:
+      color: form.legend.color
+      typography:
+        page: form.legend.typography.page
+        default: form.legend.typography.default
+        section: form.legend.typography.section
+        subsection: form.legend.typography.subsection
+        compact: form.legend.typography.compact
+    rules:
+      - The legend must be the first direct child of the Fieldset.
+      - It must clearly identify the shared question or purpose.
+      - It must not be empty.
+      - It must remain visible by default.
+      - It must not be replaced by placeholder text.
+      - It must not be replaced by child labels.
+      - It must not contain interactive content.
+      - It must not contain links, buttons, inputs or focusable descendants.
+      - Optional wording must be included in the visible legend when applicable.
+      - Allow the legend text to wrap.
+      - Do not truncate the legend.
+      - Typography changes visual hierarchy but not the semantic purpose of the legend.
+
+  groupHelperText:
+    description: >
+      Optional supporting text that helps users answer the grouped question
+      correctly.
+    required: false
+    tokens:
+      typography: form.helper.typography
+      color: form.helper.color
+    rules:
+      - Place it directly after the legend.
+      - Place it before any group error.
+      - Use it only when it helps users answer correctly.
+      - Use it for constraints, examples, source information or how an answer will be used.
+      - Keep it visible during completion and after validation.
+      - Do not repeat or replace the legend.
+      - Do not use placeholder text.
+      - Give it a stable ID.
+      - Include its ID in the Fieldset's aria-describedby.
+      - Do not automatically repeat the shared helper text on every child control.
+      - Child controls may have their own additional descriptions when needed.
+
+  groupErrorMessage:
+    description: >
+      Inline validation message shown when the grouped answer has a group-level
+      error.
+    requiredWhenGroupErrorExists: true
+    tokens:
+      typography: form.error.typography
+      color: form.error.color
+      background: form.error.background
+    rules:
+      - Place the error after helper text when helper text exists.
+      - Otherwise place it directly after the legend.
+      - Place it before the slotted controls.
+      - Write it in specific, actionable text.
+      - Explain what went wrong.
+      - Explain how to correct it where possible.
+      - Give it a stable ID.
+      - Include its ID in the Fieldset's aria-describedby.
+      - Keep the inline group error visible when an error summary is present.
+      - Do not rely on colour alone.
+      - Use an accessible "Error:" cue where required by the shared pattern.
+      - Do not duplicate child-field errors as vague group errors.
+
+  contentSlot:
+    description: >
+      Contains the related form controls or grouped component that answer the
+      legend's shared question.
+    required: true
+    type: slot
+    rules:
+      - All slotted content must relate to the legend.
+      - Child controls retain their own visible labels where needed.
+      - Child controls retain their own semantics, states and validation.
+      - The slot fills the available inline size.
+      - The slot hugs its content vertically.
+      - The slot must not impose one universal child layout.
+      - The slotted component controls whether children use vertical, horizontal or grid layout.
+      - Do not create content-type variants such as Radio, Checkbox, Date or Address.
+      - Do not place arbitrary prose, navigation, actions or unrelated content in the slot.
+      - Avoid nested Fieldsets unless explicitly required.
+
+legendStyle:
+  default: default
+  allowed:
+    - page
+    - default
+    - section
+    - subsection
+    - compact
+  options:
+    page:
+      description: Legend used for a grouped question that is also the page heading.
+      typography: form.legend.typography.page
+      intendedUse: Uses responsive H1-aligned legend typography.
+    default:
+      description: Default plain legend or H2-level grouped question directly beneath the page heading.
+      typography: form.legend.typography.default
+      intendedUse: Uses responsive H2-aligned legend typography.
+    section:
+      description: Grouped question nested inside an H2-level section.
+      typography: form.legend.typography.section
+      intendedUse: Uses responsive H3-aligned legend typography.
+    subsection:
+      description: Grouped question nested inside an H3-level subsection.
+      typography: form.legend.typography.subsection
+      intendedUse: Uses responsive H4-aligned legend typography.
+    compact:
+      description: Dense groups such as filters, cards and settings panels.
+      typography: form.legend.typography.compact
+      intendedUse: Uses responsive form-label typography.
+  rules:
+    - The default Fieldset configuration uses legendStyle default.
+    - Do not add new typography tokens.
+    - Do not choose a legend style only to obtain a semantic heading level.
+
+headingBehaviour:
+  defaultHeadingLevel: none
+  allowedHeadingLevels:
+    - none
+    - h1
+    - h2
+    - h3
+    - h4
+    - h5
+    - h6
+  recommendedPairings:
+    page: h1
+    default: h2
+    section: h3
+    subsection: h4
+    compact: none
+  rules:
+    - When headingLevel is none, the legend contains plain text and does not enter the document heading hierarchy.
+    - A plain legend may still use the default H2-aligned visual style.
+    - When a heading is required, the heading element must be nested inside the native legend.
+    - Do not place a duplicate heading immediately before the Fieldset.
+    - Do not repeat identical text in a separate heading and legend.
+    - Select the heading level from the real document hierarchy.
+    - Never select a heading level only to obtain a visual size.
+    - Do not skip heading levels merely because a preferred style is smaller.
+    - Visual legend style and semantic heading level are separate decisions.
+    - h5 and h6 are allowed when the genuine document structure requires them.
+    - Do not add H5- or H6-specific Fieldset tokens in this task.
+    - If repeated real usage proves a dedicated H5 or H6 legend style is needed, report it as a future token decision.
+    - Do not put more than one heading element inside the legend.
+    - Do not put arbitrary block content inside the legend.
+  structureExamples:
+    plainLegend:
+      valid: true
+      html: |
+        <fieldset>
+          <legend>What is your address?</legend>
+          ...
+        </fieldset>
+    headingInsideLegend:
+      valid: true
+      html: |
+        <fieldset>
+          <legend>
+            <h2>What is your address?</h2>
+          </legend>
+          ...
+        </fieldset>
+    duplicateHeadingBeforeFieldset:
+      valid: false
+      reason: Do not include a separate identical H2 before the Fieldset.
+
+requirement:
+  default: required
+  allowed:
+    - required
+    - optional
+    - mixed
+  required:
+    legendSuffix: none
+    fieldsetRequiredAttribute: false
+    rules:
+      - No visible suffix is shown by default.
+      - Fieldset itself does not support a native required attribute.
+      - Child components own their required implementation.
+      - Do not put required on the fieldset.
+      - Do not use an asterisk alone.
+      - Do not rely on colour.
+  optional:
+    legendSuffix: "(optional)"
+    rules:
+      - Append "(optional)" to the visible legend.
+      - The optional wording must be part of the group's accessible name.
+      - Child components must not contradict the optional group status.
+  mixed:
+    legendSuffix: none
+    rules:
+      - Use when child controls have different requirement statuses.
+      - Do not append "(required)" or "(optional)" to the group legend.
+      - Each child label communicates its own status.
+      - Do not describe the whole group as required or optional when that would be misleading.
+
+accessibleName:
+  required: true
+  method: native-legend
+  rules:
+    - The visible legend provides the Fieldset's group name.
+    - Do not replace the legend with aria-label.
+    - Do not duplicate the group name with aria-label or aria-labelledby when the native legend provides it.
+    - Optional wording must be visible in the legend when the group is optional.
+
+accessibleDescription:
+  groupHelperText:
+    method: aria-describedby
+  groupErrorText:
+    method: aria-describedby
+  idOrder:
+    - groupHelperText
+    - groupErrorText
+  example: |
+    <fieldset aria-describedby="contact-hint contact-error">
+  rules:
+    - Omit aria-describedby when neither helper nor group error exists.
+    - When helper text exists, include its ID.
+    - When a group error exists, include its ID.
+    - When both exist, list helper ID first and error ID second.
+    - Do not reference hidden, missing or unrelated elements.
+    - Do not overwrite child-control descriptions.
+    - Child controls retain their own aria-describedby values.
+
+validation:
+  ownership: shared-between-fieldset-and-slotted-children
+
+  wholeGroupError:
+    examples:
+      - No required Radio selected
+      - No required Checkbox selected
+      - The user has not answered any part of a required group
+    rules:
+      - Show one inline group error.
+      - Associate it with the Fieldset using aria-describedby.
+      - Do not apply aria-invalid to the native Fieldset by default.
+      - Do not make the Fieldset focusable.
+      - The child grouped-control component owns any child aria-invalid behaviour.
+      - An error-summary link should target the first relevant interactive control or an explicitly documented component target.
+      - Preserve the user's existing selections and values.
+
+  childFieldError:
+    examples:
+      - Date of birth year is missing
+      - One address field contains an invalid value
+    rules:
+      - The affected child component owns the error.
+      - Associate the error with the specific child control.
+      - Set aria-invalid="true" on the specific invalid control where required by its component contract.
+      - The error-summary link targets the invalid child.
+      - Do not create a second vague Fieldset error merely because one child is invalid.
+      - Other valid child controls must not automatically be marked invalid.
+
+  combinationOrRelationshipError:
+    examples:
+      - The entered date is not a real date
+      - A start date is later than an end date
+      - Two answers conflict
+    rules:
+      - Use a group-level message when the error concerns the combined answer.
+      - Associate the message with the Fieldset.
+      - The child component contract determines whether relevant child controls also receive invalid styling or aria-invalid.
+      - The summary target should be the first relevant interactive control.
+      - Preserve all entered values.
+
+errorSummaryRelationship:
+  ownership: shared-error-summary-pattern
+  rules:
+    - Fieldset does not render the page error summary.
+    - An error summary supplements rather than replaces inline errors.
+    - Inline group or child errors remain visible.
+    - Summary messages should match or clearly correspond to inline messages.
+    - Summary links target the relevant interactive child rather than a non-focusable Fieldset by default.
+    - Following a summary link must not require adding tabindex to the Fieldset.
+    - Focus management belongs to the shared error-summary and focus-management patterns.
+
+states:
+  default:
+    description: Resting Fieldset with no group-level validation error.
+    rules:
+      - Legend is present.
+      - Helper is shown only when enabled.
+      - No error message is shown.
+  error:
+    description: Fieldset with a group-level validation error.
+    rules:
+      - Group error is visible.
+      - Helper remains visible when still useful.
+      - No Fieldset focus ring is added.
+      - No default Fieldset error border is added.
+      - Child components keep ownership of their own focus and invalid states.
+
+unsupportedStates:
+  hover:
+    supported: false
+  focus:
+    supported: false
+    reason: Fieldset must not be focusable.
+  errorFocus:
+    supported: false
+  filled:
+    supported: false
+  selected:
+    supported: false
+  readOnly:
+    supported: false
+  childControlState:
+    supported: false
+  contentType:
+    supported: false
+
+disabledFieldset:
+  supported: true
+  attribute: disabled
+  figmaVariant: false
+  rules:
+    - The native disabled attribute may be used only when the whole group is unavailable.
+    - It disables descendant controls according to native HTML behaviour.
+    - It is not a substitute for read-only content.
+    - Disabled controls are not submitted.
+    - Do not rely on opacity alone.
+    - Do not add a Fieldset-specific disabled colour token.
+    - In Figma, the slotted child controls must use their own disabled presentations.
+    - Do not create a Fieldset disabled visual variant solely to restyle the legend.
+    - Content placed inside the legend must not contain controls.
+
+nativeAttributes:
+  fieldset:
+    supported:
+      - id
+      - name
+      - form
+      - disabled
+      - aria-describedby
+    prohibited:
+      - required
+      - readonly
+      - positive tabindex
+      - tabindex="-1" by default
+      - role="group" on the native fieldset
+      - aria-label as a replacement for the visible legend
+      - aria-invalid on the fieldset by default
+    rules:
+      - Do not add ARIA when native fieldset and legend semantics provide the required group relationship.
+      - Do not make the native Fieldset focusable by default.
+  legend:
+    element: legend
+    rules:
+      - Use the native element.
+      - Do not add an explicit role.
+      - Do not use it outside a Fieldset in this component.
+      - Do not add interactive descendants.
+      - Use the nested heading only when the legend genuinely participates in document structure.
+
+nestedFieldsets:
+  supported: conditional
+  rules:
+    - Nested Fieldsets are allowed only for a genuine parent-child question hierarchy.
+    - Every nested Fieldset must have its own legend.
+    - Avoid nesting where separate sibling Fieldsets would be clearer.
+    - Do not nest Fieldsets merely to create spacing or borders.
+    - Test nested groups with screen readers because repeated group announcements may become verbose.
+    - Slotted content must not introduce an undocumented or accidental nested Fieldset.
+
+contentSlot:
+  required: true
+  purpose: >
+    Contains the related form controls or grouped component that answer the
+    legend's shared question.
+  allowedExamples:
+    - Radio group
+    - Checkbox group
+    - Date of birth fields
+    - Related Text Inputs
+    - Related Selects
+    - Address fields
+    - Other documented multi-part form components
+  rules:
+    - All slotted content must relate to the legend.
+    - Child controls retain their own visible labels where needed.
+    - Child controls retain their own semantics, states and validation.
+    - The slot fills the available inline size.
+    - The slot hugs its content vertically.
+    - The slot must not impose one universal child layout.
+    - The slotted component controls whether children use vertical, horizontal or grid layout.
+    - Do not create content-type variants such as Radio, Checkbox, Date or Address.
+    - Do not place arbitrary prose, navigation, actions or unrelated content in the slot.
+    - Avoid nested Fieldsets unless explicitly required.
+
+sizing:
+  width:
+    ownership: parent-layout
+    default: fill-container
+    rules:
+      - Use the form column controlled by the parent form layout.
+      - Do not create Fieldset width variants.
+      - Do not set a component-specific maximum width.
+      - Legend, helper and error text may wrap.
+      - Child content must not overflow its container.
+      - Use logical sizing terminology where possible.
+      - Fieldset has no fixed height.
+  blockSize:
+    ownership: content
+    default: hug-contents
+
+tokens:
+  legend:
+    typography:
+      page: form.legend.typography.page
+      default: form.legend.typography.default
+      section: form.legend.typography.section
+      subsection: form.legend.typography.subsection
+      compact: form.legend.typography.compact
+    color: form.legend.color
+  helper:
+    typography: form.helper.typography
+    color: form.helper.color
+  error:
+    typography: form.error.typography
+    color: form.error.color
+    background: form.error.background
+  spacing:
+    labelToHelper: form.field.gap.labelToHelper
+    helperToError: form.field.gap.helperToError
+    errorToControl: form.field.gap.errorToControl
+    betweenOptions: form.group.gap.betweenOptions
+    betweenFields: form.group.gap.betweenFields
+  tokenDecision:
+    newFieldsetSpecificTokensRequired: false
+    rules:
+      - Reuse shared form and spacing tokens.
+      - Do not add raw values.
+      - Do not add a Fieldset border, background, focus or error-container token.
+      - Child components own their visual tokens.
+      - If direct legend-to-content spacing cannot be expressed accurately with the existing semantic tokens, report that as a potential shared token gap rather than changing tokens during this task.
+
+accessibility:
+  conformanceTarget: WCAG 2.2 AA
+  note: Fieldset alone does not guarantee conformance; slotted child controls and page-level form patterns must also be implemented correctly.
+  wcag:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: The native fieldset and legend expose the group relationship, and helper or error text must be associated with the group where present.
+    - id: WCAG 1.3.2
+      name: Meaningful Sequence
+      level: A
+      relevance: Legend, helper text, group error and related controls must appear in a meaningful order.
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Error and disabled states must not rely on colour alone.
+    - id: WCAG 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Legend, helper and error text need sufficient contrast against their backgrounds.
+    - id: WCAG 1.4.10
+      name: Reflow
+      level: AA
+      relevance: Legend, helper text, error text and slotted controls must wrap or reflow without requiring two-dimensional scrolling.
+    - id: WCAG 1.4.12
+      name: Text Spacing
+      level: AA
+      relevance: Fieldset text must remain readable and not clip or overlap when users adjust text spacing.
+    - id: WCAG 2.4.6
+      name: Headings and Labels
+      level: AA
+      relevance: The legend must clearly describe the grouped question, and nested heading levels must follow the document structure.
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: Group-level errors must be identified in visible text close to the Fieldset.
+    - id: WCAG 3.3.2
+      name: Labels or Instructions
+      level: A
+      relevance: The legend, helper text and child labels provide the instructions needed to answer the group.
+    - id: WCAG 3.3.3
+      name: Error Suggestion
+      level: AA
+      relevance: Group errors should explain how to correct the grouped answer where possible.
+    - id: WCAG 4.1.2
+      name: Name, Role, Value
+      level: A
+      relevance: Native fieldset and legend semantics expose the group name and role, while child controls expose their own names, roles, values and states.
+
+figmaProperties:
+  state:
+    type: variant
+    values:
+      - default
+      - error
+  requirement:
+    type: variant
+    values:
+      - required
+      - optional
+      - mixed
+  legendStyle:
+    type: variant
+    values:
+      - page
+      - default
+      - section
+      - subsection
+      - compact
+  helperText:
+    type: boolean
+    values:
+      - true
+      - false
+  textProperties:
+    legendText:
+      type: text
+      default: What is your preferred contact method?
+    helperTextContent:
+      type: text
+      default: Select all options that apply.
+    errorText:
+      type: text
+      default: "Error: Select your preferred contact method"
+  contentSlot:
+    type: slot-or-instance-swap
+
+figmaHandoff:
+  headingLevel:
+    default: none
+    allowed:
+      - none
+      - h1
+      - h2
+      - h3
+      - h4
+      - h5
+      - h6
+    rules:
+      - Record the intended semantic heading level during handoff.
+      - Do not create headingLevel as a visual variant because it does not inherently change appearance.
+      - Do not model heading levels as duplicate visual variants.
+
+figmaStructure:
+  tree: |
+    Fieldset
+    |-- Legend
+    |-- Helper text
+    |-- Error message
+    `-- Content slot
+  rules:
+    - Use vertical Auto Layout.
+    - Set Fieldset to Fill container and Hug contents.
+    - Use responsive legend styles.
+    - Expose helper visibility as a Boolean property.
+    - Show the error only in the error state.
+    - Keep helper text visible in the error state.
+    - Expose the generic content slot.
+    - Do not build Radio, Checkbox, Date or Address variants.
+    - Do not create Fieldset focus variants.
+    - Do not model heading levels as duplicate visual variants.
+    - Do not add default visual borders or backgrounds.
+    - Do not use raw values.
+
+qa:
+  examples:
+    - id: required-plain-default-legend
+      scenario: Required grouped question with a plain default legend.
+      expected:
+        legendStyle: default
+        requirement: required
+        headingLevel: none
+        legendSuffix: none
+    - id: optional-legend
+      scenario: Optional grouped question.
+      expected:
+        legendIncludes: "(optional)"
+        accessibleNameIncludes: "(optional)"
+    - id: mixed-requirement-group
+      scenario: Group where child controls have different requirement statuses.
+      expected:
+        requirement: mixed
+        legendSuffix: none
+        childLabelsCommunicateRequirement: true
+    - id: page-legend-with-h1-metadata
+      scenario: Grouped question is also the page heading.
+      expected:
+        legendStyle: page
+        headingLevel: h1
+        duplicateHeadingBeforeFieldset: false
+    - id: default-legend-with-no-heading
+      scenario: Plain grouped question beneath existing page structure.
+      expected:
+        legendStyle: default
+        headingLevel: none
+    - id: h2-legend
+      scenario: Grouped question participates as an H2.
+      expected:
+        headingLevel: h2
+        headingNestedInsideLegend: true
+    - id: h3-legend
+      scenario: Grouped question participates as an H3.
+      expected:
+        headingLevel: h3
+        headingNestedInsideLegend: true
+    - id: h4-legend
+      scenario: Grouped question participates as an H4.
+      expected:
+        headingLevel: h4
+        headingNestedInsideLegend: true
+    - id: h5-or-h6-semantic-heading
+      scenario: Genuine deep document structure requires H5 or H6 semantics.
+      expected:
+        allowedHeadingLevels:
+          - h5
+          - h6
+        additionalFieldsetTokensRequired: false
+    - id: compact-legend
+      scenario: Dense grouped controls such as filters, cards or settings panels.
+      expected:
+        legendStyle: compact
+        typography: form.legend.typography.compact
+    - id: helper-text
+      scenario: Group helper text is present.
+      expected:
+        helperAfterLegend: true
+        helperIdInAriaDescribedBy: true
+    - id: whole-group-error
+      scenario: Required group has no selected answer.
+      expected:
+        groupErrorVisible: true
+        groupErrorIdInAriaDescribedBy: true
+        fieldsetAriaInvalid: false
+    - id: helper-plus-group-error
+      scenario: Helper and group error are both present.
+      expected:
+        ariaDescribedByOrder:
+          - helper-id
+          - error-id
+    - id: child-field-error-owned-by-child
+      scenario: One child field inside the group is invalid.
+      expected:
+        groupErrorCreatedAutomatically: false
+        childOwnsAriaInvalid: true
+    - id: combination-error
+      scenario: Multiple child answers combine into an invalid answer.
+      expected:
+        groupLevelMessage: true
+        summaryTarget: first-relevant-interactive-control
+    - id: disabled-native-fieldset
+      scenario: Whole group is unavailable.
+      expected:
+        nativeDisabledAttribute: true
+        descendantControlsDisabledByNativeBehaviour: true
+    - id: long-wrapping-legend
+      scenario: Legend text is long.
+      expected:
+        wraps: true
+        truncated: false
+    - id: narrow-container
+      scenario: Fieldset appears in a narrow form column.
+      expected:
+        width: fill-container
+        childContentDoesNotOverflow: true
+    - id: generic-radio-slot
+      scenario: Radio options answer the legend question.
+      expected:
+        contentSlotType: generic
+        radioSpecificVariantRequired: false
+    - id: generic-multi-part-field-slot
+      scenario: Date of birth fields answer the legend question.
+      expected:
+        contentSlotType: generic
+        childLabelsPreserved: true
+    - id: justified-nested-fieldset
+      scenario: A genuine parent-child grouped question needs a nested Fieldset.
+      expected:
+        nestedFieldsetHasOwnLegend: true
+        nestingUsedForLayoutOnly: false
+
+  screenReaderChecks:
+    - Legend is announced as the group name.
+    - Child labels are still announced.
+    - Helper text is available as the group description.
+    - Group error is available as the group description.
+    - Helper and error are both available in the correct order.
+    - Heading is exposed at the selected level when used.
+    - No duplicate question announcement is caused by a separate identical heading.
+    - Disabled descendant state is exposed by native controls.
+    - Child-field errors remain associated with the child control.
+
+  structuralChecks:
+    - Legend is the first direct child.
+    - Legend contains no interactive content.
+    - No accidental empty helper or error nodes are rendered.
+    - No prohibited tabindex is present.
+    - No explicit role is added to the native Fieldset.
+    - Slotted controls all relate to the legend.
+
+acceptanceCriteria:
+  - Native Fieldset and Legend are required.
+  - Legend is the first direct child.
+  - Every Fieldset has a visible group name.
+  - Child labels remain present where needed.
+  - Helper and group errors are associated with the Fieldset.
+  - Helper ID precedes error ID in aria-describedby.
+  - Group, child and combination validation ownership is unambiguous.
+  - The error summary does not replace inline errors.
+  - The Fieldset is not focusable.
+  - Heading semantics and visual legend style are separate.
+  - Plain legend is the default semantic configuration.
+  - All H1-H6 heading levels are allowed when structurally correct.
+  - Default legend style uses the responsive H2-aligned tokens.
+  - All legend styles use responsive semantic tokens.
+  - Optional and mixed groups are represented correctly.
+  - Generic slot content is supported without content-type variants.
+  - No new component-specific tokens are required.
+  - No raw visual values are used.
+  - The YAML agrees with existing shared form patterns.
