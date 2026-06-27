@@ -1334,39 +1334,38 @@
     },
     "legend": {
       "typography": {
-        "default": {
+        "page": {
           "base": {
+            "$value": "{typography.heading.h1.base}",
             "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.medium}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            },
-            "$description": "Base typography for legends used by standard grouped form controls."
+            "$description": "Base breakpoint legend typography for a grouped form question that is also the page heading."
           },
           "md": {
+            "$value": "{typography.heading.h1.md}",
             "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.medium}",
-              "fontSize": "{typography.size.md}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            },
-            "$description": "Medium breakpoint typography for legends used by standard grouped form controls."
+            "$description": "Medium breakpoint legend typography for a grouped form question that is also the page heading."
           },
           "lg": {
+            "$value": "{typography.heading.h1.lg}",
             "$type": "typography",
-            "$value": {
-              "fontFamily": "{typography.family.sans}",
-              "fontWeight": "{typography.weight.medium}",
-              "fontSize": "{typography.size.lg}",
-              "lineHeight": "{typography.lineHeight.normal}",
-              "letterSpacing": "{typography.letterSpacing.normal}"
-            },
-            "$description": "Large breakpoint typography for legends used by standard grouped form controls."
+            "$description": "Large breakpoint legend typography for a grouped form question that is also the page heading."
+          }
+        },
+        "default": {
+          "base": {
+            "$value": "{typography.heading.h2.base}",
+            "$type": "typography",
+            "$description": "Base breakpoint default legend typography for a top-level grouped form question beneath the page heading."
+          },
+          "md": {
+            "$value": "{typography.heading.h2.md}",
+            "$type": "typography",
+            "$description": "Medium breakpoint default legend typography for a top-level grouped form question beneath the page heading."
+          },
+          "lg": {
+            "$value": "{typography.heading.h2.lg}",
+            "$type": "typography",
+            "$description": "Large breakpoint default legend typography for a top-level grouped form question beneath the page heading."
           }
         },
         "section": {
@@ -1404,9 +1403,21 @@
           }
         },
         "compact": {
-          "$value": "{typography.label.default}",
-          "$type": "typography",
-          "$description": "Compact legend typography for dense grouped controls such as filters, cards or settings panels."
+          "base": {
+            "$value": "{form.label.typography.base}",
+            "$type": "typography",
+            "$description": "Base breakpoint compact legend typography for dense grouped controls such as filters, cards and settings panels."
+          },
+          "md": {
+            "$value": "{form.label.typography.md}",
+            "$type": "typography",
+            "$description": "Medium breakpoint compact legend typography for dense grouped controls such as filters, cards and settings panels."
+          },
+          "lg": {
+            "$value": "{form.label.typography.lg}",
+            "$type": "typography",
+            "$description": "Large breakpoint compact legend typography for dense grouped controls such as filters, cards and settings panels."
+          }
         }
       },
       "color": {

@@ -4,7 +4,7 @@ Forms help users provide information, make choices and recover from mistakes.
 
 This folder contains shared form patterns used across form components.
 
-Individual components such as text input, textarea, select, radio, checkbox and date of birth should follow these patterns unless there is a documented reason not to.
+Individual components and foundations such as Fieldset, text input, textarea, select, radio, checkbox and date of birth should follow these patterns unless there is a documented reason not to.
 
 Shared form patterns cover:
 
@@ -27,6 +27,8 @@ Most form controls should have a visible label.
 If a visible label is not possible, the control must still have a clear programmatic label.
 
 Labels and legends are different HTML mechanisms. A label identifies an individual control. A legend identifies a group of related controls inside a fieldset.
+
+Fieldset is the design-system foundation for grouped controls. Use it when several related controls answer one shared question, and do not use it as a generic layout container.
 
 Form typography follows the shared responsive typography pattern:
 

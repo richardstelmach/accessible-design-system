@@ -18,6 +18,22 @@ Helper text should not replace the label.
 
 Placeholder text should not be used instead of helper text.
 
+## Group helper text
+
+For Fieldset and other grouped controls, group helper text supports the shared legend question.
+
+Place group helper text directly after the legend and before any group error message.
+
+Give group helper text a stable ID.
+
+Associate it with the Fieldset using `aria-describedby`.
+
+When group helper text and a group error message are both present, list the helper ID before the error ID in `aria-describedby`.
+
+Do not automatically repeat group helper text on every child control.
+
+Child-specific help remains associated with the relevant child control.
+
 ## Use helper text for
 
 - format guidance
@@ -66,4 +82,18 @@ This repeats the label and does not add useful information.
   name="national-insurance-number"
   aria-describedby="national-insurance-number-hint"
 />
+```
+
+## Group helper example
+
+```html
+<fieldset aria-describedby="dob-hint">
+  <legend>What is your date of birth?</legend>
+
+  <div id="dob-hint">
+    For example, 31 3 1980.
+  </div>
+
+  ...
+</fieldset>
 ```

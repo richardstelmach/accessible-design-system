@@ -1,6 +1,8 @@
 # Legends and fieldsets
 
-Use a `fieldset` and `legend` when a group of controls answers one shared question.
+Use a `<fieldset>` and `<legend>` when a group of controls answers one shared question.
+
+Fieldset is the design-system component for this grouped-control foundation. Legend is required anatomy inside Fieldset, not a standalone published component.
 
 ## Core rules
 
@@ -14,18 +16,152 @@ Use a label for an individual control.
 
 Use a legend for a group of related controls.
 
-## When to use a fieldset and legend
+The legend must be the first direct child of the `<fieldset>`.
 
-Use a fieldset and legend for:
+Do not make the Fieldset focusable.
 
-- radio groups
-- checkbox groups
-- date of birth fields
-- address groups
-- multi-part questions
-- groups of fields that need one shared question
+Do not add `role="group"` to a native `<fieldset>`.
 
-## Radio group example
+## When a Fieldset is required
+
+Use a Fieldset and legend for:
+
+- radio groups;
+- checkbox groups;
+- date of birth fields;
+- address groups;
+- multi-part questions;
+- groups of fields that need one shared question;
+- genuine parent-child grouped questions.
+
+## When not to use Fieldset
+
+Do not use Fieldset:
+
+- for one standalone control;
+- as a generic layout container;
+- only to add spacing, a border or visual grouping;
+- around unrelated fields;
+- around arbitrary page content.
+
+## Legend versus label
+
+In a radio group:
+
+```text
+Legend = shared question
+Radio labels = answer options
+```
+
+In a date of birth group:
+
+```text
+Legend = shared question
+Labels = individual fields within the answer
+```
+
+Do not document grouped controls as having a "label or legend".
+
+Use:
+
+```text
+Label = individual control
+Legend = grouped controls inside a fieldset
+```
+
+## Heading inside legend
+
+Plain legend text is the default semantic configuration.
+
+```html
+<fieldset>
+  <legend>What is your address?</legend>
+  ...
+</fieldset>
+```
+
+A heading may be nested inside the legend when the grouped question genuinely participates in the document heading structure.
+
+```html
+<fieldset>
+  <legend>
+    <h2>What is your address?</h2>
+  </legend>
+  ...
+</fieldset>
+```
+
+Do not add a heading to every legend automatically.
+
+Do not duplicate identical text in a heading before the Fieldset and in the legend.
+
+Choose the heading level from the document structure, not visual appearance.
+
+H1 through H6 are allowed when structurally correct.
+
+## Visual legend style
+
+Visual legend style and semantic heading level are separate decisions.
+
+The responsive legend styles are:
+
+| Legend style | Visual mapping | Typical semantic heading |
+| ------------ | -------------- | ------------------------ |
+| Page | H1-aligned typography | H1 |
+| Default | H2-aligned typography | H2 or no heading |
+| Section | H3-aligned typography | H3 |
+| Subsection | H4-aligned typography | H4 |
+| Compact | Responsive form-label typography | No heading |
+
+A plain legend can use the default H2-aligned visual style without becoming an H2.
+
+H5 and H6 are supported as semantic heading levels when the document structure requires them, but there are no dedicated H5 or H6 Fieldset visual tokens.
+
+## Helper text and errors
+
+Group helper text appears after the legend and before any group error.
+
+Group helper text should have a stable ID and be associated with the Fieldset using `aria-describedby`.
+
+Group-level errors should also have a stable ID and be associated with the Fieldset using `aria-describedby`.
+
+When both helper and error text are present, put the helper ID before the error ID.
+
+Child-field errors should be associated with the specific child field.
+
+## Native disabled behaviour
+
+Use the native `disabled` attribute only when the whole group is unavailable.
+
+Descendant controls are disabled according to native HTML behaviour and are not submitted.
+
+Disabled is not read-only.
+
+Child components own disabled visual presentation. Do not rely on opacity alone.
+
+## Nested Fieldsets
+
+Nested Fieldsets are allowed only for a real parent-child question structure.
+
+Every nested Fieldset must have its own legend.
+
+Do not nest Fieldsets merely for layout, spacing or borders.
+
+Sibling Fieldsets are often clearer.
+
+Test nested groups with screen readers because repeated group announcements can become verbose.
+
+## Content slot relationship
+
+The Fieldset content slot contains the related controls or grouped component that answers the legend's shared question.
+
+All slotted content must relate to the legend.
+
+Child controls keep their own labels, names, roles, values, states and validation.
+
+Do not place arbitrary prose, navigation, actions or unrelated content in the slot.
+
+## Examples
 
 ```html
 <fieldset>
@@ -43,15 +179,6 @@ Use a fieldset and legend for:
 </fieldset>
 ```
 
-In this example:
-
-```text
-Legend = shared question
-Radio labels = answer options
-```
-
-## Date of birth example
-
 ```html
 <fieldset>
   <legend>What is your date of birth?</legend>
@@ -65,30 +192,4 @@ Radio labels = answer options
   <label for="dob-year">Year</label>
   <input id="dob-year" name="dob-year">
 </fieldset>
-```
-
-In this example:
-
-```text
-Legend = shared question
-Labels = individual fields within the answer
-```
-
-## Helper text and errors
-
-Group helper text should be associated with the fieldset or group.
-
-Group-level errors should be associated with the fieldset or group.
-
-Child-field errors should be associated with the specific child field.
-
-## Important distinction
-
-Do not document grouped controls as having a “label or legend”.
-
-Use:
-
-```text
-Label = individual control
-Legend = grouped controls inside a fieldset
 ```

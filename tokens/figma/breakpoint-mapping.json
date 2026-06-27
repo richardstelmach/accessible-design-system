@@ -368,24 +368,50 @@
       }
     },
     {
-      "figmaVariable": "form/legend/default/typography/fontSize",
+      "figmaVariable": "form/legend/page/typography/fontSize",
       "type": "fontSize",
-      "requiresGitHubUpdate": true,
       "modes": {
         "base": {
-          "source": "form.legend.typography.default.base.$value.fontSize",
-          "alias": "typography.size.md",
-          "rawValuePx": 16
+          "source": "form.legend.typography.page.base",
+          "resolvedSource": "typography.heading.h1.base.$value.fontSize",
+          "alias": "typography.size.3xl",
+          "rawValuePx": 30
         },
         "md": {
-          "source": "form.legend.typography.default.md.$value.fontSize",
-          "alias": "typography.size.md",
-          "rawValuePx": 16
+          "source": "form.legend.typography.page.md",
+          "resolvedSource": "typography.heading.h1.md.$value.fontSize",
+          "alias": "typography.size.4xl",
+          "rawValuePx": 36
         },
         "lg": {
-          "source": "form.legend.typography.default.lg.$value.fontSize",
-          "alias": "typography.size.lg",
-          "rawValuePx": 18
+          "source": "form.legend.typography.page.lg",
+          "resolvedSource": "typography.heading.h1.lg.$value.fontSize",
+          "alias": "typography.size.5xl",
+          "rawValuePx": 48
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/legend/default/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "form.legend.typography.default.base",
+          "resolvedSource": "typography.heading.h2.base.$value.fontSize",
+          "alias": "typography.size.2xl",
+          "rawValuePx": 24
+        },
+        "md": {
+          "source": "form.legend.typography.default.md",
+          "resolvedSource": "typography.heading.h2.md.$value.fontSize",
+          "alias": "typography.size.3xl",
+          "rawValuePx": 30
+        },
+        "lg": {
+          "source": "form.legend.typography.default.lg",
+          "resolvedSource": "typography.heading.h2.lg.$value.fontSize",
+          "alias": "typography.size.4xl",
+          "rawValuePx": 36
         }
       }
     },
@@ -493,6 +519,30 @@
           "fontSizeAlias": "typography.size.2xl",
           "fontSizePx": 24,
           "rawValuePx": 28.8
+        }
+      }
+    },
+    {
+      "figmaVariable": "form/legend/compact/typography/fontSize",
+      "type": "fontSize",
+      "modes": {
+        "base": {
+          "source": "form.legend.typography.compact.base",
+          "resolvedSource": "form.label.typography.base.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "md": {
+          "source": "form.legend.typography.compact.md",
+          "resolvedSource": "form.label.typography.md.$value.fontSize",
+          "alias": "typography.size.md",
+          "rawValuePx": 16
+        },
+        "lg": {
+          "source": "form.legend.typography.compact.lg",
+          "resolvedSource": "form.label.typography.lg.$value.fontSize",
+          "alias": "typography.size.lg",
+          "rawValuePx": 18
         }
       }
     },
@@ -651,10 +701,6 @@
     }
   ],
   "excludedFromBreakpointCollection": [
-    {
-      "tokenOrStyle": "form/legend/compact/typography",
-      "reason": "Compact legend typography is intentionally fixed and compact."
-    },
     {
       "tokenOrStyle": "colour tokens",
       "reason": "Colour belongs to theme or state decisions, not breakpoint mode."

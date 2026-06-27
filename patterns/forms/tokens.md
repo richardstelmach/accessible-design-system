@@ -64,10 +64,21 @@ Use legend tokens for grouped controls inside a fieldset.
 Legends are separate from labels because a legend identifies a group of related controls, while a label identifies an individual control.
 
 ```text
-form.legend.typography.default
-form.legend.typography.section
-form.legend.typography.subsection
-form.legend.typography.compact
+form.legend.typography.page.base
+form.legend.typography.page.md
+form.legend.typography.page.lg
+form.legend.typography.default.base
+form.legend.typography.default.md
+form.legend.typography.default.lg
+form.legend.typography.section.base
+form.legend.typography.section.md
+form.legend.typography.section.lg
+form.legend.typography.subsection.base
+form.legend.typography.subsection.md
+form.legend.typography.subsection.lg
+form.legend.typography.compact.base
+form.legend.typography.compact.md
+form.legend.typography.compact.lg
 form.legend.color
 ```
 
@@ -80,6 +91,9 @@ The legend always identifies a grouped form control inside a fieldset. The typog
 Use:
 
 ```text
+form.legend.typography.page.base
+form.legend.typography.page.md
+form.legend.typography.page.lg
 form.legend.typography.default.base
 form.legend.typography.default.md
 form.legend.typography.default.lg
@@ -89,8 +103,23 @@ form.legend.typography.section.lg
 form.legend.typography.subsection.base
 form.legend.typography.subsection.md
 form.legend.typography.subsection.lg
-form.legend.typography.compact
+form.legend.typography.compact.base
+form.legend.typography.compact.md
+form.legend.typography.compact.lg
 ```
+
+Semantic mappings:
+
+```text
+page       -> H1-aligned responsive typography
+default    -> H2-aligned responsive typography
+section    -> H3-aligned responsive typography
+subsection -> H4-aligned responsive typography
+compact    -> responsive form-label typography
+```
+
+Semantic heading level remains separate from the selected visual token. A plain legend can use H2-aligned visual styling without becoming an H2.
+
 Do not choose a legend size only to make something look more important.
 
 Use the variant that matches the fieldset’s context in the page structure.
@@ -237,5 +266,6 @@ Form labels, control values, helper text and error text should follow the respon
 - `form.control.typography` uses the default body scale so entered values align with surrounding content.
 - `form.helper.typography` uses the responsive small body scale because helper text is supporting content.
 - `form.error.typography` uses the default body scale because validation feedback is critical task content.
+- `form.legend.typography` uses responsive legend styles for grouped controls and keeps semantic heading level separate from visual scale.
 
 Do not lock form text to base-only typography tokens unless the component has a documented compact mode.

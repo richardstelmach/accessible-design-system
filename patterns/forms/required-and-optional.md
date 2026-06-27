@@ -98,6 +98,8 @@ Example:
 
 For required grouped controls, the legend does not need “(required)” if the form pattern states that fields are required unless marked optional.
 
+Fieldset itself has no native `required` attribute. Required implementation remains with the child controls or grouped child component.
+
 Example:
 
 ```html
@@ -111,6 +113,30 @@ Example:
   <label for="contact-phone">Phone</label>
 </fieldset>
 ```
+
+## Mixed-requirement groups
+
+Use a mixed-requirement group when child controls inside one Fieldset have different requirement statuses.
+
+Do not add “(required)” or “(optional)” to the group legend, because that would describe the whole group inaccurately.
+
+Each child label communicates its own status.
+
+Example:
+
+```html
+<fieldset>
+  <legend>What is your delivery address?</legend>
+
+  <label for="delivery-address-line-1">Address line 1</label>
+  <input id="delivery-address-line-1" name="delivery-address-line-1" required>
+
+  <label for="delivery-address-line-2">Address line 2 (optional)</label>
+  <input id="delivery-address-line-2" name="delivery-address-line-2">
+</fieldset>
+```
+
+Do not use mixed status when the whole group is clearly required or clearly optional.
 
 ## Validation
 
@@ -176,6 +202,8 @@ For individual fields, include optional status in the `label`.
 For grouped controls, include optional status in the `legend`.
 
 Use the native `required` attribute for required form controls where appropriate.
+
+Do not use `required` on a Fieldset.
 
 Use `aria-required="true"` only when the native `required` attribute is not suitable or not supported by the control pattern.
 
