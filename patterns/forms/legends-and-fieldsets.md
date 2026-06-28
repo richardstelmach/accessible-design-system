@@ -129,6 +129,16 @@ When both helper and error text are present, put the helper ID before the error 
 
 Child-field errors should be associated with the specific child field.
 
+## Group header spacing
+
+For layout, treat the legend, optional group helper text and optional group error as the Fieldset Group header.
+
+Group header is an internal layout wrapper, not a public HTML part. The native order remains legend, helper text, group error and related controls.
+
+Use `form.group.gap.headerToContent` between the Group header and the content slot. Use `form.field.gap.labelToHelper` between legend and helper text, and `form.field.gap.helperToError` between helper text and group error.
+
+If helper text or group error is not present, collapse it without leaving empty spacing. Do not use one 24px gap across legend, helper text, error and content.
+
 ## Native disabled behaviour
 
 Use the native `disabled` attribute only when the whole group is unavailable.

@@ -24,6 +24,10 @@ For Fieldset and other grouped controls, group helper text supports the shared l
 
 Place group helper text directly after the legend and before any group error message.
 
+Legend, group helper text and group error form the grouped control's internal Group header. Use `form.field.gap.labelToHelper` between legend and helper text, and `form.field.gap.helperToError` between helper text and group error.
+
+Use `form.group.gap.headerToContent` between the complete Group header and the related controls. Hidden helper or error content must not leave empty spacing.
+
 Give group helper text a stable ID.
 
 Associate it with the Fieldset using `aria-describedby`.

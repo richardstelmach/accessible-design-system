@@ -28,9 +28,10 @@ Do not use Fieldset as a generic layout wrapper.
 ```text
 Grouped form control
 ├── Fieldset
-│   ├── Legend
-│   ├── Group helper text, optional
-│   ├── Group error message, error state only
+│   ├── Group header, internal layout wrapper
+│   │   ├── Legend
+│   │   ├── Group helper text, optional
+│   │   └── Group error message, error state only
 │   └── Content slot
 ```
 
@@ -43,7 +44,21 @@ Required order:
 
 The content slot contains the related controls or grouped child component that answers the legend question.
 
+Group header is an internal layout wrapper, not extra public HTML anatomy. The native order remains Legend, group helper text, group error message and related controls.
+
 Omitted optional elements must not leave empty markup or empty spacing.
+
+## Layout spacing
+
+Use `form.group.gap.headerToContent` between the Group header and the content slot.
+
+Inside the Group header, use `form.field.gap.labelToHelper` between Legend and helper text, and `form.field.gap.helperToError` between helper text and group error.
+
+When helper text or group error is hidden, do not reserve empty spacing for it. Do not apply one 24px gap across Legend, helper text, group error and the content slot.
+
+The group error stays inside the Group header. The header-to-content gap is the same in the default and error states.
+
+Use `form.group.gap.betweenOptions` and `form.group.gap.betweenFields` only for spacing inside the content slot. Use `form.field.gap.controlToNextField` after the complete Fieldset when the next form field begins.
 
 ## Label and legend distinction
 
