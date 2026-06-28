@@ -42,9 +42,10 @@ Do not use Fieldset:
 
 ```text
 Fieldset
-├── Legend
-├── Group helper text - optional
-├── Group error message - error state only
+├── Group header - internal layout wrapper
+│   ├── Legend
+│   ├── Group helper text - optional
+│   └── Group error message - error state only
 └── Related controls / content slot
 ```
 
@@ -56,6 +57,8 @@ Use this order:
 4. Related controls
 
 The legend and content slot are required. Group helper text is optional. Group error message appears only when there is a group-level error.
+
+Group header is an internal layout wrapper for Figma and implementation structure. It is not an extra public HTML part, and it must not change the native order.
 
 Omitted optional elements must not leave empty markup or empty spacing.
 
@@ -433,6 +436,21 @@ Legend, helper and error text may wrap.
 
 Do not add a default decorative border or background.
 
+## Layout spacing
+
+Use `form.group.gap.headerToContent` between the Group header and the content slot. This resolves through `spacing.stack.lg` to `spacing.6`, which is `1.5rem` or about 24px.
+
+Inside the Group header, keep the tighter relationships:
+
+- `form.field.gap.labelToHelper` between Legend and helper text;
+- `form.field.gap.helperToError` between helper text and group error.
+
+Group error remains inside the Group header. The error state uses the same `form.group.gap.headerToContent` gap between the Group header and content slot.
+
+When helper text or group error is hidden, it must collapse without leaving empty spacing. Do not use one 24px gap across Legend, helper text, error message and content slot.
+
+`form.field.gap.errorToControl` is for a single field inline error and its own control. `form.field.gap.controlToNextField` is for the gap after one complete field or Fieldset before the next field.
+
 ## Tokens
 
 Use the current responsive legend tokens:
@@ -470,7 +488,7 @@ form.error.color
 form.error.background
 form.field.gap.labelToHelper
 form.field.gap.helperToError
-form.field.gap.errorToControl
+form.group.gap.headerToContent
 form.group.gap.betweenOptions
 form.group.gap.betweenFields
 ```
@@ -493,6 +511,19 @@ Properties:
 - Helper text
 - Error text
 - Content slot
+
+Structure:
+
+```text
+Fieldset
+├── Group header
+│   ├── Legend
+│   ├── Helper text
+│   └── Error message
+└── Content slot
+```
+
+Use the root Fieldset gap for `form.group.gap.headerToContent` between Group header and Content slot. Use the smaller header spacing tokens inside Group header.
 
 Heading level is handoff metadata, not a visual variant.
 

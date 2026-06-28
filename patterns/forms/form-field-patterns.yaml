@@ -127,6 +127,10 @@ patterns:
       - groupErrorMessage
       - contentSlot
     terminology:
+      groupHeader: >
+        Internal layout region containing the legend, optional group helper text
+        and optional group error before the content slot. It is not additional
+        public HTML anatomy.
       contentSlot: >
         Generic slot for controls or grouped components that answer the shared
         legend question. Earlier references to relatedControls are equivalent.
@@ -150,6 +154,37 @@ patterns:
       - Do not add role="group" to the native fieldset.
       - Do not use fieldset as a generic layout container.
       - Use native disabled fieldset behaviour only when the whole group is unavailable.
+      - Treat legend, group helper text and group error as the Group header for layout.
+      - Separate the Group header from the content slot with form.group.gap.headerToContent.
+      - Keep form.group.gap.betweenOptions and form.group.gap.betweenFields for spacing inside the content slot.
+      - Use form.field.gap.controlToNextField only after the complete Fieldset when the next form field begins.
+    layout:
+      groupHeader:
+        contains:
+          - legend
+          - groupHelperText
+          - groupErrorMessage
+        publicHtmlAnatomy: false
+        rules:
+          - The DOM and semantic order remains legend, helper text, group error and related controls.
+          - Use form.field.gap.labelToHelper between Legend and group helper text.
+          - Use form.field.gap.helperToError between group helper text and group error.
+          - Optional helper and error content collapses without empty spacing.
+      headerToContent:
+        token: form.group.gap.headerToContent
+        appliesBetween:
+          - groupHeader
+          - contentSlot
+        rules:
+          - Use this gap whether the Group header ends with Legend, helper text or group error.
+          - Use the same gap in default and error states.
+          - Do not use form.field.gap.errorToControl for grouped-control header-to-content spacing.
+          - Do not use form.field.gap.controlToNextField for internal Fieldset spacing.
+      contentSlot:
+        rules:
+          - Child controls or grouped components own their internal layout.
+          - Use form.group.gap.betweenOptions between related options where the child component needs option spacing.
+          - Use form.group.gap.betweenFields between child fields where the child component needs field spacing.
     requiredImplementation:
       nativeFieldset: true
       nativeLegend: true
@@ -511,6 +546,7 @@ tokens:
     errorToControl: form.field.gap.errorToControl
     controlToNextField: form.field.gap.controlToNextField
   groupSpacing:
+    headerToContent: form.group.gap.headerToContent
     betweenOptions: form.group.gap.betweenOptions
     betweenFields: form.group.gap.betweenFields
   control:

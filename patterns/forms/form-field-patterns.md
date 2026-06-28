@@ -81,11 +81,14 @@ Examples include:
 ```text
 Grouped form control
 ├── Fieldset
-│   ├── Legend
-│   ├── Group helper text, optional
-│   ├── Group error message, optional
-│   └── Related controls
+│   ├── Group header, internal layout wrapper
+│   │   ├── Legend
+│   │   ├── Group helper text, optional
+│   │   └── Group error message, optional
+│   └── Related controls / content slot
 ```
+
+Group header is a layout wrapper, not extra public HTML anatomy. Use `form.group.gap.headerToContent` between the Group header and related controls.
 
 ### Rules
 

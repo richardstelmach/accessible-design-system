@@ -128,6 +128,9 @@ pattern:
   rules:
     - The public component is Fieldset.
     - Legend is mandatory anatomy within Fieldset.
+    - Group header is an internal layout wrapper for legend, helper text and group error; it is not public HTML anatomy.
+    - The DOM and semantic order remains legend, helper text, group error and related controls.
+    - Separate the Group header from the content slot with form.group.gap.headerToContent.
     - Omitted optional elements must not leave empty spacing or empty DOM nodes.
     - Unrelated content must not appear between the legend, helper, error and related controls.
 
@@ -248,6 +251,37 @@ anatomy:
       - Do not create content-type variants such as Radio, Checkbox, Date or Address.
       - Do not place arbitrary prose, navigation, actions or unrelated content in the slot.
       - Avoid nested Fieldsets unless explicitly required.
+
+internalLayout:
+  groupHeader:
+    description: >
+      Internal layout wrapper for the Fieldset header content: legend, optional
+      helper text and optional group error message.
+    publicHtmlAnatomy: false
+    contains:
+      - legend
+      - groupHelperText
+      - groupErrorMessage
+    rules:
+      - Group header is a layout wrapper for Figma and implementation structure, not an additional public component part.
+      - Do not add a visible wrapper role or landmark for Group header.
+      - Keep the native DOM and semantic order as legend, helper text, group error and related controls.
+      - The native legend remains the first direct child of the fieldset.
+      - Use form.field.gap.labelToHelper between Legend and Helper text.
+      - Use form.field.gap.helperToError between Helper text and Error message.
+      - Hide optional Helper text and Error message without leaving empty nodes or empty spacing.
+      - Do not use one form.group.gap.headerToContent gap across Legend, Helper text, Error message and Content slot.
+  headerToContent:
+    token: form.group.gap.headerToContent
+    appliesBetween:
+      - groupHeader
+      - contentSlot
+    resolvesTo: "{spacing.stack.lg} -> {spacing.6} -> 1.5rem"
+    rules:
+      - Use this gap after the Group header whether the header ends with Legend, Helper text or Error message.
+      - Use the same gap in the default and error states.
+      - Do not substitute form.field.gap.errorToControl for Fieldset header-to-content spacing.
+      - Do not substitute form.field.gap.controlToNextField for internal Fieldset spacing.
 
 legendStyle:
   default: default
@@ -457,6 +491,8 @@ states:
     rules:
       - Group error is visible.
       - Helper remains visible when still useful.
+      - Group error remains inside the Group header.
+      - The gap from Group header to Content slot remains form.group.gap.headerToContent.
       - No Fieldset focus ring is added.
       - No default Fieldset error border is added.
       - Child components keep ownership of their own focus and invalid states.
@@ -593,7 +629,7 @@ tokens:
   spacing:
     labelToHelper: form.field.gap.labelToHelper
     helperToError: form.field.gap.helperToError
-    errorToControl: form.field.gap.errorToControl
+    headerToContent: form.group.gap.headerToContent
     betweenOptions: form.group.gap.betweenOptions
     betweenFields: form.group.gap.betweenFields
   tokenDecision:
@@ -603,7 +639,9 @@ tokens:
       - Do not add raw values.
       - Do not add a Fieldset border, background, focus or error-container token.
       - Child components own their visual tokens.
-      - If direct legend-to-content spacing cannot be expressed accurately with the existing semantic tokens, report that as a potential shared token gap rather than changing tokens during this task.
+      - Use form.group.gap.headerToContent for the shared grouped-control header-to-content gap; no Fieldset-specific token is required.
+      - form.field.gap.errorToControl is for a single field inline error and its own control, not Fieldset header-to-content spacing.
+      - form.field.gap.controlToNextField is for the gap after a complete field or Fieldset before the next field, not internal Fieldset spacing.
 
 accessibility:
   conformanceTarget: WCAG 2.2 AA
@@ -711,13 +749,20 @@ figmaHandoff:
 figmaStructure:
   tree: |
     Fieldset
-    |-- Legend
-    |-- Helper text
-    |-- Error message
+    |-- Group header
+    |   |-- Legend
+    |   |-- Helper text
+    |   `-- Error message
     `-- Content slot
   rules:
     - Use vertical Auto Layout.
     - Set Fieldset to Fill container and Hug contents.
+    - Group header is an internal layout wrapper, not public HTML anatomy.
+    - Bind the Fieldset root gap between Group header and Content slot to form.group.gap.headerToContent.
+    - Use form.field.gap.labelToHelper between Legend and Helper text inside Group header.
+    - Use form.field.gap.helperToError between Helper text and Error message inside Group header.
+    - Optional Helper text and Error message collapse without empty spacing.
+    - Do not use one 24px Auto Layout gap across Legend, Helper text, Error message and Content slot.
     - Use responsive legend styles.
     - Expose helper visibility as a Boolean property.
     - Show the error only in the error state.
@@ -804,6 +849,19 @@ qa:
         ariaDescribedByOrder:
           - helper-id
           - error-id
+        helperToErrorGap: form.field.gap.helperToError
+        headerToContentGap: form.group.gap.headerToContent
+    - id: fieldset-header-to-content-spacing
+      scenario: Fieldset separates header content from related controls.
+      expected:
+        groupHeaderContains:
+          - legend
+          - groupHelperText
+          - groupErrorMessage
+        groupHeaderPublicHtmlAnatomy: false
+        headerToContentGap: form.group.gap.headerToContent
+        errorToControlUsedForFieldsetHeader: false
+        controlToNextFieldUsedInsideFieldset: false
     - id: child-field-error-owned-by-child
       scenario: One child field inside the group is invalid.
       expected:
@@ -882,5 +940,6 @@ acceptanceCriteria:
   - Optional and mixed groups are represented correctly.
   - Generic slot content is supported without content-type variants.
   - No new component-specific tokens are required.
+  - Fieldset uses form.group.gap.headerToContent between Group header and Content slot.
   - No raw visual values are used.
   - The YAML agrees with existing shared form patterns.

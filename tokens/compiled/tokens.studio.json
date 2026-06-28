@@ -1038,6 +1038,11 @@
       },
       "group": {
         "gap": {
+          "headerToContent": {
+            "$value": "{spacing.stack.lg}",
+            "$type": "spacing",
+            "$description": "Vertical gap between a grouped control's header content—legend, helper text and group error—and its related controls or content slot."
+          },
           "betweenOptions": {
             "$value": "{spacing.stack.sm}",
             "$type": "spacing",

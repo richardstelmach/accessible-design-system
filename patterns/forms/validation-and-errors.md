@@ -34,11 +34,16 @@ Control
 Use this order for a grouped control:
 
 ```text
-Legend
-Helper text, optional
-Group error message
+Group header
+├── Legend
+├── Helper text, optional
+└── Group error message
 Related controls
 ```
+
+Group header is an internal layout wrapper, not additional public HTML anatomy. The DOM and semantic order remains legend, helper text, group error and related controls.
+
+Use `form.group.gap.headerToContent` between the Group header and related controls in both default and error states. Do not use `form.field.gap.errorToControl` for Fieldset header-to-content spacing.
 
 When helper and error text are both present, put the helper ID before the error ID in `aria-describedby`.
 
@@ -213,6 +218,8 @@ Example:
 ## Group helper text with errors
 
 When a grouped control has both helper text and a group error, keep the helper visible when it still helps users correct the answer.
+
+The group error remains inside the Group header. Use `form.field.gap.helperToError` between helper text and group error, then `form.group.gap.headerToContent` between the complete Group header and related controls.
 
 List the helper ID first and the error ID second:
 

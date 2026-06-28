@@ -158,14 +158,23 @@ form.field.gap.errorToControl
 form.field.gap.controlToNextField
 ```
 
+`form.field.gap.errorToControl` is for a single field inline error and that field's own control.
+
+`form.field.gap.controlToNextField` is for the gap after one complete field or grouped Fieldset before the next field begins.
+
 ## Group spacing tokens
 
 Use group spacing tokens for grouped controls such as radios, checkboxes and multi-part questions.
 
 ```text
+form.group.gap.headerToContent
 form.group.gap.betweenOptions
 form.group.gap.betweenFields
 ```
+
+Use `form.group.gap.headerToContent` between a grouped control's Group header and its content slot. The Group header contains the legend, optional helper text and optional group error.
+
+Use `form.group.gap.betweenOptions` and `form.group.gap.betweenFields` for spacing inside the content slot.
 
 ## Control shell tokens
 
