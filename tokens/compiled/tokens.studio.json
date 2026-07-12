@@ -1116,6 +1116,13 @@
             "$description": "Border colour for invalid form controls."
           }
         },
+        "selected": {
+          "border": {
+            "$value": "{color.interactive.primary.background}",
+            "$type": "color",
+            "$description": "Selected boundary colour for selection controls such as Radio and Checkbox."
+          }
+        },
         "disabled": {
           "background": {
             "$value": "{color.interactive.disabled.background}",
@@ -1278,6 +1285,27 @@
           "$value": "{spacing.inline.xs}",
           "$type": "spacing",
           "$description": "Gap between standalone link text and a trailing icon."
+        }
+      },
+      "radio": {
+        "control": {
+          "size": {
+            "$value": "{size.target.minimum}",
+            "$type": "dimension",
+            "$description": "Radio visual control diameter. Uses the minimum target size token so the visible circle is 1.5rem, or 24px at a default 16px root size."
+          }
+        },
+        "indicator": {
+          "size": {
+            "$value": "0.75rem",
+            "$type": "dimension",
+            "$description": "Radio selected indicator diameter. This component-specific dimension is 12px at a default 16px root size."
+          },
+          "color": {
+            "$value": "{form.state.selected.border}",
+            "$type": "color",
+            "$description": "Radio selected indicator colour."
+          }
         }
       },
       "textInput": {

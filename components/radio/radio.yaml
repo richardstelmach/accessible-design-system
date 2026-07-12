@@ -1,0 +1,845 @@
+component: Radio
+id: radio
+version: 0.1.0
+status: draft
+
+description: >
+  Radio is an individual option in a same-named set of native radio inputs.
+  It lets users choose exactly one answer from a set of mutually exclusive
+  options. Radio groups are composed by placing multiple Radio instances inside
+  the existing Fieldset content slot.
+
+purpose:
+  - Provide an accessible individual radio option.
+  - Preserve native radio input behaviour, name, value, checked and disabled state.
+  - Support a visible label for each answer option.
+  - Support an optional, uncommon option-specific description.
+  - Support selected, unselected, focus and disabled presentations.
+  - Compose with Fieldset for the shared question, helper text, error text and group semantics.
+
+sourceDocumentation:
+  sharedPattern:
+    - patterns/forms/form-field-patterns.yaml
+  humanReadable:
+    - patterns/forms/grouped-control-pattern.md
+    - patterns/forms/legends-and-fieldsets.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/disabled-and-readonly.md
+    - patterns/forms/tokens.md
+
+relatedDocumentation:
+  - components/fieldset/fieldset.yaml
+  - components/fieldset/fieldset.md
+  - patterns/forms/form-field-patterns.yaml
+  - patterns/forms/grouped-control-pattern.md
+  - patterns/forms/legends-and-fieldsets.md
+  - patterns/forms/required-and-optional.md
+  - patterns/forms/validation-and-errors.md
+  - patterns/forms/error-summary.md
+  - patterns/forms/focus-management.md
+  - patterns/forms/disabled-and-readonly.md
+  - patterns/forms/tokens.md
+  - accessibility/focus-indicators.yaml
+
+scope:
+  includes:
+    - Individual native radio options
+    - Required or optional groups when composed inside Fieldset
+    - Same-named radio sets
+    - Selected and unselected radio options
+    - Focused radio options
+    - Disabled radio options
+    - Option-specific descriptions
+    - Restored saved selections
+  excludes:
+    - A public Radio Group component
+    - Radio Group YAML or Markdown documentation
+    - Radio Group token namespace
+    - Fieldset, legend, group helper text or group error implementation
+    - Group-level required or optional wording
+    - Error or error-focus visual variants
+    - Hover, active, read-only or indeterminate variants
+    - Custom ARIA radio behaviour
+    - Multi-select behaviour
+
+principles:
+  - Use Radio when exactly one option can be selected from a set.
+  - Use Checkbox when more than one option can be selected.
+  - Compose several Radio instances inside Fieldset for a shared question.
+  - Fieldset owns the native fieldset, legend, group helper text, group error text and group requirement status.
+  - Each Radio owns its native input, id, name, value, label, optional description and visual state.
+  - The Fieldset legend does not replace individual Radio labels.
+  - The native checked state is the implementation source of truth.
+  - Do not recreate native radio behaviour with role="radio".
+  - Do not preselect an option merely to avoid an unanswered state.
+  - Preserve the user's selected value after validation.
+
+pattern:
+  type: grouped-control-child
+  parentPattern: grouped-control
+  parentComponent: fieldset
+  anatomy:
+    - nativeInput
+    - visualControl
+    - selectedIndicator
+    - optionContent
+    - label
+    - description
+  requiredImplementation:
+    nativeInput: true
+    nativeTypeRadio: true
+    uniqueId: true
+    sharedNameWithinGroup: true
+    nonEmptyValue: true
+    visibleLabel: true
+    nativeCheckedState: true
+    fieldsetComposition: true
+    optionDescriptionAssociationWhenPresent: true
+
+defaults:
+  selected: false
+  state: default
+  description: false
+
+anatomy:
+  root:
+    description: >
+      Complete Radio option row. The root groups the native input, visual
+      control and option content while keeping the visible label and optional
+      description semantically separate.
+    element: div
+    layout: horizontal
+    tokens:
+      gap: spacing.control.gap
+      minBlockSize: size.control.minBlockSize.default
+    rules:
+      - The root contains the native input, visual control and option content.
+      - The native control and visible label must form a generous clickable target.
+      - Clicking the visible label activates the Radio.
+      - Clicking the native control activates the Radio.
+      - Use horizontal layout with the control before the option content.
+      - Align the control with the first line of the label.
+      - Do not center the control against a long description.
+      - The row hugs content vertically while respecting size.control.minBlockSize.default.
+      - Labels and descriptions may wrap.
+      - Do not include an option description in the associated label merely to enlarge the click target.
+      - Do not place interactive content inside the label or description.
+
+  nativeInput:
+    description: >
+      Native input that provides name, role, checked state, value, keyboard
+      behaviour and form submission.
+    element: input
+    type: radio
+    required: true
+    rules:
+      - type="radio" is mandatory.
+      - Every Radio must have a unique id.
+      - Every Radio must have a non-empty value.
+      - Every Radio in one set must use the same non-empty name.
+      - The native checked state is the source of truth for selected presentation.
+      - Do not use display="none" or visibility="hidden" to hide the native input.
+      - Do not add role="radio" to a native radio input.
+      - Do not add aria-checked to a native radio input.
+      - Do not use readonly.
+      - Disabled native Radios must not receive focus.
+
+  visualControl:
+    description: >
+      Circular visual representation of the native radio input.
+    required: true
+    tokens:
+      size: component.radio.control.size
+      background: form.control.background
+      borderColor: form.control.border.color
+      selectedBorderColor: form.state.selected.border
+      borderWidth: form.control.border.width
+      radius: radius.full
+    rules:
+      - The visual control appears before the option content.
+      - It is circular.
+      - It reflects the native input checked and disabled states.
+      - It must not replace the native input semantics.
+      - The native input and visual control may overlap or be visually composed.
+
+  selectedIndicator:
+    description: >
+      Inner circular indicator shown only when the native radio is checked.
+    requiredWhenSelected: true
+    tokens:
+      size: component.radio.indicator.size
+      color: component.radio.indicator.color
+      radius: radius.full
+    rules:
+      - Show only when selected is true.
+      - Preserve the indicator in disabled selected state.
+      - Do not use a checkmark or indeterminate mark for Radio.
+
+  optionContent:
+    description: Label and optional option-specific description.
+    layout: vertical
+    required: true
+    rules:
+      - Option content sits after the visual control.
+      - Label is required.
+      - Description is optional.
+      - The visual anatomy may stack Label and Description, but the HTML label must not contain the Description.
+      - Text may wrap and must not be truncated.
+
+  label:
+    description: >
+      Visible text that names the individual Radio option.
+    required: true
+    tokens:
+      typography: form.label.typography
+      color: form.label.color
+    rules:
+      - Every Radio option must have its own visible label.
+      - The Fieldset legend does not replace the Radio label.
+      - The accessible name must include only the individual option label text.
+      - The label contains only text that should form the option accessible name.
+      - Use for to reference the native input id.
+      - Do not use aria-label or aria-labelledby to duplicate the visible label.
+      - Keep labels clear, concise and mutually exclusive.
+      - Do not add required or optional wording to individual Radio labels.
+      - Do not use placeholder text.
+
+  description:
+    description: >
+      Optional supporting text that explains this specific option.
+    required: false
+    tokens:
+      typography: form.helper.typography
+      color: form.helper.color
+    rules:
+      - A plain visible label is the default Radio presentation.
+      - Option descriptions are optional and should be used only when one specific option needs additional explanation.
+      - Description defaults to false.
+      - Do not routinely add descriptions to every Radio option.
+      - Shared guidance belongs in Fieldset helper text rather than being repeated as an option description.
+      - Give the description a stable ID.
+      - Reference the description ID from this Radio using aria-describedby.
+      - Option description text must not become part of the Radio accessible name.
+      - Do not place an option description inside the associated label when that description is referenced using aria-describedby.
+      - Do not associate the description as a second label.
+      - When no option description exists, omit the description element and aria-describedby.
+      - Do not render an empty description element.
+      - Do not reserve empty layout spacing for a hidden description.
+      - Do not automatically repeat Fieldset helper or error IDs on every Radio.
+
+selectionBehaviour:
+  rules:
+    - Only one enabled or disabled Radio in a same-named group can be selected.
+    - Selecting one Radio clears the checked state from other Radios with the same name in the same form owner.
+    - A saved or previously selected answer may be restored.
+    - Do not preselect a valid answer for a new question without a saved value.
+    - Provide an explicit "None", "Not applicable" or "I do not know" option when returning to no selection is a legitimate user need.
+
+states:
+  default:
+    description: Enabled Radio, selected or unselected, without visible keyboard focus.
+    tokens:
+      background: form.control.background
+      borderColor: form.control.border.color
+      selectedBorderColor: form.state.selected.border
+      indicatorColor: component.radio.indicator.color
+    rules:
+      - Unselected state shows the circular boundary without the selected indicator.
+      - Selected state shows the selected boundary and inner indicator.
+
+  focus:
+    description: Enabled Radio while the native input has keyboard focus.
+    tokens:
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+      focusRingWidth: border.width.medium
+      focusSeparatorWidth: border.width.medium
+    treatment:
+      type: circular-double-ring
+      surrounds: visualControl
+      layers:
+        - visualControl
+        - separator
+        - focusRing
+    rules:
+      - Visible focus surrounds the circular visual Radio control, not the whole option row.
+      - Focus must remain visible on selected and unselected Radios.
+      - The separator uses form.state.focus.separator.
+      - The outer ring uses form.state.focus.ring.
+      - Both focus layers use border.width.medium.
+      - The focus shape is circular.
+
+  disabled:
+    description: Native Radio that cannot be selected or receive focus.
+    tokens:
+      background: form.state.disabled.background
+      foreground: form.state.disabled.foreground
+      borderColor: form.state.disabled.border
+      selectedIndicatorColor: form.state.disabled.foreground
+    rules:
+      - Use the native disabled attribute.
+      - Disabled Radios do not receive keyboard focus.
+      - Disabled Radios are not submitted with the form.
+      - Do not rely on opacity alone.
+      - Disabled selected state must still communicate that the option is selected.
+      - Keep the option label visible.
+
+stateCombinations:
+  - selected: false
+    state: default
+  - selected: true
+    state: default
+  - selected: false
+    state: focus
+  - selected: true
+    state: focus
+  - selected: false
+    state: disabled
+  - selected: true
+    state: disabled
+
+unsupportedStates:
+  error:
+    supported: false
+    reason: Missing required selection is a group-level Fieldset error.
+  errorFocus:
+    supported: false
+    reason: Focused Radio keeps the normal Radio focus treatment during a group error.
+  hover:
+    supported: false
+  active:
+    supported: false
+  readonly:
+    supported: false
+    reason: Native radio inputs do not support readonly.
+  indeterminate:
+    supported: false
+    reason: Radio has binary checked or unchecked native state.
+  required:
+    supportedAsVisualState: false
+  optional:
+    supportedAsVisualState: false
+  responsiveSize:
+    supported: false
+
+composition:
+  parent: Fieldset
+  rules:
+    - Place related Radio instances inside Fieldset's generic content slot.
+    - Fieldset owns the shared question through the legend.
+    - Fieldset owns group helper text.
+    - Fieldset owns group error text.
+    - Fieldset owns required, optional and mixed group status.
+    - Fieldset owns form.group.gap.headerToContent between group header and content slot.
+    - Fieldset may use the native disabled attribute when the complete group is disabled.
+    - Use form.group.gap.betweenOptions between Radio instances in a vertical composition.
+    - Vertical Radio groups are the default composition.
+    - Horizontal layout is a parent composition decision, not a Radio variant.
+
+nativeHtml:
+  input:
+    element: input
+    type: radio
+    supportedAttributes:
+      - id
+      - name
+      - value
+      - checked
+      - required
+      - disabled
+      - form
+      - aria-describedby
+    prohibitedAttributes:
+      - readonly
+      - role="radio"
+      - aria-checked
+      - aria-invalid for whole-group missing-selection errors
+    rules:
+      - Use native HTML radio input behaviour.
+      - Do not add ARIA that duplicates or conflicts with native semantics.
+      - Required is a group-level implementation concern expressed on native Radio inputs.
+      - If using native required, apply it consistently according to the implementation framework's radio-group strategy.
+      - Do not put required on Fieldset.
+
+  label:
+    preferredStructure: label-for-input-id
+    alternativeStructure: wrapping-label-without-description
+    rules:
+      - The visible label should use for to reference the native input id.
+      - A wrapping label is acceptable only when no option description is present.
+      - Do not place option description text inside the associated label.
+      - Do not compromise accessible-name and accessible-description separation to make the description itself toggle the Radio.
+      - Do not prescribe JavaScript click forwarding when native label behaviour is sufficient.
+      - The label must remain visible.
+
+describedBy:
+  optionDescription:
+    method: aria-describedby
+    owner: radio
+  groupHelperText:
+    method: aria-describedby
+    owner: fieldset
+  groupErrorText:
+    method: aria-describedby
+    owner: fieldset
+  rules:
+    - Option-specific descriptions use a stable ID referenced by that Radio.
+    - Option description text must not become part of the Radio accessible name.
+    - Omit aria-describedby when no option description exists.
+    - Fieldset helper IDs must not automatically be repeated on every Radio.
+    - Fieldset error IDs must not automatically be repeated on every Radio.
+    - Do not associate unrelated text with an individual Radio.
+
+validation:
+  missingRequiredSelection:
+    owner: fieldset
+    rules:
+      - Missing required selection is a group-level Fieldset error.
+      - Fieldset displays and owns the error message.
+      - Associate the group error with the Fieldset using aria-describedby.
+      - Radio options retain their normal visual states.
+      - Do not turn every Radio boundary red.
+      - Do not create individual Radio error messages.
+      - Do not apply aria-invalid to every Radio for a missing group selection.
+      - The focused Radio still uses the normal Radio focus treatment.
+      - Inline Fieldset errors remain visible when an error summary exists.
+      - Error-summary links target the first relevant Radio.
+      - Preserve the selected value after validation.
+
+keyboardInteraction:
+  nativeBehaviourRequired: true
+  sequentialFocus:
+    - Tab reaches the selected Radio in the group when one is selected.
+    - Tab reaches the first enabled Radio when none is selected.
+    - Disabled Radios are skipped.
+  operation:
+    - Arrow keys move selection according to native browser behaviour.
+    - Space selects the focused Radio according to native browser behaviour.
+    - Do not add custom keyboard handling that conflicts with native radio behaviour.
+    - Do not trap keyboard focus.
+
+layout:
+  root:
+    display: horizontal
+    controlPlacement: before-option-content
+    controlAlignment: first-line
+    tokens:
+      controlToContentGap: spacing.control.gap
+      minimumBlockSize: size.control.minBlockSize.default
+  optionContent:
+    display: vertical
+  groupComposition:
+    defaultDirection: vertical
+    tokenBetweenOptions: form.group.gap.betweenOptions
+    headerToContentTokenOwner: fieldset
+  rules:
+    - Labels and descriptions may wrap.
+    - The Radio root must not overflow narrow containers.
+    - The visual control size does not change by breakpoint.
+    - Hidden descriptions collapse without leaving empty spacing.
+
+tokens:
+  label:
+    typography: form.label.typography
+    color: form.label.color
+  description:
+    typography: form.helper.typography
+    color: form.helper.color
+  control:
+    size: component.radio.control.size
+    background: form.control.background
+    borderColor: form.control.border.color
+    borderWidth: form.control.border.width
+    selectedBorderColor: form.state.selected.border
+    radius: radius.full
+  indicator:
+    size: component.radio.indicator.size
+    color: component.radio.indicator.color
+    radius: radius.full
+  focus:
+    ring: form.state.focus.ring
+    separator: form.state.focus.separator
+    ringWidth: border.width.medium
+    separatorWidth: border.width.medium
+  disabled:
+    background: form.state.disabled.background
+    foreground: form.state.disabled.foreground
+    borderColor: form.state.disabled.border
+  layout:
+    controlToContentGap: spacing.control.gap
+    optionToOptionGap: form.group.gap.betweenOptions
+    minimumRowBlockSize: size.control.minBlockSize.default
+
+tokenDecision:
+  newSharedTokens:
+    - form.state.selected.border
+  newComponentTokens:
+    - component.radio.control.size
+    - component.radio.indicator.size
+    - component.radio.indicator.color
+  noNewResponsiveTokensRequired: true
+  rules:
+    - Do not add form.state.selected.indicator in this pass.
+    - Do not add component aliases for existing radius, border width, focus, typography or spacing tokens.
+    - Keep Radio circle and dot geometry component-specific.
+
+figmaProperties:
+  selected:
+    type: variant
+    values:
+      - false
+      - true
+  state:
+    type: variant
+    values:
+      - default
+      - focus
+      - disabled
+  description:
+    type: boolean
+    default: false
+    values:
+      - false
+      - true
+  textProperties:
+    labelText:
+      type: text
+      required: true
+      default: Email
+    descriptionText:
+      type: text
+      requiredWhen:
+        - description: true
+      default: We will use this for service updates.
+
+figmaStateRules:
+  - Production states are selected/unselected combined with default, focus and disabled.
+  - Description defaults to false.
+  - Description is documentation-supported but not the normal default.
+  - Do not create error or errorFocus variants.
+  - Do not create hover, active, readOnly, indeterminate, required, optional or responsive-size variants.
+  - Do not create a Radio Group Figma component.
+  - Use component instances inside Fieldset examples for grouped documentation.
+
+figmaStructure:
+  tree: |
+    Radio
+    |-- Native input
+    |-- Visual control
+    |   `-- Selected indicator
+    `-- Option content
+        |-- Label
+        `-- Description - optional
+  rules:
+    - Use Auto Layout.
+    - Bind documented tokens where available.
+    - The visual control is circular.
+    - Show focus around the circular control.
+    - Hide the description layer when description is false without leaving empty spacing.
+    - Figma visual grouping does not imply the description is part of the HTML label.
+    - Handoff notes must preserve semantic separation between Label and Description.
+    - Keep the component resizable and safe in narrow containers.
+
+accessibility:
+  conformanceTarget: WCAG 2.2 AA
+  note: Radio alone does not guarantee conformance; Fieldset composition, validation and surrounding form behaviour must also be correct.
+  wcag:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: Native fieldset and legend expose the group, while each native Radio exposes its option name, role and state.
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Selected, disabled and validation-related states must not rely on colour alone.
+    - id: WCAG 1.4.10
+      name: Reflow
+      level: AA
+      relevance: Labels and descriptions must wrap in narrow containers without horizontal scrolling.
+    - id: WCAG 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: Radio boundary, selected indicator and focus indicator need sufficient contrast.
+    - id: WCAG 1.4.12
+      name: Text Spacing
+      level: AA
+      relevance: Adjusted text spacing must not clip or overlap labels and descriptions.
+    - id: WCAG 2.1.1
+      name: Keyboard
+      level: A
+      relevance: Native Radio selection must be operable by keyboard.
+    - id: WCAG 2.4.6
+      name: Headings and Labels
+      level: AA
+      relevance: Fieldset legend identifies the question and Radio labels identify individual options.
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: Focus must be visible on selected and unselected Radios.
+    - id: WCAG 2.4.11
+      name: Focus Not Obscured Minimum
+      level: AA
+      relevance: Author content must not completely obscure the focused Radio control.
+    - id: WCAG 2.5.8
+      name: Target Size Minimum
+      level: AA
+      relevance: The associated row uses the shared comfortable minimum block size.
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: Missing-selection errors are identified by Fieldset group error text.
+    - id: WCAG 3.3.2
+      name: Labels or Instructions
+      level: A
+      relevance: The legend, labels, group helper text and option descriptions provide instructions.
+    - id: WCAG 4.1.2
+      name: Name, Role, Value
+      level: A
+      relevance: Native radio inputs expose name, role, checked value and disabled state.
+
+contentGuidelines:
+  labels:
+    - Use clear, concise, mutually exclusive labels.
+    - Use sentence case.
+    - Do not include required or optional wording on individual Radio labels.
+    - Do not use placeholder text.
+  descriptions:
+    - A plain visible label is the default Radio presentation.
+    - Use option descriptions only when one specific option needs explanation.
+    - Treat option descriptions as uncommon rather than routine.
+    - Put group-wide guidance in Fieldset helper text.
+    - Do not repeat the same descriptive guidance beneath every option.
+    - Keep descriptions short.
+    - Omit the description element and aria-describedby when no description exists.
+  options:
+    - Do not preselect an option merely to avoid an unanswered state.
+    - Restore a previously selected or saved answer when one exists.
+    - Add an explicit none-style option when no selection is a legitimate answer.
+    - Do not place interactive content inside a Radio label or description.
+
+examples:
+  fieldsetComposition:
+    html: |
+      <fieldset aria-describedby="contact-hint">
+        <legend>How would you like to be contacted?</legend>
+        <p id="contact-hint">Choose one option.</p>
+
+        <div>
+          <input id="contact-email" name="contact-method" type="radio" value="email">
+          <label for="contact-email">Email</label>
+        </div>
+
+        <div>
+          <input id="contact-phone" name="contact-method" type="radio" value="phone">
+          <label for="contact-phone">Phone</label>
+        </div>
+      </fieldset>
+  optionDescription:
+    classNameNote: >
+      The radio and radio__content class names are illustrative only. They
+      demonstrate one possible implementation structure and are not required
+      public API. Consuming implementations may use different class names or
+      styling approaches while preserving the documented native HTML semantics
+      and accessible relationships.
+    html: |
+      <div class="radio">
+        <input
+          id="delivery-pickup"
+          name="delivery-method"
+          type="radio"
+          value="pickup"
+          aria-describedby="delivery-pickup-description"
+        >
+        <div class="radio__content">
+          <label for="delivery-pickup">Collect in store</label>
+          <div id="delivery-pickup-description">
+            We will email when your order is ready.
+          </div>
+        </div>
+      </div>
+
+qa:
+  examples:
+    - id: unselected-default
+      scenario: Radio is enabled and unchecked.
+      expected:
+        selected: false
+        state: default
+        selectedIndicatorVisible: false
+    - id: selected-default
+      scenario: Radio is enabled and checked.
+      expected:
+        selected: true
+        state: default
+        selectedIndicatorVisible: true
+    - id: unselected-focus
+      scenario: Unchecked Radio has keyboard focus.
+      expected:
+        selected: false
+        state: focus
+        focusSurrounds: visualControl
+    - id: selected-focus
+      scenario: Checked Radio has keyboard focus.
+      expected:
+        selected: true
+        state: focus
+        focusSurrounds: visualControl
+    - id: disabled-unselected
+      scenario: Disabled Radio is unchecked.
+      expected:
+        selected: false
+        state: disabled
+        focusable: false
+    - id: disabled-selected
+      scenario: Disabled Radio is checked.
+      expected:
+        selected: true
+        state: disabled
+        selectedStateStillVisible: true
+    - id: optional-option-description
+      scenario: Option-specific description is present.
+      expected:
+        description: true
+        radioAriaDescribedByIncludes: option-description-id
+        optionDescriptionOutsideLabel: true
+        accessibleNameExcludesDescription: true
+    - id: no-option-description
+      scenario: Plain Radio option has no option-specific description.
+      expected:
+        description: false
+        descriptionElementRendered: false
+        radioAriaDescribedByPresent: false
+        emptyDescriptionSpacingReserved: false
+    - id: long-wrapping-label
+      scenario: Label text wraps across multiple lines.
+      expected:
+        labelWraps: true
+        contentNotClipped: true
+    - id: long-wrapping-description
+      scenario: Description text wraps across multiple lines.
+      expected:
+        descriptionWraps: true
+        contentNotClipped: true
+    - id: narrow-container
+      scenario: Radio appears in a narrow Fieldset content slot.
+      expected:
+        noHorizontalOverflow: true
+    - id: shared-name
+      scenario: Several Radio instances answer one Fieldset legend.
+      expected:
+        sameName: true
+        oneSelectedAtMost: true
+    - id: unique-ids-values
+      scenario: Each Radio in a set is inspected.
+      expected:
+        idsUnique: true
+        valuesNonEmpty: true
+    - id: fieldset-composition
+      scenario: Radios are placed in Fieldset content slot.
+      expected:
+        fieldsetProvidesLegend: true
+        radioGroupComponentCreated: false
+    - id: fieldset-helper-plus-option-descriptions
+      scenario: Fieldset helper and option descriptions are both present.
+      expected:
+        fieldsetAriaDescribedByIncludes: group-helper-id
+        radioAriaDescribedByIncludesOnlyOwnDescription: true
+    - id: missing-selection-fieldset-error
+      scenario: Required Radio set has no selected option.
+      expected:
+        fieldsetErrorVisible: true
+        radioErrorStyling: false
+        radioAriaInvalidRepeated: false
+    - id: error-summary-first-radio-target
+      scenario: Error summary links to a missing Radio answer.
+      expected:
+        target: first-relevant-radio
+    - id: no-default-preselection
+      scenario: New question has no saved answer.
+      expected:
+        validAnswerPreselected: false
+    - id: restored-previous-selection
+      scenario: Saved answer exists.
+      expected:
+        selectedValueRestored: true
+    - id: zoom-200
+      scenario: Page is viewed at 200 percent zoom.
+      expected:
+        noContentLoss: true
+    - id: text-spacing-adjustments
+      scenario: User applies text spacing overrides.
+      expected:
+        noOverlap: true
+        noClipping: true
+    - id: forced-colours
+      scenario: Forced-colours or high-contrast mode is active.
+      expected:
+        selectedStatePerceivable: true
+        focusVisible: true
+    - id: keyboard-interaction
+      scenario: User operates same-named Radios with keyboard.
+      expected:
+        nativeKeyboardBehaviourPreserved: true
+        noKeyboardTrap: true
+    - id: screen-reader-announcement
+      scenario: Radio set is read by a screen reader.
+      expected:
+        legendAnnounced: true
+        optionLabelAnnounced: true
+        selectedStateAnnounced: true
+        optionDescriptionAnnouncedWhenPresent: true
+
+implementationRules:
+  html:
+    - Use input type="radio".
+    - Give every Radio a unique id.
+    - Give every Radio a non-empty value.
+    - Use the same non-empty name for options in one set.
+    - Associate the visible label with the input using label for and input id.
+    - Keep the label text limited to the option accessible name.
+    - Use native checked and disabled attributes.
+    - Use required according to the implementation's group validation strategy.
+    - Do not use readonly.
+    - Do not use role="radio" or aria-checked on a native Radio.
+    - Use aria-describedby only for option-specific descriptions.
+    - Do not put a referenced option description inside the associated label.
+    - Omit aria-describedby when no option description exists.
+  css:
+    - Keep the native input available to assistive technology.
+    - Do not hide the native input with display none or visibility hidden.
+    - Use component.radio.control.size for the visual circle.
+    - Use component.radio.indicator.size for the selected indicator.
+    - Use size.control.minBlockSize.default for the row minimum block size.
+    - Use spacing.control.gap between the visual control and option content.
+    - Use form.group.gap.betweenOptions between sibling Radio instances.
+
+aiGenerationRules:
+  - Generate Radio as an individual option, not a group wrapper.
+  - Compose related Radios inside Fieldset.
+  - Do not create Radio Group components or token namespaces.
+  - Do not create error variants for Radio.
+  - Do not repeat Fieldset helper or error IDs on every Radio.
+  - Generate plain visible labels by default.
+  - Generate option descriptions only when an individual option needs additional explanation.
+  - Keep option descriptions outside associated labels.
+  - Omit description elements and aria-describedby when descriptions are absent.
+  - Preserve native HTML radio behaviour.
+  - Use documented semantic and component tokens.
+  - Report missing token needs rather than inventing values.
+
+acceptanceCriteria:
+  - Radio is an individual public component.
+  - No Radio Group source file or token namespace is created.
+  - Native input type radio is required.
+  - Every Radio has a visible label.
+  - Option descriptions are associated only with the relevant Radio.
+  - Option descriptions default to false and are absent unless explicitly needed.
+  - Option descriptions are outside the associated label.
+  - Radio accessible names exclude option descriptions.
+  - Fieldset owns group semantics, helper text, error text and requirement status.
+  - Missing required selection does not create Radio error styling.
+  - Focus surrounds the circular visual control.
+  - Disabled selected and disabled unselected states are supported.
+  - Tokens use compatible types and compile.
+  - No responsive Radio token group is introduced.
