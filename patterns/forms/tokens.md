@@ -201,6 +201,7 @@ Use state tokens for shared form control states.
 form.state.focus.ring
 form.state.focus.separator
 form.state.error.border
+form.state.selected.border
 form.state.disabled.background
 form.state.disabled.foreground
 form.state.disabled.border
@@ -209,6 +210,8 @@ form.state.readonly.foreground
 form.state.readonly.border
 ```
 Hover is not currently documented as a shared form control state. If a future form component needs a visibly distinct hover treatment, add it deliberately as part of that component’s specification.
+
+Use `form.state.selected.border` for the selected boundary of selection controls such as Radio and Checkbox.
 
 ## Error summary tokens
 
@@ -266,6 +269,14 @@ textInput.width.full
 ```
 
 Only create component-specific tokens when the shared form tokens are not enough.
+
+Radio uses component-specific geometry for its circular control and selected indicator:
+
+```text
+component.radio.control.size
+component.radio.indicator.size
+component.radio.indicator.color
+```
 
 ## Form typography
 

@@ -561,6 +561,7 @@ tokens:
     focusRing: form.state.focus.ring
     focusSeparator: form.state.focus.separator
     errorBorder: form.state.error.border
+    selectedBorder: form.state.selected.border
     disabledBackground: form.state.disabled.background
     disabledForeground: form.state.disabled.foreground
     disabledBorder: form.state.disabled.border

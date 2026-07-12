@@ -1,0 +1,25 @@
+{
+  "component": {
+    "radio": {
+      "control": {
+        "size": {
+          "$value": "{size.target.minimum}",
+          "$type": "dimension",
+          "$description": "Radio visual control diameter. Uses the minimum target size token so the visible circle is 1.5rem, or 24px at a default 16px root size."
+        }
+      },
+      "indicator": {
+        "size": {
+          "$value": "0.75rem",
+          "$type": "dimension",
+          "$description": "Radio selected indicator diameter. This component-specific dimension is 12px at a default 16px root size."
+        },
+        "color": {
+          "$value": "{form.state.selected.border}",
+          "$type": "color",
+          "$description": "Radio selected indicator colour."
+        }
+      }
+    }
+  }
+}
