@@ -46,23 +46,36 @@ Use these source files:
 - `components/internal/documentation-card.yaml`
 - `accessibility/headings.yaml`
 - `accessibility/focus-indicators.yaml`
+- `tokens/figma/sync-contract.yaml`
+- `docs/token-sync-workflow.md`
 - `icons/registry.json`
 - `patterns/iconography.yaml`
 
-## Mandatory preflight
+## Mandatory non-destructive preflight
 
 Before changing Figma:
 
-1. Read the latest source from GitHub.
-2. Read the component contract YAML.
-3. Read the component Markdown documentation, if present.
-4. Read `patterns/component-documentation-page.yaml`.
-5. Read the shared page, documentation page, card grid, page header and documentation card pattern files.
-6. Inspect the Figma file.
-7. Inspect the shared Figma documentation template on the `00 Templates` page, if present.
-8. Inspect the nearest completed component documentation page as a reference.
+1. Read the latest source files from the default GitHub branch, or from the explicitly supplied source branch if one is provided.
+2. Read the component contract YAML and confirm it exists.
+3. Read the component Markdown documentation, if present, and confirm whether it exists.
+4. Read the shared machine-readable pattern, token-sync, accessibility and internal documentation component files listed above.
+5. Inspect the current Figma page structure.
+6. Inspect the shared Figma documentation template on the `00 Templates` page, if present.
+7. Inspect the nearest completed component documentation page as a reference.
+8. Inspect existing component masters, internal documentation components, variables, styles, modes, icons and reusable sample components.
+9. Confirm whether the intended component page already exists.
+10. Confirm the correct next page number from the existing component page order instead of guessing.
+11. Identify the intended production component-set name from the component contract.
+12. List the contract-defined properties, variants, states, defaults, anatomy, token usage and QA requirements.
+13. Identify any missing variables, styles, components, slots, instance-swap support or Figma/MCP capabilities before making changes.
+
+When the agent or workflow supports staged reporting, provide a short preflight report before mutation. Include the source branch, GitHub files read, Figma pages inspected, existing assets found, intended page name, intended component-set name, property list and any gaps or conflicts.
 
 Do not rely on cached files, previous conversation context or stale local working-tree files as the source of truth.
+
+Do not modify GitHub files, token files, component contracts or documentation unless the user explicitly requests repository edits.
+
+Do not create duplicate pages, component sets, documentation headers, documentation cards, variables or styles when suitable existing assets already exist.
 
 If required GitHub files or Figma access are unavailable, stop before making changes and report the access problem.
 
@@ -70,26 +83,114 @@ If required GitHub files or Figma access are unavailable, stop before making cha
 
 When sources conflict, use this order:
 
-1. Component contract YAML
-2. Shared machine-readable token, pattern, accessibility and registry files
-3. Component Markdown documentation, if present
-4. Existing Figma implementation references
-5. This prompt
+1. Component contract YAML.
+2. Shared machine-readable token, pattern, accessibility, registry and token-sync files.
+3. Component Markdown documentation, if present.
+4. Existing Figma implementation references.
+5. This prompt.
+6. Conversation instructions.
 
-The component contract defines the component API, anatomy, states, variants, examples and accessibility requirements.
+Rules:
 
-The component documentation page pattern defines how the Figma page should be assembled.
+- The component YAML contract defines the public component API, anatomy, defaults, properties, variants, states, token usage, examples, QA requirements and accessibility requirements.
+- Shared machine-readable patterns define composition, page structure, layout, internal documentation components, cross-component rules and token-sync rules.
+- Markdown explains intended human usage, but it must not override the YAML contract.
+- Existing Figma content is a reference and validation source, not authority when it conflicts with GitHub.
+- This prompt guides the workflow but does not override repository source files.
+- A conversation prompt must not silently override repository source files.
+- When sources conflict, report the conflict rather than choosing a convenient interpretation.
 
-## Create
+## Create or update
 
-Create or update:
+Create or update only the Figma artefacts that the contract and page pattern require:
 
-1. Component masters.
-2. Relevant component variants.
-3. Relevant states.
-4. Documentation examples.
-5. QA or playground examples.
-6. Accessibility notes.
+1. Production component masters and component set.
+2. Contract-defined component variants, states and properties.
+3. Documentation examples.
+4. QA or playground examples.
+5. Accessibility notes.
+
+Keep the production component set separate from documentation examples, QA examples and accessibility notes.
+
+## Components, compositions and patterns
+
+- Do not create a public Figma component merely because several component instances are shown together.
+- Grouped examples, stacks, matrices, playgrounds and layout compositions are not automatically public components.
+- Use existing parent components and slots where contracts define composition.
+- Do not duplicate parent-component responsibilities in a child component.
+- Do not create content-type variants on generic slot-based parents unless the contract explicitly requires them.
+- Documentation examples may use ordinary Auto Layout compositions without publishing those compositions as components.
+- Report uncertainty where the contract does not clearly establish whether something is a component, pattern or composition.
+
+## Visual anatomy and implementation semantics
+
+- Figma layer nesting expresses visual structure and maintainability; it does not automatically define HTML nesting.
+- Follow semantic implementation guidance from the component contract.
+- Do not infer that visually grouped text belongs inside an HTML label, legend, button or link.
+- Preserve documented accessible-name and accessible-description separation.
+- Preserve ownership of labels, legends, helper text, errors and descriptions.
+- Add handoff notes where a Figma visual structure could otherwise be implemented with incorrect semantics.
+- Illustrative class names in HTML examples are not public API unless the contract explicitly says they are.
+
+## Component property rules
+
+- Match property names, types, values and defaults exactly to the contract.
+- Distinguish variant properties, Boolean properties, text properties, instance swaps and slots.
+- Do not turn optional content into a variant when the contract specifies a Boolean property.
+- Do not create variants for semantic metadata that has no visual effect.
+- Do not combine independent properties merely to reduce variant count if doing so makes the API inaccurate.
+- Do not create undocumented convenience properties.
+- Confirm hidden optional content collapses without empty space.
+- Confirm every documented default is represented correctly in the default component instance.
+- Verify property changes do not unintentionally change unrelated properties.
+- Ensure component instances can be configured through documented properties without forcing unrelated settings to change.
+
+## Token and variable rules
+
+- Read `tokens/figma/sync-contract.yaml` and `docs/token-sync-workflow.md` before binding variables.
+- GitHub is the source of truth for tokens. Figma is the visual implementation and validation layer.
+- Use semantic tokens, not raw values, for reusable system roles.
+- Use primitive tokens only where the contract calls for raw reusable values.
+- Use component tokens for component-specific decisions.
+- Bind the most specific documented component token when one exists.
+- Use shared semantic tokens where the contract explicitly assigns a shared role.
+- When documented component tokens exist for a component, prefer them over generic semantic tokens.
+- Do not use generic spacing, sizing, colour or typography tokens for component-specific purposes when a component-level token exists.
+- Do not invent token values.
+- Do not use raw colours, arbitrary spacing, detached icons or unbound text styles where variables or styles exist.
+- Respect variables managed through Figma modes.
+- Do not recreate responsive mode-managed variables as separate fixed variables.
+- Do not import excluded breakpoint branches into the wrong collection.
+- Never substitute a visually similar variable merely because the required variable is unavailable.
+- Report missing variables rather than using raw fallback values.
+- Verify actual rendered values and variable IDs, not only displayed variable names.
+- Check for stale or orphaned variable bindings.
+- Reapply a binding when the variable name appears correct but the rendered value or variable ID is stale.
+- Do not perform destructive variable imports or collection replacement as part of component generation.
+- Do not modify variable architecture unless the task explicitly includes approved token work.
+
+## Slot and instance rules
+
+- Preserve native Figma slots and instance-swap properties where contracts require them.
+- Do not detach instances to work around a slot limitation.
+- Do not replace reusable instances with visually copied frames.
+- Use approved icon components only.
+- Do not detach icon instances.
+- If the current Figma or MCP capability cannot populate a native slot accurately, report the limitation.
+- Use a documented temporary fallback only in documentation or QA examples, not inside the production component master, unless explicitly approved.
+- Record any difference between the intended contract and what Figma could represent.
+
+## Focus and state rules
+
+- Apply focus to the exact interactive element defined by the contract, which may be a nested control rather than the component root.
+- Use the shared focus-indicator standard where focus states are shown.
+- Preserve combined states only when the contract defines them.
+- Do not invent hover, active, error, selected, read-only, disabled or indeterminate states.
+- Do not apply a parent-owned validation state to every child control.
+- Do not create documentation-only variants in the production component set.
+- Ensure disabled selected values remain understandable where required.
+- Ensure focus examples are component instances, not alternative undocumented masters.
+- If something is unclear, add a visible note or report the gap rather than inventing rules.
 
 ## Component documentation page structure
 
@@ -110,63 +211,45 @@ The page should contain these top-level areas:
 
 Rules:
 
-- Keep production component masters separate from documentation examples and QA.
+- Reuse the existing documentation page template where available.
+- Reuse `_Documentation/Page Header` and `_Documentation/Card`; do not create local substitutes.
+- Do not modify internal documentation component masters as part of a product-component task.
+- Keep production component masters separate from examples, accessibility notes and QA.
 - Build or update the production component set first.
 - Documentation examples must be component instances, not additional variants.
 - QA examples must be component instances outside the production component set.
 - Use contract-defined examples and QA cases where available.
 - Use `_Documentation/Page Header` for each documentation area.
-- Use `_Documentation/Card` instances for repeated short documentation summaries.
-- Use the established wrapping documentation-card grid for card groups.
-- Use prose sections for longer guidance instead of forcing long text into cards.
-
-## Token and variable rules
-
-- Use the component contract as the source of truth.
-- Use semantic tokens, not raw values.
-- Use primitive tokens for raw values.
-- Use semantic tokens for reusable system roles.
-- Use component tokens for component-specific decisions.
-- When documented component tokens exist for a component, prefer them over generic semantic tokens.
-- Do not use generic spacing, sizing, colour or typography tokens for component-specific purposes when a component-level token exists.
-- Do not invent token values.
-- Do not use raw colours, arbitrary spacing, detached icons or unbound text styles where variables or styles exist.
-- Check the rendered result, not only the displayed variable name.
-- If a layer appears to have the correct variable but renders incorrectly, remove and re-apply the variable binding.
-- If a documented variable is missing or cannot be bound, report the gap rather than silently substituting a raw value.
-
-## Component rules
-
-- Use Auto Layout.
-- Use approved icon components only.
-- Do not detach icon instances.
-- Do not invent variants, states, sizes or properties that are not documented.
-- Do not create documentation-only variants in the production component set.
-- Use component properties where they keep the component maintainable.
-- Avoid multiplying variants for content conditions unless the contract explicitly requires it.
-- If something is unclear, add a visible note or report the gap rather than inventing rules.
-- Use the documented focus treatment where focus states are shown.
-- Ensure component instances can be configured through documented properties without forcing unrelated settings to change.
+- Use `_Documentation/Card` instances only for concise repeated summaries.
+- Use prose sections for longer or nuanced guidance.
+- Do not force large or complex components into card grids that clip or constrain them.
+- Use a single-column or suitable flexible layout when component content needs more width or height.
+- Use the established wrapping documentation-card grid for short card groups.
+- Use grid-style layout only for true matrices, tables or row/column comparisons.
+- Ensure Auto Layout containers use Hug or Fill appropriately rather than fixed heights that clip content.
+- Do not clip visible content.
+- Keep long explanatory text within the documented readable maximum width.
+- Verify all page and section headings follow `accessibility/headings.yaml`.
 
 ## Documentation page template rules
 
 When creating component documentation frames:
 
 - Use `patterns/documentation-page.yaml`.
-- Use or create `_Documentation/Page Header`.
-- Do not create ad hoc page headers.
+- Use `patterns/page-layout.yaml`.
+- Use `patterns/content-block.yaml` for heading, prose and action relationships.
+- Use `patterns/card-grid.yaml` for repeated card groups.
 - Include eyebrow text above the H1.
 - For component documentation pages, eyebrow text must be `Components`.
 - Use `color.text.headingAccent` for the documentation H1.
 - Use `typography.heading.h1.[breakpoint]` for the H1.
 - Use `typography.body.large.[breakpoint]` for intro text.
 - Constrain intro text to `layout.container.maxWidth.text`.
-- Use the shared Figma documentation template from the `00 Templates` page where available.
-- Use heading hierarchy from `accessibility/headings.yaml`.
 - Choose heading visual styles based on semantic level and current frame breakpoint.
-- Use `layout.container.maxWidth.text` for prose, section descriptions, documentation notes and accessibility guidance text.
-- Do not stretch explanatory body text across the full page container on desktop frames.
+- Centre the page container, not the body text.
+- Keep body copy left aligned by default.
 - Wider layout containers may be used for component examples, state matrices, playgrounds and visual samples.
+- Use standard responsive or QA frame widths only where the contract requires responsive checks.
 
 ## Documentation card rules
 
@@ -180,29 +263,15 @@ When creating repeated short documentation summaries:
 - Do not create a new card variant or card style for every sample type.
 - Use wrapping documentation card groups for short documentation summaries on desktop frames.
 - Do not convert short documentation card groups into a single full-width vertical panel list.
-- Use grid-style layout only for true matrices, tables or row/column comparisons.
 - Card title semantic level is determined by page structure; do not infer semantic level from visual text style alone.
 - Documentation / Card is an internal documentation component, not a public product component.
-
-## Layout rules
-
-- Use `patterns/page-layout.yaml`.
-- Use `patterns/card-grid.yaml` for repeated card groups.
-- Use flex-style layout for normal grouped examples.
-- Use grid-style layout only for true matrices or tables.
-- Centre the page container, not the body text.
-- Keep body copy left aligned by default.
-- Use readable text width for long-form content.
-- Ensure frames hug or expand to fit content.
-- Ensure visible content does not overflow clipped frames.
-- Use standard responsive or QA frame widths where the contract requires responsive checks.
 
 ## QA and playground rules
 
 - Use QA examples defined by the component contract.
 - Keep QA examples outside the production component set.
 - Use component instances for QA examples.
-- Include long-content, wrapping, narrow-container, focus, error, disabled and responsive checks where relevant to the component contract.
+- Include long-content, wrapping, narrow-container, focus, error, disabled and responsive checks only where relevant to the component contract.
 - Do not create extra master variants just to support QA examples.
 - Report missing contract-defined QA cases rather than inventing undocumented behaviour.
 
@@ -216,48 +285,58 @@ When creating repeated short documentation summaries:
 - Include component-specific accessibility notes in the accessibility area.
 - Use `_Documentation/Card` instances for repeated short accessibility notes.
 - Do not place accessibility notes inside production component masters.
+- Ensure accessibility notes accurately reflect the contract rather than broad claims.
 
-## Verification
+## Formal post-generation audit
 
-Before finishing, verify:
+After generation, inspect the completed result. Do not merely assume it is correct.
 
-- The correct GitHub source files were read.
-- The component contract was used as the canonical source.
-- `patterns/component-documentation-page.yaml` was followed.
-- The component page has the correct numbered name.
-- The four required top-level areas exist.
-- Component masters, documentation examples, QA and accessibility notes are separated.
-- The production component set is separate from documentation and QA examples.
-- `_Documentation/Page Header` is used instead of ad hoc headers.
-- `_Documentation/Card` instances are used for repeated short notes.
-- Card groups wrap correctly and are not full-width panel lists.
-- Documentation and QA examples remain instances.
-- Component variants and properties match the contract.
-- No undocumented variants, states, properties or token values were introduced.
-- No raw visual values were used where variables or styles exist.
-- No detached icon instances were introduced.
-- No visible content overflows clipped frames.
-- Documentation text uses readable max width.
-- Accessibility guidance matches the contract.
+Verify:
+
+- Correct page and component-set names.
+- Correct number of production variants.
+- Exact contract-defined property names, types, values and defaults.
+- No undocumented variants or properties.
+- Production masters are separate from examples and QA.
+- Documentation and QA use component instances.
+- No detached instances.
+- No duplicated internal documentation components.
+- Correct variables and styles are bound.
+- No raw values where variables exist.
+- No stale variable IDs or rendered-value mismatches.
+- No fixed-height clipping or hidden overflow.
+- Long labels, descriptions and content wrap correctly.
+- Optional elements collapse cleanly.
+- Focus, disabled, selected and validation examples match contract ownership.
+- Slot or instance-swap behaviour works.
+- Responsive or narrow-container checks are included only when relevant.
+- Accessibility notes accurately reflect the contract.
+- Visual Figma anatomy has not been misrepresented as implementation semantics.
+
+Correct issues that can be safely corrected without changing the contract. Report unresolved issues, source conflicts, unsupported Figma or MCP capabilities and human-review items.
 
 ## Completion report
 
 After creating the first pass, report:
 
-- What was created.
+- Preflight findings.
 - Which GitHub source files were read.
-- Which Figma page was created or updated.
-- Component set name.
-- Final variants and component properties.
-- Documentation areas created.
+- Which Figma pages and reference components were inspected.
+- Which page was created or updated.
+- Production component-set name.
+- Variants and properties created, including defaults.
+- Existing assets reused.
+- Variables and styles bound.
+- Documentation sections created.
 - Documentation card usage.
 - QA examples included.
-- Accessibility notes included.
-- Variables, styles, icons and existing components reused.
-- What assumptions were made.
-- Any tokens, variables, styles, icons or rules that were missing.
-- Any differences between the contract and what Figma could represent.
-- Any areas that need human review.
+- Accessibility examples included.
+- Slot or instance-swap handling.
+- Any unsupported Figma or MCP capabilities.
+- Any source conflicts.
+- Any raw-value or missing-variable risks.
+- Any assumptions.
+- Results of the post-generation audit.
+- Exact remaining human-review items.
 
 Do not modify GitHub files unless explicitly asked.
-```
