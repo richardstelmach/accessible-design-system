@@ -95,6 +95,47 @@ patterns:
       - helperText
       - errorMessage
       - control
+    orderScope:
+      - text-input
+      - textarea
+      - select
+      - search-input
+      - password-input
+      - currency-input
+      - stepper
+    orderExceptions:
+      standaloneCheckbox:
+        appliesTo:
+          - single-checkbox
+        overridesDefaultOrder: true
+        terminology:
+          checkboxRoot: Checkbox root
+          optionRow: option row
+          individualError: individual error
+          fieldsetGroupError: Fieldset group error
+        structure:
+          checkboxRoot:
+            - optionRow
+            - individualError
+          optionRow:
+            - nativeCheckboxInput
+            - optionContent
+          optionContent:
+            - visibleAssociatedLabel
+            - optionalCheckboxSpecificDescription
+        optionalNodes:
+          - optionalCheckboxSpecificDescription
+          - individualError
+        order:
+          - optionRow
+          - individualError
+        rules:
+          - The Checkbox root contains the complete option row followed by any individual error.
+          - Keep the native Checkbox input and visible associated label together in the option row.
+          - An optional Checkbox-specific description belongs with the option content but remains outside the HTML label.
+          - The individual error follows the complete option row and remains outside the associated label.
+          - This exception does not change the normal error ordering for Text Input, Textarea, Select or similar single controls.
+          - A Fieldset group error remains owned by Fieldset and is not an individual Checkbox error.
     rules:
       - A visible label is required by default.
       - The label must be associated with the control.
@@ -103,6 +144,9 @@ patterns:
       - Error text must be associated with the control when present.
       - Invalid controls must use aria-invalid="true".
       - Placeholder text must not be used as the label.
+      - A standalone single checkbox may own an individual error only when that checkbox is independently validated.
+      - Native single checkboxes submit their name and value only when checked.
+      - Consuming applications must handle the absent submitted name and value for unchecked checkboxes.
     requiredImplementation:
       accessibleName: true
       visibleLabelDefault: true
@@ -158,6 +202,8 @@ patterns:
       - Separate the Group header from the content slot with form.group.gap.headerToContent.
       - Keep form.group.gap.betweenOptions and form.group.gap.betweenFields for spacing inside the content slot.
       - Use form.field.gap.controlToNextField only after the complete Fieldset when the next form field begins.
+      - For checkbox groups, minimum, maximum and exact selection rules are group-level validation owned by Fieldset.
+      - Do not put required on one arbitrary checkbox as a shortcut for "select at least one".
     layout:
       groupHeader:
         contains:
@@ -353,6 +399,24 @@ requiredAndOptional:
         - Do not add "(required)" or "(optional)" to the group legend.
         - Child labels communicate their own statuses.
         - Do not describe the whole group as required or optional when that would be misleading.
+  singleCheckbox:
+    required:
+      rules:
+        - Native required means the standalone checkbox must be checked before the form is valid.
+        - Use required only when the positive checked answer is genuinely mandatory.
+        - Required standalone checkboxes do not need "(required)" by default.
+    optional:
+      rules:
+        - Optional standalone checkboxes may include "(optional)" in the visible label.
+        - The optional marker must be part of the checkbox accessible name.
+        - Optional preference and consent checkboxes normally have no error merely because they remain unchecked.
+  checkboxGroups:
+    rules:
+      - Fieldset owns group-level required, optional or mixed wording.
+      - Do not repeat "(optional)" on every checkbox when the complete group is optional.
+      - Do not use native required on one checkbox to mean at least one checkbox is required.
+      - Applying required to every checkbox means every checkbox is individually mandatory.
+      - Minimum, maximum and exact selection-count rules require group-level validation owned by Fieldset.
 
 validation:
   inlineErrors:
@@ -362,6 +426,19 @@ validation:
       - helperText
       - errorMessage
       - control
+    orderScope: text-like-and-similar-single-controls
+    orderExceptions:
+      standaloneCheckbox:
+        appliesTo:
+          - single-checkbox
+        overridesDefaultOrder: true
+        sequence:
+          - optionRow
+          - individualError
+        individualErrorContainer: checkboxRoot
+        individualErrorOutsideLabel: true
+        fieldsetGroupErrorOwner: fieldset
+        source: patterns.singleControl.orderExceptions.standaloneCheckbox
     rules:
       - Show the error close to the relevant field or group.
       - The error must be written in text.
@@ -381,6 +458,8 @@ validation:
       rules:
         - Use one group error when the grouped answer as a whole is missing or invalid.
         - Do not make the fieldset focusable.
+        - For checkbox groups, do not turn every child checkbox boundary red for a shared group error.
+        - For checkbox groups, do not repeat aria-invalid="true" or the Fieldset error ID on every child checkbox.
     childFieldInvalid:
       example: Date of birth is missing a year.
       association: specificInvalidChildField
@@ -561,6 +640,8 @@ tokens:
     focusRing: form.state.focus.ring
     focusSeparator: form.state.focus.separator
     errorBorder: form.state.error.border
+    selectedBackground: form.state.selected.background
+    selectedForeground: form.state.selected.foreground
     selectedBorder: form.state.selected.border
     disabledBackground: form.state.disabled.background
     disabledForeground: form.state.disabled.foreground

@@ -1,0 +1,1466 @@
+component: Checkbox
+id: checkbox
+version: 0.1.0
+status: draft
+
+description: >
+  Checkbox is an individual native checkbox control for an independently
+  answerable binary choice, confirmation or statement. Several Checkbox
+  instances may also be composed inside the existing Fieldset content slot when
+  they answer one shared multi-select question.
+
+purpose:
+  - Provide an accessible individual native checkbox option.
+  - Preserve native checkbox behaviour, name, value, checked, indeterminate and disabled state.
+  - Support standalone use for one independently answerable choice.
+  - Support composition inside Fieldset for related multi-select choices.
+  - Support a visible label for every Checkbox.
+  - Support an optional, Checkbox-specific description.
+  - Support individual error states only when that specific native Checkbox is independently validated.
+  - Exclude Checkbox Group, Switch, conditional reveal and custom ARIA checkbox implementations.
+
+sourceDocumentation:
+  sharedPattern:
+    - patterns/forms/form-field-patterns.yaml
+  humanReadable:
+    - patterns/forms/single-control-pattern.md
+    - patterns/forms/grouped-control-pattern.md
+    - patterns/forms/labels.md
+    - patterns/forms/helper-text.md
+    - patterns/forms/required-and-optional.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/error-summary.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/disabled-and-readonly.md
+    - patterns/forms/tokens.md
+
+relatedDocumentation:
+  - components/fieldset/fieldset.yaml
+  - components/fieldset/fieldset.md
+  - components/radio/radio.yaml
+  - components/radio/radio.md
+  - components/text-input/text-input.yaml
+  - patterns/forms/form-field-patterns.yaml
+  - patterns/forms/single-control-pattern.md
+  - patterns/forms/grouped-control-pattern.md
+  - patterns/forms/labels.md
+  - patterns/forms/helper-text.md
+  - patterns/forms/required-and-optional.md
+  - patterns/forms/validation-and-errors.md
+  - patterns/forms/error-summary.md
+  - patterns/forms/focus-management.md
+  - patterns/forms/disabled-and-readonly.md
+  - patterns/forms/tokens.md
+  - accessibility/focus-indicators.yaml
+
+scope:
+  includes:
+    - One public Checkbox component
+    - Standalone binary choices, confirmations and statements
+    - Checkbox instances inside the Fieldset content slot
+    - Native input type checkbox
+    - Unique id, name and non-empty value
+    - Native checked state
+    - Programmatic native indeterminate property
+    - Disabled state
+    - Visible label
+    - Optional individual description
+    - Optional visible marker for an individually optional Checkbox
+    - Individual error state when that specific native Checkbox has its own independent validation rule
+  excludes:
+    - Checkbox Group component
+    - Checkbox Group YAML or Markdown documentation
+    - Checkbox Group token namespace
+    - Switch component
+    - Conditional reveal component
+    - Custom role="checkbox" implementation
+    - Read-only Checkbox state
+    - Responsive Checkbox size variants
+    - Hover or active Figma component states
+    - Group-level helper text or group-level error ownership
+    - Native required Figma property when it creates no visible difference
+
+principles:
+  - Use Checkbox for one or more independently selectable choices.
+  - Use Radio when the available choices are mutually exclusive.
+  - Use a standalone Checkbox for one independently answerable binary choice, confirmation or statement.
+  - Compose related Checkbox instances inside Fieldset when several choices answer one shared question.
+  - Fieldset owns the native fieldset, legend, group helper text, group error text, group requirement status and group validation rules.
+  - Each Checkbox owns its native input, id, name, value, checked state, indeterminate property, disabled state, visible label, optional description and individual validation only when independently validated.
+  - The native checked state is the implementation source of truth for checkedness and form submission.
+  - Indeterminate is a programmatically managed visual state, not a third user answer.
+  - Do not recreate native checkbox behaviour with role="checkbox".
+  - Preserve the user's current checked state after validation.
+
+contexts:
+  standalone:
+    description: >
+      Use for one independently answerable binary choice, confirmation or
+      statement.
+    examples:
+      - Agreeing to a mandatory term
+      - Opting into an optional service
+      - Enabling an individual preference
+      - Confirming that a statement is true
+    owns:
+      - native input
+      - id
+      - name
+      - value
+      - checked state
+      - indeterminate property
+      - disabled state
+      - visible label
+      - optional description
+      - visible optional marker where appropriate
+      - individual error state when independently validated
+      - individual aria-invalid state
+      - individual aria-describedby relationships
+
+  insideFieldset:
+    description: >
+      Use several Checkbox instances inside Fieldset when the checkboxes answer
+      one shared multi-select question.
+    fieldsetOwns:
+      - native fieldset
+      - native legend
+      - shared helper text
+      - shared error text
+      - required, optional or mixed group status
+      - minimum, maximum or exact selection constraints
+      - group-level validation
+      - spacing between group header and Checkbox content
+    rules:
+      - Do not create a public Checkbox Group wrapper.
+      - Use form.group.gap.betweenOptions between sibling Checkbox instances.
+      - Shared guidance belongs in Fieldset helper text.
+      - Shared selection-rule errors belong to Fieldset.
+      - Do not repeat the same group-wide guidance beneath every Checkbox.
+
+pattern:
+  type: individual-selection-control
+  supportsPatterns:
+    - single-control
+    - grouped-control-child
+  parentPattern: grouped-control
+  parentComponent: fieldset
+  anatomy:
+    - nativeInput
+    - visualControl
+    - indicator
+    - optionContent
+    - label
+    - optionalMarker
+    - description
+    - errorMessage
+  requiredImplementation:
+    nativeInput: true
+    nativeTypeCheckbox: true
+    uniqueId: true
+    meaningfulName: true
+    nonEmptyValue: true
+    visibleLabel: true
+    nativeCheckedState: true
+    indeterminateDomPropertyWhenNeeded: true
+    fieldsetCompositionWhenGrouped: true
+    descriptionAssociationWhenPresent: true
+    errorAssociationWhenIndependentlyInvalid: true
+
+defaults:
+  selection: unchecked
+  state: default
+  description: false
+  optional: false
+
+anatomy:
+  root:
+    description: >
+      Complete Checkbox component. The root stacks the option row and the
+      individual error message used only when that specific native Checkbox is
+      independently validated and invalid.
+    element: div
+    layout: vertical
+    tokens:
+      errorGap: form.field.gap.errorToControl
+    rules:
+      - Use Auto Layout in Figma.
+      - Use a vertical layout so the individual error can appear beneath the option row.
+      - Hidden error content must collapse without leaving empty spacing.
+      - The root must remain safe in narrow containers.
+
+  optionRow:
+    description: >
+      Horizontal row containing the native input, visual control and option
+      content.
+    layout: horizontal
+    tokens:
+      gap: spacing.control.gap
+      minBlockSize: size.control.minBlockSize.default
+    rules:
+      - The option row uses horizontal layout.
+      - The square visual control appears before the option content.
+      - Align the control with the first line of the label.
+      - Do not vertically center the control against a long description.
+      - The row hugs content vertically while respecting size.control.minBlockSize.default.
+      - The visible label and native control form the primary clickable target.
+      - The description and error remain outside the associated label.
+
+  nativeInput:
+    description: >
+      Native input that provides name, role, checked state, value, keyboard
+      behaviour and form submission.
+    element: input
+    type: checkbox
+    required: true
+    rules:
+      - type="checkbox" is mandatory.
+      - Every Checkbox requires a unique id.
+      - Every Checkbox requires a meaningful name.
+      - Every Checkbox requires a non-empty value, especially where several related Checkboxes share a name.
+      - The native checked state is the source of truth for checkedness.
+      - Unchecked Checkboxes are not included in native form submission.
+      - Consuming applications must correctly handle the absence of an unchecked Checkbox's submitted name and value.
+      - Do not use display="none" or visibility="hidden" to hide the native input.
+      - Do not add role="checkbox" to a native checkbox input.
+      - Do not add aria-checked to duplicate native semantics.
+      - Do not use readonly.
+      - Use native disabled for disabled Checkboxes.
+      - Disabled native Checkboxes must not receive focus.
+      - Disabled native Checkboxes are not submitted with the form.
+
+  visualControl:
+    description: >
+      Square visual representation of the native checkbox input.
+    required: true
+    tokens:
+      size: component.checkbox.control.size
+      background: form.control.background
+      selectedBackground: form.state.selected.background
+      borderColor: form.control.border.color
+      selectedBorderColor: form.state.selected.border
+      errorBorderColor: form.state.error.border
+      disabledBackground: form.state.disabled.background
+      disabledBorderColor: form.state.disabled.border
+      borderWidth: form.control.border.width
+      radius: form.control.border.radius
+    rules:
+      - The visual control is square.
+      - Use the existing form-control radius.
+      - It reflects native checked, indeterminate, disabled, focus and individual error states.
+      - It must not replace the native input semantics.
+      - The native input and visual control may overlap or be visually composed.
+
+  indicator:
+    description: >
+      Checkmark or horizontal indeterminate mark shown when selection is checked
+      or indeterminate.
+    requiredWhen:
+      - selection: checked
+      - selection: indeterminate
+    tokens:
+      size: component.checkbox.indicator.size
+      color: form.state.selected.foreground
+      disabledColor: form.state.disabled.foreground
+    rules:
+      - Show no indicator when selection is unchecked.
+      - Show the existing Icon/check component when selection is checked.
+      - Show the existing Icon/minus component when selection is indeterminate.
+      - Resize both icon component frames to component.checkbox.indicator.size, which aliases size.icon.md and resolves to 20px.
+      - Centre the 20px indicator frame horizontally and vertically inside the 24px visual control.
+      - Let the existing internal spacing in each icon component control the visible mark size.
+      - Do not detach icon instances, redraw vector paths or create bespoke Checkbox indicator vectors.
+      - Use selected foreground colour for enabled checked and indeterminate indicators.
+      - Use disabled foreground colour for disabled checked and indeterminate indicators.
+      - Retain a perceivable indicator in disabled checked and disabled indeterminate states.
+
+  optionContent:
+    description: Label and optional Checkbox-specific description.
+    layout: vertical
+    required: true
+    rules:
+      - Option content sits after the visual control.
+      - Label is required.
+      - Description is optional.
+      - The visual anatomy may stack Label and Description, but the HTML label must not contain the Description.
+      - Text may wrap and must not be truncated.
+
+  label:
+    description: >
+      Visible text that names the individual Checkbox.
+    required: true
+    element: label
+    tokens:
+      typography: form.label.typography
+      color: form.label.color
+      disabledColor: form.state.disabled.foreground
+    rules:
+      - Every Checkbox must have its own visible label.
+      - The label forms the accessible name.
+      - Associate the label using label for and input id.
+      - The label should describe the positive meaning of checking the control.
+      - Use clear and affirmative wording.
+      - The optional marker is part of the visible label and accessible name when optional is true.
+      - Do not put interactive descendants inside the label.
+      - Do not replace the label with placeholder text.
+      - The label remains visible by default.
+      - The Fieldset legend does not replace individual Checkbox labels.
+
+  optionalMarker:
+    description: Visible optional wording for an individually optional Checkbox.
+    text: "(optional)"
+    visibleWhen:
+      optional: true
+    rules:
+      - Defaults to hidden.
+      - Show only when the individual Checkbox itself is optional and visible wording is appropriate.
+      - Include the marker in the visible label.
+      - The marker must be part of the accessible name.
+      - Do not repeat "(optional)" on every Checkbox when the whole Fieldset group is optional.
+
+  description:
+    description: >
+      Optional supporting text that explains this specific Checkbox.
+    required: false
+    tokens:
+      typography: form.helper.typography
+      color: form.helper.color
+      disabledColor: form.state.disabled.foreground
+    rules:
+      - Description defaults to false.
+      - Use only when the individual Checkbox needs additional explanation.
+      - Place visually below the label.
+      - Keep it semantically outside the associated label.
+      - Give the description a stable ID.
+      - Reference the description ID from this Checkbox using aria-describedby.
+      - Description text must not become part of the Checkbox accessible name.
+      - Omit the description element completely when absent.
+      - Do not render an empty description element.
+      - Do not reserve empty layout spacing for a hidden description.
+      - Shared guidance for a Checkbox group belongs in Fieldset helper text.
+      - Do not place links, buttons or other interactive elements inside the description.
+
+  errorMessage:
+    description: >
+      Inline validation message shown only when that specific native Checkbox
+      is independently validated and invalid.
+    requiredWhen:
+      - state: error
+      - state: errorFocus
+    tokens:
+      typography: form.error.typography
+      color: form.error.color
+      background: form.error.background
+    rules:
+      - Show a visible inline error only when that specific native Checkbox is independently validated and invalid.
+      - The error must be written in text.
+      - The error should explain what went wrong.
+      - Where possible, the error should explain how to fix it.
+      - Give the error message a stable ID.
+      - Associate the error ID with the native Checkbox using aria-describedby.
+      - Keep the inline error visible when an error summary is also present.
+      - Do not show individual error text merely because the Checkbox appears inside a group with a shared group error.
+
+selection:
+  values:
+    unchecked:
+      description: Native checkbox is not checked and not visually indeterminate.
+      native:
+        checked: false
+        indeterminate: false
+      rules:
+        - Use default form-control background.
+        - Use default form-control border.
+        - Show no indicator.
+    checked:
+      description: Native checkbox is checked.
+      native:
+        checked: true
+        indeterminate: false
+      rules:
+        - Use selected background.
+        - Use selected border.
+        - Show a visible Icon/check indicator.
+        - Use selected foreground colour for the Icon/check indicator.
+        - Checked Checkboxes are included in native form submission unless disabled.
+    indeterminate:
+      description: Programmatically managed partial-selection presentation.
+      native:
+        checked: independent
+        indeterminate: true
+      rules:
+        - Use selected background.
+        - Use selected border.
+        - Show a visible Icon/minus indicator.
+        - Use selected foreground colour for the Icon/minus indicator.
+        - Indeterminate is independent of native checkedness.
+        - Form submission is determined by checkedness, not by the indeterminate visual presentation.
+  figmaAbstraction:
+    property: selection
+    values:
+      - unchecked
+      - checked
+      - indeterminate
+    rules:
+      - The Figma selection property models mutually exclusive displayed selection states for design and handoff.
+      - The production DOM API still has separate checked and indeterminate properties.
+
+indeterminateBehaviour:
+  supported: true
+  implementation: native-input-indeterminate-dom-property
+  rules:
+    - Indeterminate is a programmatically managed state.
+    - It is set through the native input's indeterminate DOM property.
+    - It is not an HTML content attribute.
+    - Indeterminate is independent of native checkedness.
+    - Form submission is determined by checkedness, not by the indeterminate visual presentation.
+    - Activating an indeterminate Checkbox returns it to an ordinary checked or unchecked state according to the application's implementation.
+    - Use indeterminate primarily for an aggregate parent Checkbox representing partially selected child Checkboxes.
+    - Do not use indeterminate as a third user answer such as unknown, maybe or not applicable.
+    - Do not add aria-checked="mixed" to a native Checkbox when the native indeterminate property provides the state.
+    - Do not create a separate Indeterminate component.
+
+states:
+  default:
+    description: Enabled Checkbox without visible keyboard focus or individual error.
+    tokens:
+      background: form.control.background
+      selectedBackground: form.state.selected.background
+      borderColor: form.control.border.color
+      selectedBorderColor: form.state.selected.border
+      indicatorColor: form.state.selected.foreground
+    rules:
+      - Unchecked state shows the square boundary without an indicator.
+      - Checked state shows selected fill, selected boundary and checkmark.
+      - Indeterminate state shows selected fill, selected boundary and horizontal mark.
+
+  focus:
+    description: Enabled Checkbox while the native input has keyboard focus.
+    tokens:
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+      focusRingWidth: border.width.medium
+      focusSeparatorWidth: border.width.medium
+    treatment:
+      type: square-double-ring
+      surrounds: visualControl
+      shape: form-control-radius
+      layers:
+        - visualControl
+        - separator
+        - focusRing
+    rules:
+      - Visible focus surrounds the square visual Checkbox control, not the whole option row.
+      - Focus must remain visible on checked, unchecked and indeterminate Checkboxes.
+      - The separator uses form.state.focus.separator.
+      - The outer ring uses form.state.focus.ring.
+      - Both focus layers use border.width.medium.
+      - The focus shape follows the Checkbox visual control's square radius.
+      - Do not reuse Radio's circular focus shape.
+
+  error:
+    description: Independently validated Checkbox that is invalid without keyboard focus.
+    tokens:
+      borderColor: form.state.error.border
+      errorText: form.error.color
+      errorBackground: form.error.background
+    rules:
+      - Use only when that specific native Checkbox is independently validated and invalid.
+      - Show visible inline error text.
+      - Set aria-invalid="true" on the native Checkbox.
+      - Associate the error message using aria-describedby.
+      - Use form.state.error.border.
+      - Preserve selected background and indicator when selection is checked or indeterminate.
+      - Checked/error preserves checkedness when that specific Checkbox fails a different independent validation rule.
+      - Indeterminate/error preserves the indeterminate presentation only when that specific aggregate Checkbox has its own independent validation rule.
+      - Checked error states do not imply that an ordinary required standalone Checkbox remains invalid after it has been checked.
+      - These states do not represent a Fieldset-owned shared group error.
+      - Do not replace selected fill with an error fill unless a separate documented semantic decision exists.
+      - Do not use this state merely because a Checkbox appears inside a group that currently fails a shared rule.
+
+  errorFocus:
+    description: Independently validated Checkbox that is invalid while focused.
+    tokens:
+      borderColor: form.state.error.border
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+    treatment:
+      type: error-border-with-square-double-ring-focus
+      surrounds: visualControl
+    rules:
+      - Combine the individual error treatment with the normal focus treatment.
+      - Show visible inline error text.
+      - Set aria-invalid="true" on the native Checkbox.
+      - Retain selected background and indicator when selection is checked or indeterminate.
+      - Checked/errorFocus preserves checkedness when that specific Checkbox fails a different independent validation rule.
+      - Indeterminate/errorFocus preserves the indeterminate presentation only when that specific aggregate Checkbox has its own independent validation rule.
+      - Checked errorFocus states do not imply that an ordinary required standalone Checkbox remains invalid after it has been checked.
+      - These states do not represent a Fieldset-owned shared group error.
+      - The focus indicator must not be hidden by the error border.
+
+  disabled:
+    description: Native Checkbox that cannot be toggled, focused or submitted.
+    tokens:
+      background: form.state.disabled.background
+      foreground: form.state.disabled.foreground
+      borderColor: form.state.disabled.border
+      indicatorColor: form.state.disabled.foreground
+    rules:
+      - Use the native disabled attribute.
+      - Disabled Checkboxes do not receive keyboard focus.
+      - Disabled Checkboxes are not submitted with the form.
+      - Do not rely on opacity alone.
+      - Keep the label visible.
+      - Use disabled text treatment for label and description where consistent with the shared form-control pattern.
+      - Disabled checked and disabled indeterminate states must remain visually distinguishable.
+      - Retain a perceivable checkmark or indeterminate mark where applicable.
+
+stateCombinations:
+  - selection: unchecked
+    state: default
+  - selection: checked
+    state: default
+  - selection: indeterminate
+    state: default
+  - selection: unchecked
+    state: focus
+  - selection: checked
+    state: focus
+  - selection: indeterminate
+    state: focus
+  - selection: unchecked
+    state: error
+  - selection: checked
+    state: error
+  - selection: indeterminate
+    state: error
+  - selection: unchecked
+    state: errorFocus
+  - selection: checked
+    state: errorFocus
+  - selection: indeterminate
+    state: errorFocus
+  - selection: unchecked
+    state: disabled
+  - selection: checked
+    state: disabled
+  - selection: indeterminate
+    state: disabled
+
+unsupportedStates:
+  hover:
+    supported: false
+    reason: Hover is not a Figma component state.
+  active:
+    supported: false
+    reason: Active is not a Figma component state.
+  readonly:
+    supported: false
+    reason: Native checkbox inputs do not support readonly.
+  responsiveSize:
+    supported: false
+    reason: Checkbox has no responsive size variants.
+  required:
+    supportedAsVisualState: false
+    reason: Native required creates no visible difference by itself.
+  checkboxGroup:
+    supported: false
+    reason: Use Fieldset with Checkbox instances; do not create a public Checkbox Group component.
+
+composition:
+  parent: Fieldset
+  rules:
+    - Place related Checkbox instances inside Fieldset's generic content slot.
+    - Fieldset owns the shared question through the legend.
+    - Fieldset owns group helper text.
+    - Fieldset owns group error text.
+    - Fieldset owns required, optional and mixed group status.
+    - Fieldset owns minimum, maximum and exact selection validation.
+    - Fieldset owns form.group.gap.headerToContent between group header and content slot.
+    - Fieldset may use the native disabled attribute when the complete group is disabled.
+    - Use form.group.gap.betweenOptions between sibling Checkbox instances.
+    - Vertical Checkbox groups are the default composition.
+    - Horizontal layout is a parent composition decision, not a Checkbox variant.
+    - Do not create Checkbox Group YAML, Markdown, component API or token namespace.
+
+nativeHtml:
+  input:
+    element: input
+    type: checkbox
+    supportedAttributes:
+      - id
+      - name
+      - value
+      - checked
+      - required
+      - disabled
+      - form
+      - aria-describedby
+      - aria-invalid
+    supportedProperties:
+      - indeterminate
+    prohibitedAttributes:
+      - readonly
+      - role="checkbox"
+      - aria-checked
+      - aria-invalid for shared group selection errors
+      - indeterminate content attribute
+    rules:
+      - Use native HTML checkbox input behaviour.
+      - Do not add ARIA that duplicates or conflicts with native semantics.
+      - Required means a standalone Checkbox must be checked before the form is valid.
+      - Do not use required on one arbitrary Checkbox as a shortcut for select at least one.
+      - Do not hide the native input using display none or visibility hidden.
+
+  label:
+    preferredStructure: label-for-input-id
+    rules:
+      - Every Checkbox must have a visible associated label.
+      - The visible label should use for to reference the native input id.
+      - Do not place option description or error text inside the associated label.
+      - Do not compromise accessible-name and accessible-description separation to make the description or error toggle the Checkbox.
+      - The label must remain visible.
+
+describedBy:
+  description:
+    method: aria-describedby
+    owner: checkbox
+  individualError:
+    method: aria-describedby
+    owner: checkbox
+  groupHelperText:
+    method: aria-describedby
+    owner: fieldset
+  groupErrorText:
+    method: aria-describedby
+    owner: fieldset
+  idOrder:
+    - description
+    - individualError
+  rules:
+    - Checkbox-specific descriptions use a stable ID referenced by that Checkbox.
+    - Individual error messages use a stable ID referenced by that Checkbox.
+    - When both description and individual error are present, list description ID first and error ID second.
+    - Omit aria-describedby when neither description nor individual error exists.
+    - Fieldset helper IDs must not automatically be repeated on every Checkbox.
+    - Fieldset error IDs must not automatically be repeated on every Checkbox.
+    - Do not associate unrelated text with an individual Checkbox.
+
+requiredAndOptional:
+  defaultAssumption: requiredUnlessMarkedOptional
+  standalone:
+    required:
+      nativeRequiredMeaning: mustBeChecked
+      visibleSuffix: none
+      rules:
+        - Native required means that the Checkbox must be checked before the form is valid.
+        - Use required only where a positive checked answer is genuinely mandatory.
+        - A mandatory standalone Checkbox does not display "(required)" by default.
+    optional:
+      visibleSuffix: "(optional)"
+      optionalProperty: optional
+      rules:
+        - Optional standalone Checkboxes may display "(optional)" in the visible label.
+        - The optional marker must be part of the visible label and accessible name.
+        - Optional preference and marketing-consent Checkboxes normally have no validation error merely because they remain unchecked.
+  insideFieldset:
+    rules:
+      - Fieldset owns group-level required or optional wording.
+      - Do not repeat "(optional)" on every Checkbox when the complete group is optional.
+      - Do not apply required to one arbitrary Checkbox as a shortcut for select at least one.
+      - Applying required to every Checkbox means every Checkbox is individually mandatory.
+      - Requiring every Checkbox is not equivalent to requiring one selection.
+      - Minimum, maximum and exact selection-count rules require group-level validation owned by Fieldset.
+
+validation:
+  individualStandaloneError:
+    owner: checkbox
+    useWhen:
+      - The standalone Checkbox itself is independently validated.
+      - A mandatory acceptance Checkbox must be checked.
+    rules:
+      - Do not assume every standalone Checkbox requires validation.
+      - Optional preferences, optional consent choices and ordinary independent toggles normally have no error merely because they remain unchecked.
+      - Show a visible inline error.
+      - Use aria-invalid="true" on the native Checkbox.
+      - Associate the error message using aria-describedby.
+      - Retain the description ID before the error ID when both are present.
+      - Use form.state.error.border.
+      - Retain normal focus treatment as well as error treatment in errorFocus.
+      - Keep the inline error visible when an error summary is also present.
+      - Link the error-summary item to the Checkbox input.
+      - Preserve the user's current checked state after validation.
+      - Do not rely on a red boundary alone.
+
+  groupError:
+    owner: fieldset
+    examples:
+      - Select at least one
+      - Select no more than three
+      - Select exactly two
+    rules:
+      - Fieldset owns and displays the group error.
+      - Fieldset owns the group aria-describedby relationship.
+      - Individual Checkbox instances retain their normal visual states.
+      - Do not turn every Checkbox boundary red.
+      - Do not repeat aria-invalid="true" on every child Checkbox.
+      - Do not repeat the Fieldset error ID on every Checkbox.
+      - An error-summary item should target the first relevant Checkbox or another explicitly documented interactive target.
+      - Preserve all checked selections after validation.
+      - A Checkbox used as one option inside a Fieldset must not use its individual error state for shared minimum, maximum, exact-selection or other group-answer rules.
+      - Those shared errors are Fieldset group errors.
+
+  aggregateParentError:
+    owner: checkbox
+    useWhen:
+      - The aggregate parent Checkbox itself has its own independent validation rule.
+    rules:
+      - Checked or indeterminate error combinations preserve the aggregate Checkbox's current visual selection state when that specific Checkbox has its own independently validated error.
+      - An aggregate parent that is not independently validated does not use Checkbox error variants.
+      - The aggregate parent must not inherit the child Fieldset's minimum-selection error.
+      - The aggregate parent must not inherit the child Fieldset's maximum-selection error.
+      - The aggregate parent must not inherit the child Fieldset's exact-selection error.
+      - The aggregate parent must not inherit any other shared group-answer error.
+
+keyboardInteraction:
+  nativeBehaviourRequired: true
+  sequentialFocus:
+    - Tab moves focus according to normal document order.
+    - Disabled Checkboxes are skipped.
+  operation:
+    - Space toggles a focused native Checkbox.
+    - Do not add custom keyboard handling that conflicts with native Checkbox behaviour.
+    - Do not trap keyboard focus.
+    - Activating an indeterminate Checkbox returns it to an ordinary checked or unchecked state according to the application's implementation.
+
+layout:
+  root:
+    display: vertical
+    errorPlacement: below-option-row
+    tokens:
+      errorToControlGap: form.field.gap.errorToControl
+  optionRow:
+    display: horizontal
+    controlPlacement: before-option-content
+    controlAlignment: first-line
+    tokens:
+      controlToContentGap: spacing.control.gap
+      minimumBlockSize: size.control.minBlockSize.default
+  optionContent:
+    display: vertical
+  groupComposition:
+    defaultDirection: vertical
+    tokenBetweenOptions: form.group.gap.betweenOptions
+    headerToContentTokenOwner: fieldset
+  rules:
+    - Labels, descriptions and errors may wrap.
+    - The Checkbox root must not overflow narrow containers.
+    - The visual control size does not change by breakpoint.
+    - Hidden descriptions and errors collapse without leaving empty spacing.
+
+tokens:
+  label:
+    typography: form.label.typography
+    color: form.label.color
+  description:
+    typography: form.helper.typography
+    color: form.helper.color
+  error:
+    typography: form.error.typography
+    color: form.error.color
+    background: form.error.background
+  control:
+    size: component.checkbox.control.size
+    background: form.control.background
+    borderColor: form.control.border.color
+    borderWidth: form.control.border.width
+    radius: form.control.border.radius
+  selected:
+    background: form.state.selected.background
+    foreground: form.state.selected.foreground
+    borderColor: form.state.selected.border
+  focus:
+    ring: form.state.focus.ring
+    separator: form.state.focus.separator
+    ringWidth: border.width.medium
+    separatorWidth: border.width.medium
+  errorState:
+    borderColor: form.state.error.border
+  disabled:
+    background: form.state.disabled.background
+    foreground: form.state.disabled.foreground
+    borderColor: form.state.disabled.border
+  layout:
+    controlToContentGap: spacing.control.gap
+    errorToControlGap: form.field.gap.errorToControl
+    optionToOptionGap: form.group.gap.betweenOptions
+    minimumRowBlockSize: size.control.minBlockSize.default
+  indicator:
+    size: component.checkbox.indicator.size
+    color: form.state.selected.foreground
+
+tokenDecision:
+  newSharedTokens:
+    - form.state.selected.background
+    - form.state.selected.foreground
+  newComponentTokens:
+    - component.checkbox.control.size
+    - component.checkbox.indicator.size
+  noNewResponsiveTokensRequired: true
+  rules:
+    - Reuse form.label, form.helper and form.error typography and colour tokens.
+    - Reuse form control background, border width and radius tokens.
+    - Reuse shared selected, focus, error and disabled form state tokens.
+    - Do not add Checkbox-specific aliases for radius, border width, focus colours, error colours, selected colours, typography, disabled colours or layout spacing.
+    - Do not add Checkbox-specific checked and indeterminate colour tokens because both use the same selected treatment.
+    - Do not add Checkbox-specific icon colour tokens; the Checkbox instance overrides or binds nested icon colour to the relevant selected or disabled state token.
+    - Do not add Checkbox base, md or lg token branches.
+
+figmaProperties:
+  selection:
+    type: variant
+    default: unchecked
+    values:
+      - unchecked
+      - checked
+      - indeterminate
+  state:
+    type: variant
+    default: default
+    values:
+      - default
+      - focus
+      - error
+      - errorFocus
+      - disabled
+  description:
+    type: boolean
+    default: false
+    values:
+      - false
+      - true
+  optional:
+    type: boolean
+    default: false
+    values:
+      - false
+      - true
+  textProperties:
+    labelText:
+      type: text
+      required: true
+      default: I agree to the terms
+    descriptionText:
+      type: text
+      requiredWhen:
+        - description: true
+      default: You can change this preference later.
+    errorText:
+      type: text
+      requiredWhen:
+        - state: error
+        - state: errorFocus
+      default: "Error: Confirm that you agree before continuing."
+
+figmaStateRules:
+  - The variant matrix contains 15 selection and state combinations.
+  - Error combinations are used only when that specific native Checkbox is independently validated and invalid.
+  - Checked/error and checked/errorFocus preserve checkedness when that specific Checkbox fails a different independent validation rule.
+  - Indeterminate/error and indeterminate/errorFocus preserve the indeterminate presentation only when that specific aggregate Checkbox has its own independent validation rule.
+  - These combinations do not imply that an ordinary required standalone Checkbox remains invalid after it has been checked.
+  - These combinations do not represent a shared validation error belonging to the child Checkbox group.
+  - An aggregate parent that is not independently validated does not use Checkbox error variants.
+  - Fieldset-owned grouped validation must not place the aggregate parent or every child Checkbox into an individual error state.
+  - Disabled checked and disabled indeterminate states remain visually distinguishable.
+  - Focus surrounds the square visual control, not the whole option row.
+  - Focus remains visible for checked, unchecked and indeterminate presentations.
+  - errorFocus combines the individual error treatment with the normal focus treatment.
+  - Hover is not a Figma component state.
+  - Active is not a Figma component state.
+  - Read-only is unsupported.
+  - Responsive size variants are unsupported.
+  - Error text is visible only in error and errorFocus.
+  - Description text is required only when description is true.
+  - The optional marker is visible only when optional is true.
+  - Do not create helper-text, error-text or optional-marker variant axes.
+  - Do not create a separate Checkbox Group property.
+  - Do not create a native-required Figma property where it creates no visible difference.
+
+figmaStructure:
+  tree: |
+    Checkbox root
+    |-- Option row
+    |   |-- Native input
+    |   |-- Visual control
+    |   |   `-- Indicator
+    |   `-- Option content
+    |       |-- Label
+    |       |-- Optional marker
+    |       `-- Description - optional
+    `-- Error message - individual error states only
+  rules:
+    - Use Auto Layout.
+    - Bind documented tokens where available.
+    - The complete component uses vertical layout.
+    - The option row uses horizontal layout.
+    - The visual control is square.
+    - Visual control size is 24px through component.checkbox.control.size.
+    - Use nested instances of the existing Icon/check and Icon/minus components.
+    - Resize their component frames using component.checkbox.indicator.size, which resolves to 20px through size.icon.md.
+    - Centre the nested indicator frame horizontally and vertically within the visual control.
+    - Do not detach the instances or redraw their vector paths.
+    - Indicator colour comes from the Checkbox state token, not from the icon library default.
+    - Show focus around the square visual control.
+    - Hide description and error layers without leaving empty spacing.
+    - Figma visual grouping does not imply the description or error is part of the HTML label.
+    - Handoff notes must preserve semantic separation between Label, Description and Error.
+    - Keep the component resizable and safe in narrow containers.
+
+accessibility:
+  conformanceTarget: WCAG 2.2 AA
+  note: Checkbox alone does not guarantee conformance; Fieldset composition, validation and surrounding form behaviour must also be correct.
+  wcag:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: Native checkbox inputs expose role and state, labels expose names, and descriptions or errors are associated with aria-describedby.
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Checked, indeterminate, disabled and error states must not rely on colour alone.
+    - id: WCAG 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Label, description and error text need sufficient contrast.
+    - id: WCAG 1.4.10
+      name: Reflow
+      level: AA
+      relevance: Labels, descriptions and errors must wrap in narrow containers without horizontal scrolling.
+    - id: WCAG 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: Checkbox boundary, indicator and focus indicator need sufficient contrast.
+    - id: WCAG 1.4.12
+      name: Text Spacing
+      level: AA
+      relevance: Adjusted text spacing must not clip or overlap labels, descriptions or errors.
+    - id: WCAG 2.1.1
+      name: Keyboard
+      level: A
+      relevance: Native Checkbox toggling must be operable by keyboard.
+    - id: WCAG 2.4.3
+      name: Focus Order
+      level: A
+      relevance: Tab order follows the document order and disabled controls are skipped.
+    - id: WCAG 2.4.6
+      name: Headings and Labels
+      level: AA
+      relevance: Checkbox labels identify individual controls and Fieldset legends identify groups.
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: Focus must be visible on unchecked, checked and indeterminate Checkboxes.
+    - id: WCAG 2.4.11
+      name: Focus Not Obscured Minimum
+      level: AA
+      relevance: Author content must not completely obscure the focused Checkbox control.
+    - id: WCAG 2.5.3
+      name: Label in Name
+      level: A
+      relevance: The accessible name must include the visible Checkbox label text, including optional marker when shown.
+    - id: WCAG 2.5.8
+      name: Target Size Minimum
+      level: AA
+      relevance: The associated row uses the shared comfortable minimum block size.
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: Individual and group errors are identified in visible text.
+    - id: WCAG 3.3.2
+      name: Labels or Instructions
+      level: A
+      relevance: Labels, descriptions, legends and helper text provide instructions.
+    - id: WCAG 3.3.3
+      name: Error Suggestion
+      level: AA
+      relevance: Error messages should explain how to correct the problem where possible.
+    - id: WCAG 4.1.2
+      name: Name, Role, Value
+      level: A
+      relevance: Native checkbox inputs expose name, role, checked state, indeterminate state where supported, disabled state and value.
+  screenReaderChecks:
+    - Label is announced as the Checkbox name.
+    - Checked state is announced.
+    - Unchecked state is announced.
+    - Indeterminate state is announced when the native indeterminate property is set.
+    - Disabled state is announced.
+    - Checkbox-specific description is announced when present.
+    - Individual error is announced when associated.
+    - Fieldset legend and group error are announced for grouped use without repeating group error IDs on every child Checkbox.
+
+contentGuidelines:
+  labels:
+    - Use clear and affirmative wording.
+    - Describe the positive meaning of checking the control.
+    - Use sentence case.
+    - Do not include interactive content.
+    - Do not use placeholder text.
+    - Include "(optional)" only when the individual Checkbox itself is optional and visible wording is appropriate.
+  descriptions:
+    - Use only when one specific Checkbox needs additional explanation.
+    - Put group-wide guidance in Fieldset helper text.
+    - Do not repeat the same descriptive guidance beneath every option.
+    - Keep descriptions short.
+    - Omit the description element and its ID reference when no description exists.
+    - Omit aria-describedby entirely only when neither an individual description nor an individual error exists.
+  errors:
+    - Use individual Checkbox error text only when that specific native Checkbox is independently validated and invalid.
+    - Use Fieldset group error text for shared selection-count rules.
+    - Preserve the user's selected values after validation.
+
+examples:
+  standaloneUnchecked:
+    html: |
+      <input id="paperless" name="paperless" type="checkbox" value="yes">
+      <label for="paperless">Use paperless billing</label>
+
+  standaloneChecked:
+    html: |
+      <input id="email-receipts" name="email-receipts" type="checkbox" value="yes" checked>
+      <label for="email-receipts">Email me receipts</label>
+
+  optionalStandalone:
+    html: |
+      <input id="product-updates" name="product-updates" type="checkbox" value="yes">
+      <label for="product-updates">Send me product updates (optional)</label>
+
+  mandatoryStandalone:
+    html: |
+      <input id="terms" name="terms" type="checkbox" value="accepted" required>
+      <label for="terms">I agree to the terms and conditions</label>
+
+  optionSpecificDescription:
+    classNameNote: >
+      The .checkbox, .checkbox__option and .checkbox__content class names used
+      across these examples are illustrative only. They demonstrate one
+      possible implementation structure and are not required public API.
+      Consuming implementations may use different class names or styling
+      approaches while preserving the documented native HTML semantics and
+      accessible relationships.
+    html: |
+      <div class="checkbox">
+        <div class="checkbox__option">
+          <input
+            id="sms-alerts"
+            name="sms-alerts"
+            type="checkbox"
+            value="yes"
+            aria-describedby="sms-alerts-description"
+          >
+          <div class="checkbox__content">
+            <label for="sms-alerts">Send me text alerts</label>
+            <div id="sms-alerts-description">
+              We will only text you about important account activity.
+            </div>
+          </div>
+        </div>
+      </div>
+
+  independentlyInvalid:
+    html: |
+      <div class="checkbox">
+        <div class="checkbox__option">
+          <input
+            id="terms-invalid"
+            name="terms"
+            type="checkbox"
+            value="accepted"
+            required
+            aria-describedby="terms-error"
+            aria-invalid="true"
+          >
+          <label for="terms-invalid">I agree to the terms and conditions</label>
+        </div>
+
+        <p id="terms-error">
+          <span class="visually-hidden">Error:</span>
+          Confirm that you agree before continuing.
+        </p>
+      </div>
+
+  invalidWithDescriptionAndError:
+    html: |
+      <div class="checkbox">
+        <div class="checkbox__option">
+          <input
+            id="legal-confirmation"
+            name="legal-confirmation"
+            type="checkbox"
+            value="confirmed"
+            required
+            aria-describedby="legal-confirmation-description legal-confirmation-error"
+            aria-invalid="true"
+          >
+          <div class="checkbox__content">
+            <label for="legal-confirmation">I confirm the information is accurate</label>
+            <div id="legal-confirmation-description">
+              Check this only after reviewing every section.
+            </div>
+          </div>
+        </div>
+        <p id="legal-confirmation-error">
+          <span class="visually-hidden">Error:</span>
+          Confirm the information is accurate before continuing.
+        </p>
+      </div>
+
+  groupedInsideFieldset:
+    html: |
+      <fieldset aria-describedby="contact-options-hint">
+        <legend>How would you like us to contact you?</legend>
+        <p id="contact-options-hint">Select all options that apply.</p>
+
+        <div>
+          <input id="contact-email" name="contact-options" type="checkbox" value="email">
+          <label for="contact-email">Email</label>
+        </div>
+
+        <div>
+          <input id="contact-sms" name="contact-options" type="checkbox" value="sms">
+          <label for="contact-sms">Text message</label>
+        </div>
+      </fieldset>
+
+  groupLevelSelectAtLeastOneError:
+    html: |
+      <fieldset aria-describedby="contact-options-hint contact-options-error">
+        <legend>How would you like us to contact you?</legend>
+        <p id="contact-options-hint">Select all options that apply.</p>
+        <p id="contact-options-error">
+          <span class="visually-hidden">Error:</span>
+          Select at least one contact method.
+        </p>
+
+        <div>
+          <input id="contact-email-error" name="contact-options" type="checkbox" value="email">
+          <label for="contact-email-error">Email</label>
+        </div>
+
+        <div>
+          <input id="contact-sms-error" name="contact-options" type="checkbox" value="sms">
+          <label for="contact-sms-error">Text message</label>
+        </div>
+      </fieldset>
+
+  sameNamedGroupedCheckboxes:
+    html: |
+      <fieldset>
+        <legend>Which newsletters do you want?</legend>
+
+        <input id="news-product" name="newsletters" type="checkbox" value="product">
+        <label for="news-product">Product updates</label>
+
+        <input id="news-events" name="newsletters" type="checkbox" value="events">
+        <label for="news-events">Events</label>
+      </fieldset>
+
+  indeterminateParentControlsChildren:
+    html: |
+      <input id="all-topics" name="all-topics" type="checkbox" value="all">
+      <label for="all-topics">Select all topics</label>
+
+      <fieldset>
+        <legend>Topics</legend>
+        <input id="topic-design" name="topics" type="checkbox" value="design" checked>
+        <label for="topic-design">Design</label>
+        <input id="topic-code" name="topics" type="checkbox" value="code">
+        <label for="topic-code">Code</label>
+      </fieldset>
+    script: |
+      const parent = document.getElementById("all-topics");
+      const children = [
+        document.getElementById("topic-design"),
+        document.getElementById("topic-code")
+      ];
+
+      function updateParent() {
+        const checkedCount = children.filter((checkbox) => checkbox.checked).length;
+        const allChildrenChecked = checkedCount === children.length;
+        const someButNotAllChildrenChecked = checkedCount > 0 && !allChildrenChecked;
+
+        parent.checked = allChildrenChecked;
+        parent.indeterminate = someButNotAllChildrenChecked;
+      }
+
+      parent.addEventListener("change", () => {
+        children.forEach((checkbox) => {
+          checkbox.checked = parent.checked;
+        });
+        updateParent();
+      });
+
+      children.forEach((checkbox) => {
+        checkbox.addEventListener("change", updateParent);
+      });
+
+      updateParent();
+
+  disabledUnchecked:
+    html: |
+      <input id="archived-alerts" name="archived-alerts" type="checkbox" value="yes" disabled>
+      <label for="archived-alerts">Send alerts for archived projects</label>
+
+  disabledChecked:
+    html: |
+      <input id="required-audit" name="required-audit" type="checkbox" value="yes" checked disabled>
+      <label for="required-audit">Keep audit logging enabled</label>
+
+  disabledIndeterminate:
+    html: |
+      <input id="locked-topics" name="locked-topics" type="checkbox" value="all" disabled>
+      <label for="locked-topics">Select all locked topics</label>
+    script: |
+      const lockedTopics = document.getElementById("locked-topics");
+      lockedTopics.indeterminate = true;
+
+qa:
+  examples:
+    - id: unchecked-default
+      scenario: Checkbox is enabled and unchecked.
+      expected:
+        selection: unchecked
+        state: default
+        indicatorVisible: false
+    - id: checked-default
+      scenario: Checkbox is enabled and checked.
+      expected:
+        selection: checked
+        state: default
+        checkmarkVisible: true
+    - id: indeterminate-default
+      scenario: Checkbox has the native indeterminate property set.
+      expected:
+        selection: indeterminate
+        state: default
+        indeterminateMarkVisible: true
+        htmlAttributeUsed: false
+    - id: focus-all-selections
+      scenario: Unchecked, checked and indeterminate Checkboxes receive keyboard focus.
+      expected:
+        focusSurrounds: visualControl
+        focusShape: square
+        focusVisible: true
+    - id: individual-error
+      scenario: Independently validated standalone Checkbox is invalid.
+      expected:
+        visibleError: true
+        ariaInvalid: true
+        errorIdInAriaDescribedBy: true
+    - id: description-and-error-order
+      scenario: Description and individual error are both present.
+      expected:
+        ariaDescribedByOrder:
+          - description-id
+          - error-id
+    - id: grouped-fieldset
+      scenario: Several Checkbox instances answer one Fieldset legend.
+      expected:
+        checkboxGroupComponentCreated: false
+        fieldsetProvidesLegend: true
+        betweenOptionsToken: form.group.gap.betweenOptions
+    - id: group-error
+      scenario: Checkbox group fails select-at-least-one validation.
+      expected:
+        fieldsetErrorVisible: true
+        checkboxErrorStyling: false
+        checkboxAriaInvalidRepeated: false
+        fieldsetErrorIdRepeatedOnChildren: false
+    - id: optional-marker
+      scenario: Standalone Checkbox is individually optional.
+      expected:
+        optional: true
+        labelIncludes: "(optional)"
+        accessibleNameIncludes: "(optional)"
+    - id: no-description
+      scenario: Plain Checkbox has no description.
+      expected:
+        description: false
+        descriptionElementRendered: false
+        ariaDescribedByPresent: false
+        emptyDescriptionSpacingReserved: false
+    - id: long-wrapping-label
+      scenario: Label text wraps across multiple lines.
+      expected:
+        labelWraps: true
+        contentNotClipped: true
+        controlAlignedToFirstLine: true
+    - id: long-wrapping-description
+      scenario: Description text wraps across multiple lines.
+      expected:
+        descriptionWraps: true
+        contentNotClipped: true
+    - id: long-wrapping-error
+      scenario: Individual error text wraps across multiple lines.
+      expected:
+        errorWraps: true
+        contentNotClipped: true
+    - id: narrow-container
+      scenario: Checkbox appears in a narrow container.
+      expected:
+        noHorizontalOverflow: true
+    - id: disabled-unchecked
+      scenario: Disabled Checkbox is unchecked.
+      expected:
+        selection: unchecked
+        state: disabled
+        focusable: false
+        submitted: false
+    - id: disabled-checked
+      scenario: Disabled Checkbox is checked.
+      expected:
+        selection: checked
+        state: disabled
+        selectedStateStillVisible: true
+        submitted: false
+    - id: disabled-indeterminate
+      scenario: Disabled Checkbox is indeterminate.
+      expected:
+        selection: indeterminate
+        state: disabled
+        indeterminateStateStillVisible: true
+        submitted: false
+    - id: native-form-submission-checked
+      scenario: Enabled Checkbox is checked at submit.
+      expected:
+        submittedNamePresent: true
+        submittedValuePresent: true
+    - id: native-form-submission-unchecked
+      scenario: Enabled Checkbox is unchecked at submit.
+      expected:
+        submittedNamePresent: false
+        applicationHandlesAbsentValue: true
+    - id: native-form-submission-indeterminate-unchecked
+      scenario: Enabled Checkbox is unchecked and has the indeterminate DOM property set at submit.
+      expected:
+        checked: false
+        indeterminate: true
+        submittedNamePresent: false
+        submittedValuePresent: false
+        applicationHandlesAbsentValue: true
+    - id: native-form-submission-indeterminate-checked
+      scenario: Enabled Checkbox is checked and has the indeterminate DOM property set at submit.
+      expected:
+        checked: true
+        indeterminate: true
+        submittedNamePresent: true
+        submittedValuePresent: true
+    - id: zoom-200
+      scenario: Page is viewed at 200 percent zoom.
+      expected:
+        noContentLoss: true
+    - id: text-spacing-adjustments
+      scenario: User applies text spacing overrides.
+      expected:
+        noOverlap: true
+        noClipping: true
+    - id: forced-colours
+      scenario: Forced-colours or high-contrast mode is active.
+      expected:
+        selectedStatePerceivable: true
+        indeterminateStatePerceivable: true
+        focusVisible: true
+    - id: keyboard-interaction
+      scenario: User operates Checkbox with keyboard.
+      expected:
+        spaceToggles: true
+        tabOrderNative: true
+        noKeyboardTrap: true
+    - id: screen-reader-announcement
+      scenario: Checkbox is read by a screen reader.
+      expected:
+        labelAnnounced: true
+        checkedStateAnnounced: true
+        uncheckedStateAnnounced: true
+        indeterminateStateAnnouncedWhenPresent: true
+        disabledStateAnnouncedWhenPresent: true
+    - id: preserve-values-after-validation
+      scenario: Validation fails.
+      expected:
+        currentCheckedStatePreserved: true
+        allGroupedSelectionsPreserved: true
+
+implementationRules:
+  html:
+    - Use input type="checkbox".
+    - Give every Checkbox a unique id.
+    - Give every Checkbox a meaningful name.
+    - Give every Checkbox a non-empty value.
+    - Associate the visible label with the input using label for and input id.
+    - Keep the label text limited to the Checkbox accessible name.
+    - Keep any description and error outside the associated label.
+    - Use native checked and disabled state.
+    - Set indeterminate through the native input's indeterminate DOM property.
+    - Use required only when a standalone positive checked answer is mandatory.
+    - Do not use readonly.
+    - Do not use role="checkbox" or aria-checked on a native Checkbox.
+    - Use aria-describedby for Checkbox-specific descriptions and individual errors.
+    - Use aria-invalid="true" only when the Checkbox itself is independently invalid.
+    - Omit aria-describedby when no description or individual error exists.
+  css:
+    - Keep the native input available to assistive technology.
+    - Do not hide the native input with display none or visibility hidden.
+    - Use component.checkbox.control.size for the visual square.
+    - Use component.checkbox.indicator.size for the Icon/check and Icon/minus component frames.
+    - Do not draw bespoke Checkbox checkmark or minus vectors.
+    - Use size.control.minBlockSize.default for the option row minimum block size.
+    - Use spacing.control.gap between the visual control and option content.
+    - Use form.field.gap.errorToControl between individual error and option row.
+    - Use form.group.gap.betweenOptions between sibling Checkbox instances.
+
+aiGenerationRules:
+  - Generate Checkbox as one public individual component, not a group wrapper.
+  - Compose related Checkboxes inside Fieldset.
+  - Do not create Checkbox Group components, files or token namespaces.
+  - Use native input type checkbox.
+  - Do not create Switch, conditional reveal or custom ARIA checkbox implementations.
+  - Generate visible labels for every Checkbox.
+  - Generate descriptions only when an individual Checkbox needs additional explanation.
+  - Keep descriptions outside associated labels.
+  - Omit description elements and their ID references when descriptions are absent.
+  - Omit aria-describedby entirely only when neither an individual description nor an individual error exists.
+  - Use individual error states only when that specific native Checkbox is independently validated and invalid.
+  - Use checked/error or checked/errorFocus only to preserve checkedness when that specific Checkbox fails a different independent validation rule.
+  - Use indeterminate/error or indeterminate/errorFocus only when that specific aggregate Checkbox has its own independent validation rule.
+  - Do not use individual Checkbox error variants for shared Checkbox-group selection errors; those remain Fieldset group errors.
+  - Do not transfer minimum, maximum, exact-selection or any other shared group-answer error to an aggregate parent or child Checkbox.
+  - Do not treat checked/error combinations as meaning an ordinary required standalone Checkbox remains invalid after it has been checked.
+  - Use Fieldset group errors for shared checkbox group rules.
+  - Do not repeat Fieldset helper or error IDs on every Checkbox.
+  - Preserve native HTML checkbox behaviour and form submission.
+  - Use documented semantic and component tokens.
+  - Report missing token needs rather than inventing values.
+
+acceptanceCriteria:
+  - Only one public Checkbox component is created.
+  - No Checkbox Group component is created.
+  - No Checkbox Group token namespace is created.
+  - Checkbox supports standalone use.
+  - Checkbox supports use inside the Fieldset content slot.
+  - Native input type checkbox is required.
+  - Every Checkbox has a visible label.
+  - Descriptions default to false.
+  - Descriptions remain outside the associated label.
+  - Descriptions are associated only with the relevant Checkbox.
+  - The optional marker defaults to false.
+  - Selection supports unchecked, checked and indeterminate.
+  - State supports default, focus, error, errorFocus and disabled.
+  - The Figma variant matrix contains 15 combinations.
+  - Individual error states are limited to independently validated Checkbox controls.
+  - Fieldset group errors do not produce individual Checkbox error styling.
+  - Checked/error and checked/errorFocus preserve checkedness only for a different independent validation rule on that specific Checkbox.
+  - Indeterminate/error and indeterminate/errorFocus require an independent validation rule on that specific aggregate Checkbox.
+  - Aggregate parent and child Checkboxes do not inherit Fieldset group errors.
+  - Independently invalid Checkboxes include visible error text and aria-invalid.
+  - Indeterminate is documented as a DOM property rather than an HTML attribute.
+  - Switch is excluded.
+  - Read-only is excluded.
+  - No responsive Checkbox token group is introduced.

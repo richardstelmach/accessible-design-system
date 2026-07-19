@@ -74,6 +74,14 @@ Example:
 <input id="middle-name" name="middle-name">
 ```
 
+## Standalone checkboxes
+
+For a standalone checkbox, native `required` means the checkbox must be checked before the form is valid. Use it only when a positive checked answer is genuinely mandatory, such as accepting a required term.
+
+A mandatory standalone checkbox does not need “(required)” by default. An optional standalone checkbox may include “(optional)” in the visible label, and that wording is part of the accessible name.
+
+Optional preference and consent checkboxes normally have no validation error merely because they remain unchecked. Native unchecked checkboxes are not submitted with the form, so applications must handle the absent name and value.
+
 ## Grouped optional fields
 
 For a grouped control, include “(optional)” in the legend.
@@ -94,6 +102,8 @@ Example:
 </fieldset>
 ```
 
+For checkbox groups, Fieldset owns the group-level required, optional or mixed wording. Do not repeat “(optional)” on every checkbox when the whole group is optional.
+
 ## Required grouped fields
 
 For required grouped controls, the legend does not need “(required)” if the form pattern states that fields are required unless marked optional.
@@ -113,6 +123,8 @@ Example:
   <label for="contact-phone">Phone</label>
 </fieldset>
 ```
+
+For checkbox groups, do not apply `required` to one arbitrary checkbox as a shortcut for “select at least one”. Applying `required` to every checkbox means every checkbox is individually mandatory. Minimum, maximum and exact selection-count rules need group-level validation owned by Fieldset.
 
 ## Mixed-requirement groups
 

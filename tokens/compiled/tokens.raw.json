@@ -1592,6 +1592,16 @@
         }
       },
       "selected": {
+        "background": {
+          "$value": "{color.interactive.primary.background}",
+          "$type": "color",
+          "$description": "Selected fill colour for filled selection controls such as Checkbox."
+        },
+        "foreground": {
+          "$value": "{color.interactive.primary.foreground}",
+          "$type": "color",
+          "$description": "Foreground colour for indicators placed on selected filled selection controls such as Checkbox."
+        },
         "border": {
           "$value": "{color.interactive.primary.background}",
           "$type": "color",
@@ -1880,6 +1890,22 @@
               "letterSpacing": "{typography.letterSpacing.normal}"
             }
           }
+        }
+      }
+    },
+    "checkbox": {
+      "control": {
+        "size": {
+          "$value": "{size.target.minimum}",
+          "$type": "dimension",
+          "$description": "Checkbox visual control size. Uses the minimum target size token so the visible square is 1.5rem, or 24px at a default 16px root size."
+        }
+      },
+      "indicator": {
+        "size": {
+          "$value": "{size.icon.md}",
+          "$type": "dimension",
+          "$description": "Checkbox checkmark and indeterminate indicator frame size. Uses the medium icon size so existing icon components remain clear while fitting comfortably inside the 24px visual control."
         }
       }
     },
