@@ -15,6 +15,8 @@ Use the single control pattern when one form control answers one question.
 
 ## Anatomy
 
+For Text Input, Textarea, Select and similar single controls, use this anatomy:
+
 ```text
 Single form control
 ├── Label
@@ -25,7 +27,7 @@ Single form control
 
 ## Recommended order
 
-Use this order:
+For those controls, use this order:
 
 ```text
 Label
@@ -34,7 +36,23 @@ Error message, optional
 Control
 ```
 
-The error message appears before the control so users encounter the issue before correcting the field.
+For those controls, the error message appears before the control so users encounter the issue before correcting the field.
+
+### Standalone Checkbox exception
+
+For a standalone Checkbox, the native input and visible associated label form one option row. Use this order:
+
+```text
+Checkbox root
+|-- option row
+|   |-- Native Checkbox input
+|   `-- Visible associated label and optional description content
+`-- individual error
+```
+
+Keep the native Checkbox input and label together in the option row. An optional Checkbox-specific description belongs with the option content but remains outside the HTML `<label>`. The individual error follows the complete option row and remains outside the associated label.
+
+This exception does not change the normal error ordering for Text Input, Textarea, Select or similar controls. A Fieldset group error remains owned by Fieldset and is not an individual Checkbox error.
 
 ## Rules
 

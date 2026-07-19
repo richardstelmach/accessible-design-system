@@ -1,0 +1,20 @@
+{
+  "component": {
+    "checkbox": {
+      "control": {
+        "size": {
+          "$value": "{size.target.minimum}",
+          "$type": "dimension",
+          "$description": "Checkbox visual control size. Uses the minimum target size token so the visible square is 1.5rem, or 24px at a default 16px root size."
+        }
+      },
+      "indicator": {
+        "size": {
+          "$value": "{size.icon.md}",
+          "$type": "dimension",
+          "$description": "Checkbox checkmark and indeterminate indicator frame size. Uses the medium icon size so existing icon components remain clear while fitting comfortably inside the 24px visual control."
+        }
+      }
+    }
+  }
+}

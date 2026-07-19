@@ -321,6 +321,16 @@
           }
         },
         "selected": {
+          "background": {
+            "$value": "{color.interactive.primary.background}",
+            "$type": "color",
+            "$description": "Selected fill colour for filled selection controls such as Checkbox."
+          },
+          "foreground": {
+            "$value": "{color.interactive.primary.foreground}",
+            "$type": "color",
+            "$description": "Foreground colour for indicators placed on selected filled selection controls such as Checkbox."
+          },
           "border": {
             "$value": "{color.interactive.primary.background}",
             "$type": "color",

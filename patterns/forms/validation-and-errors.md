@@ -14,7 +14,7 @@ The error must be associated with the relevant control or group using `aria-desc
 
 Invalid controls should use `aria-invalid="true"`.
 
-For Fieldset group-level errors, associate the error with the Fieldset using `aria-describedby`. Do not apply `aria-invalid` to the Fieldset by default.
+For a Fieldset group error, associate the error with the Fieldset using `aria-describedby`. Do not apply `aria-invalid` to the Fieldset by default.
 
 Do not rely on colour alone.
 
@@ -22,7 +22,7 @@ The inline error still appears even when there is an error summary.
 
 ## Recommended order
 
-Use this order for a single control:
+For Text Input, Textarea, Select and similar single controls, use this order:
 
 ```text
 Label
@@ -31,13 +31,29 @@ Error message
 Control
 ```
 
+### Standalone Checkbox exception
+
+For a standalone Checkbox, the native input and visible associated label form one option row. Use this order:
+
+```text
+Checkbox root
+|-- option row
+|   |-- Native Checkbox input
+|   `-- Visible associated label and optional description content
+`-- individual error
+```
+
+Keep the native Checkbox input and label together in the option row. An optional Checkbox-specific description belongs with the option content but remains outside the HTML `<label>`. The individual error follows the complete option row and remains outside the associated label.
+
+This exception does not change the normal error ordering for Text Input, Textarea, Select or similar controls. A Fieldset group error remains owned by Fieldset and is not an individual Checkbox error.
+
 Use this order for a grouped control:
 
 ```text
 Group header
 ├── Legend
 ├── Helper text, optional
-└── Group error message
+└── Fieldset group error
 Related controls
 ```
 
@@ -131,6 +147,10 @@ Rules:
 - do not make the Fieldset focusable;
 - do not apply `aria-invalid` to the Fieldset by default;
 - preserve the user's existing selections and values.
+
+For checkbox groups, minimum, maximum and exact selection errors are whole-group errors. Fieldset owns the visible group error and its `aria-describedby` relationship. Individual Checkbox instances keep their normal visual states; do not turn every checkbox boundary red, repeat `aria-invalid="true"` on every child checkbox or repeat the Fieldset error ID on every child checkbox.
+
+An individual standalone Checkbox can own an error only when that checkbox itself is independently validated, such as a mandatory acceptance checkbox. In that case, show visible inline error text, set `aria-invalid="true"` on the native checkbox and associate the error with that checkbox using `aria-describedby`.
 
 ### One child field is invalid
 
