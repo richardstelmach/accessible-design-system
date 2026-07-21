@@ -149,6 +149,7 @@ pattern:
     - visualControl
     - indicator
     - optionContent
+    - labelRow
     - label
     - optionalMarker
     - description
@@ -214,6 +215,8 @@ anatomy:
     required: true
     rules:
       - type="checkbox" is mandatory.
+      - Native input remains required production semantics and Checkbox ownership.
+      - Figma may omit a literal hidden native-input layer; this does not permit implementations to omit the native input.
       - Every Checkbox requires a unique id.
       - Every Checkbox requires a meaningful name.
       - Every Checkbox requires a non-empty value, especially where several related Checkboxes share a name.
@@ -274,15 +277,36 @@ anatomy:
       - Retain a perceivable indicator in disabled checked and disabled indeterminate states.
 
   optionContent:
-    description: Label and optional Checkbox-specific description.
+    description: Label row and optional Checkbox-specific description.
     layout: vertical
     required: true
     rules:
       - Option content sits after the visual control.
+      - Option content fills the available inline width without escaping the Checkbox root.
+      - Stack the Label row before the optional Description.
       - Label is required.
       - Description is optional.
-      - The visual anatomy may stack Label and Description, but the HTML label must not contain the Description.
-      - Text may wrap and must not be truncated.
+      - The visual anatomy may stack Label row and Description, but the HTML label must not contain the Description.
+      - Label, optional marker and Description may wrap within the available Checkbox width and must not be truncated.
+
+  labelRow:
+    description: >
+      Internal constrained wrapping layout containing the visible Label and
+      optional marker.
+    layout: horizontal
+    wrap: true
+    required: true
+    publicHtmlAnatomy: false
+    rules:
+      - Keep the optional marker directly adjacent to the Label text.
+      - Do not use space-between or pin the optional marker to the right edge.
+      - Allow Label text to wrap within the available Checkbox width.
+      - Allow the optional marker to flow to the next available line when insufficient inline space remains.
+      - Do not give the Label row or Label text an unconstrained intrinsic width that causes overflow.
+      - Keep the Label and optional marker inside the Checkbox root without overlap.
+      - Hiding the optional marker removes both the marker and its associated gap.
+      - Label and optional marker together remain the visible associated label and accessible name.
+      - Description and Error message remain outside the associated label.
 
   label:
     description: >
@@ -349,10 +373,14 @@ anatomy:
     tokens:
       typography: form.error.typography
       color: form.error.color
-      background: form.error.background
     rules:
       - Show a visible inline error only when that specific native Checkbox is independently validated and invalid.
       - The error must be written in text.
+      - Render the inline Checkbox error as error text, not as a separate error surface.
+      - Do not apply form.error.background to ordinary inline field errors.
+      - Use form.error.background only when a component or pattern explicitly defines a filled error surface or container.
+      - "Error Summary uses its dedicated form.errorSummary.* tokens rather than inheriting the inline Checkbox treatment."
+      - Do not add background fill, surface padding or surface radius to the inline Checkbox error.
       - The error should explain what went wrong.
       - Where possible, the error should explain how to fix it.
       - Give the error message a stable ID.
@@ -462,7 +490,6 @@ states:
     tokens:
       borderColor: form.state.error.border
       errorText: form.error.color
-      errorBackground: form.error.background
     rules:
       - Use only when that specific native Checkbox is independently validated and invalid.
       - Show visible inline error text.
@@ -747,15 +774,21 @@ layout:
       minimumBlockSize: size.control.minBlockSize.default
   optionContent:
     display: vertical
+    inlineSize: fill-available
+  labelRow:
+    display: horizontal
+    wrap: true
+    inlineSize: constrained-to-option-content
+    markerPlacement: directly-after-label
   groupComposition:
     defaultDirection: vertical
     tokenBetweenOptions: form.group.gap.betweenOptions
     headerToContentTokenOwner: fieldset
   rules:
-    - Labels, descriptions and errors may wrap.
-    - The Checkbox root must not overflow narrow containers.
+    - Label rows, labels, optional markers, descriptions and errors wrap within the Checkbox root.
+    - The Checkbox root must not overflow, clip or overlap content, including in a 320px-wide container.
     - The visual control size does not change by breakpoint.
-    - Hidden descriptions and errors collapse without leaving empty spacing.
+    - Hidden optional markers, descriptions and errors collapse without leaving empty spacing.
 
 tokens:
   label:
@@ -767,7 +800,6 @@ tokens:
   error:
     typography: form.error.typography
     color: form.error.color
-    background: form.error.background
   control:
     size: component.checkbox.control.size
     background: form.control.background
@@ -893,8 +925,9 @@ figmaStructure:
     |   |-- Visual control
     |   |   `-- Indicator
     |   `-- Option content
-    |       |-- Label
-    |       |-- Optional marker
+    |       |-- Label row
+    |       |   |-- Label
+    |       |   `-- Optional marker - optional
     |       `-- Description - optional
     `-- Error message - individual error states only
   rules:
@@ -902,6 +935,18 @@ figmaStructure:
     - Bind documented tokens where available.
     - The complete component uses vertical layout.
     - The option row uses horizontal layout.
+    - The tree retains Native input to document semantic ownership; Figma may omit a literal hidden native-input layer.
+    - Option content fills the available width.
+    - Label row uses a constrained horizontal wrapping layout.
+    - Label text must wrap inside the available component width.
+    - Keep the optional marker directly adjacent to the Label text.
+    - Do not use space-between or pin the optional marker to the right edge.
+    - Allow the optional marker to flow to the next available line when inline space is insufficient.
+    - The optional marker must never escape the Checkbox root.
+    - Label row and Label text must not use an unconstrained intrinsic width that causes overflow.
+    - Long labels must wrap without overlapping neighbouring Checkbox instances.
+    - The complete Checkbox must reflow without overflow in a 320px-wide container.
+    - Hiding the optional marker removes both the marker and its associated gap.
     - The visual control is square.
     - Visual control size is 24px through component.checkbox.control.size.
     - Use nested instances of the existing Icon/check and Icon/minus components.
@@ -910,7 +955,7 @@ figmaStructure:
     - Do not detach the instances or redraw their vector paths.
     - Indicator colour comes from the Checkbox state token, not from the icon library default.
     - Show focus around the square visual control.
-    - Hide description and error layers without leaving empty spacing.
+    - Hide optional marker, description and error layers without leaving empty spacing.
     - Figma visual grouping does not imply the description or error is part of the HTML label.
     - Handoff notes must preserve semantic separation between Label, Description and Error.
     - Keep the component resizable and safe in narrow containers.
@@ -1249,6 +1294,13 @@ qa:
         focusSurrounds: visualControl
         focusShape: square
         focusVisible: true
+    - id: full-variant-matrix-layout
+      scenario: All 15 unique selection and state combinations are inspected together.
+      expected:
+        variantCount: 15
+        missingOrDuplicateCombinations: false
+        overlapBetweenVariants: false
+        contentEscapesVariantBounds: false
     - id: individual-error
       scenario: Independently validated standalone Checkbox is invalid.
       expected:
@@ -1280,6 +1332,9 @@ qa:
         optional: true
         labelIncludes: "(optional)"
         accessibleNameIncludes: "(optional)"
+        directlyAdjacentToLabelAtWideWidth: true
+        spaceBetweenUsed: false
+        pinnedToRightEdge: false
     - id: no-description
       scenario: Plain Checkbox has no description.
       expected:
@@ -1287,12 +1342,17 @@ qa:
         descriptionElementRendered: false
         ariaDescribedByPresent: false
         emptyDescriptionSpacingReserved: false
+        optional: false
+        optionalMarkerVisible: false
+        optionalMarkerSpacingReserved: false
     - id: long-wrapping-label
       scenario: Label text wraps across multiple lines.
       expected:
         labelWraps: true
+        wrapsWithinCheckboxRoot: true
         contentNotClipped: true
         controlAlignedToFirstLine: true
+        neighbouringInstancesOverlap: false
     - id: long-wrapping-description
       scenario: Description text wraps across multiple lines.
       expected:
@@ -1304,9 +1364,17 @@ qa:
         errorWraps: true
         contentNotClipped: true
     - id: narrow-container
-      scenario: Checkbox appears in a narrow container.
+      scenario: An optional Checkbox with a long label appears in a 320px-wide container.
       expected:
+        containerWidthPx: 320
+        labelWrapsWithinCheckboxRoot: true
+        optionalMarkerFlowsToNextAvailableLine: true
+        optionalMarkerInsideCheckboxRoot: true
+        controlAlignedToFirstLine: true
         noHorizontalOverflow: true
+        noOverlap: true
+        actualRenderedBoundsInspected: true
+        frameWidthOnlyInspectionSufficient: false
     - id: disabled-unchecked
       scenario: Disabled Checkbox is unchecked.
       expected:
@@ -1451,6 +1519,14 @@ acceptanceCriteria:
   - Descriptions remain outside the associated label.
   - Descriptions are associated only with the relevant Checkbox.
   - The optional marker defaults to false.
+  - Option content fills the available width and contains an internal constrained wrapping Label row.
+  - The optional marker remains adjacent to Label text at wide widths and may flow to the next available line at narrow widths.
+  - The optional marker is never laid out with space-between, pinned to the right edge or allowed outside the Checkbox root.
+  - Labels, descriptions and individual errors wrap without clipping or overlap, and the control remains aligned to the Label's first line.
+  - A 320px QA check inspects actual rendered bounds rather than frame widths alone.
+  - All 15 variants remain non-overlapping.
+  - Hidden optional-marker and Description layers leave no empty gap.
+  - Native input ownership remains mandatory even when Figma omits a literal hidden native-input layer.
   - Selection supports unchecked, checked and indeterminate.
   - State supports default, focus, error, errorFocus and disabled.
   - The Figma variant matrix contains 15 combinations.

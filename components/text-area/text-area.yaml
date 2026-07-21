@@ -171,9 +171,9 @@ anatomy:
     tokens:
       typography: form.error.typography
       color: form.error.color
-      background: form.error.background
     rules:
       - Show the error close to the relevant textarea.
+      - Render the inline error as text, not as a filled, padded or rounded error surface.
       - The error must be written in text.
       - The error should explain what went wrong.
       - Where possible, the error should explain how to fix it.
@@ -355,7 +355,6 @@ states:
     tokens:
       borderColor: form.state.error.border
       errorText: form.error.color
-      errorBackground: form.error.background
     rules:
       - Show an inline error message.
       - Set aria-invalid="true" on the textarea.
@@ -608,7 +607,6 @@ tokens:
   error:
     typography: form.error.typography
     color: form.error.color
-    background: form.error.background
 
   fieldSpacing:
     labelToHelper: form.field.gap.labelToHelper
