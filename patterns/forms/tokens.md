@@ -137,15 +137,24 @@ form.helper.color
 
 ## Error text tokens
 
-Use error tokens for inline field and group error messages.
+Use typography and colour tokens for inline field and group error text.
 
 ```text
 form.error.typography.base
 form.error.typography.md
 form.error.typography.lg
 form.error.color
+```
+
+Ordinary inline field and group errors are text, not automatically filled error surfaces. Do not apply `form.error.background` to every inline error.
+
+Use the background token only when a component or pattern explicitly defines a filled error surface or container:
+
+```text
 form.error.background
 ```
+
+Generic token descriptions identify eligible semantic uses; they do not create or override an explicit component or pattern binding. Error Summary is explicitly bound to `form.errorSummary.background`, so use that dedicated token rather than `form.error.background`.
 
 ## Field spacing tokens
 

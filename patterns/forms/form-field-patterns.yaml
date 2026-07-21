@@ -618,7 +618,6 @@ tokens:
   error:
     typography: form.error.typography
     color: form.error.color
-    background: form.error.background
   fieldSpacing:
     labelToHelper: form.field.gap.labelToHelper
     helperToError: form.field.gap.helperToError
@@ -675,6 +674,7 @@ accessibility:
 
 figmaRules:
   - Use semantic form tokens.
+  - Ordinary inline field and group errors use form.error typography and colour only; do not automatically apply form.error.background without an explicitly defined filled error surface or container.
   - Do not use raw colour, spacing, radius or typography values.
   - Use the single control pattern for one field answering one question.
   - Use the grouped control pattern for groups answering one shared question.

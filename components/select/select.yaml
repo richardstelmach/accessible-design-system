@@ -124,9 +124,9 @@ anatomy:
     tokens:
       typography: form.error.typography
       color: form.error.color
-      background: form.error.background
     rules:
       - Show the error close to the Select.
+      - Render the inline error as text, not as a filled, padded or rounded error surface.
       - Explain what went wrong and how to fix it where possible.
       - Associate it using aria-describedby.
       - Keep it visible when an error summary is present.
@@ -467,7 +467,6 @@ tokens:
   error:
     typography: form.error.typography
     color: form.error.color
-    background: form.error.background
 
   control:
     background: form.control.background

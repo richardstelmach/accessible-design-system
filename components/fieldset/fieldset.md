@@ -485,7 +485,6 @@ form.error.typography.base
 form.error.typography.md
 form.error.typography.lg
 form.error.color
-form.error.background
 form.field.gap.labelToHelper
 form.field.gap.helperToError
 form.group.gap.headerToContent

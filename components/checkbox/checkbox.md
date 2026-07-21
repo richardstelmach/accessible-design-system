@@ -35,15 +35,18 @@ Checkbox root
 |   |-- Visual control
 |   |   `-- Indicator
 |   `-- Option content
-|       |-- Label
-|       |-- Optional marker
+|       |-- Label row
+|       |   |-- Label
+|       |   `-- Optional marker - optional
 |       `-- Description - optional
 `-- Error message - individual error states only
 ```
 
-The native input and visual control may overlap or be visually composed in implementation, but the native input must remain available to assistive technology. Do not hide it with `display: none` or `visibility: hidden`.
+The anatomy tree retains Native input to document required production semantics and Checkbox ownership. Figma may omit a literal hidden native-input layer, but production implementation still requires a native `input type="checkbox"` that remains available to assistive technology. Do not hide it with `display: none` or `visibility: hidden`.
 
 The label and native control form the primary clickable target. The optional description and individual error remain outside the label so they are exposed as descriptions, not as part of the Checkbox name.
+
+Label row is internal visual layout anatomy, not another public property or variant. Label and optional marker together remain the visible associated label and accessible name; Description and individual Error remain outside the associated label.
 
 ## Standalone And Grouped Use
 
@@ -132,6 +135,8 @@ When that specific Checkbox is invalid:
 - link the error summary item to the Checkbox input;
 - preserve the user's current checked state.
 
+An inline Checkbox error is error text, not a separate error surface. Use `form.error.typography` and `form.error.color`; do not give the message a fill, surface padding or surface radius, and do not apply `form.error.background` to an ordinary inline field error. That background token is reserved for a component or pattern that explicitly defines a filled error surface or container. Error Summary remains distinct and uses its dedicated `form.errorSummary.*` tokens.
+
 Optional preferences, optional consent choices and ordinary independent toggles normally have no error merely because they remain unchecked.
 
 When a Checkbox group fails a shared rule such as "select at least one", Fieldset owns the group error. Individual Checkbox instances retain their normal visual states. Do not turn every Checkbox boundary red, repeat `aria-invalid="true"` on every child Checkbox or repeat the Fieldset error ID on every Checkbox.
@@ -189,6 +194,20 @@ Do not create helper-text, error-text or optional-marker variant axes. Do not cr
 The visual control is 24 x 24. Indicator choice is determined by `selection`: `unchecked` has no visible indicator, `checked` uses a nested `Icon/check` instance and `indeterminate` uses a nested `Icon/minus` instance. Resize both nested icon component frames to `component.checkbox.indicator.size`, which aliases `size.icon.md` and resolves to 20 x 20. Centre the indicator frame inside the visual control. Do not detach the icon instances, redraw their vector paths or create a separate Figma property for icon choice. The existing internal spacing in each icon component controls the visible mark size.
 
 Nested icon colour must come from the Checkbox state: use `form.state.selected.foreground` in enabled checked and indeterminate states, and `form.state.disabled.foreground` in disabled checked and disabled indeterminate states. Do not rely on the source icon component's library default colour inside Checkbox instances.
+
+### Label Row And Reflow
+
+In Figma, Option content fills the available width and stacks a constrained, wrapping Label row above the optional Description.
+
+- Label text wraps within the Checkbox root and must not use an unconstrained intrinsic width.
+- When `optional=true`, `(optional)` remains directly adjacent to the Label text.
+- Do not use space-between, create a separate right-aligned status column or pin the marker to the right edge.
+- At narrow widths, the marker may flow to the next available line but must remain inside the Checkbox root.
+- Hiding the marker removes both the marker and its associated gap. Hiding Description also leaves no gap.
+- Long labels, descriptions and individual errors wrap without clipping or overlapping neighbouring instances.
+- The visual control remains aligned with the Label's first line.
+- Test all 15 variants for overlap.
+- Test an optional Checkbox with long content at 320px and inspect actual rendered text and marker bounds; checking frame widths alone is insufficient.
 
 ## Examples
 
@@ -483,6 +502,12 @@ Check:
 - Every Checkbox has a visible label.
 - Descriptions default to `false`, remain outside the label and are associated only with the relevant Checkbox.
 - Optional marker defaults to `false`.
+- Option content fills the available width and contains an internal constrained wrapping Label row.
+- Optional marker remains adjacent to Label text at wide widths, may flow to the next available line at narrow widths and never uses space-between or right-edge pinning.
+- Labels, descriptions and individual errors wrap without clipping, overflow or overlap; the visual control stays aligned to the Label's first line.
+- A 320px Figma QA check inspects actual rendered bounds, and all 15 variants remain non-overlapping.
+- Hidden optional-marker and Description layers leave no empty gap.
+- Native input ownership remains mandatory even when Figma omits a literal hidden native-input layer.
 - `selection` supports `unchecked`, `checked` and `indeterminate`.
 - `state` supports `default`, `focus`, `error`, `errorFocus` and `disabled`.
 - Individual error states are limited to independently validated Checkbox controls.

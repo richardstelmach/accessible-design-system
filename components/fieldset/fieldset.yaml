@@ -219,9 +219,9 @@ anatomy:
     tokens:
       typography: form.error.typography
       color: form.error.color
-      background: form.error.background
     rules:
       - Place the error after helper text when helper text exists.
+      - Render the inline group error as text, not as a filled, padded or rounded grouped error container.
       - Otherwise place it directly after the legend.
       - Place it before the slotted controls.
       - Write it in specific, actionable text.
@@ -625,7 +625,6 @@ tokens:
   error:
     typography: form.error.typography
     color: form.error.color
-    background: form.error.background
   spacing:
     labelToHelper: form.field.gap.labelToHelper
     helperToError: form.field.gap.helperToError

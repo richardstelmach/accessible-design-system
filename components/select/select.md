@@ -817,7 +817,6 @@ form.helper.color
 ```text
 form.error.typography
 form.error.color
-form.error.background
 ```
 
 ### Field spacing
