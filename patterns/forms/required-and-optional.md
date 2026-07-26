@@ -78,7 +78,19 @@ Example:
 
 For a standalone checkbox, native `required` means the checkbox must be checked before the form is valid. Use it only when a positive checked answer is genuinely mandatory, such as accepting a required term.
 
-A mandatory standalone checkbox does not need “(required)” by default. An optional standalone checkbox may include “(optional)” in the visible label, and that wording is part of the accessible name.
+A standalone Checkbox is normally optional unless the positive checked answer is independently mandatory. Optionality is not a separate native Checkbox state or public Checkbox property. The suffix is visible authoring guidance.
+
+A mandatory standalone Checkbox does not need “(required)” by default and must not include “(optional)”. When optional wording is useful, put the established lowercase wording “(optional)” inside the complete visible label or `labelText`. It must be part of the same inline text flow and accessible name, not a separately aligned marker, status column or Figma layer.
+
+```html
+<input id="product-updates" name="product-updates" type="checkbox" value="yes">
+<label for="product-updates">Send me product updates (optional)</label>
+
+<input id="terms" name="terms" type="checkbox" value="accepted" required>
+<label for="terms">I agree to the terms</label>
+```
+
+Production code may author one complete string, append a textual optional suffix or render the suffix in an inline textual `<span>`. All resulting label content must remain inside the associated native `<label>` and flow as ordinary inline text. Keep Checkbox descriptions outside the label and associate them with `aria-describedby`. Do not place descriptions, links, buttons or other interactive descendants inside the label.
 
 Optional preference and consent checkboxes normally have no validation error merely because they remain unchecked. Native unchecked checkboxes are not submitted with the form, so applications must handle the absent name and value.
 

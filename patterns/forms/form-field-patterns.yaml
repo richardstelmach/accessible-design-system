@@ -110,19 +110,28 @@ patterns:
         overridesDefaultOrder: true
         terminology:
           checkboxRoot: Checkbox root
-          optionRow: option row
-          individualError: individual error
+          optionRow: Option row
+          visualControl: Visual control
+          optionContent: Option content
+          label: Label
+          description: Description
+          individualError: Error message
           fieldsetGroupError: Fieldset group error
-        structure:
+        figmaVisualStructure:
           checkboxRoot:
             - optionRow
             - individualError
           optionRow:
-            - nativeCheckboxInput
+            - visualControl
             - optionContent
           optionContent:
-            - visibleAssociatedLabel
+            - label
             - optionalCheckboxSpecificDescription
+        semanticImplementation:
+          nativeCheckboxInputOwner: checkbox
+          nativeInputAssociatedWith: completeVisibleLabel
+          descriptionAssociation: aria-describedby
+          individualErrorAssociation: aria-describedby
         optionalNodes:
           - optionalCheckboxSpecificDescription
           - individualError
@@ -131,9 +140,17 @@ patterns:
           - individualError
         rules:
           - The Checkbox root contains the complete option row followed by any individual error.
-          - Keep the native Checkbox input and visible associated label together in the option row.
+          - The Figma visual Option row contains the Visual control and Option content.
+          - The semantic implementation retains a native Checkbox input associated with the complete visible label.
           - An optional Checkbox-specific description belongs with the option content but remains outside the HTML label.
           - The individual error follows the complete option row and remains outside the associated label.
+          - Figma uses one visible Label text layer that fills the available Option-content width and uses automatic height.
+          - Label has no arbitrary fixed width or max width and wraps naturally within the Checkbox root.
+          - Optional wording is authored within the complete labelText and wraps in the same text flow.
+          - Do not create a Label row, Optional-marker layer or optional-status column.
+          - Option content fills the remaining width and the visual control aligns with the first line.
+          - Description and individual Error wrap independently.
+          - The complete Checkbox must reflow within a 320px-wide container.
           - This exception does not change the normal error ordering for Text Input, Textarea, Select or similar single controls.
           - A Fieldset group error remains owned by Fieldset and is not an individual Checkbox error.
     rules:
@@ -400,15 +417,32 @@ requiredAndOptional:
         - Child labels communicate their own statuses.
         - Do not describe the whole group as required or optional when that would be misleading.
   singleCheckbox:
+    defaultSemanticState: optionalUnlessIndependentlyMandatory
+    publicOptionalProperty: false
+    publicFigmaProperties:
+      - selection
+      - state
+      - description
+      - labelText
+      - descriptionText
+      - errorText
     required:
       rules:
         - Native required means the standalone checkbox must be checked before the form is valid.
         - Use required only when the positive checked answer is genuinely mandatory.
         - Required standalone checkboxes do not need "(required)" by default.
+        - Do not add "(optional)" to an independently mandatory Checkbox.
     optional:
       rules:
-        - Optional standalone checkboxes may include "(optional)" in the visible label.
-        - The optional marker must be part of the checkbox accessible name.
+        - Being optional is normally the default semantic state for a Checkbox.
+        - Optionality is not a separate native Checkbox state or public Checkbox property.
+        - Optional standalone Checkboxes may include "(optional)" within the complete visible labelText when that guidance is useful.
+        - Use the established lowercase wording "(optional)".
+        - The suffix remains in the same visible text flow and accessible name as the rest of the label.
+        - Do not create a separate marker layer, status column or alignment rule.
+        - Production may author one complete string, append a textual suffix or use an inline textual span inside the associated label.
+        - Keep Checkbox descriptions outside the label and associate them with aria-describedby.
+        - Do not place descriptions, links, buttons or other interactive descendants inside the label.
         - Optional preference and consent checkboxes normally have no error merely because they remain unchecked.
   checkboxGroups:
     rules:
@@ -684,6 +718,8 @@ figmaRules:
   - Use consistent inline error placement.
   - Show both error and focus states when a field is focused and invalid.
   - Do not create a visual-only required or optional indicator.
+  - For Checkbox, use one visible Label text layer containing the complete labelText; do not create an optional property or separate Optional-marker layer.
+  - For Checkbox, let Label fill the available Option-content width with automatic height and natural wrapping; do not set an arbitrary fixed width or max width.
   - Do not use disabled styling for read-only fields.
 
 aiGenerationRules:
@@ -701,4 +737,5 @@ aiGenerationRules:
   - Do not use type="number" for identifiers or structured text values.
   - Use documented semantic tokens rather than raw values.
   - Report missing token needs rather than inventing new raw values.
+  - For Checkbox, include optional wording within the complete labelText instead of generating an optional property or separate marker layer.
   - Do not invent form field variants outside the documented pattern.

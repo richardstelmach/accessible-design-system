@@ -44,13 +44,17 @@ For a standalone Checkbox, the native input and visible associated label form on
 
 ```text
 Checkbox root
-|-- option row
-|   |-- Native Checkbox input
-|   `-- Visible associated label and optional description content
-`-- individual error
+|-- Option row
+|   |-- Visual control
+|   `-- Option content
+|       |-- Label
+|       `-- Description - optional
+`-- Error message - individual error states only
 ```
 
-Keep the native Checkbox input and label together in the option row. An optional Checkbox-specific description belongs with the option content but remains outside the HTML `<label>`. The individual error follows the complete option row and remains outside the associated label.
+This is the Figma visual anatomy. The semantic implementation still requires a native Checkbox input associated with the complete visible label. Keep that native input and label together in the option row. A Checkbox-specific Description belongs with Option content but remains outside the HTML `<label>` and uses `aria-describedby`. The individual Error follows the complete Option row and remains outside the associated label.
+
+Figma uses one visible, fill-width, automatic-height Label text layer with natural wrapping. Do not create an arbitrary fixed or maximum Label width, Label row or separate Optional-marker layer. Optional wording, when useful, is included within the complete `labelText` and flows with the rest of the text. The visual control remains aligned with the first line.
 
 This exception does not change the normal error ordering for Text Input, Textarea, Select or similar controls. A Fieldset group error remains owned by Fieldset and is not an individual Checkbox error.
 
@@ -97,7 +101,7 @@ Placeholder text must not be used as a label.
 
 ## Component contract
 
-Single control components should support:
+Text Input, Textarea, Select and similar single-control components should support:
 
 - `id`
 - `name`
@@ -111,6 +115,8 @@ Single control components should support:
 - `readonly`
 - `aria-describedby`
 - `aria-invalid`
+
+Checkbox is an explicit exception to the generic `optional` capability above. Its public Figma properties are `selection`, `state`, `description`, `labelText`, `descriptionText` and `errorText`; it has no `optional` property. When visible optional guidance is useful, include `(optional)` inside the complete `labelText`.
 
 Text-like controls may also support:
 

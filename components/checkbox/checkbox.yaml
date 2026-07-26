@@ -65,7 +65,7 @@ scope:
     - Disabled state
     - Visible label
     - Optional individual description
-    - Optional visible marker for an individually optional Checkbox
+    - Complete visible label text, including optional wording when authored
     - Individual error state when that specific native Checkbox has its own independent validation rule
   excludes:
     - Checkbox Group component
@@ -110,9 +110,8 @@ contexts:
       - checked state
       - indeterminate property
       - disabled state
-      - visible label
+      - complete visible label
       - optional description
-      - visible optional marker where appropriate
       - individual error state when independently validated
       - individual aria-invalid state
       - individual aria-describedby relationships
@@ -149,9 +148,7 @@ pattern:
     - visualControl
     - indicator
     - optionContent
-    - labelRow
     - label
-    - optionalMarker
     - description
     - errorMessage
   requiredImplementation:
@@ -171,7 +168,6 @@ defaults:
   selection: unchecked
   state: default
   description: false
-  optional: false
 
 anatomy:
   root:
@@ -277,69 +273,49 @@ anatomy:
       - Retain a perceivable indicator in disabled checked and disabled indeterminate states.
 
   optionContent:
-    description: Label row and optional Checkbox-specific description.
+    description: Complete visible Label and optional Checkbox-specific Description.
     layout: vertical
     required: true
     rules:
       - Option content sits after the visual control.
       - Option content fills the available inline width without escaping the Checkbox root.
-      - Stack the Label row before the optional Description.
+      - Stack the Label before the optional Description.
       - Label is required.
       - Description is optional.
-      - The visual anatomy may stack Label row and Description, but the HTML label must not contain the Description.
-      - Label, optional marker and Description may wrap within the available Checkbox width and must not be truncated.
-
-  labelRow:
-    description: >
-      Internal constrained wrapping layout containing the visible Label and
-      optional marker.
-    layout: horizontal
-    wrap: true
-    required: true
-    publicHtmlAnatomy: false
-    rules:
-      - Keep the optional marker directly adjacent to the Label text.
-      - Do not use space-between or pin the optional marker to the right edge.
-      - Allow Label text to wrap within the available Checkbox width.
-      - Allow the optional marker to flow to the next available line when insufficient inline space remains.
-      - Do not give the Label row or Label text an unconstrained intrinsic width that causes overflow.
-      - Keep the Label and optional marker inside the Checkbox root without overlap.
-      - Hiding the optional marker removes both the marker and its associated gap.
-      - Label and optional marker together remain the visible associated label and accessible name.
+      - The visual anatomy may stack Label and Description, but the HTML label must not contain the Description.
+      - Label and Description wrap independently within the available Checkbox width and must not be truncated.
       - Description and Error message remain outside the associated label.
 
   label:
     description: >
-      Visible text that names the individual Checkbox.
+      Complete visible text that names the individual Checkbox.
     required: true
     element: label
+    figmaTextProperty: labelText
     tokens:
       typography: form.label.typography
       color: form.label.color
       disabledColor: form.state.disabled.foreground
     rules:
       - Every Checkbox must have its own visible label.
+      - labelText represents the complete visible Checkbox label.
+      - Include all visible label wording in labelText.
+      - Include "(optional)" within labelText when optional wording is needed.
+      - Use the established lowercase wording "(optional)".
+      - Optional wording flows as part of the same visible text as the rest of the label.
+      - Do not create a separately aligned optional marker.
+      - Do not create a separate optional-status column.
+      - Do not append optional wording through a separate Figma layer.
+      - Do not add "(optional)" when the choice is independently mandatory.
       - The label forms the accessible name.
       - Associate the label using label for and input id.
+      - The complete visible text, including optional wording when authored, remains associated with the native Checkbox.
       - The label should describe the positive meaning of checking the control.
       - Use clear and affirmative wording.
-      - The optional marker is part of the visible label and accessible name when optional is true.
       - Do not put interactive descendants inside the label.
       - Do not replace the label with placeholder text.
       - The label remains visible by default.
       - The Fieldset legend does not replace individual Checkbox labels.
-
-  optionalMarker:
-    description: Visible optional wording for an individually optional Checkbox.
-    text: "(optional)"
-    visibleWhen:
-      optional: true
-    rules:
-      - Defaults to hidden.
-      - Show only when the individual Checkbox itself is optional and visible wording is appropriate.
-      - Include the marker in the visible label.
-      - The marker must be part of the accessible name.
-      - Do not repeat "(optional)" on every Checkbox when the whole Fieldset group is optional.
 
   description:
     description: >
@@ -643,7 +619,10 @@ nativeHtml:
     rules:
       - Every Checkbox must have a visible associated label.
       - The visible label should use for to reference the native input id.
+      - The visible content may be authored as one complete string, an appended textual optional suffix or an inline textual span.
+      - All resulting visible label content must remain inside the associated label and flow as ordinary inline text.
       - Do not place option description or error text inside the associated label.
+      - Do not place links, buttons or other interactive descendants inside the associated label.
       - Do not compromise accessible-name and accessible-description separation to make the description or error toggle the Checkbox.
       - The label must remain visible.
 
@@ -673,7 +652,8 @@ describedBy:
     - Do not associate unrelated text with an individual Checkbox.
 
 requiredAndOptional:
-  defaultAssumption: requiredUnlessMarkedOptional
+  designSystemAuthoringPattern: requiredUnlessMarkedOptional
+  defaultCheckboxSemanticState: optionalUnlessIndependentlyMandatory
   standalone:
     required:
       nativeRequiredMeaning: mustBeChecked
@@ -682,12 +662,19 @@ requiredAndOptional:
         - Native required means that the Checkbox must be checked before the form is valid.
         - Use required only where a positive checked answer is genuinely mandatory.
         - A mandatory standalone Checkbox does not display "(required)" by default.
+        - Do not add "(optional)" to an independently mandatory choice.
     optional:
-      visibleSuffix: "(optional)"
-      optionalProperty: optional
+      nativeState: none
+      visibleAuthoringGuidance: "(optional)"
       rules:
-        - Optional standalone Checkboxes may display "(optional)" in the visible label.
-        - The optional marker must be part of the visible label and accessible name.
+        - Being optional is normally the default semantic state for a Checkbox.
+        - Optionality is not a separate native Checkbox state or public Checkbox property.
+        - Optional standalone Checkboxes may include "(optional)" within the complete visible label when that authoring guidance is useful.
+        - Use the established lowercase wording "(optional)".
+        - The suffix must be part of labelText and the same visible text flow as the rest of the label.
+        - The complete label, including the suffix when authored, remains the accessible name.
+        - Do not create a separate marker layer, status column or alignment rule for the suffix.
+        - "Example: Send me product updates (optional)"
         - Optional preference and marketing-consent Checkboxes normally have no validation error merely because they remain unchecked.
   insideFieldset:
     rules:
@@ -775,20 +762,24 @@ layout:
   optionContent:
     display: vertical
     inlineSize: fill-available
-  labelRow:
-    display: horizontal
-    wrap: true
-    inlineSize: constrained-to-option-content
-    markerPlacement: directly-after-label
+  label:
+    visibleTextLayers: 1
+    inlineSize: fill-available
+    blockSize: automatic
+    fixedWidth: false
+    maxWidth: none
+    wrap: natural
   groupComposition:
     defaultDirection: vertical
     tokenBetweenOptions: form.group.gap.betweenOptions
     headerToContentTokenOwner: fieldset
   rules:
-    - Label rows, labels, optional markers, descriptions and errors wrap within the Checkbox root.
+    - Label, Description and Error message wrap independently within the Checkbox root.
+    - Optional wording wraps as ordinary text within the complete Label.
+    - The Label has no arbitrary fixed width or max width.
     - The Checkbox root must not overflow, clip or overlap content, including in a 320px-wide container.
     - The visual control size does not change by breakpoint.
-    - Hidden optional markers, descriptions and errors collapse without leaving empty spacing.
+    - Hidden descriptions and errors collapse without leaving empty spacing.
 
 tokens:
   label:
@@ -870,17 +861,17 @@ figmaProperties:
     values:
       - false
       - true
-  optional:
-    type: boolean
-    default: false
-    values:
-      - false
-      - true
   textProperties:
     labelText:
       type: text
       required: true
       default: I agree to the terms
+      meaning: Complete visible Checkbox label
+      rules:
+        - Include all visible label wording in labelText.
+        - Include "(optional)" within labelText when optional wording is needed.
+        - Optional wording must remain in the same visible text flow.
+        - Do not create a separate optional property, text property, layer, marker or status column.
     descriptionText:
       type: text
       requiredWhen:
@@ -912,22 +903,36 @@ figmaStateRules:
   - Responsive size variants are unsupported.
   - Error text is visible only in error and errorFocus.
   - Description text is required only when description is true.
-  - The optional marker is visible only when optional is true.
+  - labelText contains the complete visible Label, including optional wording when authored.
   - Do not create helper-text, error-text or optional-marker variant axes.
+  - Do not create an optional Boolean, replacement property or separate Optional-marker layer.
   - Do not create a separate Checkbox Group property.
   - Do not create a native-required Figma property where it creates no visible difference.
+
+figmaInlineLayoutLimitation:
+  scope: Figma Auto Layout
+  browserOrProductionCodeLimitation: false
+  confirmedBehaviour:
+    - An intrinsic or Hug Label keeps a separate marker adjacent, but long Label text cannot wrap within the available width.
+    - A Fill and automatic-height Label wraps, but a separate marker follows the Label rectangle rather than the final text glyph and appears edge-pinned.
+    - A fixed Label width can coordinate separate layers, but creates arbitrary early wrapping and detached optional wording.
+    - Figma Auto Layout wraps child rectangles rather than inline text fragments.
+  conclusion:
+    - Checkbox uses one visible Label text layer.
+    - Optional wording is authored within labelText and flows as part of the same text.
+  productionImplementation:
+    - This confirmed limitation applies to Figma Auto Layout, not browser layout or production code.
+    - Production may author one complete string, append a textual optional suffix or render the suffix in an inline textual span.
+    - The resulting content remains inside the associated native label and flows as ordinary inline text.
+    - Descriptions, links, buttons and other interactive descendants remain outside the label.
 
 figmaStructure:
   tree: |
     Checkbox root
     |-- Option row
-    |   |-- Native input
     |   |-- Visual control
-    |   |   `-- Indicator
     |   `-- Option content
-    |       |-- Label row
-    |       |   |-- Label
-    |       |   `-- Optional marker - optional
+    |       |-- Label
     |       `-- Description - optional
     `-- Error message - individual error states only
   rules:
@@ -935,18 +940,20 @@ figmaStructure:
     - Bind documented tokens where available.
     - The complete component uses vertical layout.
     - The option row uses horizontal layout.
-    - The tree retains Native input to document semantic ownership; Figma may omit a literal hidden native-input layer.
+    - The visual tree may omit a literal hidden native-input layer; the semantic implementation tree and nativeInput contract retain native input ownership.
     - Option content fills the available width.
-    - Label row uses a constrained horizontal wrapping layout.
-    - Label text must wrap inside the available component width.
-    - Keep the optional marker directly adjacent to the Label text.
-    - Do not use space-between or pin the optional marker to the right edge.
-    - Allow the optional marker to flow to the next available line when inline space is insufficient.
-    - The optional marker must never escape the Checkbox root.
-    - Label row and Label text must not use an unconstrained intrinsic width that causes overflow.
+    - Label is one visible text layer bound to labelText.
+    - Label fills the available Option-content width.
+    - Label uses automatic height.
+    - Label has no arbitrary fixed width or max width.
+    - Label wraps naturally inside the Checkbox root.
+    - Optional wording wraps as part of the same Label text.
+    - Do not create a Label row, Optional-marker layer, separate status column or right-aligned suffix.
     - Long labels must wrap without overlapping neighbouring Checkbox instances.
     - The complete Checkbox must reflow without overflow in a 320px-wide container.
-    - Hiding the optional marker removes both the marker and its associated gap.
+    - Keep the visual control aligned with the first line of the Label.
+    - Description and Error message wrap independently.
+    - Removed Optional-marker anatomy leaves zero residual layout space.
     - The visual control is square.
     - Visual control size is 24px through component.checkbox.control.size.
     - Use nested instances of the existing Icon/check and Icon/minus components.
@@ -955,7 +962,7 @@ figmaStructure:
     - Do not detach the instances or redraw their vector paths.
     - Indicator colour comes from the Checkbox state token, not from the icon library default.
     - Show focus around the square visual control.
-    - Hide optional marker, description and error layers without leaving empty spacing.
+    - Hide description and error layers without leaving empty spacing.
     - Figma visual grouping does not imply the description or error is part of the HTML label.
     - Handoff notes must preserve semantic separation between Label, Description and Error.
     - Keep the component resizable and safe in narrow containers.
@@ -1011,7 +1018,7 @@ accessibility:
     - id: WCAG 2.5.3
       name: Label in Name
       level: A
-      relevance: The accessible name must include the visible Checkbox label text, including optional marker when shown.
+      relevance: The accessible name must include the complete visible Checkbox label text, including optional wording when authored.
     - id: WCAG 2.5.8
       name: Target Size Minimum
       level: AA
@@ -1049,7 +1056,11 @@ contentGuidelines:
     - Use sentence case.
     - Do not include interactive content.
     - Do not use placeholder text.
-    - Include "(optional)" only when the individual Checkbox itself is optional and visible wording is appropriate.
+    - labelText is the complete visible Checkbox label.
+    - Include "(optional)" within labelText only when optional wording is useful.
+    - Use the established lowercase wording "(optional)".
+    - Keep optional wording in the same visible text flow; do not create a separate marker or status column.
+    - Do not include "(optional)" when the choice is independently mandatory.
   descriptions:
     - Use only when one specific Checkbox needs additional explanation.
     - Put group-wide guidance in Fieldset helper text.
@@ -1078,10 +1089,19 @@ examples:
       <input id="product-updates" name="product-updates" type="checkbox" value="yes">
       <label for="product-updates">Send me product updates (optional)</label>
 
+  optionalStandaloneInlineText:
+    productionNote: >
+      An inline textual span is permitted in production HTML because it remains
+      ordinary text within the associated label; it is not a separate Figma
+      layer or Checkbox property.
+    html: |
+      <input id="usage-data" name="usage-data" type="checkbox" value="yes">
+      <label for="usage-data">Share anonymous usage data <span>(optional)</span></label>
+
   mandatoryStandalone:
     html: |
       <input id="terms" name="terms" type="checkbox" value="accepted" required>
-      <label for="terms">I agree to the terms and conditions</label>
+      <label for="terms">I agree to the terms</label>
 
   optionSpecificDescription:
     classNameNote: >
@@ -1268,6 +1288,43 @@ examples:
       lockedTopics.indeterminate = true;
 
 qa:
+  figmaReflow:
+    widthsPx:
+      - 288
+      - 320
+      - 400
+      - 480
+      - 640
+    labelCases:
+      withoutOptionalWording:
+        - short
+        - medium
+        - long
+      withOptionalWording:
+        - short
+        - medium
+        - long
+    descriptionCases:
+      - hidden
+      - visible
+      - long
+    errorCases:
+      - long-inline-error
+    variantCoverage:
+      selectionStateCombinations: 15
+    acceptance:
+      - No arbitrary Label width.
+      - No Label max width.
+      - No descendants escape the Checkbox root.
+      - No horizontal overflow.
+      - No overlap.
+      - No clipped content.
+      - No detached optional wording.
+      - No right-aligned optional wording.
+      - No separate marker layer.
+      - Label text wraps naturally.
+      - The visual control remains aligned with the first line.
+      - Removed Optional-marker anatomy leaves zero residual layout space.
   examples:
     - id: unchecked-default
       scenario: Checkbox is enabled and unchecked.
@@ -1326,15 +1383,14 @@ qa:
         checkboxErrorStyling: false
         checkboxAriaInvalidRepeated: false
         fieldsetErrorIdRepeatedOnChildren: false
-    - id: optional-marker
-      scenario: Standalone Checkbox is individually optional.
+    - id: complete-label-with-optional-wording
+      scenario: Optional authoring guidance is included in the complete labelText.
       expected:
-        optional: true
-        labelIncludes: "(optional)"
+        labelText: Send me product updates (optional)
         accessibleNameIncludes: "(optional)"
-        directlyAdjacentToLabelAtWideWidth: true
-        spaceBetweenUsed: false
-        pinnedToRightEdge: false
+        sameTextFlow: true
+        separateOptionalProperty: false
+        separateMarkerLayer: false
     - id: no-description
       scenario: Plain Checkbox has no description.
       expected:
@@ -1342,9 +1398,6 @@ qa:
         descriptionElementRendered: false
         ariaDescribedByPresent: false
         emptyDescriptionSpacingReserved: false
-        optional: false
-        optionalMarkerVisible: false
-        optionalMarkerSpacingReserved: false
     - id: long-wrapping-label
       scenario: Label text wraps across multiple lines.
       expected:
@@ -1364,15 +1417,17 @@ qa:
         errorWraps: true
         contentNotClipped: true
     - id: narrow-container
-      scenario: An optional Checkbox with a long label appears in a 320px-wide container.
+      scenario: A Checkbox with long labelText including optional wording appears in a 320px-wide container.
       expected:
         containerWidthPx: 320
         labelWrapsWithinCheckboxRoot: true
-        optionalMarkerFlowsToNextAvailableLine: true
-        optionalMarkerInsideCheckboxRoot: true
+        optionalWordingWrapsAsLabelText: true
+        optionalWordingDetached: false
         controlAlignedToFirstLine: true
         noHorizontalOverflow: true
         noOverlap: true
+        noClipping: true
+        noResidualMarkerSpace: true
         actualRenderedBoundsInspected: true
         frameWidthOnlyInspectionSufficient: false
     - id: disabled-unchecked
@@ -1456,6 +1511,17 @@ qa:
         currentCheckedStatePreserved: true
         allGroupedSelectionsPreserved: true
 
+figmaMigrationGuidance:
+  scope: Upcoming Figma correction
+  sourceTaskModifiesFigma: false
+  steps:
+    - Before removing the existing optional property, find every Checkbox instance where optional=true.
+    - Preserve every existing labelText override.
+    - Append " (optional)" to that instance's current labelText value unless the suffix is already present.
+    - Remove the Optional-marker property reference and layer.
+    - Remove the public optional component property only after instance text has been migrated.
+    - Audit all Checkbox instances for duplicated or missing suffixes.
+
 implementationRules:
   html:
     - Use input type="checkbox".
@@ -1463,8 +1529,10 @@ implementationRules:
     - Give every Checkbox a meaningful name.
     - Give every Checkbox a non-empty value.
     - Associate the visible label with the input using label for and input id.
-    - Keep the label text limited to the Checkbox accessible name.
-    - Keep any description and error outside the associated label.
+    - Keep the complete visible label text within the Checkbox accessible name.
+    - Optional wording may be authored as part of one complete string, appended as textual content or rendered in an inline textual span.
+    - Keep all resulting label content inside the associated label and flowing as ordinary inline text.
+    - Keep descriptions, errors, links, buttons and other interactive descendants outside the associated label.
     - Use native checked and disabled state.
     - Set indeterminate through the native input's indeterminate DOM property.
     - Use required only when a standalone positive checked answer is mandatory.
@@ -1491,6 +1559,9 @@ aiGenerationRules:
   - Use native input type checkbox.
   - Do not create Switch, conditional reveal or custom ARIA checkbox implementations.
   - Generate visible labels for every Checkbox.
+  - Treat labelText as the complete visible Checkbox label.
+  - Include "(optional)" within labelText only when optional authoring guidance is useful.
+  - Do not generate an optional property, replacement property, separate marker layer or optional-status column.
   - Generate descriptions only when an individual Checkbox needs additional explanation.
   - Keep descriptions outside associated labels.
   - Omit description elements and their ID references when descriptions are absent.
@@ -1518,14 +1589,20 @@ acceptanceCriteria:
   - Descriptions default to false.
   - Descriptions remain outside the associated label.
   - Descriptions are associated only with the relevant Checkbox.
-  - The optional marker defaults to false.
-  - Option content fills the available width and contains an internal constrained wrapping Label row.
-  - The optional marker remains adjacent to Label text at wide widths and may flow to the next available line at narrow widths.
-  - The optional marker is never laid out with space-between, pinned to the right edge or allowed outside the Checkbox root.
-  - Labels, descriptions and individual errors wrap without clipping or overlap, and the control remains aligned to the Label's first line.
-  - A 320px QA check inspects actual rendered bounds rather than frame widths alone.
+  - The public Figma properties are exactly selection, state, description, labelText, descriptionText and errorText.
+  - No replacement optionalText, requirement, required, labelSuffix, width, responsive-layout or other variant-axis property is introduced.
+  - labelText contains the complete visible label, including "(optional)" when authored.
+  - Option content fills the available width and contains one visible automatic-height Label text layer.
+  - Label has no arbitrary fixed width or max width.
+  - No Label row, Optional-marker layer, separate status column or right-aligned optional wording is created.
+  - Labels, descriptions and individual errors wrap naturally and independently without escaped descendants, clipping or overlap.
+  - Optional wording remains in the Label text flow and never becomes detached.
+  - The control remains aligned to the Label's first line.
+  - QA covers 288px, 320px, 400px, 480px and 640px widths.
+  - QA covers short, medium and long labels with and without optional wording, hidden and visible descriptions, a long description and a long inline error.
   - All 15 variants remain non-overlapping.
-  - Hidden optional-marker and Description layers leave no empty gap.
+  - Removed Optional-marker anatomy leaves zero residual layout space.
+  - Hidden Description and Error layers leave no empty gap.
   - Native input ownership remains mandatory even when Figma omits a literal hidden native-input layer.
   - Selection supports unchecked, checked and indeterminate.
   - State supports default, focus, error, errorFocus and disabled.
