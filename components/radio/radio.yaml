@@ -404,7 +404,10 @@ validation:
       - Do not apply aria-invalid to every Radio for a missing group selection.
       - The focused Radio still uses the normal Radio focus treatment.
       - Inline Fieldset errors remain visible when an error summary exists.
-      - Error-summary links target the first relevant Radio.
+      - Error-summary links target the first relevant visible, enabled Radio.
+      - On activation, scroll the Fieldset legend into view and move focus to that Radio.
+      - Never focus or add tabindex to Fieldset for error-summary targeting.
+      - Preserve programmatic access to the Fieldset-owned inline error without repeating its ID on every Radio.
       - Preserve the selected value after validation.
 
 keyboardInteraction:
@@ -754,7 +757,11 @@ qa:
     - id: error-summary-first-radio-target
       scenario: Error summary links to a missing Radio answer.
       expected:
-        target: first-relevant-radio
+        target: first-relevant-visible-enabled-radio
+        legendScrolledIntoView: true
+        targetReceivesFocus: true
+        fieldsetReceivesFocus: false
+        groupInlineErrorProgrammaticallyAvailable: true
     - id: no-default-preselection
       scenario: New question has no saved answer.
       expected:

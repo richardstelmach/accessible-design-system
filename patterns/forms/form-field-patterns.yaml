@@ -210,7 +210,9 @@ patterns:
       - Group-level errors should be associated with the fieldset using aria-describedby.
       - When helper and error text are both present, list the helper ID before the error ID in aria-describedby.
       - Child-field errors should be associated with the specific invalid child field.
-      - Summary links normally target the first relevant interactive child or a documented grouped-control target, not the non-focusable fieldset.
+      - Summary links target the first relevant visible, enabled interactive child, not the non-focusable fieldset.
+      - On activation, scroll the legend into view and move focus to that child.
+      - Preserve the fieldset-owned inline error association without repeating it on every child.
       - Do not make the fieldset focusable.
       - Do not add role="group" to the native fieldset.
       - Do not use fieldset as a generic layout container.
@@ -513,38 +515,68 @@ validation:
       - groupErrorMessage
 
 errorSummary:
+  componentContract:
+    machineReadable: components/error-summary/error-summary.yaml
+    humanReadable: components/error-summary/error-summary.md
   useWhen:
-    - More than one field or group has an error.
+    - A failed submit has one or more user-correctable validation errors.
+  semanticStructure: ul > li > a
+  titleElement: h2
+  rootTabIndex: -1
+  documentTitlePrefix: "Error: "
   rules:
-    - Place the error summary at the top of the page or form.
-    - Move focus to the error summary after failed submit.
-    - Use a clear heading such as “There is a problem”.
-    - List each error.
-    - Each error should link to the relevant field or group.
-    - Each field or group should still show its own inline error.
+    - Place the error summary near the top of the page or form.
+    - Use the same structure and behaviour for one error and several errors.
+    - Render the error summary and every inline error before moving focus.
+    - Move focus to the error summary exactly once for each failed-submission event.
+    - Use an h2 heading such as “There is a problem” with the responsive H2 visual style.
+    - List each distinct current user-correctable error once.
+    - Sort errors by the document order of their related form questions and controls.
+    - Each error must link to a visible, enabled control that the user can focus and correct.
+    - Each field or group must still show its own inline error.
     - The error summary must not replace inline errors.
+    - Preserve every entered value and selection when errors render and links are activated.
+    - 'Prefix the existing document title once with "Error: " before moving focus.'
+    - Do not accumulate the error prefix across repeated failed submissions.
+    - Use focus-only announcement by default and prevent duplicates when optional role="alert", focus movement and inline error updates are combined.
+    - The Figma error list uses the required native errorList slot.
+    - Compose Error Summary / Item instances inside errorList instead of using count variants or one multiline text property.
   linkTargets:
-    singleInputError: input
-    textareaError: textarea
-    selectError: select
-    radioGroupError: firstRadioOptionOrGroupTarget
-    checkboxGroupError: firstCheckboxOptionOrGroupTarget
-    dateOfBirthSpecificError: specificField
-    dateOfBirthWholeDateError: firstFieldInGroup
-    combinationError: firstRelevantInteractiveChild
-    addressSpecificError: specificField
-    addressWholeGroupError: firstRelevantFieldInGroup
+    singleInputError: visibleEnabledInput
+    textareaError: visibleEnabledTextarea
+    selectError: visibleEnabledSelect
+    standaloneCheckboxError: visibleEnabledCheckboxInput
+    radioGroupError: firstRelevantVisibleEnabledRadio
+    checkboxGroupError: firstRelevantVisibleEnabledCheckbox
+    dateOfBirthSpecificError: visibleEnabledSpecificField
+    dateOfBirthWholeDateError: firstRelevantVisibleEnabledFieldInGroup
+    combinationError: firstRelevantVisibleEnabledInteractiveChild
+    addressSpecificError: visibleEnabledSpecificField
+    addressWholeGroupError: firstRelevantVisibleEnabledFieldInGroup
+  linkActivationRules:
+    - Keep a real href fragment as a progressive-enhancement fallback.
+    - Scroll the associated label into view for a single control, standalone Checkbox or specific multi-part field.
+    - Scroll the associated legend into view for grouped controls and whole multi-part answers.
+    - Move focus to the target control, using an activation handler when native fragment behaviour cannot provide the required context and focus.
+    - Preserve the control's or owning Fieldset's established aria-describedby access to the inline error and useful hint.
+    - Never move focus to Fieldset.
   groupedControlRules:
-    - Summary links normally target an interactive child rather than a non-focusable fieldset.
+    - Summary links target a visible, enabled interactive child rather than a non-focusable fieldset.
     - Do not add tabindex to the fieldset merely to make it an error-summary target.
     - Inline group and child errors remain visible when an error summary is present.
+    - Do not repeat a Fieldset-owned group error ID on every child merely to implement summary-link focus.
 
 focusManagement:
   rules:
     - Do not move focus while the user is typing.
-    - After failed submit, move focus to the error summary when there are multiple errors.
-    - If there is only one error and no error summary is used, focus may move to the invalid field.
-    - When focus lands on an invalid field, its associated error should be available through aria-describedby.
+    - After a failed submit with one or more user-correctable validation errors, render the error summary and inline errors, then move focus to the error summary exactly once.
+    - Do not refocus the error summary because validation state rerenders while the user corrects errors.
+    - A later explicit submit that fails is a new event and moves focus to the error summary once again.
+    - Give the error-summary root tabindex="-1" before programmatic focus so it is not in the normal Tab order.
+    - tabindex="-1" may remain; if injected temporarily, keep it while the root has focus and remove it only after focus leaves.
+    - Never use tabindex="0" for the error-summary root.
+    - Move focus to an invalid control only after its error-summary link is activated.
+    - When focus lands on an invalid control, preserve its control-level or Fieldset-owned aria-describedby access to the inline error.
     - Focus must be visible.
     - Focus styling must not rely on colour alone.
     - When a field is both focused and in error, both states must remain clear.
@@ -699,7 +731,7 @@ accessibility:
   - Error text must be associated using aria-describedby.
   - Invalid controls should use aria-invalid="true".
   - Inline errors must be shown beside invalid fields or groups.
-  - More than one error should use an error summary.
+  - A failed submit with one or more user-correctable validation errors must use an error summary.
   - Focus must be visible.
   - Disabled and read-only states must be distinct.
   - Required or optional status must not rely on colour alone.
@@ -730,9 +762,12 @@ aiGenerationRules:
   - Use fieldset and legend for related groups of controls.
   - Associate helper text and error text using aria-describedby in generated code.
   - Use aria-invalid="true" on invalid controls.
-  - Use an error summary when more than one field or group has an error.
+  - Use an error summary after a failed submit with one or more user-correctable validation errors.
   - Keep inline errors even when an error summary is present.
-  - Move focus to the error summary after failed submit when there are multiple errors.
+  - Move focus to the error summary exactly once after the summary and inline errors render.
+  - Do not refocus the error summary on validation rerenders; focus it once again after a later failed submit.
+  - Sort summary items by form document order and remove duplicate items.
+  - 'Prefix the existing document title once with "Error: " while the submitted page has errors.'
   - Do not move focus while the user is typing.
   - Do not use type="number" for identifiers or structured text values.
   - Use documented semantic tokens rather than raw values.

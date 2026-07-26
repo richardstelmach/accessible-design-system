@@ -245,7 +245,10 @@ configurations:
       - Associate the error message with the input using aria-describedby.
       - Keep helper text associated when helper text is still useful.
       - The error message should appear before the control in the visual field order.
-      - The error summary link should target this input when the error belongs to this input.
+      - The error summary link targets this input when the error belongs to it.
+      - The target input must be visible and enabled.
+      - On activation, scroll the associated label into view and move focus to the input.
+      - Preserve the input's aria-describedby access to its inline error.
 
   optional:
     description: Optional Text Input.
@@ -486,11 +489,13 @@ validation:
 
   errorSummary:
     useWhen:
-      - More than one field or group has an error.
+      - A failed submit has one or more user-correctable validation errors.
     rules:
-      - Each error summary item should link to the relevant input.
-      - The relevant input should still show its inline error.
-      - After failed submit, focus may move to the error summary when there are multiple errors.
+      - Each error summary item links to the relevant visible, enabled input.
+      - On activation, scroll the associated label into view and move focus to the input.
+      - Preserve the input's aria-describedby access to its inline error.
+      - The relevant input must still show its inline error.
+      - After failed submit, move focus to the error summary exactly once after the summary and inline errors render.
       - The error summary must not replace inline errors.
 
 width:
@@ -1073,7 +1078,7 @@ implementationRules:
   validation:
     - Keep validation messages close to the relevant input.
     - Keep inline errors visible when an error summary is present.
-    - Move focus to the error summary after failed submit when there are multiple errors.
+    - Move focus to the error summary exactly once after any failed submit with one or more user-correctable validation errors.
     - Do not move focus while the user is typing.
     - Preserve user-entered values after validation fails.
 
@@ -1091,7 +1096,7 @@ aiGenerationRules:
   - Use aria-describedby when helper text or error text is present.
   - Use aria-invalid="true" when the input is invalid.
   - Keep inline errors even when an error summary is present.
-  - Use an error summary when more than one field or group has an error.
+  - Use an error summary after a failed submit with one or more user-correctable validation errors.
   - Do not rely on colour alone for errors, required status, optional status, disabled state or read-only state.
   - Use disabled and readonly correctly.
   - Use appropriate input attributes for the input purpose.

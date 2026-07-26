@@ -701,7 +701,9 @@ validation:
       - Use form.state.error.border.
       - Retain normal focus treatment as well as error treatment in errorFocus.
       - Keep the inline error visible when an error summary is also present.
-      - Link the error-summary item to the Checkbox input.
+      - Link the error-summary item to the visible, enabled native Checkbox input.
+      - On activation, scroll the associated Checkbox label into view and move focus to the native input.
+      - Preserve the Checkbox aria-describedby access to its inline error after focus moves.
       - Preserve the user's current checked state after validation.
       - Do not rely on a red boundary alone.
 
@@ -718,7 +720,10 @@ validation:
       - Do not turn every Checkbox boundary red.
       - Do not repeat aria-invalid="true" on every child Checkbox.
       - Do not repeat the Fieldset error ID on every Checkbox.
-      - An error-summary item should target the first relevant Checkbox or another explicitly documented interactive target.
+      - An error-summary item targets the first relevant visible, enabled Checkbox.
+      - On activation, scroll the Fieldset legend into view and move focus to that Checkbox.
+      - Never focus or add tabindex to Fieldset for error-summary targeting.
+      - Preserve programmatic access to the Fieldset-owned inline error without repeating its ID on every Checkbox.
       - Preserve all checked selections after validation.
       - A Checkbox used as one option inside a Fieldset must not use its individual error state for shared minimum, maximum, exact-selection or other group-answer rules.
       - Those shared errors are Fieldset group errors.

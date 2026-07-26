@@ -43,11 +43,20 @@ Use this checklist for every form component.
 
 ## Error summary
 
-- More than one error uses an error summary.
+- A failed submit with one or more user-correctable validation errors uses an error summary.
 - Error summary appears at the top of the page or form.
-- Focus moves to the error summary after failed submit.
-- Each summary item links to the relevant field or group.
+- One error and several errors use the same summary structure.
+- Focus moves to the error summary exactly once after the summary and inline errors render.
+- Validation rerenders do not refocus the summary; a later failed submit focuses it once again.
+- The root uses `tabindex="-1"` and is absent from the normal Tab order.
+- Every summary item links to a visible, enabled control.
+- Link activation scrolls the associated label or legend into view and focuses the control, never Fieldset.
+- Link activation preserves the established `aria-describedby` access to the inline error.
+- Errors follow the document order of the form and duplicate summary items are removed.
 - Inline errors are still shown beside each invalid field or group.
+- Entered values and selections are preserved.
+- The document title receives one `Error: ` prefix while errors are present.
+- Alert, live-region and focus behaviour does not announce the same summary twice.
 
 ## Keyboard and focus
 
@@ -56,6 +65,8 @@ Use this checklist for every form component.
 - Focus is not moved while the user is typing.
 - When focus lands on an invalid field, the associated error is available to assistive technology.
 - Focus styling remains visible when the field is in error.
+- Error Summary focus remains distinct from its error border and is not obscured by other content.
+- Error Summary works with 200% text resize, 400% zoom/reflow, text-spacing overrides and forced colours.
 
 ## Disabled and read-only
 

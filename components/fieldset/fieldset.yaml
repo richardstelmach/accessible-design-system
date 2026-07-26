@@ -441,7 +441,10 @@ validation:
       - Do not apply aria-invalid to the native Fieldset by default.
       - Do not make the Fieldset focusable.
       - The child grouped-control component owns any child aria-invalid behaviour.
-      - An error-summary link should target the first relevant interactive control or an explicitly documented component target.
+      - An error-summary link targets the first relevant visible, enabled interactive control.
+      - On activation, scroll the legend into view and move focus to that control.
+      - Never focus or add tabindex to Fieldset for error-summary targeting.
+      - Preserve programmatic access to the Fieldset-owned inline error.
       - Preserve the user's existing selections and values.
 
   childFieldError:
@@ -452,7 +455,9 @@ validation:
       - The affected child component owns the error.
       - Associate the error with the specific child control.
       - Set aria-invalid="true" on the specific invalid control where required by its component contract.
-      - The error-summary link targets the invalid child.
+      - The error-summary link targets the visible, enabled invalid child.
+      - On activation, scroll that child's associated label into view and move focus to the child.
+      - Preserve the child's aria-describedby access to its inline error.
       - Do not create a second vague Fieldset error merely because one child is invalid.
       - Other valid child controls must not automatically be marked invalid.
 
@@ -465,7 +470,8 @@ validation:
       - Use a group-level message when the error concerns the combined answer.
       - Associate the message with the Fieldset.
       - The child component contract determines whether relevant child controls also receive invalid styling or aria-invalid.
-      - The summary target should be the first relevant interactive control.
+      - The summary target is the first relevant visible, enabled interactive control.
+      - On activation, scroll the legend into view and move focus to that control, never Fieldset.
       - Preserve all entered values.
 
 errorSummaryRelationship:
@@ -475,7 +481,9 @@ errorSummaryRelationship:
     - An error summary supplements rather than replaces inline errors.
     - Inline group or child errors remain visible.
     - Summary messages should match or clearly correspond to inline messages.
-    - Summary links target the relevant interactive child rather than a non-focusable Fieldset by default.
+    - Summary links target a visible, enabled interactive child rather than the non-focusable Fieldset.
+    - Link activation scrolls the associated label or legend into view before focusing the child.
+    - The child control or owning Fieldset retains its established aria-describedby access to the inline error.
     - Following a summary link must not require adding tabindex to the Fieldset.
     - Focus management belongs to the shared error-summary and focus-management patterns.
 

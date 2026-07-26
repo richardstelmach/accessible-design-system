@@ -1,0 +1,1345 @@
+component: Error Summary
+id: error-summary
+version: 0.1.0
+status: draft
+
+description: >
+  Error Summary presents a page- or form-level list of validation errors,
+  links each error to the control that needs attention, and receives
+  programmatic focus after a failed submission with one or more
+  user-correctable validation errors. Its Figma API uses a required
+  native slot so the list can contain any valid number of independently
+  editable Error Summary / Item instances.
+
+purpose:
+  - Summarise validation errors near the start of a page or form.
+  - Help users understand all errors before correcting them.
+  - Link each summary error to the relevant interactive control.
+  - Require programmatic focus exactly once after each failed submission with one or more user-correctable validation errors.
+  - Preserve inline error messages beside their fields or groups.
+  - Support a variable number of errors without count variants.
+  - Provide structured Figma authoring that maps to a native HTML list.
+
+sourceDocumentation:
+  sharedPattern:
+    - patterns/forms/form-field-patterns.yaml
+  humanReadable:
+    - patterns/forms/error-summary.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/tokens.md
+
+relatedDocumentation:
+  - patterns/forms/form-field-patterns.yaml
+  - patterns/forms/error-summary.md
+  - patterns/forms/validation-and-errors.md
+  - patterns/forms/focus-management.md
+  - patterns/forms/accessibility-checklist.md
+  - patterns/forms/tokens.md
+  - patterns/form-layout.yaml
+  - accessibility/forms.md
+  - accessibility/focus-indicators.yaml
+  - components/link/link.yaml
+
+scope:
+  includes:
+    - One public Error Summary component.
+    - One supporting published Figma subcomponent named Error Summary / Item.
+    - A required native Figma Slot property named errorList.
+    - One or more actionable error links.
+    - Optional description text.
+    - Default and focus visual states.
+    - Programmatic focus after a failed submission with one or more user-correctable errors.
+    - Native ul, li and anchor semantics in production.
+    - Variable error counts without a fixed maximum.
+  excludes:
+    - Inline field-error ownership.
+    - Form-validation business logic.
+    - Automatic error discovery or counting.
+    - Replacing inline field or group errors.
+    - Error-count properties or count variants.
+    - One-item, two-item or three-item Error Summary variants.
+    - A combined multiline errorsText property.
+    - A single rich-text list component property.
+    - A separately editable bullet property.
+    - Duplicate Error Summary shells for different list lengths.
+    - Arbitrary slot content.
+    - Standalone product insertion of Error Summary / Item.
+
+principles:
+  - The error list is structured composition, not one block of editable text.
+  - The Figma errorList slot maps conceptually to the semantic ul.
+  - Every slotted Error Summary / Item maps conceptually to one li containing one anchor.
+  - The list must contain at least one item and has no maximum item count.
+  - Every errorText value contains actionable link wording only.
+  - The visual bullet marker is presentational and never becomes part of errorText or the accessible name.
+  - Error Summary / Item is published only to support the errorList slot.
+  - Error Summary / Item is not a separate product-level component.
+  - Switching state or toggling description must preserve slot content and item overrides.
+  - The Error Summary supplements inline errors and never replaces them.
+  - Do not rely on colour alone to communicate the error state.
+  - Use semantic tokens and text styles; do not use raw visual values.
+
+usage:
+  trigger: failed-submit-with-one-or-more-user-correctable-validation-errors
+  minimumErrorCount: 1
+  rules:
+    - Render Error Summary for one error and for several errors.
+    - Use identical component structure and behaviour for every valid error count.
+    - Render every inline error as well as Error Summary.
+    - Do not replace Error Summary with direct-to-field focus when there is one error.
+    - Non-user-correctable system failures require their own documented recovery pattern.
+
+pattern:
+  type: page-level-validation-summary
+  publicProductComponents:
+    - Error Summary
+  supportingFigmaComponents:
+    - Error Summary / Item
+  productionAnatomy:
+    - root
+    - title
+    - description
+    - errorList
+    - errorItem
+    - errorLink
+  requiredImplementation:
+    clearTitle: true
+    atLeastOneError: true
+    nativeUnorderedList: true
+    nativeListItems: true
+    nativeAnchors: true
+    validFragmentTargets: true
+    programmaticFocusTarget: true
+    focusOncePerFailedSubmit: true
+    visibleFocus: true
+    inlineErrorsPreserved: true
+    valuesAndSelectionsPreserved: true
+    documentTitleErrorPrefix: true
+    documentOrderSorting: true
+    duplicateItemsPrevented: true
+  rules:
+    - Place Error Summary near the top of the page or form.
+    - Put the title before the optional description and error list.
+    - Keep DOM and reading order as title, optional description and error list.
+    - Use the same or clearly corresponding wording for summary links and inline errors.
+    - Link to a visible, enabled interactive control.
+    - Do not add tabindex to a Fieldset merely to make it a summary-link target.
+
+defaults:
+  state: default
+  description: false
+  titleText: There is a problem
+  descriptionText: Review the errors below and try again.
+  errorList:
+    defaultItemCount: 1
+    defaultItemComponent: Error Summary / Item
+    minimumItemCount: 1
+    maximumItemCount: none
+  defaultErrorText: Enter your full name
+
+anatomy:
+  root:
+    description: >
+      Focusable Error Summary shell containing the title, optional description
+      and required structured error list.
+    element: div
+    required: true
+    attributes:
+      tabindex: -1
+      role:
+        required: false
+        default: none
+        supportedValue: alert
+        useWhen: tested-with-required-focus-without-duplicate-announcement
+    layout: vertical-auto-layout
+    sizing:
+      width: fill-container
+      height: hug-contents
+    tokens:
+      background: form.errorSummary.background
+      foreground: form.errorSummary.foreground
+      borderColor: form.errorSummary.border.color
+      borderWidth: form.errorSummary.border.width
+      padding: form.errorSummary.padding
+      contentGap: spacing.content.headingToBody
+    rules:
+      - Keep the root available for programmatic focus.
+      - Do not put it in the normal sequential tab order.
+      - tabindex="-1" may remain on the root without creating a Tab stop.
+      - If tabindex="-1" is injected temporarily, add it before focus and remove it only after focus leaves.
+      - Never use tabindex="0" and never remove tabindex="-1" synchronously after calling focus.
+      - Do not clip title, description, list or focus treatment.
+      - Allow the parent layout to control available width.
+      - Allow content to determine height.
+      - Use no raw fill, colour, border, padding or gap values.
+
+  title:
+    description: Visible heading that introduces the validation errors.
+    element: h2
+    required: true
+    figmaTextProperty: titleText
+    figmaTextStyle: typography/heading/h2
+    responsiveMode: Breakpoint
+    defaultText: There is a problem
+    tokens:
+      color: form.errorSummary.foreground
+      typography:
+        base: typography.heading.h2.base
+        md: typography.heading.h2.md
+        lg: typography.heading.h2.lg
+    rules:
+      - titleText must not be empty.
+      - Render the title as h2 in production.
+      - Use the responsive H2 visual style without creating a heading-level property or variant.
+      - Let the text style inherit base, md and lg values from the parent frame's Breakpoint mode.
+      - Allow the title to wrap without clipping.
+
+  description:
+    description: Optional short guidance between the title and error list.
+    element: p
+    required: false
+    visibleWhen:
+      description: true
+    figmaTextProperty: descriptionText
+    figmaTextStyle: typography/body/default
+    responsiveMode: Breakpoint
+    tokens:
+      color: form.errorSummary.foreground
+      typography:
+        base: typography.body.default.base
+        md: typography.body.default.md
+        lg: typography.body.default.lg
+    rules:
+      - Description defaults to false.
+      - descriptionText must not be empty when description is true.
+      - Hide the same Description layer when description is false.
+      - Hidden Description leaves no empty layer, gap or spacing.
+      - Toggling Description must not replace the shell or errorList slot.
+      - Let the text style inherit base, md and lg values from the parent frame's Breakpoint mode.
+
+  errorList:
+    description: >
+      Required native Figma slot that contains Error Summary / Item instances
+      and maps conceptually to the production unordered list.
+    element: ul
+    required: true
+    figmaProperty: errorList
+    figmaPropertyType: native-slot
+    defaultChildren:
+      - Error Summary / Item
+    childCount:
+      minimum: 1
+      maximum: none
+      emptyStateValid: false
+      figmaMinimumGuidance: 1
+    layout: vertical-auto-layout
+    sizing:
+      width: fill-container
+      height: hug-contents
+    tokens:
+      gap: spacing.stack.sm
+    rules:
+      - Inserted children fill the available width.
+      - Children may be added, duplicated, removed and reordered without detaching Error Summary.
+      - The final required child must not be removed.
+      - If Figma can only advise rather than block an empty slot, treat zero children as an invalid component state.
+      - Slot content must survive state changes and description toggles.
+      - Recommend only Error Summary / Item through preferred instances.
+      - Enforce the preferred-instance restriction when the current Figma implementation supports enforcement.
+      - Do not accept arbitrary content merely because the underlying slot can technically contain it.
+      - Do not replace the slot with a multiline text property or count variants.
+
+  errorItem:
+    description: One semantic list item represented by Error Summary / Item in Figma.
+    element: li
+    required: true
+    figmaComponent: Error Summary / Item
+    rules:
+      - Every item contains exactly one actionable error link.
+      - Item order must match the document order of the corresponding form questions and controls.
+      - Include one item for each distinct current user-correctable error.
+      - Do not duplicate an item because a validator or rerender emitted the same issue more than once.
+      - Production must not add a component wrapper between li and anchor.
+
+  bulletMarker:
+    description: >
+      Fixed presentational marker layer used only to represent the browser's
+      native list marker in Figma.
+    content: "•"
+    productionEquivalent: browser-list-marker
+    requiredInFigma: true
+    editable: false
+    figmaComponentProperty: none
+    accessibility:
+      semanticContent: false
+      includedInAccessibleName: false
+    tokens:
+      color: form.errorSummary.foreground
+      typography:
+        base: typography.body.default.base
+        md: typography.body.default.md
+        lg: typography.body.default.lg
+    rules:
+      - Do not expose marker text as a property.
+      - Do not include a bullet character in errorText.
+      - Do not repeat the marker in the production anchor text.
+      - Align the marker with the first line of a multiline link.
+
+  errorLink:
+    description: Actionable error wording that links to the relevant control.
+    element: a
+    required: true
+    figmaTextProperty: errorText
+    figmaTextStyle: typography/body/default
+    responsiveMode: Breakpoint
+    defaultText: Enter your full name
+    tokens:
+      color: form.errorSummary.foreground
+      typography:
+        base: typography.body.default.base
+        md: typography.body.default.md
+        lg: typography.body.default.lg
+    decoration: underline
+    interaction:
+      sourceContract: components/link/link.yaml
+      focusTokens:
+        ring: form.state.focus.ring
+        separator: form.state.focus.separator
+        ringWidth: border.width.medium
+        separatorWidth: border.width.medium
+      rules:
+        - Reuse the established Link keyboard, focus and forced-colours behaviour.
+        - Keep the default link underlined so it does not rely on colour alone.
+        - Use form.errorSummary.foreground instead of the default blue link foreground on the error surface.
+        - Do not add link interaction states as Error Summary or Error Summary / Item variants.
+    sizing:
+      width: fill-container
+      height: automatic
+    rules:
+      - errorText contains link wording only.
+      - errorText must not be empty.
+      - errorText must not start with a bullet character.
+      - Use specific wording that explains how to correct the error where possible.
+      - Long text wraps naturally.
+      - Do not set a fixed height, arbitrary width or clipping.
+      - The link destination is implementation or handoff metadata, not another public Figma property.
+      - Let the text style inherit base, md and lg values from the parent frame's Breakpoint mode.
+
+productionSemantics:
+  canonicalStructure: ul > li > a
+  oneAndMultipleErrorsUseIdenticalStructure: true
+  canonicalExample: |
+    <div class="error-summary" tabindex="-1">
+      <h2>There is a problem</h2>
+      <ul>
+        <li><a href="#full-name">Enter your full name</a></li>
+      </ul>
+    </div>
+  rules:
+    - Use a native unordered list.
+    - Use one native list item for each validation error.
+    - Use one native anchor inside each list item.
+    - Keep the anchor's accessible name equal to the actionable error wording.
+    - Let the browser provide list semantics and the production list marker.
+    - Do not render the Figma bullet-marker layer as repeated anchor text.
+    - Do not render Figma slot or component wrappers as extra semantic elements.
+    - Keep inline field and group errors visible and programmatically associated.
+    - Use the same root, h2, ul, li and anchor structure for one error and several errors.
+
+linkTargets:
+  singleInputError: visibleEnabledInput
+  textareaError: visibleEnabledTextarea
+  selectError: visibleEnabledSelect
+  standaloneCheckboxError: visibleEnabledCheckboxInput
+  radioGroupError: firstRelevantVisibleEnabledRadio
+  checkboxGroupError: firstRelevantVisibleEnabledCheckbox
+  dateOfBirthSpecificError: visibleEnabledSpecificField
+  dateOfBirthWholeDateError: firstRelevantVisibleEnabledFieldInGroup
+  combinationError: firstRelevantVisibleEnabledInteractiveChild
+  addressSpecificError: visibleEnabledSpecificField
+  addressWholeGroupError: firstRelevantVisibleEnabledFieldInGroup
+  rules:
+    - Every href fragment must resolve to a unique relevant target.
+    - Every target must be a visible, enabled interactive control that can receive focus.
+    - Keep a real href fragment as a progressive-enhancement fallback.
+    - Scroll the associated label into view for a single control, standalone Checkbox or specific multi-part field.
+    - Scroll the associated legend into view for a grouped-control or whole multi-part error.
+    - Move focus to the target control after scrolling its label or legend into view.
+    - Use an activation handler when native fragment navigation cannot provide both the required scroll context and focus.
+    - Do not make a non-focusable Fieldset focusable solely for summary targeting.
+    - Never move focus to Fieldset.
+    - Preserve the control's or owning Fieldset's established aria-describedby access to the inline error and useful hint.
+    - Do not repeat a Fieldset-owned error ID on every child merely to implement link focus.
+    - Preserve the user's entered values and selections when following a link.
+
+focusManagement:
+  rootFocus:
+    trigger: failed-submit-with-one-or-more-user-correctable-validation-errors
+    movesPerFailedSubmissionEvent: 1
+    tabindex: -1
+    normalTabStop: false
+    tabindexLifecycle:
+      persistentAllowed: true
+      temporaryInjectionAllowed: true
+      addBeforeFocus: true
+      removeOnlyAfterBlurWhenTemporary: true
+      removeSynchronouslyAfterFocus: false
+      tabindexZeroAllowed: false
+    rules:
+      - Move focus after the errors and Error Summary have been rendered.
+      - Do not move focus while the user is typing.
+      - Move focus exactly once for the current failed-submission event.
+      - Do not refocus because validation state rerenders while the user corrects errors.
+      - Treat a later explicit failed submit as a new event and move focus once again.
+      - Keep focus visibly on the Error Summary shell.
+      - Keep the focus treatment visibly distinct from the error border.
+  stateMapping:
+    default: Root is not programmatically focused.
+    focus: Root has programmatic or keyboard-visible focus.
+  figmaRules:
+    - state models the Error Summary shell focus, not an individual error link.
+    - Switching state must preserve the errorList slot and every item override.
+    - Focus styling must remain distinct from the error border and background.
+
+submissionBehaviour:
+  renderOrder:
+    - Preserve entered values and selections.
+    - Render every inline error.
+    - Render Error Summary.
+    - Prefix the document title.
+    - Move focus to Error Summary once.
+  documentTitle:
+    prefix: "Error: "
+    prefixOnce: true
+    preventAccumulationOnRepeatedSubmit: true
+    restoreWhenResolvedOrNavigationSucceeds: true
+  errors:
+    sortBy: corresponding-form-control-document-order
+    deduplicateBy: stable-current-validation-issue
+    inlineErrorsRequired: true
+    rules:
+      - Validator return order must not determine summary order.
+      - Include every distinct current user-correctable validation error once.
+      - Corresponding summary and inline wording is intentional and does not permit omitting the inline error.
+  valuesAndSelections:
+    preserveAfterFailedSubmit: true
+    preserveAfterValidationRerender: true
+    preserveAfterLinkActivation: true
+  announcements:
+    defaultStrategy: focus-only
+    optionalRootRole: alert
+    alertUseCondition: tested-with-required-focus-without-duplicate-announcement
+    summaryUpdatesPerFailedSubmissionEvent: 1
+    announceTitleAndListOnce: true
+    rules:
+      - Use programmatic focus as the sole announcement mechanism in the default focus-only strategy.
+      - When optional role="alert" is used, treat insertion or update plus focus as one tested announcement strategy.
+      - Do not independently assert the same messages through both Error Summary and inline error live regions.
+      - Do not rebuild an unchanged alert on corrective rerenders.
+      - If a supported browser and assistive-technology combination announces both the alert and focus twice, use a tested focus-only summary announcement instead of retaining duplicate assertive output.
+
+states:
+  default:
+    description: Error Summary is visible but the shell is not focused.
+    tokens:
+      background: form.errorSummary.background
+      foreground: form.errorSummary.foreground
+      borderColor: form.errorSummary.border.color
+      borderWidth: form.errorSummary.border.width
+  focus:
+    description: Error Summary shell has received programmatic focus.
+    tokens:
+      background: form.errorSummary.background
+      foreground: form.errorSummary.foreground
+      borderColor: form.errorSummary.border.color
+      borderWidth: form.errorSummary.border.width
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+      focusRingWidth: border.width.medium
+      focusSeparatorWidth: border.width.medium
+    rules:
+      - Preserve the default error surface and boundary.
+      - Add a visible outer focus treatment using documented tokens.
+      - Do not hide the error boundary with the focus treatment.
+      - Do not change title, description or list content.
+
+figmaComponentModel:
+  publicComponent:
+    name: Error Summary
+    productLevel: true
+    published: true
+  supportingComponent:
+    name: Error Summary / Item
+    productLevel: false
+    published: true
+    assetHierarchyGroup: Error Summary
+    intendedUse: Use only inside the Error Summary errorList slot
+    standaloneInsertionIntended: false
+  rules:
+    - Group Error Summary and Error Summary / Item together in the Figma asset hierarchy.
+    - Publish Error Summary / Item so the slot can recommend it as a preferred instance.
+    - Document the supporting component with the exact intended-use wording.
+    - Do not present Error Summary / Item as another product-level Error Summary component.
+
+figmaProperties:
+  state:
+    type: variant
+    default: default
+    values:
+      - default
+      - focus
+  description:
+    type: boolean
+    default: false
+    values:
+      - false
+      - true
+  textProperties:
+    titleText:
+      type: text
+      default: There is a problem
+      required: true
+    descriptionText:
+      type: text
+      default: Review the errors below and try again.
+      requiredWhen:
+        - description: true
+  errorList:
+    type: slot
+    nativeFigmaSlot: true
+    required: true
+    semanticMapping: ul
+    defaultContent:
+      - Error Summary / Item
+  exactPropertyNames:
+    - state
+    - description
+    - titleText
+    - descriptionText
+    - errorList
+  forbiddenProperties:
+    - errorCount
+    - itemCount
+    - errorsText
+    - bulletText
+    - markerText
+    - listStyle
+    - width
+    - headingLevel
+  rules:
+    - This is the complete public Figma API for Error Summary.
+    - Do not create count, width, marker, style or multiline-list properties.
+    - The production h2 semantic and link targets are handoff metadata, not Figma properties or variants.
+
+unsupportedStates:
+  values:
+    - error
+    - errorFocus
+    - hover
+    - active
+    - disabled
+  rules:
+    - Error Summary is inherently an error surface, so do not create another error axis.
+    - Nested production links still require their normal hover, active and focus behaviour.
+    - Link interaction states do not add public properties to Error Summary / Item.
+
+figmaStructure:
+  shellTree: |
+    Error Summary
+    |-- Title
+    |-- Description - optional
+    `-- Error list - native slot
+        `-- Error Summary / Item - one default instance
+  itemTree: |
+    Error Summary / Item
+    |-- Bullet marker - fixed and presentational
+    `-- Link text - errorText
+  shellLayout:
+    display: auto-layout
+    direction: vertical
+    width: fill-container
+    height: hug-contents
+    gap: spacing.content.headingToBody
+  itemLayout:
+    display: auto-layout
+    direction: horizontal
+    width: fill-container
+    height: hug-contents
+    alignment: first-baseline
+    gap: spacing.inline.sm
+  preservationRules:
+    - Use the same errorList slot property identity in default and focus variants.
+    - Use the same Description layer and Boolean property in every state variant.
+    - Keep matching layer names and component-property bindings across variants.
+    - Do not swap to a duplicate shell when state or description changes.
+    - Do not detach the shell or item instances to edit content.
+  rules:
+    - Use vertical Auto Layout for Error Summary and errorList.
+    - Use horizontal Auto Layout for Error Summary / Item.
+    - Inserted slot children fill the available width.
+    - The Link text layer fills remaining width and uses automatic height.
+    - The Bullet marker hugs its content and aligns with the link's first line.
+    - No shell, slot or item uses a fixed height.
+    - No item uses an arbitrary width.
+    - Do not clip long text.
+    - Do not use raw visual styling.
+
+figmaSlotModel:
+  propertyName: errorList
+  propertyType: slot
+  nativeFigmaSlot: true
+  status: required-native-figma-slot
+  required: true
+  semanticMapping: ul
+  defaultItem:
+    component: Error Summary / Item
+    count: 1
+  childGuidance:
+    minimum: 1
+    maximum: none
+    zeroChildren: invalid
+  authoringOperations:
+    add: supported
+    duplicate: supported
+    remove: supported-unless-final-item
+    reorder: supported
+    editEachErrorTextIndependently: supported
+    detachRequired: false
+  preferredInstances:
+    recommended:
+      - Error Summary / Item
+    allowOtherRecommendations: false
+    enforceWhenSupported: true
+    advisoryFallback:
+      - If the platform cannot enforce preferred instances, document the restriction and fail QA for arbitrary content.
+      - Native slot support remains required; do not replace errorList with a multiline text property.
+  fallbackImplementation:
+    allowed: false
+    forbidden:
+      - instance-swap
+      - placeholder-frame
+      - combined-multiline-text
+      - item-count-variants
+    rule: >
+      If native Slot creation is unavailable, report the limitation instead of
+      weakening or replacing the approved architecture.
+  contentPreservation:
+    stateChange: required
+    descriptionToggle: required
+  rules:
+    - Configure Error Summary / Item as the only preferred instance.
+    - Enable preferred-instance enforcement when the current Figma implementation supports it.
+    - Treat arbitrary content as invalid even if the slot technically accepts it.
+    - Treat an empty slot as invalid even if Figma can provide only advisory guidance.
+    - Do not set a maximum number of children.
+
+figmaItemComponent:
+  name: Error Summary / Item
+  description: Use only inside the Error Summary errorList slot
+  published: true
+  productLevel: false
+  standaloneInsertionIntended: false
+  publicApi:
+    errorText:
+      type: text
+      required: true
+      default: Enter your full name
+  exactPropertyNames:
+    - errorText
+  forbiddenProperties:
+    - bulletText
+    - markerText
+    - href
+    - state
+    - width
+  construction:
+    layout: horizontal-auto-layout
+    width: fill-container
+    height: hug-contents
+    alignment: first-baseline
+    children:
+      - bulletMarker
+      - linkText
+    bulletMarker:
+      fixedLayer: true
+      presentational: true
+      editable: false
+      sizing:
+        width: hug-content
+        height: hug-content
+    linkText:
+      boundProperty: errorText
+      sizing:
+        width: fill-container
+        height: automatic
+      wraps: true
+      clipped: false
+  rules:
+    - Do not include a bullet character in errorText.
+    - Do not expose the marker as a property.
+    - Do not give the item a fixed height or arbitrary width.
+    - Keep the marker aligned with the first line of a wrapped link.
+    - Keep the Link text independently editable in every instance.
+
+unsupportedModels:
+  - id: error-count-property
+    reason: Error counts create arbitrary limits and unnecessary API.
+  - id: count-variants
+    reason: One-, two- or three-item variants do not scale to real validation results.
+  - id: combined-errors-text
+    reason: One multiline property cannot preserve semantic items, independent editing, ordering or targets.
+  - id: rich-text-list-property
+    reason: Editing Figma text properties can remove list styling and cannot provide independent items reliably.
+  - id: editable-bullet
+    reason: The marker is presentational and must not enter the link text or accessible name.
+  - id: duplicate-shells
+    reason: Different shells risk losing slot content during state or description changes.
+  - id: arbitrary-slot-content
+    reason: errorList accepts only the approved supporting item architecture.
+  - id: fixed-maximum-count
+    reason: Validation results have no meaningful design-system maximum.
+
+tokens:
+  shell:
+    background: form.errorSummary.background
+    foreground: form.errorSummary.foreground
+    borderColor: form.errorSummary.border.color
+    borderWidth: form.errorSummary.border.width
+    padding: form.errorSummary.padding
+    contentGap: spacing.content.headingToBody
+  title:
+    typography:
+      base: typography.heading.h2.base
+      md: typography.heading.h2.md
+      lg: typography.heading.h2.lg
+    color: form.errorSummary.foreground
+  description:
+    typography:
+      base: typography.body.default.base
+      md: typography.body.default.md
+      lg: typography.body.default.lg
+    color: form.errorSummary.foreground
+  errorList:
+    itemGap: spacing.stack.sm
+  item:
+    markerToLinkGap: spacing.inline.sm
+    markerColor: form.errorSummary.foreground
+    linkColor: form.errorSummary.foreground
+    typography:
+      base: typography.body.default.base
+      md: typography.body.default.md
+      lg: typography.body.default.lg
+    linkDecoration: underline
+    linkInteractionContract: components/link/link.yaml
+    linkFocus:
+      ring: form.state.focus.ring
+      separator: form.state.focus.separator
+      ringWidth: border.width.medium
+      separatorWidth: border.width.medium
+  focus:
+    ring: form.state.focus.ring
+    separator: form.state.focus.separator
+    ringWidth: border.width.medium
+    separatorWidth: border.width.medium
+  tokenDecision:
+    newComponentTokensRequired: false
+    rawValuesAllowed: false
+    rules:
+      - Use only documented semantic and primitive token references.
+      - Report a missing token need rather than inventing a raw value.
+      - Do not bind the item link to the default blue link colour when the Error Summary foreground token is required on the error surface.
+
+figmaTypography:
+  title:
+    textStyle: typography/heading/h2
+    githubSourceBranches:
+      base: typography.heading.h2.base
+      md: typography.heading.h2.md
+      lg: typography.heading.h2.lg
+  body:
+    appliesTo:
+      - description
+      - bulletMarker
+      - errorLink
+    textStyle: typography/body/default
+    githubSourceBranches:
+      base: typography.body.default.base
+      md: typography.body.default.md
+      lg: typography.body.default.lg
+  responsiveCollection: Breakpoint
+  rules:
+    - Apply one semantic Figma text style to each text role.
+    - Let responsive values inherit from the parent frame's Breakpoint mode.
+    - Verify base, md and lg by switching the parent frame mode.
+    - Do not create breakpoint-suffixed Figma styles.
+    - Do not create responsive component variants.
+
+contentGuidelines:
+  title:
+    - Use a clear summary heading.
+    - Keep the default wording "There is a problem" unless product language requires a tested alternative.
+    - Do not include the numeric error count solely to match the number of list items.
+  description:
+    - Use only when short guidance helps users understand what to do next.
+    - Do not repeat the title or every error.
+  errorText:
+    - Use actionable wording that explains how to correct the problem.
+    - Match or clearly correspond to the inline error.
+    - Keep each item understandable when encountered as a link.
+    - Do not include "Error:" in every link unless the product content standard requires it.
+    - Do not include bullets, numbering or target IDs in visible errorText.
+  ordering:
+    - Follow the document order of the relevant form questions and controls.
+    - Sort validator output before rendering when it is returned in another order.
+    - Do not reorder errors alphabetically when that breaks form order.
+    - Include each distinct current user-correctable error once.
+    - Do not duplicate an item because multiple validators or rerenders emitted the same issue.
+
+accessibility:
+  targetStandard: WCAG 2.2 AA
+  note: >
+    Error Summary alone does not guarantee conformance. Link targets, inline
+    errors, validation timing, focus management and surrounding form semantics
+    must also be implemented correctly.
+  requirements:
+    - The title is a real h2.
+    - The errors use native ul and li semantics.
+    - Every error is a real anchor with a valid target.
+    - The root can receive programmatic focus and has visible focus.
+    - The root is not in the normal Tab order.
+    - Focus is not obscured by sticky or overlapping content.
+    - Focus order remains logical after following error links.
+    - Inline errors remain visible and programmatically associated.
+    - The marker is excluded from the anchor accessible name.
+    - Content reflows at narrow widths without horizontal scrolling.
+    - Text spacing changes do not clip or overlap content.
+    - Error and focus treatments do not rely on colour alone.
+  wcag:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: Native heading and list relationships must be preserved.
+    - id: WCAG 1.3.2
+      name: Meaningful Sequence
+      level: A
+      relevance: Title, description and errors remain in a meaningful order.
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Error and focus state must not rely on colour alone.
+    - id: WCAG 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Text and links need sufficient contrast on the error surface.
+    - id: WCAG 1.4.10
+      name: Reflow
+      level: AA
+      relevance: Long content must reflow in a 320px CSS viewport without two-dimensional scrolling.
+    - id: WCAG 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: Focus and component boundaries need sufficient contrast.
+    - id: WCAG 1.4.12
+      name: Text Spacing
+      level: AA
+      relevance: User text-spacing overrides must not cause clipping or overlap.
+    - id: WCAG 2.4.3
+      name: Focus Order
+      level: A
+      relevance: Programmatic focus and error-link navigation must preserve a logical order.
+    - id: WCAG 2.4.4
+      name: Link Purpose In Context
+      level: A
+      relevance: Each error link must describe the correction or destination.
+    - id: WCAG 2.4.6
+      name: Headings and Labels
+      level: AA
+      relevance: The summary heading and error wording must be clear.
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: Error Summary and its links need visible focus.
+    - id: WCAG 2.4.11
+      name: Focus Not Obscured Minimum
+      level: AA
+      relevance: Focused Error Summary and target controls must not be entirely hidden by author-created content.
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: Every validation error must be identified in text.
+    - id: WCAG 3.3.3
+      name: Error Suggestion
+      level: AA
+      relevance: Error wording should explain how to correct the problem where possible.
+
+examples:
+  oneError: |
+    <div class="error-summary" tabindex="-1">
+      <h2>There is a problem</h2>
+      <ul>
+        <li><a href="#full-name">Enter your full name</a></li>
+      </ul>
+    </div>
+  twoErrorsWithDescription: |
+    <div class="error-summary" tabindex="-1">
+      <h2>There is a problem</h2>
+      <p>Review the errors below and try again.</p>
+      <ul>
+        <li><a href="#full-name">Enter your full name</a></li>
+        <li><a href="#dob-year">Date of birth must include a year</a></li>
+      </ul>
+    </div>
+
+qa:
+  figmaAcceptanceCases:
+    - id: one-item
+      scenario: Error Summary contains the one default item.
+      expected:
+        itemCount: 1
+        slotValid: true
+        defaultChild: Error Summary / Item
+        detached: false
+    - id: two-items
+      scenario: Error Summary contains two independently authored errors.
+      expected:
+        itemCount: 2
+        everyChildComponent: Error Summary / Item
+        independentlyEditable: true
+        detached: false
+    - id: five-items
+      scenario: Error Summary contains five errors.
+      expected:
+        itemCount: 5
+        fixedCountVariantUsed: false
+        childrenFillWidth: true
+        detached: false
+    - id: ten-items
+      scenario: Error Summary contains ten errors.
+      expected:
+        itemCount: 10
+        maximumCountReached: false
+        shellHeight: hug-contents
+        clipping: false
+        detached: false
+    - id: add-through-slot-control
+      scenario: Designer adds an item through the errorList slot control.
+      expected:
+        addedComponent: Error Summary / Item
+        shellDetached: false
+        itemDetached: false
+        listLayoutPreserved: true
+    - id: duplicate-default-item
+      scenario: Designer duplicates the default Error Summary / Item.
+      expected:
+        itemCount: 2
+        errorTextOverridesIndependent: true
+        shellDetached: false
+    - id: delete-item
+      scenario: Designer removes one item from a list that contains more than one.
+      expected:
+        remainingItemsPreserved: true
+        listGapPreserved: true
+        shellDetached: false
+    - id: reorder-items
+      scenario: Designer reorders Error Summary / Item children.
+      expected:
+        visualOrderChanged: true
+        itemOverridesTravelWithItems: true
+        slotValid: true
+        shellDetached: false
+    - id: edit-every-error-text
+      scenario: Designer edits errorText independently on every item.
+      expected:
+        everyItemIndependentlyEditable: true
+        bulletIncludedInErrorText: false
+        neighbouringOverridesReset: false
+        listStylePreserved: true
+    - id: attempt-remove-final-item
+      scenario: Designer attempts to remove the final required item.
+      expected:
+        emptyListValid: false
+        deletionBlockedWhenSupported: true
+        invalidAdvisoryRequiredOtherwise: true
+        minimumChildGuidance: 1
+    - id: state-content-preservation
+      scenario: Designer switches state from default to focus.
+      expected:
+        slotContentPreserved: true
+        itemOrderPreserved: true
+        errorTextOverridesPreserved: true
+        shellDetached: false
+    - id: description-content-preservation
+      scenario: Designer toggles description on and off.
+      expected:
+        slotContentPreserved: true
+        itemOrderPreserved: true
+        errorTextOverridesPreserved: true
+        hiddenDescriptionGap: false
+        shellDetached: false
+    - id: long-wrapped-errors
+      scenario: Several errorText values wrap onto multiple lines.
+      expected:
+        linkTextWraps: true
+        itemHeightAutomatic: true
+        clipping: false
+        overlap: false
+    - id: container-320px
+      scenario: Error Summary appears in a 320px-wide container.
+      expected:
+        containerWidthPx: 320
+        horizontalOverflow: false
+        titleWraps: true
+        descriptionWrapsWhenVisible: true
+        errorLinksWrap: true
+        clipping: false
+    - id: multiline-bullet-alignment
+      scenario: An error link wraps across multiple lines.
+      expected:
+        markerAlignedToFirstLine: true
+        markerVerticallyCenteredAgainstWholeItem: false
+        markerRepeatedOnWrappedLines: false
+    - id: no-detachment
+      scenario: Designer completes every supported list-authoring operation.
+      expected:
+        errorSummaryDetached: false
+        errorItemDetached: false
+        componentPropertiesRemainAvailable: true
+    - id: text-edit-preserves-list-style
+      scenario: Designer edits errorText from the properties panel.
+      expected:
+        listStylePreserved: true
+        markerLayerPreserved: true
+        markerEnteredAccessibleName: false
+        combinedRichTextPropertyUsed: false
+    - id: no-raw-styling
+      scenario: Default and focus variants, slot and item are audited for variables and styles.
+      expected:
+        rawColorValues: 0
+        rawSpacingValues: 0
+        rawTypographyValues: 0
+        rawBorderValues: 0
+        detachedStyles: 0
+    - id: breakpoint-typography
+      scenario: Title and body text styles are checked in every parent Breakpoint mode.
+      expected:
+        titleTextStyle: typography/heading/h2
+        bodyTextStyle: typography/body/default
+        responsiveCollection: Breakpoint
+        verifiedModes:
+          - base
+          - md
+          - lg
+        breakpointSuffixedStyles: 0
+        responsiveComponentVariants: 0
+    - id: semantic-handoff
+      scenario: Error Summary is handed off to production.
+      expected:
+        semanticStructure: ul > li > a
+        bulletInAnchorText: false
+        slotWrapperInDom: false
+        itemComponentWrapperInDom: false
+    - id: preferred-instance-only
+      scenario: The errorList slot's recommendations and restrictions are audited.
+      expected:
+        onlyPreferredInstance: Error Summary / Item
+        enforcementEnabledWhenSupported: true
+        arbitraryContentValid: false
+        multilineTextFallbackAllowed: false
+  accessibilityCases:
+    - id: one-error-failed-submit
+      scenario: Failed submission returns one user-correctable validation error.
+      expected:
+        summaryRendered: true
+        itemCount: 1
+        semanticStructure: ul > li > a
+        rootReceivesFocus: true
+        focusMoveCount: 1
+        focusVisible: true
+        everyInlineErrorVisible: true
+    - id: several-errors-failed-submit
+      scenario: Failed submission returns several user-correctable validation errors.
+      expected:
+        summaryRendered: true
+        everyDistinctErrorListedOnce: true
+        semanticStructure: ul > li > a
+        rootReceivesFocus: true
+        focusMoveCount: 1
+        everyInlineErrorVisible: true
+    - id: no-focus-steal-while-typing
+      scenario: User corrects an error.
+      expected:
+        focusMovesUnexpectedly: false
+    - id: rerender-does-not-refocus
+      scenario: Validation state rerenders during the same failed-submission event.
+      expected:
+        additionalSummaryFocusMoves: 0
+        currentUserFocusPreserved: true
+        unchangedAlertRebuilt: false
+    - id: repeated-submit-refocuses-once
+      scenario: User explicitly submits again and the later submission also fails.
+      expected:
+        newFailedSubmissionEvent: true
+        focusMovesForNewEvent: 1
+        errorTitlePrefixCount: 1
+    - id: tabindex-lifecycle
+      scenario: Error Summary receives programmatic focus.
+      expected:
+        tabindexBeforeFocus: -1
+        normalTabStop: false
+        tabindexZeroUsed: false
+        temporaryTabindexRemovedWhileFocused: false
+    - id: page-title-prefix
+      scenario: Failed submission renders Error Summary and later repeats.
+      expected:
+        prefix: "Error: "
+        prefixAppliedBeforeFocus: true
+        prefixCount: 1
+        originalTitleRestorable: true
+    - id: document-order-and-deduplication
+      scenario: Validators return errors out of document order and emit one issue twice.
+      expected:
+        summaryOrder: corresponding-form-control-document-order
+        duplicateSummaryItems: 0
+        everyDistinctCurrentErrorPresent: true
+    - id: values-and-selections-preserved
+      scenario: Failed submission, corrective rerender and summary-link activation occur.
+      expected:
+        textValuesPreserved: true
+        textareaValuesPreserved: true
+        selectValuesPreserved: true
+        radioSelectionsPreserved: true
+        checkboxSelectionsPreserved: true
+        multipartValuesPreserved: true
+    - id: single-control-target
+      scenario: User activates a summary link for a single input, Textarea or Select.
+      expected:
+        hrefFragmentResolves: true
+        targetVisible: true
+        targetEnabled: true
+        associatedLabelScrolledIntoView: true
+        targetReceivesFocus: true
+        inlineErrorDescribedByAfterFocus: true
+    - id: standalone-checkbox-target
+      scenario: User activates a summary link for an independently invalid standalone Checkbox.
+      expected:
+        target: native-checkbox-input
+        targetVisible: true
+        targetEnabled: true
+        associatedLabelScrolledIntoView: true
+        targetReceivesFocus: true
+        inlineErrorDescribedByAfterFocus: true
+    - id: radio-group-target
+      scenario: User activates a summary link for a Radio group error.
+      expected:
+        target: first-relevant-visible-enabled-radio
+        legendScrolledIntoView: true
+        targetReceivesFocus: true
+        fieldsetReceivesFocus: false
+        fieldsetTabindexAdded: false
+        groupInlineErrorProgrammaticallyAvailable: true
+    - id: checkbox-group-target
+      scenario: User activates a summary link for a Checkbox group error.
+      expected:
+        target: first-relevant-visible-enabled-checkbox
+        legendScrolledIntoView: true
+        targetReceivesFocus: true
+        fieldsetReceivesFocus: false
+        fieldsetTabindexAdded: false
+        groupInlineErrorProgrammaticallyAvailable: true
+    - id: multipart-specific-target
+      scenario: User activates a summary link for one invalid part of a multi-part answer.
+      expected:
+        target: visible-enabled-specific-field
+        associatedLabelScrolledIntoView: true
+        targetReceivesFocus: true
+        fieldsetReceivesFocus: false
+        inlineErrorDescribedByAfterFocus: true
+    - id: multipart-whole-target
+      scenario: User activates a summary link for a whole-answer or combination multi-part error.
+      expected:
+        target: first-relevant-visible-enabled-child
+        legendScrolledIntoView: true
+        targetReceivesFocus: true
+        fieldsetReceivesFocus: false
+        groupInlineErrorProgrammaticallyAvailable: true
+    - id: inline-errors-remain
+      scenario: Error Summary is visible.
+      expected:
+        inlineErrorsVisible: true
+        inlineAssociationsPreserved: true
+        summaryReplacesInlineErrors: false
+    - id: long-text
+      scenario: Title, description and several error links contain long text.
+      expected:
+        wraps: true
+        horizontalOverflow: false
+        overlap: false
+        clipping: false
+    - id: viewport-320px
+      scenario: Production Error Summary is rendered in a 320px CSS viewport.
+      expected:
+        horizontalOverflow: false
+        twoDimensionalScrollingRequired: false
+        contentOrderPreserved: true
+    - id: text-resize-200
+      scenario: Text is resized to 200 percent without changing the viewport.
+      expected:
+        allContentAvailable: true
+        overlap: false
+        clipping: false
+    - id: zoom-reflow-400
+      scenario: Page is viewed at 400 percent browser zoom at an equivalent 320px CSS viewport.
+      expected:
+        twoDimensionalScrollingRequired: false
+        allContentAvailable: true
+        overlap: false
+        clipping: false
+    - id: text-spacing
+      scenario: WCAG text-spacing overrides are applied.
+      expected:
+        overlap: false
+        clipping: false
+        contentLoss: false
+    - id: forced-colors
+      scenario: Error Summary and its links are used in forced-colours mode.
+      expected:
+        titleAndErrorsVisible: true
+        errorBoundaryVisible: true
+        rootFocusVisible: true
+        linkFocusVisible: true
+        colorAloneCommunicatesError: false
+    - id: screen-reader-list
+      scenario: Screen reader reads the Error Summary.
+      expected:
+        titleElement: h2
+        headingExposed: true
+        listSemanticsExposed: true
+        itemCountExposed: true
+        linkPurposeClear: true
+        bulletRepeatedInAccessibleName: false
+    - id: announcement-once
+      scenario: Newly rendered Error Summary uses the selected tested focus-only or optional alert-plus-focus strategy.
+      expected:
+        focusOnlyStrategyTested: true
+        alertPlusFocusTestedWhenSupported: true
+        titleAndListAnnouncementCount: 1
+        duplicateInlineLiveAnnouncements: false
+        correctiveRerenderAnnouncementCount: 0
+    - id: focus-not-obscured
+      scenario: Error Summary and link targets receive focus with sticky or overlapping author-created content present.
+      expected:
+        summaryFocusEntirelyObscured: false
+        targetFocusEntirelyObscured: false
+        errorBorderStillDistinguishable: true
+
+implementationRules:
+  html:
+    - Use a real h2, unordered list, list items and anchors.
+    - After a failed submit with one or more user-correctable errors, render Error Summary and every inline error, then focus the summary once.
+    - Give the Error Summary root tabindex="-1" before programmatic focus.
+    - Keep tabindex="-1" permanently or, if it is injected temporarily, remove it only after focus leaves.
+    - Use role="alert" only as part of a tested strategy that does not duplicate the focus announcement or inline messages.
+    - Give every error link a fragment target that exists and is unique.
+    - Make every target a visible, enabled control.
+    - On link activation, scroll the associated label or legend into view and focus the target control.
+    - Never focus Fieldset.
+    - Preserve the control's or owning Fieldset's aria-describedby access to the inline error.
+    - Keep inline errors visible and associated with their controls.
+    - Preserve entered values and selections.
+    - Sort errors by corresponding form-control document order and remove duplicate summary items.
+    - 'Prefix the existing document title once with "Error: " before moving focus.'
+    - Do not add semantic wrappers for Figma slots or supporting components.
+    - Do not add the visual bullet to anchor text or aria-label.
+  css:
+    - Use form.errorSummary tokens for the shell.
+    - Use responsive heading and body typography tokens.
+    - Use documented spacing and focus tokens.
+    - Preserve native list semantics if list-marker presentation is customised.
+    - Allow links and the shell to grow in block size.
+    - Preserve visible focus and the error boundary in forced-colours mode.
+    - Prevent focused content from being obscured by sticky or overlapping author-created content.
+    - Do not use fixed heights, arbitrary item widths, clipping or raw values.
+  figma:
+    - Build errorList as a required native Figma Slot property.
+    - Put one Error Summary / Item instance in the slot by default.
+    - Configure Error Summary / Item as the only preferred instance.
+    - Enable preferred-instance enforcement when supported.
+    - Preserve slot content across state changes and description toggles.
+    - Use typography/heading/h2 and typography/body/default styles that inherit the parent frame's Breakpoint mode.
+    - Do not create breakpoint-suffixed text styles or responsive component variants.
+    - Do not detach Error Summary or Error Summary / Item for routine authoring.
+
+aiGenerationRules:
+  - Require Error Summary after a failed submit with one or more user-correctable validation errors.
+  - Keep every inline error and move focus to Error Summary exactly once after rendering.
+  - Do not replace the one-error summary with direct-to-field focus.
+  - Generate one public Error Summary component and one supporting Error Summary / Item Figma subcomponent.
+  - Use the exact public Error Summary property names state, description, titleText, descriptionText and errorList.
+  - Use only errorText as the public property on Error Summary / Item.
+  - Use a required native slot for errorList.
+  - Add, duplicate, remove and reorder Error Summary / Item instances through the slot.
+  - Keep at least one item and impose no maximum item count.
+  - Recommend only Error Summary / Item in the slot and enforce that restriction when supported.
+  - Do not create error-count properties, count variants or duplicate shells.
+  - Do not create one combined multiline errorsText property.
+  - Do not expose the bullet marker as editable text.
+  - Do not include a bullet character in errorText.
+  - Preserve slot content when state or description changes.
+  - Map production output to ul > li > a.
+  - Render the title as h2 while keeping heading level out of the Figma API.
+  - Use one Breakpoint-mode semantic Figma text style for each text role instead of breakpoint variants.
+  - Sort errors by form document order, remove duplicate items and preserve values and selections.
+  - Target visible, enabled controls; scroll their label or legend into view; never focus Fieldset.
+  - Prefix the document title once and prevent duplicate alert, focus and inline-error announcements.
+  - Use semantic tokens and report missing token needs instead of inventing raw styling.
+
+acceptanceCriteria:
+  - One public Error Summary component is defined.
+  - Error Summary / Item is a published supporting Figma subcomponent grouped with Error Summary.
+  - Error Summary / Item is documented as "Use only inside the Error Summary errorList slot".
+  - Error Summary / Item is not treated as a standalone product-level component.
+  - Error Summary public properties are exactly state, description, titleText, descriptionText and errorList.
+  - state supports default and focus.
+  - description defaults to false.
+  - titleText defaults to "There is a problem".
+  - The production title is semantically h2 and uses the responsive H2 visual style.
+  - errorList is a required native Figma Slot property.
+  - errorList maps conceptually to ul.
+  - errorList uses vertical Auto Layout and contains one default item.
+  - errorList has minimum child guidance of one and no maximum.
+  - Zero error items is invalid.
+  - Inserted items fill the available width.
+  - Items can be added, duplicated, removed and reordered without detaching the shell.
+  - Slot content survives state changes and description toggles.
+  - Error Summary / Item is the only preferred instance and enforcement is enabled when supported.
+  - Error Summary / Item exposes only errorText.
+  - errorText contains actionable link wording without a bullet character.
+  - Error Summary / Item uses horizontal Auto Layout.
+  - The bullet marker is fixed, presentational and aligned with the first line.
+  - Link text fills available width, has automatic height and wraps naturally.
+  - No item has a fixed height, arbitrary width or clipping.
+  - No error-count property, count variant, combined errorsText property or editable bullet property exists.
+  - Figma QA explicitly covers one, two, five and ten items.
+  - Figma QA explicitly covers add, duplicate, delete, reorder and independent text edits.
+  - Figma QA explicitly covers attempted removal of the final item.
+  - Figma QA explicitly covers state and description content preservation.
+  - Figma QA explicitly covers long errors, a 320px container and multiline bullet alignment.
+  - Figma QA explicitly covers no detachment, list-style preservation and no raw styling.
+  - Figma typography uses one semantic style per role and inherits base, md and lg values from the parent Breakpoint mode.
+  - Production semantic handoff remains ul > li > a.
+  - One error and several errors use identical semantic structure and behaviour.
+  - Every failed submit with one or more user-correctable errors renders Error Summary and all inline errors.
+  - Focus moves to Error Summary exactly once per failed-submission event and corrective rerenders do not steal focus.
+  - A later explicit failed submit moves focus to Error Summary exactly once again.
+  - tabindex="-1" keeps the root out of the normal Tab order and any temporary attribute is removed only after focus leaves.
+  - 'The existing document title receives one non-accumulating "Error: " prefix before focus.'
+  - Error items follow form document order and duplicate current issues are listed once.
+  - All entered values and selections survive failed rendering, rerenders and link activation.
+  - Every link targets a visible, enabled control, scrolls its label or legend into view and moves focus to that control.
+  - Link targeting covers single controls, Radio groups, Checkbox groups, standalone Checkbox and specific or whole multi-part answers.
+  - Fieldset never receives focus or tabindex for summary targeting.
+  - The target control or owning Fieldset retains aria-describedby access to the inline error.
+  - QA explicitly covers long text, 320px width, 200 percent text resize, 400 percent zoom/reflow and text spacing.
+  - QA explicitly covers forced colours, screen-reader semantics, one announcement and focus not obscured.
+  - Error Summary supplements rather than replaces inline errors.

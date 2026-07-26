@@ -309,7 +309,9 @@ Rules:
 - associate it with Fieldset;
 - do not make Fieldset focusable;
 - do not apply `aria-invalid` to Fieldset by default;
-- error-summary link targets the first relevant interactive child or a documented group target.
+- error-summary link targets the first relevant visible, enabled interactive child;
+- activation scrolls the legend into view and focuses that child, never Fieldset;
+- the Fieldset-owned inline error remains programmatically available.
 
 ### Child-field error
 
@@ -323,6 +325,8 @@ Rules:
 - child component owns the error;
 - associate the error with the specific child;
 - only the affected control receives `aria-invalid` where required;
+- error-summary activation scrolls the child's label into view and focuses the visible, enabled child;
+- preserve the child's `aria-describedby` access to its inline error;
 - do not add a second vague group error.
 
 ### Combination error
@@ -337,7 +341,8 @@ Rules:
 
 - use a group-level error;
 - associate it with Fieldset;
-- summary link usually targets the first relevant control;
+- summary link targets the first relevant visible, enabled control;
+- activation scrolls the legend into view and focuses that control, never Fieldset;
 - child component determines whether any individual children also receive invalid treatment.
 
 ## Error summary relationship
@@ -350,7 +355,7 @@ Inline group or child errors remain visible.
 
 Summary wording should match or clearly correspond to the inline error.
 
-Summary links target an interactive child rather than the non-focusable Fieldset by default.
+Summary links target a visible, enabled interactive child rather than the non-focusable Fieldset. Activation scrolls the associated label or legend into view and focuses the child while preserving the control's or Fieldset's established `aria-describedby` access to the inline error.
 
 Do not add `tabindex` to Fieldset merely to make it an error-summary target.
 

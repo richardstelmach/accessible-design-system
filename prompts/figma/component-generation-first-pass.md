@@ -182,7 +182,7 @@ Keep the production component set separate from documentation examples, QA examp
 
 ## Focus and state rules
 
-- Apply focus to the exact interactive element defined by the contract, which may be a nested control rather than the component root.
+- Apply focus styling to the exact focus target defined by the contract. The target may be a nested interactive control or a programmatically focusable, non-interactive component root such as Error Summary.
 - Use the shared focus-indicator standard where focus states are shown.
 - Preserve combined states only when the contract defines them.
 - Do not invent hover, active, error, selected, read-only, disabled or indeterminate states.
@@ -242,10 +242,12 @@ When creating component documentation frames:
 - Include eyebrow text above the H1.
 - For component documentation pages, eyebrow text must be `Components`.
 - Use `color.text.headingAccent` for the documentation H1.
-- Use `typography.heading.h1.[breakpoint]` for the H1.
-- Use `typography.body.large.[breakpoint]` for intro text.
+- Use the production Figma text style `typography/heading/h1` for the H1.
+- Use the production Figma text style `typography/body/large` for intro text.
 - Constrain intro text to `layout.container.maxWidth.text`.
-- Choose heading visual styles based on semantic level and current frame breakpoint.
+- Let responsive text-style values inherit from the parent frame's `Breakpoint` mode.
+- Preview `base`, `md` and `lg` by changing the parent frame mode; do not swap to breakpoint-suffixed styles or create responsive component variants.
+- Choose heading visual styles based on semantic level, then let Breakpoint mode supply the responsive value.
 - Centre the page container, not the body text.
 - Keep body copy left aligned by default.
 - Wider layout containers may be used for component examples, state matrices, playgrounds and visual samples.

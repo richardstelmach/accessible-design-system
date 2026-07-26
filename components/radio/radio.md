@@ -112,7 +112,7 @@ A missing required selection is a Fieldset group error.
 
 Fieldset displays the inline error message and associates it with the Fieldset using `aria-describedby`. Radio options retain their normal visual state. Do not turn every Radio boundary red, do not create individual Radio error messages, and do not apply `aria-invalid` to every Radio for a missing group selection.
 
-When an error summary links to a missing Radio answer, target the first relevant Radio in the group. Preserve the user's selected value after validation.
+When an error summary links to a missing Radio answer, target the first relevant visible, enabled Radio in the group. On activation, scroll the legend into view and focus that Radio, never Fieldset. Preserve programmatic access to the Fieldset-owned inline error without repeating its ID on every Radio, and preserve the user's selected value after validation.
 
 ## Native HTML
 
@@ -262,7 +262,7 @@ Test at least:
 - unique IDs and values;
 - Fieldset helper plus option descriptions;
 - missing-selection Fieldset error without Radio error styling;
-- error-summary targeting the first relevant Radio;
+- error-summary scrolling the legend and focusing the first relevant visible, enabled Radio without focusing Fieldset;
 - no default preselection;
 - restored previous selection;
 - 200% zoom;

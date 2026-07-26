@@ -487,7 +487,7 @@ Example:
 
 Inline errors remain present when an error summary is also used.
 
-When multiple fields contain errors, an error-summary link should move focus to the relevant Select.
+For every invalid Select included after a failed submit, its error-summary item links to the relevant visible, enabled Select. Activation scrolls the Select's label into view and moves focus to the Select while preserving its inline `aria-describedby` association.
 
 Do not move focus while the user is interacting with the Select.
 
