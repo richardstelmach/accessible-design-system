@@ -170,18 +170,23 @@ Use an “Error:” prefix or equivalent accessible cue where it improves clarit
 
 ## Error summary
 
-Use an error summary when a form submission contains multiple errors or when the page reloads after failed validation.
+After a failed submit with one or more user-correctable validation errors, render an error summary and every inline error. One error and several errors use the same summary structure and behaviour.
 
-An error summary should:
+An error summary must:
 
 * appear near the top of the page or form
-* receive focus after failed submission where appropriate
-* include a clear heading
-* list each error
-* link each error to the relevant field
+* receive focus exactly once after the summary and inline errors render
+* include a clear `h2` heading
+* list each distinct current error once, in the document order of the related form controls
+* link each error to a visible, enabled control
+* scroll the associated label or legend into view before focusing the target control
+* never focus Fieldset
+* preserve the target's existing access to its inline error through `aria-describedby`
 * not replace inline field errors
 
 Inline errors must remain visible next to the fields they relate to.
+
+Preserve entered values and selections when errors render and when summary links are activated. Prefix the existing document title once with `Error: ` while the submitted page has errors.
 
 ## Focus management
 
@@ -202,7 +207,11 @@ For form controls with a focus ring and separator:
 * the outer focus ring radius should be derived from the input radius, separator thickness and ring thickness
 * the focus ring should not look like a detached pill-shaped container
 
-When validation fails after form submission, move focus to the error summary when one is present.
+When validation fails after form submission with one or more user-correctable errors, move focus to the required error summary once after it and the inline errors render. Validation rerenders must not refocus it; a later explicit failed submit moves focus once again. Do not move focus while the user is typing.
+
+Give the error-summary root `tabindex="-1"` before programmatic focus so it stays out of the normal Tab order. If the attribute is injected temporarily, keep it while the summary has focus and remove it only after focus leaves.
+
+Use focus-only announcement by default. If optional `role="alert"` is combined with programmatic focus, use a tested strategy so the summary title, list and repeated inline messages are not announced twice.
 
 ## Disabled and read-only states
 

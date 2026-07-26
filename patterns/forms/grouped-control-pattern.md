@@ -166,7 +166,7 @@ Put the helper ID before the error ID:
 
 An error summary supplements inline errors. It does not replace them.
 
-Error-summary links normally target the first relevant interactive child or a documented grouped-control target, not the non-focusable Fieldset.
+Error-summary links target the first relevant visible, enabled interactive child, not the non-focusable Fieldset. On activation, scroll the legend into view and focus that child while preserving the Fieldset's established `aria-describedby` access to the inline group error.
 
 Do not add `tabindex` to Fieldset merely to make it a summary target.
 

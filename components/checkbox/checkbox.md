@@ -140,7 +140,9 @@ When that specific Checkbox is invalid:
 - list the description ID before the error ID when both are present;
 - use `form.state.error.border`;
 - keep the inline error visible when an error summary is present;
-- link the error summary item to the Checkbox input;
+- link the error summary item to the visible, enabled native Checkbox input;
+- on activation, scroll the associated label into view and focus the native Checkbox;
+- retain the Checkbox's `aria-describedby` access to its inline error;
 - preserve the user's current checked state.
 
 An inline Checkbox error is error text, not a separate error surface. Use `form.error.typography` and `form.error.color`; do not give the message a fill, surface padding or surface radius, and do not apply `form.error.background` to an ordinary inline field error. That background token is reserved for a component or pattern that explicitly defines a filled error surface or container. Error Summary remains distinct and uses its dedicated `form.errorSummary.*` tokens.
@@ -148,6 +150,8 @@ An inline Checkbox error is error text, not a separate error surface. Use `form.
 Optional preferences, optional consent choices and ordinary independent toggles normally have no error merely because they remain unchecked.
 
 When a Checkbox group fails a shared rule such as "select at least one", Fieldset owns the group error. Individual Checkbox instances retain their normal visual states. Do not turn every Checkbox boundary red, repeat `aria-invalid="true"` on every child Checkbox or repeat the Fieldset error ID on every Checkbox.
+
+The error-summary item targets the first relevant visible, enabled Checkbox. On activation, scroll the legend into view and focus that Checkbox, never Fieldset. Preserve programmatic access to the Fieldset-owned inline error without repeating its ID on every child.
 
 A Checkbox used as one option inside a Fieldset must not use its individual error state for shared minimum, maximum, exact-selection or other group-answer rules. Those are Fieldset group errors.
 

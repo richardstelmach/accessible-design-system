@@ -345,7 +345,8 @@ focusManagement:
     - Do not set tabindex to -1 on an enabled Select.
     - Do not move focus when the selected option changes.
     - Do not move focus while users navigate options.
-    - Error-summary links should move focus to the relevant Select.
+    - Error-summary links target a visible, enabled Select, scroll its label into view and move focus to it.
+    - Preserve the Select's aria-describedby access to its inline error after link activation.
     - Do not allow author-created content to obscure the focused Select completely.
 
 accessibleName:

@@ -298,7 +298,7 @@ Invalid input
 
 Keep inline errors visible even when the page also uses an error summary.
 
-When a form contains multiple errors, the error summary may receive focus after submission. Each summary item should link to the relevant control. Do not move focus while the user is typing.
+After a failed submit with one or more user-correctable validation errors, show the error summary and move focus to it exactly once after the summary and inline errors render. Each summary item links to the relevant visible, enabled control. Do not refocus the summary on validation rerenders or move focus while the user is typing.
 
 Never clear a long-form answer after validation fails.
 

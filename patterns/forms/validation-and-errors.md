@@ -20,6 +20,8 @@ Do not rely on colour alone.
 
 The inline error still appears even when there is an error summary.
 
+After a failed submit with one or more user-correctable validation errors, render an error summary and every inline error before moving focus to the summary once.
+
 ## Recommended order
 
 For Text Input, Textarea, Select and similar single controls, use this order:
@@ -210,7 +212,7 @@ Pattern:
 
 - treat this as a group-level error
 - associate the error with the Fieldset using `aria-describedby`
-- the error summary link should usually target the first relevant interactive control
+- the error summary link targets the first relevant visible, enabled interactive control, scrolls the legend into view and focuses that control
 - the child component contract determines whether relevant child controls also receive invalid styling or `aria-invalid`
 
 Example:
@@ -252,12 +254,20 @@ List the helper ID first and the error ID second:
 
 ## Error summary targets
 
-An error summary supplements inline errors. Inline field and group errors remain visible.
+An error summary is required after a failed submit with one or more user-correctable validation errors. It supplements inline errors; every inline field and group error remains visible and programmatically associated.
 
 Summary wording should match or clearly correspond to the inline error.
 
-For group-level Fieldset errors, the summary link normally targets the first relevant interactive child or a documented grouped-control target.
+Every summary link targets a unique, visible, enabled control. Preserve the target control's or owning Fieldset's established `aria-describedby` access to the inline error and any useful hint.
 
-For child-field errors, the summary link targets the invalid child.
+For group-level Fieldset errors, scroll the legend into view and focus the first relevant visible, enabled interactive child.
+
+For child-field errors, scroll the associated label into view and focus the visible, enabled invalid child.
+
+For a standalone Checkbox error, scroll its associated label into view and focus the visible, enabled native Checkbox input.
+
+For a whole multi-part answer error, scroll the legend into view and focus the first relevant visible, enabled child. For a specific-part error, scroll that field's label into view and focus that field.
 
 Do not add `tabindex` to Fieldset merely to make it an error-summary target.
+
+Do not repeat a Fieldset-owned group error ID on every child merely to implement summary-link focus.
