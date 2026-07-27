@@ -390,7 +390,9 @@ The public variant axes are:
 State × Requirement × Boundary creates 5 × 2 × 4 = 40 public variants.
 Boundary is a normal top-level variant property, not an exposed nested
 property. The 40 variants are the deterministic Figma representation; they do
-not prescribe 40 separate runtime implementations.
+not prescribe 40 separate runtime implementations. Requirement remains an
+intentional public authoring and handoff axis; it does not provide a
+variant-specific `Label text` default.
 
 The internal `_Stepper/Control row` component set has these axes:
 
@@ -428,20 +430,29 @@ is not separate user-entered data.
 
 ### Figma label authoring
 
-Use one editable, automatic-height text layer for the complete visible label.
-Required variants default to `Number of rooms`; optional variants default to
-`Number of rooms (optional)`. Do not display `(required)` or create a separate
-optional-marker layer, Boolean layer or nested marker component.
+Figma exposes one public `Label text` property with one global default:
+`Number of rooms`. Every required and optional public master binds its one
+complete visible label layer to that same property. The layer remains editable,
+automatic-height and naturally wrapping, without a fixed or maximum width.
 
-Designers overriding an optional instance author the complete label, including
-`(optional)`. If Requirement is later changed on that inserted instance, the
-designer may need to update the complete Label text override. Let the label wrap
-as one natural string without an arbitrary fixed or maximum width.
+Selecting `Requirement=optional` does not append `(optional)` or otherwise
+rewrite the label. To author an optional Stepper in Figma:
 
-This is a Figma authoring limitation following the established Checkbox
-single-label model, not a runtime accessibility rule. Runtime code may append
-or otherwise provide the optional treatment programmatically, provided the
-complete visible label and accessible name remain correct.
+1. Set `Requirement=optional`.
+2. Override `Label text` with the complete visible label, for example
+   `Number of rooms (optional)`.
+
+Switching between Requirement variants must preserve that complete-string
+override and must not alter the visible label. Do not leave an optional label
+layer unbound, display `(required)` by default, or create a separate
+optional-marker layer, Boolean property or nested marker component. Production
+masters must not depend on variant-specific text-property defaults.
+
+This single-global-default constraint is specific to Figma authoring and follows
+the established Checkbox single-label model; it does not change the runtime
+accessibility pattern. Runtime implementations may construct or append optional
+wording programmatically, provided the result is one coherent visible and
+accessible label.
 
 The later Figma build and QA must confirm:
 
@@ -451,9 +462,22 @@ The later Figma build and QA must confirm:
 - every disabled combination disables Minus, numeric input and Plus;
 - changing Boundary while disabled cannot visually re-enable a control;
 - State, Requirement and Boundary can be changed in any order;
-- text and Helper-text Boolean overrides persist across variant changes;
-- required and optional label defaults are correct;
-- optional labels use one editable text layer and no separate marker;
+- every required and optional master binds its complete label layer to the same
+  `Label text` property;
+- `Label text` works in both Requirement variants and has the one global default
+  `Number of rooms`;
+- a complete-string `Label text` override persists when Requirement changes;
+- changing Requirement does not automatically alter the visible label;
+- no required or optional label layer is left unbound;
+- all text-property overrides persist across State, Requirement and Boundary
+  changes;
+- no separate optional-marker layer, Boolean property or nested marker component
+  exists;
+- optional documentation examples use an inserted instance with a complete
+  manual `Label text` override;
+- long optional labels wrap naturally as one editable layer without a fixed
+  width;
+- Helper-text Boolean overrides persist across variant changes;
 - error and focus styling remain controlled by State;
 - valid boundaries are never presented as errors;
 - every example uses Minus → numeric input → Plus; and
@@ -468,7 +492,8 @@ Document and test each of the following using the fixed Minus → numeric input
 → Plus order:
 
 - Default value and direct entry
-- Helper text and optional field
+- Helper text and optional field, using a complete `Label text` override on the
+  inserted optional Figma instance
 - Error and error focus
 - Minimum reached, maximum reached, and minimum equals maximum
 - Whole-component disabled
