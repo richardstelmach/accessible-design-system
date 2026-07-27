@@ -370,27 +370,95 @@ existing Button, icon and form token system.
 
 The public Stepper API is:
 
-| Property | Type | Values/default |
+| Property | Type | Default |
 | --- | --- | --- |
-| State | Variant | default, focus, error, errorFocus, disabled |
-| Requirement | Variant | required, optional |
-| Helper text | Boolean | true, false |
+| State | Variant | default |
+| Requirement | Variant | required |
+| Boundary | Variant | none |
+| Helper text | Boolean | false |
 | Label text | Text | Number of rooms |
 | Value text | Text | 2 |
 | Helper text content | Text | Choose a number from 1 to 10. |
 | Error text | Text | Error: Enter a whole number from 1 to 10. |
-| Boundary | Exposed nested variant | none, minimum, maximum, both |
 
-State × Requirement creates ten outer variants. Boundary belongs to an internal
-_Stepper/Control row nested component so it does not create forty outer
-variants.
+The public variant axes are:
+
+- `State=default|focus|error|errorFocus|disabled`
+- `Requirement=required|optional`
+- `Boundary=none|minimum|maximum|both`
+
+State × Requirement × Boundary creates 5 × 2 × 4 = 40 public variants.
+Boundary is a normal top-level variant property, not an exposed nested
+property. The 40 variants are the deterministic Figma representation; they do
+not prescribe 40 separate runtime implementations.
+
+The internal `_Stepper/Control row` component set has these axes:
+
+- `State=default|focus|error|errorFocus|disabled`
+- `Boundary=none|minimum|maximum|both`
+
+State × Boundary creates 5 × 4 = 20 internal variants. Every public Stepper
+variant uses the internal row with the same State and Boundary values.
 
 The control row uses two non-detached production neutral/default Icon Button
 instances, with the left nested icon swapped to Minus and the right using Plus.
 The centre is a Stepper-owned value field built from existing form-control
-tokens, not a nested public Text Input instance. The later Figma QA must prove
-that a nested Boundary override survives both outer State and Requirement
-changes.
+tokens, not a nested public Text Input instance. Its order remains Minus →
+numeric input → Plus.
+
+Boundary represents a valid range condition:
+
+| State | Boundary | Required result |
+| --- | --- | --- |
+| Non-disabled | none | Minus, numeric input and Plus are available |
+| Non-disabled | minimum | Only Minus is unavailable |
+| Non-disabled | maximum | Only Plus is unavailable |
+| Non-disabled | both | Minus and Plus are unavailable; numeric input remains available |
+| disabled | Any value | Minus, numeric input and Plus are unavailable |
+
+State disabled always takes precedence. All four disabled Boundary combinations
+remain in the component set so designers can change the axes in any order, but
+they are intentionally visually redundant: changing Boundary while disabled
+cannot re-enable a control.
+
+Boundary does not cause error styling, error text, aria-invalid, an error
+announcement or a disabled numeric input. Runtime code normally derives the
+condition from the supplied minimum, maximum and current valid value; Boundary
+is not separate user-entered data.
+
+### Figma label authoring
+
+Use one editable, automatic-height text layer for the complete visible label.
+Required variants default to `Number of rooms`; optional variants default to
+`Number of rooms (optional)`. Do not display `(required)` or create a separate
+optional-marker layer, Boolean layer or nested marker component.
+
+Designers overriding an optional instance author the complete label, including
+`(optional)`. If Requirement is later changed on that inserted instance, the
+designer may need to update the complete Label text override. Let the label wrap
+as one natural string without an arbitrary fixed or maximum width.
+
+This is a Figma authoring limitation following the established Checkbox
+single-label model, not a runtime accessibility rule. Runtime code may append
+or otherwise provide the optional treatment programmatically, provided the
+complete visible label and accessible name remain correct.
+
+The later Figma build and QA must confirm:
+
+- exactly 40 public Stepper variants and 20 internal control-row variants;
+- every public combination uses the matching internal State and Boundary;
+- Boundary works in every non-disabled State;
+- every disabled combination disables Minus, numeric input and Plus;
+- changing Boundary while disabled cannot visually re-enable a control;
+- State, Requirement and Boundary can be changed in any order;
+- text and Helper-text Boolean overrides persist across variant changes;
+- required and optional label defaults are correct;
+- optional labels use one editable text layer and no separate marker;
+- error and focus styling remain controlled by State;
+- valid boundaries are never presented as errors;
+- every example uses Minus → numeric input → Plus; and
+- nested Icon Button and inserted Stepper instances remain attached to their
+  production masters.
 
 Do not edit Figma or Tokens Studio while implementing this GitHub contract.
 

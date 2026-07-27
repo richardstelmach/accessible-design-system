@@ -348,7 +348,8 @@ numericConstraints:
       - Do not clamp an invalid typed value while the user is entering it.
 
 boundaryBehaviour:
-  sourceOfTruth: native-disabled-buttons
+  sourceOfTruth: valid-current-value-and-range-constraints
+  renderedResult: native-disabled-buttons
   rules:
     - Boundary state is derived from a valid current numeric value and supplied range constraints.
     - Reaching a valid boundary does not set aria-invalid or create an error message.
@@ -512,7 +513,7 @@ validation:
 
 states:
   default:
-    description: Enabled valid Stepper away from a supplied boundary.
+    description: Enabled valid Stepper without focus, error or whole-component disabled treatment.
   focus:
     description: Numeric input has keyboard focus.
     tokens:
@@ -692,6 +693,7 @@ tokens:
 figmaProperties:
   state:
     type: variant
+    default: default
     values:
       - default
       - focus
@@ -700,11 +702,21 @@ figmaProperties:
       - disabled
   requirement:
     type: variant
+    default: required
     values:
       - required
       - optional
+  boundary:
+    type: variant
+    default: none
+    values:
+      - none
+      - minimum
+      - maximum
+      - both
   helperText:
     type: boolean
+    default: false
     values:
       - true
       - false
@@ -713,6 +725,14 @@ figmaProperties:
       type: text
       required: true
       default: Number of rooms
+      defaultsByRequirement:
+        required: Number of rooms
+        optional: Number of rooms (optional)
+      meaning: Complete visible Stepper label
+      rules:
+        - Use one editable text layer for the complete visible label.
+        - Include "(optional)" within labelText when Requirement is optional.
+        - Do not create a separate optional-marker layer, Boolean layer or nested marker component.
     valueText:
       type: text
       required: true
@@ -727,16 +747,6 @@ figmaProperties:
         - state: error
         - state: errorFocus
       default: "Error: Enter a whole number from 1 to 10."
-  nestedBoundary:
-    type: exposed-nested-instance-variant
-    component: _Stepper/Control row
-    property: Boundary
-    values:
-      - none
-      - minimum
-      - maximum
-      - both
-    default: none
 
 figmaStateRules:
   - State focus and errorFocus represent numericInput focus only.
@@ -745,27 +755,87 @@ figmaStateRules:
   - State errorFocus shows errorText, error input treatment and input focus treatment.
   - Non-error states hide errorText without leaving an empty gap.
   - Helper text visibility is controlled by helperText.
-  - Requirement optional includes "(optional)" in the complete visible label.
+  - Requirement optional defaults labelText to "Number of rooms (optional)".
+  - Designers overriding an optional instance author the complete labelText, including "(optional)".
+  - Changing Requirement on an inserted instance may require updating its complete labelText override.
   - Requirement required does not show "(required)" by default.
   - Boundary represents a valid runtime range condition, not an error state.
-  - State disabled forces visually disabled numericInput and both icon buttons regardless of nested Boundary.
+  - Boundary never causes error styling, errorText, aria-invalid, an error announcement or a disabled numericInput.
+  - State disabled takes precedence over every Boundary value and disables decrementButton, numericInput and incrementButton.
+  - Boundary has no visible effect while State is disabled.
 
 figmaImplementation:
-  outerVariantCount: 10
-  outerVariantFormula: state-times-requirement
-  controlRow:
-    componentName: _Stepper/Control row
-    layout: horizontal-auto-layout
-    order:
-      - Icon Button / Minus
-      - Stepper-owned value field
-      - Icon Button / Plus
-    boundaryVariants:
+  publicVariantCount: 40
+  publicVariantFormula: state-times-requirement-times-boundary
+  publicVariantAxes:
+    state:
+      - default
+      - focus
+      - error
+      - errorFocus
+      - disabled
+    requirement:
+      - required
+      - optional
+    boundary:
       - none
       - minimum
       - maximum
       - both
+  publicVariantPurpose:
+    - The 40 public variants provide deterministic Figma authoring.
+    - They do not prescribe 40 separate runtime implementations.
+  controlRow:
+    componentName: _Stepper/Control row
+    layout: horizontal-auto-layout
+    variantCount: 20
+    variantFormula: state-times-boundary
+    variantAxes:
+      state:
+        - default
+        - focus
+        - error
+        - errorFocus
+        - disabled
+      boundary:
+        - none
+        - minimum
+        - maximum
+        - both
+    order:
+      - Icon Button / Minus
+      - Stepper-owned value field
+      - Icon Button / Plus
+    nonDisabledBoundaryResults:
+      none:
+        decrementButton: enabled
+        numericInput: enabled
+        incrementButton: enabled
+      minimum:
+        decrementButton: disabled
+        numericInput: enabled
+        incrementButton: enabled
+      maximum:
+        decrementButton: enabled
+        numericInput: enabled
+        incrementButton: disabled
+      both:
+        decrementButton: disabled
+        numericInput: enabled
+        incrementButton: disabled
+    disabledPrecedence:
+      appliesToBoundary:
+        - none
+        - minimum
+        - maximum
+        - both
+      decrementButton: disabled
+      numericInput: disabled
+      incrementButton: disabled
     rules:
+      - Every public Stepper variant uses the matching State and Boundary internal control-row variant.
+      - State disabled overrides Boundary so all three controls are disabled in all four disabled combinations.
+      - Keep all four disabled Boundary combinations even though they are intentionally visually redundant.
       - Use two non-detached production neutral default-size Icon Button instances.
       - Deep-swap the left nested icon instance to registered Minus without detaching it.
       - Use the registered Plus icon in the right nested Icon Button instance.
@@ -781,15 +851,43 @@ figmaImplementation:
       - Keep the main Stepper resizable.
       - Use a representative short-quantity width in documentation and QA.
       - Treat Figma width as illustrative because CSS ch units are the GitHub source of truth.
+  labelAuthoring:
+    scope: Figma authoring
+    browserOrProductionCodeLimitation: false
+    rules:
+      - Use one editable, automatic-height text layer for the complete visible label.
+      - Let labelText wrap naturally without an arbitrary fixed or maximum width.
+      - Required variants default labelText to "Number of rooms".
+      - Optional variants default labelText to "Number of rooms (optional)".
+      - Do not create a separate optional-marker layer, Boolean layer or nested marker component.
+      - Designers overriding an optional instance include "(optional)" in the complete labelText.
+      - After changing Requirement on an inserted instance, designers may need to update the complete labelText override.
+      - This is a Figma authoring limitation based on the established Checkbox single-label model.
+      - Runtime code may append or otherwise provide the optional treatment programmatically.
   requiredQa:
-    - Confirm nested Boundary overrides survive outer State changes.
-    - Confirm nested Boundary overrides survive outer Requirement changes.
-    - Confirm disabled State overrides do not leave an enabled icon button.
-    - Confirm Minus, value field and Plus instances remain non-detached.
+    - Confirm exactly 40 public Stepper variants exist.
+    - Confirm exactly 20 internal _Stepper/Control row variants exist.
+    - Confirm every public combination uses the matching internal State and Boundary combination.
+    - Confirm Boundary changes correctly across every non-disabled State.
+    - Confirm every State disabled combination disables all three controls.
+    - Confirm changing Boundary while disabled cannot visually re-enable a control.
+    - Confirm State, Requirement and Boundary can be changed in any order.
+    - Confirm text-property overrides persist across variant changes.
+    - Confirm helperText Boolean overrides persist across variant changes.
+    - Confirm required and optional label defaults are correct.
+    - Confirm optional labels use one editable text layer with no separate optional-marker layer.
+    - Confirm error and focus styling remain controlled by State.
+    - Confirm valid boundaries are never presented as errors.
+    - Confirm all examples preserve Minus, numeric input, Plus order.
+    - Confirm Minus and Plus Icon Button instances remain non-detached.
+    - Confirm the Stepper-owned value field is not a nested Text Input instance.
     - Confirm focus rings and wrapped text are not clipped.
     - Confirm documentation and QA examples use instances, not duplicate masters.
   runtimeBoundary:
     rules:
+      - Derive Boundary from the supplied minimum, maximum and current valid value.
+      - Boundary is not separate user-entered data.
+      - The Figma variant matrix does not prescribe 40 separate runtime implementations.
       - Boundary reflects runtime native disabled behaviour in code.
       - Runtime aria relationships, focus management and status announcements are implementation requirements, not Figma-only semantics.
 
