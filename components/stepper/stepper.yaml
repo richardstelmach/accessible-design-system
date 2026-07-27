@@ -1,0 +1,1009 @@
+component: Stepper
+id: stepper
+version: 0.1.0
+status: active
+
+description: >
+  Stepper is a numeric quantity control for changing one mathematical value by
+  direct entry or adjacent decrement and increment buttons. It is not a
+  multi-page progress indicator.
+
+purpose:
+  - Collect one mathematical numeric value in a form.
+  - Support direct number entry for efficient larger changes.
+  - Provide adjacent Minus and Plus buttons for incremental changes.
+  - Preserve native numeric-input, constraint-validation and form-submission behaviour.
+  - Reuse the shared single-control form-field pattern.
+  - Keep quantity controls accessible to keyboard, pointer, touch and assistive-technology users.
+
+sourceDocumentation:
+  sharedPattern:
+    - patterns/forms/form-field-patterns.yaml
+  humanReadable:
+    - patterns/forms/single-control-pattern.md
+    - patterns/forms/labels.md
+    - patterns/forms/helper-text.md
+    - patterns/forms/required-and-optional.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/disabled-and-readonly.md
+    - patterns/forms/input-types-and-keyboards.md
+    - patterns/forms/tokens.md
+    - accessibility/focus-indicators.yaml
+    - prompts/figma/component-generation-first-pass.md
+
+relatedPatterns:
+  - patterns/forms/form-field-patterns.yaml
+  - patterns/form-layout.yaml
+  - patterns/component-documentation-page.yaml
+
+relatedComponents:
+  - components/button/button.yaml
+  - components/text-input/text-input.yaml
+  - components/error-summary/error-summary.yaml
+  - components/fieldset/fieldset.yaml
+
+scope:
+  includes:
+    - Numeric quantity controls
+    - Integer quantities
+    - Decimal quantities when a positive decimal step is supplied
+    - Required Steppers
+    - Optional Steppers
+    - Steppers with helper text
+    - Steppers with inline validation errors
+    - Steppers with minimum, maximum and step constraints
+    - Boundary-disabled decrement and increment buttons
+    - Whole-component disabled Steppers
+  excludes:
+    - Multi-page progress indicators
+    - Progress trackers
+    - Non-mathematical identifiers
+    - Values with meaningful leading zeros
+    - Currency formatting and arbitrary-precision financial entry
+    - Date parts
+    - A public Stepper Group component
+    - Read-only Steppers
+    - Server-side validation rules
+    - Full form layout
+
+principles:
+  - A Stepper is a single-control form field, not a grouped form question.
+  - The numeric input is editable and uses native input type number semantics.
+  - The visual and DOM order is always Minus, numeric input, Plus.
+  - Every enabled Stepper control is reachable in its sequential keyboard order.
+  - Boundary-unavailable buttons use native disabled, never aria-disabled.
+  - A valid value at the minimum or maximum is not a validation error.
+  - The visible label names the numeric input; button names include both action and subject.
+  - Plus and Minus icon graphics are decorative when their buttons have accessible names.
+  - Direct input and native numeric keyboard behaviour must not be replaced without evidence.
+  - Do not use a Stepper when a native number input would misrepresent the data.
+  - Do not use a fieldset or public Stepper Group for one numeric answer.
+  - Do not add custom ARIA spinbutton semantics to a native number input.
+  - Do not use placeholder text as a label, helper text or example.
+  - Preserve user-entered values when validation fails.
+  - Reuse existing semantic and component tokens; no Stepper-specific token namespace is required.
+
+pattern:
+  type: single-control
+  anatomy:
+    - label
+    - helperText
+    - errorMessage
+    - controlRow
+  order:
+    - label
+    - helperText
+    - errorMessage
+    - controlRow
+  requiredImplementation:
+    accessibleName: true
+    visibleLabelDefault: true
+    labelAssociation: true
+    describedByForHelper: true
+    describedByForError: true
+    ariaInvalidWhenInvalid: true
+    nativeNumberInput: true
+    nativeButtons: true
+
+anatomy:
+  root:
+    description: >
+      Wrapper for the complete field, including label, helper text, inline
+      error, control row and a restrained status region for button-origin
+      value changes.
+    layout: vertical-stack
+    tokens:
+      gap: form.field.gap.labelToHelper
+    rules:
+      - Use a vertical Auto Layout structure in Figma.
+      - Do not place unrelated content between field anatomy items.
+      - Do not use raw spacing values.
+      - Do not clip control, focus-ring or wrapped-text overflow.
+
+  label:
+    description: Visible text that identifies the numeric answer.
+    required: true
+    element: label
+    tokens:
+      typography: form.label.typography
+      color: form.label.color
+    rules:
+      - Associate the label with numericInput using for and id.
+      - Keep the label visible while the input has a value.
+      - Do not use aria-label when the visible label can be associated.
+      - Add "(optional)" to the visible label when requirement is optional.
+      - Do not add "(required)" by default.
+
+  helperText:
+    description: Optional supporting text for range, increment or format guidance.
+    required: false
+    element: p
+    tokens:
+      typography: form.helper.typography
+      color: form.helper.color
+    rules:
+      - Position helper text between label and error or control row.
+      - Associate helper text with numericInput using aria-describedby.
+      - Use helper text when users need range, increment or decimal guidance.
+      - Do not repeat the label.
+      - Do not use helper text as a substitute for a visible label.
+
+  errorMessage:
+    description: Inline validation message for the numeric input.
+    requiredWhenInvalid: true
+    element: p
+    tokens:
+      typography: form.error.typography
+      color: form.error.color
+    rules:
+      - Position the error before controlRow.
+      - Associate the error with numericInput using aria-describedby.
+      - Set aria-invalid="true" on numericInput only while invalid.
+      - Keep the invalid value visible and editable.
+      - Use text that explains both the problem and corrective action where possible.
+      - Do not render an inline error merely because a valid boundary is reached.
+      - Do not use a filled error surface for the ordinary inline error.
+
+  controlRow:
+    description: The fixed-order row containing decrement button, numeric input and increment button.
+    layout: horizontal-auto-layout
+    order:
+      - decrementButton
+      - numericInput
+      - incrementButton
+    tokens:
+      gap: spacing.inline.sm
+    rules:
+      - Preserve Minus, numeric input, Plus order visually and in the DOM.
+      - Align all three controls vertically.
+      - Keep individual control boundaries visually clear.
+      - Keep focus indicators visible and unclipped.
+      - Do not use a fieldset, legend or group role for this row.
+      - Do not reverse the order in responsive layouts.
+
+  decrementButton:
+    description: Native button that decreases the numeric value by one native step.
+    element: button
+    htmlType: button
+    icon:
+      source: icons/registry.json
+      name: minus
+      semanticRole: decorative
+      ariaHidden: true
+    accessibleName:
+      template: "Decrease {label}"
+      example: Decrease number of rooms
+    reuse:
+      component: Button
+      configuration: iconOnly-default-neutral
+    rules:
+      - Use a real button element with type="button".
+      - Do not use aria-disabled.
+      - Apply native disabled when the current valid value equals the supplied minimum.
+      - Apply native disabled when whole-component disabled is true.
+      - Disabled buttons must not receive sequential keyboard focus.
+      - Do not use a visible text label inside the icon-only control.
+
+  numericInput:
+    description: Editable native number input that owns the field answer and form value.
+    element: input
+    html:
+      type: number
+    tokens:
+      background: form.control.background
+      foreground: form.control.foreground
+      typography: form.control.typography
+      borderColor: form.control.border.color
+      borderWidth: form.control.border.width
+      borderRadius: form.control.border.radius
+      paddingBlock: form.control.padding.block
+      paddingInline: form.control.padding.inline
+      minBlockSize: size.control.minBlockSize.default
+      width: component.textInput.width.5ch
+    requiredAttributes:
+      - id
+      - name
+      - type
+    supportedAttributes:
+      - id
+      - name
+      - type
+      - value
+      - min
+      - max
+      - step
+      - required
+      - disabled
+      - inputmode
+      - aria-describedby
+      - aria-invalid
+    nativeSemantics:
+      role: native-number-input-spinbutton-mapping
+      value: native-value
+      minimum: min
+      maximum: max
+      increment: step
+    rules:
+      - Use input type="number".
+      - Keep the input editable; do not use readonly or aria-readonly.
+      - Use min, max and step attributes when the supplied constraints require them.
+      - Use a finite positive step; do not support step="any".
+      - Use inputmode="decimal" when decimal entry is allowed and an inputmode hint is useful.
+      - Use inputmode="numeric" for integer-only quantities when an inputmode hint is useful.
+      - Do not add role="spinbutton" or manual aria-valuenow, aria-valuemin or aria-valuemax.
+      - Do not remove native Arrow-key behaviour.
+      - Do not use the input for identifiers, leading-zero values or formatted values.
+      - Use disabled when whole-component disabled is true.
+      - Keep a disabled input out of sequential keyboard navigation and form submission.
+
+  incrementButton:
+    description: Native button that increases the numeric value by one native step.
+    element: button
+    htmlType: button
+    icon:
+      source: icons/registry.json
+      name: plus
+      semanticRole: decorative
+      ariaHidden: true
+    accessibleName:
+      template: "Increase {label}"
+      example: Increase number of rooms
+    reuse:
+      component: Button
+      configuration: iconOnly-default-neutral
+    rules:
+      - Use a real button element with type="button".
+      - Do not use aria-disabled.
+      - Apply native disabled when the current valid value equals the supplied maximum.
+      - Apply native disabled when whole-component disabled is true.
+      - Disabled buttons must not receive sequential keyboard focus.
+      - Do not use a visible text label inside the icon-only control.
+
+  status:
+    description: >
+      Visually hidden, unfocusable status region used only for button-origin
+      changes unless focus moves to numericInput after a boundary-causing activation.
+    element: span
+    semanticRole: status
+    ariaLive: polite
+    ariaAtomic: true
+    rules:
+      - Keep the status region empty until an eligible button-origin value change occurs.
+      - Announce a committed boundary change when focus does not move to numericInput.
+      - Do not include the status region in aria-describedby.
+      - Do not use an assertive live region for ordinary quantity changes.
+      - Do not update the status region for direct entry or native Arrow-key changes.
+      - Do not update the status region when focus moves to numericInput after a boundary-causing activation.
+      - Do not promise an identical spoken sentence across browser and assistive-technology combinations.
+
+requiredAndOptional:
+  defaultAssumption: requiredUnlessMarkedOptional
+  required:
+    labelSuffix: none
+    inputAttribute: required
+    rules:
+      - Apply the native required attribute to numericInput.
+      - Do not add visible "(required)" by default.
+      - Do not rely on an asterisk or colour alone.
+  optional:
+    labelSuffix: "(optional)"
+    inputAttribute: absent
+    rules:
+      - Include "(optional)" in the complete visible label and accessible name.
+      - Do not apply the native required attribute.
+      - An empty optional value is valid unless another documented rule applies.
+
+numericConstraints:
+  minimum:
+    required: false
+    htmlAttribute: min
+  maximum:
+    required: false
+    htmlAttribute: max
+  step:
+    required: true
+    htmlAttribute: step
+    rules:
+      - The value must be finite and greater than zero.
+      - The value may be fractional.
+      - Do not use step="any".
+  constraints:
+    rules:
+      - When both minimum and maximum are supplied, minimum must not exceed maximum.
+      - A supplied initial value must be finite, satisfy range constraints and be step-aligned.
+      - Use native stepUp and stepDown behaviour rather than manual floating-point arithmetic.
+      - Recalculate boundary state from the current valid numeric value after every committed change.
+      - Do not treat an absent minimum or maximum as a boundary.
+  emptyValue:
+    rules:
+      - Preserve an empty value until a user action or form validation changes it.
+      - For button activation on an empty value, use the native stepUp or stepDown algorithm subject to min, max and step.
+      - An empty required value is invalid on validation.
+      - An empty optional value is valid on validation.
+  invalidTypedValue:
+    rules:
+      - Do not silently replace bad input with a stepped value.
+      - Preserve the user-entered value and show the associated inline error at the established validation trigger.
+      - Do not clamp an invalid typed value while the user is entering it.
+
+boundaryBehaviour:
+  sourceOfTruth: native-disabled-buttons
+  rules:
+    - Boundary state is derived from a valid current numeric value and supplied range constraints.
+    - Reaching a valid boundary does not set aria-invalid or create an error message.
+    - Do not use aria-disabled for a boundary button.
+    - A disabled boundary button is removed from sequential keyboard navigation and cannot be activated.
+  states:
+    withinRange:
+      condition: Current valid value is not at a supplied minimum or maximum.
+      decrementButton: enabled
+      numericInput: enabled
+      incrementButton: enabled
+      tabSequence:
+        - decrementButton
+        - numericInput
+        - incrementButton
+    minimumReached:
+      condition: Current valid value equals supplied minimum.
+      decrementButton: native-disabled
+      numericInput: enabled
+      incrementButton: enabled
+      tabSequence:
+        - numericInput
+        - incrementButton
+    maximumReached:
+      condition: Current valid value equals supplied maximum.
+      decrementButton: enabled
+      numericInput: enabled
+      incrementButton: native-disabled
+      tabSequence:
+        - decrementButton
+        - numericInput
+    bothReached:
+      condition: Supplied minimum equals supplied maximum and current value satisfies both.
+      decrementButton: native-disabled
+      numericInput: enabled
+      incrementButton: native-disabled
+      tabSequence:
+        - numericInput
+    wholeComponentDisabled:
+      condition: disabled property is true.
+      decrementButton: native-disabled
+      numericInput: native-disabled
+      incrementButton: native-disabled
+      tabSequence: []
+
+buttonOperations:
+  decrement:
+    trigger: decrementButton activation
+    nativeOperation: stepDown
+  increment:
+    trigger: incrementButton activation
+    nativeOperation: stepUp
+  rules:
+    - Buttons must have type="button" and must not submit a form.
+    - Use the input's native stepping algorithm rather than manual arithmetic.
+    - Route programmatic button changes through the same controlled-state, validity and boundary update path as other value changes.
+    - Do not assume programmatic value changes emit the same events as direct user input.
+    - Suppress operations when the input is disabled, the activated button is disabled or the current typed value is bad input.
+    - Do not silently reset a bad typed value before attempting an operation.
+
+focusManagement:
+  ordinaryButtonChange:
+    rules:
+      - Keep focus on the activated button when it remains enabled after the value changes.
+      - Do not move focus to the input or opposite button for an ordinary value change.
+      - Do not move focus because the input is initially rendered at a boundary.
+  boundaryCausingActivation:
+    trigger:
+      - An enabled decrement or increment button is activated.
+      - The committed value causes that same activated button to become natively disabled.
+      - Leaving focus on the newly disabled button would otherwise lose meaningful focus.
+    timing:
+      - Apply the committed value and native disabled state.
+      - Wait until the post-render DOM contains the updated numericInput.
+      - Check the focused element after the disabled-state update.
+    destination: numericInput
+    rules:
+      - Move focus to numericInput only when the activated button becomes disabled and focus would otherwise be lost.
+      - Do not move focus to the opposite button.
+      - Do not move focus during ordinary value changes.
+      - Do not move focus merely because an initial render is at a boundary.
+      - Test this behaviour in supported browsers and framework render timing.
+  failedSubmission:
+    rules:
+      - Preserve the input value.
+      - Render inline error text and Error Summary before moving focus.
+      - Move focus to Error Summary once for the failed submission event.
+      - On Error Summary link activation, scroll the visible label into view and focus enabled numericInput.
+      - Do not move focus while the user is typing.
+
+keyboard:
+  tab:
+    withinRange: decrementButton-then-numericInput-then-incrementButton
+    minimumReached: numericInput-then-incrementButton
+    maximumReached: decrementButton-then-numericInput
+    bothReached: numericInput-only
+    wholeComponentDisabled: no-stepper-controls
+  shiftTab:
+    rules:
+      - Traverse the same enabled controls in reverse order.
+      - Do not add positive tabindex values.
+  buttons:
+    enter: Activates the focused enabled native button once.
+    space: Activates the focused enabled native button once.
+    rules:
+      - Disabled buttons cannot receive sequential focus or activate.
+      - Preserve native button keyboard behaviour.
+  numericInput:
+    upArrow: Preserve native number-input increment behaviour.
+    downArrow: Preserve native number-input decrement behaviour.
+    homeEnd: Do not add component-specific Home or End behaviour.
+    directEntry: Allow direct numeric entry and normal text-editing shortcuts.
+    decimalEntry:
+      rules:
+        - Allow decimal entry only when the supplied step and range permit it.
+        - Use an inputmode hint appropriate to the permitted numeric format when useful.
+    rules:
+      - Do not capture or override useful native number-input keyboard behaviour.
+      - Do not use Arrow-key changes to update the button-origin status region.
+  formSubmission:
+    rules:
+      - Enter in numericInput follows normal form behaviour.
+      - Decrement and increment buttons must not submit the form.
+
+validation:
+  validMinimum:
+    condition: Current value equals supplied minimum and satisfies all constraints.
+    treatment: valid-boundary-state
+  validMaximum:
+    condition: Current value equals supplied maximum and satisfies all constraints.
+    treatment: valid-boundary-state
+  belowMinimum:
+    condition: Current value is lower than supplied minimum.
+    treatment: range-underflow-error
+  aboveMaximum:
+    condition: Current value is greater than supplied maximum.
+    treatment: range-overflow-error
+  stepMismatch:
+    condition: Current value does not satisfy supplied step.
+    treatment: inline-error
+  emptyRequired:
+    condition: Required numericInput has no value.
+    treatment: value-missing-error
+  emptyOptional:
+    condition: Optional numericInput has no value.
+    treatment: valid-empty-value
+  badInput:
+    condition: Browser reports a bad numeric input.
+    treatment: inline-error
+  disabled:
+    condition: Whole Stepper is disabled.
+    treatment: excluded-from-native-constraint-validation-and-submission
+  rules:
+    - Use native constraint validation as the baseline for required, range and step constraints.
+    - Add application or server validation only for documented business rules.
+    - Show errors on the established blur or failed-submit trigger, not on every keystroke.
+    - Set aria-invalid="true" only for an invalid numericInput.
+    - Associate helper text and error text in a stable aria-describedby order.
+    - Retain the user's value after validation fails.
+    - Keep inline errors visible when Error Summary is present.
+
+states:
+  default:
+    description: Enabled valid Stepper away from a supplied boundary.
+  focus:
+    description: Numeric input has keyboard focus.
+    tokens:
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+    treatment: double-ring
+  error:
+    description: Numeric input is invalid and has visible inline error text.
+    tokens:
+      borderColor: form.state.error.border
+      errorText: form.error.color
+  errorFocus:
+    description: Invalid numeric input has keyboard focus.
+    tokens:
+      borderColor: form.state.error.border
+      focusRing: form.state.focus.ring
+      focusSeparator: form.state.focus.separator
+    treatment: error-border-with-double-ring-focus
+  disabled:
+    description: Whole Stepper is unavailable.
+    tokens:
+      inputBackground: form.state.disabled.background
+      inputForeground: form.state.disabled.foreground
+      inputBorderColor: form.state.disabled.border
+    rules:
+      - Apply native disabled to all three controls.
+      - Keep the visible label readable.
+      - Do not rely on opacity alone.
+      - Do not submit the numeric input.
+  boundary:
+    description: Valid range condition that disables only the unavailable button or buttons.
+    rules:
+      - Use the existing Button disabled treatment for the unavailable icon button.
+      - Keep numericInput enabled unless whole-component disabled is true.
+      - Do not apply input error styling or aria-invalid.
+
+accessibility:
+  wcag:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: Label, helper text and error text must be programmatically associated with numericInput.
+    - id: WCAG 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Boundary, error and disabled states must not rely on colour alone.
+    - id: WCAG 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: Input boundaries, icon buttons and focus indicators require sufficient contrast.
+    - id: WCAG 2.1.1
+      name: Keyboard
+      level: A
+      relevance: Every enabled control must support native keyboard operation.
+    - id: WCAG 2.4.3
+      name: Focus Order
+      level: A
+      relevance: Enabled controls follow the documented Minus, numeric input, Plus order.
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: Input and icon-button focus must remain visible and unclipped.
+    - id: WCAG 2.5.3
+      name: Label in Name
+      level: A
+      relevance: The visible field label is included in numericInput and action-button accessible names.
+    - id: WCAG 2.5.8
+      name: Target Size Minimum
+      level: AA
+      relevance: Reuse the documented default control size for the two icon buttons and numeric input.
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: Invalid numeric values require visible, associated error text.
+    - id: WCAG 3.3.2
+      name: Labels or Instructions
+      level: A
+      relevance: The visible label and optional helper text explain the expected numeric answer.
+    - id: WCAG 4.1.2
+      name: Name, Role, Value
+      level: A
+      relevance: Native number input and buttons expose correct names, roles, values, ranges and states.
+  rules:
+    - Associate label and numericInput through label for and input id.
+    - Use native input type="number" semantics.
+    - Use min, max and step for native range and increment semantics.
+    - Use native disabled for boundary-unavailable and whole-component-disabled buttons.
+    - Do not add aria-disabled to a boundary button.
+    - Do not add role="group" or role="spinbutton" to wrapper elements.
+    - Use aria-describedby for helper and inline error text only.
+    - Use aria-invalid="true" only while numericInput is invalid.
+    - Keep decorative icon graphics out of the accessibility tree.
+    - Do not make status content a permanent part of the input description.
+
+screenReaderAnnouncements:
+  contract:
+    - Numeric input exposes its accessible name, native number-input role mapping, current value, supplied range and relevant state.
+    - Decrement and increment buttons expose action-plus-subject names.
+    - Boundary buttons expose native disabled state.
+    - Helper and error text remain available through numericInput relationships.
+    - Exact wording varies by browser and screen reader.
+  buttonOriginChange:
+    when: A button commits a value change and focus does not move to numericInput.
+    mechanism: status-region
+    representativeMessage: "Number of rooms: 3"
+    rules:
+      - Announce ordinary changes when the activated button remains enabled.
+      - Announce a boundary-causing change when the browser does not move focus to numericInput.
+  boundaryFocusFallback:
+    when: Activated button becomes disabled and focus moves to numericInput.
+    mechanism: focused-native-input
+    rules:
+      - Do not also issue a status-region message for the same change.
+      - Let the focused native input expose the updated value, label, role and range.
+  directInputChange:
+    when: User types in numericInput or uses native Arrow-key operation.
+    mechanism: focused-native-input
+    rules:
+      - Do not issue an additional status-region message.
+
+formSubmission:
+  rules:
+    - Give numericInput a meaningful name.
+    - Submit the enabled numeric input through normal native form submission.
+    - Do not submit a disabled numeric input.
+    - Use type="button" on decrement and increment buttons so they do not submit the form.
+    - Validate server-side rules in addition to any client-side validation.
+
+responsiveBehaviour:
+  rules:
+    - Keep Minus, numeric input, Plus order at every viewport size.
+    - Let label, helper text and error text wrap naturally above controlRow.
+    - Do not truncate or clip field text.
+    - Keep the control row within its available container without shrinking documented target sizes below their minimum.
+    - Let numericInput use a controlled short quantity width and shrink safely when constrained.
+    - Do not stack, reorder or merge the three controls on narrow viewports.
+
+tokens:
+  field:
+    labelTypography: form.label.typography
+    labelColor: form.label.color
+    helperTypography: form.helper.typography
+    helperColor: form.helper.color
+    errorTypography: form.error.typography
+    errorColor: form.error.color
+    labelToHelper: form.field.gap.labelToHelper
+    helperToError: form.field.gap.helperToError
+    errorToControl: form.field.gap.errorToControl
+    controlToNextField: form.field.gap.controlToNextField
+  controlRow:
+    gap: spacing.inline.sm
+  numericInput:
+    background: form.control.background
+    foreground: form.control.foreground
+    typography: form.control.typography
+    borderColor: form.control.border.color
+    borderWidth: form.control.border.width
+    borderRadius: form.control.border.radius
+    paddingBlock: form.control.padding.block
+    paddingInline: form.control.padding.inline
+    minBlockSize: size.control.minBlockSize.default
+    shortQuantityWidth: component.textInput.width.5ch
+  iconButtons:
+    component: Button
+    configuration: iconOnly-default-neutral
+    minBlockSize: size.control.minBlockSize.default
+    iconSize: size.icon.md
+  states:
+    focusRing: form.state.focus.ring
+    focusSeparator: form.state.focus.separator
+    errorBorder: form.state.error.border
+    disabledBackground: form.state.disabled.background
+    disabledForeground: form.state.disabled.foreground
+    disabledBorder: form.state.disabled.border
+  additionsRequired: false
+
+figmaProperties:
+  state:
+    type: variant
+    values:
+      - default
+      - focus
+      - error
+      - errorFocus
+      - disabled
+  requirement:
+    type: variant
+    values:
+      - required
+      - optional
+  helperText:
+    type: boolean
+    values:
+      - true
+      - false
+  textProperties:
+    labelText:
+      type: text
+      required: true
+      default: Number of rooms
+    valueText:
+      type: text
+      required: true
+      default: "2"
+    helperTextContent:
+      type: text
+      required: false
+      default: Choose a number from 1 to 10.
+    errorText:
+      type: text
+      requiredWhen:
+        - state: error
+        - state: errorFocus
+      default: "Error: Enter a whole number from 1 to 10."
+  nestedBoundary:
+    type: exposed-nested-instance-variant
+    component: _Stepper/Control row
+    property: Boundary
+    values:
+      - none
+      - minimum
+      - maximum
+      - both
+    default: none
+
+figmaStateRules:
+  - State focus and errorFocus represent numericInput focus only.
+  - Icon-button focus, hover and active examples are nested Button states in documentation and QA, not outer Stepper variants.
+  - State error shows errorText and error input treatment.
+  - State errorFocus shows errorText, error input treatment and input focus treatment.
+  - Non-error states hide errorText without leaving an empty gap.
+  - Helper text visibility is controlled by helperText.
+  - Requirement optional includes "(optional)" in the complete visible label.
+  - Requirement required does not show "(required)" by default.
+  - Boundary represents a valid runtime range condition, not an error state.
+  - State disabled forces visually disabled numericInput and both icon buttons regardless of nested Boundary.
+
+figmaImplementation:
+  outerVariantCount: 10
+  outerVariantFormula: state-times-requirement
+  controlRow:
+    componentName: _Stepper/Control row
+    layout: horizontal-auto-layout
+    order:
+      - Icon Button / Minus
+      - Stepper-owned value field
+      - Icon Button / Plus
+    boundaryVariants:
+      - none
+      - minimum
+      - maximum
+      - both
+    rules:
+      - Use two non-detached production neutral default-size Icon Button instances.
+      - Deep-swap the left nested icon instance to registered Minus without detaching it.
+      - Use the registered Plus icon in the right nested Icon Button instance.
+      - Build a Stepper-owned value field from shared form-control tokens.
+      - Do not nest the public Text Input component because it owns its own label, helper and error anatomy.
+      - Use spacing.inline.sm between controls.
+      - Keep focus-ring overflow visible.
+  width:
+    status: documented-not-variant-axis
+    token: component.textInput.width.5ch
+    rules:
+      - Do not create a width variant.
+      - Keep the main Stepper resizable.
+      - Use a representative short-quantity width in documentation and QA.
+      - Treat Figma width as illustrative because CSS ch units are the GitHub source of truth.
+  requiredQa:
+    - Confirm nested Boundary overrides survive outer State changes.
+    - Confirm nested Boundary overrides survive outer Requirement changes.
+    - Confirm disabled State overrides do not leave an enabled icon button.
+    - Confirm Minus, value field and Plus instances remain non-detached.
+    - Confirm focus rings and wrapped text are not clipped.
+    - Confirm documentation and QA examples use instances, not duplicate masters.
+  runtimeBoundary:
+    rules:
+      - Boundary reflects runtime native disabled behaviour in code.
+      - Runtime aria relationships, focus management and status announcements are implementation requirements, not Figma-only semantics.
+
+examples:
+  defaultValue:
+    label: Number of rooms
+    requirement: required
+    value: "2"
+    minimum: 1
+    maximum: 10
+    step: 1
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  helperText:
+    label: Number of rooms
+    helperText: Choose a number from 1 to 10.
+    value: "2"
+    minimum: 1
+    maximum: 10
+    step: 1
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  directEntry:
+    label: Number of rooms
+    value: "7"
+    minimum: 1
+    maximum: 10
+    step: 1
+    interaction: User types 7 directly into numericInput.
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  optional:
+    label: Number of additional guests (optional)
+    requirement: optional
+    value: ""
+    minimum: 0
+    maximum: 8
+    step: 1
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  error:
+    label: Number of rooms
+    value: "12"
+    minimum: 1
+    maximum: 10
+    step: 1
+    errorText: "Error: Enter a number from 1 to 10."
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  errorFocus:
+    label: Number of rooms
+    value: "12"
+    minimum: 1
+    maximum: 10
+    step: 1
+    errorText: "Error: Enter a number from 1 to 10."
+    focusedControl: numericInput
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  minimumReached:
+    label: Number of rooms
+    value: "1"
+    minimum: 1
+    maximum: 10
+    step: 1
+    decrementButton: native-disabled
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  maximumReached:
+    label: Number of rooms
+    value: "10"
+    minimum: 1
+    maximum: 10
+    step: 1
+    incrementButton: native-disabled
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  bothReached:
+    label: Number of rooms
+    value: "1"
+    minimum: 1
+    maximum: 1
+    step: 1
+    decrementButton: native-disabled
+    incrementButton: native-disabled
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  wholeComponentDisabled:
+    label: Number of rooms
+    value: "2"
+    disabled: true
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  retainedInvalidValue:
+    label: Number of rooms
+    value: "12"
+    minimum: 1
+    maximum: 10
+    step: 1
+    errorText: "Error: Enter a number from 1 to 10."
+    rules:
+      - Keep value 12 visible after validation fails.
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  boundaryFocusFallback:
+    label: Number of rooms
+    initialValue: "2"
+    resultingValue: "1"
+    minimum: 1
+    maximum: 10
+    activatedControl: decrementButton
+    resultingFocus: numericInput
+    condition: Only when disabling activated decrementButton would otherwise lose focus.
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  buttonOriginValueChange:
+    label: Number of rooms
+    initialValue: "2"
+    resultingValue: "3"
+    minimum: 1
+    maximum: 10
+    step: 1
+    activatedControl: incrementButton
+    focusAfterChange: incrementButton
+    statusMechanism: role-status
+    representativeMessage: "Number of rooms: 3"
+    rules:
+      - Use this status update only while the activated button remains enabled.
+      - Do not use this status update for direct entry or Arrow-key changes.
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  screenReaderContract:
+    label: Number of rooms
+    numericInput:
+      type: number
+      minimum: 1
+      maximum: 10
+      step: 1
+    decrementAccessibleName: Decrease number of rooms
+    incrementAccessibleName: Increase number of rooms
+    iconSemantics: decorative
+    rules:
+      - Exact spoken wording varies by browser and screen reader.
+    order:
+      - Minus
+      - numeric input
+      - Plus
+  longContent:
+    label: Number of rooms required for everyone attending the residential training programme
+    helperText: Include accessible rooms and any rooms required for a support person; you can change this later if attendance changes.
+    errorText: "Error: Enter a whole number from 1 to 10 so we can reserve the correct number of rooms."
+    order:
+      - Minus
+      - numeric input
+      - Plus
+
+testing:
+  automated:
+    - Native input, button, label and describedby semantics.
+    - Native disabled boundary states and Tab sequences.
+    - Required, range, step and bad-input validation.
+    - Form submission inclusion and disabled-input omission.
+    - Button-origin status updates without direct-input duplication.
+    - Boundary-origin status updates when focus does not move to numericInput.
+    - Focus fallback after a button becomes disabled at a boundary.
+    - Retained invalid values after validation failure.
+    - Decimal stepping and floating-point regression coverage.
+  manual:
+    - Keyboard-only operation including every boundary sequence.
+    - Browser focus after dynamically disabling the activated button.
+    - Screen-reader labels, values, range, disabled state and announcement duplication.
+    - Pointer and touch operation.
+    - 200 percent text resize, 400 percent zoom and text-spacing overrides.
+    - Forced-colours and high-contrast behaviour.
+    - Long label, helper and error wrapping.
+    - Narrow-container layout without clipping or reordered controls.
+
+aiGenerationRules:
+  - Use Stepper only for a mathematical numeric quantity.
+  - Use a native editable input type="number" in the centre.
+  - Use native Minus and Plus buttons in fixed Minus, numeric input, Plus order.
+  - Give icon-only buttons action-plus-subject accessible names.
+  - Keep icon graphics decorative.
+  - Use native disabled, never aria-disabled, for unavailable boundary buttons.
+  - Keep valid minimum and maximum values free of error treatment.
+  - Use the documented focus fallback only after an activated button becomes disabled and focus would otherwise be lost.
+  - Do not duplicate a button-origin status announcement after focus moves to numericInput.
+  - Do not add a public Stepper Group, readonly Stepper or custom ARIA spinbutton.
+  - Reuse existing form, Button and Text Input width tokens.
+  - Do not create Stepper-specific tokens without a documented token gap.
+  - Do not edit Figma or Tokens Studio as part of GitHub-only implementation.
