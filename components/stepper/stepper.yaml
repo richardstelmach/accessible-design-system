@@ -725,13 +725,14 @@ figmaProperties:
       type: text
       required: true
       default: Number of rooms
-      defaultsByRequirement:
-        required: Number of rooms
-        optional: Number of rooms (optional)
       meaning: Complete visible Stepper label
       rules:
-        - Use one editable text layer for the complete visible label.
-        - Include "(optional)" within labelText when Requirement is optional.
+        - Label text is one public text property with one global default.
+        - Bind every required and optional public master's complete visible label layer to this same labelText property.
+        - Use one editable, naturally wrapping text layer for the complete visible label.
+        - Requirement optional does not automatically append "(optional)" or otherwise rewrite labelText.
+        - For an optional inserted instance, override labelText with the complete visible label, for example "Number of rooms (optional)".
+        - Do not leave an optional label layer unbound from labelText.
         - Do not create a separate optional-marker layer, Boolean layer or nested marker component.
     valueText:
       type: text
@@ -755,9 +756,9 @@ figmaStateRules:
   - State errorFocus shows errorText, error input treatment and input focus treatment.
   - Non-error states hide errorText without leaving an empty gap.
   - Helper text visibility is controlled by helperText.
-  - Requirement optional defaults labelText to "Number of rooms (optional)".
-  - Designers overriding an optional instance author the complete labelText, including "(optional)".
-  - Changing Requirement on an inserted instance may require updating its complete labelText override.
+  - Requirement optional does not automatically append "(optional)" or otherwise rewrite labelText.
+  - Designers authoring an optional instance set Requirement to optional and override labelText with the complete visible label, including "(optional)".
+  - Switching between Requirement variants preserves the designer's complete labelText override.
   - Requirement required does not show "(required)" by default.
   - Boundary represents a valid runtime range condition, not an error state.
   - Boundary never causes error styling, errorText, aria-invalid, an error announcement or a disabled numericInput.
@@ -785,6 +786,7 @@ figmaImplementation:
   publicVariantPurpose:
     - The 40 public variants provide deterministic Figma authoring.
     - They do not prescribe 40 separate runtime implementations.
+    - Requirement remains an intentional public authoring and handoff axis; it does not provide a variant-specific labelText default.
   controlRow:
     componentName: _Stepper/Control row
     layout: horizontal-auto-layout
@@ -857,13 +859,18 @@ figmaImplementation:
     rules:
       - Use one editable, automatic-height text layer for the complete visible label.
       - Let labelText wrap naturally without an arbitrary fixed or maximum width.
-      - Required variants default labelText to "Number of rooms".
-      - Optional variants default labelText to "Number of rooms (optional)".
+      - Label text remains one public text property with the single global default "Number of rooms".
+      - Every required and optional public master binds its one complete visible label layer to that same labelText property.
+      - Production masters must not depend on variant-specific text-property defaults.
+      - Setting Requirement to optional does not append "(optional)" or otherwise rewrite labelText.
+      - To author an optional Stepper, set Requirement to optional and override labelText with the complete visible label, for example "Number of rooms (optional)".
+      - Switching between Requirement variants must preserve the designer's complete labelText override without altering the visible string.
+      - Do not leave an optional label layer unbound from labelText.
       - Do not create a separate optional-marker layer, Boolean layer or nested marker component.
-      - Designers overriding an optional instance include "(optional)" in the complete labelText.
-      - After changing Requirement on an inserted instance, designers may need to update the complete labelText override.
-      - This is a Figma authoring limitation based on the established Checkbox single-label model.
-      - Runtime code may append or otherwise provide the optional treatment programmatically.
+      - Optional documentation examples may use an inserted instance whose complete labelText is manually overridden.
+      - This single-global-default constraint is a Figma authoring limitation based on the established Checkbox single-label model, not a runtime accessibility requirement.
+      - Runtime code may construct, append or otherwise provide the optional wording programmatically.
+      - Runtime output must still form one coherent visible and accessible label.
   requiredQa:
     - Confirm exactly 40 public Stepper variants exist.
     - Confirm exactly 20 internal _Stepper/Control row variants exist.
@@ -872,10 +879,16 @@ figmaImplementation:
     - Confirm every State disabled combination disables all three controls.
     - Confirm changing Boundary while disabled cannot visually re-enable a control.
     - Confirm State, Requirement and Boundary can be changed in any order.
-    - Confirm text-property overrides persist across variant changes.
+    - Confirm every public master's one complete label layer is bound to the same labelText property.
+    - Confirm labelText works in required and optional variants and has the single global default "Number of rooms".
+    - Confirm a manual complete-string labelText override persists when switching Requirement.
+    - Confirm switching Requirement does not automatically alter the visible label string.
+    - Confirm no required or optional label layer is left unbound from labelText.
+    - Confirm all text-property overrides persist across State, Requirement and Boundary changes.
     - Confirm helperText Boolean overrides persist across variant changes.
-    - Confirm required and optional label defaults are correct.
-    - Confirm optional labels use one editable text layer with no separate optional-marker layer.
+    - Confirm no separate optional-marker layer, Boolean property or nested marker component exists.
+    - Confirm optional documentation examples use an inserted instance with a complete-string labelText override.
+    - Confirm long optional labels wrap naturally as one editable text layer without a fixed label width.
     - Confirm error and focus styling remain controlled by State.
     - Confirm valid boundaries are never presented as errors.
     - Confirm all examples preserve Minus, numeric input, Plus order.
@@ -928,6 +941,11 @@ examples:
   optional:
     label: Number of additional guests (optional)
     requirement: optional
+    figmaDocumentationInstance:
+      labelTextOverride: Number of additional guests (optional)
+      rules:
+        - Use an inserted Stepper instance with Requirement set to optional.
+        - Apply labelTextOverride as one complete manual instance override, not as a variant-specific master default.
     value: ""
     minimum: 0
     maximum: 8
