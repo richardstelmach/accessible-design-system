@@ -122,6 +122,8 @@ For required grouped controls, the legend does not need “(required)” if the 
 
 Fieldset itself has no native `required` attribute. Required implementation remains with the child controls or grouped child component.
 
+When a required grouped answer is missing as a whole, render one shared error after any helper text and before the related controls. This is always `errorAssociation: group`: the Fieldset references the error, children do not, and Fieldset never receives `aria-invalid`. See the authoritative [Fieldset error-association contract](../../components/fieldset/fieldset.md#error-association).
+
 Example:
 
 ```html
@@ -197,7 +199,7 @@ Example:
 >
 ```
 
-For grouped controls, associate the error with the group.
+For a whole-group required error, use the default `group` association and associate the one shared error with the Fieldset. If validation instead identifies particular affected visible, enabled children, follow the Fieldset `children` association contract; do not associate the same shared error with both owners.
 
 Example:
 

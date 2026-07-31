@@ -81,14 +81,14 @@ Examples include:
 ```text
 Grouped form control
 ├── Fieldset
-│   ├── Group header, internal layout wrapper
+│   ├── Group header, visual layout region
 │   │   ├── Legend
 │   │   ├── Group helper text, optional
-│   │   └── Group error message, optional
+│   │   └── Error message, optional
 │   └── Related controls / content slot
 ```
 
-Group header is a layout wrapper, not extra public HTML anatomy. Use `form.group.gap.headerToContent` between the Group header and related controls.
+Group header is a visual layout region, not extra public HTML anatomy. Use `form.group.gap.headerToContent` between the Group header and related controls. A runtime implementation must keep the native legend as the Fieldset's first direct child and must not render a Group header wrapper.
 
 ### Rules
 
@@ -98,7 +98,7 @@ The legend describes the group.
 
 Each child control may still need its own label.
 
-Helper text and group errors should be associated with the group.
+Associate shared Helper text with the Fieldset. Error association follows the authoritative [Fieldset error-association contract](../../components/fieldset/fieldset.md#error-association): `group` is the default for an error concerning the complete group, while a consuming composite may use `children` when it can identify one or more affected visible, enabled children. The one visible Error remains in the Group header in either mode; its visual position does not determine its accessible owner.
 
 Labels and legends are not interchangeable.
 

@@ -28,10 +28,10 @@ Do not use Fieldset as a generic layout wrapper.
 ```text
 Grouped form control
 ├── Fieldset
-│   ├── Group header, internal layout wrapper
+│   ├── Group header, visual layout region
 │   │   ├── Legend
 │   │   ├── Group helper text, optional
-│   │   └── Group error message, error state only
+│   │   └── Error message, error state only
 │   └── Content slot
 ```
 
@@ -39,24 +39,26 @@ Required order:
 
 1. Legend
 2. Group helper text, when present
-3. Group error message, when present
+3. Error message, when present
 4. Content slot
 
 The content slot contains the related controls or grouped child component that answers the legend question.
 
-Group header is an internal layout wrapper, not extra public HTML anatomy. The native order remains Legend, group helper text, group error message and related controls.
+Group header is a visual layout region, not extra public HTML anatomy. The native order remains Legend, group helper text, Error message and related controls.
 
 Omitted optional elements must not leave empty markup or empty spacing.
+
+For new compound fieldset-based Figma components, `_Fieldset/Header` is the canonical internal primitive for Legend, Helper and Error. Place that Header and the consumer's content wrapper as siblings; Header must not own the consumer's Content slot. The existing public Fieldset keeps its current internal layers and generic Content slot for compatibility, so do not nest or detach it merely to claim literal reuse. `errorAssociation` is semantic metadata, not a visual variant axis. This Figma composition does not add a required runtime wrapper: `legend` remains the first direct child of `fieldset`, followed by helper text, error text and consumer controls.
 
 ## Layout spacing
 
 Use `form.group.gap.headerToContent` between the Group header and the content slot.
 
-Inside the Group header, use `form.field.gap.labelToHelper` between Legend and helper text, and `form.field.gap.helperToError` between helper text and group error.
+Inside the Group header, use `form.field.gap.labelToHelper` between Legend and helper text, and `form.field.gap.helperToError` between helper text and the Error message.
 
-When helper text or group error is hidden, do not reserve empty spacing for it. Do not apply one 24px gap across Legend, helper text, group error and the content slot.
+When helper text or Error is hidden, do not reserve empty spacing for it. Do not apply one 24px gap across Legend, helper text, Error and the content slot.
 
-The group error stays inside the Group header. The header-to-content gap is the same in the default and error states.
+The Error message stays inside the Group header. The header-to-content gap is the same in the default and error states.
 
 Use `form.group.gap.betweenOptions` and `form.group.gap.betweenFields` only for spacing inside the content slot. Use `form.field.gap.controlToNextField` after the complete Fieldset when the next form field begins.
 
@@ -100,7 +102,7 @@ Fieldset itself does not support the native `required` attribute. Required imple
 
 Group helper text is optional.
 
-Place it after the legend and before any group error.
+Place it after the legend and before any Error message.
 
 Give it a stable ID and reference it from the Fieldset using `aria-describedby`.
 
@@ -108,7 +110,14 @@ Do not automatically repeat group helper text on every child control. Child-spec
 
 ## Group errors
 
-Grouped controls can have different error ownership.
+Render exactly one shared visible error after helper text, when present, and before the related controls. Its visual position does not determine its accessible owner.
+
+Use the source option `errorAssociation: "group" | "children"`. The default is `group`. See the authoritative [Fieldset error-association contract](../../components/fieldset/fieldset.md#error-association) for the complete rules.
+
+- In `group` mode, the Fieldset references the helper first and then the shared error. Children do not reference that error and do not receive `aria-invalid` solely because the group is invalid.
+- In `children` mode, the Fieldset continues to reference the helper but excludes the shared error. Only affected visible, enabled children reference the shared error and receive `aria-invalid="true"`; unaffected children remain neutral.
+
+Never associate the same shared error with both the Fieldset and child controls. Fieldset never receives `aria-invalid`.
 
 ### Whole-group error
 
@@ -120,26 +129,26 @@ Examples:
 - no required Checkbox selected;
 - no part of a required group answered.
 
-Associate the group error with the Fieldset using `aria-describedby`.
+Use `errorAssociation: group`. A missing answer for a required group is always a whole-group error.
 
-Do not make the Fieldset focusable. Do not apply `aria-invalid` to the Fieldset by default.
+Do not make the Fieldset focusable and never apply `aria-invalid` to it.
 
 ### Child-field error
 
-Use a child-field error when one child control is invalid.
+Use `errorAssociation: children` for one shared error only when the consuming composite can identify at least one affected visible, enabled child.
 
 Examples:
 
 - Date of birth year is missing;
 - one address field contains an invalid value.
 
-The affected child component owns the error, error association and `aria-invalid` behaviour.
+Only the affected child controls reference the shared error and receive `aria-invalid="true"`. If a child component instead renders and owns its own separate error, follow that child's contract; do not also create a vague Fieldset error.
 
-Do not create a vague group error just because one child is invalid.
+The consuming composite must define a deterministic target when more than one child is affected.
 
 ### Combination error
 
-Use a group-level error when the combined answer is invalid.
+Use `group` when the error concerns the complete combined answer. Use `children` only when the consuming composite can deterministically identify affected visible, enabled children.
 
 Examples:
 
@@ -147,13 +156,7 @@ Examples:
 - a start date is later than an end date;
 - two answers conflict.
 
-Associate the message with the Fieldset. The child component contract determines whether any individual children also receive invalid treatment.
-
-## Helper and error association
-
-When helper text and a group error are both present, include both IDs in `aria-describedby`.
-
-Put the helper ID before the error ID:
+In `group` mode, put the helper ID before the error ID in the Fieldset's `aria-describedby`:
 
 ```html
 <fieldset aria-describedby="dob-hint dob-error">
@@ -162,11 +165,13 @@ Put the helper ID before the error ID:
 </fieldset>
 ```
 
+In `children` mode, the Fieldset references only the helper. Affected children add the shared error ID to their own descriptions without repeating the group helper ID.
+
 ## Error summary targeting
 
 An error summary supplements inline errors. It does not replace them.
 
-Error-summary links target the first relevant visible, enabled interactive child, not the non-focusable Fieldset. On activation, scroll the legend into view and focus that child while preserving the Fieldset's established `aria-describedby` access to the inline group error.
+Error-summary links target a visible, enabled interactive child, not the non-focusable Fieldset. The consuming component defines a deterministic relevant child in `group` mode and a deterministic affected child in `children` mode. On activation, scroll the associated legend or label into view and focus that target while preserving the established association: the Fieldset retains the error in `group` mode, while affected children retain it in `children` mode.
 
 Do not add `tabindex` to Fieldset merely to make it a summary target.
 
@@ -215,7 +220,7 @@ Label: Year
 ## Example HTML
 
 ```html
-<fieldset aria-describedby="dob-hint dob-error">
+<fieldset aria-describedby="dob-hint">
   <legend>What is your date of birth?</legend>
 
   <div id="dob-hint">
