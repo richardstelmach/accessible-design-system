@@ -119,25 +119,26 @@ H5 and H6 are supported as semantic heading levels when the document structure r
 
 ## Helper text and errors
 
-Group helper text appears after the legend and before any group error.
+Group helper text appears after the legend and before any Error message.
 
 Group helper text should have a stable ID and be associated with the Fieldset using `aria-describedby`.
 
-Group-level errors should also have a stable ID and be associated with the Fieldset using `aria-describedby`.
+Show exactly one shared visible error after helper text, when present, and before the related controls. Its accessible owner is selected with `errorAssociation: "group" | "children"`; `group` is the default. See the authoritative [Fieldset error-association contract](../../components/fieldset/fieldset.md#error-association).
 
-When both helper and error text are present, put the helper ID before the error ID.
+- In `group` mode, the Fieldset references the helper first and then the shared error. Whole-group required errors use this mode.
+- In `children` mode, the Fieldset references only the helper. Only affected visible, enabled children reference the shared error and receive `aria-invalid="true"`; unaffected children remain neutral.
 
-Child-field errors should be associated with the specific child field.
+Never associate the same shared error with both Fieldset and children. Fieldset never receives `aria-invalid`.
 
 ## Group header spacing
 
-For layout, treat the legend, optional group helper text and optional group error as the Fieldset Group header.
+For layout, treat the legend, optional group helper text and optional Error message as the Fieldset Group header.
 
-Group header is an internal layout wrapper, not a public HTML part. The native order remains legend, helper text, group error and related controls.
+Group header is a visual layout region, not a public HTML part. The native order remains legend, helper text, Error message and related controls.
 
-Use `form.group.gap.headerToContent` between the Group header and the content slot. Use `form.field.gap.labelToHelper` between legend and helper text, and `form.field.gap.helperToError` between helper text and group error.
+Use `form.group.gap.headerToContent` between the Group header and the content slot. Use `form.field.gap.labelToHelper` between legend and helper text, and `form.field.gap.helperToError` between helper text and the Error message.
 
-If helper text or group error is not present, collapse it without leaving empty spacing. Do not use one 24px gap across legend, helper text, error and content.
+If helper text or Error is not present, collapse it without leaving empty spacing. Do not use one 24px gap across legend, helper text, Error and content.
 
 ## Native disabled behaviour
 
@@ -170,6 +171,10 @@ All slotted content must relate to the legend.
 Child controls keep their own labels, names, roles, values, states and validation.
 
 Do not place arbitrary prose, navigation, actions or unrelated content in the slot.
+
+For new compound fieldset-based Figma components, compose the internal `_Fieldset/Header` and the consumer's content wrapper as siblings. `_Fieldset/Header` contains Legend, Helper and Error but does not own consumer content. Do not nest or detach the public Fieldset merely to claim reuse; its current layers, public properties and generic Content slot remain unchanged for compatibility.
+
+The Figma Header boundary is not a runtime DOM wrapper. Any code implementation must render a fragment or direct children so `legend` remains the first direct child of `fieldset`, followed by helper text, error text and consumer controls.
 
 ## Examples
 

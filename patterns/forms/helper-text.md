@@ -22,9 +22,9 @@ Placeholder text should not be used instead of helper text.
 
 For Fieldset and other grouped controls, group helper text supports the shared legend question.
 
-Place group helper text directly after the legend and before any group error message.
+Place group helper text directly after the legend and before any Fieldset Error message.
 
-Legend, group helper text and group error form the grouped control's internal Group header. Use `form.field.gap.labelToHelper` between legend and helper text, and `form.field.gap.helperToError` between helper text and group error.
+Legend, group helper text and Error form the grouped control's visual Group header. Use `form.field.gap.labelToHelper` between legend and helper text, and `form.field.gap.helperToError` between helper text and Error.
 
 Use `form.group.gap.headerToContent` between the complete Group header and the related controls. Hidden helper or error content must not leave empty spacing.
 
@@ -32,7 +32,7 @@ Give group helper text a stable ID.
 
 Associate it with the Fieldset using `aria-describedby`.
 
-When group helper text and a group error message are both present, list the helper ID before the error ID in `aria-describedby`.
+When group Helper and Error are both present, association depends on the Fieldset's [`errorAssociation`](../../components/fieldset/fieldset.md#error-association). In the default `group` mode, list the Helper ID before the Error ID in the Fieldset's `aria-describedby`; children do not reference that shared Error. In `children` mode, Fieldset references Helper only; only affected visible, enabled children reference the one shared Error and receive `aria-invalid="true"`, while unaffected children remain neutral. Fieldset never receives `aria-invalid`, and the same Error must never be associated with both Fieldset and children. Visual placement inside the Group header does not determine accessible ownership; a whole-group required failure remains group-owned.
 
 Do not automatically repeat group helper text on every child control.
 

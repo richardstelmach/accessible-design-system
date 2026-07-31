@@ -6,7 +6,7 @@ status: draft
 description: >
   Fieldset groups related form controls that answer one shared question. It
   uses native fieldset and legend elements, supports optional group helper text
-  and group-level errors, and provides a generic content slot for related form
+  and one shared inline error, and provides a generic content slot for related form
   components.
 
 purpose:
@@ -15,6 +15,7 @@ purpose:
   - Provide a mandatory legend for every grouped question.
   - Support optional group helper text.
   - Support group-level validation without replacing child-field validation.
+  - Support one shared inline error whose accessible owner is either the Fieldset or identified affected children.
   - Support a generic content slot for related form controls or grouped components.
   - Support legends that may also participate in the document heading hierarchy.
   - Provide a reusable foundation for Radio group, Checkbox group, Date of birth, Address group and other multi-part questions.
@@ -65,7 +66,7 @@ scope:
     - Date of birth and other multi-part inputs
     - Address and related-field groups
     - Optional group helper text
-    - Group-level inline errors
+    - One shared inline error whose accessible owner follows errorAssociation
     - Required, optional and mixed-requirement groups
     - Plain legends
     - Legends containing a semantically appropriate heading
@@ -94,8 +95,14 @@ principles:
   - The legend does not replace labels required by child controls.
   - A standalone control should use a label rather than a legend.
   - Helper text is optional.
-  - Group error text is shown only when the group has a group-level error.
-  - Child-field errors remain owned by the affected child component.
+  - Show exactly one shared inline error when the consuming composite reports a shared validation error.
+  - Visual placement inside Fieldset does not determine accessible error ownership.
+  - Group helper text remains associated with the Fieldset.
+  - An error concerning the complete group is associated with the Fieldset.
+  - A consuming composite may associate the shared error with identified affected visible, enabled children.
+  - Never associate the same shared error with both the Fieldset and children.
+  - Never apply aria-invalid to the Fieldset.
+  - Individually rendered child-field errors remain owned by the affected child component.
   - Visual grouping must not replace native semantics.
   - Related controls in the slot must all relate to the legend.
   - Avoid unnecessary nested fieldsets.
@@ -123,13 +130,18 @@ pattern:
     groupAccessibleName: true
     childLabelsPreserved: true
     describedByForGroupHelper: true
-    describedByForGroupError: true
+    describedByForSharedErrorByAssociationMode: true
+    affectedChildrenAriaInvalidInChildrenMode: true
+    fieldsetAriaInvalid: false
+    singleSharedErrorOwner: true
     contentRelatedToLegend: true
   rules:
     - The public component is Fieldset.
     - Legend is mandatory anatomy within Fieldset.
-    - Group header is an internal layout wrapper for legend, helper text and group error; it is not public HTML anatomy.
+    - Group header is an internal Figma layout region for legend, helper text and group error; it is not public HTML anatomy or a runtime wrapper.
     - The DOM and semantic order remains legend, helper text, group error and related controls.
+    - The established groupErrorMessage name and its visual placement do not determine its accessible owner.
+    - Apply the errorAssociation contract when a shared inline error is present.
     - Separate the Group header from the content slot with form.group.gap.headerToContent.
     - Omitted optional elements must not leave empty spacing or empty DOM nodes.
     - Unrelated content must not appear between the legend, helper, error and related controls.
@@ -213,9 +225,9 @@ anatomy:
 
   groupErrorMessage:
     description: >
-      Inline validation message shown when the grouped answer has a group-level
-      error.
-    requiredWhenGroupErrorExists: true
+      One shared inline validation message shown in the established Fieldset
+      header position. Its accessible owner is determined by errorAssociation.
+    requiredWhenSharedErrorExists: true
     tokens:
       typography: form.error.typography
       color: form.error.color
@@ -228,8 +240,14 @@ anatomy:
       - Explain what went wrong.
       - Explain how to correct it where possible.
       - Give it a stable ID.
-      - Include its ID in the Fieldset's aria-describedby.
-      - Keep the inline group error visible when an error summary is present.
+      - When errorAssociation is group, include its ID in the Fieldset's aria-describedby.
+      - When errorAssociation is children, include its ID only in each affected visible, enabled child's aria-describedby.
+      - Keep the Fieldset associated with group helper text in children mode, but exclude the error ID from the Fieldset.
+      - Set aria-invalid="true" only on affected children in children mode.
+      - Leave unaffected children neutral and do not give them the shared error ID.
+      - Never include the same error ID in both the Fieldset and any child.
+      - Render exactly one visible error message regardless of association mode.
+      - Keep the inline shared error visible when an error summary is present.
       - Do not rely on colour alone.
       - Use an accessible "Error:" cue where required by the shared pattern.
       - Do not duplicate child-field errors as vague group errors.
@@ -255,17 +273,20 @@ anatomy:
 internalLayout:
   groupHeader:
     description: >
-      Internal layout wrapper for the Fieldset header content: legend, optional
-      helper text and optional group error message.
+      Internal Figma layout region for the Fieldset header content: legend,
+      optional helper text and optional group error message. A runtime Header
+      abstraction emits a fragment or direct children rather than a wrapper.
     publicHtmlAnatomy: false
     contains:
       - legend
       - groupHelperText
       - groupErrorMessage
     rules:
-      - Group header is a layout wrapper for Figma and implementation structure, not an additional public component part.
+      - Group header is a Figma layout region, not an additional public component part or runtime wrapper.
       - Do not add a visible wrapper role or landmark for Group header.
       - Keep the native DOM and semantic order as legend, helper text, group error and related controls.
+      - Keep one shared visible error in this position in both errorAssociation modes.
+      - Do not infer accessible error ownership from the error's visual placement inside Group header.
       - The native legend remains the first direct child of the fieldset.
       - Use form.field.gap.labelToHelper between Legend and Helper text.
       - Use form.field.gap.helperToError between Helper text and Error message.
@@ -411,26 +432,111 @@ accessibleName:
 accessibleDescription:
   groupHelperText:
     method: aria-describedby
-  groupErrorText:
+    owner: fieldset
+    appliesInErrorAssociation:
+      - group
+      - children
+  sharedErrorText:
     method: aria-describedby
-  idOrder:
+    ownerByErrorAssociation:
+      group: fieldset
+      children: affected-visible-enabled-children
+  fieldsetIdOrderWhenGroupAssociated:
     - groupHelperText
-    - groupErrorText
-  example: |
-    <fieldset aria-describedby="contact-hint contact-error">
+    - groupErrorMessage
+  fieldsetIdOrderWhenChildrenAssociated:
+    - groupHelperText
+  examples:
+    group: |
+      <fieldset aria-describedby="contact-hint contact-error">
+    children: |
+      <fieldset aria-describedby="group-hint">
+      <input id="affected-child" aria-describedby="composite-error" aria-invalid="true">
   rules:
-    - Omit aria-describedby when neither helper nor group error exists.
-    - When helper text exists, include its ID.
-    - When a group error exists, include its ID.
-    - When both exist, list helper ID first and error ID second.
+    - Omit aria-describedby from the Fieldset when group helper text is absent and the shared error uses children association.
+    - When helper text exists, always include its ID in the Fieldset's aria-describedby.
+    - When errorAssociation is group, include the shared error ID in the Fieldset's aria-describedby.
+    - When errorAssociation is group and both helper and error exist, list helper ID first and error ID second.
+    - When errorAssociation is children, exclude the shared error ID from the Fieldset's aria-describedby.
+    - When errorAssociation is children, add the shared error ID to each affected visible, enabled child's aria-describedby without overwriting its existing descriptions.
+    - Do not add the shared error ID to unaffected children.
     - Do not reference hidden, missing or unrelated elements.
     - Do not overwrite child-control descriptions.
     - Child controls retain their own aria-describedby values.
+
+errorAssociation:
+  scope: runtime-and-semantic-handoff
+  type: enum
+  default: group
+  allowed:
+    - group
+    - children
+  decisionOwner: consuming-composite
+  figmaProperty: false
+  modes:
+    group:
+      useWhen:
+        - The error concerns the complete grouped answer.
+        - The consuming composite cannot identify one or more affected visible, enabled children.
+      sharedErrorOwner: fieldset
+      fieldsetDescribedBy:
+        - groupHelperText
+        - groupErrorMessage
+      childrenReferenceSharedError: false
+      childrenAriaInvalidFromSharedError: false
+    children:
+      useWhen:
+        - The consuming composite can identify one or more affected visible, enabled children.
+      sharedErrorOwner: affected-visible-enabled-children
+      fieldsetDescribedBy:
+        - groupHelperText
+      affectedChildrenReferenceSharedError: true
+      affectedChildrenAriaInvalid: true
+      unaffectedChildrenReferenceSharedError: false
+      unaffectedChildrenAriaInvalidFromSharedError: false
+  invariants:
+    groupHelperOwner: fieldset
+    visibleSharedErrorCount: 1
+    visibleSharedErrorPosition: after-group-helper-and-before-consumer-content
+    fieldsetAriaInvalid: false
+    dualFieldsetAndChildrenAssociation: prohibited
+    wholeGroupRequiredFailureAssociation: group
+  rules:
+    - Use group when errorAssociation is omitted.
+    - Treat errorAssociation as a component integration option; do not forward it as an HTML attribute.
+    - Use group for a whole-group required failure.
+    - Use children only when the consuming composite identifies at least one affected visible, enabled child.
+    - In children mode, only affected children reference the one shared error and receive aria-invalid="true" from it.
+    - In children mode, unaffected children remain neutral.
+    - In children mode, the Fieldset continues to reference helper text when present and excludes the error.
+    - Never apply aria-invalid to the Fieldset in either mode.
+    - Never associate the same shared error with both the Fieldset and children.
+    - Error association does not change the visible error's established position.
+    - Visual placement inside Fieldset does not by itself determine accessible ownership.
+
+runtimeStructure:
+  effectiveDomTree: |
+    fieldset
+    |-- legend - first direct child
+    |-- group helper text - optional
+    |-- one shared error - optional
+    `-- consumer controls
+  headerImplementation:
+    codeShape: fragment-or-direct-children
+    wrapperElement: false
+  rules:
+    - Preserve the native fieldset element.
+    - Preserve the native legend element as the first direct child of fieldset.
+    - A code-level Header abstraction must render a fragment or direct children rather than a wrapper around legend, helper and error.
+    - After fragment expansion, helper text and the one shared error precede consumer controls as siblings inside fieldset.
+    - Omit absent helper and error nodes without leaving empty DOM or spacing.
+    - Do not translate the Figma _Fieldset/Header component into an extra runtime element.
 
 validation:
   ownership: shared-between-fieldset-and-slotted-children
 
   wholeGroupError:
+    errorAssociation: group
     examples:
       - No required Radio selected
       - No required Checkbox selected
@@ -438,9 +544,10 @@ validation:
     rules:
       - Show one inline group error.
       - Associate it with the Fieldset using aria-describedby.
-      - Do not apply aria-invalid to the native Fieldset by default.
+      - Never apply aria-invalid to the native Fieldset.
       - Do not make the Fieldset focusable.
-      - The child grouped-control component owns any child aria-invalid behaviour.
+      - Do not add this shared error ID or aria-invalid to children merely because the complete group is invalid.
+      - Children remain neutral unless they have a separate independently owned error.
       - An error-summary link targets the first relevant visible, enabled interactive control.
       - On activation, scroll the legend into view and move focus to that control.
       - Never focus or add tabindex to Fieldset for error-summary targeting.
@@ -452,14 +559,15 @@ validation:
       - Date of birth year is missing
       - One address field contains an invalid value
     rules:
-      - The affected child component owns the error.
-      - Associate the error with the specific child control.
+      - When the child renders its own individual inline error, the affected child component owns that error.
+      - Associate an individual child error with the specific child control.
       - Set aria-invalid="true" on the specific invalid control where required by its component contract.
       - The error-summary link targets the visible, enabled invalid child.
       - On activation, scroll that child's associated label into view and move focus to the child.
       - Preserve the child's aria-describedby access to its inline error.
       - Do not create a second vague Fieldset error merely because one child is invalid.
       - Other valid child controls must not automatically be marked invalid.
+      - A consuming composite that instead renders one shared error in the Fieldset header may use errorAssociation children and must follow that mode's affected-child rules.
 
   combinationOrRelationshipError:
     examples:
@@ -467,10 +575,12 @@ validation:
       - A start date is later than an end date
       - Two answers conflict
     rules:
-      - Use a group-level message when the error concerns the combined answer.
-      - Associate the message with the Fieldset.
-      - The child component contract determines whether relevant child controls also receive invalid styling or aria-invalid.
-      - The summary target is the first relevant visible, enabled interactive control.
+      - Use one shared message when the error concerns the combined answer.
+      - Use errorAssociation group when the error concerns the complete combined answer or affected children cannot be identified.
+      - A consuming composite may use errorAssociation children when it identifies one or more affected visible, enabled children.
+      - In children mode, only those affected children reference the shared error and receive aria-invalid="true".
+      - Never associate the shared message with the Fieldset and children at the same time.
+      - The consuming composite defines a deterministic visible, enabled summary target; when several children are affected, choose one of those affected children.
       - On activation, scroll the legend into view and move focus to that control, never Fieldset.
       - Preserve all entered values.
 
@@ -483,27 +593,29 @@ errorSummaryRelationship:
     - Summary messages should match or clearly correspond to inline messages.
     - Summary links target a visible, enabled interactive child rather than the non-focusable Fieldset.
     - Link activation scrolls the associated label or legend into view before focusing the child.
-    - The child control or owning Fieldset retains its established aria-describedby access to the inline error.
+    - The selected errorAssociation owner retains its established aria-describedby access to the inline error.
+    - Summary-link targeting must not change group association into children association or repeat the error ID on unaffected children.
     - Following a summary link must not require adding tabindex to the Fieldset.
     - Focus management belongs to the shared error-summary and focus-management patterns.
 
 states:
   default:
-    description: Resting Fieldset with no group-level validation error.
+    description: Resting Fieldset with no shared inline validation error.
     rules:
       - Legend is present.
       - Helper is shown only when enabled.
       - No error message is shown.
   error:
-    description: Fieldset with a group-level validation error.
+    description: Fieldset showing one shared inline validation error.
     rules:
-      - Group error is visible.
+      - One shared error is visible.
       - Helper remains visible when still useful.
-      - Group error remains inside the Group header.
+      - The shared error remains inside the Group header in both errorAssociation modes.
+      - Error state does not determine whether the shared error is associated with the Fieldset or affected children.
       - The gap from Group header to Content slot remains form.group.gap.headerToContent.
       - No Fieldset focus ring is added.
       - No default Fieldset error border is added.
-      - Child components keep ownership of their own focus and invalid states.
+      - Only affected children receive aria-invalid from the shared error in children mode; independently owned child errors keep their own contract.
 
 unsupportedStates:
   hover:
@@ -551,13 +663,13 @@ nativeAttributes:
       - required
       - readonly
       - positive tabindex
-      - tabindex="-1" by default
+      - tabindex="-1"
       - role="group" on the native fieldset
       - aria-label as a replacement for the visible legend
-      - aria-invalid on the fieldset by default
+      - aria-invalid on the fieldset
     rules:
       - Do not add ARIA when native fieldset and legend semantics provide the required group relationship.
-      - Do not make the native Fieldset focusable by default.
+      - Do not make the native Fieldset focusable.
   legend:
     element: legend
     rules:
@@ -657,7 +769,7 @@ accessibility:
     - id: WCAG 1.3.1
       name: Info and Relationships
       level: A
-      relevance: The native fieldset and legend expose the group relationship, and helper or error text must be associated with the group where present.
+      relevance: The native fieldset and legend expose the group relationship; helper text is associated with the Fieldset and the shared error follows errorAssociation.
     - id: WCAG 1.3.2
       name: Meaningful Sequence
       level: A
@@ -685,7 +797,7 @@ accessibility:
     - id: WCAG 3.3.1
       name: Error Identification
       level: A
-      relevance: Group-level errors must be identified in visible text close to the Fieldset.
+      relevance: Shared errors must be identified in one visible message close to the Fieldset and programmatically associated with the selected owner.
     - id: WCAG 3.3.2
       name: Labels or Instructions
       level: A
@@ -693,11 +805,117 @@ accessibility:
     - id: WCAG 3.3.3
       name: Error Suggestion
       level: AA
-      relevance: Group errors should explain how to correct the grouped answer where possible.
+      relevance: Shared errors should explain how to correct the grouped answer or affected children where possible.
     - id: WCAG 4.1.2
       name: Name, Role, Value
       level: A
       relevance: Native fieldset and legend semantics expose the group name and role, while child controls expose their own names, roles, values and states.
+
+figmaComponentModel:
+  existingPublicComponent:
+    name: Fieldset
+    productLevel: true
+    published: true
+    role: compatibility-bridge
+    currentProductionMasterCount: 2
+    cartesianExpansionToThirtyMasters: prohibited
+    apiPreserved: true
+    defaultsPreserved: true
+    structurePreserved: true
+    rebuiltAroundInternalHeader: false
+    migrationRequiredByThisChange: false
+    exactPropertyNames:
+      - state
+      - requirement
+      - legendStyle
+      - helperText
+      - legendText
+      - helperTextContent
+      - errorText
+      - contentSlot
+    rules:
+      - The current production Fieldset has two masters; do not describe or treat it as an existing 30-master component set.
+      - Do not expand or rebuild the two production masters into a 30-master Cartesian matrix.
+      - Preserve the existing public Fieldset component, variants, properties, defaults and layer structure exactly.
+      - Do not replace, rebuild or migrate the public Fieldset around _Fieldset/Header in this change.
+      - Existing Fieldset instances remain supported without remediation.
+      - The public Fieldset remains the correct generic Fieldset component and is not deprecated by this compatibility bridge.
+      - errorAssociation is runtime and semantic handoff metadata, not a public Figma property.
+  internalHeaderPrimitive:
+    name: _Fieldset/Header
+    visibility: internal
+    publicComponent: false
+    productLevel: false
+    componentType: component
+    componentSet: false
+    variantCount: 1
+    variantAxes: []
+    status: canonical-for-new-compound-fieldset-based-figma-components
+    standaloneInsertionIntended: false
+    anatomy:
+      - Legend
+      - Helper
+      - Error
+    properties:
+      legendText:
+        figmaPropertyName: Legend text
+        type: text
+      helperText:
+        figmaPropertyName: Helper text
+        type: boolean
+        default: false
+      helperTextContent:
+        figmaPropertyName: Helper text content
+        type: text
+      errorText:
+        figmaPropertyName: Error text
+        type: text
+    exactPropertyNames:
+      - Legend text
+      - Helper text
+      - Helper text content
+      - Error text
+    forbiddenProperties:
+      - Content
+      - State
+      - Requirement
+      - Legend style
+      - Error visible
+      - errorAssociation
+    tree: |
+      _Fieldset/Header
+      |-- Legend
+      |-- Helper
+      `-- Error
+    consumerCompositionTree: |
+      New compound fieldset-based component
+      |-- _Fieldset/Header
+      `-- Consumer content
+    consumerOwnedDecisions:
+      - State
+      - Requirement
+      - Legend style
+      - Error visibility
+    rules:
+      - Create exactly one nonvariant internal Figma component named _Fieldset/Header.
+      - Use it as the canonical header primitive only for new compound fieldset-based Figma components.
+      - Keep _Fieldset/Header and consumer content as siblings in the consuming component.
+      - Do not put consumer content inside _Fieldset/Header or expose a Content property.
+      - Do not expose State, Requirement, Legend style, Error visible or errorAssociation on _Fieldset/Header.
+      - The consuming compound component owns presentation and state, including when Error is presented.
+      - Keep Legend, optional Helper text and Error message in the established visual order.
+      - Bind spacing and text styling to the existing Fieldset semantic tokens.
+      - Figma anatomy does not authorize an additional runtime DOM wrapper.
+      - Do not add consumer-specific or Date-specific anatomy, properties or variants.
+      - A future Date Input may compose _Fieldset/Header and its Fields wrapper as siblings, but must not route Fields through the public Fieldset Content slot or nest or detach the public Fieldset merely to claim reuse.
+      - This bounded future-consumer example does not define Date Input properties, field counts, widths, parsing or focus rules.
+  futurePublicMigration:
+    includedInThisChange: false
+    requirements:
+      - Introduce a separately reviewed versioned public migration.
+      - Audit existing Fieldset instances and property overrides before migration.
+      - Define instance remediation and content-preservation steps.
+      - Do not silently swap or rebuild existing instances.
 
 figmaProperties:
   state:
@@ -752,6 +970,16 @@ figmaHandoff:
       - Record the intended semantic heading level during handoff.
       - Do not create headingLevel as a visual variant because it does not inherently change appearance.
       - Do not model heading levels as duplicate visual variants.
+  errorAssociation:
+    default: group
+    allowed:
+      - group
+      - children
+    figmaProperty: false
+    rules:
+      - Record children association during semantic handoff only when the consuming composite identifies affected visible, enabled children.
+      - Do not create errorAssociation as a public Fieldset property, _Fieldset/Header property or visual variant.
+      - Visual error placement remains identical in group and children modes.
 
 figmaStructure:
   tree: |
@@ -764,7 +992,8 @@ figmaStructure:
   rules:
     - Use vertical Auto Layout.
     - Set Fieldset to Fill container and Hug contents.
-    - Group header is an internal layout wrapper, not public HTML anatomy.
+    - Group header is an internal Figma layout region, not public HTML anatomy or a runtime wrapper.
+    - Preserve this existing public Fieldset structure as the compatibility bridge; do not replace Group header with _Fieldset/Header in this change.
     - Bind the Fieldset root gap between Group header and Content slot to form.group.gap.headerToContent.
     - Use form.field.gap.labelToHelper between Legend and Helper text inside Group header.
     - Use form.field.gap.helperToError between Helper text and Error message inside Group header.
@@ -847,17 +1076,41 @@ qa:
     - id: whole-group-error
       scenario: Required group has no selected answer.
       expected:
+        errorAssociation: group
         groupErrorVisible: true
         groupErrorIdInAriaDescribedBy: true
         fieldsetAriaInvalid: false
+        childrenReferenceSharedError: false
+        childrenAriaInvalidFromSharedError: false
     - id: helper-plus-group-error
-      scenario: Helper and group error are both present.
+      scenario: Helper and a group-associated shared error are both present.
       expected:
+        errorAssociation: group
         ariaDescribedByOrder:
           - helper-id
           - error-id
         helperToErrorGap: form.field.gap.helperToError
         headerToContentGap: form.group.gap.headerToContent
+    - id: children-associated-shared-error
+      scenario: A consuming composite identifies affected visible, enabled children.
+      expected:
+        errorAssociation: children
+        visibleErrorCount: 1
+        fieldsetDescribedBy:
+          - helper-id
+        fieldsetReferencesError: false
+        affectedChildrenReferenceSharedError: true
+        affectedChildrenAriaInvalid: true
+        unaffectedChildrenReferenceSharedError: false
+        unaffectedChildrenAriaInvalidFromSharedError: false
+        fieldsetAriaInvalid: false
+    - id: association-does-not-change-placement
+      scenario: The same visible shared error is inspected in group and children modes.
+      expected:
+        visibleErrorCountPerMode: 1
+        errorAfterHelper: true
+        errorBeforeConsumerContent: true
+        simultaneousGroupAndChildrenAssociation: false
     - id: fieldset-header-to-content-spacing
       scenario: Fieldset separates header content from related controls.
       expected:
@@ -877,8 +1130,46 @@ qa:
     - id: combination-error
       scenario: Multiple child answers combine into an invalid answer.
       expected:
-        groupLevelMessage: true
-        summaryTarget: first-relevant-interactive-control
+        sharedMessageCount: 1
+        allowedErrorAssociation:
+          - group
+          - children
+        summaryTargetByErrorAssociation:
+          group: consumer-defined-deterministic-relevant-visible-enabled-control
+          children: consumer-defined-deterministic-affected-visible-enabled-control
+    - id: runtime-header-fragment
+      scenario: A code-level Header abstraction renders the Fieldset header.
+      expected:
+        headerRendersWrapperElement: false
+        legendFirstDirectChild: true
+        effectiveDomOrder:
+          - legend
+          - groupHelperText
+          - groupErrorMessage
+          - consumerControls
+    - id: public-fieldset-compatibility
+      scenario: Existing public Fieldset masters and instances are inspected after this source change.
+      expected:
+        currentProductionMasterCount: 2
+        expandedToThirtyMasters: false
+        publicApiChanged: false
+        publicDefaultsChanged: false
+        publicStructureChanged: false
+        rebuiltAroundInternalHeader: false
+        instanceMigrationRequired: false
+    - id: internal-header-primitive
+      scenario: The canonical internal Header contract is inspected.
+      expected:
+        componentName: _Fieldset/Header
+        publicComponent: false
+        componentSet: false
+        variantCount: 1
+        exactPropertyNames:
+          - Legend text
+          - Helper text
+          - Helper text content
+          - Error text
+        headerAndConsumerContentAreSiblings: true
     - id: disabled-native-fieldset
       scenario: Whole group is unavailable.
       expected:
@@ -914,8 +1205,11 @@ qa:
     - Legend is announced as the group name.
     - Child labels are still announced.
     - Helper text is available as the group description.
-    - Group error is available as the group description.
-    - Helper and error are both available in the correct order.
+    - In group mode, the shared error is available as the Fieldset description.
+    - In group mode, helper and error are both available from the Fieldset in the correct order.
+    - In children mode, the Fieldset retains helper text and excludes the shared error.
+    - In children mode, only affected children expose the shared error and aria-invalid="true".
+    - Unaffected children remain neutral in children mode.
     - Heading is exposed at the selected level when used.
     - No duplicate question announcement is caused by a separate identical heading.
     - Disabled descendant state is exposed by native controls.
@@ -928,14 +1222,26 @@ qa:
     - No prohibited tabindex is present.
     - No explicit role is added to the native Fieldset.
     - Slotted controls all relate to the legend.
+    - Exactly one visible shared error appears after helper text and before consumer controls.
+    - No shared error ID is associated with both the Fieldset and children.
+    - A code-level Header emits a fragment or direct children without wrapping the legend.
+    - The public Fieldset Figma API, defaults and existing structure remain unchanged.
+    - _Fieldset/Header is one nonvariant internal component with only the four documented properties.
 
 acceptanceCriteria:
   - Native Fieldset and Legend are required.
   - Legend is the first direct child.
   - Every Fieldset has a visible group name.
   - Child labels remain present where needed.
-  - Helper and group errors are associated with the Fieldset.
-  - Helper ID precedes error ID in aria-describedby.
+  - Helper text is associated with the Fieldset in both errorAssociation modes.
+  - errorAssociation allows group and children and defaults to group.
+  - In group mode, the Fieldset references helper then the shared error.
+  - In children mode, only affected visible, enabled children reference the shared error and receive aria-invalid="true".
+  - In children mode, the Fieldset retains helper association and excludes the shared error.
+  - Unaffected children remain neutral.
+  - Fieldset never receives aria-invalid.
+  - The same shared error is never associated with both Fieldset and children.
+  - Exactly one visible shared error remains after helper text and before consumer content.
   - Group, child and combination validation ownership is unambiguous.
   - The error summary does not replace inline errors.
   - The Fieldset is not focusable.
@@ -946,6 +1252,9 @@ acceptanceCriteria:
   - All legend styles use responsive semantic tokens.
   - Optional and mixed groups are represented correctly.
   - Generic slot content is supported without content-type variants.
+  - The existing public Fieldset Figma API, defaults, structure and instances remain compatible.
+  - _Fieldset/Header is the one nonvariant canonical internal primitive for new compound fieldset-based Figma components.
+  - _Fieldset/Header and consumer content are siblings, and runtime Header output adds no wrapper around legend.
   - No new component-specific tokens are required.
   - Fieldset uses form.group.gap.headerToContent between Group header and Content slot.
   - No raw visual values are used.
