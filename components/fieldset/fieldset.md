@@ -308,7 +308,7 @@ The default preserves existing Fieldset behaviour. The option changes programmat
 
 Fieldset itself never receives `aria-invalid`.
 
-The same Error message must never be associated with both Fieldset and children. In `children` mode, preserve each affected child's other description IDs and add the shared Error ID without repeating the group Helper ID.
+The same Error message must never be associated with both Fieldset and children. In `children` mode, preserve each affected child's other description IDs and add the shared Error ID after any child-owned Helper ID, without repeating the group Helper ID.
 
 A whole-group required failure remains group-associated. Do not infer that every validation failure inside grouped controls is group-associated. For child-specific or combination failures, choose `children` only when the consuming composite can identify the affected visible, enabled children; otherwise use the default `group` mode.
 

@@ -123,12 +123,14 @@ Group helper text appears after the legend and before any Error message.
 
 Group helper text should have a stable ID and be associated with the Fieldset using `aria-describedby`.
 
-Show exactly one shared visible error after helper text, when present, and before the related controls. Its accessible owner is selected with `errorAssociation: "group" | "children"`; `group` is the default. See the authoritative [Fieldset error-association contract](../../components/fieldset/fieldset.md#error-association).
+When Fieldset presents a shared error, show exactly one visible error after helper text, when present, and before the related controls. Its accessible owner is selected with `errorAssociation: "group" | "children"`; `group` is the default. See the authoritative [Fieldset error-association contract](../../components/fieldset/fieldset.md#error-association).
 
 - In `group` mode, the Fieldset references the helper first and then the shared error. Whole-group required errors use this mode.
 - In `children` mode, the Fieldset references only the helper. Only affected visible, enabled children reference the shared error and receive `aria-invalid="true"`; unaffected children remain neutral.
 
 Never associate the same shared error with both Fieldset and children. Fieldset never receives `aria-invalid`.
+
+A child component may instead render and own its own individual error. Associate that error with the specific invalid child and do not also create a vague Fieldset error.
 
 ## Group header spacing
 

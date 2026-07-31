@@ -228,8 +228,8 @@ patterns:
       - Never associate the same shared error with both the fieldset and children.
       - When group association includes both helper and error text, list the helper ID before the error ID in the fieldset's aria-describedby.
       - Child-field errors should be associated with the specific invalid child field.
-      - Summary links target the first relevant visible, enabled interactive child, not the non-focusable fieldset.
-      - On activation, scroll the legend into view and move focus to that child.
+      - The consuming composite defines a deterministic visible, enabled interactive summary target: a relevant child in group mode or an affected child in children mode, never the non-focusable fieldset.
+      - On activation, scroll the associated legend or label into view and move focus to the target child.
       - Preserve the selected inline error association without changing ownership merely to support summary-link focus.
       - Do not make the fieldset focusable.
       - Do not add role="group" to the native fieldset.
@@ -424,7 +424,7 @@ helperText:
     - For grouped controls, group helper text appears after the legend and before any shared error.
     - For grouped controls, give group helper text a stable ID and reference it from the fieldset.
     - When errorAssociation is group and group helper text and a shared error are both present, put the helper ID before the error ID in the fieldset's aria-describedby.
-    - When errorAssociation is children, keep only the helper ID on the fieldset and associate the shared error with affected children.
+    - When errorAssociation is children, keep only the group helper ID on the fieldset and associate the shared error with affected children after any child-owned helper ID.
     - Do not automatically repeat group helper text on every child control.
     - Helper text must not repeat the label.
     - Helper text must not replace the label.

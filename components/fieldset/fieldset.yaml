@@ -453,12 +453,12 @@ accessibleDescription:
       <fieldset aria-describedby="group-hint">
       <input id="affected-child" aria-describedby="composite-error" aria-invalid="true">
   rules:
-    - Omit aria-describedby from the Fieldset when group helper text is absent and the shared error uses children association.
+    - Omit aria-describedby from the Fieldset when neither group helper text nor a group-associated shared error exists.
     - When helper text exists, always include its ID in the Fieldset's aria-describedby.
     - When errorAssociation is group, include the shared error ID in the Fieldset's aria-describedby.
     - When errorAssociation is group and both helper and error exist, list helper ID first and error ID second.
     - When errorAssociation is children, exclude the shared error ID from the Fieldset's aria-describedby.
-    - When errorAssociation is children, add the shared error ID to each affected visible, enabled child's aria-describedby without overwriting its existing descriptions.
+    - When errorAssociation is children, add the shared error ID to each affected visible, enabled child's aria-describedby without overwriting its existing descriptions; place it after any child-owned helper ID.
     - Do not add the shared error ID to unaffected children.
     - Do not reference hidden, missing or unrelated elements.
     - Do not overwrite child-control descriptions.

@@ -34,6 +34,8 @@ Associate it with the Fieldset using `aria-describedby`.
 
 When group Helper and Error are both present, association depends on the Fieldset's [`errorAssociation`](../../components/fieldset/fieldset.md#error-association). In the default `group` mode, list the Helper ID before the Error ID in the Fieldset's `aria-describedby`; children do not reference that shared Error. In `children` mode, Fieldset references Helper only; only affected visible, enabled children reference the one shared Error and receive `aria-invalid="true"`, while unaffected children remain neutral. Fieldset never receives `aria-invalid`, and the same Error must never be associated with both Fieldset and children. Visual placement inside the Group header does not determine accessible ownership; a whole-group required failure remains group-owned.
 
+If an affected child also owns child-specific Helper text, place that Helper ID before the shared Error ID in the child's `aria-describedby`.
+
 Do not automatically repeat group helper text on every child control.
 
 Child-specific help remains associated with the relevant child control.

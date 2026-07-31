@@ -63,7 +63,7 @@ Group header is a visual layout region, not additional public HTML anatomy. The 
 
 Use `form.group.gap.headerToContent` between the Group header and related controls in both default and error states. Do not use `form.field.gap.errorToControl` for Fieldset header-to-content spacing.
 
-When helper and shared error are both owned by the Fieldset in `group` mode, put the helper ID before the error ID in `aria-describedby`. In `children` mode, the Fieldset references only the helper; affected children add the shared error ID while preserving their own other description IDs and do not repeat the group helper ID.
+When helper and shared error are both owned by the Fieldset in `group` mode, put the helper ID before the error ID in `aria-describedby`. In `children` mode, the Fieldset references only the group helper; affected children add the shared error ID after any child-owned helper ID while preserving their other description IDs and do not repeat the group helper ID.
 
 ## Single field error example
 
@@ -108,7 +108,7 @@ When helper and shared error are both owned by the Fieldset in `group` mode, put
 
 ## Group errors
 
-Grouped controls keep one shared visible error after Helper and before the related controls. Accessible ownership is selected independently through `errorAssociation`, and the same shared error must never be associated with both Fieldset and children.
+When a grouped control presents a shared Fieldset error, keep one visible error after Helper and before the related controls. Accessible ownership is selected independently through `errorAssociation`, and the same shared error must never be associated with both Fieldset and children.
 
 ### Whole group is invalid
 
@@ -165,7 +165,9 @@ Question: What is your date of birth?
 Error: Date of birth must include a year.
 ```
 
-Pattern:
+A child component may render and own its own individual inline error. In that case, associate that error with the specific invalid child and follow the child's error contract; do not create a second vague Fieldset error.
+
+If the consuming composite instead renders one shared error in the Fieldset header, it may use this `children` pattern when it can identify the affected visible, enabled children:
 
 - the group has a legend
 - use `errorAssociation: children`
@@ -217,7 +219,7 @@ Pattern:
 - use `group` when the error concerns the complete combined answer
 - associate the error with the Fieldset using `aria-describedby` and do not repeat it on children
 - use `children` instead only when the consuming composite can deterministically identify at least one affected visible, enabled child
-- the error summary link targets the first relevant visible, enabled interactive control, scrolls the legend into view and focuses that control
+- the consuming composite defines the error-summary target: a relevant visible, enabled child in `group` mode or an affected visible, enabled child in `children` mode; activation scrolls the associated legend or label into view and focuses that target
 - never use both association modes for the same shared error
 
 Example:
@@ -273,7 +275,7 @@ For child-field errors, scroll the associated label into view and focus the visi
 
 For a standalone Checkbox error, scroll its associated label into view and focus the visible, enabled native Checkbox input.
 
-For a whole multi-part answer error, scroll the legend into view and focus the first relevant visible, enabled child. For a specific-part error, scroll that field's label into view and focus that field.
+For a whole multi-part answer error in `group` mode, scroll the legend into view and focus the consumer-defined relevant visible, enabled child. In `children` mode, target a deterministic affected visible, enabled child. For a specific individually owned part error, scroll that field's label into view and focus that field.
 
 Do not add `tabindex` to Fieldset merely to make it an error-summary target.
 

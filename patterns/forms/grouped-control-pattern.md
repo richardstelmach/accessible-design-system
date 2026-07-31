@@ -171,7 +171,7 @@ In `children` mode, the Fieldset references only the helper. Affected children a
 
 An error summary supplements inline errors. It does not replace them.
 
-Error-summary links target a relevant visible, enabled interactive child, not the non-focusable Fieldset. Preserve the established association: the Fieldset retains the error in `group` mode, while affected children retain it in `children` mode. A consuming component defines the deterministic target when several children are affected.
+Error-summary links target a visible, enabled interactive child, not the non-focusable Fieldset. The consuming component defines a deterministic relevant child in `group` mode and a deterministic affected child in `children` mode. On activation, scroll the associated legend or label into view and focus that target while preserving the established association: the Fieldset retains the error in `group` mode, while affected children retain it in `children` mode.
 
 Do not add `tabindex` to Fieldset merely to make it a summary target.
 
