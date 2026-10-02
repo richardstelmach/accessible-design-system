@@ -1,0 +1,740 @@
+component: Date Input
+id: date-input
+version: 0.1.0
+status: draft
+
+description: >
+  Date Input collects one calendar date through three visible text inputs for
+  Day, Month and Year. It is a native Fieldset-based compound component with
+  deterministic validation ownership and error-summary focus routing.
+
+purpose:
+  - Collect a memorable or known calendar date.
+  - Keep Day, Month and Year individually labelled and editable.
+  - Support date-of-birth autofill through valid autocomplete tokens.
+  - Reuse Fieldset semantics, the internal Figma header primitive and Text Input presentation.
+
+sourceDocumentation:
+  authoritative:
+    - components/fieldset/fieldset.yaml
+    - components/text-input/text-input.yaml
+  sharedPatterns:
+    - patterns/forms/form-field-patterns.yaml
+  humanReadable:
+    - patterns/forms/grouped-control-pattern.md
+    - patterns/forms/legends-and-fieldsets.md
+    - patterns/forms/helper-text.md
+    - patterns/forms/required-and-optional.md
+    - patterns/forms/validation-and-errors.md
+    - patterns/forms/focus-management.md
+    - patterns/forms/disabled-and-readonly.md
+    - patterns/forms/input-types-and-keyboards.md
+    - patterns/forms/tokens.md
+    - accessibility/focus-indicators.yaml
+
+relatedComponents:
+  - components/fieldset/fieldset.yaml
+  - components/text-input/text-input.yaml
+  - components/error-summary/error-summary.yaml
+
+scope:
+  includes:
+    - Dates entered as Day, Month and Year
+    - Date of birth
+    - Required and optional dates
+    - Group helper text
+    - One shared visible inline error
+    - Group-associated and affected-child-associated errors
+    - Whole-component disabled and read-only states
+  excludes:
+    - Time or date-and-time input
+    - Calendar picker behaviour
+    - Partial dates
+    - A single free-text date field
+    - Native input type date
+    - Mixed requirement across date parts
+    - Partially disabled or partially read-only date parts
+    - Written month names in version 0.1
+    - Server-specific date ranges and business validation
+
+principles:
+  - Date Input is one grouped answer, not three unrelated fields.
+  - Use native fieldset and legend semantics.
+  - Keep visible Day, Month and Year labels.
+  - Preserve the visual, reading and focus order Day, Month, Year.
+  - Use text inputs with numeric keyboard hints, not number inputs.
+  - Do not use placeholders, auto-advance or focus movement while typing.
+  - Preserve all entered strings when validation fails.
+  - Render one shared visible error and select exactly one accessible owner model.
+  - Whole-component disabled takes precedence over focus and error presentation.
+  - Reuse existing semantic and Text Input tokens; add no Date Input token namespace.
+  - GitHub is authoritative; Figma implements this contract.
+
+pattern:
+  type: grouped-multi-part-input
+  answerModel: one-calendar-date
+  childCount: 3
+  childOrder:
+    - day
+    - month
+    - year
+  requiredImplementation:
+    nativeFieldset: true
+    nativeLegend: true
+    visibleChildLabels: true
+    stableChildIdsAndNames: true
+    helperAssociation: true
+    deterministicErrorAssociation: true
+    deterministicSummaryTarget: true
+
+runtimeStructure:
+  effectiveDomTree: |
+    fieldset
+    |-- legend - first direct child
+    |-- group helper text - optional
+    |-- one shared error - error state only
+    `-- fields layout wrapper
+        |-- Day label + input
+        |-- Month label + input
+        `-- Year label + input
+  rules:
+    - Keep legend as the first direct child of fieldset.
+    - A fields wrapper may provide layout but must not replace fieldset semantics.
+    - A code-level header abstraction must return direct children or a fragment.
+    - Do not add role="group" to the native fieldset.
+    - Do not make fieldset, legend, helper or error focusable.
+    - Do not forward errorAssociation as an HTML attribute.
+
+anatomy:
+  root:
+    element: fieldset
+    required: true
+    rules:
+      - Own the shared legend, helper and group-associated error description.
+      - Never receive aria-invalid.
+      - Use native disabled only for whole-component disabled.
+      - Do not use readonly on fieldset.
+
+  header:
+    visualFigmaComponent: _Fieldset/Header
+    runtimeWrapper: false
+    required: true
+    children:
+      - legend
+      - helperText
+      - errorMessage
+
+  legend:
+    element: legend
+    required: true
+    defaultText: What is your date of birth?
+    rules:
+      - Remain visible and wrap without truncation.
+      - Identify the complete date question.
+      - Be the first direct child of fieldset.
+      - Include "(optional)" when the complete Date Input is optional.
+      - Do not contain interactive descendants.
+
+  helperText:
+    element: p
+    required: false
+    defaultText: For example, 31 3 1980.
+    associationOwner: fieldset
+    rules:
+      - Follow the legend and precede the shared error and fields.
+      - Use a stable ID referenced by fieldset aria-describedby.
+      - Remain visible after errors when it still helps correction.
+      - Do not repeat on every child input.
+
+  errorMessage:
+    element: p
+    requiredWhenInvalid: true
+    visibleCount: 1
+    position: after-helper-before-fields
+    defaultText: "Error: Enter a real date."
+    rules:
+      - Include a visible or visually hidden Error prefix according to the shared form pattern.
+      - Describe the problem in text and suggest correction where possible.
+      - Use exactly one errorAssociation mode.
+      - Do not create one repeated visible error per date part.
+
+  fields:
+    element: div
+    semanticRole: none
+    required: true
+    layout: horizontal-wrap
+    order:
+      - day
+      - month
+      - year
+    rules:
+      - Preserve source order when wrapping.
+      - Keep each label with its input.
+      - Do not clip focus indicators.
+
+  day:
+    label: Day
+    input:
+      element: input
+      type: text
+      inputmode: numeric
+      widthToken: component.textInput.width.2ch
+      autocompleteForUsersBirthday: bday-day
+      expectedValue: one-or-two-numeric-digits
+
+  month:
+    label: Month
+    input:
+      element: input
+      type: text
+      inputmode: numeric
+      widthToken: component.textInput.width.2ch
+      autocompleteForUsersBirthday: bday-month
+      expectedValue: one-or-two-numeric-digits
+
+  year:
+    label: Year
+    input:
+      element: input
+      type: text
+      inputmode: numeric
+      widthToken: component.textInput.width.4ch
+      autocompleteForUsersBirthday: bday-year
+      expectedValue: four-numeric-digits
+
+childInputRules:
+  requiredAttributes:
+    - id
+    - name
+    - type
+  supportedAttributes:
+    - value
+    - required
+    - disabled
+    - readonly
+    - inputmode
+    - autocomplete
+    - aria-describedby
+    - aria-invalid
+  rules:
+    - Associate each visible label using for and id.
+    - Use distinct stable names for Day, Month and Year.
+    - Use type="text"; never use type="number" or type="date".
+    - Use inputmode="numeric" only as a keyboard hint.
+    - Do not use placeholder text.
+    - Do not use maxlength as a substitute for validation.
+    - Do not add spinbutton roles or aria-valuenow metadata.
+    - Omit birthday autocomplete tokens when the date is not the user's birthday.
+
+requiredAndOptional:
+  default: required
+  supported:
+    - required
+    - optional
+  mixed: unsupported
+  required:
+    legendSuffix: none
+    childRequiredAttribute: true
+  optional:
+    legendSuffix: "(optional)"
+    childRequiredAttribute: false
+    emptyAnswerValid: true
+  rules:
+    - Treat the three parts as sharing one requirement.
+    - Do not put required on fieldset.
+    - Do not repeat optional wording on child labels.
+    - For an optional answer, validate calendar structure only when any part is entered.
+
+valueModel:
+  storedParts:
+    - day
+    - month
+    - year
+  rawValuePolicy: preserve-user-entered-strings-on-error
+  normalisationBoundary: explicit-validation-or-submission
+  rules:
+    - Accept one or two numeric digits for Day and Month.
+    - Accept four numeric digits for Year unless a consuming service documents another policy.
+    - Do not require leading zeroes.
+    - Do not pad, clamp, reorder or correct values while the user types.
+    - Do not automatically move focus after an expected character count.
+    - Parse with real calendar rules, including month length and leap years.
+    - Do not accept JavaScript date rollover as proof that a date is valid.
+  deferredResearch:
+    writtenMonthNames:
+      status: deferred
+      reason: >
+        Supporting names requires a separate width, inputmode, localisation and
+        parsing decision and would conflict with the existing numeric 2ch month contract.
+      evidence: https://design-system.service.gov.uk/components/date-input/
+
+errorAssociation:
+  sourceContract: components/fieldset/fieldset.yaml
+  type: enum
+  default: group
+  allowed:
+    - group
+    - children
+  figmaProperty: false
+  decisionOwner: date-input-validation-result
+  modes:
+    group:
+      useWhen:
+        - The complete required answer is empty.
+        - The error concerns the combined calendar date.
+        - A whole-date constraint fails.
+        - Affected parts cannot be identified deterministically.
+      errorOwner: fieldset
+      fieldsetDescribedByOrder:
+        - helperText
+        - errorMessage
+      childrenReferenceSharedError: false
+      childrenAriaInvalidFromSharedError: false
+    children:
+      useWhen:
+        - At least one affected visible enabled part is deterministically known.
+      errorOwner: affected-visible-enabled-children
+      fieldsetDescribedByOrder:
+        - helperText
+      affectedChildrenReferenceSharedError: true
+      affectedChildrenAriaInvalid: true
+      unaffectedChildrenReferenceSharedError: false
+      unaffectedChildrenAriaInvalidFromSharedError: false
+  invariants:
+    visibleSharedErrorCount: 1
+    fieldsetAriaInvalid: false
+    dualAssociation: prohibited
+    hiddenOrDisabledErrorOwner: prohibited
+
+validation:
+  trigger:
+    primary: explicit-submit
+    optional: explicit-continue-or-deliberate-validation-event
+    whileTyping: false
+  preserveValues: true
+  checks:
+    requiredEmpty:
+      association: group
+      example: Enter your date of birth.
+    missingPart:
+      association: children
+      affected: each-missing-part
+      example: Date of birth must include a year.
+    nonNumericPart:
+      association: children
+      affected: each-nonnumeric-part
+      example: Year must use 4 digits.
+    dayRange:
+      association: children
+      affected:
+        - day
+      example: Day must be between 1 and 31.
+    monthRange:
+      association: children
+      affected:
+        - month
+      example: Month must be between 1 and 12.
+    impossibleCombinedDate:
+      association: group
+      example: Enter a real date of birth.
+      refinement: >
+        Children association is allowed only when the validation algorithm can
+        identify affected parts deterministically.
+    wholeDateConstraint:
+      association: group
+      example: Date of birth must be in the past.
+  rules:
+    - Render the shared inline error before moving focus to the error summary.
+    - Keep useful helper text visible.
+    - Do not clear valid or invalid parts after failure.
+    - Do not rely on colour or border alone.
+
+focusManagement:
+  whileTyping:
+    autoAdvance: false
+    autoCorrectionFocusMove: false
+    validationFocusMove: false
+  failedSubmit:
+    initialTarget: error-summary
+    timesPerSubmission: once
+  summaryActivation:
+    group:
+      scrollTarget: legend
+      focusTarget: first-visible-enabled-relevant-child
+      dateInputDefault: day
+    children:
+      scrollTarget: first-affected-child-label
+      focusTarget: first-affected-visible-enabled-child
+      order:
+        - day
+        - month
+        - year
+  prohibitedTargets:
+    - fieldset
+    - legend
+    - header
+    - helperText
+    - errorMessage
+    - hiddenInput
+    - disabledInput
+  rules:
+    - Only one child can be focused at a time.
+    - Focus presentation must remain visible with error presentation.
+    - DOM and visual order must make Tab progression predictable.
+
+states:
+  default:
+    editable: true
+    errorVisible: false
+    focusedChild: none
+  focusDay:
+    editable: true
+    errorVisible: false
+    focusedChild: day
+  focusMonth:
+    editable: true
+    errorVisible: false
+    focusedChild: month
+  focusYear:
+    editable: true
+    errorVisible: false
+    focusedChild: year
+  errorGroup:
+    editable: true
+    errorVisible: true
+    errorAssociation: group
+    invalidChildren: []
+    focusedChild: none
+  errorDay:
+    editable: true
+    errorVisible: true
+    errorAssociation: children
+    invalidChildren:
+      - day
+    focusedChild: none
+  errorMonth:
+    editable: true
+    errorVisible: true
+    errorAssociation: children
+    invalidChildren:
+      - month
+    focusedChild: none
+  errorYear:
+    editable: true
+    errorVisible: true
+    errorAssociation: children
+    invalidChildren:
+      - year
+    focusedChild: none
+  errorFocusDay:
+    extends: errorDay
+    focusedChild: day
+  errorFocusMonth:
+    extends: errorMonth
+    focusedChild: month
+  errorFocusYear:
+    extends: errorYear
+    focusedChild: year
+  disabled:
+    nativeFieldsetDisabled: true
+    editable: false
+    focusableChildren: false
+    submitted: false
+    errorVisible: false
+    precedence: highest
+  readonly:
+    childReadonly: true
+    editable: false
+    focusableChildren: true
+    submitted: true
+    errorVisible: false
+  precedence:
+    - disabled
+    - readonly
+    - errorFocus
+    - error
+    - focus
+    - default
+  rules:
+    - Do not combine disabled or readonly presentation with active error or focus presentation.
+    - Use value text rather than a Filled state.
+    - Multiple invalid children are a runtime possibility; initial Figma states document the common single-part and group cases.
+
+responsiveBehaviour:
+  default: horizontal-day-month-year
+  narrow: wrap-complete-field-units-in-source-order
+  rules:
+    - Keep Day, Month and Year order at every width.
+    - Keep each label and its input together.
+    - Do not clip focus rings, labels or values.
+    - Do not require two-dimensional page scrolling at 320 CSS pixels.
+    - Allow legend, helper and error text to wrap without truncation.
+
+tokens:
+  newComponentNamespaceRequired: false
+  header:
+    legendTypography: form.legend.typography.default
+    legendColor: form.legend.color
+    helperTypography: form.helper.typography
+    helperColor: form.helper.color
+    errorTypography: form.error.typography
+    errorColor: form.error.color
+    legendToHelper: form.field.gap.labelToHelper
+    helperToError: form.field.gap.helperToError
+    headerToFields: form.group.gap.headerToContent
+  fields:
+    betweenFields: form.group.gap.betweenFields
+    labelTypography: form.label.typography
+    labelColor: form.label.color
+    labelToControl: form.field.gap.labelToHelper
+  inputs:
+    background: form.control.background
+    foreground: form.control.foreground
+    borderColor: form.control.border.color
+    borderWidth: form.control.border.width
+    borderRadius: form.control.border.radius
+    paddingBlock: form.control.padding.block
+    paddingInline: form.control.padding.inline
+    typography: form.control.typography
+    minimumBlockSize: size.control.minBlockSize.default
+    dayWidth: component.textInput.width.2ch
+    monthWidth: component.textInput.width.2ch
+    yearWidth: component.textInput.width.4ch
+  states:
+    focusRing: form.state.focus.ring
+    focusSeparator: form.state.focus.separator
+    errorBorder: form.state.error.border
+    disabledBackground: form.state.disabled.background
+    disabledForeground: form.state.disabled.foreground
+    disabledBorder: form.state.disabled.border
+    readonlyBackground: form.state.readonly.background
+    readonlyForeground: form.state.readonly.foreground
+    readonlyBorder: form.state.readonly.border
+
+figmaComponentModel:
+  publicComponent:
+    name: Date Input
+    type: component-set
+    status: create-after-source-gate
+    exactTree: |
+      Date Input
+      |-- _Fieldset/Header instance
+      `-- Fields
+          |-- Day
+          |   |-- Label
+          |   `-- Input
+          |-- Month
+          |   |-- Label
+          |   `-- Input
+          `-- Year
+              |-- Label
+              `-- Input
+    composition:
+      headerAndFieldsAreSiblings: true
+      publicFieldsetContentSlotUsed: false
+      publicFieldsetNested: false
+      publicFieldsetDetached: false
+    variantAxes:
+      State:
+        - Default
+        - Focus day
+        - Focus month
+        - Focus year
+        - Error group
+        - Error day
+        - Error month
+        - Error year
+        - Error focus day
+        - Error focus month
+        - Error focus year
+        - Disabled
+        - Readonly
+    nonVariantProperties:
+      Helper text:
+        type: boolean
+        default: true
+      Legend text:
+        type: text
+        default: What is your date of birth?
+      Helper text content:
+        type: text
+        default: For example, 31 3 1980.
+      Error text:
+        type: text
+        default: "Error: Enter a real date."
+      Day value:
+        type: text
+        default: ""
+      Month value:
+        type: text
+        default: ""
+      Year value:
+        type: text
+        default: ""
+    propertySources:
+      dateInputTopLevel:
+        - State
+        - Day value
+        - Month value
+        - Year value
+      exposedHeaderInstance:
+        component: _Fieldset/Header
+        properties:
+          - Helper text
+          - Legend text
+          - Helper text content
+          - Error text
+    exactPropertyNames:
+      - State
+      - Helper text
+      - Legend text
+      - Helper text content
+      - Error text
+      - Day value
+      - Month value
+      - Year value
+    semanticHandoffOnly:
+      - errorAssociation
+      - headingLevel
+      - autocompletePurpose
+      - requirement
+    rules:
+      - Use the production _Fieldset/Header component instance.
+      - Expose the _Fieldset/Header instance so its four existing properties remain available without duplicates.
+      - Keep State and the three value properties at Date Input's top level.
+      - Present one unambiguous Header property group plus Date Input's top-level properties.
+      - Use one State axis to prevent impossible focus and error combinations.
+      - Never show focus on more than one child.
+      - State determines error visibility, invalid child presentation and focused child.
+      - Requirement is not a visual variant because it changes no presentation beyond inline legend wording.
+      - For an optional date, authors include lowercase "(optional)" in the complete Legend text property.
+      - Do not expose a disconnected Optional Boolean property.
+      - Helper text controls helper visibility and omitted spacing.
+      - Use value text properties for empty and filled examples.
+      - Use default legend styling for version 0.1.
+      - Do not multiply states by public Fieldset legend styles.
+      - Do not expose errorAssociation as a Figma property.
+      - Do not introduce Date Input-specific tokens.
+      - Build Day, Month and Year from the canonical Text Input label and control visual anatomy, styles and variable bindings.
+      - Do not expose three complete nested Text Input APIs because their helper, error and requirement properties are not owned by this composite.
+      - Do not detach Text Input instances; copied visual anatomy must retain canonical style and variable bindings.
+      - Re-audit the three field presentations whenever the Text Input visual contract changes.
+
+figmaReviewExamples:
+  required:
+    - Default empty with helper
+    - Default filled without helper
+    - Optional with helper and wrapped legend
+    - Focus day
+    - Focus month
+    - Focus year
+    - Error group
+    - Error year
+    - Error focus year
+    - Disabled with values
+    - Readonly with values
+    - Narrow wrapping layout
+  auditChecks:
+    - Exact component tree and property names
+    - One focused child only
+    - Error hidden with no residual spacing outside error states
+    - Helper hidden with no residual spacing
+    - Correct invalid child boundary for part errors
+    - Neutral child boundaries for group error
+    - Token and style bindings
+    - 2ch, 2ch and 4ch relative sizing
+    - Label, helper, error and value wrapping
+    - Unclipped focus indicators
+
+accessibility:
+  standardsTarget: WCAG 2.2 AA
+  requirements:
+    - id: WCAG 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: Native Fieldset and Legend expose the group, and labels expose each date part.
+    - id: WCAG 1.3.2
+      name: Meaningful Sequence
+      level: A
+      relevance: Day, Month and Year keep a meaningful source and presentation order.
+    - id: WCAG 1.3.5
+      name: Identify Input Purpose
+      level: AA
+      relevance: Birthday parts use valid bday-day, bday-month and bday-year autocomplete tokens.
+    - id: WCAG 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Labels, helper text, error text and values must meet text contrast requirements.
+    - id: WCAG 1.4.10
+      name: Reflow
+      level: AA
+      relevance: The group wraps without two-dimensional page scrolling at 320 CSS pixels.
+    - id: WCAG 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: Input boundaries and focus/error indicators remain perceivable.
+    - id: WCAG 1.4.12
+      name: Text Spacing
+      level: AA
+      relevance: Labels, helper and error text do not clip or overlap with adjusted spacing.
+    - id: WCAG 2.1.1
+      name: Keyboard
+      level: A
+      relevance: All editable parts work with a keyboard without custom traps or auto-advance.
+    - id: WCAG 2.4.3
+      name: Focus Order
+      level: A
+      relevance: Focus follows Day, Month and Year and summary routing is deterministic.
+    - id: WCAG 2.4.6
+      name: Headings and Labels
+      level: AA
+      relevance: Legend and child labels describe the complete question and each part.
+    - id: WCAG 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: The active child keeps a visible focus indicator, including in error states.
+    - id: WCAG 2.4.11
+      name: Focus Not Obscured Minimum
+      level: AA
+      relevance: Focused date parts are not entirely hidden by authored content.
+    - id: WCAG 3.2.1
+      name: On Focus
+      level: A
+      relevance: Receiving focus does not move focus or submit the answer.
+    - id: WCAG 3.2.2
+      name: On Input
+      level: A
+      relevance: Entering a part does not automatically move focus or cause an unexpected context change.
+    - id: WCAG 3.3.1
+      name: Error Identification
+      level: A
+      relevance: One visible text error identifies the answer or affected parts.
+    - id: WCAG 3.3.2
+      name: Labels or Instructions
+      level: A
+      relevance: Legend, child labels and optional format guidance explain the required input.
+    - id: WCAG 3.3.3
+      name: Error Suggestion
+      level: AA
+      relevance: Error text suggests a correction when one is known.
+    - id: WCAG 4.1.2
+      name: Name Role Value
+      level: A
+      relevance: Native semantics expose group and child names, values and states.
+
+verification:
+  sourceGate:
+    - YAML parses successfully.
+    - All referenced local source files exist.
+    - Token references resolve to existing semantic or Text Input tokens.
+    - Error examples map to exactly one association mode.
+    - State precedence has no disabled-focus or disabled-error combination.
+  figmaGate:
+    - Production _Fieldset/Header is used unchanged.
+    - Component structure and property names match this source.
+    - Required review examples pass structural and visual audit.
+  finalGate:
+    - Keyboard and screen-reader testing passes in supported browser combinations.
+    - Reflow, zoom and text-spacing checks pass.
+    - Date-of-birth autocomplete tokens are valid and purpose-appropriate.
+    - Source and Figma remain aligned after corrections.
