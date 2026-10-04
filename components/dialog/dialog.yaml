@@ -139,6 +139,7 @@ focusManagement:
       - Use native modal inertness together with one boundary handler that wraps Shift+Tab from the first boundary to the last focusable descendant and Tab from the last boundary to the first.
       - Obtain the boundaries from a tested tabbable-order utility; do not approximate browser tab order with a selector alone.
       - The utility must handle radio groups, controls disabled by an ancestor fieldset, inert or hidden ancestors, every negative tabindex value and shadow DOM where the supported platform exposes it.
+      - Resolve the active boundary from the keyboard event's composed path so a focused descendant inside shadow DOM is compared instead of only its shadow host.
       - Recompute tabbable descendants for each Tab key event so dynamically added or removed controls are handled.
       - If no focusable descendants exist, prevent Tab from leaving and keep focus on the dialog container.
       - Do not add a second focus-trap library on top of this boundary handler.

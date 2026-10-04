@@ -188,7 +188,7 @@ by default. A product-specific exception needs a clear usability reason and docu
 
 Tab and Shift+Tab must remain within the modal dialog. Use native `showModal()` inertness together with one lightweight boundary handler: Shift+Tab from the first boundary wraps to the last focusable descendant, and Tab from the last boundary wraps to the first. If there are no focusable descendants, keep focus on the Dialog container.
 
-Recompute the tabbable descendants for each Tab key event so controls added, removed, enabled or disabled while the Dialog is open participate correctly. Use a tested tabbable-order utility rather than a selector approximation. It must account for radio-group tab stops, controls disabled by an ancestor `fieldset`, hidden or inert ancestors, all negative `tabindex` values, and shadow DOM where the supported platform exposes it. Do not layer a second focus-trap library over this handler; competing traps commonly cause skipped controls or focus loops.
+Recompute the tabbable descendants for each Tab key event so controls added, removed, enabled or disabled while the Dialog is open participate correctly. Use a tested tabbable-order utility rather than a selector approximation. It must account for radio-group tab stops, controls disabled by an ancestor `fieldset`, hidden or inert ancestors, all negative `tabindex` values, and shadow DOM where the supported platform exposes it. When shadow DOM is involved, resolve the active boundary from the keyboard event’s composed path rather than relying only on `document.activeElement`, which reports the shadow host. Do not layer a second focus-trap library over this handler; competing traps commonly cause skipped controls or focus loops.
 
 Content added while the Dialog is open must join the logical focus order. Do not use positive `tabindex` values.
 
@@ -424,7 +424,7 @@ export function createDialogController(
 
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-    const active = document.activeElement;
+    const active = event.composedPath()[0] ?? document.activeElement;
 
     if (event.shiftKey && (active === first || active === dialog)) {
       event.preventDefault();
