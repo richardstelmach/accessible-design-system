@@ -259,6 +259,13 @@
         "$description": "Surface colour reserved for elevated areas such as dialogs, popovers, floating panels or layered content."
       }
     },
+    "overlay": {
+      "modal": {
+        "$value": "rgba(17, 24, 39, 0.72)",
+        "$type": "color",
+        "$description": "Standard backdrop colour for modal surfaces. It visually separates active modal content from the inert interface beneath it."
+      }
+    },
     "text": {
       "default": {
         "$value": "{color.neutral.500}",
@@ -1906,6 +1913,81 @@
           "$value": "{size.icon.md}",
           "$type": "dimension",
           "$description": "Checkbox checkmark and indeterminate indicator frame size. Uses the medium icon size so existing icon components remain clear while fitting comfortably inside the 24px visual control."
+        }
+      }
+    },
+    "dialog": {
+      "backdrop": {
+        "background": {
+          "$value": "{color.overlay.modal}",
+          "$type": "color",
+          "$description": "Dialog alias of the shared modal overlay colour. It separates the active dialog from inert page content without being the only indication that the dialog is open."
+        }
+      },
+      "surface": {
+        "background": {
+          "$value": "{color.surface.raised}",
+          "$type": "color",
+          "$description": "Dialog surface colour."
+        },
+        "border": {
+          "$value": "{color.border.light}",
+          "$type": "color",
+          "$description": "Dialog boundary colour."
+        },
+        "radius": {
+          "$value": "{radius.xl}",
+          "$type": "borderRadius",
+          "$description": "Dialog corner radius for inset layouts. Full-screen dialogs use radius.none."
+        }
+      },
+      "size": {
+        "small": {
+          "$value": "32rem",
+          "$type": "dimension",
+          "$description": "Maximum inline size for short confirmations and focused tasks. At a 16px root size, 32rem equals 512px."
+        },
+        "medium": {
+          "$value": "40rem",
+          "$type": "dimension",
+          "$description": "Default maximum inline size for forms and standard dialog content. At a 16px root size, 40rem equals 640px."
+        },
+        "large": {
+          "$value": "56rem",
+          "$type": "dimension",
+          "$description": "Maximum inline size for complex content that genuinely benefits from more room. At a 16px root size, 56rem equals 896px."
+        },
+        "viewportInset": {
+          "$value": "{spacing.4}",
+          "$type": "spacing",
+          "$description": "Minimum space between an inset dialog and each viewport edge, including on mobile."
+        }
+      },
+      "spacing": {
+        "header": {
+          "$value": "{spacing.inset.lg}",
+          "$type": "spacing",
+          "$description": "Default inset for the dialog header."
+        },
+        "content": {
+          "$value": "{spacing.inset.lg}",
+          "$type": "spacing",
+          "$description": "Default inset for the scrollable dialog content area."
+        },
+        "footer": {
+          "$value": "{spacing.inset.lg}",
+          "$type": "spacing",
+          "$description": "Default inset for the dialog action area."
+        },
+        "sectionGap": {
+          "$value": "{spacing.stack.md}",
+          "$type": "spacing",
+          "$description": "Gap between dialog header, content and footer regions when they do not have separate boundaries."
+        },
+        "actionGap": {
+          "$value": "{spacing.inline.md}",
+          "$type": "spacing",
+          "$description": "Gap between dialog actions."
         }
       }
     },
