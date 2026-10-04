@@ -551,6 +551,19 @@
             "$description": "Foreground colour for content placed on success backgrounds."
           }
         },
+        "info": {
+          "$description": "Status colour pairing for neutral information, guidance or supporting context.",
+          "background": {
+            "$value": "{color.primary.100}",
+            "$type": "color",
+            "$description": "Background colour for informational messages."
+          },
+          "foreground": {
+            "$value": "{color.primary.950}",
+            "$type": "color",
+            "$description": "Foreground colour for content placed on informational backgrounds."
+          }
+        },
         "warning": {
           "$description": "Status colour pairing for cautionary feedback, warnings or important non-blocking messages.",
           "background": {
@@ -633,6 +646,11 @@
           "$value": "{color.status.success.foreground}",
           "$type": "color",
           "$description": "Icon colour used inside success messages or on success backgrounds."
+        },
+        "info": {
+          "$value": "{color.status.info.foreground}",
+          "$type": "color",
+          "$description": "Icon colour used inside informational messages or on informational backgrounds."
         },
         "warning": {
           "$value": "{color.status.warning.foreground}",
@@ -1294,6 +1312,39 @@
       }
     },
     "component": {
+      "alert": {
+        "spacing": {
+          "inset": {
+            "$value": "{spacing.inset.md}",
+            "$type": "spacing",
+            "$description": "Padding between the Alert boundary and its icon and content."
+          },
+          "iconToContent": {
+            "$value": "{spacing.3}",
+            "$type": "spacing",
+            "$description": "Horizontal gap between the fixed state icon and the Alert content."
+          },
+          "titleToDescription": {
+            "$value": "{spacing.stack.xs}",
+            "$type": "spacing",
+            "$description": "Vertical gap between the Alert title and optional description."
+          }
+        },
+        "icon": {
+          "size": {
+            "$value": "{size.icon.lg}",
+            "$type": "dimension",
+            "$description": "Size of the fixed state icon used by Alert."
+          }
+        },
+        "surface": {
+          "radius": {
+            "$value": "{radius.lg}",
+            "$type": "borderRadius",
+            "$description": "Corner radius for the Alert status surface."
+          }
+        }
+      },
       "checkbox": {
         "control": {
           "size": {

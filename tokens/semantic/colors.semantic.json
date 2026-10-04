@@ -311,6 +311,20 @@
             "$description": "Foreground colour for content placed on success backgrounds."
           }
         },
+
+        "info": {
+          "$description": "Status colour pairing for neutral information, guidance or supporting context.",
+          "background": {
+            "$value": "{color.primary.100}",
+            "$type": "color",
+            "$description": "Background colour for informational messages."
+          },
+          "foreground": {
+            "$value": "{color.primary.950}",
+            "$type": "color",
+            "$description": "Foreground colour for content placed on informational backgrounds."
+          }
+        },
   
         "warning": {
           "$description": "Status colour pairing for cautionary feedback, warnings or important non-blocking messages.",
@@ -395,6 +409,11 @@
           "$value": "{color.status.success.foreground}",
           "$type": "color",
           "$description": "Icon colour used inside success messages or on success backgrounds."
+        },
+        "info": {
+          "$value": "{color.status.info.foreground}",
+          "$type": "color",
+          "$description": "Icon colour used inside informational messages or on informational backgrounds."
         },
         "warning": {
           "$value": "{color.status.warning.foreground}",
