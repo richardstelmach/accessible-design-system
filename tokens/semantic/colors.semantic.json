@@ -18,6 +18,14 @@
           "$description": "Surface colour reserved for elevated areas such as dialogs, popovers, floating panels or layered content."
         }
       },
+
+      "overlay": {
+        "modal": {
+          "$value": "rgba(17, 24, 39, 0.72)",
+          "$type": "color",
+          "$description": "Standard backdrop colour for modal surfaces. It visually separates active modal content from the inert interface beneath it."
+        }
+      },
   
       "text": {
         "default": {

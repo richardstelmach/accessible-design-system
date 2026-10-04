@@ -1,0 +1,113 @@
+component: Modal backdrop
+id: modal-backdrop
+version: 0.1.0
+status: draft
+
+description: >
+  Modal backdrop is the shared visual layer behind a modal surface. It dims the
+  inert interface beneath a Dialog, drawer, sheet or other approved modal
+  pattern without becoming a separate interactive object.
+
+purpose:
+  - Give modal patterns one consistent overlay colour.
+  - Provide a reusable Figma composition component for realistic product designs.
+  - Keep design composition aligned with native platform backdrop mechanisms.
+
+relatedDocumentation:
+  - components/modal-backdrop/modal-backdrop.md
+  - components/dialog/dialog.yaml
+  - tokens/semantic/colors.semantic.json
+
+scope:
+  useFor:
+    - Modal Dialog compositions
+    - Modal drawers or sheets that explicitly adopt this contract
+    - Design-system examples showing inert content behind a modal surface
+  doNotUseFor:
+    - Non-modal popovers, menus, tooltips or disclosures
+    - Decorative colour washes
+    - Disabled-state styling
+    - Communicating modality without semantic and focus behaviour
+
+anatomy:
+  root:
+    description: Resizable viewport-covering visual layer.
+    tokens:
+      background: color.overlay.modal
+    layout:
+      display: flex
+      align: center
+      justify: center
+      inlineSize: 100%
+      blockSize: 100%
+
+  modalContent:
+    description: Figma-only insertion point for the modal surface shown above the backdrop.
+    contentType: figma-slot
+    figmaPropertyName: Modal content
+    required: false
+    maxChildren: 1
+    preferredComponents:
+      - Dialog
+
+behaviour:
+  interaction:
+    - The backdrop is not an independent control and has no accessible name or role.
+    - The owning modal pattern defines whether pointer interaction outside its surface dismisses it.
+    - Never infer dismissal behaviour from the backdrop colour or component alone.
+  modality:
+    - The owning modal pattern is responsible for inert background content, focus containment, naming and focus restoration.
+    - Do not use the backdrop as the only indication that content is modal.
+
+implementation:
+  web:
+    preferred:
+      - Use the platform backdrop mechanism, such as dialog::backdrop for a native modal dialog.
+      - Apply color.overlay.modal to that backdrop mechanism.
+    fallback:
+      - Use a fixed, viewport-covering presentation layer only when the owning modal pattern cannot use a native backdrop.
+      - Keep the fallback outside the accessibility tree and below the modal surface in stacking order.
+    cssExample: |
+      dialog::backdrop {
+        background: var(--color-overlay-modal);
+      }
+  note: >
+    The Figma component is a composition aid. It does not require every production
+    implementation to render a separate backdrop DOM element.
+
+figma:
+  componentName: Modal backdrop
+  properties:
+    Modal content:
+      type: slot
+      required: false
+      maxChildren: 1
+      preferredComponents:
+        - Dialog
+  rules:
+    - Bind the fill to color/overlay/modal.
+    - Make the component freely resizable so it can match the product viewport or frame.
+    - Centre the Modal content slot by default.
+    - Insert an approved Dialog or other modal surface instance into the slot.
+    - Do not detach the inserted modal component.
+    - Keep product content beneath the backdrop in the composition hierarchy.
+
+accessibility:
+  requirements:
+    - The backdrop itself is not exposed as a separate accessibility object.
+    - Modal semantics, accessible naming, keyboard operation and focus management belong to the owning modal component.
+    - Background content must be inert while the modal is open.
+    - The overlay colour must not be the only cue that the interaction context changed.
+
+testing:
+  - Confirm the semantic token is used rather than a raw colour.
+  - Confirm the layer covers the complete viewport at supported sizes.
+  - Confirm the modal surface remains visually distinct above the backdrop.
+  - Confirm the owning modal pattern controls light dismissal and forced-decision behaviour.
+  - Confirm the production implementation does not expose a redundant accessibility object.
+
+acceptanceCriteria:
+  - GitHub and Figma use color.overlay.modal as the shared source of colour.
+  - The Figma component has a native Modal content slot.
+  - Dialog compositions use the shared component instead of one-off overlay frames.
+  - Native web Dialog implementations use dialog::backdrop rather than requiring an extra DOM node.
