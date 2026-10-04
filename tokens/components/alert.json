@@ -1,0 +1,37 @@
+{
+  "component": {
+    "alert": {
+      "spacing": {
+        "inset": {
+          "$value": "{spacing.inset.md}",
+          "$type": "spacing",
+          "$description": "Padding between the Alert boundary and its icon and content."
+        },
+        "iconToContent": {
+          "$value": "{spacing.3}",
+          "$type": "spacing",
+          "$description": "Horizontal gap between the fixed state icon and the Alert content."
+        },
+        "titleToDescription": {
+          "$value": "{spacing.stack.xs}",
+          "$type": "spacing",
+          "$description": "Vertical gap between the Alert title and optional description."
+        }
+      },
+      "icon": {
+        "size": {
+          "$value": "{size.icon.lg}",
+          "$type": "dimension",
+          "$description": "Size of the fixed state icon used by Alert."
+        }
+      },
+      "surface": {
+        "radius": {
+          "$value": "{radius.lg}",
+          "$type": "borderRadius",
+          "$description": "Corner radius for the Alert status surface."
+        }
+      }
+    }
+  }
+}

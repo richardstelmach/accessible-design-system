@@ -1,0 +1,475 @@
+component: Alert
+id: alert
+version: 0.1.0
+status: draft
+
+description: >
+  Alert communicates a concise success, informational, warning or error message
+  without interrupting the user's task. Visual state, document-heading semantics
+  and live-region announcement behaviour are independent decisions.
+
+purpose:
+  - Communicate brief contextual feedback or status information.
+  - Present state with text, a distinct icon shape and semantic colour.
+  - Support static messages and dynamically inserted status messages without forcing focus.
+
+relatedDocumentation:
+  - components/alert/alert.md
+  - accessibility/headings.yaml
+  - patterns/iconography.yaml
+  - tokens/components/alert.json
+  - tokens/semantic/colors.semantic.json
+
+scope:
+  includes:
+    - Success, info, warning and error visual states
+    - Required title and fixed state icon
+    - Optional description
+    - Optional h2 through h6 title semantics when the title genuinely introduces a section
+    - Static, polite and assertive announcement strategies
+  excludes:
+    - Actions, links and arbitrary slotted content
+    - Dismissal controls and timed disappearance
+    - Error Summary and field-level validation replacement
+    - Toast positioning or notification queues
+    - Alert dialogs, modals and messages requiring acknowledgement
+
+principles:
+  - Do not make the title a heading merely because it is visually prominent.
+  - Whether a description is present does not decide whether the title is a heading.
+  - Do not derive live-region urgency from the visual state.
+  - Do not rely on colour alone; preserve both the canonical state label and distinct icon shape.
+  - Do not move focus to an Alert.
+  - Do not make an Alert interactive.
+
+states:
+  success:
+    default: false
+    stateLabel: Success
+    icon: check-circle
+    tokens:
+      background: color.status.success.background
+      foreground: color.status.success.foreground
+      icon: color.icon.success
+  info:
+    default: true
+    stateLabel: Information
+    icon: info
+    tokens:
+      background: color.status.info.background
+      foreground: color.status.info.foreground
+      icon: color.icon.info
+  warning:
+    default: false
+    stateLabel: Warning
+    icon: warning-circle
+    tokens:
+      background: color.status.warning.background
+      foreground: color.status.warning.foreground
+      icon: color.icon.warning
+  error:
+    default: false
+    stateLabel: Error
+    icon: x-circle
+    tokens:
+      background: color.status.error.background
+      foreground: color.status.error.foreground
+      icon: color.icon.error
+
+anatomy:
+  root:
+    required: true
+    element: div
+    layout:
+      display: flex
+      direction: row
+      alignItems: flex-start
+      fillAvailableWidth: true
+    tokens:
+      padding: component.alert.spacing.inset
+      gap: component.alert.spacing.iconToContent
+      radius: component.alert.surface.radius
+    rules:
+      - The visual state determines the surface and foreground token pairing.
+      - The root has no permanent ARIA role.
+      - The root is not focusable and has no keyboard interaction.
+
+  icon:
+    required: true
+    implementation: registered-inline-svg
+    tokens:
+      size: component.alert.icon.size
+    accessibility:
+      ariaHidden: true
+      focusable: false
+      textualEquivalent: stateLabel
+    rules:
+      - The icon is fixed by state and is not independently swappable.
+      - Do not add alt to an inline SVG.
+      - If an image implementation is used instead, give the image the state label as alt text and omit the separate hidden label.
+      - Do not expose both the icon and hidden state label to assistive technology.
+
+  content:
+    required: true
+    layout:
+      display: flex
+      direction: column
+      gap: component.alert.spacing.titleToDescription
+      minInlineSize: 0
+      fillRemainingWidth: true
+
+  stateLabel:
+    required: true
+    visuallyHidden: true
+    punctuation: colon
+    location: immediately-before-title-text
+    values:
+      success: Success
+      info: Information
+      warning: Warning
+      error: Error
+    rules:
+      - The label supplies a textual equivalent for the visual state and icon.
+      - The canonical label is included once in the accessible reading order.
+      - Product title text should not repeat the same state word unless repetition adds meaning.
+
+  title:
+    required: true
+    defaultElement: p
+    defaultTypography:
+      baseStyle: typography.body.default
+      emphasis: typography.emphasis.strong
+    headingSemantics:
+      supportedLevels:
+        - none
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      default: none
+      h1Supported: false
+      visualStyles:
+        2: typography.heading.h2
+        3: typography.heading.h3
+        4: typography.heading.h4
+        5: typography.heading.h5
+        6: typography.heading.h6
+    rules:
+      - Use a paragraph by default.
+      - Use a heading only when the title introduces a real section in the surrounding document.
+      - Do not infer heading semantics from description presence, title length or visual prominence.
+      - Do not skip heading levels to obtain a preferred size.
+      - Alert must not own the page h1.
+      - Heading visual tokens inherit base, md and lg values from the parent Breakpoint mode.
+
+  description:
+    required: false
+    element: p
+    typography: typography.body.default
+    rules:
+      - Keep the description concise and directly related to the title.
+      - Omit the node when no description is supplied.
+      - Do not render an empty description element.
+
+publicApi:
+  state:
+    type: enum
+    values:
+      - success
+      - info
+      - warning
+      - error
+    default: info
+    required: true
+  titleText:
+    type: string
+    required: true
+    validation: non-empty-after-trimming
+  description:
+    type: boolean
+    default: false
+    required: true
+  descriptionText:
+    type: string
+    requiredWhen: description=true
+    validation: non-empty-after-trimming
+  headingLevel:
+    type: enum
+    values:
+      - none
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+    default: none
+    implementationOnly: true
+    rules:
+      - This controls production markup and is not a visual state axis.
+      - In Figma, the nested Alert / Title Style communicates the intended level.
+  announcement:
+    type: enum
+    values:
+      - none
+      - polite
+      - assertive
+    default: none
+    implementationOnly: true
+    rules:
+      - This controls dynamic announcement semantics and is not a Figma visual property.
+
+announcement:
+  none:
+    default: true
+    role: null
+    useWhen:
+      - The Alert is static or already present when the page loads.
+      - The content is exposed through ordinary document reading order.
+  polite:
+    role: status
+    implicitLive: polite
+    implicitAtomic: true
+    useWhen:
+      - New advisory information should be announced without interrupting current speech.
+  assertive:
+    role: alert
+    implicitLive: assertive
+    implicitAtomic: true
+    useWhen:
+      - A newly inserted important and time-sensitive message requires immediate announcement.
+    rules:
+      - Use sparingly and test with supported browser and screen-reader combinations.
+      - Do not add redundant aria-live or aria-atomic values when the role supplies them.
+  globalRules:
+    - Create the live-region container before or at the time required by the implementation strategy so changes are announced reliably.
+    - Do not announce the same message through Alert, Error Summary and inline validation live regions.
+    - Do not repeatedly rebuild an unchanged message.
+    - Do not move focus to the Alert.
+
+figma:
+  pageName: 18 - Components - Alert
+  componentSet:
+    name: Alert
+    description: >
+      Communicates brief success, informational, warning or error feedback. Visual
+      state does not select live-region behaviour. The nested Title style records
+      heading intent; production semantics still follow document structure.
+    variants:
+      State:
+        - Success
+        - Info
+        - Warning
+        - Error
+      Description:
+        - "False"
+        - "True"
+    expectedVariantCount: 8
+    defaultVariant:
+      State: Info
+      Description: "False"
+  properties:
+    Title:
+      type: TEXT
+      default: Important information
+      required: true
+    Description text:
+      type: TEXT
+      default: Supporting detail explains what the user needs to know.
+      visibleWhen: Description=True
+    Title style:
+      type: exposed-nested-variant
+      owner: _Alert/Title
+      values:
+        - Default
+        - H2
+        - H3
+        - H4
+        - H5
+        - H6
+      default: Default
+      note: This is handoff intent. Production still selects the correct heading element from document structure.
+  internalComponents:
+    title:
+      name: _Alert/Title
+      variantProperty: Style
+      variants:
+        - Default
+        - H2
+        - H3
+        - H4
+        - H5
+        - H6
+      textProperty: Title
+      defaultStyle:
+        baseStyle: typography/body/default
+        fontWeight: typography.emphasis.strong
+      headingStyles:
+        H2: typography/heading/h2
+        H3: typography/heading/h3
+        H4: typography/heading/h4
+        H5: typography/heading/h5
+        H6: typography/heading/h6
+  fixedIconMapping:
+    Success: Icon/check-circle
+    Info: Icon/info
+    Warning: Icon/warning-circle
+    Error: Icon/x-circle
+  tokenBindings:
+    rootPadding: component/alert/spacing/inset
+    iconToContentGap: component/alert/spacing/iconToContent
+    titleToDescriptionGap: component/alert/spacing/titleToDescription
+    radius: component/alert/surface/radius
+    iconSize: component/alert/icon/size
+    backgrounds:
+      Success: color/status/success/background
+      Info: color/status/info/background
+      Warning: color/status/warning/background
+      Error: color/status/error/background
+    foregrounds:
+      Success: color/status/success/foreground
+      Info: color/status/info/foreground
+      Warning: color/status/warning/foreground
+      Error: color/status/error/foreground
+    icons:
+      Success: color/icon/success
+      Info: color/icon/info
+      Warning: color/icon/warning
+      Error: color/icon/error
+  responsiveTypography:
+    collection: Breakpoint
+    modes:
+      - base
+      - md
+      - lg
+    rules:
+      - Apply one semantic text style per title or description role.
+      - Let the style inherit from the parent frame's Breakpoint mode.
+      - Do not create breakpoint-suffixed text styles or Alert variants.
+  rules:
+    - Keep the state icon fixed; do not expose an instance-swap property on Alert.
+    - Keep announcement and headingLevel implementation-only.
+    - Preserve fill-width and automatic-height layout.
+    - Top-align the icon with the first line of content.
+    - Hide the Description node instead of substituting empty text.
+    - Do not detach icon or title instances.
+
+productionMarkup:
+  default: |
+    <div class="alert alert--info">
+      <svg aria-hidden="true" focusable="false"><!-- registered info icon --></svg>
+      <div class="alert__content">
+        <p class="alert__title">
+          <span class="visually-hidden">Information: </span>
+          Scheduled maintenance begins at 8pm
+        </p>
+      </div>
+    </div>
+  withDescriptionAndPoliteAnnouncement: |
+    <div class="alert alert--success" role="status">
+      <svg aria-hidden="true" focusable="false"><!-- registered check-circle icon --></svg>
+      <div class="alert__content">
+        <p class="alert__title">
+          <span class="visually-hidden">Success: </span>
+          Your changes were saved
+        </p>
+        <p class="alert__description">The new settings are now active.</p>
+      </div>
+    </div>
+  structuralHeading: |
+    <div class="alert alert--warning">
+      <svg aria-hidden="true" focusable="false"><!-- registered warning-circle icon --></svg>
+      <div class="alert__content">
+        <h3 class="alert__title">
+          <span class="visually-hidden">Warning: </span>
+          Before you continue
+        </h3>
+        <p class="alert__description">Check that the account details are current.</p>
+      </div>
+    </div>
+
+accessibility:
+  wcag:
+    - id: 1.1.1
+      name: Non-text Content
+      relevance: The state icon has one textual equivalent and no duplicate accessible name.
+    - id: 1.3.1
+      name: Info and Relationships
+      relevance: Heading markup is used only when the title introduces a real section.
+    - id: 1.4.1
+      name: Use of Color
+      relevance: State is also conveyed by canonical text and distinct icon shape.
+    - id: 1.4.3
+      name: Contrast Minimum
+      relevance: Foreground and background status token pairs must meet text contrast requirements.
+    - id: 2.4.6
+      name: Headings and Labels
+      relevance: A heading title must describe the content that follows.
+    - id: 4.1.3
+      name: Status Messages
+      relevance: Dynamic status messages use the appropriate programmatic role without receiving focus.
+  keyboard:
+    interaction: none
+    focusable: false
+  screenReader:
+    expectedPrefixByState:
+      success: "Success:"
+      info: "Information:"
+      warning: "Warning:"
+      error: "Error:"
+    rules:
+      - The prefix is announced once before the title.
+      - Static Alerts are available in reading order without a live-region role.
+      - Polite and assertive examples are tested as dynamic insertions or updates.
+
+contentGuidance:
+  title:
+    - State the outcome, condition or information directly.
+    - Keep the title meaningful without the description.
+    - Do not use vague titles such as Notice or Important unless the following words add the actual meaning.
+  description:
+    - Explain the consequence or next step in plain language.
+    - Keep the message short enough to scan.
+  prohibited:
+    - Do not put links, buttons or dismiss controls in Alert.
+    - Do not use Alert as a generic decorative callout.
+    - Do not duplicate field errors already provided by inline errors and Error Summary.
+
+validation:
+  source:
+    - All four state values exist and have fixed icon and token mappings.
+    - titleText is required and non-empty.
+    - descriptionText is required only when description is true.
+    - headingLevel excludes h1 and defaults to none.
+    - announcement defaults to none and is independent from state.
+    - The icon is hidden from assistive technology and the canonical state label is present once.
+  figma:
+    - Alert has exactly eight variants: four states by two description values.
+    - The public properties are State, Description, Title, Description text and exposed nested Title style.
+    - Every state uses the required registered icon instance and semantic colour variables.
+    - No icon instance-swap, announcement or headingLevel property is exposed.
+    - Default, H2, H3, H4, H5 and H6 Title styles are available through _Alert/Title.
+    - Root fill, padding, gap and radius are variable-bound.
+    - Icon size and icon colour are variable-bound.
+    - Title and description wrap without clipping at 320px.
+    - Long title and description content increases component height.
+    - base, md and lg Breakpoint modes update the applied semantic text styles.
+    - A compact review frame shows all four states with and without descriptions as instances.
+  production:
+    - No keyboard interaction or focus movement is introduced.
+    - Live-region roles are applied only for dynamic messages matching the selected announcement value.
+    - role=status and role=alert are not combined with redundant aria-live or aria-atomic attributes.
+    - The message is not announced more than once.
+    - Alert does not replace Error Summary or field-level errors.
+
+acceptanceCriteria:
+  - Alert supports success, info, warning and error states.
+  - Every Alert contains a fixed state icon, required title and optional description.
+  - The default title is semibold body text, not a heading.
+  - h2 through h6 are available only for genuine document structure; h1 is prohibited.
+  - Description presence never determines heading semantics.
+  - Visual state and announcement urgency remain independent.
+  - The icon is decorative to assistive technology and the canonical state label is announced once.
+  - Shared semantic info tokens complete the status and icon families.
+  - Alert-specific tokens contain geometry only.
+  - Figma uses the global Tokens Studio collection and existing Breakpoint modes without a parallel token source.
