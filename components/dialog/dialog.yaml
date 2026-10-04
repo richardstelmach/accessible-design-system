@@ -1,0 +1,604 @@
+component: Dialog
+id: dialog
+version: 0.1.0
+status: draft
+
+description: >
+  Dialogs interrupt the current page with a modal task, decision or important
+  information. They use native dialog semantics, make the rest of the page inert,
+  contain keyboard focus while open and restore focus when closed.
+
+terminology:
+  canonicalName: Dialog
+  note: Use "dialog", matching the HTML element and ARIA role. Do not use "dialogue" in API or component names.
+
+purpose:
+  - Present a focused task or decision without navigating to another page.
+  - Support dismissible and forced-decision flows with explicit behavior.
+  - Provide a named, modal region with predictable keyboard and focus management.
+  - Compose product-specific content through a stable content slot.
+
+relatedDocumentation:
+  - components/dialog/dialog.md
+  - components/modal-backdrop/modal-backdrop.yaml
+  - components/modal-backdrop/modal-backdrop.md
+  - components/button/button.yaml
+  - accessibility/focus-indicators.yaml
+  - accessibility/headings.yaml
+  - patterns/component-documentation-page.yaml
+  - patterns/page-layout.yaml
+
+scope:
+  includes:
+    - Modal dialogs opened in response to a user action
+    - Short confirmations and standard modal tasks
+    - Forced-decision flows with an available action inside the dialog
+    - Optional visible title and optional close control
+    - Optional primary and secondary actions
+    - Inset and mobile full-screen presentation
+    - Small, medium and large desktop sizes
+    - Vertically scrolling content
+  excludes:
+    - Non-modal dialogs
+    - Alert dialogs requiring role alertdialog
+    - Toasts, popovers, menus, drawers and tooltips
+    - Persistent page regions
+    - Multi-step workflow conventions beyond the dialog container
+
+principles:
+  - Use a dialog only when interruption is justified.
+  - Prefer a page for long, complex or frequently referenced work.
+  - Use the native HTML dialog element and showModal() for web implementation.
+  - The dialog must always have an accessible name.
+  - Move focus to the dialog container when it opens.
+  - Keep focus within the modal dialog while it is open.
+  - Restore focus to the element that opened the dialog when it closes, when that element still exists and can receive focus.
+  - Never allow a forced-decision dialog to become a dead end.
+
+behaviour:
+  modality:
+    required: true
+    implementation:
+      element: dialog
+      openMethod: showModal()
+      rules:
+        - Do not open the component with only the open attribute because that does not create a modal dialog.
+        - While open, content outside the dialog must be inert and unavailable to pointer and sequential keyboard interaction.
+        - Only one modal dialog should be active at a time.
+
+  dismissal:
+    variants:
+      dismissible:
+        default: true
+        nativeClosedBy: any
+        escape: closes
+        closeControl: closes-when-present
+        backdrop: closes-on-click-or-tap-outside
+        rules:
+          - At least one reliable dismissal method must be available.
+          - The close control is optional because Escape and backdrop dismissal are supported by default.
+          - Closing without completing an action must not silently commit changes.
+      forcedDecision:
+        default: false
+        nativeClosedBy: none
+        escape: prevented
+        closeControl: prohibited
+        backdrop: ignored
+        rules:
+          - The user can close the dialog only through an enabled action inside it.
+          - Include at least one action that resolves the flow.
+          - Do not use forced-decision mode merely to increase conversion or prevent ordinary cancellation.
+          - Explain consequences before the user acts.
+          - Where declining is a valid outcome, provide it as an explicit action.
+          - Prevent the native cancel event rather than allowing Escape to close and reopening the dialog.
+
+  backdropInteraction:
+    rules:
+      - Dismiss only when both pointer down and pointer up occur outside the dialog surface.
+      - Do not dismiss when a pointer gesture begins in the dialog and ends outside it.
+      - Do not treat clicks on descendants or scrollbars as backdrop clicks.
+
+  scroll:
+    container: contentSlot
+    axis: vertical
+    mechanism: native-browser-scroll
+    rules:
+      - Constrain the dialog to the available viewport block size.
+      - Keep the header and action area visible when practical; only the content region scrolls.
+      - Use overflow-y auto on the content region.
+      - Do not create horizontal scrolling at supported viewport sizes or at 400 percent zoom.
+      - Preserve browser and assistive-technology scrolling behavior.
+      - Use overscroll containment only if background scroll chaining is otherwise a demonstrated problem.
+
+  pageScroll:
+    rules:
+      - Prevent the underlying page from scrolling while the modal dialog is open.
+      - Restore the previous page scroll behavior on close.
+      - Do not reset the page scroll position.
+
+focusManagement:
+  onOpen:
+    target: dialogContainer
+    implementation:
+      autofocus: true
+      sequence:
+        - Record the currently focused trigger element.
+        - Apply autofocus to the native dialog element, not to a descendant.
+        - Open with showModal().
+        - Let the native dialog focusing steps focus the dialog container.
+    rules:
+      - Do not add tabindex to a native dialog element; the HTML Standard prohibits it.
+      - Do not use autofocus on a destructive or irreversible action.
+      - Do not move initial focus to the close button, first field or primary action by default.
+      - Ensure the focused dialog container is not visually obscured.
+
+  whileOpen:
+    focusContainment: required
+    rules:
+      - Tab and Shift+Tab remain within the modal dialog.
+      - Use native modal inertness together with one boundary handler that wraps Shift+Tab from the first boundary to the last focusable descendant and Tab from the last boundary to the first.
+      - Obtain the boundaries from a tested tabbable-order utility; do not approximate browser tab order with a selector alone.
+      - The utility must handle radio groups, controls disabled by an ancestor fieldset, inert or hidden ancestors, every negative tabindex value and shadow DOM where the supported platform exposes it.
+      - Resolve the active boundary from the keyboard event's composed path so a focused descendant inside shadow DOM is compared instead of only its shadow host.
+      - Recompute tabbable descendants for each Tab key event so dynamically added or removed controls are handled.
+      - If no focusable descendants exist, prevent Tab from leaving and keep focus on the dialog container.
+      - Do not add a second focus-trap library on top of this boundary handler.
+      - Dynamically added focusable content must participate in the dialog focus order.
+      - Do not use positive tabindex values.
+
+  onClose:
+    target: openingTrigger
+    fallback: next-logical-focus-target
+    rules:
+      - Restore focus after the dialog is no longer open.
+      - If the trigger no longer exists or is disabled, move focus to a logical nearby location and document that product-specific behavior.
+      - If closing navigates to a new view, let the destination's focus-management pattern take precedence.
+
+semantics:
+  preferredElement: dialog
+  modalMethod: showModal()
+  implicitRole: dialog
+  rules:
+    - Do not add role dialog to a native dialog unless required to work around a verified platform defect.
+    - Do not add aria-modal to a native modal dialog unless required by a verified support issue.
+    - Do not use role alertdialog for the standard Dialog component.
+    - Keep the dialog in the DOM while closing focus is restored; remove it only afterwards if the product lifecycle requires removal.
+
+accessibleName:
+  required: true
+  methods:
+    titlePresent:
+      method: aria-labelledby
+      source: title.id
+      rules:
+        - The title must be visible.
+        - The title id must be unique in the document.
+        - Do not also apply aria-label.
+    titleAbsent:
+      method: aria-label
+      requiredValue: non-empty-purpose-specific-string
+      rules:
+        - The API must require an accessible label when no visible title is supplied.
+        - Do not derive the name from button text or body copy.
+  validation:
+    - Fail development validation when neither a title nor a non-empty aria-label is provided.
+    - Fail development validation when both aria-labelledby and aria-label are applied by the component API.
+
+accessibleDescription:
+  method: aria-describedby
+  optional: true
+  rules:
+    - Use for a short, stable summary that improves understanding when the dialog opens.
+    - Do not point aria-describedby at long, complex, structured or frequently changing content.
+    - Allow screen-reader users to explore long content using normal reading commands.
+
+anatomy:
+  backdrop:
+    pseudoElement: dialog::backdrop
+    required: true
+    tokens:
+      background: component.dialog.backdrop.background
+    rules:
+      - The token aliases color.overlay.modal, the shared modal-overlay semantic colour.
+      - Use the Modal backdrop Figma component when composing product screens; native web dialogs apply the same token through dialog::backdrop.
+      - Do not rely on backdrop appearance alone to communicate modality.
+      - Backdrop content is not interactive content and is not exposed as a separate accessibility object.
+
+  root:
+    element: dialog
+    required: true
+    focusableProgrammatically: true
+    initialFocusAttribute: autofocus
+    tokens:
+      background: component.dialog.surface.background
+      borderColor: component.dialog.surface.border
+      borderWidth: border.width.thin
+      radius: component.dialog.surface.radius
+    layout:
+      closed: user-agent-hidden
+      open:
+        display: flex
+        direction: column
+        overflow: hidden
+      rules:
+        - Apply flex layout only while the dialog has the open state.
+        - Do not override the user agent rule that hides a dialog without the open attribute.
+
+  header:
+    required: false
+    visibility: shown-when-title-or-close-control-is-present
+    layout:
+      display: flex
+      align: start
+      justify: space-between
+      gap: spacing.inline.md
+    tokens:
+      padding: component.dialog.spacing.header
+    rules:
+      - Allow the header block size to grow when the title wraps.
+      - Reserve space for the close control without fixing the title to a single line.
+      - Do not clip, truncate or overlap the title at supported zoom, text-spacing or translated-content conditions.
+
+  title:
+    element: heading
+    required: false
+    contentType: text
+    namingRelationship: aria-labelledby
+    visualStyle:
+      base: typography.heading.h3.base
+      md: typography.heading.h3.md
+      lg: typography.heading.h3.lg
+    tokens:
+      color: color.text.heading
+    wrapping: allowed
+
+  closeControl:
+    required: false
+    allowedWhen: dismissible
+    prohibitedWhen: forcedDecision
+    component: Button
+    configuration:
+      type: button
+      presentation: icon-only
+      icon: x
+      accessibleName: Close dialog
+    placement: top-right
+    rules:
+      - Use the registered x icon.
+      - The icon is decorative because the button has an accessible name.
+      - Meet the shared minimum target-size and focus-indicator requirements.
+      - Do not place the close control over title or body text at any supported zoom or text-spacing setting.
+
+  contentSlot:
+    required: true
+    technicalName: content
+    web:
+      contentType: named-slot
+      markup: '<slot name="content"></slot>'
+    figma:
+      contentType: figma-slot
+      propertyName: Content
+      fallback: instance-swap-property
+    layout:
+      grow: true
+      minBlockSize: 0
+      overflowY: auto
+      overflowX: hidden
+    tokens:
+      padding: component.dialog.spacing.content
+    rules:
+      - Accept structured product content rather than plain text only.
+      - Slot content owns its internal semantics and validation.
+      - Do not put the footer actions inside the scrolling content slot by default.
+      - Do not detach slotted Figma component instances.
+
+  footer:
+    required: false
+    visibility: shown-when-an-action-is-present
+    layout:
+      display: flex
+      wrap: true
+      gap: component.dialog.spacing.actionGap
+      narrowDirection: column
+      largerDirection: row
+    tokens:
+      padding: component.dialog.spacing.footer
+
+  primaryAction:
+    required: false
+    component: Button
+    buttonVariant: primary
+    web:
+      contentType: named-slot
+      slotName: primary-action
+    figma:
+      contentType: instance-swap-property
+      propertyName: Primary action
+
+  secondaryAction:
+    required: false
+    component: Button
+    buttonVariant: default
+    web:
+      contentType: named-slot
+      slotName: secondary-action
+    figma:
+      contentType: instance-swap-property
+      propertyName: Secondary action
+
+actions:
+  order:
+    narrow: [secondaryAction, primaryAction]
+    larger: [secondaryAction, primaryAction]
+  rules:
+    - Actions are optional in a dismissible informational dialog.
+    - At least one enabled resolving action is required in forced-decision mode.
+    - Use actual Button components and native button elements.
+    - Use type button unless the action intentionally submits a form.
+    - Keep action labels specific and action-oriented.
+    - Do not make destructive and safe actions visually indistinguishable.
+    - Avoid disabled primary actions when validation can instead run after activation.
+
+sizes:
+  small:
+    token: component.dialog.size.small
+    default: false
+    useFor: Short confirmations, acknowledgements and focused decisions.
+  medium:
+    token: component.dialog.size.medium
+    default: true
+    useFor: Standard forms and common dialog tasks.
+  large:
+    token: component.dialog.size.large
+    default: false
+    useFor: Complex content that needs additional width but still belongs in a dialog.
+  rules:
+    - Size sets maximum inline size, not a fixed width.
+    - Actual inline size is the smaller of the selected size and the viewport minus two viewport insets.
+    - Do not choose large only to avoid improving content structure.
+
+mobilePresentation:
+  inset:
+    default: true
+    inlineSize: viewport minus two component.dialog.size.viewportInset values
+    maxBlockSize: viewport minus two component.dialog.size.viewportInset values
+    placement: centered
+    radius: component.dialog.surface.radius
+    rules:
+      - Preserve at least a 1rem inset from each viewport edge.
+      - Use dynamic viewport units in implementation to account for browser chrome and on-screen keyboards.
+  fullScreen:
+    default: false
+    inlineSize: 100dvi
+    blockSize: 100dvb
+    maxInlineSize: none
+    maxBlockSize: none
+    radius: radius.none
+    rules:
+      - Use for tasks needing the available mobile canvas, not for short confirmations.
+      - Respect safe-area insets in header, content and footer padding.
+      - Maintain the same semantics, naming, focus containment and dismissal mode.
+
+responsiveBehaviour:
+  - Use inset medium as the default presentation at every breakpoint.
+  - Small, medium and large are explicit consumer choices, not automatic breakpoint variants.
+  - Mobile full-screen is an explicit option and may activate below breakpoint.md.
+  - Stack and full-width actions on narrow viewports when needed for readable labels and targets.
+  - Support 320 CSS pixels without two-dimensional scrolling.
+  - Support reflow at 400 percent zoom at a 1280 CSS pixel desktop viewport.
+  - Use logical properties so the layout works in right-to-left interfaces.
+
+keyboardInteraction:
+  opening:
+    - The trigger activates the dialog using Enter or Space according to native Button behavior.
+  openDialog:
+    - Tab moves to the next focusable descendant and wraps within the modal boundary through native modal behavior.
+    - Shift+Tab moves to the previous focusable descendant and remains within the modal boundary.
+    - Escape closes a dismissible dialog through the native cancel event.
+    - Escape does nothing in forced-decision mode because the cancel event is prevented.
+    - Enter and Space activate focused controls according to their native behavior.
+  rules:
+    - Do not bind Enter to the primary action globally when focus is on a multiline field or another control with its own Enter behavior.
+    - Do not close on Escape from a nested widget if that widget consumes Escape for its own documented behavior; a subsequent Escape may dismiss the dialog.
+
+contentGuidelines:
+  title:
+    - Describe the task, decision or information concisely.
+    - Use sentence case.
+    - Do not end a short title with punctuation.
+  body:
+    - Put essential consequences before actions.
+    - Keep content focused on one task or closely related decision.
+    - Do not hide required instructions below a long scroll without an additional cue.
+  actions:
+    - Prefer specific labels such as "Delete account" or "Save changes" over "OK".
+    - Use "Cancel" only when it accurately describes the outcome.
+    - Keep labels distinct when announced without surrounding context.
+
+wcag:
+  target: WCAG 2.2 AA
+  supports:
+    - 1.3.1 Info and Relationships
+    - 1.3.2 Meaningful Sequence
+    - 1.4.3 Contrast Minimum
+    - 1.4.10 Reflow
+    - 1.4.11 Non-text Contrast
+    - 1.4.12 Text Spacing
+    - 2.1.1 Keyboard
+    - 2.1.2 No Keyboard Trap
+    - 2.4.3 Focus Order
+    - 2.4.6 Headings and Labels
+    - 2.4.7 Focus Visible
+    - 2.4.11 Focus Not Obscured Minimum
+    - 2.5.3 Label in Name
+    - 2.5.8 Target Size Minimum
+    - 3.2.1 On Focus
+    - 3.2.2 On Input
+    - 3.3.2 Labels or Instructions
+    - 4.1.2 Name Role Value
+
+figmaProperties:
+  Size:
+    type: variant
+    values: [Small, Medium, Large]
+    default: Medium
+  Mobile presentation:
+    type: variant
+    values: [Inset, Full screen]
+    default: Inset
+    note: Full screen is documented for mobile use; do not use it as a desktop size.
+  Dismissal:
+    type: variant
+    values: [Dismissible, Forced decision]
+    default: Dismissible
+  Show title:
+    type: boolean
+    default: true
+  Title:
+    type: text
+    default: Dialog title
+  Show close:
+    type: boolean
+    default: true
+    constraints:
+      - Must be false when Dismissal is Forced decision.
+  Content:
+    type: slot
+    required: true
+    fallbackType: instance-swap
+  Show primary action:
+    type: boolean
+    default: true
+  Primary action:
+    type: instance-swap
+    preferredComponent: Button
+  Show secondary action:
+    type: boolean
+    default: true
+  Secondary action:
+    type: instance-swap
+    preferredComponent: Button
+
+figmaRules:
+  - Create a Dialog component set using only the documented variant axes and properties.
+  - Use Auto Layout for the root, header, content and footer.
+  - Make Content a native Figma slot named Content where available.
+  - If native slots are unavailable, use an instance-swap or nested placeholder property named Content and report the fallback.
+  - Set preferred instances for common content examples without adding content-type variants.
+  - Use Button instances for close, primary and secondary actions; do not detach them.
+  - Use the registered x icon in the close Button.
+  - Use semantic variables and component tokens; do not use raw visual values.
+  - Compose documentation and product examples with the shared Modal backdrop component instead of one-off backdrop frames.
+  - Represent the content region as the only vertically scrolling region in prototypes and examples.
+  - Document initial focus on the dialog container with an annotation; a static Figma focus state is illustrative only.
+  - Do not show a close control on forced-decision variants.
+  - For a titleless instance, add an accessibility annotation containing the required implementation aria-label.
+  - Keep production masters separate from documentation examples and QA frames.
+
+figmaSlotModel:
+  status: use-native-figma-slots-where-available
+  nativePropertyName: Content
+  intendedImplementation:
+    - Create a nested Auto Layout frame for the content region.
+    - Convert it to a native Figma slot named Content.
+    - Describe the slot as accepting structured product content with its own internal layout.
+    - Set sensible preferred instances for representative content compositions.
+  fallbackImplementation:
+    - Use a nested placeholder component or instance-swap property named Content.
+    - Preserve the same padding, sizing and clipping behavior.
+    - Mark the fallback for later migration without changing the public property name.
+  stabilityRule:
+    - Do not remove or rename the published Content slot without migration testing because instance content can be reset.
+
+examples:
+  - name: Standard dismissible dialog
+    configuration:
+      size: medium
+      dismissal: dismissible
+      title: present
+      closeControl: present
+      primaryAction: present
+      secondaryAction: present
+  - name: Informational dialog without title
+    configuration:
+      size: small
+      dismissal: dismissible
+      title: absent
+      ariaLabel: About session timeout
+      closeControl: present
+      primaryAction: absent
+      secondaryAction: absent
+  - name: Forced decision
+    configuration:
+      size: small
+      dismissal: forcedDecision
+      title: present
+      closeControl: absent
+      primaryAction: present
+      secondaryAction: present
+  - name: Mobile full-screen task
+    configuration:
+      size: medium
+      mobilePresentation: fullScreen
+      dismissal: dismissible
+      title: present
+      closeControl: present
+
+testing:
+  contract:
+    - Reject missing accessible name.
+    - Use aria-labelledby when a title is present and aria-label only when it is absent.
+    - Reject a close control in forced-decision mode.
+    - Require an enabled resolving action in forced-decision mode.
+  keyboard:
+    - Open from a keyboard-operated trigger and confirm focus lands on the dialog container.
+    - Cycle forward and backward through every focusable descendant without leaving the dialog.
+    - Repeat boundary wrapping with radio groups, a disabled fieldset, negative tabindex values, hidden and inert ancestors, and dynamically added or removed controls.
+    - Confirm Escape closes dismissible mode.
+    - Confirm Escape does not close forced-decision mode.
+    - Confirm all actions work without pointer input.
+  pointer:
+    - Confirm backdrop click or tap closes dismissible mode.
+    - Confirm interaction inside the surface does not close the dialog.
+    - Confirm a drag beginning inside and ending outside does not close the dialog.
+    - Confirm backdrop interaction does not close forced-decision mode.
+  focusRestoration:
+    - Close through Escape, close control, backdrop, primary action and secondary action as applicable.
+    - Confirm focus returns to the opening trigger after each close path.
+    - Remove or disable the trigger and confirm the product-defined fallback receives focus.
+  screenReader:
+    - Confirm the Dialog role and accessible name are announced.
+    - Confirm title-based naming does not produce a duplicated name.
+    - Confirm long content is navigable without being flattened into the accessible description.
+    - Confirm background content is not operable while the dialog is open.
+  visual:
+    - Check 320px and 390px mobile, 768px tablet, 1024px and 1440px desktop frames.
+    - Check inset and mobile full-screen presentations.
+    - Check Small, Medium and Large sizes with short and overflowing content.
+    - Check 200 percent text spacing and 400 percent browser zoom.
+    - Check browser default scrolling, visible focus, high contrast and forced-colours mode.
+    - Check safe-area insets and on-screen keyboard behavior on mobile.
+
+acceptanceCriteria:
+  - The component uses a native modal dialog in web implementations.
+  - Focus lands on the dialog container on open and remains within the modal while open.
+  - Focus returns to the trigger on close, with a documented fallback when restoration is impossible.
+  - Dismissible mode closes by Escape, optional close control and backdrop activation.
+  - Forced-decision mode ignores Escape and backdrop activation, has no close control and contains an enabled resolving action.
+  - The dialog always has exactly one accessible naming method.
+  - Overflowing body content scrolls vertically using native browser scrolling.
+  - Optional primary and secondary actions use Button components.
+  - Inset mobile layout preserves viewport spacing and full-screen mobile layout respects safe areas.
+  - Small, Medium and Large sizes use component tokens and remain fluid below their maximum widths.
+  - The technical Content slot and Figma Content slot or documented fallback are both present.
+  - Documented keyboard, screen-reader, reflow and focus-restoration checks pass.
+
+aiGenerationRules:
+  - Use only the documented sizes, dismissal modes and mobile presentations.
+  - Default to Medium, Inset and Dismissible.
+  - Require a purpose-specific aria-label when generating a titleless Dialog.
+  - Never combine Forced decision with a close control, Escape dismissal or backdrop dismissal.
+  - Never generate Forced decision without an enabled resolving action.
+  - Keep content in the Content slot and actions in their action properties.
+  - Reuse Button and registered icon components.
+  - Report unsupported native Figma slots and use the named fallback without inventing a different API.

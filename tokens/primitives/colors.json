@@ -9,6 +9,14 @@
         "$value": "#000000",
         "$type": "color"
       },
+
+      "neutralTranslucent": {
+        "720": {
+          "$value": "rgba(17, 24, 39, 0.72)",
+          "$type": "color",
+          "$description": "Dark neutral at 72 percent opacity for layered presentation effects."
+        }
+      },
   
       "neutral": {
         "100": {
