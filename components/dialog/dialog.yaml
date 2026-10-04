@@ -136,7 +136,10 @@ focusManagement:
     focusContainment: required
     rules:
       - Tab and Shift+Tab remain within the modal dialog.
-      - Prefer the native modal dialog focus model; do not add a second competing focus trap.
+      - Use native modal inertness together with one boundary handler that wraps Shift+Tab from the first boundary to the last focusable descendant and Tab from the last boundary to the first.
+      - Recompute focusable descendants for each Tab key event so dynamically added or removed controls are handled.
+      - If no focusable descendants exist, prevent Tab from leaving and keep focus on the dialog container.
+      - Do not add a second focus-trap library on top of this boundary handler.
       - Dynamically added focusable content must participate in the dialog focus order.
       - Do not use positive tabindex values.
 
@@ -209,9 +212,14 @@ anatomy:
       borderWidth: border.width.thin
       radius: component.dialog.surface.radius
     layout:
-      display: flex
-      direction: column
-      overflow: hidden
+      closed: user-agent-hidden
+      open:
+        display: flex
+        direction: column
+        overflow: hidden
+      rules:
+        - Apply flex layout only while the dialog has the open state.
+        - Do not override the user agent rule that hides a dialog without the open attribute.
 
   header:
     required: false

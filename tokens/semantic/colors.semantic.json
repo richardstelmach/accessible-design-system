@@ -21,7 +21,7 @@
 
       "overlay": {
         "modal": {
-          "$value": "rgba(17, 24, 39, 0.72)",
+          "$value": "{color.neutralTranslucent.720}",
           "$type": "color",
           "$description": "Standard backdrop colour for modal surfaces. It visually separates active modal content from the inert interface beneath it."
         }

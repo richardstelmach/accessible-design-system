@@ -186,7 +186,9 @@ by default. A product-specific exception needs a clear usability reason and docu
 
 ### While open
 
-Tab and Shift+Tab must remain within the modal dialog. Prefer the native `showModal()` focus model and inert background behavior. Do not layer a second focus-trap library over the native behavior unless testing identifies a specific browser defect; competing traps commonly cause skipped controls or focus loops.
+Tab and Shift+Tab must remain within the modal dialog. Use native `showModal()` inertness together with one lightweight boundary handler: Shift+Tab from the first boundary wraps to the last focusable descendant, and Tab from the last boundary wraps to the first. If there are no focusable descendants, keep focus on the Dialog container.
+
+Recompute the focusable descendants for each Tab key event so controls added, removed, enabled or disabled while the Dialog is open participate correctly. Do not layer a second focus-trap library over this handler; competing traps commonly cause skipped controls or focus loops.
 
 Content added while the Dialog is open must join the logical focus order. Do not use positive `tabindex` values.
 
@@ -308,7 +310,7 @@ Do not use full screen for a short confirmation. It does not change the Dialogâ€
 Constrain the Dialog to the available viewport height and apply native vertical scrolling to the Content region:
 
 ```css
-.dialog {
+.dialog[open] {
   display: flex;
   max-block-size: calc(100dvb - 2 * var(--component-dialog-size-viewport-inset));
   flex-direction: column;
@@ -380,6 +382,25 @@ export function createDialogController(dialog, { forcedDecision = false } = {}) 
   let trigger = null;
   let pointerStartedOutside = false;
 
+  const focusableSelector = [
+    "a[href]",
+    "area[href]",
+    "button:not([disabled])",
+    "input:not([disabled]):not([type='hidden'])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    "[contenteditable]:not([contenteditable='false'])",
+    "[tabindex]:not([tabindex='-1'])"
+  ].join(",");
+
+  const getFocusableDescendants = () =>
+    [...dialog.querySelectorAll(focusableSelector)].filter(
+      (element) =>
+        element instanceof HTMLElement &&
+        !element.hidden &&
+        element.getClientRects().length > 0
+    );
+
   const isOutsideSurface = (event) => {
     const rect = dialog.getBoundingClientRect();
     return (
@@ -400,6 +421,30 @@ export function createDialogController(dialog, { forcedDecision = false } = {}) 
 
   dialog.addEventListener("cancel", (event) => {
     if (forcedDecision) event.preventDefault();
+  });
+
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key !== "Tab") return;
+
+    const focusable = getFocusableDescendants();
+
+    if (focusable.length === 0) {
+      event.preventDefault();
+      dialog.focus();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+
+    if (event.shiftKey && (active === first || active === dialog)) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && active === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   dialog.addEventListener("pointerdown", (event) => {
