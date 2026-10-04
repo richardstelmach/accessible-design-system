@@ -188,7 +188,7 @@ by default. A product-specific exception needs a clear usability reason and docu
 
 Tab and Shift+Tab must remain within the modal dialog. Use native `showModal()` inertness together with one lightweight boundary handler: Shift+Tab from the first boundary wraps to the last focusable descendant, and Tab from the last boundary wraps to the first. If there are no focusable descendants, keep focus on the Dialog container.
 
-Recompute the focusable descendants for each Tab key event so controls added, removed, enabled or disabled while the Dialog is open participate correctly. Do not layer a second focus-trap library over this handler; competing traps commonly cause skipped controls or focus loops.
+Recompute the tabbable descendants for each Tab key event so controls added, removed, enabled or disabled while the Dialog is open participate correctly. Use a tested tabbable-order utility rather than a selector approximation. It must account for radio-group tab stops, controls disabled by an ancestor `fieldset`, hidden or inert ancestors, all negative `tabindex` values, and shadow DOM where the supported platform exposes it. Do not layer a second focus-trap library over this handler; competing traps commonly cause skipped controls or focus loops.
 
 Content added while the Dialog is open must join the logical focus order. Do not use positive `tabindex` values.
 
@@ -375,31 +375,19 @@ The following expanded HTML illustrates the rendered anatomy. A framework or Web
 
 ## Reference behavior
 
-This framework-neutral controller shows the required lifecycle. Production adapters may express the same contract through framework hooks.
+This framework-neutral controller shows the required lifecycle. It requires the product adapter to supply a tested `getTabbableElements(container)` function. A maintained tabbable-order utility may provide that function; do not replace it with a CSS-selector approximation. Production adapters may express the same contract through framework hooks.
 
 ```js
-export function createDialogController(dialog, { forcedDecision = false } = {}) {
+export function createDialogController(
+  dialog,
+  { forcedDecision = false, getTabbableElements } = {}
+) {
+  if (typeof getTabbableElements !== "function") {
+    throw new TypeError("Dialog requires a tested getTabbableElements function.");
+  }
+
   let trigger = null;
   let pointerStartedOutside = false;
-
-  const focusableSelector = [
-    "a[href]",
-    "area[href]",
-    "button:not([disabled])",
-    "input:not([disabled]):not([type='hidden'])",
-    "select:not([disabled])",
-    "textarea:not([disabled])",
-    "[contenteditable]:not([contenteditable='false'])",
-    "[tabindex]:not([tabindex='-1'])"
-  ].join(",");
-
-  const getFocusableDescendants = () =>
-    [...dialog.querySelectorAll(focusableSelector)].filter(
-      (element) =>
-        element instanceof HTMLElement &&
-        !element.hidden &&
-        element.getClientRects().length > 0
-    );
 
   const isOutsideSurface = (event) => {
     const rect = dialog.getBoundingClientRect();
@@ -426,7 +414,7 @@ export function createDialogController(dialog, { forcedDecision = false } = {}) 
   dialog.addEventListener("keydown", (event) => {
     if (event.key !== "Tab") return;
 
-    const focusable = getFocusableDescendants();
+    const focusable = getTabbableElements(dialog);
 
     if (focusable.length === 0) {
       event.preventDefault();
@@ -470,6 +458,16 @@ export function createDialogController(dialog, { forcedDecision = false } = {}) 
 
   return { open, close };
 }
+```
+
+For example, an adapter may pass a wrapper around a maintained utility:
+
+```js
+import { tabbable } from "tabbable";
+
+const controller = createDialogController(dialog, {
+  getTabbableElements: (container) => tabbable(container)
+});
 ```
 
 The product adapter must add its documented fallback when the opening trigger is removed or disabled. It must also coordinate page scroll locking without resetting the page’s scroll position.
@@ -539,6 +537,7 @@ Confirm that:
 - focus lands on the Dialog container;
 - Tab and Shift+Tab reach every enabled control in logical order;
 - focus cannot move into the background page;
+- boundary wrapping remains correct for radio groups, disabled fieldsets, every negative `tabindex` value, hidden and inert ancestors, and dynamically added or removed controls;
 - Escape closes dismissible mode;
 - Escape does not close forced-decision mode;
 - every available action works without a pointer;

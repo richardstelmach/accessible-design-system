@@ -137,7 +137,9 @@ focusManagement:
     rules:
       - Tab and Shift+Tab remain within the modal dialog.
       - Use native modal inertness together with one boundary handler that wraps Shift+Tab from the first boundary to the last focusable descendant and Tab from the last boundary to the first.
-      - Recompute focusable descendants for each Tab key event so dynamically added or removed controls are handled.
+      - Obtain the boundaries from a tested tabbable-order utility; do not approximate browser tab order with a selector alone.
+      - The utility must handle radio groups, controls disabled by an ancestor fieldset, inert or hidden ancestors, every negative tabindex value and shadow DOM where the supported platform exposes it.
+      - Recompute tabbable descendants for each Tab key event so dynamically added or removed controls are handled.
       - If no focusable descendants exist, prevent Tab from leaving and keep focus on the dialog container.
       - Do not add a second focus-trap library on top of this boundary handler.
       - Dynamically added focusable content must participate in the dialog focus order.
@@ -550,6 +552,7 @@ testing:
   keyboard:
     - Open from a keyboard-operated trigger and confirm focus lands on the dialog container.
     - Cycle forward and backward through every focusable descendant without leaving the dialog.
+    - Repeat boundary wrapping with radio groups, a disabled fieldset, negative tabindex values, hidden and inert ancestors, and dynamically added or removed controls.
     - Confirm Escape closes dismissible mode.
     - Confirm Escape does not close forced-decision mode.
     - Confirm all actions work without pointer input.
