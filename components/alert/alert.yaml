@@ -139,6 +139,7 @@ anatomy:
     defaultTypography:
       baseStyle: typography.body.default
       emphasis: typography.emphasis.strong
+      figmaTextStyle: typography/body/default/strong
     headingSemantics:
       supportedLevels:
         - none
@@ -293,6 +294,12 @@ figma:
     title:
       name: _Alert/Title
       variantProperty: Style
+      layout:
+        direction: vertical
+        width: fill-available
+        height: hug-content
+        paddingBlock: 0
+        minimumHeight: 0
       variants:
         - Default
         - H2
@@ -302,14 +309,20 @@ figma:
         - H6
       textProperty: Title
       defaultStyle:
-        baseStyle: typography/body/default
-        fontWeight: typography.emphasis.strong
+        textStyle: typography/body/default/strong
+        composedFrom:
+          - typography.body.default
+          - typography.emphasis.strong
       headingStyles:
         H2: typography/heading/h2
         H3: typography/heading/h3
         H4: typography/heading/h4
         H5: typography/heading/h5
         H6: typography/heading/h6
+      rules:
+        - Every variant wrapper hugs the rendered text height in base, md and lg modes.
+        - Do not add fixed height, minimum height or vertical padding to the wrapper.
+        - The content-frame gap token is the complete visible space between title and description text boxes.
   fixedIconMapping:
     Success: Icon/check-circle
     Info: Icon/info
@@ -350,6 +363,7 @@ figma:
     - Keep the state icon fixed; do not expose an instance-swap property on Alert.
     - Keep announcement and headingLevel implementation-only.
     - Preserve fill-width and automatic-height layout.
+    - Keep every _Alert/Title wrapper at hug-content height so it does not add phantom title-to-description spacing.
     - Top-align the icon with the first line of content.
     - Hide the Description node instead of substituting empty text.
     - Do not detach icon or title instances.
@@ -449,6 +463,10 @@ validation:
     - Every state uses the required registered icon instance and semantic colour variables.
     - No icon instance-swap, announcement or headingLevel property is exposed.
     - Default, H2, H3, H4, H5 and H6 Title styles are available through _Alert/Title.
+    - Every Alert title and description text node has an applied named text style.
+    - Default title instances inherit typography/body/default/strong from the _Alert/Title source component.
+    - Every _Alert/Title wrapper height equals its rendered text height in base, md and lg modes.
+    - Description-bearing variants render exactly component.alert.spacing.titleToDescription between the title and description text boxes.
     - Root fill, padding, gap and radius are variable-bound.
     - Icon size and icon colour are variable-bound.
     - Title and description wrap without clipping at 320px.

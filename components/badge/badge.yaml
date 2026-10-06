@@ -1,0 +1,414 @@
+component: Badge
+id: badge
+version: 0.1.0
+status: draft
+
+description: >
+  Badge is a compact, non-interactive text label that communicates the current
+  status of an adjacent item. Visible text carries the meaning; tone provides a
+  supplementary scanning cue.
+
+purpose:
+  - Communicate one short status in context.
+  - Help users scan repeated statuses without relying on colour alone.
+  - Provide ordinary text semantics with no interaction or forced announcement.
+
+relatedDocumentation:
+  - components/badge/badge.md
+  - tokens/components/badge.json
+  - tokens/semantic/colors.semantic.json
+  - tokens/figma/sync-contract.yaml
+
+scope:
+  includes:
+    - Required text label
+    - Neutral, info, success, warning and error visual tones
+    - Static status labels rendered as ordinary phrasing content
+    - Wrapping labels and localised content
+  excludes:
+    - Links, buttons and click handlers
+    - Filters, selections and removable chips
+    - Notification counters and number-only labels
+    - Icons and arbitrary slotted content
+    - Hover, focus, active, selected, disabled and dismissible states
+    - Built-in live-region behaviour
+
+principles:
+  - The visible label communicates the status without colour.
+  - Tone is a visual aid and never creates hidden semantics.
+  - Badge remains non-interactive and unfocusable.
+  - Badge does not become a live region merely because its value can change.
+  - Use the smallest useful set of statuses and keep mappings consistent within a product.
+  - Prefer a different component when users can act on the element.
+
+tones:
+  neutral:
+    default: true
+    intendedUse: Default, inactive or unclassified status.
+    tokens:
+      background: color.status.neutral.background
+      foreground: color.status.neutral.foreground
+  info:
+    default: false
+    intendedUse: Informational or in-progress status.
+    tokens:
+      background: color.status.info.background
+      foreground: color.status.info.foreground
+  success:
+    default: false
+    intendedUse: Positive or completed status.
+    tokens:
+      background: color.status.success.background
+      foreground: color.status.success.foreground
+  warning:
+    default: false
+    intendedUse: Status needing attention but not an error.
+    tokens:
+      background: color.status.warning.background
+      foreground: color.status.warning.foreground
+  error:
+    default: false
+    intendedUse: Failed, blocked or rejected status.
+    tokens:
+      background: color.status.error.background
+      foreground: color.status.error.foreground
+
+anatomy:
+  root:
+    required: true
+    defaultElement: span
+    semantics: ordinary-phrasing-content
+    layout:
+      display: inline-flex
+      alignItems: center
+      justifyContent: center
+      width: hug-content
+      height: automatic
+      whiteSpace: normal
+    tokens:
+      paddingBlock: component.badge.spacing.paddingBlock
+      paddingInline: component.badge.spacing.paddingInline
+      maxWidth: component.badge.sizing.maxWidth
+      radius: component.badge.surface.radius
+    accessibility:
+      focusable: false
+      role: null
+      ariaLive: null
+    rules:
+      - Do not add tabindex, role=status, role=alert or widget semantics.
+      - Do not attach click, hover, focus, selection or dismissal behaviour.
+      - Do not set a fixed width or height that can clip the label.
+
+  label:
+    required: true
+    contentModel: plain-text
+    typography: typography.body.small
+    maxInlineSize:
+      calculation: maxWidth - (paddingInline * 2)
+      inputs:
+        maxWidth: component.badge.sizing.maxWidth
+        paddingInline: component.badge.spacing.paddingInline
+      resolvedAtDefaultRoot: 14rem
+    validation: non-empty-after-trimming
+    rules:
+      - Render the supplied value as text, never as raw HTML.
+      - Use sentence case rather than all capitals.
+      - Use short, specific status wording that remains meaningful without tone.
+      - Prefer adjectives or past participles rather than action verbs.
+      - Allow wrapping and automatic height.
+      - Do not truncate, ellipsise or horizontally scroll the label.
+      - Localise the complete label rather than concatenating fragments.
+
+publicApi:
+  label:
+    type: string
+    required: true
+    validation: non-empty-after-trimming
+    rendering: escaped-text
+  tone:
+    type: enum
+    values:
+      - neutral
+      - info
+      - success
+      - warning
+      - error
+    default: neutral
+    required: false
+    semantics: visual-only
+  prohibitedBadgeSpecificProps:
+    - onClick
+    - href
+    - dismissible
+    - selected
+    - disabled
+    - icon
+    - count
+    - role
+    - aria-live
+    - rawHtml
+
+semantics:
+  defaultMarkup: span
+  role: null
+  focusable: false
+  keyboardInteraction: none
+  pointerInteraction: none
+  accessibleContent: visible-label-text
+  rules:
+    - Do not add an aria-label that differs from the visible label.
+    - Do not add a hidden status prefix derived from tone.
+    - Do not expose tone as an accessible name or description.
+    - Use ordinary visible context outside Badge when the status subject is otherwise unclear.
+
+dynamicUpdates:
+  ownedBy: consuming-application
+  badgeLiveRegionByDefault: false
+  guidance:
+    - Use a suitable pre-existing status region or separate concise announcement only when a change must be announced without moving focus.
+    - Do not make every Badge a live region.
+    - Do not derive announcement politeness from tone.
+    - Error tone does not automatically justify an assertive alert.
+    - Do not announce the same status change through more than one live region.
+  example: |
+    <div role="status">
+      Application status:
+      <span class="badge badge--info">Under review</span>
+    </div>
+
+figma:
+  pageName: 19 - Components - Badge
+  componentSet:
+    name: Badge
+    description: >
+      Compact, non-interactive status label. Visible label text carries meaning;
+      tone is supplementary and does not select announcement behaviour.
+    variants:
+      Tone:
+        - Neutral
+        - Info
+        - Success
+        - Warning
+        - Error
+    expectedVariantCount: 5
+    defaultVariant:
+      Tone: Neutral
+  properties:
+    Label:
+      type: TEXT
+      default: Status
+      required: true
+  prohibitedProperties:
+    - Icon
+    - Size
+    - Interactive
+    - Selected
+    - Dismissible
+    - Announcement
+  tokenBindings:
+    paddingBlock: component/badge/spacing/paddingBlock
+    paddingInline: component/badge/spacing/paddingInline
+    maxWidth: component/badge/sizing/maxWidth
+    radius: component/badge/surface/radius
+    backgrounds:
+      Neutral: color/status/neutral/background
+      Info: color/status/info/background
+      Success: color/status/success/background
+      Warning: color/status/warning/background
+      Error: color/status/error/background
+    foregrounds:
+      Neutral: color/status/neutral/foreground
+      Info: color/status/info/foreground
+      Success: color/status/success/foreground
+      Warning: color/status/warning/foreground
+      Error: color/status/error/foreground
+    typography: typography/body/small
+  responsiveTypography:
+    collection: Breakpoint
+    modes:
+      - base
+      - md
+      - lg
+    rules:
+      - Apply the single semantic small-body text style.
+      - Let the style inherit from the parent frame's Breakpoint mode.
+      - Do not create breakpoint-suffixed text styles or Badge variants.
+  layout:
+    direction: horizontal
+    horizontalSizing: hug
+    verticalSizing: hug
+    minimumWidth: 0
+    maximumWidth: 15rem
+    labelMaximumWidthAtDefaultRoot: 14rem
+    labelWrapping: enabled
+  rules:
+    - Bind every colour, spacing, sizing and radius value to the specified variables.
+    - Keep Label as the only text node and public text property.
+    - Do not add icons, prototype interactions or cursor treatments.
+    - Preserve automatic height when a constrained parent causes wrapping.
+    - Do not detach instances or replace bound values with raw values.
+
+productionMarkup:
+  default: |
+    <span class="badge badge--neutral">Pending</span>
+  success: |
+    <span class="badge badge--success">Completed</span>
+  dynamicContextOwnedByApplication: |
+    <div role="status">
+      Application status:
+      <span class="badge badge--info">Under review</span>
+    </div>
+
+contentGuidance:
+  preferred:
+    - Active
+    - Under review
+    - Completed
+    - Delayed
+    - Rejected
+  avoid:
+    - APPROVE
+    - CLICK HERE
+    - DELETE
+    - A number without a word that explains it
+  rules:
+    - Keep labels short and specific.
+    - Use sentence case.
+    - Prefer status descriptions over action verbs.
+    - Keep the same label and tone mapping consistent within one product.
+    - Add visible surrounding context when the status subject is unclear.
+
+accessibility:
+  conformanceTarget: WCAG 2.2 AA
+  wcag:
+    - id: 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: The Badge remains in ordinary reading order next to the item whose status it describes.
+    - id: 1.4.1
+      name: Use of Color
+      level: A
+      relevance: The visible label communicates status without depending on tone.
+    - id: 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Every Badge label and background pairing meets the normal-text contrast threshold.
+    - id: 1.4.10
+      name: Reflow
+      level: AA
+      relevance: Long and translated labels wrap without loss at narrow widths and zoom.
+    - id: 1.4.12
+      name: Text Spacing
+      level: AA
+      relevance: Label text remains visible when user text-spacing overrides are applied.
+    - id: 3.2.4
+      name: Consistent Identification
+      level: AA
+      relevance: Repeated status labels keep a consistent meaning and tone mapping within a product.
+    - id: 4.1.3
+      name: Status Messages
+      level: AA
+      relevance: The consuming application announces dynamic changes when needed without making every Badge a live region.
+  keyboard:
+    interaction: none
+    focusable: false
+  screenReader:
+    expectedOutput: visible label text in ordinary reading order
+    toneAnnounced: false
+    rules:
+      - The label is announced once.
+      - Static Badge does not interrupt speech.
+      - All tones with identical labels have identical accessible text.
+
+contrast:
+  minimumRatio: 4.5
+  textClassification: normal
+  currentPairs:
+    neutral:
+      background: "#d6d6d6"
+      foreground: "#3d3d3d"
+      ratio: 7.47
+    info:
+      background: "#bbd9fc"
+      foreground: "#003b7f"
+      ratio: 7.48
+    success:
+      background: "#c3e263"
+      foreground: "#354209"
+      ratio: 7.43
+    warning:
+      background: "#fcd25d"
+      foreground: "#4e3a03"
+      ratio: 7.52
+    error:
+      background: "#fec9ce"
+      foreground: "#6b252b"
+      ratio: 7.51
+  rules:
+    - Recalculate ratios from resolved source tokens whenever any referenced colour changes.
+    - The recorded current ratios are audit evidence, not independent token values.
+
+validation:
+  source:
+    - Exactly five tone values exist and neutral is the default.
+    - Every tone maps to one shared semantic status foreground and background pair.
+    - label is required, non-empty after trimming and rendered as escaped text.
+    - No icon, interaction, size or announcement API is defined.
+    - Geometry aliases resolve to existing spacing, sizing and radius tokens.
+    - The Badge maximum-width token resolves to 15rem.
+    - Every resolved colour pair meets at least 4.5 to 1 contrast.
+  figma:
+    - Badge has exactly five variants under one Tone property.
+    - Tone and Label are the only public properties.
+    - Every colour, spacing, sizing and radius value is variable-bound.
+    - Label uses the semantic small-body text style.
+    - No icon, interaction, size or announcement properties exist.
+    - Badge hugs short labels and grows in height when constrained text wraps.
+    - A review frame shows every tone, a multi-word label and a constrained wrapping example.
+    - base, md and lg Breakpoint modes update the applied small-body style.
+  production:
+    - Static output is a non-focusable span with no role or aria-live attribute.
+    - Empty and whitespace-only labels are rejected.
+    - Unsupported tone values are rejected.
+    - Label content is escaped rather than interpreted as HTML.
+    - All tones with identical labels expose identical accessible text.
+    - Long localised labels survive 320 CSS pixels, 400 percent zoom and text-spacing overrides.
+    - A dynamic status is announced once only when the consuming application supplies an appropriate live region.
+
+testMatrix:
+  automated:
+    - name: required-label
+      assertion: Empty and whitespace-only labels are rejected.
+    - name: escaped-label
+      assertion: Markup-like label content is rendered as text.
+    - name: default-tone
+      assertion: An omitted tone resolves to neutral.
+    - name: allowed-tones
+      assertion: Only neutral, info, success, warning and error are accepted.
+    - name: static-semantics
+      assertion: Output has no widget role, tabindex, aria-live or interaction handler.
+    - name: accessible-text-parity
+      assertion: Identical labels expose identical accessible text for every tone.
+    - name: token-resolution
+      assertion: Every Badge alias resolves in raw and Token Studio compiled outputs.
+    - name: contrast
+      assertion: Every resolved foreground and background pair is at least 4.5 to 1.
+  manual:
+    - name: reflow
+      assertion: Multi-word and translated labels remain visible at 320 CSS pixels and 400 percent zoom.
+    - name: text-spacing
+      assertion: Labels remain visible with WCAG text-spacing overrides.
+    - name: non-interactive-cue
+      assertion: Pointer, hover and keyboard inspection reveal no suggestion of clickability.
+    - name: dynamic-announcement
+      assertion: A consuming application announces a meaningful status change once when required.
+
+acceptanceCriteria:
+  - Badge is a compact non-interactive status label with required visible text.
+  - Neutral, info, success, warning and error tones are available.
+  - Visible text communicates meaning without colour and tone adds no hidden semantics.
+  - Badge has no icons, actions, focus, selection, dismissal or built-in live-region behaviour.
+  - All shared status colour pairs meet WCAG 2.2 AA normal-text contrast.
+  - Label text wraps without clipping, truncation or loss under zoom and text-spacing changes.
+  - Figma uses exactly five variants and one Label property.
+  - Tokens Studio global output and manual Breakpoint typography remain the only Figma token sources.
