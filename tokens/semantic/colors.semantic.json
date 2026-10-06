@@ -298,6 +298,18 @@
       },
   
       "status": {
+        "neutral": {
+          "background": {
+            "$value": "{color.neutral.100}",
+            "$type": "color",
+            "$description": "Background colour for neutral status labels and messages."
+          },
+          "foreground": {
+            "$value": "{color.neutral.600}",
+            "$type": "color",
+            "$description": "Foreground colour for content placed on neutral status backgrounds."
+          }
+        },
         "success": {
           "$description": "Status colour pairing for positive feedback, successful actions or confirmation messages.",
           "background": {

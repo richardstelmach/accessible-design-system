@@ -47,7 +47,7 @@ The icon is not independently swappable. This prevents a state colour, shape and
 
 ## Title semantics
 
-The title is a paragraph by default, styled with `typography.body.default` and `typography.emphasis.strong`.
+The title is a paragraph by default, styled with `typography.body.default` and `typography.emphasis.strong`. In Figma, apply the composed named text style `typography/body/default/strong`; do not reproduce the same appearance with detached font properties.
 
 ```html
 <p class="alert__title">
@@ -175,7 +175,11 @@ Expose:
 - `Description text` when `Description=True`;
 - the nested `_Alert/Title` `Style` property as `Title style`.
 
-`_Alert/Title` has `Default`, `H2`, `H3`, `H4`, `H5` and `H6` variants. `Default` uses body typography with strong emphasis. The heading variants use the corresponding semantic heading style. This avoids turning title treatment into another Alert variant axis and prevents a 48-variant matrix.
+`_Alert/Title` has `Default`, `H2`, `H3`, `H4`, `H5` and `H6` variants. `Default` uses the named `typography/body/default/strong` text style, composed from responsive default-body typography and `typography.emphasis.strong`. The heading variants use the corresponding semantic heading style. This avoids turning title treatment into another Alert variant axis and prevents a 48-variant matrix.
+
+The strong-body style must remain a real applied text style. Applying `typography/body/default` and then manually changing the font weight detaches the text node from its style and fails text-style adherence checks.
+
+The `_Alert/Title` wrapper must hug the rendered text height at every Breakpoint mode. Do not give it a fixed height, minimum height or vertical padding. `component.alert.spacing.titleToDescription` is the complete visible gap between the rendered title and description text boxes; empty wrapper space must not enlarge it.
 
 The state icon remains fixed and is not an instance-swap property. `announcement` and production `headingLevel` remain handoff/implementation metadata rather than Figma visual properties.
 
@@ -219,6 +223,8 @@ Avoid vague labels such as “Notice” or “Important” without the actual me
 - [ ] All state colours are bound to shared semantic variables.
 - [ ] Padding, gaps, radius and icon size are bound to Alert geometry variables.
 - [ ] `_Alert/Title` exposes Default and H2–H6 styles without multiplying Alert variants.
+- [ ] Every title and description text node has a named text style; Default title instances inherit `typography/body/default/strong` from the source component.
+- [ ] Every `_Alert/Title` variant hugs its rendered text height so the visible title-to-description gap equals `component.alert.spacing.titleToDescription`.
 - [ ] Description visibility does not change title semantics.
 - [ ] Title and description wrap and grow automatically.
 - [ ] The component remains readable at 320px.
