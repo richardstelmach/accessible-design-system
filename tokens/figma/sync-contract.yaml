@@ -115,6 +115,22 @@ tokensStudio:
       updateExistingStyleAndVariableNames: true
       removeItemsWithoutTokenConnection: false
 
+  variableMetadata:
+    sourceOfTruth: canonical-token-source
+    minimumPluginVersion: "2.11.0"
+    extensions:
+      scopes: com.figma.scopes
+      codeSyntax: com.figma.codeSyntax
+    codeSyntaxPlatforms:
+      - Web
+      - Android
+      - iOS
+    rules:
+      - define scopes explicitly for new or changed Figma-exported variables
+      - use the exact developer-facing reference for Web code syntax
+      - do not rely on Figma-only code syntax because routine export removes orphaned values
+      - compile metadata into tokens/compiled/tokens.studio.json before provider pull
+
   destructiveExport:
     allowedFor:
       - intentional-token-deletion
@@ -177,6 +193,7 @@ validation:
     - undeclared responsive groups fail the build before compiled outputs are written
     - active Figma bindings do not reference deleted variables
     - production semantic text styles do not use breakpoint suffixes
+    - source-defined Figma scopes and code syntax are retained in tokens.studio.json
 
 references:
   humanWorkflow: docs/token-sync-workflow.md

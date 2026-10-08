@@ -302,12 +302,24 @@
           "background": {
             "$value": "{color.neutral.100}",
             "$type": "color",
-            "$description": "Background colour for neutral status labels and messages."
+            "$description": "Background colour for neutral status labels and messages.",
+            "$extensions": {
+              "com.figma.scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-neutral-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.neutral.600}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on neutral status backgrounds."
+            "$description": "Foreground colour for content placed on neutral status backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": ["TEXT_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-neutral-foreground)"
+              }
+            }
           }
         },
         "success": {
@@ -315,12 +327,24 @@
           "background": {
             "$value": "{color.success.100}",
             "$type": "color",
-            "$description": "Background colour for success messages."
+            "$description": "Background colour for success messages.",
+            "$extensions": {
+              "com.figma.scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-success-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.success.950}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on success backgrounds."
+            "$description": "Foreground colour for content placed on success backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": ["TEXT_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-success-foreground)"
+              }
+            }
           }
         },
 
@@ -329,12 +353,24 @@
           "background": {
             "$value": "{color.primary.100}",
             "$type": "color",
-            "$description": "Background colour for informational messages."
+            "$description": "Background colour for informational messages.",
+            "$extensions": {
+              "com.figma.scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-info-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.primary.950}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on informational backgrounds."
+            "$description": "Foreground colour for content placed on informational backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": ["TEXT_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-info-foreground)"
+              }
+            }
           }
         },
   
@@ -343,12 +379,24 @@
           "background": {
             "$value": "{color.warning.100}",
             "$type": "color",
-            "$description": "Background colour for warning messages."
+            "$description": "Background colour for warning messages.",
+            "$extensions": {
+              "com.figma.scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-warning-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.warning.950}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on warning backgrounds."
+            "$description": "Foreground colour for content placed on warning backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": ["TEXT_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-warning-foreground)"
+              }
+            }
           }
         },
   
@@ -357,12 +405,24 @@
           "background": {
             "$value": "{color.error.100}",
             "$type": "color",
-            "$description": "Background colour for error messages."
+            "$description": "Background colour for error messages.",
+            "$extensions": {
+              "com.figma.scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-error-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.error.950}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on error backgrounds."
+            "$description": "Foreground colour for content placed on error backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": ["TEXT_FILL"],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-error-foreground)"
+              }
+            }
           }
         }
       },
