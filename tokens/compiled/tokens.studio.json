@@ -1409,6 +1409,75 @@
       }
     },
     "component": {
+      "accordion": {
+        "spacing": {
+          "triggerPaddingBlock": {
+            "$value": "{spacing.control.paddingBlock.default}",
+            "$type": "spacing",
+            "$description": "Block padding inside an accordion trigger. Allow the target to grow when its heading wraps.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-accordion-spacing-trigger-padding-block)"
+              }
+            }
+          },
+          "paddingInline": {
+            "$value": "{spacing.control.paddingInline.default}",
+            "$type": "spacing",
+            "$description": "Shared inline padding aligning accordion trigger titles and panel content.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-accordion-spacing-padding-inline)"
+              }
+            }
+          },
+          "triggerGap": {
+            "$value": "{spacing.control.gap}",
+            "$type": "spacing",
+            "$description": "Minimum space between a wrapping accordion title and its trailing state caret.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-accordion-spacing-trigger-gap)"
+              }
+            }
+          },
+          "panelPaddingBlock": {
+            "$value": "{spacing.inset.md}",
+            "$type": "spacing",
+            "$description": "Block padding around expanded accordion panel content; content determines panel height.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-accordion-spacing-panel-padding-block)"
+              }
+            }
+          },
+          "itemGap": {
+            "$value": "{spacing.stack.sm}",
+            "$type": "spacing",
+            "$description": "Gap between accordion items, leaving room for external keyboard focus rings.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-accordion-spacing-item-gap)"
+              }
+            }
+          }
+        }
+      },
       "alert": {
         "spacing": {
           "inset": {
