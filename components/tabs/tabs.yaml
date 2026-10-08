@@ -4,9 +4,9 @@ version: 0.1.0
 status: draft
 
 phase:
-  current: tokens-and-documentation
+  current: figma-review
   implementation: not-started
-  figma: deferred
+  figma: built-and-audited
   releaseReady: false
 
 description: >
@@ -38,7 +38,7 @@ scope:
     - Disabled tabs, icon-only labels, badges and tab menus
     - Lazy-loading framework, controlled-state framework adapter and network requests
     - Built-in URL history management
-    - Production code and Figma changes in this phase
+    - Production code in this phase
 
 decisions:
   activationDefault:
@@ -56,8 +56,8 @@ decisions:
       - This is a system choice informed by GOV.UK, not a W3C-mandated breakpoint.
       - Update semantics, focus and keyboard handling together when changing presentation.
   figmaInventory:
-    status: deferred-to-live-preflight
-    rule: Inspect the existing file before fixing page number, component hierarchy and public property names.
+    status: confirmed-by-live-preflight
+    rule: Reuse local native slots, documentation masters and the established numbered page convention.
 
 principles:
   - Use for peer sections when switching views helps the task.
@@ -438,13 +438,50 @@ tokenDecision:
     - Compile both outputs from canonical JSON; do not hand-edit generated files.
 
 figma:
-  status: deferred
+  status: built-and-audited
+  fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  pageName: 20 - Components - Tabs
+  pageId: "1164:6"
+  componentSetId: "1164:13"
+  panelComponentId: "1164:32"
+  compositionComponentId: "1164:36"
+  reviewFrameId: "1165:43"
+  tokenRoundTrip: pending-repeat-export-after-stroke-scope-correction
+  libraryPublication: not-published
   documentationPattern: patterns/component-documentation-page.yaml
   preflightRequired: true
-  inventoryToConfirm:
-    - Reusable individual tab with Selected and interaction state presentations
-    - A flexible tab-list and panel composition without fixed tab-count variants
-    - A contents-list example showing all labelled sections
+  inventory:
+    tab:
+      componentSet: Tabs / Tab
+      variants:
+        Selected: ["False", "True"]
+        State: [Default, Hover, Pressed]
+      expectedVariantCount: 6
+      properties:
+        Label: {type: TEXT, default: Tab}
+        Focus: {type: BOOLEAN, default: false}
+      rules:
+        - Focus independently reveals both focus-ring layers in every selected and pointer state.
+        - Do not create redundant Focus variants.
+    panel:
+      component: Tabs / Panel
+      properties:
+        Heading: {type: TEXT, default: Details}
+        Content: {type: SLOT}
+      rules:
+        - Use shared heading and body styles; native content slot grows with consumer content.
+        - The Figma heading style does not decide the HTML heading level.
+    composition:
+      component: Tabs
+      properties:
+        Tabs: {type: SLOT}
+        Panel: {type: SLOT}
+      rules:
+        - Tabs slot accepts a variable number of Tabs / Tab instances in one horizontal row.
+        - Panel slot contains the visible Tabs / Panel instance.
+        - Use no fixed tab-count variants.
+        - The contents-list fallback is documented with ordinary links and panel instances.
+        - Design instances illustrate state; production ARIA and keyboard handling remain implementation work.
   constraints:
     - Keep focus independent of selection, including an unselected focused tab for manual mode.
     - Inherit shared semantic typography through the manual Breakpoint collection.
@@ -498,7 +535,10 @@ validation:
   limitations:
     - Token and contract validation is not runtime accessibility certification.
     - No production Tabs implementation or browser test harness exists in this phase.
-    - Live Figma preflight, binding audit and visual checks have not run.
+    - Figma structure, variable bindings and design examples were audited on 2026-10-08; runtime behaviour remains untested.
+    - Twenty text nodes in the two labelled stress examples intentionally override shared typography; production and ordinary documentation use shared styles.
+    - Figma cannot reproduce the browser word-spacing override; complete that acceptance check in the implementation.
+    - The corrected STROKE_FLOAT metadata requires a repeat Tokens Studio pull and routine export before round-trip acceptance.
 
 acceptanceCriteria:
   - Source and generated tokens agree and no new responsive mapping is required.
@@ -507,7 +547,8 @@ acceptanceCriteria:
   - Text and meaningful indicators meet the stated contrast thresholds.
   - Automatic activation and the narrow contents-list presentation follow the accepted decisions.
   - Source is reviewed and merged before a Tokens Studio pull from main.
-  - Figma work starts only in its subsequent phase after live preflight.
+  - Figma inventory, bindings and documentation agree with the source contract.
+  - Repeat export preserves the five existing variable IDs, aliases, scopes and code syntax.
 
 references:
   reviewed: "2026-10-08"

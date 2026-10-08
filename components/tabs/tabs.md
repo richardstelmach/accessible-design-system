@@ -1,6 +1,6 @@
 # Tabs
 
-**Status:** Draft — tokens and documentation phase
+**Status:** Draft — Figma built and audited; repeat token export pending
 
 **Version:** 0.1.0
 
@@ -12,7 +12,7 @@
 
 Tabs presents related sections in a shared space, with one panel visible in its enhanced presentation. Users enter the tab list once with Tab, move between tabs using arrow keys, and use Tab again to reach the selected panel.
 
-This phase defines source tokens, behaviour and acceptance criteria. It does not provide a production component or claim that runtime accessibility or Figma validation has passed.
+The source defines tokens, behaviour and acceptance criteria for the Figma implementation. A production web component and runtime accessibility validation remain future work.
 
 ## Accepted decisions
 
@@ -23,7 +23,7 @@ The initial contract uses these decisions:
 | Activation default | Automatic for immediately available, preloaded panels; support explicit manual activation | Fast switching when there is no loading delay. Use manual activation whenever display cannot be immediate. |
 | Narrow presentation | Contents links followed by all sections below `breakpoint.md` (48rem), or whenever the complete row cannot fit its container | Avoid clipped controls, multiple tab rows and hidden off-screen labels. This is a system policy, not a W3C breakpoint requirement. |
 
-The scope is horizontal, text-only tabs. Vertical, disabled, icon-only, nested, closable and draggable tabs are outside this version. Figma page number and component hierarchy remain subject to the later live-file preflight.
+The scope is horizontal, text-only tabs. Vertical, disabled, icon-only, nested, closable and draggable tabs are outside this version. The live preflight confirmed page `20 - Components - Tabs` and the component inventory below.
 
 ## When to use
 
@@ -151,7 +151,7 @@ Focus uses the shared [double-ring treatment](../../accessibility/focus-indicato
 
 Do not use the blue text colour against these grey hover/pressed surfaces: those combinations fall below 4.5:1. All ratios must be recalculated after token or surface changes.
 
-The spacing tokens declare `GAP` scopes. Indicator thickness declares `STROKE_WEIGHT` for the later Figma bottom-stroke binding. All five carry exact `Web` CSS references. No new shared colours, responsive branches, typography styles or Breakpoint mappings are required.
+The spacing tokens declare `GAP` scopes. Indicator thickness declares `STROKE_FLOAT` for the later Figma bottom-stroke binding. All five carry exact `Web` CSS references. No new shared colours, responsive branches, typography styles or Breakpoint mappings are required.
 
 ## Layout and responsive behaviour
 
@@ -182,11 +182,23 @@ These are implementation acceptance checks, not completed runtime results. Test 
 
 ## Figma handoff
 
-Figma work follows source review and token sync. Inspect the live file before fixing its page number, hierarchy or public component properties. Show selected/unselected tabs, pointer states, and both selected and unselected focus examples. Use flexible compositions rather than variants for every tab count.
+Built and audited on 8 October 2026 in [20 - Components - Tabs](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk/Accessible-Design-System?node-id=1164-6). The page reuses existing variables, semantic text styles, native slots and shared documentation components.
+
+- `Tabs / Tab`: six variants (`Selected=False/True` × `State=Default/Hover/Pressed`), a `Label` text property and an independent `Focus` boolean. Focus can coexist with any pointer state without adding variants.
+- `Tabs / Panel`: a `Heading` text property and a native `Content` slot.
+- `Tabs`: native `Tabs` and `Panel` slots for flexible composition, without a variant for each tab count.
+
+The component set is `1164:13`, panel master `1164:32`, composition master `1164:36`, and review examples `1165:43`. The page contains the standard four areas, four shared header instances and 15 shared documentation cards.
+
+The narrow fallback uses ordinary contents links and panel instances in documentation. Figma instances illustrate state; the contract remains authoritative for production keyboard and ARIA behaviour.
 
 Follow the [standard documentation page](../../patterns/component-documentation-page.yaml), with separate component, documentation, QA and accessibility areas. Reuse shared headers, cards, text styles and variables. Responsive typography inherits the manual `Breakpoint` collection; do not create breakpoint-suffixed variants or styles.
 
-After the source changes are reviewed and merged to GitHub `main`, pull `tokens/compiled/tokens.studio.json` into Tokens Studio's `global` set and run the routine non-destructive export described in the [sync workflow](../../docs/token-sync-workflow.md). The local draft is not yet available to that provider.
+The design audit confirmed six tab variants, independent focus rings, all five variable aliases/scopes/WEB references, bound spacing and indicators, intact Breakpoint modes, and no narrow-container text overflow. Visual checks covered component masters, selection/focus examples, 320px fallback, long labels and typography stress. Twenty text nodes in the two labelled stress examples deliberately override shared styles to simulate doubled text and increased spacing. Browser word spacing and runtime accessibility still require implementation tests.
+
+The initial export exposed an invalid indicator scope (`STROKE_WEIGHT`). It was corrected to Figma's supported `STROKE_FLOAT` in canonical source and on the existing live variable, preserving its ID. A repeat pull/export is required to verify that the correction survives the provider round-trip; library publication has not been performed.
+
+After the source changes are reviewed and merged to GitHub `main`, pull `tokens/compiled/tokens.studio.json` into Tokens Studio's `global` set and run the routine non-destructive export described in the [sync workflow](../../docs/token-sync-workflow.md). The initial tokens were merged in PR #27; the stroke-scope correction and Figma inventory are the follow-up source change.
 
 ## References
 
