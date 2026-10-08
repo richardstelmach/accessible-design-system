@@ -1611,6 +1611,92 @@
           }
         }
       },
+      "card": {
+        "spacing": {
+          "padding": {
+            "$value": "{spacing.inset.md}",
+            "$type": "spacing",
+            "$description": "Padding around card title, content and actions; retained by an empty composition shell.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-card-spacing-padding)"
+              }
+            }
+          },
+          "contentGap": {
+            "$value": "{spacing.content.headingToBody}",
+            "$type": "spacing",
+            "$description": "Gap between a present card title and its content; omit when either is absent.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-card-spacing-content-gap)"
+              }
+            }
+          },
+          "actionsGap": {
+            "$value": "{spacing.content.bodyToAction}",
+            "$type": "spacing",
+            "$description": "Gap before a non-empty card action area; omit for an empty Actions slot.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-card-spacing-actions-gap)"
+              }
+            }
+          },
+          "badgeInset": {
+            "$value": "{spacing.inset.sm}",
+            "$type": "spacing",
+            "$description": "Inset of the non-interactive badge inside the image frame.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-card-spacing-badge-inset)"
+              }
+            }
+          }
+        },
+        "media": {
+          "horizontalWidth": {
+            "$value": "12rem",
+            "$type": "dimension",
+            "$description": "Fixed image column in horizontal cards; image uses a square frame.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "WIDTH_HEIGHT"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-card-media-horizontal-width)"
+              }
+            }
+          }
+        },
+        "layout": {
+          "horizontalMinWidth": {
+            "$value": "32rem",
+            "$type": "dimension",
+            "$description": "Minimum available card container width for horizontal layout; below this stack vertically. Compile to a literal container-query threshold because CSS var() cannot be used in a size query condition.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "WIDTH_HEIGHT"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-card-layout-horizontal-min-width)"
+              }
+            }
+          }
+        }
+      },
       "checkbox": {
         "control": {
           "size": {
