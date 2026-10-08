@@ -66,7 +66,11 @@ The icon is decorative to assistive technology because the button already expose
 
 Keep focus on the trigger when the user toggles it. Every trigger remains a normal tab stop. Do not add roving focus, a focus trap, Escape-to-collapse or duplicate key handlers. The [W3C example](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/examples/accordion/) illustrates native heading/button relationships and sequential keyboard navigation.
 
-Initial expansion defaults to none after successful enhancement. `initialExpandedIds` may contain any number of valid unique item keys. Reject unknown or duplicate keys. Updating one item never changes another item's expansion state. There is no disabled trigger or `aria-disabled` state in this version, since every open item can be closed.
+**A chosen item can start open on page load.** Set `initialExpandedIds` to its key—for example, `initialExpandedIds: ["delivery"]`. This can be any item, including one other than the first. Its panel starts visible, its trigger has `aria-expanded="true"`, and its icon is caret-up. Other items start collapsed unless their keys are also supplied.
+
+If omitted, initial expansion defaults to none after successful enhancement. The list may contain any number of valid unique item keys; reject unknown or duplicate keys. Apply initial state once without moving focus, and do not reset the user's choices on later renders.
+
+An initially open item can be closed normally. Opening another item leaves it open until the user closes it. Updating one item never changes another item's expansion state. There is no disabled trigger or `aria-disabled` state in this version, since every open item can be closed.
 
 If an integration hides a panel while focus is inside, move focus to its trigger before hiding it. Error links and deep links must reveal their target panel before focusing or scrolling to its content. Do not automatically focus a panel on expansion or announce its full content through a live region.
 
@@ -158,7 +162,7 @@ Planned page: **21 - Components - Accordion** in the [Accessible Design System f
 
 Splitting the nested title keeps typography separate from the interaction matrix. The HTML heading level is documented alongside the instance; a Figma text style cannot create browser semantics. Switching Expanded must preserve title and slot overrides. Figma instances illustrate state and do not implement runtime ARIA or keyboard behaviour.
 
-Follow the [documentation template](../../patterns/component-documentation-page.yaml): separate component masters, documentation examples, QA and accessibility areas; reuse shared headers and cards. Include a compact instance review showing several items open, all closed, independent focus, a documented H2/H4 visual exception, and populated content slots. QA includes every visual style, narrow long titles, RTL, responsive modes, text stress and slot retention.
+Follow the [documentation template](../../patterns/component-documentation-page.yaml): separate component masters, documentation examples, QA and accessibility areas; reuse shared headers and cards. Include a compact instance review showing a chosen non-first item open on page load, several items open, all closed, independent focus, a documented H2/H4 visual exception, and populated content slots. QA includes every visual style, narrow long titles, RTL, responsive modes, text stress and slot retention.
 
 Source review and merge to GitHub `main` precede Figma construction and the Tokens Studio pull. Pull `tokens/compiled/tokens.studio.json` into **global**, then use the [routine non-destructive export](../../docs/token-sync-workflow.md). Keep **Breakpoint** manually managed. Finish with a binding/metadata audit and repeat export before accepting the round-trip.
 
@@ -169,6 +173,7 @@ Source checks cover YAML/JSON parsing, token references, aliases, metadata, cont
 - [ ] Confirm heading navigation for levels 2–6, with visual overrides preserving semantics.
 - [ ] Verify native keyboard activation, normal Tab order, correct names and expansion announcements.
 - [ ] Open and close every item independently; test any initial combination and multiple sets.
+- [ ] Start a chosen non-first item open; verify its state, caret and visibility, then close it and open siblings without resetting other choices.
 - [ ] Verify hidden content is unreachable and focus survives external collapse.
 - [ ] Verify form values and panel content survive collapse/reopen.
 - [ ] Test no-JavaScript, initial focus preservation, print and reveal-before-focus integrations.

@@ -167,10 +167,15 @@ publicApi:
   initialExpandedIds:
     type: item-key-list
     default: []
+    example: [delivery]
     rules:
+      - Allow a chosen item to start open on page load, including an item other than the first.
+      - For example, [delivery] starts only the delivery item open; [] starts all items closed.
       - Apply only after successful enhancement; all baseline content is visible.
       - Reject duplicate or unknown keys; any number of valid keys is permitted.
       - Do not focus a trigger or panel on initialisation.
+      - Initially open items remain freely collapsible; opening another item leaves them unchanged.
+      - Apply initial state once; subsequent renders must not reset the user's expansion choices.
   panelLandmark:
     type: boolean
     default: false
@@ -399,6 +404,7 @@ figma:
     - Do not claim design properties implement keyboard or ARIA behaviour.
   documentationExamples:
     - Three items with one expanded and all collapsed
+    - A chosen non-first item open on page load through initialExpandedIds, with matching caret and aria-expanded
     - Several expanded items; opening another preserves every existing open panel
     - Semantic h2 with visual H4, explicitly annotated
     - Matching semantic and visual h2 through h6 title treatments
@@ -428,6 +434,8 @@ validation:
       - Enter, Space and pointer activation toggle exactly once with focus retained.
       - All triggers remain in Tab order; only expanded content controls are reachable.
       - Independent expansion, all-open/all-closed states and initial key validation.
+      - A chosen non-first item starts open with aria-expanded=true, caret-up and visible panel; other items start closed.
+      - The initially open item can be closed; opening a sibling does not close it; rerenders do not reset user choices.
       - No focus loss when a panel containing focus is programmatically collapsed.
       - Enhancement preserves a focused panel; no-JS and print show all content.
       - Values and local state survive collapse and reopen.
