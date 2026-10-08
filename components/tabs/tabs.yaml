@@ -1,0 +1,530 @@
+component: Tabs
+id: tabs
+version: 0.1.0
+status: draft
+
+phase:
+  current: tokens-and-documentation
+  implementation: not-started
+  figma: deferred
+  releaseReady: false
+
+description: >
+  Tabs groups related content into labelled panels. An enhanced tab list exposes
+  one panel at a time and has one sequential keyboard entry point. Selection,
+  keyboard focus and temporary pointer states are independent.
+
+relatedDocumentation:
+  - components/tabs/tabs.md
+  - tokens/components/tabs.json
+  - accessibility/focus-indicators.yaml
+  - accessibility/headings.yaml
+  - patterns/component-documentation-page.yaml
+  - patterns/responsive/responsive-modes.yaml
+  - tokens/figma/sync-contract.yaml
+  - docs/token-sync-workflow.md
+
+scope:
+  includes:
+    - Horizontal tab list with visible text labels and associated content panels
+    - Exactly one selection in the enhanced presentation
+    - Automatic and manual keyboard activation behaviour
+    - Progressive enhancement from ordinary linked sections
+    - Default, hover, pressed and keyboard-focus presentation independent of selection
+    - Shared responsive typography and comfortable targets
+  excludes:
+    - Page navigation, route switching and sequential process steps
+    - Vertical, nested, closable, draggable or reorderable tab sets
+    - Disabled tabs, icon-only labels, badges and tab menus
+    - Lazy-loading framework, controlled-state framework adapter and network requests
+    - Built-in URL history management
+    - Production code and Figma changes in this phase
+
+decisions:
+  activationDefault:
+    status: accepted
+    value: automatic
+    condition: All panels are present and can display immediately.
+    alternative: manual
+    rule: Manual mode is required when switching cannot be immediate; do not infer readiness from network speed.
+  narrowPresentation:
+    status: accepted
+    value: contents-list-and-all-sections
+    threshold: breakpoint.md
+    rules:
+      - Fallback applies below breakpoint.md or whenever the complete tab row cannot fit its container.
+      - This is a system choice informed by GOV.UK, not a W3C-mandated breakpoint.
+      - Update semantics, focus and keyboard handling together when changing presentation.
+  figmaInventory:
+    status: deferred-to-live-preflight
+    rule: Inspect the existing file before fixing page number, component hierarchy and public property names.
+
+principles:
+  - Use for peer sections when switching views helps the task.
+  - Prefer visible sections when users need all information or must compare panels.
+  - Keep essential instructions and validation summaries outside hidden content.
+  - Do not use a tab-shaped link to another page as role=tab.
+  - Treat APG as interaction guidance and WCAG 2.2 AA as the conformance baseline.
+
+anatomy:
+  root:
+    element: div
+    role: null
+    layout: vertical
+    tokens:
+      listToPanel: component.tabs.spacing.listToPanel
+  label:
+    required: true
+    description: Accessible name describing the purpose of the set.
+    rules:
+      - Prefer aria-labelledby referencing a visible contextual heading.
+      - Otherwise require a concise non-empty aria-label.
+      - The label does not create a heading level by itself.
+  tabList:
+    enhancedRole: tablist
+    orientation: horizontal
+    layout: single-row
+    tokens:
+      gap: component.tabs.spacing.tabGap
+    rules:
+      - The enhanced list contains only tabs, with neutral wrappers where needed.
+      - Use role=presentation on list-item wrappers if enhancing an HTML list.
+      - Never wrap the tab row into multiple rows or clip its focus rings.
+  tab:
+    baselineElement: a
+    enhancedRole: tab
+    accessibleName: visible-label-text
+    tokens:
+      paddingBlock: component.tabs.spacing.tabPaddingBlock
+      paddingInline: component.tabs.spacing.tabPaddingInline
+      minBlockSize: size.control.minBlockSize.default
+      minInlineSize: size.target.comfortable
+      radius: radius.none
+      typography: typography.body.default
+    rules:
+      - Baseline href references the associated section ID.
+      - Enhanced activation is local; prevent anchor navigation only while enhancement is active.
+      - Support Space explicitly on enhanced anchors as well as Enter and pointer activation.
+      - A button-based adapter must use type=button and provide an equivalent baseline contents list.
+      - Do not nest links, buttons, headings or other interactive content inside a tab label.
+      - Render labels as escaped text, without ellipsis or tooltips replacing visible wording.
+  selectedIndicator:
+    type: persistent-block-end-border
+    tokens:
+      thickness: component.tabs.indicator.thickness
+      color: color.interactive.default.border
+    rules:
+      - Draw only for the selected tab, in all interaction states.
+      - Reserve equivalent layout space for unselected tabs without drawing a transparent border.
+      - Use padding compensation or an equivalent stable box model to prevent selection layout shift.
+      - A border or underline shape carries selection independently of text colour.
+  panel:
+    baselineElement: section
+    enhancedRole: tabpanel
+    defaultContentStart: contextual-heading
+    tokens:
+      background: color.surface.default
+      text: color.text.default
+    rules:
+      - Each panel starts with a context-appropriate heading matching its tab label.
+      - Panels fill available width and grow with content; do not set fixed heights.
+      - Panel content owns its normal headings, prose, links and controls.
+      - Keep each panel mounted when hidden so switching preserves entered values and local state.
+      - Hidden content must not be exposed to focus, pointer input or the accessibility tree.
+
+publicApi:
+  status: framework-neutral-contract
+  items:
+    type: ordered-list
+    required: true
+    minimumCount: 2
+    itemFields:
+      id: Stable non-empty unique key; derive globally unique tab and panel IDs with an instance prefix.
+      label: Required non-empty plain text describing the panel.
+      content: Required panel content including its heading; not an untrusted raw HTML string.
+    rules:
+      - Reject duplicate or empty keys and labels.
+      - Preserve supplied item order in both presentations.
+      - For one section render ordinary content instead of a redundant tab widget.
+  labelledBy:
+    type: id-reference
+    preferred: true
+    rule: Resolve to visible meaningful text; do not combine with label.
+  label:
+    type: string
+    rule: Required when labelledBy is absent; non-empty after trimming.
+  initialSelectedId:
+    type: item-key
+    required: false
+    default: first-item
+    rule: Reject an explicit unknown key; never initialise with no selection or move focus on page load.
+  activation:
+    type: enum
+    values: [automatic, manual]
+    default: automatic
+    rule: Automatic requires immediately available panel content.
+  prohibitedProps:
+    - disabled
+    - closable
+    - orientation=vertical
+    - href-to-another-page
+    - iconOnly
+    - rawHtmlLabel
+  rules:
+    - Selection is owned by Tabs; do not give each item an independent selected flag.
+    - A later framework adapter must document controlled-state and callback semantics separately.
+
+semantics:
+  enhanced:
+    list: Named tablist with horizontal orientation.
+    tabs: Each tab has a unique ID, aria-controls pointing at its panel, and explicit aria-selected.
+    selection: Exactly one aria-selected=true; all other tabs are false.
+    panels: Each panel uses role=tabpanel and aria-labelledby pointing at its tab.
+    hiddenPanels: Use the hidden attribute; do not override its display behaviour in CSS.
+    panelTabStop: >
+      Panel content starts with a heading, so the visible panel uses tabindex=0.
+      Hidden panels retain no reachable focus stops. Tab next proceeds to controls
+      inside the visible panel, then onward in document order.
+    prohibited:
+      - aria-expanded or aria-pressed as substitutes for aria-selected
+      - aria-current as a substitute for tab selection
+      - aria-live or role=alert on the whole panel
+      - positive tabindex
+      - aria-hidden alone as a hiding mechanism
+  baseline:
+    list: Ordinary list of links to visible sections.
+    panels: All sections visible in source order with contextual headings.
+    rules:
+      - Do not emit widget roles or selection attributes before enhancement succeeds.
+      - Do not hide panels before event handlers and relationships are ready.
+      - If enhancement fails, all section content remains available.
+
+keyboardInteraction:
+  entry: Tab enters on the selected tab, initially the first unless a valid initial selection is supplied.
+  tabindexPolicy: >
+    Outside the tab list only the selected tab has tabindex=0. While arrow keys
+    move focus within the list, move the single tabindex=0 to the focused tab
+    and set all other tabs to -1, without changing manual-mode selection.
+    After focus leaves the list, restore tabindex=0 to the selected tab.
+    Restore only after native Tab navigation completes, so Tab always leaves
+    the list even when the unselected focused tab precedes the selected tab.
+  keys:
+    Tab: Leave the tab list for the selected panel, then its content in normal order.
+    Shift+Tab: Leave backwards in normal document order; re-entry from the panel reaches the selected tab.
+    ArrowRight: Focus the next tab in DOM order, wrapping from last to first.
+    ArrowLeft: Focus the previous tab in DOM order, wrapping from first to last.
+    Home: Focus the first tab.
+    End: Focus the last tab.
+    Enter: Activate the focused tab; keep focus on it.
+    Space: Activate the focused tab; prevent page scrolling for this handled key.
+    ArrowUp: Preserve browser scrolling and assistive-technology behaviour.
+    ArrowDown: Preserve browser scrolling and assistive-technology behaviour.
+  automatic:
+    rule: Focusing a tab also selects it and reveals its already available panel.
+  manual:
+    rule: Arrow, Home and End move focus only; Enter, Space or a click commits selection.
+    example: Details remains selected while History is focused until the user activates History.
+  rules:
+    - Scope handlers to tabs in this list; do not intercept keys from panel content.
+    - Do not intercept modified browser or assistive-technology shortcuts.
+    - Prevent default only for keys the enhanced widget handles.
+    - Pointer or touch activation selects the target and keeps focus associated with that tab.
+    - Do not trap focus or move focus into a panel automatically on selection.
+    - The DOM-order arrow convention follows APG; verify usability with right-to-left content in implementation QA.
+
+states:
+  selected:
+    type: boolean
+    independentFromInteraction: true
+  interaction:
+    default:
+      background: color.interactive.default.background
+      foreground: color.interactive.default.foreground
+    hover:
+      background: color.interactive.default.hover.background
+      foreground: color.interactive.default.hover.foreground
+    pressed:
+      background: color.interactive.default.active.background
+      foreground: color.interactive.default.active.foreground
+    focus:
+      ring: color.interactive.focus.ring
+      separator: color.interactive.focus.separator
+      ringWidth: border.width.medium
+      separatorWidth: border.width.medium
+  rules:
+    - Pressed means pointer/key actuation; selected means the panel is shown.
+    - Selected styling persists through hover, pressed and focus.
+    - Focus overlays the current state rather than removing the selected indicator.
+    - Use the shared double-ring treatment around a focused tab and visible panel.
+    - Raise the focused control above adjacent controls; do not clip the external ring.
+    - No disabled state exists; omit unavailable sections or explain their empty content in a selectable panel.
+
+responsiveBehaviour:
+  universal:
+    - Support 320 CSS pixel width, 400 percent zoom, 200 percent text resizing and WCAG text-spacing overrides.
+    - Never truncate labels, enforce fixed panel heights or cause page-level horizontal scrolling.
+    - Use logical spacing properties and normal source order.
+    - Use shared semantic typography, inheriting base, md and lg modes.
+  fallback:
+    decision: narrowPresentation
+    activationCondition: Below breakpoint.md or when the full row cannot fit the actual container.
+    presentation: Ordinary contents links followed by all labelled sections.
+    semantics: Remove tablist, tab, tabpanel, aria-selected, aria-controls and widget tabindex attributes.
+    keyboard: Restore native link and document behaviour; no arrow-key handling.
+    focusContinuity:
+      - Reuse each link node so a focused tab becomes the corresponding contents link without losing focus.
+      - Leave focus within panel content in place while showing all sections.
+      - On re-enhancement, select the panel containing focus before hiding any other panel.
+      - If a contents link holds focus on re-enhancement, select that tab to keep focus and selection coherent.
+      - Otherwise restore the last valid selection; do not move focus on resize.
+      - Do not apply a second visual-only responsive mode that leaves ARIA and event handlers stale.
+  print:
+    - Print every panel in source order with its heading, regardless of selection.
+    - Avoid a tab-shaped interactive control presentation in print.
+
+contentGuidance:
+  - Use short, distinct labels in sentence case and meaningful content headings.
+  - Put the most useful section first and keep labels stable while changing content.
+  - Prefer a small, task-relevant set; do not impose an arbitrary numeric maximum.
+  - Do not use Tabs for comparisons, mandatory ordered reading or primary page navigation.
+  - Put a useful explanation in a legitimately empty panel rather than disabling its tab.
+  - Keep form steps and required cross-panel validation flows outside the initial scope.
+  - Label translations are complete strings and may grow; the layout must adapt.
+
+integration:
+  announcements: Selection uses the tab role/state; do not announce the whole panel again in a live region.
+  asyncContent: >
+    Network fetching is outside this contract. If a consumer later supplies delayed
+    content it must use manual activation and separately define loading, error,
+    aria-busy and concise status-announcement behaviour without stealing focus.
+  deepLinks: >
+    Baseline section anchors work normally. Enhanced URL/history synchronisation is
+    not provided. Any later adapter must reveal the target panel before focusing a
+    hidden descendant and define reload/back/forward behaviour; document the gap.
+  validation: >
+    Do not hide required inputs across panels in v1. A future error-summary
+    integration must reveal an invalid field's panel before moving focus to it.
+
+accessibility:
+  conformanceTarget: WCAG 2.2 AA
+  wcag:
+    - id: 1.3.1
+      name: Info and Relationships
+      level: A
+      relevance: Programmatic tab-to-panel associations and meaningful section headings.
+    - id: 1.4.1
+      name: Use of Color
+      level: A
+      relevance: Selection has a persistent underline shape independent of colour.
+    - id: 1.4.3
+      name: Contrast Minimum
+      level: AA
+      relevance: Normal label text meets 4.5 to 1 in every state.
+    - id: 1.4.4
+      name: Resize Text
+      level: AA
+      relevance: Text at 200 percent does not clip or lose functionality.
+    - id: 1.4.10
+      name: Reflow
+      level: AA
+      relevance: Labels and panels remain usable at 320 CSS pixels without two-dimensional page scrolling.
+    - id: 1.4.11
+      name: Non-text Contrast
+      level: AA
+      relevance: Selection indicator and meaningful focus boundary meet 3 to 1 against adjacent colours.
+    - id: 1.4.12
+      name: Text Spacing
+      level: AA
+      relevance: User spacing changes preserve all text and controls.
+    - id: 2.1.1
+      name: Keyboard
+      level: A
+      relevance: All tab selection and panel content are keyboard-operable.
+    - id: 2.1.2
+      name: No Keyboard Trap
+      level: A
+      relevance: Tab and Shift+Tab leave the composite widget.
+    - id: 2.4.3
+      name: Focus Order
+      level: A
+      relevance: One list entry point and no focus in hidden panels.
+    - id: 2.4.6
+      name: Headings and Labels
+      level: AA
+      relevance: Set name, labels and panel headings describe their purposes.
+    - id: 2.4.7
+      name: Focus Visible
+      level: AA
+      relevance: Keyboard focus is visible on tabs and focusable panels.
+    - id: 2.4.11
+      name: Focus Not Obscured Minimum
+      level: AA
+      relevance: Author-created overlays do not entirely hide the focused item; aim to keep its full ring visible.
+    - id: 2.5.3
+      name: Label in Name
+      level: A
+      relevance: Accessible tab names contain the complete visible label.
+    - id: 2.5.8
+      name: Target Size Minimum
+      level: AA
+      relevance: Targets meet the 24 by 24 CSS pixel minimum; the system uses 44px minimums at a 16px root.
+    - id: 3.2.1
+      name: On Focus
+      level: A
+      relevance: Focusing a tab does not navigate, submit a form or relocate focus.
+    - id: 4.1.2
+      name: Name Role Value
+      level: A
+      relevance: Name, tab role and selected state match the visible presentation.
+  forcedColors:
+    - Preserve an actual selected border using system colours and a separate visible focus outline.
+    - Do not depend on box-shadow, background fills or transparent borders alone.
+    - Allow the user agent's forced colour adjustments; do not opt out on the whole widget.
+  motion:
+    - Switch panels without an animated height, sliding indicator or automatic rotation.
+    - Do not use motion to communicate selection; honour reduced-motion preferences in consuming content.
+  screenReader:
+    - Verify label, tab role, selection and set position using supported browser and screen-reader combinations.
+    - The visible panel is named by its controlling tab.
+    - Hidden panels are absent from reading and focus navigation.
+    - Read fallback content as ordinary links, headings and sections.
+
+contrast:
+  textMinimum: 4.5
+  indicatorMinimum: 3
+  focusMinimum: 3
+  pairs:
+    - name: default-label
+      foreground: color.interactive.default.foreground
+      background: color.interactive.default.background
+    - name: hover-label
+      foreground: color.interactive.default.hover.foreground
+      background: color.interactive.default.hover.background
+    - name: pressed-label
+      foreground: color.interactive.default.active.foreground
+      background: color.interactive.default.active.background
+    - name: selection-default
+      foreground: color.interactive.default.border
+      background: color.interactive.default.background
+    - name: selection-hover
+      foreground: color.interactive.default.border
+      background: color.interactive.default.hover.background
+    - name: selection-pressed
+      foreground: color.interactive.default.border
+      background: color.interactive.default.active.background
+    - name: focus-separator
+      foreground: color.interactive.focus.ring
+      background: color.interactive.focus.separator
+    - name: focus-surround
+      foreground: color.interactive.focus.ring
+      background: color.surface.default
+  rules:
+    - Resolved values are evidence, not duplicate tokens.
+    - Recheck every pairing after token or surrounding-surface changes.
+
+tokenDecision:
+  newComponentTokens:
+    - component.tabs.spacing.tabPaddingBlock
+    - component.tabs.spacing.tabPaddingInline
+    - component.tabs.spacing.tabGap
+    - component.tabs.spacing.listToPanel
+    - component.tabs.indicator.thickness
+  newSharedTokens: []
+  newResponsiveTokensRequired: false
+  rules:
+    - Reuse shared colours, focus, sizing and typography directly.
+    - Do not clone shared colour or typography tokens into a Tabs namespace.
+    - Every new token includes precise Figma scopes and Web code syntax.
+    - Compile both outputs from canonical JSON; do not hand-edit generated files.
+
+figma:
+  status: deferred
+  documentationPattern: patterns/component-documentation-page.yaml
+  preflightRequired: true
+  inventoryToConfirm:
+    - Reusable individual tab with Selected and interaction state presentations
+    - A flexible tab-list and panel composition without fixed tab-count variants
+    - A contents-list example showing all labelled sections
+  constraints:
+    - Keep focus independent of selection, including an unselected focused tab for manual mode.
+    - Inherit shared semantic typography through the manual Breakpoint collection.
+    - Do not create base, md or lg variants for token changes.
+    - Use a bottom stroke bound to component/tabs/indicator/thickness.
+    - Bind spacing to component/tabs/spacing variables and colours to shared semantic variables.
+    - Keep component masters, documentation, QA and accessibility areas separate.
+    - Follow the existing header, card and wrapping-grid template.
+    - Confirm page number, native component properties and live variable IDs before writes.
+  documentationExamples:
+    - Three related content panels with the first selected
+    - Non-first initial selection
+    - Manual mode with different selected and focused tabs
+    - Selected and unselected tabs under hover, pressed and focus
+    - Narrow contents-list presentation with all sections visible
+  qaExamples:
+    - Long localised labels and narrow embedded container
+    - 320 CSS pixel viewport and 400 percent zoom equivalent
+    - Text-spacing overrides and 200 percent text size
+    - Selected focus ring with no clipping at both ends of the row
+    - Mixed prose and interactive panel content
+
+validation:
+  source:
+    - Parse JSON and YAML; verify Markdown links and all token references.
+    - Verify five new aliased tokens and durable scope and code-syntax metadata.
+    - Rebuild raw and Studio output, retain responsive exclusions and resolve every alias.
+    - Confirm rebuild idempotence and no unrelated canonical token changes.
+    - Calculate text, indicator and focus contrast from resolved source values.
+    - Confirm accepted activation and responsive decisions agree across contract and documentation; do not claim runtime readiness.
+  production:
+    status: future-implementation-acceptance-tests
+    automated:
+      - Unique IDs, non-empty names, matching controls/labelledby references and exactly one selection.
+      - One list tab stop, correct initial selection and re-entry on the selected tab in both modes.
+      - Left/Right wrapping and Home/End for both activation modes.
+      - Manual arrows leave aria-selected and visible panel unchanged until Enter or Space.
+      - Tab exits the list even from an unselected tab before or after the selected tab; it reaches the visible panel and its controls, then leaves; Shift+Tab reverses naturally.
+      - Up/Down, modified keys and panel-local keyboard handling remain unmodified.
+      - Pointer activation, Space on anchors and native click cancellation while enhanced.
+      - Hidden panels have no reachable descendants; state is preserved across selection.
+      - Independent tab sets do not share IDs, state or keyboard handling.
+      - Without JavaScript, all content and section links work; print contains every section.
+      - Accepted responsive transitions preserve focus and update semantics and keyboard handling together.
+    manual:
+      - NVDA with Firefox or Chrome and VoiceOver with Safari, including mobile touch navigation.
+      - Windows forced-colour selection and focus remain distinguishable.
+      - 320 CSS pixels, 400 percent zoom, text resizing, long labels and spacing overrides.
+      - Focus remains visible near sticky headers and at tab-row boundaries.
+      - Right-to-left content and DOM-order navigation are understandable.
+  limitations:
+    - Token and contract validation is not runtime accessibility certification.
+    - No production Tabs implementation or browser test harness exists in this phase.
+    - Live Figma preflight, binding audit and visual checks have not run.
+
+acceptanceCriteria:
+  - Source and generated tokens agree and no new responsive mapping is required.
+  - The enhanced interaction has one keyboard entry point and separate focus and selection.
+  - Inactive panels cannot receive focus or be read as visible content.
+  - Text and meaningful indicators meet the stated contrast thresholds.
+  - Automatic activation and the narrow contents-list presentation follow the accepted decisions.
+  - Source is reviewed and merged before a Tokens Studio pull from main.
+  - Figma work starts only in its subsequent phase after live preflight.
+
+references:
+  reviewed: "2026-10-08"
+  sources:
+    - name: W3C APG Tabs Pattern
+      url: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+    - name: W3C APG Automatic Tabs Example
+      url: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/examples/tabs-automatic/
+    - name: W3C APG Manual Tabs Example
+      url: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/examples/tabs-manual/
+    - name: GOV.UK Tabs
+      url: https://design-system.service.gov.uk/components/tabs/
+    - name: W3C WCAG 2.2
+      url: https://www.w3.org/TR/WCAG22/
+    - name: W3C Target Size Minimum
+      url: https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html
+    - name: W3C Reflow
+      url: https://www.w3.org/WAI/WCAG22/Understanding/reflow.html
+    - name: W3C Focus Not Obscured Minimum
+      url: https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html

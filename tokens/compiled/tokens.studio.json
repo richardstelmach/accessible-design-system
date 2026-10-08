@@ -1671,6 +1671,77 @@
           }
         }
       },
+      "tabs": {
+        "spacing": {
+          "tabPaddingBlock": {
+            "$value": "{spacing.control.paddingBlock.default}",
+            "$type": "spacing",
+            "$description": "Block padding inside a tab target; preserve automatic height when labels wrap.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-tabs-spacing-tab-padding-block)"
+              }
+            }
+          },
+          "tabPaddingInline": {
+            "$value": "{spacing.control.paddingInline.default}",
+            "$type": "spacing",
+            "$description": "Inline padding inside each tab target.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-tabs-spacing-tab-padding-inline)"
+              }
+            }
+          },
+          "tabGap": {
+            "$value": "{spacing.control.gap}",
+            "$type": "spacing",
+            "$description": "Gap between adjacent tabs, leaving room for their external focus rings.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-tabs-spacing-tab-gap)"
+              }
+            }
+          },
+          "listToPanel": {
+            "$value": "{spacing.stack.md}",
+            "$type": "spacing",
+            "$description": "Gap between the tab list and the visible content panel.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-tabs-spacing-list-to-panel)"
+              }
+            }
+          }
+        },
+        "indicator": {
+          "thickness": {
+            "$value": "{border.width.thick}",
+            "$type": "borderWidth",
+            "$description": "Thickness of the persistent selected-tab underline; selection remains distinct from keyboard focus.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "STROKE_WEIGHT"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-tabs-indicator-thickness)"
+              }
+            }
+          }
+        }
+      },
       "textInput": {
         "width": {
           "full": {
