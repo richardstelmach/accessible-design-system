@@ -1733,7 +1733,7 @@
             "$description": "Thickness of the persistent selected-tab underline; selection remains distinct from keyboard focus.",
             "$extensions": {
               "com.figma.scopes": [
-                "STROKE_WEIGHT"
+                "STROKE_FLOAT"
               ],
               "com.figma.codeSyntax": {
                 "Web": "var(--component-tabs-indicator-thickness)"
