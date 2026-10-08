@@ -1,0 +1,465 @@
+component: Accordion
+id: accordion
+version: 0.1.0
+status: draft
+
+phase:
+  current: source-review
+  implementation: not-started
+  figma: read-only-preflight-complete
+  releaseReady: false
+
+description: >
+  Vertically stacked disclosure sections. Each section has a heading containing
+  a button, a state indicator and an associated content panel. Semantic heading
+  level, visual heading style, expansion and keyboard focus are separate concerns.
+
+relatedDocumentation:
+  - components/accordion/accordion.md
+  - tokens/components/accordion.json
+  - accessibility/headings.yaml
+  - accessibility/focus-indicators.yaml
+  - patterns/component-documentation-page.yaml
+  - tokens/figma/sync-contract.yaml
+  - docs/token-sync-workflow.md
+  - icons/registry.json
+
+scope:
+  includes:
+    - Text-labelled vertical disclosure sections with flexible panel content
+    - Native h2 through h6 semantics and independently selectable visual heading styles
+    - Collapsed and expanded presentation with default, hover, pressed and independent focus
+    - Independent expansion; opening or closing an item never changes another item
+    - Framework-neutral contract, tokens, documentation and planned Figma inventory
+  excludes:
+    - Production implementation and framework-specific controlled-state adapters
+    - Disabled items or a requirement to keep one panel open
+    - Single-open mode, built-in expand-all controls, URL history, async loading and animation
+    - Nested accordions and arbitrary interactive title content
+    - Built-in header action, badge or leading-icon slots in this first version
+
+decisions:
+  expansionMode:
+    status: accepted
+    value: independent
+    authority: Richard confirmed that each item must be manually opened and closed independently.
+    rule: Any number may be open; opening or closing one never changes another.
+  headingAndTypography:
+    status: follows-existing-heading-standard
+    rule: Match visual style to heading level by default; permit documented visual exceptions.
+  indicator:
+    status: follows-existing-icon-registry
+    collapsed: caret-down
+    expanded: caret-up
+    reason: Existing registered Phosphor icons communicate vertical reveal and collapse.
+
+principles:
+  - Prefer visible sections when everyone must read the content or compare it continuously.
+  - Keep essential instructions, urgent messages and error summaries outside hidden panels.
+  - Expansion must never submit a form, navigate or unexpectedly move focus into content.
+  - Treat APG as interaction guidance and WCAG 2.2 AA as the conformance target.
+
+anatomy:
+  root:
+    element: div
+    role: null
+    layout: vertical
+    tokens:
+      gap: component.accordion.spacing.itemGap
+    rules:
+      - No accordion, tablist, menu or listbox ARIA role.
+      - Preserve supplied item order in visual and DOM order.
+  heading:
+    elements: [h2, h3, h4, h5, h6]
+    onlyChild: trigger-button
+    rules:
+      - Choose the level from the surrounding page hierarchy.
+      - All peer items use the same semantic heading level.
+      - Reset heading margins; typography is an independent visual decision.
+      - Do not add role=heading or aria-level redundantly to native heading elements.
+      - Do not place a second control, persistent description or badge inside the heading.
+  trigger:
+    element: button
+    type: button
+    accessibleName: visible-title-text
+    tokens:
+      paddingBlock: component.accordion.spacing.triggerPaddingBlock
+      paddingInline: component.accordion.spacing.paddingInline
+      gap: component.accordion.spacing.triggerGap
+      minBlockSize: size.control.minBlockSize.default
+      minInlineSize: size.target.comfortable
+      radius: radius.none
+    rules:
+      - The full header button is the pointer target, including its indicator.
+      - Render title as escaped, non-empty plain text; never nest interactive elements.
+      - Title wraps naturally, keeps its full wording and occupies remaining width.
+      - No fixed title height, line clamp, ellipsis or tooltip-only title.
+  indicator:
+    source: icons/registry.json
+    collapsed: caret-down
+    expanded: caret-up
+    weight: regular
+    placement: inline-end
+    tokens:
+      size: size.icon.md
+      color: color.icon.default
+    rules:
+      - Use existing icon component instances; do not redraw the glyphs.
+      - Hidden from assistive technology with aria-hidden=true and not separately focusable.
+      - Indicator state and aria-expanded must agree with actual panel visibility.
+      - Carets point vertically in both LTR and RTL layouts.
+  panel:
+    element: div
+    optionalRole: region
+    tokens:
+      paddingBlock: component.accordion.spacing.panelPaddingBlock
+      paddingInline: component.accordion.spacing.paddingInline
+      background: color.surface.default
+      text: color.text.default
+      typography: typography.body.default
+    rules:
+      - Content fills available width and grows in height without clipping.
+      - Content owns its ordinary prose, lists, links, controls and contextual subheadings.
+      - No mandatory duplicate panel title; the trigger heading already names the section.
+      - Subheadings continue the document hierarchy below the trigger heading.
+      - Keep panel DOM mounted while collapsed to preserve values and local state.
+      - Use hidden when collapsed; aria-hidden alone is insufficient to exclude controls from focus.
+      - Protect the hidden attribute from display overrides in component CSS.
+      - No default panel tabindex and no whole-panel live region.
+  divider:
+    placement: item-block-end
+    tokens:
+      thickness: border.width.thin
+      color: color.border.default
+    rules:
+      - Decorative separation; trigger text and caret identify the control independently.
+
+publicApi:
+  status: framework-neutral-contract
+  items:
+    type: ordered-list
+    required: true
+    minimumCount: 1
+    itemFields:
+      id: Stable non-empty unique key; derive globally unique trigger/panel IDs with an instance prefix.
+      title: Required non-empty plain text describing the panel.
+      content: Required structured panel content; not an untrusted raw HTML string.
+    rules:
+      - Reject empty or duplicate keys, empty titles and missing content.
+      - A single section is permitted; consider ordinary visible content when disclosure adds no value.
+  headingLevel:
+    type: integer
+    values: [2, 3, 4, 5, 6]
+    required: true
+    default: null
+    rule: Explicitly chosen by the consumer from the page outline; never guessed from font size.
+  titleStyle:
+    type: enum
+    values: [h2, h3, h4, h5, h6]
+    required: false
+    default: match-headingLevel
+    tokenFamily: typography.heading
+    rules:
+      - Choose the existing responsive heading style; no new type scale.
+      - An override changes appearance only, never the DOM heading element.
+      - Document semantic level and visual style when they differ.
+      - Apply consistently to peer items and preserve clear visual hierarchy.
+  initialExpandedIds:
+    type: item-key-list
+    default: []
+    rules:
+      - Apply only after successful enhancement; all baseline content is visible.
+      - Reject duplicate or unknown keys; any number of valid keys is permitted.
+      - Do not focus a trigger or panel on initialisation.
+  panelLandmark:
+    type: boolean
+    default: false
+    rules:
+      - Opt in for substantial panels whose structure benefits from named landmarks.
+      - When true, use role=region and aria-labelledby pointing to the controlling button.
+      - Avoid landmark proliferation, especially when more than about six panels may be open.
+      - When false, use an ordinary div without redundant aria-labelledby.
+  prohibitedProps:
+    - disabled
+    - requireOneOpen
+    - singleOpen
+    - exclusive
+    - iconOnly
+    - rawHtmlTitle
+    - arbitraryTitleSlot
+    - ariaCollapsed
+  rules:
+    - The root owns expanded item keys; do not introduce competing independent item flags.
+    - Framework-controlled values and callbacks require a later adapter contract.
+
+semantics:
+  trigger:
+    aria-expanded: "true for visible content; false for hidden content"
+    aria-controls: ID of exactly the associated panel; target remains in the DOM.
+    id: Globally unique and stable across rerenders.
+  panel:
+    id: Matches the trigger aria-controls value.
+    hidden: Present only while collapsed in the enhanced presentation.
+    regionLabel: When opting into role=region, aria-labelledby references the trigger ID.
+  rules:
+    - There is no aria-collapsed attribute; collapsed is aria-expanded=false.
+    - Do not use aria-selected, aria-pressed, aria-current or aria-haspopup for expansion.
+    - All panels can collapse in this version, so aria-disabled is unnecessary.
+    - Expansion changes update visibility, indicator and aria-expanded together.
+
+keyboard:
+  keys:
+    Enter: Toggle the focused trigger through the native button click behaviour.
+    Space: Toggle the focused trigger through the native button click behaviour.
+    Tab: Move forwards through every trigger and visible panel control in DOM order.
+    Shift+Tab: Move backwards through the same normal page order.
+    ArrowKeys: Preserve browser scrolling and embedded-control behaviour.
+    HomeEnd: Preserve browser behaviour; no custom header-navigation shortcut in this version.
+  rules:
+    - Every trigger is a normal tab stop; no roving tabindex.
+    - Do not add key handlers that duplicate native button click activation.
+    - Leave panel-local keys and modified shortcuts untouched.
+    - No Escape-to-collapse behaviour or focus trap.
+
+expansion:
+  independent: Toggling one item leaves every other item unchanged; any number may be open or closed.
+  focus:
+    - User-triggered toggling keeps focus on the activated button.
+    - Before externally hiding a panel containing focus, return focus to its controlling button.
+    - Integration must reveal a hidden error or deep-link target before scrolling or focusing it.
+    - Initial enhancement must not hide a panel containing focus; preserve it as expanded.
+    - Preserving a focused panel does not close any initially expanded panel.
+  baseline:
+    - Before enhancement, render ordinary headings with every panel visible.
+    - Insert trigger buttons and collapsed visibility only when event handling is ready.
+    - Failure to initialise must leave readable content, without non-functional toggle controls.
+  print:
+    - Print all panels in source order with headings, regardless of current expansion.
+    - Hide decorative control indicators in print; do not change the stored interactive state.
+
+states:
+  expanded: [false, true]
+  interaction:
+    default:
+      foreground: color.interactive.default.foreground
+      background: color.interactive.default.background
+    hover:
+      foreground: color.interactive.default.hover.foreground
+      background: color.interactive.default.hover.background
+    pressed:
+      foreground: color.interactive.default.active.foreground
+      background: color.interactive.default.active.background
+  focus:
+    independent: true
+    ring: color.interactive.focus.ring
+    separator: color.interactive.focus.separator
+    ringWidth: border.width.medium
+    separatorWidth: border.width.medium
+  rules:
+    - Expansion is shown by panel visibility and caret direction, not colour alone.
+    - Keep both focus layers visible when focus overlaps hover, pressed or expansion.
+    - Raise the focused trigger above adjacent content and never clip the external ring.
+    - Keep indicator color fixed at color.icon.default in all three pointer states.
+
+layout:
+  width: fill-container
+  height: hug-content
+  rules:
+    - Use logical inline/block properties and natural wrapping in LTR and RTL layouts.
+    - Keep the vertical disclosure presentation at every breakpoint.
+    - Inherit base, md and lg typography from the parent Breakpoint mode in Figma.
+    - Preserve 44px comfortable minimum targets and increase height as text grows.
+    - Fit a 320 CSS pixel viewport without page-level horizontal scrolling.
+    - Support 200 percent text resizing and 400 percent zoom at a 1280px starting viewport.
+    - Support line-height 1.5, paragraph spacing 2em, letter spacing 0.12em and word spacing 0.16em.
+    - Use overflow wrapping for long unbroken titles; never shrink type to fit.
+    - Panel content integrations remain responsible for their own responsive behaviour.
+
+accessibility:
+  conformanceTarget: WCAG 2.2 AA
+  wcag:
+    - {id: "1.3.1", level: A, relevance: Heading structure and trigger-panel relationships.}
+    - {id: "1.3.2", level: A, relevance: Meaningful reading order across headings and panels.}
+    - {id: "1.4.1", level: A, relevance: Caret direction and visibility communicate expansion.}
+    - {id: "1.4.3", level: AA, relevance: Readable text across all pointer states.}
+    - {id: "1.4.4", level: AA, relevance: Text resizing without clipping or lost controls.}
+    - {id: "1.4.10", level: AA, relevance: Reflow at 320 CSS pixels.}
+    - {id: "1.4.11", level: AA, relevance: Meaningful indicator and focus contrast.}
+    - {id: "1.4.12", level: AA, relevance: Text spacing without loss of content.}
+    - {id: "2.1.1", level: A, relevance: Keyboard operable trigger buttons.}
+    - {id: "2.1.2", level: A, relevance: No keyboard trap.}
+    - {id: "2.4.3", level: A, relevance: Predictable focus and hidden-content exclusion.}
+    - {id: "2.4.6", level: AA, relevance: Descriptive section headings.}
+    - {id: "2.4.7", level: AA, relevance: Persistent visible keyboard focus.}
+    - {id: "2.4.11", level: AA, relevance: Focus is not entirely obscured by author-created overlays.}
+    - {id: "2.5.3", level: A, relevance: Visible title supplies the accessible name.}
+    - {id: "2.5.8", level: AA, relevance: Target dimensions; system target is 44px.}
+    - {id: "3.2.1", level: A, relevance: Focusing a trigger does not expand content.}
+    - {id: "4.1.2", level: A, relevance: Button name and expansion state are exposed.}
+  forcedColors:
+    - Preserve native system colours and a visible outline for focus.
+    - Render caret shapes using a system foreground/currentColor; do not rely on background images.
+    - Do not disable forced-colour adjustment on the whole component.
+  motion:
+    - Toggle instantly by default; no height or caret animation is required.
+    - Future animation must respect reduced motion and keep hidden content unfocusable.
+  screenReader:
+    - Discover triggers as headings at the correct level and as named buttons.
+    - Hear expanded or collapsed state without a redundant live-region announcement.
+    - Discover only expanded panel content and any deliberately named regions.
+
+contrast:
+  textMinimum: 4.5
+  indicatorMinimum: 3
+  focusMinimum: 3
+  pairs:
+    - {name: default-title, foreground: color.interactive.default.foreground, background: color.interactive.default.background, minimum: 4.5}
+    - {name: hover-title, foreground: color.interactive.default.hover.foreground, background: color.interactive.default.hover.background, minimum: 4.5}
+    - {name: pressed-title, foreground: color.interactive.default.active.foreground, background: color.interactive.default.active.background, minimum: 4.5}
+    - {name: panel-text, foreground: color.text.default, background: color.surface.default, minimum: 4.5}
+    - {name: default-caret, foreground: color.icon.default, background: color.interactive.default.background, minimum: 3}
+    - {name: hover-caret, foreground: color.icon.default, background: color.interactive.default.hover.background, minimum: 3}
+    - {name: pressed-caret, foreground: color.icon.default, background: color.interactive.default.active.background, minimum: 3}
+    - {name: focus-separator, foreground: color.interactive.focus.ring, background: color.interactive.focus.separator, minimum: 3}
+    - {name: focus-surface, foreground: color.interactive.focus.ring, background: color.surface.default, minimum: 3}
+
+tokens:
+  newComponentTokens:
+    - component.accordion.spacing.triggerPaddingBlock
+    - component.accordion.spacing.paddingInline
+    - component.accordion.spacing.triggerGap
+    - component.accordion.spacing.panelPaddingBlock
+    - component.accordion.spacing.itemGap
+  newSharedTokens: []
+  newResponsiveTokensRequired: false
+  rules:
+    - Reuse shared semantic colours, heading/body styles, target dimensions, icons and focus treatment.
+    - All five component aliases have GAP scopes and exact Web CSS syntax in canonical JSON.
+    - Rebuild compiled outputs; never hand-edit them.
+
+figma:
+  status: planned-after-source-review
+  fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  pageName: 21 - Components - Accordion
+  documentationPattern: patterns/component-documentation-page.yaml
+  tokenRoundTrip: not-started
+  libraryPublication: not-published
+  preflight:
+    date: "2026-10-08"
+    existingAccordionPage: false
+    existingAccordionVariables: false
+    referencePageId: "1164:6"
+    caretDownId: "61:635"
+    caretUpId: "61:629"
+    headingStyles: [typography/heading/h2, typography/heading/h3, typography/heading/h4, typography/heading/h5, typography/heading/h6]
+    nativeSlotsVerified: true
+    mutationsPerformed: false
+  inventory:
+    title:
+      componentSet: Accordion / Title
+      variants:
+        Title style: [H2, H3, H4, H5, H6]
+      expectedVariantCount: 5
+      properties:
+        Title: {type: TEXT, default: Section title}
+      rules:
+        - Shared responsive heading style per visual variant.
+        - Visual style does not choose HTML heading level; document semantics in the instance handoff.
+    item:
+      componentSet: Accordion / Item
+      variants:
+        Expanded: ["False", "True"]
+        State: [Default, Hover, Pressed]
+      expectedVariantCount: 6
+      properties:
+        Focus: {type: BOOLEAN, default: false}
+        Content: {type: SLOT}
+      nestedProperties: [Title, Title style]
+      rules:
+        - Expose nested Accordion / Title properties instead of multiplying state variants by typography.
+        - Keep a populated native Content slot; hide the panel wrapper in collapsed variants.
+        - Preserve content and title overrides when switching compatible variants.
+        - Caret glyph follows Expanded; do not expose a free choice of expansion indicator.
+        - No arbitrary title slot; plain text preserves an unambiguous control name.
+    composition:
+      component: Accordion
+      properties:
+        Items: {type: SLOT}
+      rules:
+        - Vertical native Items slot accepts Accordion / Item instances with no fixed-count variants.
+        - Populate the default composition with three useful examples.
+        - headingLevel is an implementation annotation, not a visual variant axis; expansion is always independent.
+  constraints:
+    - Reuse global variables and the existing manual Breakpoint collection.
+    - Add only the five source-defined spacing variables after source review and sync.
+    - Reuse existing caret masters; no new icons or heading styles.
+    - Use shared documentation headers and card instances with wrapping grids.
+    - Keep masters separate from documentation, QA and accessibility areas.
+    - Keep one compact review frame of instances with masters outside it.
+    - Do not claim design properties implement keyboard or ARIA behaviour.
+  documentationExamples:
+    - Three items with one expanded and all collapsed
+    - Several expanded items; opening another preserves every existing open panel
+    - Semantic h2 with visual H4, explicitly annotated
+    - Matching semantic and visual h2 through h6 title treatments
+    - Mixed prose, list and existing link or button instances inside the content slot
+    - Focus alongside collapsed, expanded, hover and pressed states
+  qaExamples:
+    - 320px width with long wrapping titles and populated panels
+    - base, md and lg heading styles inherited through parent mode
+    - Every title style with 200 percent text size and text-spacing simulation
+    - Focus rings at first and last item and beside expanded content
+    - RTL title alignment and trailing carets
+    - Slot content and title properties preserved when Expanded changes
+
+validation:
+  source:
+    - Parse contract YAML and token JSON; resolve local documentation links and token references.
+    - Confirm new aliases, precise scopes and Web syntax survive compilation.
+    - Preserve all unrelated tokens and responsive mappings.
+    - Calculate every contrast pair from resolved canonical values.
+    - Confirm idempotent rebuild and clean diff formatting.
+  production:
+    status: future-implementation-acceptance-tests
+    automated:
+      - Heading levels 2 through 6; visual style changes never change semantics.
+      - Native type=button triggers with non-empty visible names and unique IDs across sets.
+      - Each controls reference resolves to its own panel; region labels resolve to the trigger.
+      - Enter, Space and pointer activation toggle exactly once with focus retained.
+      - All triggers remain in Tab order; only expanded content controls are reachable.
+      - Independent expansion, all-open/all-closed states and initial key validation.
+      - No focus loss when a panel containing focus is programmatically collapsed.
+      - Enhancement preserves a focused panel; no-JS and print show all content.
+      - Values and local state survive collapse and reopen.
+      - Error and deep-link integrations reveal content before attempting focus.
+      - Pointer states never erase keyboard focus or expansion indicators.
+    manual:
+      - NVDA with Firefox or Chrome; VoiceOver with Safari; mobile touch screen-reader navigation.
+      - Correct heading navigation, button name/state and optional region announcements.
+      - Forced colours, reduced motion, RTL, text resizing and text-spacing overrides.
+      - 320px reflow and 400 percent zoom; visible focus near sticky headers.
+  limitations:
+    - No production Accordion implementation or browser test harness exists in this phase.
+    - Source/token checks do not establish runtime accessibility conformance.
+    - Figma was inspected read-only; Accordion assets have not been built or visually audited.
+    - Independent expansion is confirmed by Richard; no exclusive mode is included.
+
+acceptanceCriteria:
+  - Consumer explicitly selects correct semantic heading level; appearance is separately configurable.
+  - Slots permit flexible panel and item content without interactive title markup.
+  - Expanded state, caret direction and panel visibility remain synchronised.
+  - Contract and documentation agree on the approved expansion policy.
+  - Tokens compile without changing unrelated source decisions.
+  - Source review and GitHub main merge precede Tokens Studio pull and Figma construction.
+  - Figma inventory, bindings, slots and documentation pass structural and visual checks.
+  - Repeat non-destructive export preserves variable IDs and metadata before sync is accepted.
+
+references:
+  reviewed: "2026-10-08"
+  sources:
+    - {name: W3C APG Accordion Pattern, url: "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/"}
+    - {name: W3C APG Accordion Example, url: "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/examples/accordion/"}
+    - {name: W3C Reflow, url: "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"}
+    - {name: W3C Text Spacing, url: "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html"}
+    - {name: W3C Target Size Minimum, url: "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"}
+    - {name: W3C Focus Not Obscured Minimum, url: "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html"}
