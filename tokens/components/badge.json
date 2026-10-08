@@ -5,26 +5,50 @@
         "paddingBlock": {
           "$value": "{spacing.1}",
           "$type": "spacing",
-          "$description": "Vertical padding between the Badge label and its status surface."
+          "$description": "Vertical padding between the Badge label and its status surface.",
+          "$extensions": {
+            "com.figma.scopes": ["GAP"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-badge-spacing-padding-block)"
+            }
+          }
         },
         "paddingInline": {
           "$value": "{spacing.2}",
           "$type": "spacing",
-          "$description": "Horizontal padding between the Badge label and its status surface."
+          "$description": "Horizontal padding between the Badge label and its status surface.",
+          "$extensions": {
+            "com.figma.scopes": ["GAP"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-badge-spacing-padding-inline)"
+            }
+          }
         }
       },
       "sizing": {
         "maxWidth": {
           "$value": "15rem",
           "$type": "dimension",
-          "$description": "Maximum inline size of the complete Badge before a long label wraps. At a default 16px root size, 15rem equals 240px."
+          "$description": "Maximum inline size of the complete Badge before a long label wraps. At a default 16px root size, 15rem equals 240px.",
+          "$extensions": {
+            "com.figma.scopes": ["WIDTH_HEIGHT"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-badge-sizing-max-width)"
+            }
+          }
         }
       },
       "surface": {
         "radius": {
           "$value": "{radius.full}",
           "$type": "borderRadius",
-          "$description": "Corner radius for the compact Badge status surface."
+          "$description": "Corner radius for the compact Badge status surface.",
+          "$extensions": {
+            "com.figma.scopes": ["CORNER_RADIUS"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-badge-surface-radius)"
+            }
+          }
         }
       }
     }

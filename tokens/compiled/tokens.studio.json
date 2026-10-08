@@ -542,12 +542,29 @@
           "background": {
             "$value": "{color.neutral.100}",
             "$type": "color",
-            "$description": "Background colour for neutral status labels and messages."
+            "$description": "Background colour for neutral status labels and messages.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-neutral-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.neutral.600}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on neutral status backgrounds."
+            "$description": "Foreground colour for content placed on neutral status backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-neutral-foreground)"
+              }
+            }
           }
         },
         "success": {
@@ -555,12 +572,29 @@
           "background": {
             "$value": "{color.success.100}",
             "$type": "color",
-            "$description": "Background colour for success messages."
+            "$description": "Background colour for success messages.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-success-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.success.950}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on success backgrounds."
+            "$description": "Foreground colour for content placed on success backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-success-foreground)"
+              }
+            }
           }
         },
         "info": {
@@ -568,12 +602,29 @@
           "background": {
             "$value": "{color.primary.100}",
             "$type": "color",
-            "$description": "Background colour for informational messages."
+            "$description": "Background colour for informational messages.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-info-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.primary.950}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on informational backgrounds."
+            "$description": "Foreground colour for content placed on informational backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-info-foreground)"
+              }
+            }
           }
         },
         "warning": {
@@ -581,12 +632,29 @@
           "background": {
             "$value": "{color.warning.100}",
             "$type": "color",
-            "$description": "Background colour for warning messages."
+            "$description": "Background colour for warning messages.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-warning-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.warning.950}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on warning backgrounds."
+            "$description": "Foreground colour for content placed on warning backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-warning-foreground)"
+              }
+            }
           }
         },
         "error": {
@@ -594,12 +662,29 @@
           "background": {
             "$value": "{color.error.100}",
             "$type": "color",
-            "$description": "Background colour for error messages."
+            "$description": "Background colour for error messages.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-error-background)"
+              }
+            }
           },
           "foreground": {
             "$value": "{color.error.950}",
             "$type": "color",
-            "$description": "Foreground colour for content placed on error backgrounds."
+            "$description": "Foreground colour for content placed on error backgrounds.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-status-error-foreground)"
+              }
+            }
           }
         }
       },
@@ -1329,31 +1414,71 @@
           "inset": {
             "$value": "{spacing.inset.md}",
             "$type": "spacing",
-            "$description": "Padding between the Alert boundary and its icon and content."
+            "$description": "Padding between the Alert boundary and its icon and content.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-alert-spacing-inset)"
+              }
+            }
           },
           "iconToContent": {
             "$value": "{spacing.3}",
             "$type": "spacing",
-            "$description": "Horizontal gap between the fixed state icon and the Alert content."
+            "$description": "Horizontal gap between the fixed state icon and the Alert content.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-alert-spacing-icon-to-content)"
+              }
+            }
           },
           "titleToDescription": {
             "$value": "{spacing.stack.xs}",
             "$type": "spacing",
-            "$description": "Vertical gap between the Alert title and optional description."
+            "$description": "Vertical gap between the Alert title and optional description.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-alert-spacing-title-to-description)"
+              }
+            }
           }
         },
         "icon": {
           "size": {
             "$value": "{size.icon.lg}",
             "$type": "dimension",
-            "$description": "Size of the fixed state icon used by Alert."
+            "$description": "Size of the fixed state icon used by Alert.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "WIDTH_HEIGHT"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-alert-icon-size)"
+              }
+            }
           }
         },
         "surface": {
           "radius": {
             "$value": "{radius.lg}",
             "$type": "borderRadius",
-            "$description": "Corner radius for the Alert status surface."
+            "$description": "Corner radius for the Alert status surface.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "CORNER_RADIUS"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-alert-surface-radius)"
+              }
+            }
           }
         }
       },
@@ -1362,26 +1487,58 @@
           "paddingBlock": {
             "$value": "{spacing.1}",
             "$type": "spacing",
-            "$description": "Vertical padding between the Badge label and its status surface."
+            "$description": "Vertical padding between the Badge label and its status surface.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-badge-spacing-padding-block)"
+              }
+            }
           },
           "paddingInline": {
             "$value": "{spacing.2}",
             "$type": "spacing",
-            "$description": "Horizontal padding between the Badge label and its status surface."
+            "$description": "Horizontal padding between the Badge label and its status surface.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-badge-spacing-padding-inline)"
+              }
+            }
           }
         },
         "sizing": {
           "maxWidth": {
             "$value": "15rem",
             "$type": "dimension",
-            "$description": "Maximum inline size of the complete Badge before a long label wraps. At a default 16px root size, 15rem equals 240px."
+            "$description": "Maximum inline size of the complete Badge before a long label wraps. At a default 16px root size, 15rem equals 240px.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "WIDTH_HEIGHT"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-badge-sizing-max-width)"
+              }
+            }
           }
         },
         "surface": {
           "radius": {
             "$value": "{radius.full}",
             "$type": "borderRadius",
-            "$description": "Corner radius for the compact Badge status surface."
+            "$description": "Corner radius for the compact Badge status surface.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "CORNER_RADIUS"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-badge-surface-radius)"
+              }
+            }
           }
         }
       },

@@ -5,31 +5,61 @@
         "inset": {
           "$value": "{spacing.inset.md}",
           "$type": "spacing",
-          "$description": "Padding between the Alert boundary and its icon and content."
+          "$description": "Padding between the Alert boundary and its icon and content.",
+          "$extensions": {
+            "com.figma.scopes": ["GAP"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-alert-spacing-inset)"
+            }
+          }
         },
         "iconToContent": {
           "$value": "{spacing.3}",
           "$type": "spacing",
-          "$description": "Horizontal gap between the fixed state icon and the Alert content."
+          "$description": "Horizontal gap between the fixed state icon and the Alert content.",
+          "$extensions": {
+            "com.figma.scopes": ["GAP"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-alert-spacing-icon-to-content)"
+            }
+          }
         },
         "titleToDescription": {
           "$value": "{spacing.stack.xs}",
           "$type": "spacing",
-          "$description": "Vertical gap between the Alert title and optional description."
+          "$description": "Vertical gap between the Alert title and optional description.",
+          "$extensions": {
+            "com.figma.scopes": ["GAP"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-alert-spacing-title-to-description)"
+            }
+          }
         }
       },
       "icon": {
         "size": {
           "$value": "{size.icon.lg}",
           "$type": "dimension",
-          "$description": "Size of the fixed state icon used by Alert."
+          "$description": "Size of the fixed state icon used by Alert.",
+          "$extensions": {
+            "com.figma.scopes": ["WIDTH_HEIGHT"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-alert-icon-size)"
+            }
+          }
         }
       },
       "surface": {
         "radius": {
           "$value": "{radius.lg}",
           "$type": "borderRadius",
-          "$description": "Corner radius for the Alert status surface."
+          "$description": "Corner radius for the Alert status surface.",
+          "$extensions": {
+            "com.figma.scopes": ["CORNER_RADIUS"],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-alert-surface-radius)"
+            }
+          }
         }
       }
     }

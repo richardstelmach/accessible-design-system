@@ -747,6 +747,45 @@ Routine syncing must not delete existing Figma resources.
 
 ---
 
+## Figma Variable Scopes and Code Syntax
+
+For Tokens Studio 2.11.0 or later, store Figma variable scopes and platform code syntax on the canonical token itself:
+
+```json
+"$extensions": {
+  "com.figma.scopes": ["GAP"],
+  "com.figma.codeSyntax": {
+    "Web": "var(--component-alert-spacing-inset)"
+  }
+}
+```
+
+Use the canonical platform labels `Web`, `Android` and `iOS`. The Web value must be the exact developer-facing reference expected in Figma Dev Mode.
+
+This metadata follows the same source-controlled workflow as the token value:
+
+```text
+Edit canonical source JSON
+↓
+Run node scripts/build-tokens.mjs
+↓
+Confirm the extensions in tokens/compiled/tokens.studio.json
+↓
+Commit and push
+↓
+Pull from GitHub in Tokens Studio
+↓
+Run the routine non-destructive export
+↓
+Verify scopes and code syntax in Figma
+```
+
+Do not rely on Figma-only code syntax. During export, current Tokens Studio versions remove a platform syntax that is absent from the token metadata. An omitted scope may remain on an existing variable, but it cannot define a new or recreated variable deterministically.
+
+See [Durable Figma variable scopes and code syntax](figma-variable-metadata-sync.md) for the supported extension keys, evidence and troubleshooting notes.
+
+---
+
 ## Exceptional Destructive Reconciliation
 
 A destructive export is used only when intentionally deleting or renaming tokens or reconciling previously generated Figma artefacts.
@@ -1187,7 +1226,7 @@ Pull from GitHub in Tokens Studio
 ↓
 Run a non-destructive Figma export
 ↓
-Validate visually
+Validate values, bindings, scopes, code syntax and appearance
 ```
 
 Keep:
@@ -1455,6 +1494,7 @@ Do not invent a replacement value directly in Figma.
 8. Components do not use breakpoint variants merely to represent responsive tokens.
 9. Fixed semantic spacing must not be replaced with responsive layout tokens solely because the current values match.
 10. Token deletion or renaming requires binding migration and duplicate-file validation.
+11. New or changed Tokens Studio-managed variables define Figma scopes and code syntax in canonical source JSON.
 
 Because the free Tokens Studio workflow cannot maintain the Figma `Breakpoint` collection, responsive values are manually mirrored into Figma after being updated in GitHub.
 
