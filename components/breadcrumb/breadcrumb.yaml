@@ -1,0 +1,301 @@
+component: Breadcrumb
+id: breadcrumb
+version: 0.1.0
+status: draft
+
+phase:
+  current: source-ready-for-review
+  implementation: not-started
+  figma: built-and-audited
+  releaseReady: false
+
+description: >
+  Hierarchical navigation to ancestor pages. A compact overflowing trail can
+  scroll horizontally or expand in place to expose the complete path.
+
+relatedDocumentation:
+  - components/breadcrumb/breadcrumb.md
+  - components/breadcrumb/research.md
+  - tokens/components/breadcrumb.json
+  - components/link/link.yaml
+  - components/button/button.yaml
+  - accessibility/focus-indicators.yaml
+  - patterns/component-documentation-page.yaml
+  - tokens/figma/sync-contract.yaml
+
+scope:
+  includes:
+    - Hierarchical ancestor links and an optional plain-text current page
+    - Native horizontal scrolling with an explicit full-path layout toggle
+    - Full labels, responsive text and a wrapping expanded path
+    - Native slots, documentation and QA examples in Figma
+  excludes:
+    - History trails, Back to results, previous-page links and steppers
+    - Ellipsis menus, omitted middle ancestors and label truncation
+    - Disabled or loading items, icon-only labels and arbitrary interactive item content
+    - Framework adapters and production JavaScript in this contract/Figma phase
+
+acceptedDecisions:
+  approvedBy: Richard
+  date: '2026-10-10'
+  hierarchy: Application-supplied site hierarchy; never browser or visit history.
+  overflow: Native horizontal scrolling plus a Show full path layout option.
+  expanded: Same ordered hierarchy wraps within the available width.
+  longLabel: Wrap within the item in both presentations; do not shorten with ellipsis.
+  currentPage: Optional plain text, never a self-link.
+  home: Optional by page context, never automatically remove a meaningful ancestor.
+  evidence: Baymard ecommerce findings inform the design; the full-path toggle is our accessibility enhancement.
+
+publicApi:
+  status: framework-neutral-contract
+  label: {type: plain-text, default: Breadcrumb, localisable: true}
+  ancestors:
+    type: ordered-list
+    required: true
+    fields:
+      id: Stable unique key.
+      label: Required non-empty destination name; may be a concise editorial page label.
+      href: Required native navigation destination.
+      linkAttributes: Preserve applicable native anchor attributes and router integration.
+    ordering: Highest included ancestor to immediate parent.
+  currentPage:
+    type: optional-plain-text
+    rendering: Final non-interactive span with aria-current=page.
+    absent: Final ancestor remains a link without aria-current.
+  expanded:
+    type: boolean
+    default: false
+    meaning: User preference for full-path layout, not whether ancestor links exist.
+  onExpandedChange: Optional controlled-state callback; expansion must remain operable.
+  showFullPathLabel: {type: plain-text, default: Show full path, localisable: true}
+  showCompactPathLabel: {type: plain-text, default: Show compact path, localisable: true}
+  validation:
+    - Reject empty labels, empty ancestor hrefs and duplicate keys.
+    - Omit the entire component when there are no ancestors; a current-page-only landmark adds no navigation.
+    - Never derive ancestors from referrer, visit history, search terms or the route's raw URL segments.
+    - Multi-category products use a valid application-supplied hierarchy; do not fabricate a path.
+    - Do not duplicate the current page among its ancestors.
+
+semantics:
+  root: nav with a localised accessible name.
+  list: ol containing li items in logical hierarchy order.
+  ancestor: Native a element with a valid href and visible destination name.
+  currentPage: Optional plain span with aria-current=page; never focusable.
+  toggle: Native button type=button after the list, inside the navigation landmark.
+  separators: Decorative slash before each item except the first; aria-hidden=true.
+  rules:
+    - Preserve list semantics when hiding markers; verify browser and screen-reader combinations.
+    - Do not use menu, menubar, tree, tablist or stepper roles.
+    - Do not mark the final ancestor current when the current page is omitted.
+    - Keep page heading and primary navigation independent of this component.
+
+content:
+  - Preserve all meaningful ancestor levels in the selected hierarchy.
+  - On mobile product pages Home may be omitted where the header has an obvious accessible home link.
+  - The current product name may be omitted when the visible page heading identifies it.
+  - These omissions are explicit page-level choices, not automatic mobile behaviour for all sites.
+  - Keep concise labels descriptive and consistent with their destination; avoid ambiguous abbreviations.
+  - Review excessive categorisation before adding display workarounds for very deep paths.
+
+layout:
+  selection: Based on actual available container width and content, not a fixed item count or device breakpoint.
+  inline: Complete trail fits naturally; no toggle and no scrolling needed.
+  scrollable:
+    condition: Compact trail exceeds the available content width.
+    behaviour: Native horizontal overflow confined to the list viewport, with no page-wide horizontal overflow.
+    cue: Show full path remains visible outside the scroller; a partially visible following item also signals continuation where present.
+    start: Logical beginning; do not automatically jump to the end or move focus on render.
+    clipping: Clip only the scrolling viewport; reserve focus clearance inside it on all sides.
+  expanded:
+    behaviour: Same items and DOM order wrap into rows; all text stays within the available width.
+    toggleLabel: Show compact path
+    rule: Keep the separator with its following item; no standalone orphan separators.
+  sizing:
+    item: Natural width up to the available inner viewport width, then wrap the label.
+    label: min-inline-size zero; overflow-wrap anywhere for unbreakable strings; automatic height.
+    current: Same typography and wrapping geometry as links, without interaction styling.
+    target: Minimum inline size size.target.minimum and minimum block size size.target.comfortable.
+    row: Align items at the start so multi-line labels never overlap adjacent rows.
+  responsive:
+    - Inherit semantic typography from the parent Breakpoint mode; no breakpoint variant axis.
+    - Re-evaluate overflow after container changes, fonts, translations and item updates.
+    - Detect compact natural overflow independently of the expanded wrapped height/width.
+    - Preserve the user's expanded preference across resizing.
+    - If overflow disappears, remove an unfocused toggle; retain it until blur when it holds focus.
+  rtl:
+    - Use logical inline spacing and native direction; retain logical DOM hierarchy order.
+    - Slash is direction-neutral. Localised names may use bidi isolation for mixed scripts.
+    - Scroll and focus reveal follow the logical direction without assuming positive scrollLeft values.
+  noJavaScript: Full path wraps by default; hide the toggle until enhancement is ready.
+  print: Show the complete wrapping path and omit the presentation toggle.
+
+layoutToggle:
+  action: Change only presentation of the existing list; no navigation, duplicate links or hidden middle items.
+  expandedState: aria-expanded reflects whether the full-path presentation is active.
+  relationship: aria-controls references the stable list container ID.
+  focus:
+    - Keep focus on the same toggle element when its label changes.
+    - Do not replace list nodes or reset link identity on expansion.
+    - Reset scroll to logical start on deliberate collapse; ensure any focused link remains fully visible.
+    - Toggle remains outside the clipped scroller and is keyboard reachable.
+  announcements: Button name and expanded state communicate the change; no live-region repetition of the trail.
+  motion: Instant layout change; no required animation or smooth scrolling.
+
+keyboardAndFocus:
+  tab: Native links in DOM order, then the overflow toggle if present; current text and separators are skipped.
+  enter: Native link activation or button activation.
+  space: Native button activation; retain native scrolling behaviour on links.
+  arrows: No roving focus or custom arrow-key navigation.
+  scroller: No extra tabindex is necessary when its native links provide access to every item.
+  focus:
+    - Scroll the focused anchor and its entire focus indicator into the visible viewport.
+    - Preserve focus when hover or pressed states overlap.
+    - Keep focus appearance outside layout flow so dimensions never shift.
+    - Do not auto-focus or navigate on render, focus, scroll or pointerdown.
+  pointer:
+    - Use browser overflow scrolling; do not implement custom drag-to-scroll handlers.
+    - A swipe, scroll gesture or cancelled pointer must not activate an ancestor.
+    - Preserve native modifier clicks, link context menus and new-tab behaviour.
+
+visuals:
+  typography: typography.body.default with inherited responsive bindings.
+  currentForeground: color.text.default
+  separatorForeground: color.text.default
+  linkForeground:
+    Default: color.link.default.foreground
+    Hover: color.link.hover.foreground
+    Pressed: color.link.active.foreground
+  linkDecoration: Underline in every state so navigation stays recognisable.
+  focus:
+    ring: color.interactive.focus.ring
+    separator: color.interactive.focus.separator
+    width: border.width.medium
+    radius: radius.sm
+    outset: 4px total from two 2px rings, using existing focus contract.
+  spacing:
+    itemGap: component.breadcrumb.spacing.itemGap
+    separatorGap: component.breadcrumb.spacing.separatorGap
+    paddingBlock: component.breadcrumb.spacing.paddingBlock
+    paddingInline: component.breadcrumb.spacing.paddingInline
+    rowGap: component.breadcrumb.spacing.rowGap
+    controlGap: component.breadcrumb.spacing.controlGap
+    focusInset: component.breadcrumb.spacing.focusInset
+  toggle: Existing Button, Variant=text, Size=compact; allow localised labels to wrap.
+
+figma:
+  fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  pageName: 23 - Components - Breadcrumb
+  status: built-and-audited
+  pageId: '1202:6'
+  auditDate: '2026-10-10'
+  documentationPattern: patterns/component-documentation-page.yaml
+  inventory:
+    Breadcrumb:
+      componentSetId: '1202:146'
+      variants: {Layout: [Inline, Scrollable, Expanded]}
+      count: 3
+      slots: [Items]
+      nested: Existing text Button as presentation toggle.
+    Breadcrumb / Link:
+      componentSetId: '1202:10'
+      variants: {State: [Default, Hover, Pressed]}
+      count: 3
+      properties: [Label, Show separator, Focus]
+    Breadcrumb / Current:
+      componentId: '1202:29'
+      count: 1
+      properties: [Label, Show separator]
+  linkedTextStyle:
+    name: component/breadcrumb/link
+    source: typography/body/default
+    recipe:
+      - Copy semantic font, size, line height, spacing and typography variable bindings.
+      - Set UNDERLINE; apply to every Breadcrumb link label across all pointer states.
+      - Keep current text and separators on the original body style.
+    styleId: 'S:1a022d78713701658212ea372eae8a0ece4bb9d5,'
+    managedBy: Canonical recipe in this contract; manually managed composed style, not a Tokens Studio typography token.
+  authoring:
+    - Populate Items with Breadcrumb / Link instances and optionally a final Breadcrumb / Current.
+    - Disable Show separator on the first item; enable it on following items.
+    - Resize long item instances to at most the viewport inner width; set target and text to Fill width and Hug height.
+    - Layout variants represent runtime states; Figma does not measure overflow or run browser semantics.
+    - Select Expanded manually to preview full-path presentation; no prototype interaction is claimed.
+    - Figma slot content must survive layout changes; validate override preservation.
+    - Localise the existing nested Button label through its text layer override.
+  requiredAreas:
+    - 01 - Component set
+    - 02 - Documentation examples
+    - 03 - QA and responsive tests
+    - 04 - Accessibility notes
+  documentationAreas:
+    componentSet: '1202:147'
+    examples: '1202:153'
+    qa: '1202:159'
+    accessibility: '1202:165'
+  variables:
+    component/breadcrumb/spacing/itemGap: 'VariableID:1201:6'
+    component/breadcrumb/spacing/separatorGap: 'VariableID:1201:7'
+    component/breadcrumb/spacing/paddingBlock: 'VariableID:1201:8'
+    component/breadcrumb/spacing/paddingInline: 'VariableID:1201:9'
+    component/breadcrumb/spacing/rowGap: 'VariableID:1201:10'
+    component/breadcrumb/spacing/controlGap: 'VariableID:1201:11'
+    component/breadcrumb/spacing/focusInset: 'VariableID:1201:12'
+  tokenRoundTrip: pending-source-merge
+  libraryPublication: not-published
+
+documentationExamples:
+  - General page with Home, ancestors and a plain-text current page
+  - Product category trail omitting Home and current product title by explicit page choice
+  - Narrow overflowing trail with visible Show full path control
+  - Expanded version of the same narrow trail
+  - Long ancestor label and long current-page label
+
+validation:
+  target: WCAG 2.2 AA
+  wcag: ['1.3.1', '1.3.2', '1.4.1', '1.4.3', '1.4.4', '1.4.10', '1.4.11', '1.4.12', '2.1.1', '2.1.2', '2.4.3', '2.4.4', '2.4.6', '2.4.7', '2.4.11', '2.5.2', '2.5.3', '2.5.8', '4.1.2']
+  contrast: Normal text at least 4.5:1; focus ring at least 3:1 against adjacent separator/surface.
+  targetSize: System choice of at least 44px block size and 24px inline size at the reference root size; not the inline-prose exception.
+  reflow: Full-path view readable without horizontal scrolling at 320 CSS px and 400 percent zoom.
+  textSpacing: No loss at line height 1.5, paragraph spacing 2em, letter spacing 0.12em and word spacing 0.16em.
+  forcedColors: Preserve native links and a visible system-colour outline; box-shadow alone is insufficient.
+  qaExamples:
+    - 320px viewport with 16px page padding and complete expanded path
+    - Compact overflowing path and focused item at the scroll boundary
+    - Long individual labels in compact and expanded presentations
+    - First and last link focus; hover and pressed plus focus
+    - Base, md and lg typography modes
+    - RTL logical order and mixed-direction labels
+    - 200 percent text size and text-spacing stress cases
+    - Same slot content and labels retained after changing Layout variants
+  implementationAcceptance:
+    - Named landmark, ordered list, silent separators and correct current-page semantics with screen readers
+    - Native keyboard navigation, modifier activation and no scroll-induced navigation
+    - Measured overflow, localisation and font-loading changes
+    - Toggle name/state, stable focus and removal-after-blur on resizing
+    - Expanded list reflows at 320px and 400 percent zoom
+    - Long unbroken labels, 200 percent text resizing and all four text-spacing overrides
+    - Native no-JavaScript and print full-path fallback
+    - Visible focus in forced colours and at scroller boundaries
+    - RTL scrolling and touch cancellation on real devices
+  status: Contract and Figma evidence do not establish production browser or assistive-technology conformance.
+  evidence:
+    tokenBuild: 380 raw; 308 Tokens Studio; 24 mapped responsive groups; zero unmapped groups or broken retained aliases.
+    metadata: Seven unique global spacing aliases match canonical scopes and Web syntax; Breakpoint modes unchanged.
+    inventory: Seven masters across two component sets and one standalone Current component; 14 documented root instances.
+    typography: 222 text nodes use shared styles; 12 deliberate text overrides are confined to labelled 200-percent and text-spacing QA examples.
+    layout: 71 label targets checked without text overflow or undersized target dimensions.
+    preservation: Scrollable-to-Expanded and reverse preserve slot content; all three link states preserve Label and Focus.
+    visual: Masters, documentation, accessibility notes, narrow labels and text-stress compositions reviewed.
+    contrastOnWhite:
+      body: 7.00
+      defaultLink: 4.52
+      hoverLink: 7.00
+      pressedLink: 10.87
+      focusRing: 4.52
+    pending: Browser implementation, RTL, screen readers, native scrolling, touch cancellation, 400-percent zoom, word spacing and forced colours.
+
+
+references:
+  - https://baymard.com/research-articles/implementing-mobile-hierarchy-breadcrumbs
+  - https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/
+  - https://www.w3.org/WAI/WCAG22/Techniques/general/G206

@@ -1611,6 +1611,101 @@
           }
         }
       },
+      "breadcrumb": {
+        "spacing": {
+          "itemGap": {
+            "$value": "{spacing.inline.sm}",
+            "$type": "spacing",
+            "$description": "Gap between complete breadcrumb items.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-breadcrumb-spacing-item-gap)"
+              }
+            }
+          },
+          "separatorGap": {
+            "$value": "{spacing.inline.xs}",
+            "$type": "spacing",
+            "$description": "Gap between the decorative separator and its following label target.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-breadcrumb-spacing-separator-gap)"
+              }
+            }
+          },
+          "paddingBlock": {
+            "$value": "{spacing.1}",
+            "$type": "spacing",
+            "$description": "Transparent block padding inside link targets.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-breadcrumb-spacing-padding-block)"
+              }
+            }
+          },
+          "paddingInline": {
+            "$value": "{spacing.1}",
+            "$type": "spacing",
+            "$description": "Transparent inline padding inside link targets.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-breadcrumb-spacing-padding-inline)"
+              }
+            }
+          },
+          "rowGap": {
+            "$value": "{spacing.stack.sm}",
+            "$type": "spacing",
+            "$description": "Gap between rows in the expanded full path.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-breadcrumb-spacing-row-gap)"
+              }
+            }
+          },
+          "controlGap": {
+            "$value": "{spacing.stack.sm}",
+            "$type": "spacing",
+            "$description": "Gap between trail viewport and full-path toggle.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-breadcrumb-spacing-control-gap)"
+              }
+            }
+          },
+          "focusInset": {
+            "$value": "{spacing.1}",
+            "$type": "spacing",
+            "$description": "Inner clearance for the complete two-part focus outline within the scrolling viewport.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "GAP"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-breadcrumb-spacing-focus-inset)"
+              }
+            }
+          }
+        }
+      },
       "card": {
         "spacing": {
           "padding": {
