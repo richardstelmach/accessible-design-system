@@ -21,7 +21,7 @@ assistive technology follow ordinary HTML structure and operate the actual contr
 ## Accepted decisions
 
 - One public Card family, with reusable nested Title and Media parts.
-- Vertical media uses 16:9; horizontal media uses a square, 12rem column.
+- Vertical media uses 16:9; horizontal media uses a 12rem column that fills the card height.
 - Horizontal layout begins at 32rem of available container width. Below this it
   becomes vertical, including the media ratio. This is a component layout decision,
   not a new global breakpoint; content retains at least 20rem before its padding.
@@ -137,12 +137,15 @@ remains visible when pointer states overlap it. Keep the root unclipped and clip
 
 ## Layout and images
 
-Vertical images fill the card width at 16:9. Horizontal images use a 12rem square at
-inline-start, with the content column taking remaining space. In RTL, inline-start is right.
-The horizontal image stays top-aligned when content makes the card taller.
+Vertical images fill the card width at 16:9. Horizontal media uses a 12rem column at
+inline-start, with a minimum height of 12rem and the content column taking remaining space.
+In RTL, inline-start is right. The media frame fills the complete inner card height, so longer
+content does not leave a strip beneath the image. The frame has no forced square ratio.
 
 Use `object-fit: cover` for photography and an author-adjustable focal point. Use `contain`
-when cropping would remove important information. Preserve intrinsic dimensions and reserve
+when cropping would remove important information. Centre contained images on
+`component.card.media.background`; any letterboxing is part of the full media column.
+The example artwork in `placeholder.svg` uses neutral greys. Preserve intrinsic dimensions and reserve
 the media frame while loading. A failed image must not remove the card's content or link.
 
 At container widths below 32rem, use the vertical layout. Container queries must use a
@@ -160,22 +163,23 @@ Content instead. If no image is supplied, status also belongs in Content.
 
 ## Tokens and visual states
 
-Use `color.surface.default`, `radius.lg` and `border.width.thin`. Static borders use
-`color.border.light`; enhanced surface borders use `color.border.interactive`, then
-the shared hover/active border colours. The surface fill stays stable so arbitrary
-slotted content does not unexpectedly lose contrast. Linked titles remain underlined.
+Use `color.surface.default`, `radius.lg` and `border.width.thin`. Static and enhanced cards use
+`color.border.light` (#D6D6D6) at rest and `color.border.default` (#B5B5B5) for enhanced
+hover/pressed states, following `patterns/card-grid.yaml`. These are decorative outlines;
+the underlined title link provides the action affordance and its own focus indicator.
+The surface fill stays stable so arbitrary slotted content does not unexpectedly lose contrast. Linked titles remain underlined.
 
-Card adds six source tokens: content padding, title-to-content gap, actions gap, badge
-inset, horizontal media width and horizontal minimum container width. The four spacing
+Card adds seven source tokens: content padding, title-to-content gap, actions gap, badge
+inset, horizontal media width, media background and horizontal minimum container width. The four spacing
 tokens alias existing semantic spacing. No new responsive token groups
-are needed. All six tokens include explicit Figma scopes and Web code syntax.
+are needed. All seven tokens include explicit Figma scopes and Web code syntax.
 Six composed linked-title text styles preserve the base typography and its variable
 bindings while adding an underline. Their reproducible recipes live in the YAML contract;
 they are manually managed styles rather than new exported typography tokens.
 
 ## Figma handoff
 
-Built and visually reviewed on 9 October 2026 in
+Built on 9 October and visually revised on 10 October 2026 in
 [22 - Components - Card](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk/Accessible-Design-System?node-id=1179-7709).
 Start with the [documentation examples](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk/Accessible-Design-System?node-id=1181-108).
 
@@ -212,8 +216,8 @@ keyboard order, screen-reader names/headings and the no-JavaScript fallback. Che
 Keep releaseReady false until a runnable implementation passes those checks. Merge, Tokens
 Studio pull/export and library publication remain separate workflow checkpoints.
 
-The token build passed with 372 raw and 300 Tokens Studio tokens, 24 mapped responsive
-groups, no unmapped groups and no broken retained aliases. Card adds six variables and
+The token build passed with 373 raw and 301 Tokens Studio tokens, 24 mapped responsive
+groups, no unmapped groups and no broken retained aliases. Card adds seven variables and
 22 Figma variants across its three sets. Text contrast on the white surface is 7:1 for
 body, 10.86:1 for headings and 4.52:1 for links; focus against its white separator is 4.52:1.
 The token round-trip and production acceptance checks remain pending.

@@ -2283,13 +2283,27 @@
         "horizontalWidth": {
           "$value": "12rem",
           "$type": "dimension",
-          "$description": "Fixed image column in horizontal cards; image uses a square frame.",
+          "$description": "Fixed horizontal image column width and minimum height; the frame fills the card height without forcing a square crop.",
           "$extensions": {
             "com.figma.scopes": [
               "WIDTH_HEIGHT"
             ],
             "com.figma.codeSyntax": {
               "Web": "var(--component-card-media-horizontal-width)"
+            }
+          }
+        },
+        "background": {
+          "$value": "{color.neutral.100}",
+          "$type": "color",
+          "$description": "Neutral media background visible around contained images and while an image loads.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-card-media-background)"
             }
           }
         }
