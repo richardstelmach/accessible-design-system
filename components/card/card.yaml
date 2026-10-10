@@ -1,0 +1,347 @@
+component: Card
+id: card
+version: 0.1.0
+status: draft
+
+phase:
+  current: figma-review
+  implementation: not-started
+  figma: built-and-audited
+  releaseReady: false
+
+description: >
+  A visually bounded container grouping related content about one subject.
+  Images, titles and actions are optional. Pointer enhancement delegates the
+  surrounding surface to a real title link without making the container a widget.
+
+relatedDocumentation:
+  - components/card/card.md
+  - tokens/components/card.json
+  - components/badge/badge.yaml
+  - components/link/link.yaml
+  - accessibility/headings.yaml
+  - accessibility/focus-indicators.yaml
+  - patterns/card-grid.yaml
+  - patterns/component-documentation-page.yaml
+  - tokens/figma/sync-contract.yaml
+
+scope:
+  includes:
+    - One public Card family with vertical and horizontal layouts
+    - Static content, title links, optional pointer enhancement and secondary actions
+    - Optional image, title, Content slot, Actions slot and Image badge slot
+    - Empty composition shell with the standard surface, padding and radius
+    - Native Figma slots and nested title/media components
+  excludes:
+    - Selection, expansion, dragging, dismissal, disabled and loading cards
+    - Video, carousels and interactive image overlays
+    - Nested cards, nested whole-card click targets and arbitrary root click actions
+    - Framework adapters and production JavaScript in this contract/Figma phase
+    - Separate product, article, event or marketing card components
+
+decisions:
+  family: One component family; orientation changes layout, not semantics.
+  headingStyle: Match heading level by default; explicit compact style uses typography.heading.h5.
+  horizontalMediaWidth: component.card.media.horizontalWidth
+  horizontalMinimumContainer: component.card.layout.horizontalMinWidth
+  responsiveTrigger: Available component container width, not viewport width.
+  shell: Omit built-in title and image and compose through Content; no separate Surface component yet.
+
+semantics:
+  defaultElement: div
+  role: null
+  tabindex: absent
+  rules:
+    - Never wrap the card in an anchor or button.
+    - Never add role=link, role=button, a tab stop or root keyboard handlers.
+    - Use article only when the content is independently meaningful as an article.
+    - Use ul/li for an unordered collection; do not add a landmark to every card.
+    - A static card needs neither a heading nor an action.
+    - Do not output empty headings, anchors or unnamed article regions for an empty shell.
+
+publicApi:
+  status: framework-neutral-contract
+  layout: {type: enum, values: [vertical, horizontal], default: vertical}
+  title: {type: plain-text, required: false}
+  headingLevel:
+    type: enum
+    values: [none, 2, 3, 4, 5, 6]
+    default: none
+    rule: Authors explicitly choose the level from page structure; h1 belongs to the page.
+  titleStyle:
+    type: enum
+    values: [auto, compact]
+    default: auto
+    mapping:
+      autoHeading: typography.heading.h2 through typography.heading.h6 matching headingLevel
+      autoNone: typography.body.default plus typography.emphasis.strong
+      compact: typography.heading.h5
+    rule: Compact is valid only for a semantic heading; it never changes the HTML level.
+  titleHref:
+    type: url
+    required: false
+    rule: Requires non-empty title; produces a real anchor inside the title element.
+  titleLinkAttributes:
+    type: native-anchor-attributes
+    rule: Preserve target, rel, download and native routing integration on the title link.
+  wholeCardClickable:
+    type: boolean
+    default: false
+    requiredWhenTrue: Non-empty title and valid titleHref.
+    standardLinkedComposition: true
+  image:
+    type: optional-image
+    fields:
+      src: Required when present.
+      alt: Required string; empty only for decorative or redundant images.
+      fit: cover by default; contain when cropping would lose meaning.
+      position: Centre by default; author-adjustable focal position.
+      srcset: Optional responsive image sources.
+      sizes: Optional source selection guidance matching the layout.
+    rules:
+      - Use a real img with intrinsic dimensions; preserve its frame while loading.
+      - Do not link the image separately to the same title destination.
+      - Do not repeat the title in alt text without additional information.
+      - A failed image must not remove the title, content or navigation.
+  content: {type: slot, required: false}
+  actions: {type: slot, required: false}
+  imageBadge:
+    type: slot
+    required: false
+    allowed: One existing non-interactive Badge.
+    requires: image
+  validation:
+    - Reject wholeCardClickable=true without a non-empty linked title; never guess the first link.
+    - Reject titleHref without title and imageBadge without image.
+    - Reject titleStyle=compact when headingLevel=none.
+    - Omit absent sections and their gaps; do not preserve invisible placeholders.
+    - Slot content is composed content, not unsanitised HTML strings.
+
+anatomy:
+  container:
+    tokens:
+      fill: color.surface.default
+      borderStatic: color.border.light
+      borderClickable: color.border.light
+      borderHover: color.border.default
+      borderPressed: color.border.default
+      borderWidth: border.width.thin
+      radius: radius.lg
+    rules:
+      - Keep the surface fill stable across pointer states for readable slotted content.
+      - Do not clip the container; descendant focus indicators need room.
+      - An empty shell retains content padding but no arbitrary minimum height.
+  media:
+    verticalRatio: '16:9'
+    horizontalHeight: Fill card height, with a minimum equal to the media column width.
+    background: component.card.media.background
+    placeholder: components/card/placeholder.svg
+    horizontalWidth: component.card.media.horizontalWidth
+    rules:
+      - Vertical media fills the card width; horizontal media keeps its standard column width.
+      - Images retain intrinsic proportions through object-fit; never distort them.
+      - Clip media only, with upper corners rounded vertically and leading corners horizontally.
+      - Horizontal media fills the full inner card height; object-fit crops or contains the image without stretching its intrinsic proportions.
+      - Contained images are centred on the neutral media background; letterboxing stays inside the complete media column.
+      - Omit the media wrapper when no image is present; content uses the complete card width.
+  imageBadge:
+    inset: component.card.spacing.badgeInset
+    position: top-inline-start
+    rules:
+      - Keep Badge text on its opaque semantic background, never directly on the photograph.
+      - Allow wrapping within the media frame; do not truncate the status.
+      - If a long status cannot fit, place it in Content instead of clipping it.
+      - Badge is not focusable; it remains ordinary text in reading order.
+  contentArea:
+    padding: component.card.spacing.padding
+    titleToContent: component.card.spacing.contentGap
+    contentToActions: component.card.spacing.actionsGap
+    rules:
+      - Use the same padding for image-free and image-bearing cards.
+      - Content owns its internal paragraphs, metadata and spacing.
+      - Actions wrap and use existing Link and Button components.
+      - Do not add a redundant Read more link to the same destination as the title.
+
+pointerEnhancement:
+  purpose: Enlarge the title link's target without introducing a second action.
+  primaryLink: Explicitly designated title anchor belonging to this card.
+  rules:
+    - Add clickable styling only after successful JavaScript initialisation.
+    - Activate the real title anchor once; do not keep a second destination on the container.
+    - Enhance only an unmodified primary completed click/tap on eligible surface content.
+    - Do not activate on pointerdown, touchstart, focus, pointer cancellation or a drag/scroll gesture.
+    - Ignore defaultPrevented events and events originating from any interactive descendant or its children.
+    - Exclude anchors, buttons, inputs, selects, textareas, labels, summary, media controls, contenteditable, custom widgets and explicit opt-out regions.
+    - Use the event path to respect nested descendants and shadow-host opt-out boundaries.
+    - Ignore events from nested card boundaries and programmatic click events generated by forwarding.
+    - Preserve text selection; suppress forwarding when a selection intersects this card or a selection/drag gesture occurred.
+    - Do not use a short click-duration cutoff that rejects slow deliberate clicks.
+    - Ignore modified, middle and right clicks on the background; never turn them into same-tab navigation.
+    - Leave all events on actual links native, including modifier keys, context menus, downloads and new-tab behaviour.
+    - Never require secondary controls to stopPropagation for correctness.
+    - Do not cancel native touch scrolling or long-press selection.
+  limitation: The background is not a native link; native link context menus and touch previews remain on the title link.
+  multipleActions: Secondary actions are allowed when one primary title destination remains clear; otherwise disable surface enhancement.
+
+keyboardAndFocus:
+  tab: Native interactive descendants only, in DOM order; no container tab stop.
+  enter: Native link or button behaviour on the focused element.
+  space: Native button behaviour; no custom Space activation for links or the container.
+  screenReader: Ordinary content, appropriate headings and concise title link name; no card widget announcement.
+  focus:
+    - Use existing link/button focus treatments on the actual focused element.
+    - Preserve focus when pointer hover/pressed states overlap it.
+    - Never replace a secondary control's focus ring with an ambiguous card-wide outline.
+    - No auto-focus, focus trap or focus movement on render or layout changes.
+  noJavaScript: Title anchor and all other native controls remain usable; only the enlarged surface target is absent.
+
+layout:
+  width: Controlled by parent; no fixed content height.
+  direction: Media at inline-start in horizontal layouts; reverses appropriately in RTL.
+  horizontal:
+    minimumContainerWidth: component.card.layout.horizontalMinWidth
+    belowMinimum: Render the vertical layout, including its 16:9 media ratio.
+    fallback: Vertical by default when container queries are unavailable.
+  readingOrder: Stable media, title, content, actions order across both layouts; do not reorder focusable content with CSS.
+  rules:
+    - Titles and body text wrap, including long unbroken strings.
+    - Content column can shrink below its min-content width.
+    - No line clamping, ellipsis or shrinking text to fit.
+    - Equal-height groups may stretch cards naturally without clipping their contents.
+    - Do not create base/md/lg component variants just for typography token changes.
+    - In Figma choose the layout explicitly; the frame Breakpoint mode controls typography, not container queries.
+
+figma:
+  fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  pageName: 22 - Components - Card
+  status: built-and-audited
+  pageId: '1179:7709'
+  auditDate: '2026-10-10'
+  documentationPattern: patterns/component-documentation-page.yaml
+  inventory:
+    Card:
+      componentSetId: '1180:737'
+      variants:
+        Layout: [Vertical, Horizontal]
+        Surface: [Static, Default, Hover, Pressed]
+      count: 8
+      properties: [Show image, Show body, Show title, Show content, Show actions]
+      slots: [Content, Actions]
+      nestedExposed: [Title, Media]
+    Card / Title:
+      componentSetId: '1180:614'
+      variants:
+        Style: [Body strong, H2, H3, H4, H5, H6]
+        Linked: ['False', 'True']
+      count: 12
+      properties: [Title, Focus]
+      rule: Style is visual handoff; production headingLevel remains context-dependent.
+    Card / Media:
+      componentSetId: '1180:629'
+      variants: {Layout: [Vertical, Horizontal]}
+      count: 2
+      properties: [Show badge]
+      slots: [Image badge]
+      rule: Image fill is replaceable; fill mode and crop express cover/contain and focal position.
+  rules:
+    - Static may contain a linked title without surface enhancement.
+    - Default/Hover/Pressed require visible linked Title; Figma cannot enforce this dependency.
+    - Focus belongs to the nested linked Title or slotted controls, never the Card root.
+    - Production slots use native Figma slots; no detached composition examples.
+    - Preserve _Documentation/Card as an internal documentation component.
+    - Show default, hover, pressed and title-focus examples without adding focus as a root variant axis.
+  linkedTitleStyles:
+    managedBy: source-defined-component-style-recipe
+    reason: Use named underlined styles so linked and unlinked titles keep independent decoration without detaching typography.
+    names:
+      component/card/title/body-strong/link: typography/body/default/strong
+      component/card/title/h2/link: typography/heading/h2
+      component/card/title/h3/link: typography/heading/h3
+      component/card/title/h4/link: typography/heading/h4
+      component/card/title/h5/link: typography/heading/h5
+      component/card/title/h6/link: typography/heading/h6
+    recipe:
+      - Copy the referenced semantic style's font, size, line height and letter spacing.
+      - Copy all fontFamily, fontWeight, fontSize, lineHeight and letterSpacing variable bindings present on the source style.
+      - Set textDecoration=UNDERLINE and apply the derived shared style to linked titles only.
+      - Keep unlinked titles on the original semantic styles with no underline.
+      - Retain the same responsive Breakpoint bindings; do not flatten sizes or add breakpoint-suffixed styles.
+      - These six composed styles are managed by this contract, not exported typography tokens; audit them after routine Tokens Studio export.
+  authoringLimitations:
+    - Show body controls the entire content area, including Title, Content and Actions.
+    - Figma does not derive dependent visibility or choose container-query layouts automatically.
+    - The blank-shell example hides Body and uses a 34px presentation height (padding plus border); show Body and restore Hug height when adding content.
+    - Native-slot empty layout can retain its previous size; review Hug sizing after clearing all slot content.
+    - Layout examples do not prove production JavaScript, assistive-technology or RTL behaviour.
+  documentationAreas:
+    componentSet: '1181:96'
+    examples: '1181:108'
+    qa: '1181:286'
+    accessibility: '1181:471'
+  variables:
+    component/card/spacing/padding: 'VariableID:1179:7703'
+    component/card/spacing/contentGap: 'VariableID:1179:7704'
+    component/card/spacing/actionsGap: 'VariableID:1179:7705'
+    component/card/spacing/badgeInset: 'VariableID:1179:7706'
+    component/card/media/horizontalWidth: 'VariableID:1179:7707'
+    component/card/media/background: 'VariableID:1195:341'
+    component/card/layout/horizontalMinWidth: 'VariableID:1179:7708'
+  tokenRoundTrip: not-started
+  libraryPublication: not-published
+
+documentationExamples:
+  - Empty composition shell
+  - Static image-free information
+  - Linked image-free card
+  - Vertical image with overlaid Badge
+  - Horizontal image and secondary action
+  - Title link with surface enhancement disabled
+  - Compact visual heading with explicitly documented semantic H2
+
+validation:
+  target: WCAG 2.2 AA
+  wcag: ['1.1.1', '1.3.1', '1.3.2', '1.4.1', '1.4.3', '1.4.4', '1.4.10', '1.4.11', '1.4.12', '2.1.1', '2.1.2', '2.4.3', '2.4.4', '2.4.6', '2.4.7', '2.4.11', '2.5.2', '2.5.3', '2.5.8', '4.1.2']
+  textContrast: At least 4.5:1 for normal text; 3:1 for qualifying large text.
+  focusAndInteractiveBoundaryContrast: Actual control boundaries and focus indicators need at least 3:1 against adjacent surfaces.
+  decorativeCardBorder: Uses the Card Grid light/default outlines; the underlined title link identifies the action independently of the border.
+  targetSize: Reuse system Link/Button target policy; do not rely on the proxy area to excuse undersized secondary controls.
+  forcedColors: Preserve native link affordance and system-colour focus outlines; never disable adjustment globally.
+  motion: No animation required; any later animation must respect reduced motion.
+  qaExamples:
+    - 320 CSS px vertical card with long title, body, Badge and actions
+    - 511px stacked and 512px horizontal container, independent of viewport width
+    - Base/md/lg typography modes and semantic H2-H6 title styles
+    - Missing image/title/content/actions and completely empty shell
+    - Cover and contain image handling; portrait and landscape sources
+    - All pointer states and title/secondary-action focus
+    - RTL media and badge position
+  implementationAcceptance:
+    - Keyboard and screen-reader review with and without JavaScript
+    - One navigation per surface or title click; zero navigation from secondary controls
+    - Nested icons, form labels, custom widget opt-outs and shadow boundaries excluded
+    - Selection, drag, scroll, cancellation, long press and slow clicks remain usable
+    - Native title modifiers, context menus, target, download and router integration preserved
+    - Reflow at 320px and 400% zoom, text resizing and WCAG text-spacing overrides
+    - No clipped focus rings, content or status labels
+    - Image alt text and linked-title accessible names reviewed in context
+  status: Contract and Figma evidence do not establish production browser or assistive-technology conformance.
+  evidence:
+    tokenBuild: 373 raw tokens; 301 Tokens Studio tokens; 24 mapped responsive groups; zero unmapped groups or broken retained aliases.
+    figma: 22 variants across three sets; three native slot roles; all text styled; source-defined scopes and Web syntax on seven Card variables.
+    visual: Reviewed documentation and QA frames; decorative border tokens match Card Grid; horizontal media fills card height; greyscale artwork and contained-image background reviewed.
+    contrast:
+      bodyOnSurface: 7.00
+      headingOnSurface: 10.86
+      linkOnSurface: 4.52
+      focusOnWhiteSeparator: 4.52
+    representedInFigma: [empty-shell, image-free, vertical, horizontal, badge, secondary-actions, compact-heading, cover, contain, title-focus, pointer-states, 320px-long-content, 511px-and-512px-boundary, base-md-lg-typography]
+    pendingProductionChecks: [keyboard, screen-reader, actual-container-query, pointer-event-guards, text-selection, slow-click, touch-scroll-and-cancellation, modifiers, no-javascript, RTL, 400-percent-zoom, text-spacing, forced-colours, portrait-source-cropping]
+
+references:
+  - https://inclusive-components.design/cards/
+  - https://fluent2.microsoft.design/components/web/react/core/card/usage/
+  - https://designsystem.digital.gov/components/card/
+  - https://www.carbondesignsystem.com/building-blocks/core/components/tile/guidelines
+  - https://service-manual.nhs.uk/design-system/components/card
+  - https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html
+  - https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html
