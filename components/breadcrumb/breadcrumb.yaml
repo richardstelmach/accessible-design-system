@@ -4,7 +4,7 @@ version: 0.1.0
 status: draft
 
 phase:
-  current: source-ready-for-review
+  current: token-roundtrip-complete
   implementation: not-started
   figma: built-and-audited
   releaseReady: false
@@ -240,7 +240,15 @@ figma:
     component/breadcrumb/spacing/rowGap: 'VariableID:1201:10'
     component/breadcrumb/spacing/controlGap: 'VariableID:1201:11'
     component/breadcrumb/spacing/focusInset: 'VariableID:1201:12'
-  tokenRoundTrip: pending-source-merge
+  tokenRoundTrip: >
+    Source merged to GitHub main in PR 32 at 46414eb. Richard confirmed the
+    Tokens Studio pull/export on 2026-10-10. The post-export Figma audit passed:
+    all seven variable IDs, aliases, scopes and Web syntax match source;
+    no duplicate variable names; global and base/md/lg Breakpoint modes intact;
+    seven masters, all 14 documented trail layouts, 71 label targets and the
+    composed link style preserved. All 234 text layers match the baseline,
+    including 222 styled layers and 12 intentional stress-test overrides.
+    Narrow, long-label, focus and text-stress examples were visually reviewed.
   libraryPublication: not-published
 
 documentationExamples:
