@@ -213,14 +213,18 @@ selection, drag, scroll, cancellation, shadow/opt-out regions, modifiers, native
 keyboard order, screen-reader names/headings and the no-JavaScript fallback. Check 320px reflow,
 400% zoom, text-spacing overrides, RTL, long status labels and visible focus in forced colours.
 
-Keep releaseReady false until a runnable implementation passes those checks. Merge, Tokens
-Studio pull/export and library publication remain separate workflow checkpoints.
+Keep releaseReady false until a runnable implementation passes those checks. The source merge
+and Tokens Studio pull/export are complete. Library publication remains a separate checkpoint.
 
 The token build passed with 373 raw and 301 Tokens Studio tokens, 24 mapped responsive
 groups, no unmapped groups and no broken retained aliases. Card adds seven variables and
 22 Figma variants across its three sets. Text contrast on the white surface is 7:1 for
 body, 10.86:1 for headings and 4.52:1 for links; focus against its white separator is 4.52:1.
-The token round-trip and production acceptance checks remain pending.
+The GitHub `main` → Tokens Studio `global` → Figma round-trip completed on 10 October 2026.
+The routine non-destructive export created no variables because all seven Card variables already
+existed. The post-export audit confirmed their names, IDs, aliases, scopes and Web syntax; found
+no duplicate Card variables; preserved active component bindings; and left the manual Breakpoint
+collection intact with `base`, `md` and `lg` modes. Production acceptance checks remain pending.
 
 ## References
 
