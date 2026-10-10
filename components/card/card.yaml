@@ -4,7 +4,7 @@ version: 0.1.0
 status: draft
 
 phase:
-  current: figma-review
+  current: token-roundtrip-complete
   implementation: not-started
   figma: built-and-audited
   releaseReady: false
@@ -286,7 +286,8 @@ figma:
     component/card/media/horizontalWidth: 'VariableID:1179:7707'
     component/card/media/background: 'VariableID:1195:341'
     component/card/layout/horizontalMinWidth: 'VariableID:1179:7708'
-  tokenRoundTrip: not-started
+  tokenRoundTrip: completed-no-change
+  tokenRoundTripDate: '2026-10-10'
   libraryPublication: not-published
 
 documentationExamples:
@@ -327,6 +328,7 @@ validation:
   status: Contract and Figma evidence do not establish production browser or assistive-technology conformance.
   evidence:
     tokenBuild: 373 raw tokens; 301 Tokens Studio tokens; 24 mapped responsive groups; zero unmapped groups or broken retained aliases.
+    tokenRoundTrip: GitHub main was pulled into Tokens Studio global and exported non-destructively. The no-change export was accepted after the Figma audit found all seven Card variables, no duplicate names, intact base/md/lg Breakpoint modes and preserved component bindings.
     figma: 22 variants across three sets; three native slot roles; all text styled; source-defined scopes and Web syntax on seven Card variables.
     visual: Reviewed documentation and QA frames; decorative border tokens match Card Grid; horizontal media fills card height; greyscale artwork and contained-image background reviewed.
     contrast:
