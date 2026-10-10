@@ -205,10 +205,16 @@ colours pass in a browser. Figma appearance alone cannot certify those behaviour
 
 ## Repository and sync state
 
-Work is on local `feat/breadcrumb-contract`, based on fetched `main` at `a977e2c`.
-The new variables were created from canonical local sources. GitHub source merge,
-Tokens Studio pull/export and post-export audit remain pending. Figma library
-publication is a separate checkpoint.
+Source merged to GitHub `main` in [PR #32](https://github.com/richardstelmach/accessible-design-system/pull/32)
+at `46414eb`. Richard confirmed the Tokens Studio pull/export on 10 October 2026.
+The post-export Figma audit passed: all seven variables retain their IDs, aliases,
+scopes and Web syntax; no duplicate variable names exist; `global` and the
+`base`/`md`/`lg` Breakpoint modes remain intact. Seven masters, 14 trail examples,
+71 label targets and the composed link style match the pre-export baseline.
+All 234 text layers are preserved, including 222 styled layers and 12 deliberate
+stress-test overrides. Narrow, long-label, focus and text-stress examples were
+visually reviewed without regressions. Figma library publication remains a
+separate checkpoint, and browser implementation acceptance is still outstanding.
 
 ## References
 
