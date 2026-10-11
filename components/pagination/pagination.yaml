@@ -144,7 +144,15 @@ navigationIntegration:
 visuals:
   typography: typography.body.default
   links: Non-current links retain underline in every state; color.link.default.foreground, color.link.hover.foreground and color.link.active.foreground.
-  current: Filled color.interactive.primary.background with color.interactive.primary.foreground and strong body typography; retained current treatment in all pointer states.
+  current:
+    default: {background: component.pagination.current.default.background, foreground: component.pagination.current.default.foreground}
+    hover: {background: component.pagination.current.hover.background, foreground: component.pagination.current.hover.foreground}
+    pressed: {background: component.pagination.current.active.background, foreground: component.pagination.current.active.foreground}
+    source: color.interactive.selected filled semantic family, through component aliases.
+    rules:
+      - Current remains a real link with aria-current=page, filled treatment and strong body typography in every interaction state.
+      - Active means transient press; it does not mean current page. Hover and pressed feedback apply to the current link too.
+      - Focus overlays every interaction state independently; current identity never disappears on focus or press.
   currentForcedColors: Retain a visible border and current semantics so selected state does not depend on background colour alone.
   target: At least size.target.comfortable in both axes (44px at reference root size); grow with content.
   focus: Shared two-part ring using color.interactive.focus.ring, color.interactive.focus.separator and border.width.medium; independent boolean in Figma.
@@ -162,7 +170,7 @@ figma:
   pageName: 24 - Components - Pagination
   status: built-and-audited
   pageId: '1209:6'
-  auditDate: '2026-10-10'
+  auditDate: '2026-10-11'
   inventory:
     Pagination:
       componentSetId: '1209:105'
@@ -174,8 +182,11 @@ figma:
       variants: {State: [Default, Hover, Pressed]}
       properties: [Label, Focus]
     Pagination / Current:
-      componentId: '1209:20'
+      componentSetId: '1215:9558'
+      defaultComponentId: '1209:20'
+      variants: {State: [Default, Hover, Pressed]}
       properties: [Label, Focus]
+      stateMatrixId: '1215:9559'
     Pagination / Ellipsis:
       componentId: '1209:24'
       description: Static omission marker, never interactive.
@@ -212,6 +223,12 @@ figma:
     component/pagination/spacing/paddingBlock: 'VariableID:1208:9'
     component/pagination/spacing/paddingInline: 'VariableID:1208:10'
     component/pagination/spacing/focusInset: 'VariableID:1208:11'
+    component/pagination/current/default/background: 'VariableID:1215:648'
+    component/pagination/current/default/foreground: 'VariableID:1215:649'
+    component/pagination/current/hover/background: 'VariableID:1215:650'
+    component/pagination/current/hover/foreground: 'VariableID:1215:651'
+    component/pagination/current/active/background: 'VariableID:1215:652'
+    component/pagination/current/active/foreground: 'VariableID:1215:653'
   tokenRoundTrip: pending-source-merge
   libraryPublication: not-published
 
@@ -222,7 +239,7 @@ validation:
     - Few pages, first page, central page, final page and absent single/empty pagination
     - Ten thousand pages, multi-million totals, very long formatted integers and 320px containers
     - Numbered and compact layouts showing the same data and retained slot overrides
-    - Pointer states combined with focus and current-page focus
+    - Default, Hover and Pressed for both ordinary and current-page links, each with and without focus
     - Optional page jump and invalid submission using existing field error states
     - Base/md/lg modes, long translations, enlarged text and text spacing
     - RTL and forced-colour browser acceptance documented without claiming a Figma simulation
@@ -237,12 +254,12 @@ validation:
     - RTL, forced colours and unobscured focus
   status: Contract and Figma evidence do not establish production browser or assistive-technology conformance.
   evidence:
-    tokenBuild: 386 raw tokens; 314 Tokens Studio tokens; 24 mapped responsive groups; zero unmapped groups and broken retained aliases.
-    metadata: Six unique global spacing aliases match canonical IDs, scopes and Web syntax; Breakpoint base/md/lg modes intact.
-    inventory: Eight masters, 18 root examples and 191 page/directional targets checked.
-    typography: 331 text layers use shared styles; 20 intentional overrides are confined to the two labelled text-stress examples.
+    tokenBuild: 401 raw tokens; 329 Tokens Studio tokens; 24 mapped responsive groups; zero unmapped groups and broken retained aliases.
+    metadata: Six spacing aliases plus nine selected semantic colours, six current component aliases and three existing form aliases match source; 18 selection-related variables audited for alias, scope and Web syntax; Breakpoint modes intact.
+    inventory: Ten masters and 18 existing root examples; Current variants have 52 by 44px targets; six current state/focus combinations audited.
+    typography: 343 text layers use shared styles; 20 intentional overrides are confined to the two labelled text-stress examples.
     geometry: Zero visible overflow; numbered fallback also wraps at 288px content width.
-    preservation: Both root slots retain content and text styles across layouts; all three Link states preserve Label and Focus.
+    preservation: Both root slots retain content and text styles across layouts; Link and Current states preserve Label and Focus; 20 existing current-page labels survived the Current conversion.
     pageWindow: 125301 multi-page cases including safe-integer boundaries, plus nine invalid-input rejection cases passed in the contract checker.
-    contrast: Body 7.00 to 1; links 4.52, 7.00 and 10.87 to 1; current text and focus 4.52 to 1.
-    visual: Reviewed masters, documentation, accessibility, large totals, French directions, 200-percent text, spacing and page-entry error examples.
+    contrast: Body 7.00 to 1; links and current text 4.52, 7.00 and 10.87 to 1 across default, hover and pressed; focus ring against separator 4.52 to 1.
+    visual: Existing masters, documentation, accessibility and responsive/stress examples reviewed; selection revision adds a reviewed six-state Current matrix.

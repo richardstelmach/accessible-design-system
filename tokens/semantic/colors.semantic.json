@@ -181,6 +181,136 @@
             }
           }
         },
+        "selected": {
+          "$description": "Filled treatment for a persistent selected choice or current navigation item. Selection is independent of hover, transient active/pressed interaction and focus. Components retain their own state semantics and non-colour indicators; this family does not define primary action priority.",
+          "background": {
+            "$type": "color",
+            "$value": "{color.primary.700}",
+            "$description": "Background colour for a filled selected or current item at rest.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.white}",
+            "$description": "Foreground colour for a filled selected or current item at rest.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-foreground)"
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.primary.700}",
+            "$description": "Border colour for a filled selected or current item at rest.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "STROKE_COLOR"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-border)"
+              }
+            }
+          },
+          "hover": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.primary.900}",
+              "$description": "Background colour for a filled selected or current item while hovered.",
+              "$extensions": {
+                "com.figma.scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "com.figma.codeSyntax": {
+                  "Web": "var(--color-interactive-selected-hover-background)"
+                }
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.white}",
+              "$description": "Foreground colour for a filled selected or current item while hovered.",
+              "$extensions": {
+                "com.figma.scopes": [
+                  "TEXT_FILL",
+                  "SHAPE_FILL"
+                ],
+                "com.figma.codeSyntax": {
+                  "Web": "var(--color-interactive-selected-hover-foreground)"
+                }
+              }
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.primary.900}",
+              "$description": "Border colour for a filled selected or current item while hovered.",
+              "$extensions": {
+                "com.figma.scopes": [
+                  "STROKE_COLOR"
+                ],
+                "com.figma.codeSyntax": {
+                  "Web": "var(--color-interactive-selected-hover-border)"
+                }
+              }
+            }
+          },
+          "active": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.primary.950}",
+              "$description": "Background colour for a filled selected or current item during transient press/activation.",
+              "$extensions": {
+                "com.figma.scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "com.figma.codeSyntax": {
+                  "Web": "var(--color-interactive-selected-active-background)"
+                }
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.white}",
+              "$description": "Foreground colour for a filled selected or current item during transient press/activation.",
+              "$extensions": {
+                "com.figma.scopes": [
+                  "TEXT_FILL",
+                  "SHAPE_FILL"
+                ],
+                "com.figma.codeSyntax": {
+                  "Web": "var(--color-interactive-selected-active-foreground)"
+                }
+              }
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.primary.950}",
+              "$description": "Border colour for a filled selected or current item during transient press/activation.",
+              "$extensions": {
+                "com.figma.scopes": [
+                  "STROKE_COLOR"
+                ],
+                "com.figma.codeSyntax": {
+                  "Web": "var(--color-interactive-selected-active-border)"
+                }
+              }
+            }
+          }
+        },
         "destructive": {
           "background": {
             "$value": "{color.error.700}",

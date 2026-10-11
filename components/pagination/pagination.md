@@ -167,16 +167,22 @@ page one. These are integration requirements, not behaviour supplied by Figma.
 
 ## Figma and tokens
 
-Page: **24 - Components - Pagination**. The family has eight masters: Numbered
-and Compact roots, three Link pointer states, Current, Ellipsis and Page jump.
+Page: **24 - Components - Pagination**. The family has ten masters: Numbered
+and Compact roots, three Link states, three Current states, Ellipsis and Page jump.
 Root `Pages` and `Auxiliary` slots preserve content across layout changes. Label
 and Focus remain independent in Link and Current. Root Summary and boundary
 booleans must agree with the supplied data. Auxiliary is empty by default.
 
 The six component spacing aliases are canonical in
 `tokens/components/pagination.json`; all preserve precise GAP scopes and Web code
-syntax. Colours, targets, focus, typography, field and button styling reuse
-existing foundations. `component/pagination/link` composes the body style with a
+syntax. Six current-page colour aliases reference the shared
+`color.interactive.selected` semantic family. Default, Hover and Pressed use its
+paired background and foreground tokens. The filled indicator, strong type and
+`aria-current="page"` persist through all interactions; focus is an independent
+ring. The semantic family's `active` branch means a transient press, never current
+location. See [shared selection guidance](../../docs/token-structure.md#persistent-selection-and-current-location).
+
+Targets, focus, typography, field and button styling reuse existing foundations. `component/pagination/link` composes the body style with a
 persistent underline; its recipe and bindings are maintained in the contract.
 
 ## Acceptance and workflow state

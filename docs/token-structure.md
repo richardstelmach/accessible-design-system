@@ -127,4 +127,45 @@ Examples:
 - `status.error.background` → `color.error.100`
 - `status.error.foreground` → `color.error.950`
 
-Primary and featured backgrounds currently use black foreground text because their same-family darkest tones do not provide sufficient contrast against the 500 background colours for normal text.
+Primary action backgrounds use `color.primary.700` with white foreground text, progressing to 900 on hover and 950 while pressed. Featured backgrounds use `color.secondary.500` with black foreground text. These are separate semantic pairings.
+
+## Persistent selection and current location
+
+`color.interactive.selected` defines the shared **filled** treatment for a persistent
+selected choice or current navigation item. It is separate from primary action
+priority even though both families currently reference the same blue primitives.
+Do not alias selection to primary actions: either family can evolve independently.
+
+| Interaction | Background / border | Foreground |
+| --- | --- | --- |
+| Rest | `color.interactive.selected.background` / `.border` → primary 700 | `.foreground` → white |
+| Hover | `color.interactive.selected.hover.background` / `.border` → primary 900 | `.hover.foreground` → white |
+| Pressed | `color.interactive.selected.active.background` / `.border` → primary 950 | `.active.foreground` → white |
+
+Selection/current identity persists through every interaction. `active` means a
+transient press, never the persistent selected state. Keyboard focus independently
+overlays the shared `color.interactive.focus` ring and separator. Noninteractive
+selected items use the rest treatment; disabled controls must not acquire hover or
+pressed behaviour. A future selected-and-disabled treatment needs an explicit
+component contract that preserves its selection indicator.
+
+Components opt into this filled treatment through their own aliases. Pagination
+uses `component.pagination.current.{default,hover,active}.{background,foreground}`.
+For example, `component.pagination.current.hover.background` references
+`color.interactive.selected.hover.background`. A future calendar can use
+`component.calendar.day.selected.*` aliases when its contract is defined; no
+calendar tokens are introduced prematurely. `form.state.selected.*` retains its
+existing public names and references this shared family for filled form selection.
+
+Sharing colours does not share HTML/ARIA semantics. Pagination retains
+`aria-current="page"`; selected calendar dates use the semantics appropriate to
+the calendar pattern, and toggle buttons retain their pressed-state semantics.
+In a calendar, **today**, **selected date**, keyboard focus and temporary pointer
+press are distinct states and may coexist. A current-day marker must not imply
+that today is the chosen date. Range interiors require their own treatment.
+
+Use the filled family only where the component calls for it. Tabs may retain an
+underline indicator and their documented neutral interaction colours. Selection
+must also have a non-colour cue and the correct programmatic state; colour tokens
+alone do not supply either. Choose background and foreground as a pair, validate
+contrast in every state, and retain visible indicators in forced-colour modes.

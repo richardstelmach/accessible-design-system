@@ -322,19 +322,45 @@
         },
         "selected": {
           "background": {
-            "$value": "{color.interactive.primary.background}",
             "$type": "color",
-            "$description": "Selected fill colour for filled selection controls such as Checkbox."
+            "$value": "{color.interactive.selected.background}",
+            "$description": "Selected fill colour for filled selection controls such as Checkbox.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--form-state-selected-background)"
+              }
+            }
           },
           "foreground": {
-            "$value": "{color.interactive.primary.foreground}",
             "$type": "color",
-            "$description": "Foreground colour for indicators placed on selected filled selection controls such as Checkbox."
+            "$value": "{color.interactive.selected.foreground}",
+            "$description": "Foreground colour for indicators placed on selected filled selection controls such as Checkbox.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--form-state-selected-foreground)"
+              }
+            }
           },
           "border": {
-            "$value": "{color.interactive.primary.background}",
             "$type": "color",
-            "$description": "Selected boundary colour for selection controls such as Radio and Checkbox."
+            "$value": "{color.interactive.selected.border}",
+            "$description": "Selected boundary colour for selection controls such as Radio and Checkbox.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "STROKE_COLOR"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--form-state-selected-border)"
+              }
+            }
           }
         },
         "disabled": {

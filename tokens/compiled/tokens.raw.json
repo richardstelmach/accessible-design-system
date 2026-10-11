@@ -423,6 +423,136 @@
           }
         }
       },
+      "selected": {
+        "$description": "Filled treatment for a persistent selected choice or current navigation item. Selection is independent of hover, transient active/pressed interaction and focus. Components retain their own state semantics and non-colour indicators; this family does not define primary action priority.",
+        "background": {
+          "$type": "color",
+          "$value": "{color.primary.700}",
+          "$description": "Background colour for a filled selected or current item at rest.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--color-interactive-selected-background)"
+            }
+          }
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.white}",
+          "$description": "Foreground colour for a filled selected or current item at rest.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--color-interactive-selected-foreground)"
+            }
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{color.primary.700}",
+          "$description": "Border colour for a filled selected or current item at rest.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--color-interactive-selected-border)"
+            }
+          }
+        },
+        "hover": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.primary.900}",
+            "$description": "Background colour for a filled selected or current item while hovered.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-hover-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.white}",
+            "$description": "Foreground colour for a filled selected or current item while hovered.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-hover-foreground)"
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.primary.900}",
+            "$description": "Border colour for a filled selected or current item while hovered.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "STROKE_COLOR"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-hover-border)"
+              }
+            }
+          }
+        },
+        "active": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.primary.950}",
+            "$description": "Background colour for a filled selected or current item during transient press/activation.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-active-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.white}",
+            "$description": "Foreground colour for a filled selected or current item during transient press/activation.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-active-foreground)"
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.primary.950}",
+            "$description": "Border colour for a filled selected or current item during transient press/activation.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "STROKE_COLOR"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--color-interactive-selected-active-border)"
+              }
+            }
+          }
+        }
+      },
       "destructive": {
         "background": {
           "$value": "{color.error.700}",
@@ -1722,19 +1852,45 @@
       },
       "selected": {
         "background": {
-          "$value": "{color.interactive.primary.background}",
           "$type": "color",
-          "$description": "Selected fill colour for filled selection controls such as Checkbox."
+          "$value": "{color.interactive.selected.background}",
+          "$description": "Selected fill colour for filled selection controls such as Checkbox.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--form-state-selected-background)"
+            }
+          }
         },
         "foreground": {
-          "$value": "{color.interactive.primary.foreground}",
           "$type": "color",
-          "$description": "Foreground colour for indicators placed on selected filled selection controls such as Checkbox."
+          "$value": "{color.interactive.selected.foreground}",
+          "$description": "Foreground colour for indicators placed on selected filled selection controls such as Checkbox.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--form-state-selected-foreground)"
+            }
+          }
         },
         "border": {
-          "$value": "{color.interactive.primary.background}",
           "$type": "color",
-          "$description": "Selected boundary colour for selection controls such as Radio and Checkbox."
+          "$value": "{color.interactive.selected.border}",
+          "$description": "Selected boundary colour for selection controls such as Radio and Checkbox.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--form-state-selected-border)"
+            }
+          }
         }
       },
       "disabled": {
@@ -2604,6 +2760,98 @@
             ],
             "com.figma.codeSyntax": {
               "Web": "var(--component-pagination-spacing-focus-inset)"
+            }
+          }
+        }
+      },
+      "current": {
+        "default": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.background}",
+            "$description": "Background colour for the current-page link in its default interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-default-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.foreground}",
+            "$description": "Foreground colour for the current-page link in its default interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-default-foreground)"
+              }
+            }
+          }
+        },
+        "hover": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.hover.background}",
+            "$description": "Background colour for the current-page link in its hover interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-hover-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.hover.foreground}",
+            "$description": "Foreground colour for the current-page link in its hover interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-hover-foreground)"
+              }
+            }
+          }
+        },
+        "active": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.active.background}",
+            "$description": "Background colour for the current-page link in its active interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-active-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.active.foreground}",
+            "$description": "Foreground colour for the current-page link in its active interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-active-foreground)"
+              }
             }
           }
         }
