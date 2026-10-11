@@ -98,6 +98,14 @@ page positions for totals through 500 and selected boundaries up to JavaScript's
 maximum safe integer: 125,301 multi-page cases and nine invalid inputs passed.
 This checks the contract algorithm, not a production component.
 
+## Numbered alignment
+
+Keep Previous at the inline start and Next at the inline end. The Pages slot fills
+the space between them and centres the number group within that space. Wrapped
+lines remain centred. When a boundary link is omitted, its space becomes available
+to the page list. This is centring within the available list region, rather than
+absolute positioning against the whole bar; labels and numbers can grow safely.
+
 ## Compact layout and reflow
 
 Choose layout from actual available width, translated labels and digit lengths.

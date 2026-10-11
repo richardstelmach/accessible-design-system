@@ -92,7 +92,8 @@ numberWindow:
     - {currentPage: 10000, totalPages: 10000, sequence: '1 ... 9996 9997 9998 9999 10000'}
 
 layout:
-  numbered: Previous, page-number list, Next in logical order; comfortable spacing and targets.
+  numbered: Previous at inline start, Next at inline end, and the page-number group centred in the flexible space between them; preserve logical order, spacing and targets.
+  numberedAlignment: Pages fills the remaining row width and centres its contents, including each wrapped line. Centre within the available page-list region, not via absolute positioning; omitted directions release their space.
   compact: Summary above Previous/Next; First/Last in a separate row to retain endpoint access.
   selection: Available container width, actual translated label widths and digit lengths; no fixed page-count or device breakpoint.
   fit: Prefer numbered when the complete bounded row fits; otherwise use compact. Explicit numbered requests may wrap as an accessible fallback.
