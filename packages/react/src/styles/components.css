@@ -60,3 +60,190 @@
 .owla11y-input[data-width="10ch"] { max-inline-size:calc(var(--component-textInput-width-10ch) + var(--form-control-padding-inline) * 2 + var(--form-control-border-width) * 2); }
 .owla11y-input[data-width="20ch"] { max-inline-size:calc(var(--component-textInput-width-20ch) + var(--form-control-padding-inline) * 2 + var(--form-control-border-width) * 2); }
 @media (forced-colors:active) { .owla11y-button { border:var(--border-width-thin) solid ButtonText; } .owla11y-button:focus-visible { box-shadow:none; } }
+
+/* Native form controls: shared field typography, states and adjacency spacing. */
+.owla11y-textarea {
+  block-size:var(--component-textarea-blockSize-default);
+  min-block-size:var(--component-textarea-blockSize-minimum);
+  max-block-size:none;
+  resize:vertical;
+}
+.owla11y-select-wrap {
+  position:relative;
+  inline-size:100%;
+  min-inline-size:0;
+  color:var(--form-control-foreground);
+}
+.owla11y-select {
+  appearance:none;
+  padding-inline-end:calc(var(--form-control-padding-inline) + var(--size-icon-md) + var(--spacing-control-gap));
+}
+.owla11y-select-indicator {
+  position:absolute;
+  inline-size:var(--size-icon-md);
+  block-size:var(--size-icon-md);
+  inset-inline-end:var(--form-control-padding-inline);
+  inset-block-start:50%;
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+.owla11y-select-wrap:has(select:disabled) { color:var(--form-state-disabled-foreground); }
+.owla11y-label + .owla11y-select-wrap,
+.owla11y-helper + .owla11y-select-wrap { margin-block-start:var(--form-field-gap-labelToHelper); }
+.owla11y-error + .owla11y-select-wrap { margin-block-start:var(--form-field-gap-errorToControl); }
+
+.owla11y-fieldset {
+  border:0;
+  padding:0;
+  margin:0;
+  min-inline-size:0;
+  max-inline-size:100%;
+  color:var(--form-legend-color);
+}
+.owla11y-legend {
+  float:left;
+  inline-size:100%;
+  padding:0;
+  margin:0;
+  overflow-wrap:anywhere;
+}
+.owla11y-legend + * { clear:both; }
+.owla11y-legend > :is(h1,h2,h3,h4,h5,h6) { font:inherit; letter-spacing:inherit; margin:0; }
+.owla11y-fieldset > .owla11y-helper { margin-block-start:var(--form-field-gap-labelToHelper); }
+.owla11y-fieldset > .owla11y-error { margin-block-start:var(--form-field-gap-helperToError); }
+.owla11y-fieldset > :not(.owla11y-legend,.owla11y-helper,.owla11y-error) {
+  margin-block-start:var(--form-group-gap-betweenOptions);
+}
+.owla11y-fieldset > :is(.owla11y-legend,.owla11y-helper,.owla11y-error) + :not(.owla11y-helper,.owla11y-error) {
+  margin-block-start:var(--form-group-gap-headerToContent);
+}
+.owla11y-legend[data-style="page"] {
+  font-family:var(--form-legend-typography-page-fontFamily);
+  font-size:var(--form-legend-typography-page-fontSize);
+  font-weight:var(--form-legend-typography-page-fontWeight);
+  line-height:var(--form-legend-typography-page-lineHeight);
+  letter-spacing:var(--form-legend-typography-page-letterSpacing);
+}
+.owla11y-legend[data-style="default"] {
+  font-family:var(--form-legend-typography-default-fontFamily);
+  font-size:var(--form-legend-typography-default-fontSize);
+  font-weight:var(--form-legend-typography-default-fontWeight);
+  line-height:var(--form-legend-typography-default-lineHeight);
+  letter-spacing:var(--form-legend-typography-default-letterSpacing);
+}
+.owla11y-legend[data-style="section"] {
+  font-family:var(--form-legend-typography-section-fontFamily);
+  font-size:var(--form-legend-typography-section-fontSize);
+  font-weight:var(--form-legend-typography-section-fontWeight);
+  line-height:var(--form-legend-typography-section-lineHeight);
+  letter-spacing:var(--form-legend-typography-section-letterSpacing);
+}
+.owla11y-legend[data-style="subsection"] {
+  font-family:var(--form-legend-typography-subsection-fontFamily);
+  font-size:var(--form-legend-typography-subsection-fontSize);
+  font-weight:var(--form-legend-typography-subsection-fontWeight);
+  line-height:var(--form-legend-typography-subsection-lineHeight);
+  letter-spacing:var(--form-legend-typography-subsection-letterSpacing);
+}
+.owla11y-legend[data-style="compact"] {
+  font-family:var(--form-legend-typography-compact-fontFamily);
+  font-size:var(--form-legend-typography-compact-fontSize);
+  font-weight:var(--form-legend-typography-compact-fontWeight);
+  line-height:var(--form-legend-typography-compact-lineHeight);
+  letter-spacing:var(--form-legend-typography-compact-letterSpacing);
+}
+
+.owla11y-choice { min-inline-size:0; max-inline-size:100%; }
+.owla11y-choice-row {
+  display:flex;
+  align-items:flex-start;
+  gap:var(--spacing-control-gap);
+  padding-block:var(--form-control-padding-block);
+  min-block-size:var(--size-control-minBlockSize-default);
+  box-sizing:border-box;
+}
+.owla11y-choice-content { flex:1; min-inline-size:0; }
+.owla11y-choice-content > label { display:block; min-block-size:var(--size-target-minimum); }
+.owla11y-choice-content > .owla11y-helper { margin-block-start:var(--form-field-gap-labelToHelper); }
+.owla11y-choice > .owla11y-error { margin-block-start:var(--form-field-gap-errorToControl); }
+.owla11y-choice-control {
+  appearance:none;
+  display:grid;
+  place-content:center;
+  flex:none;
+  box-sizing:border-box;
+  padding:0;
+  margin:0;
+  background:var(--form-control-background);
+  border:var(--form-control-border-width) solid var(--form-control-border-color);
+  color:var(--form-state-selected-foreground);
+}
+.owla11y-checkbox {
+  inline-size:var(--component-checkbox-control-size);
+  block-size:var(--component-checkbox-control-size);
+  border-radius:var(--form-control-border-radius);
+}
+.owla11y-radio {
+  inline-size:var(--component-radio-control-size);
+  block-size:var(--component-radio-control-size);
+  border-radius:var(--radius-full);
+}
+.owla11y-checkbox:is(:checked,:indeterminate) {
+  background:var(--form-state-selected-background);
+  border-color:var(--form-state-selected-border);
+}
+.owla11y-radio:checked { border-color:var(--form-state-selected-border); }
+.owla11y-choice-control::before {
+  content:"";
+  display:block;
+  visibility:hidden;
+}
+.owla11y-checkbox::before {
+  inline-size:var(--component-checkbox-indicator-size);
+  block-size:var(--component-checkbox-indicator-size);
+  background:currentColor;
+}
+.owla11y-radio::before {
+  inline-size:var(--component-radio-indicator-size);
+  block-size:var(--component-radio-indicator-size);
+  border-radius:var(--radius-full);
+  background:var(--component-radio-indicator-color);
+}
+.owla11y-choice-control:checked::before, .owla11y-checkbox:indeterminate::before { visibility:visible; }
+.owla11y-checkbox[aria-invalid="true"] { border-color:var(--form-state-error-border); }
+.owla11y-choice-control:focus-visible {
+  outline:var(--border-width-medium) solid var(--form-state-focus-ring);
+  outline-offset:var(--border-width-medium);
+  box-shadow:0 0 0 var(--border-width-medium) var(--form-state-focus-separator);
+}
+.owla11y-choice-control:disabled {
+  background:var(--form-state-disabled-background);
+  border-color:var(--form-state-disabled-border);
+  color:var(--form-state-disabled-foreground);
+  opacity:1;
+}
+.owla11y-radio:disabled::before { background:var(--form-state-disabled-foreground); }
+.owla11y-choice-row:has(input:disabled) :is(.owla11y-label,.owla11y-helper) { color:var(--form-state-disabled-foreground); }
+@media (forced-colors:active) {
+  .owla11y-select { appearance:auto; padding-inline-end:var(--form-control-padding-inline); }
+  .owla11y-select-indicator { display:none; }
+  .owla11y-choice-control { forced-color-adjust:none; background:Canvas; border-color:CanvasText; color:HighlightText; }
+  .owla11y-checkbox:is(:checked,:indeterminate) { background:Highlight; border-color:Highlight; }
+  .owla11y-radio:checked { border-color:Highlight; }
+  .owla11y-radio::before { background:Highlight; }
+  .owla11y-choice-control:disabled { background:Canvas; border-color:GrayText; color:GrayText; }
+  .owla11y-radio:disabled::before { background:GrayText; }
+  .owla11y-choice-control:focus-visible { outline-color:Highlight; box-shadow:none; }
+}
+
+/* Existing Phosphor Regular artwork from the canonical Figma icon instances. */
+.owla11y-checkbox:indeterminate::before {
+  clip-path:none;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20transform%3D%22translate(2.5%209.375)%22%20d%3D%22M%2015%200.625%20C%2015%200.7907603122293949%2014.934152448549867%200.949731981381774%2014.81694221496582%201.0669422149658203%20C%2014.699731981381774%201.1841524485498667%2014.540760312229395%201.25%2014.375%201.25%20L%200.625%201.25%20C%200.4592396877706051%201.25%200.3002686146646738%201.1841524485498667%200.18305838108062744%201.0669422149658203%20C%200.06584814749658108%200.949731981381774%200%200.7907603122293949%200%200.625%20C%200%200.4592396877706051%200.06584814749658108%200.3002686146646738%200.18305838108062744%200.18305838108062744%20C%200.3002686146646738%200.06584814749658108%200.4592396877706051%200%200.625%200%20L%2014.375%200%20C%2014.540760312229395%200%2014.699731981381774%200.06584814749658108%2014.81694221496582%200.18305838108062744%20C%2014.934152448549867%200.3002686146646738%2015%200.4592396877706051%2015%200.625%20Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20transform%3D%22translate(2.5%209.375)%22%20d%3D%22M%2015%200.625%20C%2015%200.7907603122293949%2014.934152448549867%200.949731981381774%2014.81694221496582%201.0669422149658203%20C%2014.699731981381774%201.1841524485498667%2014.540760312229395%201.25%2014.375%201.25%20L%200.625%201.25%20C%200.4592396877706051%201.25%200.3002686146646738%201.1841524485498667%200.18305838108062744%201.0669422149658203%20C%200.06584814749658108%200.949731981381774%200%200.7907603122293949%200%200.625%20C%200%200.4592396877706051%200.06584814749658108%200.3002686146646738%200.18305838108062744%200.18305838108062744%20C%200.3002686146646738%200.06584814749658108%200.4592396877706051%200%200.625%200%20L%2014.375%200%20C%2014.540760312229395%200%2014.699731981381774%200.06584814749658108%2014.81694221496582%200.18305838108062744%20C%2014.934152448549867%200.3002686146646738%2015%200.4592396877706051%2015%200.625%20Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+}
+.owla11y-checkbox::before {
+  clip-path:none;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20transform%3D%22translate(2.49965238571167%204.999652862548828)%22%20d%3D%22M%2015.442535877227783%201.0675352811813354%20L%205.4425352811813354%2011.067535877227783%20C%205.384489609859884%2011.125646159052849%205.315558975562453%2011.171745751053095%205.2396851778030396%2011.203198432922363%20C%205.163811380043626%2011.234651114791632%205.082482174038887%2011.250839233398438%205.0003474950790405%2011.250839233398438%20C%204.918212816119194%2011.250839233398438%204.836883610114455%2011.234651114791632%204.7610098123550415%2011.203198432922363%20C%204.685136014595628%2011.171745751053095%204.616205380298197%2011.125646159052849%204.558159708976746%2011.067535877227783%20L%200.18316000699996948%206.6925352811813354%20C%200.06588459014892578%206.575259864330292%20-5.551115123125783e-16%206.416199970990419%200%206.2503474950790405%20C%200%206.084495019167662%200.06588459014892578%205.925435125827789%200.18316000699996948%205.808159708976746%20C%200.3004354238510132%205.690884292125702%200.45949501916766167%205.624999403953552%200.6253474950790405%205.624999403953552%20C%200.7911999709904194%205.624999403953552%200.9502595663070679%205.690884292125702%201.0675349831581116%205.808159708976746%20L%205.0003474950790405%209.741753935813904%20L%2014.558160305023193%200.1831597089767456%20C%2014.675435721874237%200.0658842921257019%2014.83449561521411%20-1.2356965450877055e-9%2015.000348091125488%200%20C%2015.166200567036867%201.2356976553107302e-9%2015.32526046037674%200.0658842921257019%2015.442535877227783%200.1831597089767456%20C%2015.559811294078827%200.3004351258277893%2015.625696181015279%200.45949501916766167%2015.625696182250977%200.6253474950790405%20C%2015.625696183486674%200.7911999709904194%2015.559811294078827%200.9502598643302917%2015.442535877227783%201.0675352811813354%20Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20transform%3D%22translate(2.49965238571167%204.999652862548828)%22%20d%3D%22M%2015.442535877227783%201.0675352811813354%20L%205.4425352811813354%2011.067535877227783%20C%205.384489609859884%2011.125646159052849%205.315558975562453%2011.171745751053095%205.2396851778030396%2011.203198432922363%20C%205.163811380043626%2011.234651114791632%205.082482174038887%2011.250839233398438%205.0003474950790405%2011.250839233398438%20C%204.918212816119194%2011.250839233398438%204.836883610114455%2011.234651114791632%204.7610098123550415%2011.203198432922363%20C%204.685136014595628%2011.171745751053095%204.616205380298197%2011.125646159052849%204.558159708976746%2011.067535877227783%20L%200.18316000699996948%206.6925352811813354%20C%200.06588459014892578%206.575259864330292%20-5.551115123125783e-16%206.416199970990419%200%206.2503474950790405%20C%200%206.084495019167662%200.06588459014892578%205.925435125827789%200.18316000699996948%205.808159708976746%20C%200.3004354238510132%205.690884292125702%200.45949501916766167%205.624999403953552%200.6253474950790405%205.624999403953552%20C%200.7911999709904194%205.624999403953552%200.9502595663070679%205.690884292125702%201.0675349831581116%205.808159708976746%20L%205.0003474950790405%209.741753935813904%20L%2014.558160305023193%200.1831597089767456%20C%2014.675435721874237%200.0658842921257019%2014.83449561521411%20-1.2356965450877055e-9%2015.000348091125488%200%20C%2015.166200567036867%201.2356976553107302e-9%2015.32526046037674%200.0658842921257019%2015.442535877227783%200.1831597089767456%20C%2015.559811294078827%200.3004351258277893%2015.625696181015279%200.45949501916766167%2015.625696182250977%200.6253474950790405%20C%2015.625696183486674%200.7911999709904194%2015.559811294078827%200.9502598643302917%2015.442535877227783%201.0675352811813354%20Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+}

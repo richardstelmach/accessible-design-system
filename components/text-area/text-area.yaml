@@ -1030,3 +1030,27 @@ aiGenerationRules:
   - Use documented semantic and component tokens rather than raw values.
   - Report missing token needs rather than inventing raw values.
   - Do not invent new Textarea variants outside this specification.
+
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  exports: [Textarea]
+  refTarget: HTMLTextAreaElement
+  validationEvidence: ../../docs/validation/react-forms-parity.md
+  rules:
+    - "Native value/defaultValue/onChange; controlled fields require onChange or readOnly."
+    - "Default rows=5 is a native fallback; CSS uses component.textarea.blockSize.default/minimum."
+    - "Required by default; optional marker belongs to the accessible label; no placeholder or naming override."
+    - "Vertical resizing; helper and error IDs merge; disabled/read-only controls suppress errors."
+
+figmaReconciliation:
+  date: '2026-10-18'
+  componentSetId: '359:8013'
+  header: {name: _Textarea/Header, type: internal-auto-layout-frame, gap: form.field.gap.helperToError}
+  headerToControl:
+    default: form.field.gap.labelToHelper
+    error: form.field.gap.errorToControl
+    errorFocus: form.field.gap.errorToControl
+  height: {default: component.textarea.blockSize.default, minimum: component.textarea.blockSize.minimum}
+  preservePublicProperties: true
+  evidence: ../../docs/validation/react-forms-parity.md

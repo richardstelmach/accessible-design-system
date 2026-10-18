@@ -1,0 +1,2642 @@
+{
+  "date": "2026-10-18",
+  "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
+  "sourceBaseline": {
+    "commit": "49acf49a9d91e2ed765ce98aabb5efa46a8884d1",
+    "blobs": {
+      "text-area": "3a17ac0a57e308af2a1cec9d3fba51cbc61e3818",
+      "select": "9891f5b4511c9ae041d92580aeb000f5f9f06598",
+      "fieldset": "e38de9c6bd03b378b12fe8c31e5d6b87f4817130",
+      "checkbox": "0c5de7e0419df076e32abdbb74e224306e33f235",
+      "radio": "2c0016a9a2c72e06422401e0e46ef054e848f4e6"
+    }
+  },
+  "discovery": {
+    "textarea": [
+      [
+        {
+          "id": "359:8013",
+          "name": "Textarea",
+          "properties": {
+            "Label text#283:0": {
+              "type": "TEXT",
+              "defaultValue": "Tell us what happened"
+            },
+            "Helper text#283:13": {
+              "type": "BOOLEAN",
+              "defaultValue": false
+            },
+            "Helper text content#283:26": {
+              "type": "TEXT",
+              "defaultValue": "Use helper text only when it helps users answer correctly."
+            },
+            "Error text#283:39": {
+              "type": "TEXT",
+              "defaultValue": "Error: Enter a description."
+            },
+            "Value text#283:52": {
+              "type": "TEXT",
+              "defaultValue": ""
+            },
+            "State": {
+              "type": "VARIANT",
+              "defaultValue": "default",
+              "variantOptions": [
+                "default",
+                "focus",
+                "error",
+                "errorFocus",
+                "disabled",
+                "readonly"
+              ]
+            },
+            "Requirement": {
+              "type": "VARIANT",
+              "defaultValue": "required",
+              "variantOptions": [
+                "required",
+                "optional"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "359:8014",
+              "name": "State=default, Requirement=required",
+              "gap": 4
+            },
+            {
+              "id": "359:8024",
+              "name": "State=default, Requirement=optional",
+              "gap": 4
+            },
+            {
+              "id": "359:8034",
+              "name": "State=focus, Requirement=required",
+              "gap": 4
+            },
+            {
+              "id": "359:8044",
+              "name": "State=focus, Requirement=optional",
+              "gap": 4
+            },
+            {
+              "id": "359:8054",
+              "name": "State=error, Requirement=required",
+              "gap": 4
+            },
+            {
+              "id": "359:8064",
+              "name": "State=error, Requirement=optional",
+              "gap": 4
+            },
+            {
+              "id": "359:8074",
+              "name": "State=errorFocus, Requirement=required",
+              "gap": 4
+            },
+            {
+              "id": "359:8084",
+              "name": "State=errorFocus, Requirement=optional",
+              "gap": 4
+            },
+            {
+              "id": "359:8094",
+              "name": "State=disabled, Requirement=required",
+              "gap": 4
+            },
+            {
+              "id": "359:8104",
+              "name": "State=disabled, Requirement=optional",
+              "gap": 4
+            },
+            {
+              "id": "359:8114",
+              "name": "State=readonly, Requirement=required",
+              "gap": 4
+            },
+            {
+              "id": "359:8124",
+              "name": "State=readonly, Requirement=optional",
+              "gap": 4
+            }
+          ],
+          "sample": [
+            {
+              "id": "359:8014",
+              "w": 640,
+              "h": 191,
+              "parts": [
+                {
+                  "id": "359:8015",
+                  "name": "Label row",
+                  "w": 640,
+                  "h": 27,
+                  "gap": 4,
+                  "minH": null,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:99"
+                    }
+                  }
+                },
+                {
+                  "id": "359:8016",
+                  "name": "Label text",
+                  "w": 194,
+                  "h": 27,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "Tell us what happened",
+                  "size": 18,
+                  "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:104"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6773"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "359:8017",
+                  "name": "Optional marker text",
+                  "w": 65,
+                  "h": 21,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "(optional)",
+                  "size": 14,
+                  "style": "",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:104"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:121"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "359:8018",
+                  "name": "Helper text",
+                  "w": 640,
+                  "h": 24,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "Use helper text only when it helps users answer correctly.",
+                  "size": 16,
+                  "style": "S:189980c8dc16c098f1e9ece343212bb8f79002f9,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:106"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6778"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "359:8019",
+                  "name": "Error text",
+                  "w": 640,
+                  "h": 27,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "Error: Enter a description.",
+                  "size": 18,
+                  "style": "S:5abf96e4c0598354a0c2ba856d1017912f27a2dd,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:107"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6780"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "359:8020",
+                  "name": "Input control",
+                  "w": 640,
+                  "h": 160,
+                  "gap": 0,
+                  "minH": 128,
+                  "padding": [
+                    12,
+                    16,
+                    12,
+                    16
+                  ],
+                  "bound": {
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:121"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:120"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:121"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:120"
+                    },
+                    "height": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:358:7973"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "strokeTopWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeBottomWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeLeftWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeRightWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:358:7972"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:115"
+                      }
+                    ],
+                    "strokes": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "359:8021",
+                  "name": "Value text",
+                  "w": 608,
+                  "h": 136,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "",
+                  "size": 16,
+                  "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:116"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6776"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ],
+    "select": [
+      [
+        {
+          "id": "384:1122",
+          "name": "Select",
+          "properties": {
+            "Label text#384:0": {
+              "type": "TEXT",
+              "defaultValue": "Country"
+            },
+            "Helper text#384:11": {
+              "type": "BOOLEAN",
+              "defaultValue": false
+            },
+            "Helper text content#384:22": {
+              "type": "TEXT",
+              "defaultValue": "Select the country where you currently live."
+            },
+            "Error text#384:33": {
+              "type": "TEXT",
+              "defaultValue": "Error: Select a country"
+            },
+            "Value text#384:44": {
+              "type": "TEXT",
+              "defaultValue": "Select a country"
+            },
+            "State": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default",
+                "Focus",
+                "Error",
+                "Error focus",
+                "Disabled"
+              ]
+            },
+            "Requirement": {
+              "type": "VARIANT",
+              "defaultValue": "Required",
+              "variantOptions": [
+                "Required",
+                "Optional"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "384:1002",
+              "name": "State=Default, Requirement=Required",
+              "gap": 4
+            },
+            {
+              "id": "384:1014",
+              "name": "State=Default, Requirement=Optional",
+              "gap": 4
+            },
+            {
+              "id": "384:1026",
+              "name": "State=Focus, Requirement=Required",
+              "gap": 4
+            },
+            {
+              "id": "384:1038",
+              "name": "State=Focus, Requirement=Optional",
+              "gap": 4
+            },
+            {
+              "id": "384:1050",
+              "name": "State=Error, Requirement=Required",
+              "gap": 4
+            },
+            {
+              "id": "384:1062",
+              "name": "State=Error, Requirement=Optional",
+              "gap": 4
+            },
+            {
+              "id": "384:1074",
+              "name": "State=Error focus, Requirement=Required",
+              "gap": 4
+            },
+            {
+              "id": "384:1086",
+              "name": "State=Error focus, Requirement=Optional",
+              "gap": 4
+            },
+            {
+              "id": "384:1098",
+              "name": "State=Disabled, Requirement=Required",
+              "gap": 4
+            },
+            {
+              "id": "384:1110",
+              "name": "State=Disabled, Requirement=Optional",
+              "gap": 4
+            }
+          ],
+          "sample": [
+            {
+              "id": "384:1002",
+              "w": 640,
+              "h": 75,
+              "parts": [
+                {
+                  "id": "384:1003",
+                  "name": "Label row",
+                  "w": 640,
+                  "h": 27,
+                  "gap": 4,
+                  "minH": null,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:99"
+                    }
+                  }
+                },
+                {
+                  "id": "384:1004",
+                  "name": "Label text",
+                  "w": 70,
+                  "h": 27,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "Country",
+                  "size": 18,
+                  "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:104"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6773"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "384:1005",
+                  "name": "Optional marker text",
+                  "w": 83,
+                  "h": 27,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "(optional)",
+                  "size": 18,
+                  "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:104"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6773"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "384:1006",
+                  "name": "Helper text",
+                  "w": 608,
+                  "h": 24,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "Select the country where you currently live.",
+                  "size": 16,
+                  "style": "S:189980c8dc16c098f1e9ece343212bb8f79002f9,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:106"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6778"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "407:313",
+                  "name": "Error message",
+                  "w": 100,
+                  "h": 100,
+                  "gap": 0,
+                  "minH": null,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "bound": {}
+                },
+                {
+                  "id": "384:1007",
+                  "name": "Error text",
+                  "w": 100,
+                  "h": 81,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "Error: Select a country",
+                  "size": 18,
+                  "style": "S:5abf96e4c0598354a0c2ba856d1017912f27a2dd,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:107"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6780"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "384:1008",
+                  "name": "Select control",
+                  "w": 640,
+                  "h": 44,
+                  "gap": 8,
+                  "minH": 44,
+                  "padding": [
+                    12,
+                    16,
+                    12,
+                    16
+                  ],
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:112"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:121"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:120"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:121"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:120"
+                    },
+                    "height": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "strokeTopWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeBottomWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeLeftWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeRightWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:115"
+                      }
+                    ],
+                    "strokes": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "384:1009",
+                  "name": "Value text",
+                  "w": 580,
+                  "h": 24,
+                  "minH": null,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "Select a country",
+                  "size": 18,
+                  "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:116"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6776"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ],
+    "fieldset": [
+      [
+        {
+          "id": "485:1684",
+          "name": "_Fieldset/Legend",
+          "count": 15,
+          "properties": {
+            "Legend text#485:15": {
+              "type": "TEXT",
+              "defaultValue": "What is your preferred contact method?"
+            },
+            "Legend style": {
+              "type": "VARIANT",
+              "defaultValue": "Page",
+              "variantOptions": [
+                "Page",
+                "Default",
+                "Section",
+                "Subsection",
+                "Compact"
+              ]
+            },
+            "Requirement": {
+              "type": "VARIANT",
+              "defaultValue": "Required",
+              "variantOptions": [
+                "Required",
+                "Optional",
+                "Mixed"
+              ]
+            }
+          },
+          "sample": [
+            {
+              "id": "485:1654",
+              "w": 520,
+              "h": 116,
+              "gap": 0,
+              "bound": {},
+              "parts": [
+                {
+                  "id": "485:1655",
+                  "name": "Legend text",
+                  "w": 520,
+                  "h": 116,
+                  "text": "What is your preferred contact method?",
+                  "size": 48,
+                  "style": "S:e3b6913c7c0acc3e52d544eb087dee90a7cb24bf,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:105"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:472:312"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:119"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "485:1699",
+          "name": "Fieldset",
+          "count": 2,
+          "properties": {
+            "Helper text#485:24": {
+              "type": "BOOLEAN",
+              "defaultValue": false
+            },
+            "Helper text content#485:25": {
+              "type": "TEXT",
+              "defaultValue": "Select all options that apply."
+            },
+            "Error text#485:26": {
+              "type": "TEXT",
+              "defaultValue": "Error: Select your preferred contact method"
+            },
+            "Content#485:27": {
+              "type": "SLOT",
+              "description": null,
+              "preferredValues": []
+            },
+            "State": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default",
+                "Error"
+              ]
+            }
+          },
+          "sample": [
+            {
+              "id": "485:1685",
+              "w": 640,
+              "h": 190,
+              "gap": 24,
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:495:1745"
+                }
+              },
+              "parts": [
+                {
+                  "id": "485:1686",
+                  "name": "Group header",
+                  "w": 640,
+                  "h": 86,
+                  "gap": 4,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:109"
+                    }
+                  }
+                },
+                {
+                  "id": "I485:1687;485:1661",
+                  "name": "Legend text",
+                  "w": 640,
+                  "h": 86,
+                  "text": "What is your preferred contact method?",
+                  "size": 36,
+                  "style": "S:1bdbe7583421d62691cbfbbe2ddbb2f4d0d6249f,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:105"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6953"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:119"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "485:1689",
+                  "name": "Helper text",
+                  "w": 640,
+                  "h": 24,
+                  "text": "Select all options that apply.",
+                  "size": 16,
+                  "style": "S:189980c8dc16c098f1e9ece343212bb8f79002f9,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:106"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6778"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "485:1690",
+                  "name": "Error message",
+                  "w": 640,
+                  "h": 27,
+                  "text": "Error: Select your preferred contact method",
+                  "size": 18,
+                  "style": "S:5abf96e4c0598354a0c2ba856d1017912f27a2dd,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:107"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6780"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ],
+    "radio": [
+      [
+        {
+          "id": "582:73",
+          "name": "Radio",
+          "properties": {
+            "description#582:0": {
+              "type": "BOOLEAN",
+              "defaultValue": false
+            },
+            "labelText#582:7": {
+              "type": "TEXT",
+              "defaultValue": "Email"
+            },
+            "descriptionText#582:14": {
+              "type": "TEXT",
+              "defaultValue": "Option-specific description"
+            },
+            "selected": {
+              "type": "VARIANT",
+              "defaultValue": "false",
+              "variantOptions": [
+                "false",
+                "true"
+              ]
+            },
+            "state": {
+              "type": "VARIANT",
+              "defaultValue": "default",
+              "variantOptions": [
+                "default",
+                "focus",
+                "disabled"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "582:18",
+              "name": "selected=false, state=default"
+            },
+            {
+              "id": "582:27",
+              "name": "selected=true, state=default"
+            },
+            {
+              "id": "582:36",
+              "name": "selected=false, state=focus"
+            },
+            {
+              "id": "582:45",
+              "name": "selected=true, state=focus"
+            },
+            {
+              "id": "582:54",
+              "name": "selected=false, state=disabled"
+            },
+            {
+              "id": "582:63",
+              "name": "selected=true, state=disabled"
+            }
+          ],
+          "sample": [
+            {
+              "id": "582:18",
+              "w": 320,
+              "h": 48,
+              "gap": 8,
+              "minH": 44,
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:112"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:120"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:120"
+                },
+                "minHeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                }
+              },
+              "parts": [
+                {
+                  "id": "582:19",
+                  "name": "Native input semantic marker",
+                  "w": 1,
+                  "h": 1,
+                  "gap": 0,
+                  "bound": {}
+                },
+                {
+                  "id": "582:20",
+                  "name": "Radio control",
+                  "w": 24,
+                  "h": 24,
+                  "gap": 0,
+                  "bound": {
+                    "width": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:564:1495"
+                    },
+                    "height": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:564:1495"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "strokeTopWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeBottomWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeLeftWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeRightWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:115"
+                      }
+                    ],
+                    "strokes": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "582:21",
+                  "name": "Focus separator",
+                  "w": 28,
+                  "h": 28,
+                  "gap": 0,
+                  "bound": {
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "strokeTopWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:5"
+                    },
+                    "strokeBottomWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:5"
+                    },
+                    "strokeLeftWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:5"
+                    },
+                    "strokeRightWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:5"
+                    },
+                    "strokes": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:124"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "582:22",
+                  "name": "Focus ring",
+                  "w": 32,
+                  "h": 32,
+                  "gap": 0,
+                  "bound": {
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "strokeTopWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:5"
+                    },
+                    "strokeBottomWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:5"
+                    },
+                    "strokeLeftWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:5"
+                    },
+                    "strokeRightWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:5"
+                    },
+                    "strokes": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:123"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "582:23",
+                  "name": "Selected indicator",
+                  "w": 12,
+                  "h": 12,
+                  "gap": 0,
+                  "bound": {
+                    "width": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:564:1496"
+                    },
+                    "height": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:564:1496"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:76"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:564:1497"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "582:24",
+                  "name": "Option content",
+                  "w": 288,
+                  "h": 24,
+                  "gap": 4,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:109"
+                    }
+                  }
+                },
+                {
+                  "id": "582:25",
+                  "name": "Label",
+                  "w": 288,
+                  "h": 24,
+                  "text": "Email",
+                  "size": 16,
+                  "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:104"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6773"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "582:26",
+                  "name": "Description",
+                  "w": 180,
+                  "h": 21,
+                  "text": "Option-specific description",
+                  "size": 14,
+                  "style": "S:189980c8dc16c098f1e9ece343212bb8f79002f9,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:106"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6778"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ],
+    "checkbox": [
+      [
+        {
+          "id": "710:3450",
+          "name": "Checkbox",
+          "properties": {
+            "description#710:0": {
+              "type": "BOOLEAN",
+              "defaultValue": false
+            },
+            "labelText#710:2": {
+              "type": "TEXT",
+              "defaultValue": "I agree to the terms"
+            },
+            "descriptionText#710:3": {
+              "type": "TEXT",
+              "defaultValue": "You can change this preference later."
+            },
+            "errorText#710:4": {
+              "type": "TEXT",
+              "defaultValue": "Error: Confirm that you agree before continuing."
+            },
+            "selection": {
+              "type": "VARIANT",
+              "defaultValue": "unchecked",
+              "variantOptions": [
+                "unchecked",
+                "checked",
+                "indeterminate"
+              ]
+            },
+            "state": {
+              "type": "VARIANT",
+              "defaultValue": "default",
+              "variantOptions": [
+                "default",
+                "focus",
+                "error",
+                "errorFocus",
+                "disabled"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "708:19",
+              "name": "selection=unchecked, state=default"
+            },
+            {
+              "id": "710:18",
+              "name": "selection=checked, state=default"
+            },
+            {
+              "id": "710:31",
+              "name": "selection=indeterminate, state=default"
+            },
+            {
+              "id": "710:45",
+              "name": "selection=unchecked, state=focus"
+            },
+            {
+              "id": "710:58",
+              "name": "selection=checked, state=focus"
+            },
+            {
+              "id": "710:71",
+              "name": "selection=indeterminate, state=focus"
+            },
+            {
+              "id": "710:3330",
+              "name": "selection=unchecked, state=error"
+            },
+            {
+              "id": "710:3343",
+              "name": "selection=checked, state=error"
+            },
+            {
+              "id": "710:3356",
+              "name": "selection=indeterminate, state=error"
+            },
+            {
+              "id": "710:3370",
+              "name": "selection=unchecked, state=errorFocus"
+            },
+            {
+              "id": "710:3383",
+              "name": "selection=checked, state=errorFocus"
+            },
+            {
+              "id": "710:3396",
+              "name": "selection=indeterminate, state=errorFocus"
+            },
+            {
+              "id": "710:3410",
+              "name": "selection=unchecked, state=disabled"
+            },
+            {
+              "id": "710:3423",
+              "name": "selection=checked, state=disabled"
+            },
+            {
+              "id": "710:3436",
+              "name": "selection=indeterminate, state=disabled"
+            }
+          ],
+          "sample": [
+            {
+              "id": "708:19",
+              "w": 320,
+              "h": 51,
+              "gap": 8,
+              "minH": null,
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:111"
+                }
+              },
+              "parts": [
+                {
+                  "id": "708:20",
+                  "name": "Option row",
+                  "w": 320,
+                  "h": 51,
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    0,
+                    12,
+                    0
+                  ],
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:112"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:120"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:120"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    }
+                  }
+                },
+                {
+                  "id": "708:21",
+                  "name": "Visual control",
+                  "w": 24,
+                  "h": 24,
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "bound": {
+                    "width": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:697:480"
+                    },
+                    "height": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:697:480"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:119"
+                    },
+                    "strokeTopWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeBottomWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeLeftWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "strokeRightWeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:118"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:115"
+                      }
+                    ],
+                    "strokes": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "709:18",
+                  "name": "Option content",
+                  "w": 288,
+                  "h": 27,
+                  "gap": 4,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:251:109"
+                    }
+                  }
+                },
+                {
+                  "id": "709:20",
+                  "name": "Label",
+                  "w": 288,
+                  "h": 27,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "I agree to the terms",
+                  "size": 18,
+                  "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:104"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6773"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:117"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "709:22",
+                  "name": "Description - optional",
+                  "w": 288,
+                  "h": 24,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "You can change this preference later.",
+                  "size": 16,
+                  "style": "S:189980c8dc16c098f1e9ece343212bb8f79002f9,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:106"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6778"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "709:23",
+                  "name": "Error message",
+                  "w": 320,
+                  "h": 54,
+                  "padding": [
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "text": "Error: Confirm that you agree before continuing.",
+                  "size": 18,
+                  "style": "S:5abf96e4c0598354a0c2ba856d1017912f27a2dd,",
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:251:107"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:303:6780"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "repairAndValidation": {
+    "textarea": [
+      {
+        "probeId": "1264:9833",
+        "deletedNodeIds": [
+          "1264:9833"
+        ],
+        "headerIds": [
+          "1264:96",
+          "1264:97",
+          "1264:98",
+          "1264:99",
+          "1264:100",
+          "1264:101",
+          "1264:102",
+          "1264:103",
+          "1264:104",
+          "1264:105",
+          "1264:106",
+          "1264:107"
+        ],
+        "variants": 12,
+        "results": [
+          {
+            "mode": "base",
+            "controlHeight": 160,
+            "minHeight": 128,
+            "gap": 8,
+            "headerGap": 4
+          },
+          {
+            "mode": "md",
+            "controlHeight": 160,
+            "minHeight": 128,
+            "gap": 8,
+            "headerGap": 4
+          },
+          {
+            "mode": "lg",
+            "controlHeight": 160,
+            "minHeight": 128,
+            "gap": 8,
+            "headerGap": 4
+          }
+        ]
+      }
+    ],
+    "textareaExamples": [
+      {
+        "setId": "359:8013",
+        "variants": 12,
+        "instances": 10,
+        "issues": []
+      }
+    ],
+    "selectStructure": [
+      {
+        "createdNodeIds": [
+          "1264:9718",
+          "1264:9719",
+          "1264:9720",
+          "1264:9721",
+          "1264:9722",
+          "1264:9723",
+          "1264:9724",
+          "1264:9725",
+          "1264:9726",
+          "1264:9727"
+        ],
+        "mutatedNodeIds": [
+          "384:1003",
+          "384:1006",
+          "407:313",
+          "384:1007",
+          "384:1012",
+          "384:1013",
+          "384:1002",
+          "1264:9718",
+          "384:1008",
+          "384:1009",
+          "384:1015",
+          "384:1018",
+          "407:314",
+          "384:1019",
+          "384:1024",
+          "384:1025",
+          "384:1014",
+          "1264:9719",
+          "384:1020",
+          "384:1021",
+          "384:1027",
+          "384:1030",
+          "407:315",
+          "384:1031",
+          "384:1036",
+          "384:1037",
+          "384:1026",
+          "1264:9720",
+          "384:1032",
+          "384:1033",
+          "384:1039",
+          "384:1042",
+          "407:316",
+          "384:1043",
+          "384:1048",
+          "384:1049",
+          "384:1038",
+          "1264:9721",
+          "384:1044",
+          "384:1045",
+          "384:1051",
+          "384:1054",
+          "407:317",
+          "384:1055",
+          "384:1060",
+          "384:1061",
+          "384:1050",
+          "1264:9722",
+          "384:1056",
+          "384:1057",
+          "384:1063",
+          "384:1066",
+          "407:318",
+          "384:1067",
+          "384:1072",
+          "384:1073",
+          "384:1062",
+          "1264:9723",
+          "384:1068",
+          "384:1069",
+          "384:1075",
+          "384:1078",
+          "407:319",
+          "384:1079",
+          "384:1084",
+          "384:1085",
+          "384:1074",
+          "1264:9724",
+          "384:1080",
+          "384:1081",
+          "384:1087",
+          "384:1090",
+          "407:320",
+          "384:1091",
+          "384:1096",
+          "384:1097",
+          "384:1086",
+          "1264:9725",
+          "384:1092",
+          "384:1093",
+          "384:1099",
+          "384:1102",
+          "407:321",
+          "384:1103",
+          "384:1108",
+          "384:1109",
+          "384:1098",
+          "1264:9726",
+          "384:1104",
+          "384:1105",
+          "384:1111",
+          "384:1114",
+          "407:322",
+          "384:1115",
+          "384:1120",
+          "384:1121",
+          "384:1110",
+          "1264:9727",
+          "384:1116",
+          "384:1117"
+        ],
+        "variants": 10,
+        "results": [
+          {
+            "id": "384:1002",
+            "name": "State=Default, Requirement=Required",
+            "gap": 4,
+            "control": 53
+          },
+          {
+            "id": "384:1014",
+            "name": "State=Default, Requirement=Optional",
+            "gap": 4,
+            "control": 53
+          },
+          {
+            "id": "384:1026",
+            "name": "State=Focus, Requirement=Required",
+            "gap": 4,
+            "control": 53
+          },
+          {
+            "id": "384:1038",
+            "name": "State=Focus, Requirement=Optional",
+            "gap": 4,
+            "control": 53
+          },
+          {
+            "id": "384:1050",
+            "name": "State=Error, Requirement=Required",
+            "gap": 8,
+            "control": 53
+          },
+          {
+            "id": "384:1062",
+            "name": "State=Error, Requirement=Optional",
+            "gap": 8,
+            "control": 53
+          },
+          {
+            "id": "384:1074",
+            "name": "State=Error focus, Requirement=Required",
+            "gap": 8,
+            "control": 53
+          },
+          {
+            "id": "384:1086",
+            "name": "State=Error focus, Requirement=Optional",
+            "gap": 8,
+            "control": 53
+          },
+          {
+            "id": "384:1098",
+            "name": "State=Disabled, Requirement=Required",
+            "gap": 4,
+            "control": 53
+          },
+          {
+            "id": "384:1110",
+            "name": "State=Disabled, Requirement=Optional",
+            "gap": 4,
+            "control": 53
+          }
+        ]
+      }
+    ],
+    "selectViewportIntermediate": [
+      {
+        "createdNodeIds": [
+          "1264:9844",
+          "1264:9845",
+          "1264:9846",
+          "1264:9847",
+          "1264:9848",
+          "1264:9849",
+          "1264:9850",
+          "1264:9851",
+          "1264:9852",
+          "1264:9853"
+        ],
+        "mutatedNodeIds": [
+          "384:1009",
+          "384:1008",
+          "1264:9844",
+          "384:1021",
+          "384:1020",
+          "1264:9845",
+          "384:1033",
+          "384:1032",
+          "1264:9846",
+          "384:1045",
+          "384:1044",
+          "1264:9847",
+          "384:1057",
+          "384:1056",
+          "1264:9848",
+          "384:1069",
+          "384:1068",
+          "1264:9849",
+          "384:1081",
+          "384:1080",
+          "1264:9850",
+          "384:1093",
+          "384:1092",
+          "1264:9851",
+          "384:1105",
+          "384:1104",
+          "1264:9852",
+          "384:1117",
+          "384:1116",
+          "1264:9853"
+        ],
+        "deletedNodeIds": [
+          "1264:9854"
+        ],
+        "variants": 10,
+        "results": [
+          {
+            "mode": "base",
+            "h": 53,
+            "minHeight": 44,
+            "gap": 8,
+            "headerGap": 4,
+            "valueHeight": 27
+          },
+          {
+            "mode": "md",
+            "h": 53,
+            "minHeight": 44,
+            "gap": 8,
+            "headerGap": 4,
+            "valueHeight": 27
+          },
+          {
+            "mode": "lg",
+            "h": 53,
+            "minHeight": 44,
+            "gap": 8,
+            "headerGap": 4,
+            "valueHeight": 27
+          }
+        ],
+        "indicator": [
+          {
+            "name": "Vector",
+            "w": 13.750696182250977,
+            "h": 7.500838279724121,
+            "paths": [
+              {
+                "windingRule": "NONZERO",
+                "data": "M 13.567535877227783 1.067535230282978 L 7.3175352811813354 7.317534932293075 C 7.259489609859884 7.375645211347536 7.190558975562453 7.421744801149829 7.1146851778030396 7.453197481519484 C 7.038811380043626 7.48465016188914 6.957482174038887 7.500838279724122 6.8753474950790405 7.500838279724122 C 6.793212816119194 7.500838279724122 6.711883610114455 7.48465016188914 6.6360098123550415 7.453197481519484 C 6.560136014595628 7.421744801149829 6.491205380298197 7.375645211347536 6.433159708976746 7.317534932293075 L 0.18316000699996948 1.067535230282978 C 0.06588459014892578 0.9502598190234366 0 0.791199933267283 0 0.6253474652634823 C 0 0.45949499725968157 0.06588459014892578 0.30043511150352786 0.18316000699996948 0.1831597002439866 C 0.3004354238510132 0.0658842889844453 0.45949501916766167 1.1102229716915164e-15 0.6253474950790405 0 C 0.7911999709904194 0 0.9502595663070679 0.0658842889844453 1.0675349831581116 0.1831597002439866 L 6.8753474950790405 5.991753650136756 L 12.683160305023193 0.1831597002439866 C 12.74122919421643 0.1250908138193806 12.810167167335749 0.07902811370251028 12.886037826538086 0.047601459140961686 C 12.961908485740423 0.016174804579413088 13.043226283043623 0 13.125348091125488 0 C 13.207469899207354 0 13.288787696510553 0.016174804579413088 13.36465835571289 0.047601459140961686 C 13.440529014915228 0.07902811370251028 13.509466988034546 0.1250908138193806 13.567535877227783 0.1831597002439866 C 13.62560476642102 0.2412285866685926 13.671666872687638 0.3101665565010599 13.703093528747559 0.3860372120860067 C 13.73452018480748 0.46190786767095354 13.750696182250975 0.5432256610970521 13.750696182250977 0.6253474652634823 C 13.750696182250975 0.7074692694299125 13.73452018480748 0.7887870628560111 13.703093528747559 0.8646577184409578 C 13.671666872687638 0.9405283740259046 13.62560476642102 1.009466343858372 13.567535877227783 1.067535230282978 Z"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "selectFinalResponsiveBinding": [
+      {
+        "mutatedNodeIds": [
+          "384:1009",
+          "384:1021",
+          "384:1033",
+          "384:1045",
+          "384:1057",
+          "384:1069",
+          "384:1081",
+          "384:1093",
+          "384:1105",
+          "384:1117"
+        ],
+        "deletedNodeIds": [
+          "1264:9903"
+        ],
+        "results": [
+          {
+            "mode": "base",
+            "font": 16,
+            "valueHeight": 24,
+            "controlHeight": 50,
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "bound": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:116"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:303:6776"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:116"
+                }
+              ]
+            }
+          },
+          {
+            "mode": "md",
+            "font": 16,
+            "valueHeight": 24,
+            "controlHeight": 50,
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "bound": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:116"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:303:6776"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:116"
+                }
+              ]
+            }
+          },
+          {
+            "mode": "lg",
+            "font": 18,
+            "valueHeight": 27,
+            "controlHeight": 53,
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "bound": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:116"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:303:6776"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:116"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "selectExamples": [
+      {
+        "setId": "384:1122",
+        "variants": 10,
+        "instances": 17,
+        "issues": [],
+        "styles": [
+          {
+            "id": "384:1009",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1021",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1033",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1045",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1057",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1069",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1081",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1093",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1105",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          },
+          {
+            "id": "384:1117",
+            "style": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,",
+            "hasResponsiveFont": true
+          }
+        ]
+      }
+    ],
+    "radio": [
+      {
+        "setId": "582:73",
+        "count": 6,
+        "modes": [
+          {
+            "mode": "base",
+            "rowHeight": 48,
+            "control": [
+              24,
+              24
+            ],
+            "font": 16
+          },
+          {
+            "mode": "md",
+            "rowHeight": 48,
+            "control": [
+              24,
+              24
+            ],
+            "font": 16
+          },
+          {
+            "mode": "lg",
+            "rowHeight": 51,
+            "control": [
+              24,
+              24
+            ],
+            "font": 18
+          }
+        ],
+        "deletedNodeIds": [
+          "1265:482"
+        ]
+      }
+    ],
+    "fieldset": [
+      {
+        "setId": "485:1699",
+        "count": 2,
+        "modes": [
+          {
+            "mode": "base",
+            "font": 24,
+            "gap": 24,
+            "headerGap": 4
+          },
+          {
+            "mode": "md",
+            "font": 30,
+            "gap": 24,
+            "headerGap": 4
+          },
+          {
+            "mode": "lg",
+            "font": 36,
+            "gap": 24,
+            "headerGap": 4
+          }
+        ],
+        "deletedNodeIds": [
+          "1265:2211"
+        ]
+      }
+    ],
+    "checkbox": [
+      {
+        "setId": "710:3450",
+        "count": 15,
+        "modes": [
+          {
+            "mode": "base",
+            "rowHeight": 48,
+            "control": [
+              24,
+              24
+            ],
+            "font": 16
+          },
+          {
+            "mode": "md",
+            "rowHeight": 48,
+            "control": [
+              24,
+              24
+            ],
+            "font": 16
+          },
+          {
+            "mode": "lg",
+            "rowHeight": 51,
+            "control": [
+              24,
+              24
+            ],
+            "font": 18
+          }
+        ],
+        "deletedNodeIds": [
+          "1265:3523"
+        ],
+        "collections": [
+          {
+            "name": "global",
+            "count": 329,
+            "modes": [
+              "global"
+            ]
+          },
+          {
+            "name": "Breakpoint",
+            "count": 30,
+            "modes": [
+              "base",
+              "md",
+              "lg"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "notes": [
+    "Select viewport intermediate measurements precede restoration of shared text style and responsive font binding. Use selectFinalResponsiveBinding for final 50/50/53 heights.",
+    "Screenshots were visually inspected inline; image payloads are intentionally excluded from this receipt.",
+    "Textarea repair created 12 internal headers; Select repair created 10 internal headers and 10 value viewports. Public component IDs and property APIs are unchanged.",
+    "All measurement probes were removed; no variables, styles or public components were added, renamed or deleted."
+  ]
+}

@@ -1,6 +1,6 @@
 # OwlA11y React API contract
 
-Status: implementation contract draft, 18 October 2026. Product decisions accepted by Richard: React 18.3 and 19, styled components with token customisation, light theme for launch. Button, IconButton, Link and TextInput are implemented locally; the remaining families are interface drafts. See packages/react/README.md for commands and verification limits.
+Status: partially implemented beta contract, 18 October 2026. Product decisions accepted by Richard: React 18.3 and 19, styled components with token customisation, light theme for launch. Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox and Radio are implemented; the remaining families are interface drafts. See packages/react/README.md for commands and verification limits.
 
 ## Shared conventions
 
@@ -61,3 +61,17 @@ For Accordion, the new controlled adapter is additive: expandedIds/defaultExpand
 ## First implementation checkpoint
 
 Create compile-checked props and consumer examples for Button, IconButton, Link and TextInput first. Compile against React 18.3 and 19 typings separately; verify refs and event inference. Follow with the other families, resolving the explicit host/part-ID questions before treating the API as stable. Keep the JSON, typed declarations and canonical contracts aligned in the same change. No stability promise before beta feedback.
+
+## Form-components checkpoint
+
+Textarea, Select, Fieldset, Checkbox and Radio now follow the source contracts and use native elements. All five forward their native refs; className on a single field or choice styles its wrapper, while Fieldset className styles the fieldset. Invalid configuration throws an actionable error in all builds, matching the first four components.
+
+Textarea keeps rows=5 and wrap=soft as native defaults; CSS sets the canonical 160px initial height, 128px minimum and vertical resizing. Select requires a first direct, enabled, visible empty-value option. Real options have explicit nonempty string values and plain text labels; optgroups have labels. React owns selected state through string value/defaultValue. Native size is omitted or 1, and tabIndex is omitted or 0; readOnly and multiple are unsupported. The opened menu remains browser/OS controlled.
+
+Fieldset supports legendStyle page/default/section/subsection/compact and headingLevel none/h1/h2/h3/h4/h5/h6. Plain legend is the default. The consuming composite supplies an explicit error.id in children mode and passes that ID only to affected enabled controls; Fieldset does not clone children or infer affected controls. Legend, helper, one error and consumer controls remain direct native siblings. Optional wording is authored as part of the legend; there is no native required attribute on Fieldset.
+
+Checkbox is optional unless native required is supplied for that individual choice. Optional wording is authored within its label. Checkedness controls submission; indeterminate is a separate DOM property set on mount and when its prop changes. Native activation clears indeterminate, so an aggregate owner must update it when child selections change. It is exposed after hydration, not as an SSR attribute. Checkbox has individual errors only for independent validation. Radio has no individual error API; shared missing-answer errors stay on Fieldset. Neither repeats group error/helper IDs automatically. Both preserve native reset and browser keyboard behaviour; controlled choices require onChange.
+
+Native disabled Fieldsets govern descendant focus/submission and :disabled styling. A private context suppresses unavailable error presentation in library descendants, including TextInput. Custom controls remain responsible for their own presentation.
+
+See [form comparison and validation](validation/react-forms-parity.md) for source blobs, Figma repairs, automated results and the remaining manual release evidence.

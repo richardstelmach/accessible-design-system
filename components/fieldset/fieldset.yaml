@@ -1259,3 +1259,15 @@ acceptanceCriteria:
   - Fieldset uses form.group.gap.headerToContent between Group header and Content slot.
   - No raw visual values are used.
   - The YAML agrees with existing shared form patterns.
+
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  exports: [Fieldset]
+  refTarget: HTMLFieldSetElement
+  validationEvidence: ../../docs/validation/react-forms-parity.md
+  rules:
+    - "Native legend remains first direct child; helper/error/consumer controls follow without a header wrapper."
+    - "legendStyle defaults to default; headingLevel defaults to none, with h1 through h6 supported independently."
+    - "Group error describes only the Fieldset; children mode requires error.id and explicit binding by the consuming composite."
+    - "Disabled Fieldset uses native descendant disabling; optional/mixed wording is authored in the legend; no focus or aria-invalid."

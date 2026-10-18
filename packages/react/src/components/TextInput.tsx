@@ -2,6 +2,7 @@
 import { forwardRef, useId } from 'react';
 import type { TextInputProps } from '../types.js';
 import { classes,describedBy,text,oneOf } from '../internal/validation.js';
+import { useUnavailable } from '../internal/forms.js';
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInput({label,name,id,helperText,error,errorDescribedBy,requirement='required',optionalLabel='(optional)',width='full',type='text',className,'aria-describedby':externalDescription,'aria-invalid':externalInvalid,...props},ref) {
  const generatedId=useId(); const controlId=id ?? `owla11y-${generatedId}`;
  for (const key of ['placeholder','aria-label','aria-labelledby']) if (key in props) throw new Error(`OwlA11y: TextInput does not support ${key}; use its visible label and helper text.`);
@@ -16,7 +17,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
  const helperId=helperText?.trim() ? `${controlId}-helper` : undefined;
  const errorId=error ? error.id ?? `${controlId}-error` : undefined;
  if(errorId) text(errorId,'TextInput error id');
- const inactive=props.disabled || props.readOnly;
+ const inactive=useUnavailable(props.disabled, props.readOnly);
  const invalid=inactive ? undefined : error || errorDescribedBy ? true : externalInvalid;
  return <div className={classes('owla11y-field',className)}>
   <label className="owla11y-label" htmlFor={controlId}>{label}{requirement==='optional' && <>{' '}<span className="owla11y-optional">{optionalLabel}</span></>}</label>
