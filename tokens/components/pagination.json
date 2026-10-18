@@ -1,0 +1,178 @@
+{
+  "component": {
+    "pagination": {
+      "spacing": {
+        "itemGap": {
+          "$type": "spacing",
+          "$value": "{spacing.inline.sm}",
+          "$description": "Gap between page targets.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-pagination-spacing-item-gap)"
+            }
+          }
+        },
+        "groupGap": {
+          "$type": "spacing",
+          "$value": "{spacing.inline.md}",
+          "$description": "Gap between directional links and the page window.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-pagination-spacing-group-gap)"
+            }
+          }
+        },
+        "rowGap": {
+          "$type": "spacing",
+          "$value": "{spacing.stack.sm}",
+          "$description": "Gap between compact rows and optional auxiliary content.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-pagination-spacing-row-gap)"
+            }
+          }
+        },
+        "paddingBlock": {
+          "$type": "spacing",
+          "$value": "{spacing.1}",
+          "$description": "Block padding inside page targets.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-pagination-spacing-padding-block)"
+            }
+          }
+        },
+        "paddingInline": {
+          "$type": "spacing",
+          "$value": "{spacing.2}",
+          "$description": "Inline padding inside page targets.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-pagination-spacing-padding-inline)"
+            }
+          }
+        },
+        "focusInset": {
+          "$type": "spacing",
+          "$value": "{spacing.1}",
+          "$description": "Clearance for the shared two-part focus outline.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-pagination-spacing-focus-inset)"
+            }
+          }
+        }
+      },
+      "current": {
+        "default": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.background}",
+            "$description": "Background colour for the current-page link in its default interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-default-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.foreground}",
+            "$description": "Foreground colour for the current-page link in its default interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-default-foreground)"
+              }
+            }
+          }
+        },
+        "hover": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.hover.background}",
+            "$description": "Background colour for the current-page link in its hover interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-hover-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.hover.foreground}",
+            "$description": "Foreground colour for the current-page link in its hover interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-hover-foreground)"
+              }
+            }
+          }
+        },
+        "active": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.active.background}",
+            "$description": "Background colour for the current-page link in its active interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-active-background)"
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{color.interactive.selected.active.foreground}",
+            "$description": "Foreground colour for the current-page link in its active interaction state; current-page identity persists in all states.",
+            "$extensions": {
+              "com.figma.scopes": [
+                "TEXT_FILL",
+                "SHAPE_FILL"
+              ],
+              "com.figma.codeSyntax": {
+                "Web": "var(--component-pagination-current-active-foreground)"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

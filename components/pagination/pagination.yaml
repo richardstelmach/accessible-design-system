@@ -1,0 +1,266 @@
+component: Pagination
+id: pagination
+version: 0.1.0
+status: draft
+
+phase:
+  current: source-ready-for-review
+  implementation: not-started
+  figma: built-and-audited
+  releaseReady: false
+
+description: Named navigation between addressable pages of a known, finite result set.
+
+relatedDocumentation:
+  - components/pagination/pagination.md
+  - components/pagination/research.md
+  - components/link/link.yaml
+  - components/button/button.yaml
+  - components/text-input/text-input.yaml
+  - patterns/component-documentation-page.yaml
+  - tokens/figma/sync-contract.yaml
+
+scope:
+  includes:
+    - Known-total numbered navigation and a compact presentation
+    - Constant-size page window for arbitrarily large supported totals
+    - Optional explicit page-jump form composed from Text Input and Button
+    - Native navigation and requirements for progressively enhanced navigation
+  excludes:
+    - Unknown totals, cursor-only APIs and estimated last-page links
+    - Load more, infinite scrolling, carousels, tabs and process steppers
+    - Page-size selector, filtering controls and result rendering
+    - Framework adapters and production JavaScript in this contract/Figma phase
+
+decisions:
+  explicitUserRequirement: Native navigation landmark with aria-label; consider very large page counts.
+  proposedDefaults:
+    numberedWindow: At most seven number-or-ellipsis positions, plus Previous and Next.
+    compact: Page X of Y summary, Previous/Next, and explicit First/Last links.
+    pageJump: Optional and off by default; only enable for known-page retrieval tasks.
+    current: Real current-page link with aria-current=page in numbered mode.
+    totals: Known exact totals only in version one.
+  evidence: Baymard ecommerce guidance; USWDS seven-position rule; W3C landmarks; system-specific compact and jump design.
+
+publicApi:
+  status: framework-neutral-contract
+  label: {type: plain-text, default: Pagination, localisable: true, required: true}
+  currentPage: {type: positive-safe-integer, required: true}
+  totalPages: {type: non-negative-safe-integer, required: true}
+  pageHref: Function returning a real navigation URL for a requested page, preserving query/filter/sort state.
+  presentation: {values: [auto, numbered, compact], default: auto}
+  pageJump: {type: boolean, default: false}
+  labels: Localisable Previous, Next, First, Last, Page N, Page X of Y, Go to page, Go and validation messages.
+  validation:
+    - Reject negative, fractional, non-finite and unsafe integer values; never silently round a page number.
+    - For a nonempty set currentPage must be between one and totalPages inclusive.
+    - For zero pages use currentPage=1 as an internal empty-state sentinel and render no navigation.
+    - Render no pagination landmark when totalPages is zero or one.
+    - Do not infer or invent totalPages from currently loaded items or an estimate.
+    - Do not accept an array containing one item per page; derive the bounded window.
+
+semantics:
+  root: Native nav with a non-empty localised aria-label, default Pagination.
+  contextLabel: Prefer Search results pagination or Orders pagination when several result sets share a page.
+  repeatedCopies: Identical top/bottom navigation for the same result set uses the same label; different sets use different labels.
+  pageList: ul containing li elements for page links and noninteractive omissions.
+  links: Native a elements with real href values; preserve modifier clicks, context menus, browser history and new tabs.
+  pageLinkName: Page N; include the visible number in the accessible name.
+  currentNumbered: Exactly one current-page link per numbered list has aria-current=page.
+  currentCompact: Summary span with aria-current=page reads Page X of Y; the hidden numbered list is absent from accessibility and tab order.
+  directions: Visible Previous, Next, First and Last text; names may expand to Previous page and Next page.
+  unavailable: Omit Previous/First on page one and Next/Last on the final page; do not expose inert anchors.
+  ellipsis: Noninteractive li with a visually hidden Pages omitted explanation and an aria-hidden ellipsis glyph; no href, button or tabindex.
+  noWidgetRoles: Do not use tablist, menu, toolbar, aria-selected or roving tabindex.
+
+numberWindow:
+  capacity: Seven positions including omission markers; directional links are separate.
+  algorithm:
+    - If totalPages <= 7, show every page.
+    - Otherwise, if currentPage <= 4, show pages 1 through 5, an ellipsis, and totalPages.
+    - Otherwise, if currentPage >= totalPages - 3, show page 1, an ellipsis, and the final five pages.
+    - Otherwise show 1, ellipsis, currentPage-1, currentPage, currentPage+1, ellipsis, totalPages.
+  invariants:
+    - Sorted unique in-range page numbers; current page and both endpoints always present.
+    - At most seven number-or-ellipsis positions and never adjacent ellipses.
+    - Every ellipsis represents at least two omitted pages.
+    - Time and memory bounded independently of totalPages; never create a totalPages-sized array.
+    - Show complete localised integers without abbreviations such as 10k or 1M.
+  examples:
+    - {currentPage: 1, totalPages: 10000, sequence: '1 2 3 4 5 ... 10000'}
+    - {currentPage: 500, totalPages: 10000, sequence: '1 ... 499 500 501 ... 10000'}
+    - {currentPage: 10000, totalPages: 10000, sequence: '1 ... 9996 9997 9998 9999 10000'}
+
+layout:
+  numbered: Previous at inline start, Next at inline end, and the page-number group centred in the flexible space between them; preserve logical order, spacing and targets.
+  numberedAlignment: Pages fills the remaining row width and centres its contents, including each wrapped line. Centre within the available page-list region, not via absolute positioning; omitted directions release their space.
+  compact: Summary above Previous/Next; First/Last in a separate row to retain endpoint access.
+  selection: Available container width, actual translated label widths and digit lengths; no fixed page-count or device breakpoint.
+  fit: Prefer numbered when the complete bounded row fits; otherwise use compact. Explicit numbered requests may wrap as an accessible fallback.
+  resizing: Never remove the focused page link because the layout changes; defer its removal until focus leaves or keep the numbered presentation until blur.
+  reflow:
+    - No horizontal scrolling, clipping, truncated labels, tiny targets or horizontal swipe requirement.
+    - Compact rows wrap or stack; summary wraps at spaces and, for an unusually long numeric string, within that string as a final fallback.
+    - Links grow for larger digits, translations and enlarged text; the target is a minimum, not a fixed square.
+    - Optional page-jump form stacks below navigation and remains within the available width.
+  rtl: Logical CSS properties, native document direction and isolated formatted numbers; never reverse numerical order manually.
+  typography: Inherit semantic typography and Breakpoint modes; no breakpoint variant axis.
+  noJavaScript: Real links and a wrapping numbered list remain usable; a page-jump form uses native GET navigation where supported.
+
+pageJump:
+  default: Absent; do not add solely because a numerical total exceeds an arbitrary threshold.
+  purpose: Reach a known page directly, particularly in archives and operational data.
+  composition: Existing Text Input with visible Go to page label plus existing submit Button labelled Go.
+  control: Native input type=text with inputmode=numeric, no placeholder and no spinbutton.
+  width: component.textInput.width.20ch plus control padding, constrained by available width and form.layout.column.maxWidth.
+  help: Enter a page from 1 to N, associated using aria-describedby.
+  submit: Explicit Go activation or Enter; never navigate on typing, selection or blur.
+  parsing: Validate the whole trimmed value as a positive integer; reject partial numbers, decimals, signs and exponents. Support localised digits deliberately if offered.
+  error: Show Enter a page number from 1 to N; associate inline error, set aria-invalid=true, and focus the field when submission fails.
+  unchangedPage: Valid submission of the current page is a no-op with a polite Already on page N message and unchanged focus.
+  navigation: Use the same URL builder as the links and preserve filters/sorting; native GET integration includes their parameters.
+  requirement: When this optional feature is enabled its field is required on submission; the field label does not say optional.
+
+keyboardAndFocus:
+  tab: Native links and, when enabled, input and submit button in DOM order.
+  enter: Follow links or submit the page-jump form.
+  space: Retain native link scrolling; activate the submit button when focused.
+  arrows: No custom pagination shortcuts or arrow-key navigation.
+  focus: Independent of hover/pressed state; full two-part ring visible with no layout shift.
+  pointer: Navigate on activation; never on focus, pointerdown or cancelled touch gestures.
+
+navigationIntegration:
+  native: Navigate to addressable pages; document title includes current page and total where available.
+  enhanced:
+    - Keep href fallback, URL/history, filters and sorting coherent with the displayed result page.
+    - Keep current page and results unchanged while fetching; mark the results region aria-busy and provide concise loading feedback.
+    - Commit the new page, title and history only after successful loading; ignore stale out-of-order responses.
+    - On deliberate successful page change, focus the results heading with temporary tabindex=-1 and reveal it without obscuring it under sticky content.
+    - Heading identifies the new page/result context; avoid a duplicate live announcement when that focused heading already communicates completion.
+    - On failure retain the displayed page and pagination; announce an associated error and preserve the initiating control for retry.
+    - Browser Back/Forward restores previous page, filters, sorting and scroll position; do not force the deliberate-navigation focus policy onto history restoration.
+  filtering: Consumer resets to page one after changing filter or sort across the full dataset; do not leave a stale invalid page.
+  totalChanges: Consumer resolves a removed page to a valid page with appropriate feedback; never silently show a different page under the old current indicator.
+
+visuals:
+  typography: typography.body.default
+  links: Non-current links retain underline in every state; color.link.default.foreground, color.link.hover.foreground and color.link.active.foreground.
+  current:
+    default: {background: component.pagination.current.default.background, foreground: component.pagination.current.default.foreground}
+    hover: {background: component.pagination.current.hover.background, foreground: component.pagination.current.hover.foreground}
+    pressed: {background: component.pagination.current.active.background, foreground: component.pagination.current.active.foreground}
+    source: color.interactive.selected filled semantic family, through component aliases.
+    rules:
+      - Current remains a real link with aria-current=page, filled treatment and strong body typography in every interaction state.
+      - Active means transient press; it does not mean current page. Hover and pressed feedback apply to the current link too.
+      - Focus overlays every interaction state independently; current identity never disappears on focus or press.
+  currentForcedColors: Retain a visible border and current semantics so selected state does not depend on background colour alone.
+  target: At least size.target.comfortable in both axes (44px at reference root size); grow with content.
+  focus: Shared two-part ring using color.interactive.focus.ring, color.interactive.focus.separator and border.width.medium; independent boolean in Figma.
+  radius: radius.sm for current indicator and focus geometry.
+  spacing:
+    itemGap: component.pagination.spacing.itemGap
+    groupGap: component.pagination.spacing.groupGap
+    rowGap: component.pagination.spacing.rowGap
+    paddingBlock: component.pagination.spacing.paddingBlock
+    paddingInline: component.pagination.spacing.paddingInline
+    focusInset: component.pagination.spacing.focusInset
+
+figma:
+  fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  pageName: 24 - Components - Pagination
+  status: built-and-audited
+  pageId: '1209:6'
+  auditDate: '2026-10-11'
+  inventory:
+    Pagination:
+      componentSetId: '1209:105'
+      variants: {Layout: [Numbered, Compact]}
+      slots: [Pages, Auxiliary]
+      properties: [Summary, Show previous, Show next]
+    Pagination / Link:
+      componentSetId: '1209:10'
+      variants: {State: [Default, Hover, Pressed]}
+      properties: [Label, Focus]
+    Pagination / Current:
+      componentSetId: '1215:9558'
+      defaultComponentId: '1209:20'
+      variants: {State: [Default, Hover, Pressed]}
+      properties: [Label, Focus]
+      stateMatrixId: '1215:9559'
+    Pagination / Ellipsis:
+      componentId: '1209:24'
+      description: Static omission marker, never interactive.
+    Pagination / Page jump:
+      componentId: '1209:26'
+      description: Optional composition of existing Text Input and Button, inserted in Auxiliary.
+  authoring:
+    - Populate Pages using the bounded number window; render Current exactly once.
+    - Summary, page labels, destinations and boundary visibility must describe the same state.
+    - Show previous also controls compact First; Show next also controls compact Last.
+    - Auxiliary is empty by default; insert Page jump only for a justified use case.
+    - Layout previews are manual; Figma does not calculate page windows or simulate browser navigation.
+    - Slot content and text overrides must survive Layout changes.
+  requiredAreas: [01 - Component set, 02 - Documentation examples, 03 - QA and responsive tests, 04 - Accessibility notes]
+  documentationAreas:
+    componentSet: '1209:106'
+    examples: '1209:112'
+    qa: '1209:118'
+    accessibility: '1209:124'
+  linkedTextStyle:
+    name: component/pagination/link
+    styleId: 'S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,'
+    source: typography/body/default
+    recipe: Copy the semantic body font, size, line-height, spacing and variable bindings; set UNDERLINE.
+    managedBy: Canonical recipe here, not a Tokens Studio typography token; audit after export.
+  pageJumpWidth:
+    semantic: component.textInput.width.20ch plus control padding, constrained by available width.
+    figma: 232px reference field width from measured 20-zero text plus 32px padding; adapt the entire field to available width and text size. The shared input control remains Fill.
+    formColumn: form.layout.column.maxWidth
+  variables:
+    component/pagination/spacing/itemGap: 'VariableID:1208:6'
+    component/pagination/spacing/groupGap: 'VariableID:1208:7'
+    component/pagination/spacing/rowGap: 'VariableID:1208:8'
+    component/pagination/spacing/paddingBlock: 'VariableID:1208:9'
+    component/pagination/spacing/paddingInline: 'VariableID:1208:10'
+    component/pagination/spacing/focusInset: 'VariableID:1208:11'
+    component/pagination/current/default/background: 'VariableID:1215:648'
+    component/pagination/current/default/foreground: 'VariableID:1215:649'
+    component/pagination/current/hover/background: 'VariableID:1215:650'
+    component/pagination/current/hover/foreground: 'VariableID:1215:651'
+    component/pagination/current/active/background: 'VariableID:1215:652'
+    component/pagination/current/active/foreground: 'VariableID:1215:653'
+  tokenRoundTrip: pending-source-merge
+  libraryPublication: not-published
+
+validation:
+  target: WCAG 2.2 AA
+  wcag: ['1.3.1', '1.3.2', '1.4.1', '1.4.3', '1.4.4', '1.4.10', '1.4.11', '1.4.12', '2.1.1', '2.1.2', '2.4.3', '2.4.4', '2.4.6', '2.4.7', '2.4.11', '2.5.2', '2.5.3', '2.5.8', '3.2.1', '3.2.2', '3.3.1', '3.3.2', '3.3.3', '4.1.2', '4.1.3']
+  qaExamples:
+    - Few pages, first page, central page, final page and absent single/empty pagination
+    - Ten thousand pages, multi-million totals, very long formatted integers and 320px containers
+    - Numbered and compact layouts showing the same data and retained slot overrides
+    - Default, Hover and Pressed for both ordinary and current-page links, each with and without focus
+    - Optional page jump and invalid submission using existing field error states
+    - Base/md/lg modes, long translations, enlarged text and text spacing
+    - RTL and forced-colour browser acceptance documented without claiming a Figma simulation
+  implementationAcceptance:
+    - Labelled landmarks, current page, link names and omission descriptions with screen readers
+    - Exhaustive page-window boundary checks and bounded execution for very large totals
+    - Native navigation, keyboard, modifiers, touch cancellation and no-JavaScript fallback
+    - Correct URL/history, Back restoration, loading failures and race handling
+    - Stable focus during responsive changes and correct result focus after deliberate navigation
+    - Jump validation, Enter submission, parameter preservation and same-page feedback
+    - 320px/400-percent reflow, 200-percent text, all text-spacing overrides and long translations
+    - RTL, forced colours and unobscured focus
+  status: Contract and Figma evidence do not establish production browser or assistive-technology conformance.
+  evidence:
+    tokenBuild: 401 raw tokens; 329 Tokens Studio tokens; 24 mapped responsive groups; zero unmapped groups and broken retained aliases.
+    metadata: Six spacing aliases plus nine selected semantic colours, six current component aliases and three existing form aliases match source; 18 selection-related variables audited for alias, scope and Web syntax; Breakpoint modes intact.
+    inventory: Ten masters and 18 existing root examples; Current variants have 52 by 44px targets; six current state/focus combinations audited.
+    typography: 343 text layers use shared styles; 20 intentional overrides are confined to the two labelled text-stress examples.
+    geometry: Zero visible overflow; numbered fallback also wraps at 288px content width.
+    preservation: Both root slots retain content and text styles across layouts; Link and Current states preserve Label and Focus; 20 existing current-page labels survived the Current conversion.
+    pageWindow: 125301 multi-page cases including safe-integer boundaries, plus nine invalid-input rejection cases passed in the contract checker.
+    contrast: Body 7.00 to 1; links and current text 4.52, 7.00 and 10.87 to 1 across default, hover and pressed; focus ring against separator 4.52 to 1.
+    visual: Existing masters, documentation, accessibility and responsive/stress examples reviewed; selection revision adds a reviewed six-state Current matrix.
