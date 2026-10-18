@@ -144,4 +144,4 @@ The structural audit passed eight Toast masters, three close-control masters, 19
 
 Status text contrast ranges from 7.43:1 to 7.52:1. Close-icon contrast ranges from 7.01:1 at rest to 3.42:1 when pressed; the shared focus ring has 4.52:1 contrast against its separator. Token compilation and an unchanged repeat build pass. No unrelated token values changed.
 
-GitHub merge and the Tokens Studio round-trip remain pending. This record covers source and design checks, not production runtime accessibility.
+Source merged in PR #36. Richard completed the Tokens Studio pull/export on 18 October 2026 and reported no new variables. The post-export audit confirmed all six existing variable IDs, aliases, scopes, descriptions and Web references match the merged source. All eight Toast and three close-control masters remain intact, with no broken bindings, duplicate Toast variable names or visible overflow. This is a successful unchanged round-trip. Browser implementation and assistive-technology testing remain separate release gates.
