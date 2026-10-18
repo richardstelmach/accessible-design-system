@@ -1,0 +1,1072 @@
+{
+  "date": "2026-10-18",
+  "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
+  "receipts": {
+    "figma-repair-link": {
+      "mutatedNodeIds": [
+        "192:13",
+        "192:18",
+        "192:23",
+        "192:28",
+        "I193:45;192:13",
+        "I193:53;192:18",
+        "I193:65;192:23",
+        "I193:77;192:28",
+        "I193:89;192:13",
+        "I194:74;192:13",
+        "I194:82;192:18",
+        "I194:94;192:23",
+        "I194:106;192:28",
+        "I194:118;192:13",
+        "I194:126;192:13"
+      ],
+      "mutatedStyleIds": [
+        "S:74044515f79cad609a5b676cf7c7601c0c297d9c,"
+      ],
+      "count": 15,
+      "styleFont": {
+        "family": "Inter",
+        "style": "Regular",
+        "variationSettings": {
+          "wght": 400,
+          "slnt": 0
+        }
+      },
+      "masterWeights": [
+        {
+          "id": "192:13",
+          "font": {
+            "family": "Inter",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400,
+              "slnt": 0
+            }
+          },
+          "weight": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:116"
+            }
+          ]
+        },
+        {
+          "id": "192:18",
+          "font": {
+            "family": "Inter",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400,
+              "slnt": 0
+            }
+          },
+          "weight": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:116"
+            }
+          ]
+        },
+        {
+          "id": "192:23",
+          "font": {
+            "family": "Inter",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400,
+              "slnt": 0
+            }
+          },
+          "weight": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:116"
+            }
+          ]
+        },
+        {
+          "id": "192:28",
+          "font": {
+            "family": "Inter",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400,
+              "slnt": 0
+            }
+          },
+          "weight": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:116"
+            }
+          ]
+        }
+      ]
+    },
+    "figma-repair-link-style-restored": {
+      "mutatedNodeIds": [
+        "192:13",
+        "192:18",
+        "192:23",
+        "192:28",
+        "I193:45;192:13",
+        "I193:53;192:18",
+        "I193:65;192:23",
+        "I193:77;192:28",
+        "I193:89;192:13",
+        "I194:74;192:13",
+        "I194:82;192:18",
+        "I194:94;192:23",
+        "I194:106;192:28",
+        "I194:118;192:13",
+        "I194:126;192:13"
+      ],
+      "mutatedStyleIds": [
+        "S:74044515f79cad609a5b676cf7c7601c0c297d9c,"
+      ],
+      "texts": [
+        {
+          "id": "192:13"
+        },
+        {
+          "id": "192:18"
+        },
+        {
+          "id": "192:23"
+        },
+        {
+          "id": "192:28"
+        },
+        {
+          "id": "I193:45;192:13"
+        },
+        {
+          "id": "I193:53;192:18"
+        },
+        {
+          "id": "I193:65;192:23"
+        },
+        {
+          "id": "I193:77;192:28"
+        },
+        {
+          "id": "I193:89;192:13"
+        },
+        {
+          "id": "I194:74;192:13"
+        },
+        {
+          "id": "I194:82;192:18"
+        },
+        {
+          "id": "I194:94;192:23"
+        },
+        {
+          "id": "I194:106;192:28"
+        },
+        {
+          "id": "I194:118;192:13"
+        },
+        {
+          "id": "I194:126;192:13"
+        }
+      ],
+      "styleWeight": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:8:116"
+      }
+    },
+    "figma-repair-link-final": {
+      "createdNodeIds": [
+        "1260:10574"
+      ],
+      "removedNodeIds": [
+        "1260:10574"
+      ],
+      "styleId": "S:74044515f79cad609a5b676cf7c7601c0c297d9c,",
+      "linkedConsumerCount": 15,
+      "weightFailures": [],
+      "modes": [
+        {
+          "mode": "base",
+          "height": 32,
+          "size": 16,
+          "font": {
+            "family": "Inter",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400,
+              "slnt": 0
+            }
+          }
+        },
+        {
+          "mode": "md",
+          "height": 32,
+          "size": 16,
+          "font": {
+            "family": "Inter",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400,
+              "slnt": 0
+            }
+          }
+        },
+        {
+          "mode": "lg",
+          "height": 35,
+          "size": 18,
+          "font": {
+            "family": "Inter",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400,
+              "slnt": 0
+            }
+          }
+        }
+      ],
+      "styleBindings": {
+        "letterSpacing": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:8:134"
+        },
+        "fontSize": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:305:6961"
+        },
+        "fontFamily": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:240:98"
+        },
+        "fontWeight": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:8:116"
+        }
+      }
+    },
+    "figma-repair-button": {
+      "mutatedNodeIds": [
+        "95:691",
+        "95:692",
+        "95:693",
+        "95:696",
+        "I95:694;61:680",
+        "95:697",
+        "95:698",
+        "I95:699;61:595",
+        "95:741",
+        "95:742",
+        "95:743",
+        "95:746",
+        "I95:744;61:680",
+        "95:747",
+        "95:748",
+        "I95:749;61:595",
+        "95:791",
+        "95:792",
+        "95:793",
+        "95:796",
+        "I95:794;61:680",
+        "95:797",
+        "95:798",
+        "I95:799;61:595"
+      ],
+      "variantCount": 9,
+      "variants": [
+        {
+          "id": "95:691",
+          "w": 111,
+          "h": 44,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        },
+        {
+          "id": "95:693",
+          "w": 139,
+          "h": 44,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        },
+        {
+          "id": "95:697",
+          "w": 139,
+          "h": 44,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        },
+        {
+          "id": "95:741",
+          "w": 130,
+          "h": 51,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        },
+        {
+          "id": "95:743",
+          "w": 158,
+          "h": 51,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        },
+        {
+          "id": "95:747",
+          "w": 158,
+          "h": 51,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        },
+        {
+          "id": "95:791",
+          "w": 146,
+          "h": 59,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        },
+        {
+          "id": "95:793",
+          "w": 174,
+          "h": 59,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        },
+        {
+          "id": "95:797",
+          "w": 174,
+          "h": 59,
+          "fill": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1515"
+            }
+          ],
+          "stroke": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1517"
+            }
+          ]
+        }
+      ]
+    },
+    "figma-repair-button-paints": {
+      "mutatedNodeIds": [
+        "95:691",
+        "95:692",
+        "95:693",
+        "95:696",
+        "I95:694;61:680",
+        "95:697",
+        "95:698",
+        "I95:699;61:595",
+        "95:741",
+        "95:742",
+        "95:743",
+        "95:746",
+        "I95:744;61:680",
+        "95:747",
+        "95:748",
+        "I95:749;61:595",
+        "95:791",
+        "95:792",
+        "95:793",
+        "95:796",
+        "I95:794;61:680",
+        "95:797",
+        "95:798",
+        "I95:799;61:595"
+      ],
+      "variantCount": 9,
+      "foreground": {
+        "r": 0.4627451002597809,
+        "g": 0.4627451002597809,
+        "b": 0.4627451002597809,
+        "a": 1
+      }
+    },
+    "figma-repair-button-final-audit": {
+      "count": 9,
+      "variants": [
+        {
+          "id": "95:691",
+          "name": "Variant=text, Size=compact, State=disabled, Icon=none",
+          "width": 111,
+          "height": 44,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        },
+        {
+          "id": "95:693",
+          "name": "Variant=text, Size=compact, State=disabled, Icon=leading",
+          "width": 139,
+          "height": 44,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        },
+        {
+          "id": "95:697",
+          "name": "Variant=text, Size=compact, State=disabled, Icon=trailing",
+          "width": 139,
+          "height": 44,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        },
+        {
+          "id": "95:741",
+          "name": "Variant=text, Size=default, State=disabled, Icon=none",
+          "width": 130,
+          "height": 51,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        },
+        {
+          "id": "95:743",
+          "name": "Variant=text, Size=default, State=disabled, Icon=leading",
+          "width": 158,
+          "height": 51,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        },
+        {
+          "id": "95:747",
+          "name": "Variant=text, Size=default, State=disabled, Icon=trailing",
+          "width": 158,
+          "height": 51,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        },
+        {
+          "id": "95:791",
+          "name": "Variant=text, Size=comfortable, State=disabled, Icon=none",
+          "width": 146,
+          "height": 59,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        },
+        {
+          "id": "95:793",
+          "name": "Variant=text, Size=comfortable, State=disabled, Icon=leading",
+          "width": 174,
+          "height": 59,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        },
+        {
+          "id": "95:797",
+          "name": "Variant=text, Size=comfortable, State=disabled, Icon=trailing",
+          "width": 174,
+          "height": 59,
+          "stroke": 1,
+          "fill": [
+            "color/interactive/disabled/background"
+          ],
+          "border": [
+            "color/interactive/disabled/border"
+          ]
+        }
+      ],
+      "totalButtonComponentNodes": 225
+    },
+    "figma-repair-input": {
+      "createdNodeIds": [
+        "1260:9354",
+        "1260:9355",
+        "1260:9356",
+        "1260:9357",
+        "1260:9358",
+        "1260:9359",
+        "1260:9360",
+        "1260:9361",
+        "1260:9362",
+        "1260:9363",
+        "1260:9364",
+        "1260:9365"
+      ],
+      "mutatedNodeIds": [
+        "283:638",
+        "283:641",
+        "283:642",
+        "283:637",
+        "1260:9354",
+        "283:643",
+        "283:644",
+        "283:648",
+        "283:651",
+        "283:652",
+        "283:647",
+        "1260:9355",
+        "283:653",
+        "283:654",
+        "283:658",
+        "283:661",
+        "283:662",
+        "283:657",
+        "1260:9356",
+        "283:663",
+        "283:664",
+        "283:668",
+        "283:671",
+        "283:672",
+        "283:667",
+        "1260:9357",
+        "283:673",
+        "283:674",
+        "283:678",
+        "283:681",
+        "283:682",
+        "283:677",
+        "1260:9358",
+        "283:683",
+        "283:684",
+        "283:688",
+        "283:691",
+        "283:692",
+        "283:687",
+        "1260:9359",
+        "283:693",
+        "283:694",
+        "283:698",
+        "283:701",
+        "283:702",
+        "283:697",
+        "1260:9360",
+        "283:703",
+        "283:704",
+        "283:708",
+        "283:711",
+        "283:712",
+        "283:707",
+        "1260:9361",
+        "283:713",
+        "283:714",
+        "283:718",
+        "283:721",
+        "283:722",
+        "283:717",
+        "1260:9362",
+        "283:723",
+        "283:724",
+        "283:728",
+        "283:731",
+        "283:732",
+        "283:727",
+        "1260:9363",
+        "283:733",
+        "283:734",
+        "283:738",
+        "283:741",
+        "283:742",
+        "283:737",
+        "1260:9364",
+        "283:743",
+        "283:744",
+        "283:748",
+        "283:751",
+        "283:752",
+        "283:747",
+        "1260:9365",
+        "283:753",
+        "283:754"
+      ],
+      "masters": [
+        {
+          "id": "283:637",
+          "state": "default",
+          "control": "283:643",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 4
+        },
+        {
+          "id": "283:647",
+          "state": "default",
+          "control": "283:653",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 4
+        },
+        {
+          "id": "283:657",
+          "state": "focus",
+          "control": "283:663",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 4
+        },
+        {
+          "id": "283:667",
+          "state": "focus",
+          "control": "283:673",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 4
+        },
+        {
+          "id": "283:677",
+          "state": "error",
+          "control": "283:683",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 8
+        },
+        {
+          "id": "283:687",
+          "state": "error",
+          "control": "283:693",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 8
+        },
+        {
+          "id": "283:697",
+          "state": "errorFocus",
+          "control": "283:703",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 8
+        },
+        {
+          "id": "283:707",
+          "state": "errorFocus",
+          "control": "283:713",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 8
+        },
+        {
+          "id": "283:717",
+          "state": "disabled",
+          "control": "283:723",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 4
+        },
+        {
+          "id": "283:727",
+          "state": "disabled",
+          "control": "283:733",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 4
+        },
+        {
+          "id": "283:737",
+          "state": "readonly",
+          "control": "283:743",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 4
+        },
+        {
+          "id": "283:747",
+          "state": "readonly",
+          "control": "283:753",
+          "height": 53,
+          "minHeight": 44,
+          "valueHeight": 27,
+          "gap": 4
+        }
+      ],
+      "instanceOverrideCheck": {
+        "total": 26,
+        "preserved": 26
+      },
+      "componentProperties": [
+        "Label text#283:0",
+        "Helper text#283:13",
+        "Helper text content#283:26",
+        "Error text#283:39",
+        "Value text#283:52",
+        "State",
+        "Requirement"
+      ]
+    },
+    "figma-repair-input-singleline": {
+      "createdNodeIds": [
+        "1260:10253",
+        "1260:10254",
+        "1260:10255",
+        "1260:10256",
+        "1260:10257",
+        "1260:10258",
+        "1260:10259",
+        "1260:10260",
+        "1260:10261",
+        "1260:10262",
+        "1260:10263",
+        "1260:10264"
+      ],
+      "mutatedNodeIds": [
+        "283:643",
+        "1260:10253",
+        "283:644",
+        "283:653",
+        "1260:10254",
+        "283:654",
+        "283:663",
+        "1260:10255",
+        "283:664",
+        "283:673",
+        "1260:10256",
+        "283:674",
+        "283:683",
+        "1260:10257",
+        "283:684",
+        "283:693",
+        "1260:10258",
+        "283:694",
+        "283:703",
+        "1260:10259",
+        "283:704",
+        "283:713",
+        "1260:10260",
+        "283:714",
+        "283:723",
+        "1260:10261",
+        "283:724",
+        "283:733",
+        "1260:10262",
+        "283:734",
+        "283:743",
+        "1260:10263",
+        "283:744",
+        "283:753",
+        "1260:10264",
+        "283:754",
+        "283:1205",
+        "I283:1205;283:643",
+        "283:1217",
+        "I283:1217;283:643",
+        "283:1229",
+        "I283:1229;283:643",
+        "283:1241",
+        "I283:1241;283:643",
+        "283:1253",
+        "I283:1253;283:643",
+        "283:1265",
+        "I283:1265;283:643"
+      ],
+      "changedProperties": [],
+      "shortExamples": [
+        {
+          "id": "283:1205",
+          "fieldWidth": 250,
+          "controlWidth": 640,
+          "controlHeight": 53
+        },
+        {
+          "id": "283:1217",
+          "fieldWidth": 250,
+          "controlWidth": 640,
+          "controlHeight": 53
+        },
+        {
+          "id": "283:1229",
+          "fieldWidth": 250,
+          "controlWidth": 640,
+          "controlHeight": 53
+        },
+        {
+          "id": "283:1241",
+          "fieldWidth": 250,
+          "controlWidth": 640,
+          "controlHeight": 53
+        },
+        {
+          "id": "283:1253",
+          "fieldWidth": 250,
+          "controlWidth": 640,
+          "controlHeight": 53
+        },
+        {
+          "id": "283:1265",
+          "fieldWidth": 250,
+          "controlWidth": 640,
+          "controlHeight": 53
+        }
+      ],
+      "masters": [
+        {
+          "id": "283:637",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:647",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:657",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:667",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:677",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:687",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:697",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:707",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:717",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:727",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:737",
+          "controlHeight": 53
+        },
+        {
+          "id": "283:747",
+          "controlHeight": 53
+        }
+      ]
+    },
+    "figma-repair-input-width-final": {
+      "mutatedNodeIds": [
+        "283:1205",
+        "283:1217",
+        "283:1229",
+        "283:1241",
+        "283:1253",
+        "283:1265"
+      ],
+      "examples": [
+        {
+          "id": "283:1205",
+          "label": "Day",
+          "fieldWidth": 58,
+          "controlWidth": 58,
+          "height": 53,
+          "sizing": "FILL"
+        },
+        {
+          "id": "283:1217",
+          "label": "Code",
+          "fieldWidth": 70,
+          "controlWidth": 70,
+          "height": 53,
+          "sizing": "FILL"
+        },
+        {
+          "id": "283:1229",
+          "label": "Year",
+          "fieldWidth": 82,
+          "controlWidth": 82,
+          "height": 53,
+          "sizing": "FILL"
+        },
+        {
+          "id": "283:1241",
+          "label": "Code",
+          "fieldWidth": 94,
+          "controlWidth": 94,
+          "height": 53,
+          "sizing": "FILL"
+        },
+        {
+          "id": "283:1253",
+          "label": "Postcode",
+          "fieldWidth": 154,
+          "controlWidth": 154,
+          "height": 53,
+          "sizing": "FILL"
+        },
+        {
+          "id": "283:1265",
+          "label": "Phone number",
+          "fieldWidth": 250,
+          "controlWidth": 250,
+          "height": 53,
+          "sizing": "FILL"
+        }
+      ]
+    },
+    "figma-repair-input-final-audit": {
+      "createdNodeIds": [
+        "1260:10558"
+      ],
+      "removedNodeIds": [
+        "1260:10558"
+      ],
+      "instanceCount": 26,
+      "problems": [],
+      "modes": [
+        {
+          "mode": "base",
+          "height": 50,
+          "minHeight": 44,
+          "gap": 8
+        },
+        {
+          "mode": "md",
+          "height": 50,
+          "minHeight": 44,
+          "gap": 8
+        },
+        {
+          "mode": "lg",
+          "height": 53,
+          "minHeight": 44,
+          "gap": 8
+        }
+      ],
+      "masterCount": 12,
+      "properties": [
+        "Label text#283:0",
+        "Helper text#283:13",
+        "Helper text content#283:26",
+        "Error text#283:39",
+        "Value text#283:52",
+        "State",
+        "Requirement"
+      ]
+    }
+  }
+}

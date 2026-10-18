@@ -1104,3 +1104,34 @@ aiGenerationRules:
   - Use documented semantic tokens rather than raw values.
   - Report missing token needs rather than inventing raw values.
   - Do not invent new Text Input variants outside this specification.
+
+figmaReconciliation:
+  date: '2026-10-18'
+  componentSetId: '283:757'
+  header:
+    name: _Text Input/Header
+    type: internal-auto-layout-frame
+    contentOrder: [Label row, Helper text, Error text]
+    gap: form.field.gap.helperToError
+    height: hug-content
+  headerToControl:
+    default: form.field.gap.labelToHelper
+    error: form.field.gap.errorToControl
+    errorFocus: form.field.gap.errorToControl
+  control:
+    minimumHeight: size.control.minBlockSize.default
+    height: hug-content
+    fixedHeightBinding: prohibited
+    strokesIncludedInLayout: true
+    padding: existing-form-control-tokens
+    valueViewport:
+      name: Value viewport
+      width: fill
+      height: hug-content
+      clipsContent: true
+      valueText: Single line with natural width; viewport clips overflow like a native input.
+  implementationBoundary:
+    - Header and Value viewport are internal Figma layout frames, not additional public React exports.
+    - Existing text and visibility properties stay on the public component set.
+    - Character-width documentation is illustrative; native code uses the canonical ch measure.
+  evidence: ../../docs/validation/figma-core-reconciliation.md

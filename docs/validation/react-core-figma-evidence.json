@@ -1,0 +1,1166 @@
+{
+  "date": "2026-10-18",
+  "sourceFiles": [
+    {
+      "path": "components/button/button.yaml",
+      "sha": "5ec8cb3ca89045d1641ea12ad19a2346d684e0f8"
+    },
+    {
+      "path": "components/link/link.yaml",
+      "sha": "c403ebe20c99f0fa54937466113390eef0f5802e"
+    },
+    {
+      "path": "components/text-input/text-input.yaml",
+      "sha": "ad5279424dbd5b96a07622b6b893d8941a323132"
+    }
+  ],
+  "figmaFile": "dVFI0q1cXMtmjUAkdvSWkk",
+  "button": {
+    "count": 225,
+    "samples": [
+      {
+        "root": {
+          "id": "95:201",
+          "name": "Variant=primary, Size=compact, State=default, Icon=none",
+          "w": 94,
+          "h": 44,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "gap": 8,
+          "radius": 8,
+          "stroke": 0,
+          "bindings": "{\"itemSpacing\":\"spacing/control/gap\",\"paddingLeft\":\"spacing/control/paddingInline/compact\",\"paddingTop\":\"spacing/control/paddingBlock/compact\",\"paddingRight\":\"spacing/control/paddingInline/compact\",\"paddingBottom\":\"spacing/control/paddingBlock/compact\",\"topLeftRadius\":\"radius/lg\",\"topRightRadius\":\"radius/lg\",\"bottomLeftRadius\":\"radius/lg\",\"bottomRightRadius\":\"radius/lg\",\"minHeight\":\"size/control/minBlockSize/compact\",\"fills\":[\"color/interactive/primary/background\"]}"
+        },
+        "children": [
+          {
+            "id": "95:202",
+            "name": "Label",
+            "w": 70,
+            "h": 24,
+            "text": "Continue",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"color/interactive/primary/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/button/compact/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          }
+        ],
+        "texts": [
+          {
+            "id": "95:202",
+            "name": "Label",
+            "w": 70,
+            "h": 24,
+            "text": "Continue",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"color/interactive/primary/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/button/compact/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          }
+        ]
+      },
+      {
+        "root": {
+          "id": "95:251",
+          "name": "Variant=primary, Size=default, State=default, Icon=none",
+          "w": 111,
+          "h": 51,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "gap": 8,
+          "radius": 8,
+          "stroke": 0,
+          "bindings": "{\"itemSpacing\":\"spacing/control/gap\",\"paddingLeft\":\"spacing/control/paddingInline/default\",\"paddingTop\":\"spacing/control/paddingBlock/default\",\"paddingRight\":\"spacing/control/paddingInline/default\",\"paddingBottom\":\"spacing/control/paddingBlock/default\",\"topLeftRadius\":\"radius/lg\",\"topRightRadius\":\"radius/lg\",\"bottomLeftRadius\":\"radius/lg\",\"bottomRightRadius\":\"radius/lg\",\"minHeight\":\"size/control/minBlockSize/default\",\"fills\":[\"color/interactive/primary/background\"]}"
+        },
+        "children": [
+          {
+            "id": "95:252",
+            "name": "Label",
+            "w": 79,
+            "h": 27,
+            "text": "Continue",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"color/interactive/primary/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/button/default/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          }
+        ],
+        "texts": [
+          {
+            "id": "95:252",
+            "name": "Label",
+            "w": 79,
+            "h": 27,
+            "text": "Continue",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"color/interactive/primary/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/button/default/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          }
+        ]
+      },
+      {
+        "root": {
+          "id": "95:301",
+          "name": "Variant=primary, Size=comfortable, State=default, Icon=none",
+          "w": 127,
+          "h": 59,
+          "padding": [
+            16,
+            24,
+            16,
+            24
+          ],
+          "gap": 8,
+          "radius": 8,
+          "stroke": 0,
+          "bindings": "{\"itemSpacing\":\"spacing/control/gap\",\"paddingLeft\":\"spacing/control/paddingInline/comfortable\",\"paddingTop\":\"spacing/control/paddingBlock/comfortable\",\"paddingRight\":\"spacing/control/paddingInline/comfortable\",\"paddingBottom\":\"spacing/control/paddingBlock/comfortable\",\"topLeftRadius\":\"radius/lg\",\"topRightRadius\":\"radius/lg\",\"bottomLeftRadius\":\"radius/lg\",\"bottomRightRadius\":\"radius/lg\",\"minHeight\":\"size/control/minBlockSize/comfortable\",\"fills\":[\"color/interactive/primary/background\"]}"
+        },
+        "children": [
+          {
+            "id": "95:302",
+            "name": "Label",
+            "w": 79,
+            "h": 27,
+            "text": "Continue",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"color/interactive/primary/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/button/comfortable/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          }
+        ],
+        "texts": [
+          {
+            "id": "95:302",
+            "name": "Label",
+            "w": 79,
+            "h": 27,
+            "text": "Continue",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"color/interactive/primary/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/button/comfortable/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          }
+        ]
+      },
+      {
+        "root": {
+          "id": "95:808",
+          "name": "Variant=primary, Size=compact, State=default",
+          "w": 44,
+          "h": 44,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "gap": 0,
+          "radius": 9999,
+          "stroke": 0,
+          "bindings": "{\"width\":\"size/control/minBlockSize/compact\",\"height\":\"size/control/minBlockSize/compact\",\"topLeftRadius\":\"radius/full\",\"topRightRadius\":\"radius/full\",\"bottomLeftRadius\":\"radius/full\",\"bottomRightRadius\":\"radius/full\",\"fills\":[\"color/interactive/primary/background\"]}"
+        },
+        "children": [
+          {
+            "id": "95:809",
+            "name": "Icon/plus",
+            "w": 20,
+            "h": 20,
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "gap": 0,
+            "radius": 0,
+            "stroke": 1,
+            "bindings": "{\"width\":\"size/icon/md\"}"
+          }
+        ],
+        "texts": []
+      },
+      {
+        "root": {
+          "id": "95:823",
+          "name": "Variant=primary, Size=default, State=default",
+          "w": 44,
+          "h": 44,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "gap": 0,
+          "radius": 9999,
+          "stroke": 0,
+          "bindings": "{\"width\":\"size/control/minBlockSize/default\",\"height\":\"size/control/minBlockSize/default\",\"topLeftRadius\":\"radius/full\",\"topRightRadius\":\"radius/full\",\"bottomLeftRadius\":\"radius/full\",\"bottomRightRadius\":\"radius/full\",\"fills\":[\"color/interactive/primary/background\"]}"
+        },
+        "children": [
+          {
+            "id": "95:824",
+            "name": "Icon/plus",
+            "w": 20,
+            "h": 20,
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "gap": 0,
+            "radius": 0,
+            "stroke": 1,
+            "bindings": "{\"width\":\"size/icon/md\"}"
+          }
+        ],
+        "texts": []
+      },
+      {
+        "root": {
+          "id": "95:838",
+          "name": "Variant=primary, Size=comfortable, State=default",
+          "w": 48,
+          "h": 48,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "gap": 0,
+          "radius": 9999,
+          "stroke": 0,
+          "bindings": "{\"width\":\"size/control/minBlockSize/comfortable\",\"height\":\"size/control/minBlockSize/comfortable\",\"topLeftRadius\":\"radius/full\",\"topRightRadius\":\"radius/full\",\"bottomLeftRadius\":\"radius/full\",\"bottomRightRadius\":\"radius/full\",\"fills\":[\"color/interactive/primary/background\"]}"
+        },
+        "children": [
+          {
+            "id": "95:839",
+            "name": "Icon/plus",
+            "w": 20,
+            "h": 20,
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "gap": 0,
+            "radius": 0,
+            "stroke": 1,
+            "bindings": "{\"width\":\"size/icon/md\"}"
+          }
+        ],
+        "texts": []
+      }
+    ]
+  },
+  "input": {
+    "count": 12,
+    "samples": [
+      {
+        "root": {
+          "id": "283:637",
+          "name": "State=default, Requirement=required",
+          "w": 640,
+          "h": 75,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "gap": 4,
+          "radius": 0,
+          "stroke": 1,
+          "bindings": "{\"itemSpacing\":\"form/field/gap/labelToHelper\"}"
+        },
+        "children": [
+          {
+            "id": "283:638",
+            "name": "Label row",
+            "w": 640,
+            "h": 27,
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "gap": 4,
+            "radius": 0,
+            "stroke": 1,
+            "bindings": "{\"itemSpacing\":\"spacing/inline/xs\"}"
+          },
+          {
+            "id": "283:641",
+            "name": "Helper text",
+            "w": 640,
+            "h": 24,
+            "text": "Use helper text only when it helps users answer correctly.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/helper/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/helper/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:642",
+            "name": "Error text",
+            "w": 640,
+            "h": 27,
+            "text": "Error: Enter a value in the correct format.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/error/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/error/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:643",
+            "name": "Input control",
+            "w": 640,
+            "h": 44,
+            "padding": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "radius": 4,
+            "stroke": 1,
+            "bindings": "{\"paddingLeft\":\"form/control/padding/inline\",\"paddingTop\":\"form/control/padding/block\",\"paddingRight\":\"form/control/padding/inline\",\"paddingBottom\":\"form/control/padding/block\",\"height\":\"size/control/minBlockSize/default\",\"topLeftRadius\":\"form/control/border/radius\",\"topRightRadius\":\"form/control/border/radius\",\"bottomLeftRadius\":\"form/control/border/radius\",\"bottomRightRadius\":\"form/control/border/radius\",\"strokeTopWeight\":\"form/control/border/width\",\"strokeBottomWeight\":\"form/control/border/width\",\"strokeLeftWeight\":\"form/control/border/width\",\"strokeRightWeight\":\"form/control/border/width\",\"fills\":[\"form/control/background\"],\"strokes\":[\"form/control/border/color\"]}"
+          }
+        ],
+        "texts": [
+          {
+            "id": "283:639",
+            "name": "Label text",
+            "w": 120,
+            "h": 27,
+            "text": "Email address",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/label/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/label/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          },
+          {
+            "id": "283:640",
+            "name": "Optional marker text",
+            "w": 65,
+            "h": 21,
+            "text": "(optional)",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 14,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/label/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"typography/size/sm\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          },
+          {
+            "id": "283:641",
+            "name": "Helper text",
+            "w": 640,
+            "h": 24,
+            "text": "Use helper text only when it helps users answer correctly.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/helper/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/helper/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:642",
+            "name": "Error text",
+            "w": 640,
+            "h": 27,
+            "text": "Error: Enter a value in the correct format.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/error/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/error/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:644",
+            "name": "Value text",
+            "w": 608,
+            "h": 27,
+            "text": "",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/control/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/control/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          }
+        ]
+      },
+      {
+        "root": {
+          "id": "283:677",
+          "name": "State=error, Requirement=required",
+          "w": 640,
+          "h": 106,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "gap": 4,
+          "radius": 0,
+          "stroke": 1,
+          "bindings": "{\"itemSpacing\":\"form/field/gap/labelToHelper\"}"
+        },
+        "children": [
+          {
+            "id": "283:678",
+            "name": "Label row",
+            "w": 640,
+            "h": 27,
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "gap": 4,
+            "radius": 0,
+            "stroke": 1,
+            "bindings": "{\"itemSpacing\":\"spacing/inline/xs\"}"
+          },
+          {
+            "id": "283:681",
+            "name": "Helper text",
+            "w": 640,
+            "h": 24,
+            "text": "Use helper text only when it helps users answer correctly.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/helper/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/helper/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:682",
+            "name": "Error text",
+            "w": 640,
+            "h": 27,
+            "text": "Error: Enter a value in the correct format.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/error/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/error/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:683",
+            "name": "Input control",
+            "w": 640,
+            "h": 44,
+            "padding": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "radius": 4,
+            "stroke": 1,
+            "bindings": "{\"paddingLeft\":\"form/control/padding/inline\",\"paddingTop\":\"form/control/padding/block\",\"paddingRight\":\"form/control/padding/inline\",\"paddingBottom\":\"form/control/padding/block\",\"height\":\"size/control/minBlockSize/default\",\"topLeftRadius\":\"form/control/border/radius\",\"topRightRadius\":\"form/control/border/radius\",\"bottomLeftRadius\":\"form/control/border/radius\",\"bottomRightRadius\":\"form/control/border/radius\",\"strokeTopWeight\":\"form/control/border/width\",\"strokeBottomWeight\":\"form/control/border/width\",\"strokeLeftWeight\":\"form/control/border/width\",\"strokeRightWeight\":\"form/control/border/width\",\"fills\":[\"form/control/background\"],\"strokes\":[\"form/state/error/border\"]}"
+          }
+        ],
+        "texts": [
+          {
+            "id": "283:679",
+            "name": "Label text",
+            "w": 120,
+            "h": 27,
+            "text": "Email address",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/label/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/label/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          },
+          {
+            "id": "283:680",
+            "name": "Optional marker text",
+            "w": 65,
+            "h": 21,
+            "text": "(optional)",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 14,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/label/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"typography/size/sm\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          },
+          {
+            "id": "283:681",
+            "name": "Helper text",
+            "w": 640,
+            "h": 24,
+            "text": "Use helper text only when it helps users answer correctly.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/helper/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/helper/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:682",
+            "name": "Error text",
+            "w": 640,
+            "h": 27,
+            "text": "Error: Enter a value in the correct format.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/error/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/error/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:684",
+            "name": "Value text",
+            "w": 608,
+            "h": 27,
+            "text": "",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/control/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/control/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          }
+        ]
+      },
+      {
+        "root": {
+          "id": "283:697",
+          "name": "State=errorFocus, Requirement=required",
+          "w": 640,
+          "h": 106,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "gap": 4,
+          "radius": 0,
+          "stroke": 1,
+          "bindings": "{\"itemSpacing\":\"form/field/gap/labelToHelper\"}"
+        },
+        "children": [
+          {
+            "id": "283:698",
+            "name": "Label row",
+            "w": 640,
+            "h": 27,
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "gap": 4,
+            "radius": 0,
+            "stroke": 1,
+            "bindings": "{\"itemSpacing\":\"spacing/inline/xs\"}"
+          },
+          {
+            "id": "283:701",
+            "name": "Helper text",
+            "w": 640,
+            "h": 24,
+            "text": "Use helper text only when it helps users answer correctly.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/helper/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/helper/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:702",
+            "name": "Error text",
+            "w": 640,
+            "h": 27,
+            "text": "Error: Enter a value in the correct format.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/error/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/error/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:703",
+            "name": "Input control",
+            "w": 640,
+            "h": 44,
+            "padding": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "radius": 4,
+            "stroke": 1,
+            "bindings": "{\"paddingLeft\":\"form/control/padding/inline\",\"paddingTop\":\"form/control/padding/block\",\"paddingRight\":\"form/control/padding/inline\",\"paddingBottom\":\"form/control/padding/block\",\"height\":\"size/control/minBlockSize/default\",\"topLeftRadius\":\"form/control/border/radius\",\"topRightRadius\":\"form/control/border/radius\",\"bottomLeftRadius\":\"form/control/border/radius\",\"bottomRightRadius\":\"form/control/border/radius\",\"strokeTopWeight\":\"form/control/border/width\",\"strokeBottomWeight\":\"form/control/border/width\",\"strokeLeftWeight\":\"form/control/border/width\",\"strokeRightWeight\":\"form/control/border/width\",\"fills\":[\"form/control/background\"],\"strokes\":[\"form/state/error/border\"]}"
+          }
+        ],
+        "texts": [
+          {
+            "id": "283:699",
+            "name": "Label text",
+            "w": 120,
+            "h": 27,
+            "text": "Email address",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/label/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/label/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          },
+          {
+            "id": "283:700",
+            "name": "Optional marker text",
+            "w": 65,
+            "h": 21,
+            "text": "(optional)",
+            "font": {
+              "family": "Inter",
+              "style": "Medium",
+              "variationSettings": {
+                "wght": 500,
+                "slnt": 0
+              }
+            },
+            "size": 14,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/label/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"typography/size/sm\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+          },
+          {
+            "id": "283:701",
+            "name": "Helper text",
+            "w": 640,
+            "h": 24,
+            "text": "Use helper text only when it helps users answer correctly.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/helper/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/helper/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:702",
+            "name": "Error text",
+            "w": 640,
+            "h": 27,
+            "text": "Error: Enter a value in the correct format.",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/error/color\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/error/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          },
+          {
+            "id": "283:704",
+            "name": "Value text",
+            "w": 608,
+            "h": 27,
+            "text": "",
+            "font": {
+              "family": "Inter",
+              "style": "Regular",
+              "variationSettings": {
+                "wght": 400,
+                "slnt": 0
+              }
+            },
+            "size": 16,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "bindings": "{\"fills\":[\"form/control/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"form/control/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/regular\"]}"
+          }
+        ]
+      }
+    ]
+  },
+  "link": [
+    {
+      "id": "192:11",
+      "name": "State=default",
+      "parent": "Link",
+      "width": 248,
+      "height": 35,
+      "padding": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "gap": 0,
+      "radius": 0,
+      "stroke": 0,
+      "bindings": "{\"itemSpacing\":\"border/width/none\",\"paddingLeft\":\"component/link/targetPaddingInline\",\"paddingTop\":\"component/link/targetPaddingBlock\",\"paddingRight\":\"component/link/targetPaddingInline\",\"paddingBottom\":\"component/link/targetPaddingBlock\",\"strokeTopWeight\":\"border/width/none\",\"strokeBottomWeight\":\"border/width/none\",\"strokeLeftWeight\":\"border/width/none\",\"strokeRightWeight\":\"border/width/none\"}",
+      "texts": [
+        {
+          "name": "Label / default",
+          "text": "Read accessibility guidance",
+          "size": 18,
+          "font": {
+            "family": "Inter",
+            "style": "Medium",
+            "variationSettings": {
+              "wght": 500,
+              "slnt": 0
+            }
+          },
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "style": "S:74044515f79cad609a5b676cf7c7601c0c297d9c,",
+          "decoration": "UNDERLINE",
+          "bindings": "{\"fills\":[\"color/link/default/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/link/standalone/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"],\"textRangeFills\":[\"color/link/default/foreground\"]}"
+        }
+      ],
+      "children": [
+        {
+          "name": "Link content",
+          "type": "FRAME",
+          "width": 240,
+          "height": 27,
+          "gap": 4,
+          "padding": [
+            0,
+            0
+          ],
+          "bindings": "{\"itemSpacing\":\"component/link/gap\",\"paddingLeft\":\"spacing/0\",\"paddingTop\":\"spacing/0\",\"paddingRight\":\"spacing/0\",\"paddingBottom\":\"spacing/0\",\"strokeTopWeight\":\"border/width/none\",\"strokeBottomWeight\":\"border/width/none\",\"strokeLeftWeight\":\"border/width/none\",\"strokeRightWeight\":\"border/width/none\"}"
+        }
+      ]
+    },
+    {
+      "id": "192:16",
+      "name": "State=hover",
+      "parent": "Link",
+      "width": 248,
+      "height": 35,
+      "padding": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "gap": 0,
+      "radius": 0,
+      "stroke": 0,
+      "bindings": "{\"itemSpacing\":\"border/width/none\",\"paddingLeft\":\"component/link/targetPaddingInline\",\"paddingTop\":\"component/link/targetPaddingBlock\",\"paddingRight\":\"component/link/targetPaddingInline\",\"paddingBottom\":\"component/link/targetPaddingBlock\",\"strokeTopWeight\":\"border/width/none\",\"strokeBottomWeight\":\"border/width/none\",\"strokeLeftWeight\":\"border/width/none\",\"strokeRightWeight\":\"border/width/none\"}",
+      "texts": [
+        {
+          "name": "Label / hover",
+          "text": "Read accessibility guidance",
+          "size": 18,
+          "font": {
+            "family": "Inter",
+            "style": "Medium",
+            "variationSettings": {
+              "wght": 500,
+              "slnt": 0
+            }
+          },
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "style": "S:74044515f79cad609a5b676cf7c7601c0c297d9c,",
+          "decoration": "NONE",
+          "bindings": "{\"fills\":[\"color/link/hover/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/link/standalone/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+        }
+      ],
+      "children": [
+        {
+          "name": "Link content",
+          "type": "FRAME",
+          "width": 240,
+          "height": 27,
+          "gap": 4,
+          "padding": [
+            0,
+            0
+          ],
+          "bindings": "{\"itemSpacing\":\"component/link/gap\",\"paddingLeft\":\"spacing/0\",\"paddingTop\":\"spacing/0\",\"paddingRight\":\"spacing/0\",\"paddingBottom\":\"spacing/0\",\"strokeTopWeight\":\"border/width/none\",\"strokeBottomWeight\":\"border/width/none\",\"strokeLeftWeight\":\"border/width/none\",\"strokeRightWeight\":\"border/width/none\"}"
+        }
+      ]
+    },
+    {
+      "id": "192:21",
+      "name": "State=active",
+      "parent": "Link",
+      "width": 248,
+      "height": 35,
+      "padding": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "gap": 0,
+      "radius": 0,
+      "stroke": 0,
+      "bindings": "{\"itemSpacing\":\"border/width/none\",\"paddingLeft\":\"component/link/targetPaddingInline\",\"paddingTop\":\"component/link/targetPaddingBlock\",\"paddingRight\":\"component/link/targetPaddingInline\",\"paddingBottom\":\"component/link/targetPaddingBlock\",\"strokeTopWeight\":\"border/width/none\",\"strokeBottomWeight\":\"border/width/none\",\"strokeLeftWeight\":\"border/width/none\",\"strokeRightWeight\":\"border/width/none\"}",
+      "texts": [
+        {
+          "name": "Label / active",
+          "text": "Read accessibility guidance",
+          "size": 18,
+          "font": {
+            "family": "Inter",
+            "style": "Medium",
+            "variationSettings": {
+              "wght": 500,
+              "slnt": 0
+            }
+          },
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "style": "S:74044515f79cad609a5b676cf7c7601c0c297d9c,",
+          "decoration": "NONE",
+          "bindings": "{\"fills\":[\"color/link/active/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/link/standalone/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"]}"
+        }
+      ],
+      "children": [
+        {
+          "name": "Link content",
+          "type": "FRAME",
+          "width": 240,
+          "height": 27,
+          "gap": 4,
+          "padding": [
+            0,
+            0
+          ],
+          "bindings": "{\"itemSpacing\":\"component/link/gap\",\"paddingLeft\":\"spacing/0\",\"paddingTop\":\"spacing/0\",\"paddingRight\":\"spacing/0\",\"paddingBottom\":\"spacing/0\",\"strokeTopWeight\":\"border/width/none\",\"strokeBottomWeight\":\"border/width/none\",\"strokeLeftWeight\":\"border/width/none\",\"strokeRightWeight\":\"border/width/none\"}"
+        }
+      ]
+    },
+    {
+      "id": "192:26",
+      "name": "State=focus",
+      "parent": "Link",
+      "width": 248,
+      "height": 35,
+      "padding": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "gap": 0,
+      "radius": 0,
+      "stroke": 0,
+      "bindings": "{\"itemSpacing\":\"border/width/none\",\"paddingLeft\":\"component/link/targetPaddingInline\",\"paddingTop\":\"component/link/targetPaddingBlock\",\"paddingRight\":\"component/link/targetPaddingInline\",\"paddingBottom\":\"component/link/targetPaddingBlock\",\"strokeTopWeight\":\"border/width/none\",\"strokeBottomWeight\":\"border/width/none\",\"strokeLeftWeight\":\"border/width/none\",\"strokeRightWeight\":\"border/width/none\"}",
+      "texts": [
+        {
+          "name": "Label / focus",
+          "text": "Read accessibility guidance",
+          "size": 18,
+          "font": {
+            "family": "Inter",
+            "style": "Medium",
+            "variationSettings": {
+              "wght": 500,
+              "slnt": 0
+            }
+          },
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "style": "S:74044515f79cad609a5b676cf7c7601c0c297d9c,",
+          "decoration": "UNDERLINE",
+          "bindings": "{\"fills\":[\"color/link/default/foreground\"],\"letterSpacing\":[\"typography/letterSpacing/normal\"],\"fontSize\":[\"component/link/standalone/typography/fontSize\"],\"fontFamily\":[\"typography/family/sans\"],\"fontWeight\":[\"typography/weight/medium\"],\"textRangeFills\":[\"color/link/default/foreground\"]}"
+        }
+      ],
+      "children": [
+        {
+          "name": "Focus ring overlay",
+          "type": "RECTANGLE",
+          "width": 244,
+          "height": 35,
+          "gap": null,
+          "padding": null,
+          "bindings": "{\"topLeftRadius\":\"radius/sm\",\"topRightRadius\":\"radius/sm\",\"bottomLeftRadius\":\"radius/sm\",\"bottomRightRadius\":\"radius/sm\",\"strokeTopWeight\":\"border/width/medium\",\"strokeBottomWeight\":\"border/width/medium\",\"strokeLeftWeight\":\"border/width/medium\",\"strokeRightWeight\":\"border/width/medium\",\"strokes\":[\"color/interactive/focus/ring\"]}"
+        },
+        {
+          "name": "Focus separator overlay",
+          "type": "RECTANGLE",
+          "width": 240,
+          "height": 31,
+          "gap": null,
+          "padding": null,
+          "bindings": "{\"topLeftRadius\":\"radius/sm\",\"topRightRadius\":\"radius/sm\",\"bottomLeftRadius\":\"radius/sm\",\"bottomRightRadius\":\"radius/sm\",\"strokeTopWeight\":\"border/width/medium\",\"strokeBottomWeight\":\"border/width/medium\",\"strokeLeftWeight\":\"border/width/medium\",\"strokeRightWeight\":\"border/width/medium\",\"strokes\":[\"color/interactive/focus/separator\"]}"
+        },
+        {
+          "name": "Link content",
+          "type": "FRAME",
+          "width": 240,
+          "height": 27,
+          "gap": 4,
+          "padding": [
+            0,
+            0
+          ],
+          "bindings": "{\"itemSpacing\":\"component/link/gap\",\"paddingLeft\":\"spacing/0\",\"paddingTop\":\"spacing/0\",\"paddingRight\":\"spacing/0\",\"paddingBottom\":\"spacing/0\",\"strokeTopWeight\":\"border/width/none\",\"strokeBottomWeight\":\"border/width/none\",\"strokeLeftWeight\":\"border/width/none\",\"strokeRightWeight\":\"border/width/none\"}"
+        }
+      ]
+    }
+  ]
+}

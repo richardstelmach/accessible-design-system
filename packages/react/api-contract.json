@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "status": "partially-implemented-manual-release-checks-pending",
+  "accepted": {
+    "react": [
+      "18.3",
+      "19"
+    ],
+    "styled": true,
+    "tailwindRequired": false,
+    "launchTheme": "light"
+  },
+  "families": [
+    {
+      "id": "button",
+      "exports": [
+        "Button",
+        "IconButton"
+      ],
+      "props": "variant=default; size=default; type=button; native disabled; visible children or required icon/name",
+      "behaviour": "Native button props/ref; at most one leading/trailing icon; IconButton excludes text variant.",
+      "implementation": "implemented-automated-checks-passed"
+    },
+    {
+      "id": "link",
+      "exports": [
+        "Link"
+      ],
+      "props": "href; children; presentation=inline|standalone (inline); trailingIcon",
+      "behaviour": "Native anchor props/ref; no disabled/as/asChild; preserve navigation.",
+      "implementation": "implemented-automated-checks-passed"
+    },
+    {
+      "id": "text-input",
+      "exports": [
+        "TextInput"
+      ],
+      "props": "label; name; id?; helperText?; error?; requirement=required|optional; type=text; width=full|2ch|3ch|4ch|5ch|10ch|20ch (full)",
+      "behaviour": "Native input props/ref, value/defaultValue/onChange; requirement and native required must agree. No placeholder or accessible-name override.",
+      "implementation": "implemented-automated-checks-passed"
+    },
+    {
+      "id": "text-area",
+      "exports": [
+        "Textarea"
+      ],
+      "props": "label; name; id?; helperText?; error?; requirement; rows=5",
+      "behaviour": "Native textarea props/ref, value/defaultValue/onChange; vertical resize.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "select",
+      "exports": [
+        "Select"
+      ],
+      "props": "label; name; id?; helperText?; error?; requirement; children=option/optgroup",
+      "behaviour": "Native single-select props/ref, value/defaultValue/onChange; no multiple/readOnly; React owns selected via value.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "fieldset",
+      "exports": [
+        "Fieldset"
+      ],
+      "props": "legend; legendStyle?; headingLevel?; helperText?; error?; errorAssociation=group|children (group); children",
+      "behaviour": "Native fieldset props/ref; legend first direct child. In children mode error.id is supplied to affected controls through errorDescribedBy; no duplicate group error association.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "radio",
+      "exports": [
+        "Radio"
+      ],
+      "props": "label; name; value; id?; description?",
+      "behaviour": "Native radio props/ref, checked/defaultChecked/onChange; group error belongs to Fieldset.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "checkbox",
+      "exports": [
+        "Checkbox"
+      ],
+      "props": "label; name; value; id?; description?; error?; indeterminate=false",
+      "behaviour": "Native checkbox props/ref, checked/defaultChecked/onChange; indeterminate separate from checkedness; no readOnly.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "error-summary",
+      "exports": [
+        "ErrorSummary"
+      ],
+      "props": "title; description?; errors: {id,text,targetId,contextId?}[]; focusRequestKey?",
+      "behaviour": "Root div ref; nonempty errors. One focus per new failed-submit key after commit; target visible enabled control; contextId optionally scrolls to legend/label.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "stepper",
+      "exports": [
+        "Stepper"
+      ],
+      "props": "label; name; id?; min?; max?; step (positive); helperText?; error?; requirement; incrementLabel; decrementLabel",
+      "behaviour": "Native numeric input ref; value/defaultValue are raw strings; onValueChange(raw, {source: input|increment|decrement}); use native stepUp/stepDown. No second value owner via onChange.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "date-input",
+      "exports": [
+        "DateInput"
+      ],
+      "props": "legend; name (field-name prefix); id?; value/defaultValue: {day,month,year} raw strings; onValueChange; helperText?; error?; errorAssociation; invalidParts?; required; disabled; readOnly; purpose=date|date-of-birth",
+      "behaviour": "Ref targets first day input; three native text fields with numeric inputmode; stable part IDs; no parsing/clamping on typing. Validation remains explicit consumer input.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "dialog",
+      "exports": [
+        "Dialog"
+      ],
+      "props": "open; onOpenChange(next,{reason}); title?; accessibleLabel?; showTitle=true; showClose=true; closeLabel; size=small|medium|large; presentation=inset|fullscreen; dismissal=dismissible|forced-decision; children; actions?; returnFocusRef?",
+      "behaviour": "Controlled native dialog ref. Require title or accessibleLabel. Forced decision forbids close control and requires enabled resolving action. Native showModal; contract initial focus and one tested boundary handler.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "modal-backdrop",
+      "exports": [],
+      "props": "Dialog-owned ::backdrop CSS; no public React component",
+      "behaviour": "Own public design contract retained; no extra presentation element or focus target required.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "alert",
+      "exports": [
+        "Alert"
+      ],
+      "props": "state=info; titleText; descriptionText?; headingLevel=none; announcement=none|polite|assertive (none)",
+      "behaviour": "Static messages have no live role; optional description replaces redundant description Boolean in React.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "badge",
+      "exports": [
+        "Badge"
+      ],
+      "props": "label; tone=neutral",
+      "behaviour": "Noninteractive span; no role/live-region/click API.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "tabs",
+      "exports": [
+        "Tabs"
+      ],
+      "props": "label; items: {id,label,heading,content}[]; selectedId/defaultSelectedId; onSelectedChange; activation=automatic|manual (automatic)",
+      "behaviour": "Unique nonempty items; default first selection. Immediate panels for automatic mode; all-sections fallback below md or container overflow; DOM order retained.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "accordion",
+      "exports": [
+        "Accordion"
+      ],
+      "props": "items: {id,title,content}[]; headingLevel (2..6); titleStyle?; expandedIds/defaultExpandedIds; onExpandedChange; panelLandmark=false",
+      "behaviour": "Independent expansion only. defaultExpandedIds maps canonical initialExpandedIds; explicit controlled adapter, stable IDs, baseline visible before enhancement.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "card",
+      "exports": [
+        "Card"
+      ],
+      "props": "layout=vertical|horizontal; title?; headingLevel=none; titleStyle=auto|compact; titleHref?; titleLinkAttributes?; wholeCardClickable=false; image?; children?; actions?; imageBadge?",
+      "behaviour": "Div ref; children maps canonical content slot; image requires alt and intrinsic dimensions; whole-card enhancement requires title link, preserves selection and secondary controls.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "breadcrumb",
+      "exports": [
+        "Breadcrumb"
+      ],
+      "props": "label=Breadcrumb; ancestors: {id,label,href,linkAttributes?}[]; currentPage?; expanded/defaultExpanded=false; onExpandedChange; showFullPathLabel; showCompactPathLabel",
+      "behaviour": "Nav ref; current page plain text; no ancestors means omit landmark; observer-based overflow preserves focus and user choice.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "pagination",
+      "exports": [
+        "Pagination"
+      ],
+      "props": "label=Pagination; currentPage; totalPages; pageHref(page); presentation=auto; pageJump=false; labels",
+      "behaviour": "Nav ref; known safe-integer totals only; no controlled current state inside component; application owns URL/results/history. Constant-size window and explicit jump.",
+      "implementation": "not-implemented"
+    },
+    {
+      "id": "toast",
+      "exports": [
+        "ToastProvider",
+        "ToastRegion",
+        "ToastNotificationsButton",
+        "useToast"
+      ],
+      "props": "provider labels; useToast(): add(message), dismiss(id); message={id,state=info,titleText,descriptionText?,announcement=polite,dismissLabel}",
+      "behaviour": "One provider owns queue and announcers. Region and entry button required once in app shell. Persistent messages, no timers/eviction; add duplicate active ID rejected; removal focus handled by host.",
+      "implementation": "not-implemented"
+    }
+  ]
+}

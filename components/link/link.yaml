@@ -360,6 +360,15 @@ figmaImplementation:
   figmaTypography:
     standalone: component/link/standalone/typography
     responsiveMode: Breakpoint
+    recipe:
+      source: typography.body.default
+      fontWeight: typography.weight.regular
+      responsiveFontSize: component/link/standalone/typography/fontSize
+      styleId: 'S:74044515f79cad609a5b676cf7c7601c0c297d9c,'
+      rules:
+        - Keep the shared style attached to every standalone Link label.
+        - Bind the style font weight to the existing regular variable.
+        - Preserve per-state text colour and underline treatment.
 
 devImplementation:
   description: >
@@ -409,3 +418,13 @@ aiGenerationRules:
   - Use component.link.targetPaddingBlock and component.link.targetPaddingInline for standalone Link transparent target padding.
   - Use component.link.gap between standalone link text and trailing icon.
   - Do not use spacing.inline.xs as all-side padding.
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  export: Link
+  href: Required non-empty native anchor destination.
+  children: Required meaningful visible destination content.
+  presentation: {values: [inline, standalone], default: inline}
+  trailingIcon: Optional decorative icon.
+  nativeAttributes: Preserve applicable anchor attributes, events and ref.
+  prohibited: [disabled, as, asChild]

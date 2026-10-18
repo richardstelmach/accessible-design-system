@@ -4,9 +4,9 @@ version: 0.1.0
 status: draft
 
 phase:
-  current: source-review
+  current: figma-built-roundtrip-evidence-pending
   implementation: not-started
-  figma: read-only-preflight-complete
+  figma: masters-present
   releaseReady: false
 
 description: >
@@ -343,7 +343,7 @@ tokens:
     - Rebuild compiled outputs; never hand-edit them.
 
 figma:
-  status: planned-after-source-review
+  status: masters-present
   fileKey: dVFI0q1cXMtmjUAkdvSWkk
   pageName: 21 - Components - Accordion
   documentationPattern: patterns/component-documentation-page.yaml
@@ -471,3 +471,10 @@ references:
     - {name: W3C Text Spacing, url: "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html"}
     - {name: W3C Target Size Minimum, url: "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"}
     - {name: W3C Focus Not Obscured Minimum, url: "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html"}
+
+releaseAudit:
+  date: '2026-10-18'
+  figmaPageId: '1176:101'
+  evidence: Live inventory confirmed title set, item set and root component.
+  tokenRoundTrip: completion-evidence-required
+  runtime: not-implemented

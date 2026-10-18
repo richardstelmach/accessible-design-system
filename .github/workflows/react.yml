@@ -1,0 +1,22 @@
+name: React package
+on:
+  push:
+  pull_request:
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build:example
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: npm run verify:package
+      - run: git diff --exit-code -- tokens/compiled

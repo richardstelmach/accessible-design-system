@@ -1,0 +1,63 @@
+# OwlA11y React API contract
+
+Status: implementation contract draft, 18 October 2026. Product decisions accepted by Richard: React 18.3 and 19, styled components with token customisation, light theme for launch. Button, IconButton, Link and TextInput are implemented locally; the remaining families are interface drafts. See packages/react/README.md for commands and verification limits.
+
+## Shared conventions
+
+Use named exports from @owla11y/react and import @owla11y/react/styles.css once. Package scope availability remains to be verified. Support JavaScript and TypeScript consumers. Preserve native element props and refs except explicit prohibited combinations. No generic polymorphic as/asChild API in the first release. React 18-compatible forwardRef is the implementation convention for public refs.
+
+Generate stable IDs with React useId unless the consumer supplies id. A supplied id must be globally unique. Never derive DOM IDs directly from an unscoped item key. aria-describedby merges consumer IDs with generated helper/error IDs, removes duplicates and omits absent nodes. Components own structural roles/states; consumers must not override these with contradictory ARIA.
+
+Single controls own visible labels, helper text and error association. error is absent or {message: string, id?: string}; message must be non-empty. errorDescribedBy references an externally rendered shared error and applies aria-invalid on the affected control without rendering another copy. Fieldset children-mode requires an explicitly identified shared error ID and affected controls; group-mode never forwards that error to each child. This integration must be demonstrated in a complete DateInput and ErrorSummary example.
+
+For ordinary native controls use native value/defaultValue and onChange events (checked/defaultChecked for selections). Custom composites use onValueChange callbacks. Never supply both controlled and default props; never switch ownership after mount. Controlled state requires its change callback, except deliberately read-only native controls. Uncontrolled form controls must reset with their form. Controlled resets are the consumer's responsibility and must be documented.
+
+Requirement defaults to required for TextInput, Textarea and Stepper; visible optional wording and native required are derived from one policy. Select follows the same required/optional adapter. Label requirements and group policies remain governed by the canonical form contracts. These defaults match the canonical requiredUnlessMarkedOptional policy.
+
+Only native values determine hover, pressed, focus and disabled state. Do not expose a Figma State prop. Decorative icons are hidden from assistive technology. Do not accept raw HTML strings. Slots use ReactNode; plain-text labels/titles remain strings where required by contracts.
+
+Invalid finite enums and conflicting prop modes are developer configuration errors with actionable development diagnostics. Do not silently coerce invalid keys, page numbers or numeric constraints. Type checking does not replace nonempty-string and dynamic-data validation. Decide production failure handling per component before implementation; document it alongside its tests.
+
+## Family interfaces
+
+The machine-readable companion is [api-contract.json](../packages/react/api-contract.json). These interfaces extend the framework-neutral contracts; existing semantic and content restrictions continue to apply.
+
+| Family | Public exports | Props and defaults | Behaviour |
+| --- | --- | --- | --- |
+| button | Button, IconButton | variant=default; size=default; type=button; native disabled; visible children or required icon/name | Native button props/ref; at most one leading/trailing icon; IconButton excludes text variant. |
+| link | Link | href; children; presentation=inline / standalone (inline); trailingIcon | Native anchor props/ref; no disabled/as/asChild; preserve navigation. |
+| text-input | TextInput | label; name; id?; helperText?; error?; requirement=required / optional; type=text; width=full or canonical ch widths | Native input props/ref, value/defaultValue/onChange; requirement and native required must agree. |
+| text-area | Textarea | label; name; id?; helperText?; error?; requirement; rows=5 | Native textarea props/ref, value/defaultValue/onChange; vertical resize. |
+| select | Select | label; name; id?; helperText?; error?; requirement; children=option/optgroup | Native single-select props/ref, value/defaultValue/onChange; no multiple/readOnly; React owns selected via value. |
+| fieldset | Fieldset | legend; legendStyle?; headingLevel?; helperText?; error?; errorAssociation=group / children (group); children | Native fieldset props/ref; legend first direct child. In children mode error.id is supplied to affected controls through errorDescribedBy; no duplicate group error association. |
+| radio | Radio | label; name; value; id?; description? | Native radio props/ref, checked/defaultChecked/onChange; group error belongs to Fieldset. |
+| checkbox | Checkbox | label; name; value; id?; description?; error?; indeterminate=false | Native checkbox props/ref, checked/defaultChecked/onChange; indeterminate separate from checkedness; no readOnly. |
+| error-summary | ErrorSummary | title; description?; errors: {id,text,targetId,contextId?}[]; focusRequestKey? | Root div ref; nonempty errors. One focus per new failed-submit key after commit; target visible enabled control; contextId optionally scrolls to legend/label. |
+| stepper | Stepper | label; name; id?; min?; max?; step (positive); helperText?; error?; requirement; incrementLabel; decrementLabel | Native numeric input ref; value/defaultValue are raw strings; onValueChange(raw, {source: input / increment / decrement}); use native stepUp/stepDown. No second value owner via onChange. |
+| date-input | DateInput | legend; name (field-name prefix); id?; value/defaultValue: {day,month,year} raw strings; onValueChange; helperText?; error?; errorAssociation; invalidParts?; required; disabled; readOnly; purpose=date / date-of-birth | Ref targets first day input; three native text fields with numeric inputmode; stable part IDs; no parsing/clamping on typing. Validation remains explicit consumer input. |
+| dialog | Dialog | open; onOpenChange(next,{reason}); title?; accessibleLabel?; showTitle=true; showClose=true; closeLabel; size=small / medium / large; presentation=inset / fullscreen; dismissal=dismissible / forced-decision; children; actions?; returnFocusRef? | Controlled native dialog ref. Require title or accessibleLabel. Forced decision forbids close control and requires enabled resolving action. Native showModal; contract initial focus and one tested boundary handler. |
+| modal-backdrop | Dialog CSS only | Dialog-owned ::backdrop CSS; no public React component | Own public design contract retained; no extra presentation element or focus target required. |
+| alert | Alert | state=info; titleText; descriptionText?; headingLevel=none; announcement=none / polite / assertive (none) | Static messages have no live role; optional description replaces redundant description Boolean in React. |
+| badge | Badge | label; tone=neutral | Noninteractive span; no role/live-region/click API. |
+| tabs | Tabs | label; items: {id,label,heading,content}[]; selectedId/defaultSelectedId; onSelectedChange; activation=automatic / manual (automatic) | Unique nonempty items; default first selection. Immediate panels for automatic mode; all-sections fallback below md or container overflow; DOM order retained. |
+| accordion | Accordion | items: {id,title,content}[]; headingLevel (2..6); titleStyle?; expandedIds/defaultExpandedIds; onExpandedChange; panelLandmark=false | Independent expansion only. defaultExpandedIds maps canonical initialExpandedIds; explicit controlled adapter, stable IDs, baseline visible before enhancement. |
+| card | Card | layout=vertical / horizontal; title?; headingLevel=none; titleStyle=auto / compact; titleHref?; titleLinkAttributes?; wholeCardClickable=false; image?; children?; actions?; imageBadge? | Div ref; children maps canonical content slot; image requires alt and intrinsic dimensions; whole-card enhancement requires title link, preserves selection and secondary controls. |
+| breadcrumb | Breadcrumb | label=Breadcrumb; ancestors: {id,label,href,linkAttributes?}[]; currentPage?; expanded/defaultExpanded=false; onExpandedChange; showFullPathLabel; showCompactPathLabel | Nav ref; current page plain text; no ancestors means omit landmark; observer-based overflow preserves focus and user choice. |
+| pagination | Pagination | label=Pagination; currentPage; totalPages; pageHref(page); presentation=auto; pageJump=false; labels | Nav ref; known safe-integer totals only; no controlled current state inside component; application owns URL/results/history. Constant-size window and explicit jump. |
+| toast | ToastProvider, ToastRegion, ToastNotificationsButton, useToast | provider labels; useToast(): add(message), dismiss(id); message={id,state=info,titleText,descriptionText?,announcement=polite,dismissLabel} | One provider owns queue and announcers. Region and entry button required once in app shell. Persistent messages, no timers/eviction; add duplicate active ID rejected; removal focus handled by host. |
+
+## Integration rules and evidence
+
+Dialog open is controlled to keep ownership explicit; the native open attribute is not a substitute for showModal. Reasons include trigger, close-button, escape, backdrop and action; transitions fire once per user intent, not in response to prop reconciliation. Dismissal and initial focus continue to follow dialog.yaml. Native dialog attributes such as closedby need feature detection and a tested fallback across supported browsers.
+
+ToastProvider owns each mounted host lifetime. add returns the stable ID and takes a complete message; dismiss removes only that ID. Host labels include the Notifications region name and a localisable count formatter. Burst aggregation and modal deferral follow toast.yaml. Do not pass callbacks inside announced text or place a second live role on visible Toasts. Provider/region/button placement and modal-state integration are required technical investigation items, not yet validated APIs.
+
+A Tabs item heading labels the fallback section as well as panel content; heading semantics must fit the page outline. Selection survives fallback changes; focus never disappears into newly hidden content. Explicitly test manual activation and Tab exit.
+
+DateInput keeps raw strings and exposes required as a native group policy rather than the single-field requirement presentation axis. name creates day/month/year names; expose partNames for services needing different submission names. Return part IDs through a documented helper or render integration so ErrorSummary never guesses them. The exact helper shape must be resolved in the typed implementation.
+
+For Accordion, the new controlled adapter is additive: expandedIds/defaultExpandedIds replace initialExpandedIds only at the React layer. Do not change the independent-only canonical behaviour.
+
+## First implementation checkpoint
+
+Create compile-checked props and consumer examples for Button, IconButton, Link and TextInput first. Compile against React 18.3 and 19 typings separately; verify refs and event inference. Follow with the other families, resolving the explicit host/part-ID questions before treating the API as stable. Keep the JSON, typed declarations and canonical contracts aligned in the same change. No stability promise before beta feedback.

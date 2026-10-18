@@ -1,5 +1,6 @@
 component: Button
 version: 1.0.0
+status: draft
 
 description: >
   Buttons allow users to trigger actions, submit information or move through a flow.
@@ -109,10 +110,10 @@ structure:
     radius: radius.lg
     borderWidth: border.width.thin
     typography:
-    source: selected size
-    compact: component.button.typography.compact
-    default: component.button.typography.default
-    comfortable: component.button.typography.comfortable
+      source: selected size
+      compact: component.button.typography.compact
+      default: component.button.typography.default
+      comfortable: component.button.typography.comfortable
 
   label:
     required: true
@@ -256,3 +257,37 @@ aiGenerationRules:
   - Apply the double-ring focus treatment to focused Button and Icon Button examples.
   - Do not use raw colours for focus separator or focus ring.
   - Use color.interactive.focus.separator and color.interactive.focus.ring.
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  exports: [Button, IconButton]
+  button:
+    variant: {values: [primary, default, destructive, text], default: default}
+    size: {values: [compact, default, comfortable], default: default}
+    type: {values: [button, submit, reset], default: button}
+    children: Required visible action label.
+    leadingIcon: Optional decorative icon.
+    trailingIcon: Optional decorative icon; do not combine with leadingIcon in version one.
+  iconButton:
+    variant: {values: [primary, default, destructive], default: default}
+    icon: Required decorative icon.
+    accessibleName: Required non-empty aria-label or aria-labelledby target with a non-empty name.
+    sizeAndType: Same defaults as Button.
+  nativeAttributes: Preserve applicable native button attributes, events and ref.
+  rules:
+    - Native disabled controls are unavailable to activation and sequential keyboard focus.
+    - Hover, pressed and focus come from browser interaction, never state props.
+    - IconButton does not support the text variant in the current Figma inventory.
+
+figmaReconciliation:
+  date: '2026-10-18'
+  disabledTextVariants:
+    count: 9
+    background: color.interactive.disabled.background
+    foreground: color.interactive.disabled.foreground
+    icon: color.icon.onDisabled
+    border: color.interactive.disabled.border
+    borderWidth: border.width.thin
+    strokeAlignment: inside
+    preserveDimensions: true
+  evidence: ../../docs/validation/figma-core-reconciliation.md
