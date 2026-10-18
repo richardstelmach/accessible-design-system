@@ -169,3 +169,7 @@ underline indicator and their documented neutral interaction colours. Selection
 must also have a non-colour cue and the correct programmatic state; colour tokens
 alone do not supply either. Choose background and foreground as a pair, validate
 contrast in every state, and retain visible indicators in forced-colour modes.
+
+## Toast geometry
+
+`tokens/components/toast.json` adds six non-responsive aliases under `component.toast`: `spacing.inset`, `spacing.iconToContent`, `spacing.titleToDescription`, `spacing.stack`, `icon.size` and `surface.radius`. All reference existing primitives or semantic roles and include durable Figma scopes and Web syntax. Toast shares Alert's status colour pairings, body typography and the neutral Icon Button treatment; it adds no colour, typography, duration or responsive token family.
