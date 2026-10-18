@@ -1,0 +1,201 @@
+component: Toast
+id: toast
+version: 0.1.0
+status: draft
+
+phase:
+  current: awaiting-github-and-token-roundtrip
+  implementation: not-started
+  figma: built-and-audited
+  releaseReady: false
+
+description: Persistent, dismissible feedback about an event without interrupting the current task.
+
+relatedDocumentation:
+  - components/toast/toast.md
+  - components/toast/research.md
+  - components/alert/alert.yaml
+  - components/button/button.yaml
+  - accessibility/focus-indicators.yaml
+  - patterns/component-documentation-page.yaml
+  - tokens/components/toast.json
+
+scope:
+  includes:
+    - Success, info, warning and error visual states
+    - Required plain-text title, fixed status icon and close button
+    - Optional plain-text description
+    - Persistent lifetime and an explicit localisable dismissal name
+    - Polite default and explicitly chosen assertive announcements
+    - Notification-region integration, ordering and focus recovery requirements
+  excludes:
+    - Timers, duration, auto-dismiss, countdowns and pause-on-hover APIs
+    - Hidden close controls, swipe-only dismissal and global Escape shortcuts
+    - Actions, links, undo deadlines, rich content and progress indicators
+    - Required acknowledgement, blocking failures and modal interaction
+    - Notification history service, server event transport and framework runtime
+    - Field-validation and Error Summary replacement
+
+decisions:
+  lifetime: Persistent until explicit user dismissal; no timed variant or duration API.
+  rationale: A deliberate system policy beyond the WCAG minimum; consumers need not prove an untimed equivalent for every message.
+  announcement: Polite by default; urgency is independent of visual state.
+  title: Paragraph using strong body typography; no heading-level API for a short event notification.
+  actions: Close only in version one; recovery actions remain in the relevant persistent task UI.
+
+publicApi:
+  status: framework-neutral-contract
+  id: {type: stable-unique-string, required: true}
+  state: {values: [success, info, warning, error], default: info}
+  titleText: {type: plain-text, required: true, validation: non-empty-after-trimming}
+  descriptionText: {type: plain-text, required: false, emptyValue: omit-description}
+  announcement: {values: [polite, assertive], default: polite, implementationOnly: true}
+  dismissLabel: {type: plain-text, required: true, localisable: true, example: 'Dismiss notification: Your changes were saved'}
+  onDismiss: Callback for explicit user dismissal of this stable ID.
+  validation:
+    - Reject empty titles, empty dismissal names and duplicate active IDs.
+    - Treat message strings as text, not HTML.
+    - Do not infer urgency from state, colour, icon or words such as error.
+    - No duration, autoDismiss, dismissible=false or announcement=none option.
+    - Do not use Toast for static page-load notices; use Alert without live semantics.
+
+states:
+  success: {label: 'Success:', icon: check-circle, background: color.status.success.background, foreground: color.status.success.foreground, iconColor: color.icon.success}
+  info: {label: 'Information:', icon: info, background: color.status.info.background, foreground: color.status.info.foreground, iconColor: color.icon.info}
+  warning: {label: 'Warning:', icon: warning-circle, background: color.status.warning.background, foreground: color.status.warning.foreground, iconColor: color.icon.warning}
+  error: {label: 'Error:', icon: x-circle, background: color.status.error.background, foreground: color.status.error.foreground, iconColor: color.icon.error}
+
+anatomy:
+  root: Nonfocusable visual container, with status icon, flexible message and close control in logical reading order.
+  icon: Fixed registered inline SVG, aria-hidden=true and focusable=false; no independent icon swap API.
+  message: Required paragraph title and optional paragraph description; no controls inside the announced text.
+  stateLabel: Visually hidden canonical state prefix appears once before the title in the visible message's accessible reading order.
+  close: Native button type=button, always present and enabled, with registered x icon hidden from assistive technology and contextual dismissLabel.
+  titleStyle: typography/body/default/strong
+  descriptionStyle: typography/body/default
+  closeComposition: Existing neutral compact Icon Button; default, hover and active states with independent shared two-part focus treatment.
+
+announcements:
+  singleOwner: The host owns one text-only polite announcer and one text-only assertive announcer, mounted empty before events occur.
+  polite: role=status supplies implicit aria-live=polite and aria-atomic=true.
+  assertive: role=alert supplies implicit aria-live=assertive and aria-atomic=true.
+  explicitAriaLive: Do not redundantly add aria-live or aria-atomic to these roles.
+  visibleRegion: Labelled region containing ordinary list items; neither the list nor visible Toasts has a second live-region role.
+  content: Publish state label, title and description once through exactly one announcer; never include the close button name or the whole notification list.
+  duplicatePrevention:
+    - Do not nest status inside alert, use both announcers for one event, or also announce through Alert/Error Summary.
+    - Inserting another Toast must not reread existing Toasts.
+    - Dismissal must not republish the removed message.
+    - Deduplicate by event ID, not merely text; a separate later event may have the same message.
+  bursts:
+    - Preserve every distinct notification in the visible accessible list in chronological order.
+    - Batch a burst into one concise announcement with a count and essential outcomes; do not rapidly overwrite a shared announcer and assume everything was heard.
+    - Assertive events must not wait behind polite events; an interrupted polite message remains available in the region.
+    - No claim that assistive technology announces every update; test batching and repeated text with supported browser and screen-reader combinations.
+  assertiveUse: Rare important and time-sensitive changes, such as loss of connectivity putting unsaved work at risk; no forced interaction or focus change.
+  inappropriate: Routine save success and ordinary failures are polite; a blocking response belongs in the task UI or an appropriate dialog.
+  initialRender: Do not announce restored historical messages or pre-rendered page notices as new events.
+
+lifetimeAndRegion:
+  persistence: No time-based removal, fading away, replacement by a new event or capacity-based eviction.
+  dismissal: Only explicit activation of this Toast's close button or Escape while focus is within this Toast.
+  ordering: Append oldest-to-newest in matching DOM and visual order; no CSS visual reversal or active reordering.
+  removal: Remove only the targeted ID; dismissed IDs do not immediately reappear on rerender.
+  appScope: Keep active notifications across in-app navigation while relevant; full document unload ends the host lifetime. Important outcomes also belong in durable task UI.
+  discoverability: Use a labelled Notifications region and a persistent visible Notifications (N) entry control while messages exist; deliberate activation focuses and reveals the region.
+  regionFocus: tabindex=-1 allows deliberate entry without making every message an extra tab stop; maintain a visible focus indicator and an empty Notifications state as a stable fallback.
+  count: Count is current active messages, is not a separate live region and must not duplicate announcements.
+  layout: Use an in-flow stack or reserved notification rail. A floating desktop presentation is allowed only if it cannot cover content or focused controls.
+  narrowOrCrowded: Switch to the in-flow region when available width or height cannot accommodate messages; all messages remain reachable through document scrolling.
+  noEviction: Do not hide, truncate or delete older messages to enforce a visible-item cap. High-volume feeds need a separate notification-centre pattern.
+  modal: Do not announce an inaccessible toast behind an inert modal; defer nonurgent delivery until the modal closes, or communicate relevant feedback within that modal's accessible scope through one owner.
+
+keyboardAndFocus:
+  arrival: Never move focus on arrival or announce by focusing a message.
+  tab: Native tab order through close buttons; no trap, positive tabindex or roving tabindex.
+  activation: Enter and Space activate the focused close button using native click semantics; never remove on pointerdown.
+  escape: Dismiss only the Toast containing keyboard focus; do not intercept Escape from elsewhere or from a higher-priority modal.
+  afterDismissal:
+    - If focus was outside the removed Toast, preserve it; do not restore focus simply because dismissal occurred.
+    - If focus was within it, focus the next remaining close button in list order, otherwise the previous one.
+    - If none remain, return to the recorded origin when still connected, visible, enabled and not inert; otherwise focus the persistent Notifications entry or region fallback.
+    - The host captures the origin on explicit region entry, or the active element before a user tabs into its first close control.
+    - Never leave focus on body after removing the focused button; reveal the new focus target without obscuring it.
+
+visuals:
+  padding: component.toast.spacing.inset
+  columnGap: component.toast.spacing.iconToContent
+  textGap: component.toast.spacing.titleToDescription
+  stackGap: component.toast.spacing.stack
+  statusIconSize: component.toast.icon.size
+  radius: component.toast.surface.radius
+  closeTarget: size.target.comfortable in both axes, 44px at reference root size; never shrink.
+  closeIconSize: size.icon.md
+  focus: color.interactive.focus.ring and color.interactive.focus.separator, both border.width.medium; visible across default, hover and pressed.
+  reflow:
+    - Fill available width; min-inline-size=0 on text and flexible wrappers; no fixed height or line clamping.
+    - Keep icon and close target intact; title and description wrap, including an unbroken string with overflow-wrap=anywhere.
+    - At 320 CSS px with page padding, the Toast fits within 288px; document scrolling reaches long content and every close control.
+    - Preserve content at 200% text, 400% browser zoom and WCAG text-spacing overrides.
+    - Use logical layout for RTL and inherit base, md and lg typography from Breakpoint.
+  forcedColors: Retain a visible system-colour boundary, x icon and focus outline; use forced-color-adjust=auto, not status colour alone.
+  motion: No entrance or exit animation required; if a consumer adds motion, respect prefers-reduced-motion and never delay access or dismissal.
+
+figma:
+  fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  pageName: 25 - Components - Toast
+  status: built-and-audited
+  pageId: '1238:6'
+  auditDate: '2026-10-18'
+  documentationFrameId: '1238:135'
+  qaFrameId: '1238:141'
+  accessibilityFrameId: '1238:147'
+  tokenRoundtrip: pending-github-merge-and-tokens-studio-export
+  variableIds:
+    component/toast/spacing/inset: 'VariableID:1237:6'
+    component/toast/spacing/iconToContent: 'VariableID:1237:7'
+    component/toast/spacing/titleToDescription: 'VariableID:1237:8'
+    component/toast/spacing/stack: 'VariableID:1237:9'
+    component/toast/icon/size: 'VariableID:1237:10'
+    component/toast/surface/radius: 'VariableID:1237:11'
+  inventory:
+    Toast:
+      componentSetId: '1238:15'
+      variants: {State: [Success, Info, Warning, Error], Description: ['False', 'True']}
+      properties: [Title, Description text]
+      nestedProperties: Close control State and Focus
+      count: 8
+    _Toast/Close:
+      componentSetId: '1238:34'
+      variants: {State: [Default, Hover, Pressed]}
+      properties: [Focus]
+      count: 3
+  implementationMetadataOnly: [id, announcement, dismissLabel, onDismiss]
+  noAxes: [Duration, Auto-dismiss, Dismissible, Breakpoint, Urgency, Heading level]
+  areas: [01 - Component set, 02 - Documentation examples, 03 - QA and responsive tests, 04 - Accessibility notes]
+  examples:
+    - Every visual state with and without description
+    - Routine polite error and rare assertive warning with written behaviour labels
+    - Three persistent notifications in chronological order
+    - Default, Hover and Pressed close controls with and without focus
+    - Long title and description at 320px viewport with 288px content
+    - Base, md and lg typography inheritance
+    - 200% text and text-spacing QA overrides, not production variants
+  documentation: Reuse Page container, _Documentation/Page Header and _Documentation/Card; all repeated text uses named semantic styles.
+
+acceptanceCriteria:
+  - Exactly eight Toast variants and three close-control variants; no timed or nondismissible option.
+  - Four status pairings and registered icons match Alert; six component geometry aliases carry exact scopes and Web syntax.
+  - Text meets 4.5 to 1 contrast; meaningful icons and focus indicators meet applicable 3 to 1 contrast requirements.
+  - Close remains reachable, named, enabled and at least 44 by 44px at reference size.
+  - All visible content wraps and grows; status and close icons remain separate from text.
+  - One announcement owner selects status or alert independently from severity, without announcing controls or prior messages.
+  - No focus theft on arrival; predictable focus recovery only when removing the focused Toast.
+  - No timeout, silent replacement or capacity eviction; notification-region access and reflow are available.
+  - Runtime acceptance includes keyboard, repeated messages, bursts, modal scope, focus removal, scrolling, zoom, RTL and forced colours.
+  - Test NVDA with Firefox/Chrome, JAWS with Chrome/Edge and VoiceOver with Safari on supported platforms before release.
+  - Figma and token checks do not claim browser or screen-reader certification.
+
+wcag:
+  baseline: WCAG 2.2 AA
+  criteria: ['1.3.1', '1.4.1', '1.4.3', '1.4.4', '1.4.10', '1.4.11', '1.4.12', '2.1.1', '2.1.2', '2.2.1', '2.4.3', '2.4.7', '2.4.11', '2.5.2', '2.5.8', '4.1.2', '4.1.3']

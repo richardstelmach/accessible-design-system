@@ -3001,6 +3001,92 @@
           "$description": "Default initial Textarea block size. Provides a clear multi-line writing area while allowing vertical resizing. At a default 16px root size, 10rem equals 160px."
         }
       }
+    },
+    "toast": {
+      "spacing": {
+        "inset": {
+          "$value": "{spacing.inset.md}",
+          "$type": "spacing",
+          "$description": "Padding inside the Toast surface.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-toast-spacing-inset)"
+            }
+          }
+        },
+        "iconToContent": {
+          "$value": "{spacing.3}",
+          "$type": "spacing",
+          "$description": "Gap between the status icon, message and close control.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-toast-spacing-icon-to-content)"
+            }
+          }
+        },
+        "titleToDescription": {
+          "$value": "{spacing.stack.xs}",
+          "$type": "spacing",
+          "$description": "Gap between the Toast title and optional description.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-toast-spacing-title-to-description)"
+            }
+          }
+        },
+        "stack": {
+          "$value": "{spacing.stack.sm}",
+          "$type": "spacing",
+          "$description": "Vertical separation between persistent notifications.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "GAP"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-toast-spacing-stack)"
+            }
+          }
+        }
+      },
+      "icon": {
+        "size": {
+          "$value": "{size.icon.lg}",
+          "$type": "dimension",
+          "$description": "Size of the fixed Toast status icon.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-toast-icon-size)"
+            }
+          }
+        }
+      },
+      "surface": {
+        "radius": {
+          "$value": "{radius.lg}",
+          "$type": "borderRadius",
+          "$description": "Corner radius of the Toast status surface.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "CORNER_RADIUS"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--component-toast-surface-radius)"
+            }
+          }
+        }
+      }
     }
   }
 }
