@@ -116,3 +116,21 @@ test('rendered errors pass axe including contrast with focus-only announcements'
   });
   expect(violations).toEqual([]); await expect(page.locator('[role=alert], [aria-live]')).toHaveCount(0);
 });
+
+test('preview headings and form typography follow the canonical breakpoint hierarchy', async ({ page }) => {
+  // Check both sides of each breakpoint, including page styles shared by every preview.
+  for (const route of ['date-errors', 'forms', 'parity', '']) {
+    await page.goto(`/?${route}`);
+    for (const [width, h1, h2, body] of [[767, 30, 24, 16], [768, 36, 30, 16], [1023, 36, 30, 16], [1024, 48, 36, 18]]) {
+      await page.setViewportSize({ width, height: 1000 });
+      await expect(page.locator('main > h1')).toHaveCSS('font-size', `${h1}px`);
+      await expect(page.locator('main > p').first()).toHaveCSS('font-size', `${body}px`);
+      if (route === 'date-errors') {
+        await expect(page.locator('#birth-date > legend')).toHaveCSS('font-size', `${h2}px`);
+        await expect(page.locator('main > h2')).toHaveCSS('font-size', `${h2}px`);
+        await expect(page.locator('#birth-date input').first()).toHaveCSS('font-size', `${body}px`);
+        await expect(page.locator('#birth-date label').first()).toHaveCSS('font-size', `${body}px`);
+      }
+    }
+  }
+});

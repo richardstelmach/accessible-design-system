@@ -14,7 +14,7 @@ export function DateErrors() {
     const item = errors.find(error => error.id === id);
     return item ? { message: item.text } : undefined;
   };
-  return <main style={{ maxWidth: '40rem', padding: '1rem', margin: '2rem auto', fontFamily: 'Inter, sans-serif', overflowWrap: 'anywhere' }}>
+  return <main className="owla11y-preview" style={{ maxWidth: '40rem', padding: '1rem', margin: '2rem auto', overflowWrap: 'anywhere' }}>
     <h1>OwlA11y date and error summary</h1>
     <p>Submit an incomplete form to inspect error routing. Answers are preserved; errors update only on explicit submission.</p>
     <style>{`.date-example-stack { display:grid; gap:var(--form-field-gap-controlToNextField); }`}</style>

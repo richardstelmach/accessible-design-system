@@ -42,11 +42,25 @@ All thirteen exposed _Fieldset/Header instances still point to master 1094:1500.
 
 Detailed IDs, initial measurements, repairs and probe receipts are in [machine-readable evidence](react-date-errors-figma-evidence.json). Filled probes supersede empty-text font getters, which may retain their pre-resolution reported size even when the resolved layout height changes. Representative Figma screenshots and the browser's narrow comparison screenshot were visually inspected. The preview includes Inter 400/500/700 so heading comparison uses the real bold face rather than synthetic bold; distributed CSS still downloads no fonts.
 
+## Preview typography correction
+
+The page H1 and explanatory body copy initially inherited browser defaults: H1 stayed 32px at every breakpoint while the correctly responsive date legend reached 36px on large screens. Shared development-only preview styles now use the canonical responsive body and H1/H2/H3 tokens across all four preview routes. Inter 600 is also loaded for the H3 semibold style. Package styles and Figma component/token definitions require no changes.
+
+Computed sizes with the default 16px browser root:
+
+| Viewport | Page H1 | Date legend / page H2 | Body / date labels / input text |
+| --- | --- | --- | --- |
+| Below 48rem (768px) | 30px | 24px | 16px |
+| 48rem to below 64rem (1024px) | 36px | 30px | 16px |
+| 64rem and above | 48px | 36px | 18px |
+
+The date legend deliberately uses the default Fieldset legend style, visually equivalent to H2 while retaining native legend semantics. A browser regression check verifies the shared page H1/body on every preview route and the date legend, H2, part labels and inputs at 767, 768, 1023 and 1024px. Responsive token sizes use rem units, so the pixel values above reflect default browser settings rather than fixed text sizes.
+
 ## Automated validation
 
 - Build and generated public declarations pass. Package API type checks now also compile the actual examples, catching the native fieldset/defaultValue declaration conflict during implementation; that conflict is fixed and covered by a compile-checked uncontrolled example.
 - **42 Vitest tests** cover the existing nine components plus raw date preservation, part IDs/names/autocomplete, explicit external form association, group/child error ownership, disabled/read-only/reset behaviour, Gregorian validation, error ordering/deduplication, real fragments, one focus per submission under Strict Mode, title restoration, SSR/hydration and markup accessibility.
-- **17 Chromium checks** pass, including the prior ten. The new suite covers repeated failed submits, Tab exit and link activation, input/textarea/select/Radio/Checkbox/date routing, preserved values, successful correction, title restoration, native reset, responsive heights/gaps, no auto-advance, forced-colour focus, 320px reflow, text-spacing overrides and 200% root text size. Rendered axe checks include colour contrast and pass for the supplied failed-submit form.
+- **18 Chromium checks** pass, including the prior ten. The new suite covers repeated failed submits, Tab exit and link activation, input/textarea/select/Radio/Checkbox/date routing, preserved values, successful correction, title restoration, native reset, responsive heights/gaps, no auto-advance, forced-colour focus, 320px reflow, text-spacing overrides and 200% root text size. Rendered axe checks include colour contrast and pass for the supplied failed-submit form.
 - The packed archive contains **36 intended files**. Independent **React 18.3.1 and React 19.3.1** consumers compile positive/negative API cases and verify eleven components plus the pure date helper, SSR/hydration, stable IDs, summary sorting/routing/focus, title lifecycle, inline relationships and native reset. React act flushes hydration/effects deterministically; a fixed-delay fixture assumption was removed after a concurrent validation run exposed it. jsdom layout/scroll is stubbed in this fixture; actual layout/focus visibility is established by the browser checks.
 - Canonical token build remains 407 raw tokens, 335 Studio tokens, 24 mapped groups, zero unmapped groups and zero broken retained aliases. Canonical compiled outputs are unchanged. Component YAML parsing and whitespace checks pass.
 - The client production example builds successfully. Expected Vite warnings about ignoring use-client directives in an entirely client-rendered example do not alter the unbundled library directives. No package publication occurs.
