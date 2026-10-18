@@ -4,7 +4,7 @@ version: 0.1.0
 status: draft
 
 phase:
-  current: awaiting-github-and-token-roundtrip
+  current: token-roundtrip-complete
   implementation: not-started
   figma: built-and-audited
   releaseReady: false
@@ -150,7 +150,8 @@ figma:
   documentationFrameId: '1238:135'
   qaFrameId: '1238:141'
   accessibilityFrameId: '1238:147'
-  tokenRoundtrip: pending-github-merge-and-tokens-studio-export
+  tokenRoundtrip: complete
+  postExportAuditDate: '2026-10-18'
   variableIds:
     component/toast/spacing/inset: 'VariableID:1237:6'
     component/toast/spacing/iconToContent: 'VariableID:1237:7'
