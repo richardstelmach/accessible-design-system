@@ -1,0 +1,28 @@
+{
+  "name": "@owla11y/react",
+  "version": "0.1.0-beta.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "OwlA11y styled React components with customisable design tokens",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "react": ">=18.3.0 <20.0.0",
+    "react-dom": ">=18.3.0 <20.0.0"
+  }
+}

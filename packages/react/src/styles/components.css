@@ -1,0 +1,62 @@
+/* Component styles consume canonical tokens. No global reset or font fetch. */
+.owla11y-button, .owla11y-input { box-sizing:border-box; max-inline-size:100%; }
+.owla11y-button { display:inline-flex; align-items:center; justify-content:center; gap:var(--spacing-control-gap); border:0; box-shadow:inset 0 0 0 var(--border-width-thin) var(--owl-button-border, transparent); border-radius:var(--radius-lg); background:var(--owl-button-bg); color:var(--owl-button-fg); cursor:pointer; white-space:normal; overflow-wrap:anywhere; text-align:center; font-family:var(--component-button-typography-default-fontFamily); font-size:var(--component-button-typography-default-fontSize); font-weight:var(--component-button-typography-default-fontWeight); line-height:var(--component-button-typography-default-lineHeight); letter-spacing:var(--component-button-typography-default-letterSpacing); }
+.owla11y-icon { display:inline-flex; align-items:center; justify-content:center; flex:none; inline-size:var(--size-icon-md); block-size:var(--size-icon-md); pointer-events:none; }
+.owla11y-icon svg { inline-size:100%; block-size:100%; }
+.owla11y-icon-button { border-radius:var(--radius-full); padding:0 !important; aspect-ratio:1; flex:none; }
+.owla11y-button:focus-visible, .owla11y-link:focus-visible, .owla11y-input:focus-visible { outline:var(--border-width-medium) solid var(--color-interactive-focus-ring); outline-offset:var(--border-width-medium); box-shadow:0 0 0 var(--border-width-medium) var(--color-interactive-focus-separator); }
+.owla11y-link { color:var(--color-link-default-foreground); text-decoration:underline; text-underline-offset:.15em; overflow-wrap:anywhere; }
+.owla11y-link:hover { color:var(--color-link-hover-foreground); text-decoration:none; }
+.owla11y-link:active { color:var(--color-link-active-foreground); text-decoration:none; }
+.owla11y-link[data-presentation="standalone"] { display:inline-flex; align-items:center; gap:var(--component-link-gap); min-block-size:var(--size-target-minimum); min-inline-size:var(--size-target-minimum); box-sizing:border-box; padding:var(--component-link-targetPaddingBlock) var(--component-link-targetPaddingInline); }
+.owla11y-field { display:flex; flex-direction:column; align-items:flex-start; gap:0; min-inline-size:0; max-inline-size:100%; color:var(--form-label-color); }
+.owla11y-label, .owla11y-helper, .owla11y-error { overflow-wrap:anywhere; max-inline-size:100%; }
+.owla11y-helper { color:var(--form-helper-color); }
+.owla11y-error { color:var(--form-error-color); }
+.owla11y-input { inline-size:100%; min-inline-size:0; min-block-size:var(--size-control-minBlockSize-default); margin:0; padding:var(--form-control-padding-block) var(--form-control-padding-inline); border:var(--form-control-border-width) solid var(--form-control-border-color); border-radius:var(--form-control-border-radius); background:var(--form-control-background); color:var(--form-control-foreground); }
+.owla11y-input[aria-invalid="true"], .owla11y-input[aria-invalid="grammar"], .owla11y-input[aria-invalid="spelling"] { border-color:var(--form-state-error-border); }
+.owla11y-input[readonly] { background:var(--form-state-readonly-background); color:var(--form-state-readonly-foreground); border-color:var(--form-state-readonly-border); }
+.owla11y-input:disabled { background:var(--form-state-disabled-background); color:var(--form-state-disabled-foreground); border-color:var(--form-state-disabled-border); opacity:1; }
+.owla11y-button:disabled { background:var(--color-interactive-disabled-background); color:var(--color-interactive-disabled-foreground); border-color:var(--color-interactive-disabled-border); cursor:default; }
+@media (forced-colors:active) { .owla11y-button:focus-visible, .owla11y-link:focus-visible, .owla11y-input:focus-visible { outline:2px solid Highlight; box-shadow:none; } .owla11y-button:disabled, .owla11y-input:disabled { color:GrayText; border-color:GrayText; } }
+.owla11y-button[data-size="compact"] { min-block-size:var(--size-control-minBlockSize-compact); padding:var(--spacing-control-paddingBlock-compact) var(--spacing-control-paddingInline-compact); font-family:var(--component-button-typography-compact-fontFamily); font-size:var(--component-button-typography-compact-fontSize); font-weight:var(--component-button-typography-compact-fontWeight); line-height:var(--component-button-typography-compact-lineHeight); letter-spacing:var(--component-button-typography-compact-letterSpacing); }
+.owla11y-icon-button[data-size="compact"] { inline-size:var(--size-control-minBlockSize-compact); block-size:var(--size-control-minBlockSize-compact); }
+.owla11y-button[data-size="default"] { min-block-size:var(--size-control-minBlockSize-default); padding:var(--spacing-control-paddingBlock-default) var(--spacing-control-paddingInline-default); font-family:var(--component-button-typography-default-fontFamily); font-size:var(--component-button-typography-default-fontSize); font-weight:var(--component-button-typography-default-fontWeight); line-height:var(--component-button-typography-default-lineHeight); letter-spacing:var(--component-button-typography-default-letterSpacing); }
+.owla11y-icon-button[data-size="default"] { inline-size:var(--size-control-minBlockSize-default); block-size:var(--size-control-minBlockSize-default); }
+.owla11y-button[data-size="comfortable"] { min-block-size:var(--size-control-minBlockSize-comfortable); padding:var(--spacing-control-paddingBlock-comfortable) var(--spacing-control-paddingInline-comfortable); font-family:var(--component-button-typography-comfortable-fontFamily); font-size:var(--component-button-typography-comfortable-fontSize); font-weight:var(--component-button-typography-comfortable-fontWeight); line-height:var(--component-button-typography-comfortable-lineHeight); letter-spacing:var(--component-button-typography-comfortable-letterSpacing); }
+.owla11y-icon-button[data-size="comfortable"] { inline-size:var(--size-control-minBlockSize-comfortable); block-size:var(--size-control-minBlockSize-comfortable); }
+.owla11y-button[data-variant="default"] { --owl-button-bg:var(--color-interactive-default-background); --owl-button-fg:var(--color-interactive-default-foreground); --owl-button-border:var(--color-interactive-default-border); }
+.owla11y-button[data-variant="default"]:hover:not(:disabled) { --owl-button-bg:var(--color-interactive-default-hover-background); --owl-button-fg:var(--color-interactive-default-hover-foreground); --owl-button-border:var(--color-interactive-default-hover-border); }
+.owla11y-button[data-variant="default"]:active:not(:disabled) { --owl-button-bg:var(--color-interactive-default-active-background); --owl-button-fg:var(--color-interactive-default-active-foreground); --owl-button-border:var(--color-interactive-default-active-border); }
+.owla11y-button[data-variant="primary"] { --owl-button-bg:var(--color-interactive-primary-background); --owl-button-fg:var(--color-interactive-primary-foreground); --owl-button-border:transparent; }
+.owla11y-button[data-variant="primary"]:hover:not(:disabled) { --owl-button-bg:var(--color-interactive-primary-hover-background); --owl-button-fg:var(--color-interactive-primary-hover-foreground); --owl-button-border:transparent; }
+.owla11y-button[data-variant="primary"]:active:not(:disabled) { --owl-button-bg:var(--color-interactive-primary-active-background); --owl-button-fg:var(--color-interactive-primary-active-foreground); --owl-button-border:transparent; }
+.owla11y-button[data-variant="destructive"] { --owl-button-bg:var(--color-interactive-destructive-background); --owl-button-fg:var(--color-interactive-destructive-foreground); --owl-button-border:transparent; }
+.owla11y-button[data-variant="destructive"]:hover:not(:disabled) { --owl-button-bg:var(--color-interactive-destructive-hover-background); --owl-button-fg:var(--color-interactive-destructive-hover-foreground); --owl-button-border:transparent; }
+.owla11y-button[data-variant="destructive"]:active:not(:disabled) { --owl-button-bg:var(--color-interactive-destructive-active-background); --owl-button-fg:var(--color-interactive-destructive-active-foreground); --owl-button-border:transparent; }
+.owla11y-button[data-variant="text"] { --owl-button-bg:transparent; --owl-button-fg:var(--color-interactive-text-foreground); --owl-button-border:transparent; }
+.owla11y-button[data-variant="text"]:hover:not(:disabled) { --owl-button-bg:transparent; --owl-button-fg:var(--color-interactive-text-hover-foreground); --owl-button-border:transparent; }
+.owla11y-button[data-variant="text"]:active:not(:disabled) { --owl-button-bg:transparent; --owl-button-fg:var(--color-interactive-text-active-foreground); --owl-button-border:transparent; }
+.owla11y-label { font-family:var(--form-label-typography-fontFamily); font-size:var(--form-label-typography-fontSize); font-weight:var(--form-label-typography-fontWeight); line-height:var(--form-label-typography-lineHeight); letter-spacing:var(--form-label-typography-letterSpacing); }
+.owla11y-helper { font-family:var(--form-helper-typography-fontFamily); font-size:var(--form-helper-typography-fontSize); font-weight:var(--form-helper-typography-fontWeight); line-height:var(--form-helper-typography-lineHeight); letter-spacing:var(--form-helper-typography-letterSpacing); }
+.owla11y-error { font-family:var(--form-error-typography-fontFamily); font-size:var(--form-error-typography-fontSize); font-weight:var(--form-error-typography-fontWeight); line-height:var(--form-error-typography-lineHeight); letter-spacing:var(--form-error-typography-letterSpacing); }
+.owla11y-input { font-family:var(--form-control-typography-fontFamily); font-size:var(--form-control-typography-fontSize); font-weight:var(--form-control-typography-fontWeight); line-height:var(--form-control-typography-lineHeight); letter-spacing:var(--form-control-typography-letterSpacing); }
+
+/* Borders are painted inside the Figma button geometry without altering layout. */
+.owla11y-button:focus-visible { box-shadow:inset 0 0 0 var(--border-width-thin) var(--owl-button-border, transparent), 0 0 0 var(--border-width-medium) var(--color-interactive-focus-separator); }
+.owla11y-button:disabled { --owl-button-border:var(--color-interactive-disabled-border); }
+.owla11y-link[data-presentation="standalone"] { font-family:var(--typography-body-default-fontFamily); font-size:var(--typography-body-default-fontSize); font-weight:var(--typography-body-default-fontWeight); line-height:var(--typography-body-default-lineHeight); letter-spacing:var(--typography-body-default-letterSpacing); border-radius:var(--radius-sm); }
+.owla11y-link[data-presentation="inline"] { -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+.owla11y-label + .owla11y-helper { margin-block-start:var(--form-field-gap-labelToHelper); }
+.owla11y-error { margin-block-start:var(--form-field-gap-helperToError); }
+.owla11y-label + .owla11y-input, .owla11y-helper + .owla11y-input { margin-block-start:var(--form-field-gap-labelToHelper); }
+.owla11y-error + .owla11y-input { margin-block-start:var(--form-field-gap-errorToControl); }
+.owla11y-optional { font-size:var(--typography-size-sm); }
+.owla11y-input { inline-size:var(--component-textInput-width-full); }
+.owla11y-input[data-width="2ch"] { max-inline-size:calc(var(--component-textInput-width-2ch) + var(--form-control-padding-inline) * 2 + var(--form-control-border-width) * 2); }
+.owla11y-input[data-width="3ch"] { max-inline-size:calc(var(--component-textInput-width-3ch) + var(--form-control-padding-inline) * 2 + var(--form-control-border-width) * 2); }
+.owla11y-input[data-width="4ch"] { max-inline-size:calc(var(--component-textInput-width-4ch) + var(--form-control-padding-inline) * 2 + var(--form-control-border-width) * 2); }
+.owla11y-input[data-width="5ch"] { max-inline-size:calc(var(--component-textInput-width-5ch) + var(--form-control-padding-inline) * 2 + var(--form-control-border-width) * 2); }
+.owla11y-input[data-width="10ch"] { max-inline-size:calc(var(--component-textInput-width-10ch) + var(--form-control-padding-inline) * 2 + var(--form-control-border-width) * 2); }
+.owla11y-input[data-width="20ch"] { max-inline-size:calc(var(--component-textInput-width-20ch) + var(--form-control-padding-inline) * 2 + var(--form-control-border-width) * 2); }
+@media (forced-colors:active) { .owla11y-button { border:var(--border-width-thin) solid ButtonText; } .owla11y-button:focus-visible { box-shadow:none; } }

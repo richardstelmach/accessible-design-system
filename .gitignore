@@ -144,3 +144,8 @@ vite.config.ts.timestamp-*
 
 # macOS metadata
 .DS_Store
+
+# React generated styles and browser test artifacts
+packages/react/generated/
+test-results/
+playwright-report/

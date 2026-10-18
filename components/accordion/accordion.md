@@ -1,6 +1,6 @@
 # Accordion
 
-**Status:** Draft — source review; Figma inspected, construction pending
+**Status:** Draft — Figma masters present; token round-trip completion evidence and runtime testing pending
 
 **Version:** 0.1.0
 

@@ -1,0 +1,21 @@
+import {test,expect} from '@playwright/test';
+test.beforeEach(async({page})=>{await page.setViewportSize({width:1200,height:1000});await page.goto('/?parity');await page.evaluate(()=>document.fonts.ready);});
+test('button and icon sizes follow source/Figma geometry across responsive modes',async({page})=>{
+ for(const [width,heights,fonts] of [[600,[44,48,56],[14,16,16]],[800,[44,48,56],[14,16,16]],[1200,[44,51,59],[16,18,18]]] as const){await page.setViewportSize({width,height:1000});for(const [i,size] of ['compact','default','comfortable'].entries()){for(const variant of ['primary','default','destructive','text']){const b=page.getByTestId(`${variant}-${size}`);expect((await b.boundingBox())!.height).toBe(heights[i]);await expect(b).toHaveCSS('font-size',`${fonts[i]}px`);}const icon=page.getByRole('button',{name:`Add ${size}`,exact:true});expect((await icon.boundingBox())!.width).toBe(i===2?48:44);expect((await icon.boundingBox())!.height).toBe(i===2?48:44);}}
+});
+test('links use source colours, body typography, padding, decorations and stable focus',async({page})=>{const link=page.getByTestId('standalone-link');await expect(link).toHaveCSS('font-size','18px');await expect(link).toHaveCSS('font-weight','400');await expect(link).toHaveCSS('padding-top','4px');expect((await link.boundingBox())!.height).toBe(35);await expect(link).toHaveCSS('text-decoration-line','underline');await link.hover();await expect(link).toHaveCSS('text-decoration-line','none');const before=await link.boundingBox();await page.keyboard.press('Tab');await link.focus();await expect(link).toHaveCSS('outline-style','solid');expect(await link.boundingBox()).toEqual(before);});
+test('field spacing and optional marker match source, widths constrain without overflow',async({page})=>{const plain=page.getByTestId('plain'),helper=page.getByTestId('helper'),error=page.getByTestId('error');await expect(plain).toHaveCSS('margin-top','4px');await expect(helper).toHaveCSS('margin-top','4px');await expect(error).toHaveCSS('margin-top','8px');await expect(page.locator('.owla11y-optional')).toHaveCSS('font-size','14px');expect((await plain.boundingBox())!.height).toBeGreaterThanOrEqual(44);await expect(page.getByLabel('Disabled',{exact:true})).toBeDisabled();await expect(page.getByLabel('Read only',{exact:true})).toHaveAttribute('readonly','');await page.setViewportSize({width:320,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);await page.screenshot({path:'test-results/core-parity-mobile.png',fullPage:true});});
+test('button and link state colours resolve from canonical role tokens',async({page})=>{
+ async function tokenColour(locator:ReturnType<typeof page.getByTestId>,token:string,property='color'){
+  const actual=await locator.evaluate((el,{token,property})=>{const probe=document.createElement('span');probe.style.color=`var(${token})`;el.appendChild(probe);const expected=getComputedStyle(probe).color;const actual=getComputedStyle(el).getPropertyValue(property);probe.remove();return {actual,expected}},{token,property});expect(actual.actual).toBe(actual.expected);
+ }
+ for(const variant of ['primary','default','destructive','text']){
+  const b=page.getByTestId(`${variant}-default`);
+  await page.mouse.move(0,0);await tokenColour(b,`--color-interactive-${variant}-foreground`);
+  await b.hover();await tokenColour(b,`--color-interactive-${variant}-hover-foreground`);
+  await page.keyboard.press('Tab');await b.focus();await expect(b).toHaveCSS('outline-style','solid');const before=await b.boundingBox();
+  await b.hover();await page.mouse.down();await tokenColour(b,`--color-interactive-${variant}-active-foreground`);await expect(b).toHaveCSS('outline-style','solid');expect(await b.boundingBox()).toEqual(before);await page.mouse.up();
+ }
+ const link=page.getByTestId('standalone-link');await page.mouse.move(0,0);await tokenColour(link,'--color-link-default-foreground');await link.hover();await tokenColour(link,'--color-link-hover-foreground');await page.mouse.down();await tokenColour(link,'--color-link-active-foreground');await page.mouse.up();
+ await page.emulateMedia({forcedColors:'active'});await page.keyboard.press('Tab');await page.getByTestId('default-default').focus();await expect(page.getByTestId('default-default')).toHaveCSS('outline-style','solid');
+});

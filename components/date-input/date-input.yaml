@@ -515,7 +515,7 @@ figmaComponentModel:
   publicComponent:
     name: Date Input
     type: component-set
-    status: create-after-source-gate
+    status: masters-present
     exactTree: |
       Date Input
       |-- _Fieldset/Header instance
@@ -738,3 +738,11 @@ verification:
     - Reflow, zoom and text-spacing checks pass.
     - Date-of-birth autocomplete tokens are valid and purpose-appropriate.
     - Source and Figma remain aligned after corrections.
+
+releaseAudit:
+  date: '2026-10-18'
+  figmaPageId: '1099:6'
+  componentSetId: '1099:424'
+  evidence: Live inventory confirmed thirteen Date Input variants.
+  fullDesignAndRoundTripVerification: required-before-publication
+  runtime: not-implemented

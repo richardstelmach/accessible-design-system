@@ -64,3 +64,9 @@ This prevents Tokens Studio from recreating separate `/base`, `/md` and `/lg` Fi
 See [`docs/token-sync-workflow.md`](docs/token-sync-workflow.md) for the complete build, sync, export and validation workflow.
 
 ---
+
+## OwlA11y React development
+
+The first runnable package contains Button, IconButton, Link and TextInput. See [package usage and commands](packages/react/README.md), [React interfaces](docs/react-api.md) and [package architecture](docs/react-package-structure.md). Run `npm ci`, `npm run build`, `npm test` and `npm run dev` from this directory. The package remains private and unpublished during beta preparation.
+
+Review the [audit resolutions](docs/launch-audit-resolution.md), [source and Figma comparison](docs/validation/react-core-parity.md), and [completed Figma reconciliation](docs/validation/figma-core-reconciliation.md) for validation results and remaining launch checks.
