@@ -1,5 +1,7 @@
 # Error Summary
 
+React implementation: `ErrorSummary` is exported from `@owla11y/react` with native list links, document-order sorting and explicit failed-submit focus requests. See [React API](../../docs/react-api.md), [usage](../../packages/react/README.md), and [source/Figma validation](../../docs/validation/react-date-errors-parity.md). Manual screen-reader acceptance remains open.
+
 **Status:** Draft
 **Version:** 0.1.0
 **Machine-readable specification:** [`error-summary.yaml`](./error-summary.yaml)

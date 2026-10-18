@@ -1,6 +1,6 @@
 # OwlA11y React API contract
 
-Status: partially implemented beta contract, 18 October 2026. Product decisions accepted by Richard: React 18.3 and 19, styled components with token customisation, light theme for launch. Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox and Radio are implemented; the remaining families are interface drafts. See packages/react/README.md for commands and verification limits.
+Status: partially implemented beta contract, 18 October 2026. Product decisions accepted by Richard: React 18.3 and 19, styled components with token customisation, light theme for launch. Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary and DateInput are implemented; the remaining families are interface drafts. See packages/react/README.md for commands and verification limits.
 
 ## Shared conventions
 
@@ -54,7 +54,7 @@ ToastProvider owns each mounted host lifetime. add returns the stable ID and tak
 
 A Tabs item heading labels the fallback section as well as panel content; heading semantics must fit the page outline. Selection survives fallback changes; focus never disappears into newly hidden content. Explicitly test manual activation and Tab exit.
 
-DateInput keeps raw strings and exposes required as a native group policy rather than the single-field requirement presentation axis. name creates day/month/year names; expose partNames for services needing different submission names. Return part IDs through a documented helper or render integration so ErrorSummary never guesses them. The exact helper shape must be resolved in the typed implementation.
+DateInput keeps raw strings and exposes required=true as a group policy rather than the single-field requirement presentation axis. name creates day/month/year submission names; partNames overrides all three with distinct explicit names. getDateInputIds(id) returns group/day/month/year IDs; supply the same id to DateInput so ErrorSummary never guesses its part IDs. The helper is pure and available without DOM access.
 
 For Accordion, the new controlled adapter is additive: expandedIds/defaultExpandedIds replace initialExpandedIds only at the React layer. Do not change the independent-only canonical behaviour.
 
@@ -75,3 +75,15 @@ Checkbox is optional unless native required is supplied for that individual choi
 Native disabled Fieldsets govern descendant focus/submission and :disabled styling. A private context suppresses unavailable error presentation in library descendants, including TextInput. Custom controls remain responsible for their own presentation.
 
 See [form comparison and validation](validation/react-forms-parity.md) for source blobs, Figma repairs, automated results and the remaining manual release evidence.
+
+## Date and error-summary checkpoint
+
+DateInput and ErrorSummary are implemented with a complete failed-submit example at ?date-errors. DateInput's ref targets Day. className styles its native fieldset. Default labels are Day/Month/Year; labels permits localisation. required=false appends the localisable optionalLabel once to the legend and removes required from all children; supply a legend without that suffix. purpose=date-of-birth enables bday-day/month/year only for the user's own birth date. Otherwise omit those autofill tokens. An explicit native form owner is forwarded to all three parts.
+
+DateInput values are complete objects of three raw strings. Controlled editable values require onValueChange(next,{part}); controlled readOnly may omit it. Uncontrolled defaults use native reset without a second React state owner. A controlled form resets application state itself. The component never parses, normalises, pads, clamps or advances focus. Group errors do not invalidate every part. Children errors require an error plus a nonempty invalidParts list and associate one generated or supplied error ID only with those parts. Whole-component disabled/readOnly suppress error presentation. Calendar and service rules remain at an explicit consumer boundary; the example validator demonstrates missing parts, numeric ranges, Gregorian leap years and a birth date in the past.
+
+ErrorSummary defaults to the visible h2 title There is a problem. errors must be nonempty. Stable issue IDs identify errors; duplicate current issues collapse, conflicting reuse of one ID throws, and text excludes list markers. The component sorts items by target document order after commit, then focuses only for a new finite-number/nonempty-string focusRequestKey. Pass a new key for every failed submit, including an initial server-rendered failed submission. Omit the key for passive display. Corrective rerenders do not refocus. A title owner adds one Error: prefix while mounted, restores it on resolution/unmount and preserves an externally replaced navigation title.
+
+Summary target IDs must resolve uniquely to visible, enabled native inputs, textareas, selects or buttons in the tab order. contextId optionally identifies a label, legend or fieldset (whose direct legend is scrolled). Without it, individual fields use their label and group Radio/Checkbox targets use the legend where appropriate. For a whole-date error use ids.day and contextId=ids.group; for a part-specific error use the affected part ID, which resolves its own label. Fragments remain real href values. Modified clicks retain native link behaviour. Active summary targets must remain available; invalid configuration throws after commit. No Fieldset is focused and inline descriptions remain unchanged. Root ref targets the native div with persistent tabIndex=-1. Only the tested focus-based announcement strategy is exposed; role/aria-live overrides are excluded.
+
+See [date/error comparison](validation/react-date-errors-parity.md) for precise evidence and remaining manual acceptance. These APIs do not imply screen-reader certification or full Next.js RSC acceptance.

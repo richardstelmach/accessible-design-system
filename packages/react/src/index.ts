@@ -1,6 +1,10 @@
 export { Button, IconButton } from './components/Button.js';
 export { Link } from './components/Link.js';
 export { TextInput } from './components/TextInput.js';
+export { DateInput } from './components/DateInput.js';
+export { ErrorSummary } from './components/ErrorSummary.js';
+export { getDateInputIds } from './internal/date.js';
+export type { DateInputProps, DateInputValue, DatePart, ErrorSummaryProps, ErrorSummaryItem } from './types.js';
 export { Textarea } from './components/Textarea.js';
 export { Select } from './components/Select.js';
 export { Fieldset } from './components/Fieldset.js';

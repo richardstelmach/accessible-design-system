@@ -1,6 +1,6 @@
 # OwlA11y package structure
 
-Accepted baseline: React 18.3 and 19; styled components with token overrides; light theme at launch. The workspace implements nine components: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox and Radio. Publication remains disabled.
+Accepted baseline: React 18.3 and 19; styled components with token overrides; light theme at launch. The workspace implements eleven components: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary and DateInput. Publication remains disabled.
 
 ## Repository layout
 
@@ -37,8 +37,9 @@ Before adding dependency versions, verify current official tool documentation an
 1. Establish the workspace, CSS generation, type checking and packed-consumer fixtures.
 2. Implement Button/IconButton, Link and TextInput, verifying the shared API conventions.
 3. Add Textarea, Select, Fieldset, Checkbox and Radio with integrated native form and Figma comparison checks.
-4. Follow with ErrorSummary and DateInput; investigate Dialog focus/lifecycle, Tabs fallback and Toast host integration before stabilising their typed interfaces.
-5. Complete the remaining families and release evidence from the readiness audit.
+4. Implement ErrorSummary and DateInput with native error routing, explicit part IDs and a complete failed-submit example.
+5. Investigate Dialog focus/lifecycle, Tabs fallback and Toast host integration before stabilising their typed interfaces.
+6. Complete the remaining families and release evidence from the readiness audit.
 
 ## Scaffold verification
 

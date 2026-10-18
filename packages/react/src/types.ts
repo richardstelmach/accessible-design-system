@@ -122,3 +122,56 @@ export type RadioProps = Omit<CheckboxProps, 'error' | 'indeterminate' | 'aria-i
   indeterminate?: never;
   'aria-invalid'?: never;
 };
+
+export type DatePart = 'day' | 'month' | 'year';
+export type DateInputValue = Record<DatePart, string>;
+type DateValueOwnership = {
+  value: DateInputValue; defaultValue?: never;
+  onValueChange: (value: DateInputValue, detail: { part: DatePart }) => void;
+} | {
+  value: DateInputValue; defaultValue?: never; readOnly: true;
+  onValueChange?: (value: DateInputValue, detail: { part: DatePart }) => void;
+} | {
+  value?: never; defaultValue?: DateInputValue;
+  onValueChange?: (value: DateInputValue, detail: { part: DatePart }) => void;
+};
+type DateErrorOwnership = { errorAssociation?: 'group'; invalidParts?: never; error?: FieldError } |
+  { errorAssociation: 'children'; invalidParts: readonly [DatePart, ...DatePart[]]; error: FieldError };
+export type DateInputProps = Omit<ComponentPropsWithoutRef<'fieldset'>,
+  'children' | 'value' | 'defaultValue' | 'onChange' | 'onInput' | 'onReset' | 'role' | 'tabIndex' | 'aria-invalid' | 'aria-label' | 'aria-labelledby'> &
+  DateValueOwnership & DateErrorOwnership & {
+    legend: string;
+    name: string;
+    helperText?: string;
+    required?: boolean;
+    optionalLabel?: string;
+    readOnly?: boolean;
+    purpose?: 'date' | 'date-of-birth';
+    labels?: Partial<Record<DatePart, string>>;
+    partNames?: Record<DatePart, string>;
+    children?: never;
+    onChange?: never;
+    onInput?: never;
+    onReset?: never;
+    role?: never;
+    tabIndex?: never;
+    'aria-invalid'?: never;
+    'aria-label'?: never;
+    'aria-labelledby'?: never;
+  };
+
+export type ErrorSummaryItem = { id: string; text: string; targetId: string; contextId?: string };
+export type ErrorSummaryProps = Omit<ComponentPropsWithoutRef<'div'>,
+  'children' | 'title' | 'role' | 'tabIndex' | 'aria-live' | 'aria-label' | 'aria-labelledby'> & {
+  title?: string;
+  description?: string;
+  errors: readonly ErrorSummaryItem[];
+  /** Pass a new value for every failed submit. Omit for passive display. */
+  focusRequestKey?: string | number;
+  children?: never;
+  role?: never;
+  tabIndex?: never;
+  'aria-live'?: never;
+  'aria-label'?: never;
+  'aria-labelledby'?: never;
+};
