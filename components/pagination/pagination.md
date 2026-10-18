@@ -205,5 +205,15 @@ native navigation, focus, no-JavaScript behaviour, history, asynchronous errors,
 all four text-spacing overrides, 320px/400% reflow, 200% text, RTL, forced colours
 and jump validation. Library publication remains separate.
 
-Work is on `feat/pagination-contract`, based on `main` at `783289a`. Source review,
-GitHub merge, Tokens Studio pull/export and the post-export audit remain pending.
+Source merged through [PR #34](https://github.com/richardstelmach/accessible-design-system/pull/34)
+at `7a3331d`. Richard completed the Tokens Studio step on 18 October 2026 and
+reported no variables created. The post-export audit confirms all 24 relevant
+variables already match the merged source, retaining their IDs, aliases,
+descriptions, scopes and Web syntax. No additional variable creation was needed.
+
+The audit found no broken references across 8,728 binding references, no duplicate
+names among the audited variables, and no visible horizontal overflow. Ten
+masters, all six Current state/focus combinations, the composed Link style,
+centred wrapping Pages and Breakpoint modes remain intact. The design and token
+round-trip is complete; production implementation acceptance and Figma library
+publication remain separate.
