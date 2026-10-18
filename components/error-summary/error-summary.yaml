@@ -1343,3 +1343,21 @@ acceptanceCriteria:
   - QA explicitly covers long text, 320px width, 200 percent text resize, 400 percent zoom/reflow and text spacing.
   - QA explicitly covers forced colours, screen-reader semantics, one announcement and focus not obscured.
   - Error Summary supplements rather than replaces inline errors.
+
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  exports: [ErrorSummary]
+  refTarget: HTMLDivElement
+  title: There is a problem
+  errors: Nonempty array of stable id/text/targetId/contextId items; duplicate current issues collapse.
+  focusRequestKey: New nonempty string or finite number per failed submission; omit for passive display.
+  rules:
+    - Render native h2 and ul/li/a; retain fragment destinations without Figma wrappers or repeated bullet text.
+    - Sort by target document order after sibling controls commit, before focusing.
+    - Focus once per new failed-submit key; corrective renders do not steal focus.
+    - Prefix the document title once and restore it on unmount without overwriting a navigation-owned title.
+    - Resolve unique visible enabled native targets and scroll their label or legend before focus.
+    - Keep persistent tabindex=-1 and use the tested focus-only strategy without an alert/live role.
+    - Preserve the target or Fieldset inline error association; never focus Fieldset itself.
+  validationEvidence: ../../docs/validation/react-date-errors-parity.md

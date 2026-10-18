@@ -9,7 +9,7 @@ const countries = <><option value="">Select a country</option><optgroup label="C
 export function Forms() {
   const [notes, setNotes] = useState('');
   const [saved, setSaved] = useState('');
-  return <main style={{ maxWidth: '40rem', margin: '2rem auto', padding: '1rem', fontFamily: 'Inter, sans-serif', overflowWrap: 'anywhere' }}>
+  return <main className="owla11y-preview" style={{ maxWidth: '40rem', margin: '2rem auto', padding: '1rem', overflowWrap: 'anywhere' }}>
     <h1>OwlA11y form components</h1>
     <p>Development comparison for Textarea, Select, Fieldset, Checkbox and Radio. Use the keyboard to inspect focus and native interaction.</p>
     <style>{`.forms-stack { display:grid; gap:var(--form-field-gap-controlToNextField); }`}</style>

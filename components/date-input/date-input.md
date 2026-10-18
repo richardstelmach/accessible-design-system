@@ -1,5 +1,7 @@
 # Date Input
 
+React implementation: `DateInput` and the pure `getDateInputIds` helper are exported from `@owla11y/react`. See [React API](../../docs/react-api.md), [usage](../../packages/react/README.md), and [source/Figma validation](../../docs/validation/react-date-errors-parity.md). Automated validation passes; manual release acceptance remains open.
+
 **Status:** Draft
 
 **Version:** 0.1.0

@@ -745,4 +745,39 @@ releaseAudit:
   componentSetId: '1099:424'
   evidence: Live inventory confirmed thirteen Date Input variants.
   fullDesignAndRoundTripVerification: required-before-publication
-  runtime: not-implemented
+  runtime: react-implemented-manual-release-checks-pending
+
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  exports: [DateInput, getDateInputIds]
+  refTarget: HTMLInputElement-day
+  value: Raw day/month/year strings; controlled values require onValueChange or readOnly.
+  uncontrolled: defaultValue uses native form reset; no React value owner is introduced.
+  ids: getDateInputIds(id) returns group/day/month/year; provide that id to DateInput.
+  errors: Group association is default; children association requires error and nonempty invalidParts.
+  requirement: required defaults to true; false appends optionalLabel to the legend only.
+  rules:
+    - Preserve raw text; no automatic parsing, correction, padding, clamping or focus advance.
+    - Expose partNames for distinct submission names and labels for localised visible part labels.
+    - Forward a supplied native form owner to all three inputs.
+    - Native disabled or readOnly applies to the complete answer and suppresses stale errors.
+    - Calendar and service validation runs at an explicit consumer submission boundary.
+  validationEvidence: ../../docs/validation/react-date-errors-parity.md
+
+figmaReconciliation:
+  date: '2026-10-18'
+  componentSetId: '1099:424'
+  controlsReconciled: 39
+  variantsPreserved: 13
+  header: Existing exposed _Fieldset/Header instances remain unchanged.
+  control:
+    minimumHeight: size.control.minBlockSize.default
+    height: hug-content
+    fixedHeightBinding: prohibited
+    strokesIncludedInLayout: true
+    valueViewport: {name: Value viewport, width: fill, height: hug-content, clipsContent: true, valueText: single-line-natural-width}
+    sharedTextStyle: form/control/typography
+    responsiveFontVariable: form/control/typography/fontSize
+  focus: Existing overlays retain source separator/ring offsets and stretch with the control.
+  evidence: ../../docs/validation/react-date-errors-parity.md

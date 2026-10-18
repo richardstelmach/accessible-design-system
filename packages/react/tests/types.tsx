@@ -1,6 +1,8 @@
 import React, {createRef} from 'react';
 import {Button,IconButton,Link,TextInput} from '../src/index.js';
 import {Textarea,Select,Fieldset,Checkbox,Radio} from '../src/index.js';
+import {DateInput,ErrorSummary,getDateInputIds} from '../src/index.js';
+import type {DateInputValue} from '../src/index.js';
 <Button ref={createRef<HTMLButtonElement>()} onClick={e=>e.currentTarget.focus()}>Save</Button>;
 <IconButton aria-label="Add" icon={<svg/>}/>;
 <Link href="/" ref={createRef<HTMLAnchorElement>()}>Home</Link>;
@@ -55,3 +57,25 @@ import {Textarea,Select,Fieldset,Checkbox,Radio} from '../src/index.js';
 <Radio label="Email" name="contact" value="email" error={{message:'Error'}}/>;
 // @ts-expect-error choice value is mandatory
 <Checkbox label="Updates" name="updates"/>;
+
+const dateIds = getDateInputIds('dob');
+<DateInput id={dateIds.group} legend="Date of birth" name="dob" ref={createRef<HTMLInputElement>()} purpose="date-of-birth" />;
+<DateInput legend="Date" name="date" defaultValue={{day:'01',month:'02',year:'2000'}} />;
+<DateInput legend="Date" name="date" value={{day:'1',month:'2',year:'2000'}} onValueChange={(value:DateInputValue,detail)=>detail.part} />;
+<DateInput legend="Date" name="date" value={{day:'1',month:'2',year:'2000'}} readOnly />;
+<DateInput legend="Date" name="date" error={{message:'Enter year'}} errorAssociation="children" invalidParts={['year']} />;
+<ErrorSummary ref={createRef<HTMLDivElement>()} errors={[{id:'dob',text:'Enter date',targetId:dateIds.day,contextId:dateIds.group}]} focusRequestKey={1} />;
+// @ts-expect-error DateInput controlled owner requires callback or readonly
+<DateInput legend="Date" name="date" value={{day:'1',month:'2',year:'2000'}} />;
+// @ts-expect-error children association needs affected parts
+<DateInput legend="Date" name="date" errorAssociation="children" error={{message:'Enter date'}} />;
+// @ts-expect-error group errors do not mark children invalid
+<DateInput legend="Date" name="date" invalidParts={['year']} />;
+// @ts-expect-error raw date strings must not be coerced to numbers
+<DateInput legend="Date" name="date" defaultValue={{day:1,month:'2',year:'2000'}} />;
+// @ts-expect-error DateInput has one value owner
+<DateInput legend="Date" name="date" onChange={()=>{}} />;
+// @ts-expect-error summary owns native focus semantics
+<ErrorSummary errors={[{id:'dob',text:'Enter date',targetId:dateIds.day}]} tabIndex={0} />;
+// @ts-expect-error untested duplicate live-announcement strategies are excluded
+<ErrorSummary errors={[{id:'dob',text:'Enter date',targetId:dateIds.day}]} role="alert" />;

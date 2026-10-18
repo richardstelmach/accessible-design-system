@@ -90,8 +90,8 @@
         "ErrorSummary"
       ],
       "props": "title; description?; errors: {id,text,targetId,contextId?}[]; focusRequestKey?",
-      "behaviour": "Root div ref; nonempty errors. One focus per new failed-submit key after commit; target visible enabled control; contextId optionally scrolls to legend/label.",
-      "implementation": "not-implemented"
+      "behaviour": "Native h2/ul/li/a; document-order sorting and issue deduplication after commit. New focusRequestKey requests focus once; passive display omits the key. Prefix/restore document title, retain fragments and scroll label/legend before native-control focus. No alert/live role by default.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "stepper",
@@ -107,9 +107,9 @@
       "exports": [
         "DateInput"
       ],
-      "props": "legend; name (field-name prefix); id?; value/defaultValue: {day,month,year} raw strings; onValueChange; helperText?; error?; errorAssociation; invalidParts?; required; disabled; readOnly; purpose=date|date-of-birth",
-      "behaviour": "Ref targets first day input; three native text fields with numeric inputmode; stable part IDs; no parsing/clamping on typing. Validation remains explicit consumer input.",
-      "implementation": "not-implemented"
+      "props": "legend; name prefix; id?; raw value/defaultValue {day,month,year}; onValueChange(next,{part}); helperText?; error?; errorAssociation=group|children; nonempty invalidParts for children; required=true; disabled; readOnly; purpose=date|date-of-birth; labels?; partNames?; optionalLabel?",
+      "behaviour": "Native fieldset with three text inputs; day ref; numeric inputmode; raw strings preserved and native uncontrolled reset. getDateInputIds(id) returns group/day/month/year; supplied form owner applies to all parts. Consumer validates explicitly; no parsing/clamping/auto-advance.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "dialog",
