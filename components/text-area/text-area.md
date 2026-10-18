@@ -1,8 +1,10 @@
 # Textarea
 
+React implementation: exported from `@owla11y/react`, with native semantics, refs and token styling. See [package usage](../../packages/react/README.md), [React API](../../docs/react-api.md) and [source/Figma validation](../../docs/validation/react-forms-parity.md). Automated checks pass; manual release acceptance remains open.
+
 **Status:** Draft  
 **Version:** 0.1.0  
-**Machine-readable specification:** [`textarea.yaml`](./textarea.yaml)  
+**Machine-readable specification:** [`text-area.yaml`](./text-area.yaml)
 **Component tokens:** [`../../tokens/components/textarea.json`](../../tokens/components/textarea.json)
 
 ## Overview

@@ -46,7 +46,7 @@
       ],
       "props": "label; name; id?; helperText?; error?; requirement; rows=5",
       "behaviour": "Native textarea props/ref, value/defaultValue/onChange; vertical resize.",
-      "implementation": "not-implemented"
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "select",
@@ -55,7 +55,7 @@
       ],
       "props": "label; name; id?; helperText?; error?; requirement; children=option/optgroup",
       "behaviour": "Native single-select props/ref, value/defaultValue/onChange; no multiple/readOnly; React owns selected via value.",
-      "implementation": "not-implemented"
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "fieldset",
@@ -64,7 +64,7 @@
       ],
       "props": "legend; legendStyle?; headingLevel?; helperText?; error?; errorAssociation=group|children (group); children",
       "behaviour": "Native fieldset props/ref; legend first direct child. In children mode error.id is supplied to affected controls through errorDescribedBy; no duplicate group error association.",
-      "implementation": "not-implemented"
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "radio",
@@ -73,7 +73,7 @@
       ],
       "props": "label; name; value; id?; description?",
       "behaviour": "Native radio props/ref, checked/defaultChecked/onChange; group error belongs to Fieldset.",
-      "implementation": "not-implemented"
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "checkbox",
@@ -82,7 +82,7 @@
       ],
       "props": "label; name; value; id?; description?; error?; indeterminate=false",
       "behaviour": "Native checkbox props/ref, checked/defaultChecked/onChange; indeterminate separate from checkedness; no readOnly.",
-      "implementation": "not-implemented"
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "error-summary",

@@ -42,3 +42,83 @@ export type TextInputProps = InputNative & InputValue & {
   optionalLabel?: string;
   width?: 'full' | '2ch' | '3ch' | '4ch' | '5ch' | '10ch' | '20ch';
 };
+
+type VisibleField = {
+  label: string;
+  name: string;
+  helperText?: string;
+  error?: FieldError;
+  errorDescribedBy?: string;
+  requirement?: 'required' | 'optional';
+  optionalLabel?: string;
+  placeholder?: never;
+  'aria-label'?: never;
+  'aria-labelledby'?: never;
+  role?: never;
+  required?: never;
+};
+type TextareaNative = Omit<ComponentPropsWithoutRef<'textarea'>,
+  keyof VisibleField | 'children' | 'value' | 'defaultValue' | 'onChange'>;
+type TextareaChange = NonNullable<ComponentPropsWithoutRef<'textarea'>['onChange']>;
+type TextareaValue = { value: string; defaultValue?: never; onChange: TextareaChange } |
+  { value: string; defaultValue?: never; readOnly: true; onChange?: TextareaChange } |
+  { value?: never; defaultValue?: string; onChange?: TextareaChange };
+export type TextareaProps = TextareaNative & VisibleField & TextareaValue & { children?: never };
+
+type SelectNative = Omit<ComponentPropsWithoutRef<'select'>,
+  keyof VisibleField | 'value' | 'defaultValue' | 'onChange' | 'multiple' | 'size' | 'tabIndex'>;
+type SelectChange = NonNullable<ComponentPropsWithoutRef<'select'>['onChange']>;
+type SelectValue = { value: string; defaultValue?: never; onChange: SelectChange } |
+  { value?: never; defaultValue?: string; onChange?: SelectChange };
+export type SelectProps = SelectNative & VisibleField & SelectValue & {
+  children: ReactNode;
+  multiple?: never;
+  size?: 1;
+  readOnly?: never;
+  tabIndex?: 0;
+};
+
+export type LegendStyle = 'page' | 'default' | 'section' | 'subsection' | 'compact';
+export type FieldsetHeadingLevel = 'none' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+type FieldsetError = { errorAssociation?: 'group'; error?: FieldError } |
+  { errorAssociation: 'children'; error?: FieldError & { id: string } };
+export type FieldsetProps = Omit<ComponentPropsWithoutRef<'fieldset'>,
+  'children' | 'aria-invalid' | 'aria-label' | 'aria-labelledby' | 'role' | 'tabIndex'> & FieldsetError & {
+  legend: string;
+  legendStyle?: LegendStyle;
+  headingLevel?: FieldsetHeadingLevel;
+  helperText?: string;
+  children: ReactNode;
+  'aria-invalid'?: never;
+  'aria-label'?: never;
+  'aria-labelledby'?: never;
+  role?: never;
+  tabIndex?: never;
+};
+
+type ChoiceNative = Omit<ComponentPropsWithoutRef<'input'>,
+  'children' | 'type' | 'value' | 'defaultValue' | 'checked' | 'defaultChecked' | 'onChange' |
+  'readOnly' | 'role' | 'aria-checked' | 'aria-label' | 'aria-labelledby'>;
+type ChoiceChange = NonNullable<ComponentPropsWithoutRef<'input'>['onChange']>;
+type ChoiceChecked = { checked: boolean; defaultChecked?: never; onChange: ChoiceChange } |
+  { checked?: never; defaultChecked?: boolean; onChange?: ChoiceChange };
+export type CheckboxProps = ChoiceNative & ChoiceChecked & {
+  label: string;
+  name: string;
+  value: string;
+  description?: string;
+  error?: FieldError;
+  indeterminate?: boolean;
+  children?: never;
+  type?: never;
+  readOnly?: never;
+  role?: never;
+  'aria-checked'?: never;
+  'aria-label'?: never;
+  'aria-labelledby'?: never;
+};
+export type RadioProps = Omit<CheckboxProps, 'error' | 'indeterminate' | 'aria-invalid'> & ChoiceChecked & {
+  error?: never;
+  indeterminate?: never;
+  'aria-invalid'?: never;
+};

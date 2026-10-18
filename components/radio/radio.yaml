@@ -850,3 +850,16 @@ acceptanceCriteria:
   - Disabled selected and disabled unselected states are supported.
   - Tokens use compatible types and compile.
   - No responsive Radio token group is introduced.
+
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  exports: [Radio]
+  refTarget: HTMLInputElement
+  validationEvidence: ../../docs/validation/react-forms-parity.md
+  rules:
+    - "Native checked/defaultChecked/onChange; controlled checkedness requires onChange."
+    - "label, shared nonempty name and nonempty string value are required; optional description stays outside the label."
+    - "Compose native radio inputs in Fieldset; do not create a separate RadioGroup export."
+    - "Missing-answer errors belong to Fieldset; no individual error, aria-invalid, readOnly or indeterminate API."
+    - "No default preselection; native keyboard interaction and form reset are preserved."

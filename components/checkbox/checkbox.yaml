@@ -1622,3 +1622,16 @@ acceptanceCriteria:
   - Switch is excluded.
   - Read-only is excluded.
   - No responsive Checkbox token group is introduced.
+
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  exports: [Checkbox]
+  refTarget: HTMLInputElement
+  validationEvidence: ../../docs/validation/react-forms-parity.md
+  rules:
+    - "Native checked/defaultChecked/onChange; controlled checkedness requires onChange."
+    - "label, name and nonempty string value are required; description stays outside the label."
+    - "indeterminate is a DOM property independent of checkedness and submission; native activation clears it."
+    - "Optional by default; native required means this specific checkbox must be checked. Group selection errors remain on Fieldset."
+    - "Individual error may be supplied; disabled controls suppress it; no readOnly or aria-checked override."

@@ -696,3 +696,30 @@ acceptanceCriteria:
   - The dropdown indicator is decorative.
   - Error focus shows both error and focus treatments.
   - The YAML, Markdown, Figma component and implementation guidance agree.
+
+publicApi:
+  status: react-implemented-manual-release-checks-pending
+  reference: ../../docs/react-api.md
+  exports: [Select]
+  refTarget: HTMLSelectElement
+  validationEvidence: ../../docs/validation/react-forms-parity.md
+  rules:
+    - "Native string value/defaultValue/onChange; controlled selection requires onChange."
+    - "Native option/optgroup children; first direct option has empty string value and stays enabled and visible."
+    - "Require explicit stable string values and plain text option labels; no option.selected."
+    - "Required by default; no multiple/readOnly/custom popup; size is omitted or 1; tabIndex is omitted or 0."
+
+figmaReconciliation:
+  date: '2026-10-18'
+  componentSetId: '384:1122'
+  header: {name: _Select/Header, type: internal-auto-layout-frame, gap: form.field.gap.helperToError}
+  headerToControl:
+    default: form.field.gap.labelToHelper
+    error: form.field.gap.errorToControl
+    errorFocus: form.field.gap.errorToControl
+  control: {minimumHeight: size.control.minBlockSize.default, height: hug-content, strokesIncludedInLayout: true}
+  valueViewport: {name: Value viewport, width: fill, height: hug-content, clipsContent: true, valueText: single-line-natural-width}
+  sharedTextStyle: form/control/typography
+  responsiveFontVariable: form/control/typography/fontSize
+  preservePublicProperties: true
+  evidence: ../../docs/validation/react-forms-parity.md
