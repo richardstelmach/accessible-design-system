@@ -48,6 +48,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs({
   const panels = useRef(new Map<string, HTMLElement>());
   const leaveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const pendingContinuity = useRef<string | null>(null);
+  const pointerFocus = useRef<{ key: string; requested: boolean } | null>(null);
   const latest = useRef({ items, desired, controlled, onSelectedChange, labelledBy });
   latest.current = { items, desired, controlled, onSelectedChange, labelledBy };
   useImperativeHandle(ref, () => root.current!, []);
@@ -168,12 +169,23 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs({
             clearTimeout(leaveTimer.current);
             if (!enhanced) return;
             setRoving(item.id);
-            if (activation === 'automatic') choose(item.id);
+            if (activation === 'automatic') {
+              const pointer = pointerFocus.current;
+              if (pointer && pointer.key === item.id) pointer.requested = true;
+              choose(item.id);
+            }
           }}
+          onPointerDown={event => { pointerFocus.current = event.button === 0 ? { key: item.id, requested: false } : null; }}
+          onPointerCancel={() => { pointerFocus.current = null; }}
           onClick={event => {
+            const pointer = pointerFocus.current;
+            const focusRequested = pointer && pointer.key === item.id && pointer.requested;
+            pointerFocus.current = null;
             if (!enhanced || event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
-            event.preventDefault(); event.currentTarget.focus();
-            if (activation === 'manual') choose(item.id);
+            event.preventDefault();
+            const alreadyFocused = event.currentTarget.ownerDocument.activeElement === event.currentTarget;
+            event.currentTarget.focus();
+            if (activation === 'manual' || (alreadyFocused && !focusRequested)) choose(item.id);
           }}
           onKeyUp={event => { if (event.key === ' ' || event.key === 'Enter') setPressed(null); }}
           onKeyDown={event => {

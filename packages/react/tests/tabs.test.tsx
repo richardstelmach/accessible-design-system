@@ -107,3 +107,13 @@ it('defers controlled hiding when a panel still contains focus',()=>{
   act(()=>screen.getByRole('button',{name:'Outside'}).focus());
   expect(screen.getByRole('tab',{name:'History'})).toHaveAttribute('aria-selected','true');
 });
+
+it('automatic controlled activation permits retries without duplicating pointer focus requests',()=>{
+  const change=vi.fn();render(<Tabs label="Sections" items={items} selectedId="details" onSelectedChange={change}/>);
+  const history=screen.getByRole('tab',{name:'History'});
+  fireEvent(history,new MouseEvent('pointerdown',{button:0,bubbles:true}));act(()=>history.focus());fireEvent.click(history);
+  expect(change).toHaveBeenCalledExactlyOnceWith('history');
+  fireEvent.click(history);expect(change).toHaveBeenCalledTimes(2);
+  fireEvent(history,new MouseEvent('pointerdown',{button:0,bubbles:true}));fireEvent.click(history);expect(change).toHaveBeenCalledTimes(3);
+  expect(screen.getByRole('tab',{name:'Details'})).toHaveAttribute('aria-selected','true');
+});
