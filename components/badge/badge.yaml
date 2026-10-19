@@ -412,3 +412,13 @@ acceptanceCriteria:
   - Label text wraps without clipping, truncation or loss under zoom and text-spacing changes.
   - Figma uses exactly five variants and one Label property.
   - Tokens Studio global output and manual Breakpoint typography remain the only Figma token sources.
+
+reactAdapter:
+  implementation: implemented-manual-release-checks-pending
+  export: Badge
+  ref: HTMLSpanElement
+  props: Required plain-text label; tone defaults to neutral.
+  containerMetadata: id, className, style, lang, dir and data attributes; no handlers, focus, role, ARIA overrides or content slots.
+  announcementOwner: Consuming application only; Badge has no live role or hidden tone prefix.
+  figmaReconciliation: All five existing tone masters, small-body style and four geometry variables retained unchanged.
+  evidence: docs/validation/react-feedback-parity.md

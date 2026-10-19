@@ -9,7 +9,7 @@
     "node": ">=22.12"
   },
   "scripts": {
-    "build": "node scripts/build-tokens.mjs && node scripts/build-react-css.mjs && tsc -p packages/react/tsconfig.json && node scripts/assemble-react.mjs",
+    "build": "node scripts/clean-react.mjs && node scripts/build-tokens.mjs && node scripts/build-react-css.mjs && tsc -p packages/react/tsconfig.json && node scripts/assemble-react.mjs",
     "test": "vitest run",
     "typecheck": "tsc -p packages/react/tsconfig.test.json && tsc -p examples/client-consumer/tsconfig.json",
     "verify:package": "node scripts/verify-react-package.mjs",

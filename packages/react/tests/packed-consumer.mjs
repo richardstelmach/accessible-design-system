@@ -9,7 +9,7 @@ globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Ele
 globalThis.getComputedStyle=dom.window.getComputedStyle;
 const {renderToString}=await import('react-dom/server');
 const {hydrateRoot}=await import('react-dom/client');
-const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast } = await import('@owla11y/react');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
@@ -135,4 +135,15 @@ await React.act(async()=>root.querySelector('[aria-controls]').click());assert.o
 await React.act(async()=>root.querySelector('[data-toast-id] button').focus());await React.act(async()=>toastAPI.dismiss('packed-save'));
 assert.equal(root.querySelectorAll('[data-toast-id]').length,0);assert.ok(document.activeElement===root.querySelector('[aria-controls]'));
 assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
-console.log('Packed package: React ' + React.version + ' thirteen components plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');
+const alertRef=React.createRef();const badgeRef=React.createRef();
+const feedbackApp=(announcement='none',headingLevel='none')=>h(React.StrictMode,null,h('div',null,
+ h(Alert,{ref:alertRef,state:'error',titleText:'Review the application',descriptionText:'Check the details',announcement,headingLevel}),
+ h(Badge,{ref:badgeRef,tone:'success',label:'Completed'})));
+root.innerHTML=renderToString(feedbackApp());const feedbackHTML=root.innerHTML;
+assert.equal(root.querySelector('[role],[tabindex],[aria-live],[aria-atomic]'),null);
+await React.act(async()=>{hydrated=hydrateRoot(root,feedbackApp(),{onRecoverableError:error=>errors.push(error)});});
+assert.equal(root.innerHTML,feedbackHTML);assert.equal(alertRef.current.textContent,'Error: Review the applicationCheck the details');assert.equal(badgeRef.current.tagName,'SPAN');assert.equal(badgeRef.current.textContent,'Completed');
+await React.act(async()=>hydrated.render(feedbackApp('polite',3)));
+assert.equal(alertRef.current.getAttribute('role'),'status');assert.equal(alertRef.current.querySelector('h3').textContent,'Error: Review the application');assert.equal(root.querySelector('[aria-live],[aria-atomic],[tabindex]'),null);
+assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
+console.log('Packed package: React ' + React.version + ' fifteen components including Alert/Badge plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');

@@ -137,3 +137,26 @@ const timedToast:ToastMessage={...toastMessage,duration:5000};
 <ToastRegion role="alert"/>;
 // @ts-expect-error entry text is generated from the active count
 <ToastNotificationsButton>Custom</ToastNotificationsButton>;
+
+import {Alert,Badge} from '../src/index.js';
+<Alert titleText="Saved" state="success" ref={createRef<HTMLDivElement>()}/>;
+<Alert titleText="Before continuing" headingLevel={3} announcement="polite" descriptionText="Check your answers"/>;
+<Badge label="Pending" tone="info" ref={createRef<HTMLSpanElement>()}/>;
+// @ts-expect-error Alert title is required
+<Alert/>;
+// @ts-expect-error semantic headings exclude h1
+<Alert titleText="Title" headingLevel={1}/>;
+// @ts-expect-error noninteractive feedback has no action slot
+<Alert titleText="Title"><button>Action</button></Alert>;
+// @ts-expect-error roles are derived from announcement
+<Alert titleText="Title" role="alert"/>;
+// @ts-expect-error rich label content is unsupported
+<Badge label={<strong>Pending</strong>}/>;
+// @ts-expect-error Badge is not a button
+<Badge label="Pending" onClick={()=>{}}/>;
+// @ts-expect-error Badge never supplies live semantics
+<Badge label="Pending" role="status"/>;
+// @ts-expect-error Badge is not focusable
+<Badge label="Pending" tabIndex={0}/>;
+// @ts-expect-error Badge labels are required
+<Badge tone="success"/>;

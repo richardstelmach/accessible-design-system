@@ -132,18 +132,18 @@
       "exports": [
         "Alert"
       ],
-      "props": "state=info; titleText; descriptionText?; headingLevel=none; announcement=none|polite|assertive (none)",
-      "behaviour": "Static messages have no live role; optional description replaces redundant description Boolean in React.",
-      "implementation": "not-implemented"
+      "props": "state=info; titleText; descriptionText?; headingLevel=none|2..6; announcement=none|polite|assertive (none); stateLabels?; ref=HTMLDivElement; container metadata only",
+      "behaviour": "Static nonfocusable div by default; fixed decorative icon and one hidden state prefix; explicit semantic headings use matching responsive tokens. Optional description omits blank text. Live priority is independent of state; one announcement owner, no focus or lifetime management.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "badge",
       "exports": [
         "Badge"
       ],
-      "props": "label; tone=neutral",
-      "behaviour": "Noninteractive span; no role/live-region/click API.",
-      "implementation": "not-implemented"
+      "props": "label; tone=neutral|info|success|warning|error (neutral); ref=HTMLSpanElement; container metadata only",
+      "behaviour": "Noninteractive span; visible label supplies meaning; no hidden tone prefix, role/live region, event handlers or content slots. Small-body text wraps within min(parent width,15rem).",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "tabs",

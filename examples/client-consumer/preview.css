@@ -1,5 +1,6 @@
 /* Development preview typography; package styles do not style host page headings. */
 .owla11y-preview {
+  overflow-wrap: anywhere;
   font-family: var(--typography-body-default-fontFamily);
   font-size: var(--typography-body-default-fontSize);
   font-weight: var(--typography-body-default-fontWeight);
