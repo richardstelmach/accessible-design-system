@@ -9,7 +9,7 @@ globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Ele
 globalThis.getComputedStyle=dom.window.getComputedStyle;
 const {renderToString}=await import('react-dom/server');
 const {hydrateRoot}=await import('react-dom/client');
-const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog } = await import('@owla11y/react');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
@@ -95,4 +95,29 @@ const cancel=new dom.window.Event('cancel',{cancelable:true});await React.act(as
 assert.equal(cancel.defaultPrevented,true);assert.deepEqual(requested,[[false,'escape']]);assert.equal(modalRef.current.open,true);
 await React.act(async()=>hydrated.render(modal(false)));assert.equal(document.body.style.overflow,'');assert.deepEqual(errors,[]);
 await React.act(async()=>hydrated.unmount());
-console.log('Packed package: React ' + React.version + ' twelve components, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');
+// Simulated layout drives enhancement deterministically; Chromium owns actual fit/reflow evidence.
+let wide=true;const resized=[];
+dom.window.matchMedia=query=>({get matches(){return query==='print'?false:wide;},addEventListener(){},removeEventListener(){}});
+dom.window.ResizeObserver=class{constructor(callback){resized.push(callback);}observe(){}disconnect(){}};
+dom.window.HTMLElement.prototype.getBoundingClientRect=function(){return new dom.window.DOMRect(0,0,this.classList.contains('owla11y-tabs__measure')?200:800,48);};
+const tabsRef=React.createRef();const changes=[];
+const tabsApp=h(Tabs,{ref:tabsRef,label:'Packed sections',defaultSelectedId:'history',activation:'manual',onSelectedChange:id=>changes.push(id),items:[
+ {id:'details',label:'Details',heading:'Details',content:h('input',{'aria-label':'Notes',defaultValue:'Saved note'})},
+ {id:'history',label:'History',heading:'History',content:h('p',null,'Earlier activity')}
+]});
+root.innerHTML=renderToString(tabsApp);assert.equal(root.querySelector('[role=tab]'),null);assert.equal(root.querySelectorAll('section:not([hidden])').length,2);
+const tabIds=[...root.querySelectorAll('[id]')].map(n=>n.id);
+await React.act(async()=>{hydrated=hydrateRoot(root,tabsApp,{onRecoverableError:error=>errors.push(error)});});
+assert.ok(tabsRef.current===root.firstElementChild);assert.deepEqual([...root.querySelectorAll('[id]')].map(n=>n.id),tabIds);
+assert.equal(root.querySelector('[role=tab][aria-selected=true]').textContent,'History');
+const detailTab=[...root.querySelectorAll('[role=tab]')].find(n=>n.textContent==='Details');
+await React.act(async()=>detailTab.click());assert.deepEqual(changes,['details']);
+const notes=root.querySelector('input');notes.value='Edited note';
+await React.act(async()=>root.querySelectorAll('[role=tab]')[1].click());
+assert.ok(notes===root.querySelector('input'));assert.ok(notes.closest('section').hidden);
+await React.act(async()=>{wide=false;resized.forEach(callback=>callback());});
+assert.equal(root.querySelector('[role=tab]'),null);assert.equal(root.querySelectorAll('section:not([hidden])').length,2);
+await React.act(async()=>notes.focus());await React.act(async()=>{wide=true;resized.forEach(callback=>callback());});
+assert.equal(root.querySelector('[role=tab][aria-selected=true]').textContent,'Details');assert.equal(notes.value,'Edited note');assert.ok(document.activeElement===notes);
+assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
+console.log('Packed package: React ' + React.version + ' thirteen components, Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');

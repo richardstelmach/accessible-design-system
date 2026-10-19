@@ -67,7 +67,7 @@ See [`docs/token-sync-workflow.md`](docs/token-sync-workflow.md) for the complet
 
 ## OwlA11y React development
 
-The runnable package contains Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput and Dialog. See [package usage and commands](packages/react/README.md), [React interfaces](docs/react-api.md) and [package architecture](docs/react-package-structure.md). Run `npm ci`, `npm run build`, `npm test` and `npm run dev` from this directory. Use `?forms` for the new form-component comparison. The package remains private and unpublished during beta preparation.
+The runnable package contains Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog and Tabs. See [package usage and commands](packages/react/README.md), [React interfaces](docs/react-api.md) and [package architecture](docs/react-package-structure.md). Run `npm ci`, `npm run build`, `npm test` and `npm run dev` from this directory. Use `?forms` for the new form-component comparison. The package remains private and unpublished during beta preparation.
 
 Review the [audit resolutions](docs/launch-audit-resolution.md), [source and Figma comparison](docs/validation/react-core-parity.md), and [completed Figma reconciliation](docs/validation/figma-core-reconciliation.md) for validation results and remaining launch checks.
 
@@ -75,4 +75,4 @@ The next five components are covered by the [form-component comparison and valid
 
 ErrorSummary and DateInput complete the first failed-submit example at `?date-errors`. See [date/error comparison and validation](docs/validation/react-date-errors-parity.md) for error routing, title/focus behaviour, raw date handling and the Date Input Figma repairs.
 
-Dialog and its native modal backdrop are implemented at `?dialogs`. See [Dialog source/Figma comparison and validation](docs/validation/react-dialog-parity.md). Tabs and Toast remain the next interaction families to investigate.
+Dialog and its native modal backdrop are implemented at `?dialogs`. See [Dialog source/Figma comparison and validation](docs/validation/react-dialog-parity.md). Tabs is implemented at `?tabs`; see [Tabs comparison and validation](docs/validation/react-tabs-parity.md). Toast host integration is the next interaction family to investigate.

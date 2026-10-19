@@ -150,9 +150,9 @@
       "exports": [
         "Tabs"
       ],
-      "props": "label; items: {id,label,heading,content}[]; selectedId/defaultSelectedId; onSelectedChange; activation=automatic|manual (automatic)",
-      "behaviour": "Unique nonempty items; default first selection. Immediate panels for automatic mode; all-sections fallback below md or container overflow; DOM order retained.",
-      "implementation": "not-implemented"
+      "props": "label|labelledBy; items: {id,label,heading,content}[] (minimum 2); headingLevel=3 (2..6); selectedId/defaultSelectedId; onSelectedChange; activation=automatic|manual (automatic)",
+      "behaviour": "Linked-section SSR/baseline; measured enhancement at >=48rem if whole row fits. Automatic/manual activation, one roving entry, mounted hidden panels, focus-aware fallback/re-enhancement and all-sections print. Controlled owner may decline; never hide focused content.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "accordion",

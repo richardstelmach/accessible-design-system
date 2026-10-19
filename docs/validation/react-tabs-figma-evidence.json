@@ -1,0 +1,2893 @@
+{
+  "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
+  "baselineCommit": "8821faa75cfdb5add818b250360ffeedf84c4882",
+  "before": {
+    "sets": [
+      {
+        "id": "1164:13",
+        "name": "Tabs / Tab",
+        "variants": [
+          {
+            "id": "1164:7",
+            "name": "Selected=False, State=Default",
+            "type": "COMPONENT",
+            "w": 64,
+            "h": 51,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "layout": "HORIZONTAL",
+            "sizing": [
+              "HUG",
+              "HUG"
+            ],
+            "clips": false,
+            "stroke": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "strokesIncluded": false,
+            "bindings": {
+              "paddingLeft": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingTop": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "paddingRight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingBottom": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "topLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "topRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "minWidth": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:148"
+              },
+              "minHeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:150"
+              },
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:85:1495"
+                }
+              ]
+            },
+            "properties": {
+              "Label#1164:0": {
+                "type": "TEXT",
+                "defaultValue": "Tab"
+              },
+              "Focus#1164:7": {
+                "type": "BOOLEAN",
+                "defaultValue": false
+              },
+              "Selected": {
+                "type": "VARIANT",
+                "defaultValue": "False",
+                "variantOptions": [
+                  "False",
+                  "True"
+                ]
+              },
+              "State": {
+                "type": "VARIANT",
+                "defaultValue": "Default",
+                "variantOptions": [
+                  "Default",
+                  "Hover",
+                  "Pressed"
+                ]
+              }
+            },
+            "children": [
+              {
+                "id": "1164:14",
+                "name": "Label",
+                "type": "TEXT",
+                "w": 32,
+                "h": 27,
+                "visible": true,
+                "bindings": {
+                  "fills": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:57"
+                    }
+                  ],
+                  "letterSpacing": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:134"
+                    }
+                  ],
+                  "fontSize": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:305:6951"
+                    }
+                  ],
+                  "fontFamily": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:240:98"
+                    }
+                  ],
+                  "fontWeight": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:116"
+                    }
+                  ]
+                },
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                "font": {
+                  "size": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  },
+                  "text": "Tab"
+                }
+              },
+              {
+                "id": "1164:15",
+                "name": "Focus ring",
+                "type": "RECTANGLE",
+                "w": 72,
+                "h": 59,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:61"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "1164:16",
+                "name": "Focus separator",
+                "type": "RECTANGLE",
+                "w": 68,
+                "h": 55,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:120:1923"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "1164:8",
+            "name": "Selected=False, State=Hover",
+            "type": "COMPONENT",
+            "w": 64,
+            "h": 51,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "layout": "HORIZONTAL",
+            "sizing": [
+              "HUG",
+              "HUG"
+            ],
+            "clips": false,
+            "stroke": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "strokesIncluded": false,
+            "bindings": {
+              "paddingLeft": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingTop": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "paddingRight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingBottom": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "topLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "topRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "minWidth": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:148"
+              },
+              "minHeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:150"
+              },
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:85:1496"
+                }
+              ]
+            },
+            "properties": {
+              "Label#1164:0": {
+                "type": "TEXT",
+                "defaultValue": "Tab"
+              },
+              "Focus#1164:7": {
+                "type": "BOOLEAN",
+                "defaultValue": false
+              },
+              "Selected": {
+                "type": "VARIANT",
+                "defaultValue": "False",
+                "variantOptions": [
+                  "False",
+                  "True"
+                ]
+              },
+              "State": {
+                "type": "VARIANT",
+                "defaultValue": "Default",
+                "variantOptions": [
+                  "Default",
+                  "Hover",
+                  "Pressed"
+                ]
+              }
+            },
+            "children": [
+              {
+                "id": "1164:17",
+                "name": "Label",
+                "type": "TEXT",
+                "w": 32,
+                "h": 27,
+                "visible": true,
+                "bindings": {
+                  "fills": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:85:1497"
+                    }
+                  ],
+                  "letterSpacing": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:134"
+                    }
+                  ],
+                  "fontSize": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:305:6951"
+                    }
+                  ],
+                  "fontFamily": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:240:98"
+                    }
+                  ],
+                  "fontWeight": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:116"
+                    }
+                  ]
+                },
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                "font": {
+                  "size": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  },
+                  "text": "Tab"
+                }
+              },
+              {
+                "id": "1164:18",
+                "name": "Focus ring",
+                "type": "RECTANGLE",
+                "w": 72,
+                "h": 59,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:61"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "1164:19",
+                "name": "Focus separator",
+                "type": "RECTANGLE",
+                "w": 68,
+                "h": 55,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:120:1923"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "1164:9",
+            "name": "Selected=False, State=Pressed",
+            "type": "COMPONENT",
+            "w": 64,
+            "h": 51,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "layout": "HORIZONTAL",
+            "sizing": [
+              "HUG",
+              "HUG"
+            ],
+            "clips": false,
+            "stroke": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "strokesIncluded": false,
+            "bindings": {
+              "paddingLeft": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingTop": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "paddingRight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingBottom": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "topLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "topRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "minWidth": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:148"
+              },
+              "minHeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:150"
+              },
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:85:1499"
+                }
+              ]
+            },
+            "properties": {
+              "Label#1164:0": {
+                "type": "TEXT",
+                "defaultValue": "Tab"
+              },
+              "Focus#1164:7": {
+                "type": "BOOLEAN",
+                "defaultValue": false
+              },
+              "Selected": {
+                "type": "VARIANT",
+                "defaultValue": "False",
+                "variantOptions": [
+                  "False",
+                  "True"
+                ]
+              },
+              "State": {
+                "type": "VARIANT",
+                "defaultValue": "Default",
+                "variantOptions": [
+                  "Default",
+                  "Hover",
+                  "Pressed"
+                ]
+              }
+            },
+            "children": [
+              {
+                "id": "1164:20",
+                "name": "Label",
+                "type": "TEXT",
+                "w": 32,
+                "h": 27,
+                "visible": true,
+                "bindings": {
+                  "fills": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:85:1500"
+                    }
+                  ],
+                  "letterSpacing": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:134"
+                    }
+                  ],
+                  "fontSize": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:305:6951"
+                    }
+                  ],
+                  "fontFamily": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:240:98"
+                    }
+                  ],
+                  "fontWeight": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:116"
+                    }
+                  ]
+                },
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                "font": {
+                  "size": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  },
+                  "text": "Tab"
+                }
+              },
+              {
+                "id": "1164:21",
+                "name": "Focus ring",
+                "type": "RECTANGLE",
+                "w": 72,
+                "h": 59,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:61"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "1164:22",
+                "name": "Focus separator",
+                "type": "RECTANGLE",
+                "w": 68,
+                "h": 55,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:120:1923"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "1164:10",
+            "name": "Selected=True, State=Default",
+            "type": "COMPONENT",
+            "w": 64,
+            "h": 51,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "layout": "HORIZONTAL",
+            "sizing": [
+              "HUG",
+              "HUG"
+            ],
+            "clips": false,
+            "stroke": [
+              0,
+              0,
+              4,
+              0
+            ],
+            "strokesIncluded": false,
+            "bindings": {
+              "paddingLeft": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingTop": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "paddingRight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingBottom": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "topLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "topRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "strokeBottomWeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4182"
+              },
+              "minWidth": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:148"
+              },
+              "minHeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:150"
+              },
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:85:1495"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:58"
+                }
+              ]
+            },
+            "properties": {
+              "Label#1164:0": {
+                "type": "TEXT",
+                "defaultValue": "Tab"
+              },
+              "Focus#1164:7": {
+                "type": "BOOLEAN",
+                "defaultValue": false
+              },
+              "Selected": {
+                "type": "VARIANT",
+                "defaultValue": "False",
+                "variantOptions": [
+                  "False",
+                  "True"
+                ]
+              },
+              "State": {
+                "type": "VARIANT",
+                "defaultValue": "Default",
+                "variantOptions": [
+                  "Default",
+                  "Hover",
+                  "Pressed"
+                ]
+              }
+            },
+            "children": [
+              {
+                "id": "1164:23",
+                "name": "Label",
+                "type": "TEXT",
+                "w": 32,
+                "h": 27,
+                "visible": true,
+                "bindings": {
+                  "fills": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:57"
+                    }
+                  ],
+                  "letterSpacing": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:134"
+                    }
+                  ],
+                  "fontSize": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:305:6951"
+                    }
+                  ],
+                  "fontFamily": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:240:98"
+                    }
+                  ],
+                  "fontWeight": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:116"
+                    }
+                  ]
+                },
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                "font": {
+                  "size": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  },
+                  "text": "Tab"
+                }
+              },
+              {
+                "id": "1164:24",
+                "name": "Focus ring",
+                "type": "RECTANGLE",
+                "w": 72,
+                "h": 59,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:61"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "1164:25",
+                "name": "Focus separator",
+                "type": "RECTANGLE",
+                "w": 68,
+                "h": 55,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:120:1923"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "1164:11",
+            "name": "Selected=True, State=Hover",
+            "type": "COMPONENT",
+            "w": 64,
+            "h": 51,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "layout": "HORIZONTAL",
+            "sizing": [
+              "HUG",
+              "HUG"
+            ],
+            "clips": false,
+            "stroke": [
+              0,
+              0,
+              4,
+              0
+            ],
+            "strokesIncluded": false,
+            "bindings": {
+              "paddingLeft": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingTop": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "paddingRight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingBottom": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "topLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "topRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "strokeBottomWeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4182"
+              },
+              "minWidth": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:148"
+              },
+              "minHeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:150"
+              },
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:85:1496"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:58"
+                }
+              ]
+            },
+            "properties": {
+              "Label#1164:0": {
+                "type": "TEXT",
+                "defaultValue": "Tab"
+              },
+              "Focus#1164:7": {
+                "type": "BOOLEAN",
+                "defaultValue": false
+              },
+              "Selected": {
+                "type": "VARIANT",
+                "defaultValue": "False",
+                "variantOptions": [
+                  "False",
+                  "True"
+                ]
+              },
+              "State": {
+                "type": "VARIANT",
+                "defaultValue": "Default",
+                "variantOptions": [
+                  "Default",
+                  "Hover",
+                  "Pressed"
+                ]
+              }
+            },
+            "children": [
+              {
+                "id": "1164:26",
+                "name": "Label",
+                "type": "TEXT",
+                "w": 32,
+                "h": 27,
+                "visible": true,
+                "bindings": {
+                  "fills": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:85:1497"
+                    }
+                  ],
+                  "letterSpacing": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:134"
+                    }
+                  ],
+                  "fontSize": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:305:6951"
+                    }
+                  ],
+                  "fontFamily": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:240:98"
+                    }
+                  ],
+                  "fontWeight": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:116"
+                    }
+                  ]
+                },
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                "font": {
+                  "size": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  },
+                  "text": "Tab"
+                }
+              },
+              {
+                "id": "1164:27",
+                "name": "Focus ring",
+                "type": "RECTANGLE",
+                "w": 72,
+                "h": 59,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:61"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "1164:28",
+                "name": "Focus separator",
+                "type": "RECTANGLE",
+                "w": 68,
+                "h": 55,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:120:1923"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "1164:12",
+            "name": "Selected=True, State=Pressed",
+            "type": "COMPONENT",
+            "w": 64,
+            "h": 51,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 0,
+            "layout": "HORIZONTAL",
+            "sizing": [
+              "HUG",
+              "HUG"
+            ],
+            "clips": false,
+            "stroke": [
+              0,
+              0,
+              4,
+              0
+            ],
+            "strokesIncluded": false,
+            "bindings": {
+              "paddingLeft": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingTop": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "paddingRight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4179"
+              },
+              "paddingBottom": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4178"
+              },
+              "topLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "topRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "strokeBottomWeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1160:4182"
+              },
+              "minWidth": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:148"
+              },
+              "minHeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:150"
+              },
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:85:1499"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:58"
+                }
+              ]
+            },
+            "properties": {
+              "Label#1164:0": {
+                "type": "TEXT",
+                "defaultValue": "Tab"
+              },
+              "Focus#1164:7": {
+                "type": "BOOLEAN",
+                "defaultValue": false
+              },
+              "Selected": {
+                "type": "VARIANT",
+                "defaultValue": "False",
+                "variantOptions": [
+                  "False",
+                  "True"
+                ]
+              },
+              "State": {
+                "type": "VARIANT",
+                "defaultValue": "Default",
+                "variantOptions": [
+                  "Default",
+                  "Hover",
+                  "Pressed"
+                ]
+              }
+            },
+            "children": [
+              {
+                "id": "1164:29",
+                "name": "Label",
+                "type": "TEXT",
+                "w": 32,
+                "h": 27,
+                "visible": true,
+                "bindings": {
+                  "fills": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:85:1500"
+                    }
+                  ],
+                  "letterSpacing": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:134"
+                    }
+                  ],
+                  "fontSize": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:305:6951"
+                    }
+                  ],
+                  "fontFamily": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:240:98"
+                    }
+                  ],
+                  "fontWeight": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:116"
+                    }
+                  ]
+                },
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                "font": {
+                  "size": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  },
+                  "text": "Tab"
+                }
+              },
+              {
+                "id": "1164:30",
+                "name": "Focus ring",
+                "type": "RECTANGLE",
+                "w": 72,
+                "h": 59,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:61"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "1164:31",
+                "name": "Focus separator",
+                "type": "RECTANGLE",
+                "w": 68,
+                "h": 55,
+                "visible": false,
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:120:1923"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "panel": {
+      "id": "1164:32",
+      "name": "Tabs / Panel",
+      "type": "COMPONENT",
+      "w": 640,
+      "h": 75,
+      "pad": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "gap": 12,
+      "layout": "VERTICAL",
+      "sizing": [
+        "FIXED",
+        "HUG"
+      ],
+      "clips": false,
+      "stroke": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "strokesIncluded": true,
+      "bindings": {
+        "itemSpacing": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:8:103"
+        },
+        "fills": [
+          {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:51"
+          }
+        ]
+      },
+      "properties": {
+        "Heading#1164:14": {
+          "type": "TEXT",
+          "defaultValue": "Details"
+        },
+        "Content#1164:15": {
+          "type": "SLOT",
+          "description": "Panel body; preserve ordinary heading, text and interactive-content semantics.",
+          "slotSettings": {
+            "stretchChildOnInsert": true,
+            "displayEmptyByDefault": false,
+            "minChildren": null,
+            "maxChildren": null,
+            "allowPreferredValuesOnly": false
+          },
+          "preferredValues": []
+        }
+      },
+      "children": [
+        {
+          "id": "1164:33",
+          "name": "Heading",
+          "type": "TEXT",
+          "w": 640,
+          "h": 36,
+          "visible": true,
+          "bindings": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:18:814"
+              }
+            ],
+            "letterSpacing": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:305:6948"
+              }
+            ],
+            "fontSize": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:305:6943"
+              }
+            ],
+            "fontFamily": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:240:98"
+              }
+            ],
+            "fontWeight": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:118"
+              }
+            ]
+          },
+          "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+          "font": {
+            "size": 30,
+            "line": {
+              "unit": "PERCENT",
+              "value": 120.00000476837158
+            },
+            "text": "Details"
+          }
+        },
+        {
+          "id": "1164:34",
+          "name": "Content",
+          "type": "SLOT",
+          "w": 640,
+          "h": 27,
+          "visible": true,
+          "bindings": {
+            "itemSpacing": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:105"
+            }
+          }
+        }
+      ]
+    },
+    "composition": {
+      "id": "1164:36",
+      "name": "Tabs",
+      "type": "COMPONENT",
+      "w": 800,
+      "h": 142,
+      "pad": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "gap": 16,
+      "layout": "VERTICAL",
+      "sizing": [
+        "FIXED",
+        "HUG"
+      ],
+      "clips": false,
+      "stroke": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "strokesIncluded": true,
+      "bindings": {
+        "itemSpacing": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1160:4181"
+        }
+      },
+      "properties": {
+        "Tabs#1164:16": {
+          "type": "SLOT",
+          "description": "One horizontal row of Tabs / Tab instances. Exactly one Selected=True. Use the contents fallback if the complete row does not fit.",
+          "slotSettings": {
+            "stretchChildOnInsert": false,
+            "displayEmptyByDefault": false,
+            "minChildren": 2,
+            "maxChildren": null,
+            "allowPreferredValuesOnly": true
+          },
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "12217533408ab01293dd76b02b7180169b0e1cf3"
+            }
+          ]
+        },
+        "Panel#1164:17": {
+          "type": "SLOT",
+          "description": "The visible Tabs / Panel instance.",
+          "slotSettings": {
+            "stretchChildOnInsert": true,
+            "displayEmptyByDefault": false,
+            "minChildren": 1,
+            "maxChildren": 1,
+            "allowPreferredValuesOnly": true
+          },
+          "preferredValues": [
+            {
+              "type": "COMPONENT",
+              "key": "9044224624837ae797d87279d64cc8a5ef214819"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": "1164:37",
+          "name": "Tabs",
+          "type": "SLOT",
+          "w": 800,
+          "h": 51,
+          "visible": true,
+          "bindings": {
+            "itemSpacing": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:1160:4180"
+            }
+          }
+        },
+        {
+          "id": "1164:50",
+          "name": "Panel",
+          "type": "SLOT",
+          "w": 800,
+          "h": 75,
+          "visible": true,
+          "bindings": {}
+        }
+      ]
+    },
+    "review": {
+      "id": "1165:43",
+      "name": "Tabs review examples",
+      "type": "FRAME",
+      "w": 1152,
+      "h": 775,
+      "pad": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "gap": 24,
+      "layout": "VERTICAL",
+      "sizing": [
+        "FIXED",
+        "HUG"
+      ],
+      "clips": false,
+      "stroke": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "strokesIncluded": true,
+      "bindings": {
+        "itemSpacing": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:8:97"
+        }
+      },
+      "children": [
+        {
+          "id": "1165:44",
+          "name": "Section heading",
+          "type": "TEXT",
+          "w": 608,
+          "h": 43,
+          "visible": true,
+          "bindings": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:18:814"
+              }
+            ],
+            "letterSpacing": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:133"
+              }
+            ],
+            "fontSize": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:305:6942"
+              }
+            ],
+            "fontFamily": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:240:98"
+              }
+            ],
+            "fontWeight": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:119"
+              }
+            ]
+          },
+          "style": "S:6f4d73374de168016819e2625fd9f97307ca5ee1,",
+          "font": {
+            "size": 36,
+            "line": {
+              "unit": "PERCENT",
+              "value": 120.00000476837158
+            },
+            "text": "Tabs review examples"
+          }
+        },
+        {
+          "id": "1165:45",
+          "name": "Guidance",
+          "type": "TEXT",
+          "w": 608,
+          "h": 54,
+          "visible": true,
+          "bindings": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:53"
+              }
+            ],
+            "letterSpacing": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:134"
+              }
+            ],
+            "fontSize": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:305:6951"
+              }
+            ],
+            "fontFamily": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:240:98"
+              }
+            ],
+            "fontWeight": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:116"
+              }
+            ]
+          },
+          "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+          "font": {
+            "size": 18,
+            "line": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "text": "Production instances show the default, another initial selection, and manual focus without changing selection."
+          }
+        },
+        {
+          "id": "1165:46",
+          "name": "Default selection",
+          "type": "FRAME",
+          "w": 1152,
+          "h": 194,
+          "visible": true,
+          "bindings": {
+            "itemSpacing": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:96"
+            }
+          }
+        },
+        {
+          "id": "1165:94",
+          "name": "Non-first selection",
+          "type": "FRAME",
+          "w": 1152,
+          "h": 194,
+          "visible": true,
+          "bindings": {
+            "itemSpacing": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:96"
+            }
+          }
+        },
+        {
+          "id": "1165:142",
+          "name": "Manual activation — Details selected, History focused",
+          "type": "FRAME",
+          "w": 1152,
+          "h": 194,
+          "visible": true,
+          "bindings": {
+            "itemSpacing": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:96"
+            }
+          }
+        }
+      ]
+    },
+    "variables": [
+      {
+        "id": "VariableID:1160:4178",
+        "name": "component/tabs/spacing/tabPaddingBlock",
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          }
+        },
+        "scopes": [
+          "GAP"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-spacing-tab-padding-block)"
+        }
+      },
+      {
+        "id": "VariableID:1160:4179",
+        "name": "component/tabs/spacing/tabPaddingInline",
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          }
+        },
+        "scopes": [
+          "GAP"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-spacing-tab-padding-inline)"
+        }
+      },
+      {
+        "id": "VariableID:1160:4180",
+        "name": "component/tabs/spacing/tabGap",
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:112"
+          }
+        },
+        "scopes": [
+          "GAP"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-spacing-tab-gap)"
+        }
+      },
+      {
+        "id": "VariableID:1160:4181",
+        "name": "component/tabs/spacing/listToPanel",
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:96"
+          }
+        },
+        "scopes": [
+          "GAP"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-spacing-list-to-panel)"
+        }
+      },
+      {
+        "id": "VariableID:1160:4182",
+        "name": "component/tabs/indicator/thickness",
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:6"
+          }
+        },
+        "scopes": [
+          "STROKE_FLOAT"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-indicator-thickness)"
+        }
+      }
+    ]
+  },
+  "geometry": {
+    "variants": [
+      {
+        "id": "1164:7",
+        "strokeAlign": "INSIDE",
+        "strokes": [],
+        "bottom": 1,
+        "children": [
+          {
+            "id": "1164:14",
+            "name": "Label",
+            "x": 16,
+            "y": 12,
+            "w": 32,
+            "h": 27,
+            "position": "AUTO",
+            "visible": true,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "props": {
+              "characters": "Label#1164:0"
+            }
+          },
+          {
+            "id": "1164:15",
+            "name": "Focus ring",
+            "x": -4,
+            "y": -4,
+            "w": 72,
+            "h": 59,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          },
+          {
+            "id": "1164:16",
+            "name": "Focus separator",
+            "x": -2,
+            "y": -2,
+            "w": 68,
+            "h": 55,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1164:8",
+        "strokeAlign": "INSIDE",
+        "strokes": [],
+        "bottom": 1,
+        "children": [
+          {
+            "id": "1164:17",
+            "name": "Label",
+            "x": 16,
+            "y": 12,
+            "w": 32,
+            "h": 27,
+            "position": "AUTO",
+            "visible": true,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "props": {
+              "characters": "Label#1164:0"
+            }
+          },
+          {
+            "id": "1164:18",
+            "name": "Focus ring",
+            "x": -4,
+            "y": -4,
+            "w": 72,
+            "h": 59,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          },
+          {
+            "id": "1164:19",
+            "name": "Focus separator",
+            "x": -2,
+            "y": -2,
+            "w": 68,
+            "h": 55,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1164:9",
+        "strokeAlign": "INSIDE",
+        "strokes": [],
+        "bottom": 1,
+        "children": [
+          {
+            "id": "1164:20",
+            "name": "Label",
+            "x": 16,
+            "y": 12,
+            "w": 32,
+            "h": 27,
+            "position": "AUTO",
+            "visible": true,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "props": {
+              "characters": "Label#1164:0"
+            }
+          },
+          {
+            "id": "1164:21",
+            "name": "Focus ring",
+            "x": -4,
+            "y": -4,
+            "w": 72,
+            "h": 59,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          },
+          {
+            "id": "1164:22",
+            "name": "Focus separator",
+            "x": -2,
+            "y": -2,
+            "w": 68,
+            "h": 55,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1164:10",
+        "strokeAlign": "INSIDE",
+        "strokes": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.3490196168422699,
+              "g": 0.3490196168422699,
+              "b": 0.3490196168422699
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:58"
+              }
+            }
+          }
+        ],
+        "bottom": 4,
+        "children": [
+          {
+            "id": "1164:23",
+            "name": "Label",
+            "x": 16,
+            "y": 12,
+            "w": 32,
+            "h": 27,
+            "position": "AUTO",
+            "visible": true,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "props": {
+              "characters": "Label#1164:0"
+            }
+          },
+          {
+            "id": "1164:24",
+            "name": "Focus ring",
+            "x": -4,
+            "y": -4,
+            "w": 72,
+            "h": 59,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          },
+          {
+            "id": "1164:25",
+            "name": "Focus separator",
+            "x": -2,
+            "y": -2,
+            "w": 68,
+            "h": 55,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1164:11",
+        "strokeAlign": "INSIDE",
+        "strokes": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.3490196168422699,
+              "g": 0.3490196168422699,
+              "b": 0.3490196168422699
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:58"
+              }
+            }
+          }
+        ],
+        "bottom": 4,
+        "children": [
+          {
+            "id": "1164:26",
+            "name": "Label",
+            "x": 16,
+            "y": 12,
+            "w": 32,
+            "h": 27,
+            "position": "AUTO",
+            "visible": true,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "props": {
+              "characters": "Label#1164:0"
+            }
+          },
+          {
+            "id": "1164:27",
+            "name": "Focus ring",
+            "x": -4,
+            "y": -4,
+            "w": 72,
+            "h": 59,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          },
+          {
+            "id": "1164:28",
+            "name": "Focus separator",
+            "x": -2,
+            "y": -2,
+            "w": 68,
+            "h": 55,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1164:12",
+        "strokeAlign": "INSIDE",
+        "strokes": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.3490196168422699,
+              "g": 0.3490196168422699,
+              "b": 0.3490196168422699
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:58"
+              }
+            }
+          }
+        ],
+        "bottom": 4,
+        "children": [
+          {
+            "id": "1164:29",
+            "name": "Label",
+            "x": 16,
+            "y": 12,
+            "w": 32,
+            "h": 27,
+            "position": "AUTO",
+            "visible": true,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "props": {
+              "characters": "Label#1164:0"
+            }
+          },
+          {
+            "id": "1164:30",
+            "name": "Focus ring",
+            "x": -4,
+            "y": -4,
+            "w": 72,
+            "h": 59,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          },
+          {
+            "id": "1164:31",
+            "name": "Focus separator",
+            "x": -2,
+            "y": -2,
+            "w": 68,
+            "h": 55,
+            "position": "ABSOLUTE",
+            "visible": false,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "props": {
+              "visible": "Focus#1164:7"
+            }
+          }
+        ]
+      }
+    ],
+    "slots": [
+      {
+        "id": "1164:34",
+        "sizing": [
+          "FILL",
+          "HUG"
+        ],
+        "clips": false
+      }
+    ],
+    "collection": [
+      {
+        "id": "VariableCollectionId:8:2",
+        "name": "global",
+        "modes": [
+          {
+            "name": "global",
+            "modeId": "8:0"
+          }
+        ],
+        "count": 329
+      },
+      {
+        "id": "VariableCollectionId:303:6772",
+        "name": "Breakpoint",
+        "modes": [
+          {
+            "name": "base",
+            "modeId": "303:1"
+          },
+          {
+            "name": "md",
+            "modeId": "303:2"
+          },
+          {
+            "name": "lg",
+            "modeId": "303:3"
+          }
+        ],
+        "count": 30
+      }
+    ],
+    "styles": [
+      {
+        "id": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+        "name": "typography/body/default",
+        "font": {
+          "family": "Inter",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400,
+            "slnt": 0
+          }
+        },
+        "bindings": {
+          "letterSpacing": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:134"
+          },
+          "fontSize": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:305:6951"
+          },
+          "fontFamily": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:240:98"
+          },
+          "fontWeight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:116"
+          }
+        }
+      },
+      {
+        "id": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+        "name": "typography/heading/h3",
+        "font": {
+          "family": "Inter",
+          "style": "Semi Bold",
+          "variationSettings": {
+            "slnt": 0,
+            "wght": 600
+          }
+        },
+        "bindings": {
+          "letterSpacing": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:305:6948"
+          },
+          "fontSize": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:305:6943"
+          },
+          "fontFamily": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:240:98"
+          },
+          "fontWeight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:118"
+          }
+        }
+      }
+    ]
+  },
+  "responsiveProbes": {
+    "probes": [
+      {
+        "id": "1361:331",
+        "mode": "OwlA11y Tabs parity probe base",
+        "children": [
+          {
+            "id": "1361:332",
+            "width": 87,
+            "height": 48,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "selected": "False",
+            "stroke": 1,
+            "label": [
+              {
+                "id": "I1361:332;1164:14",
+                "size": 16,
+                "height": 24,
+                "y": 12,
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,"
+              }
+            ],
+            "focus": []
+          },
+          {
+            "id": "1361:336",
+            "width": 87,
+            "height": 48,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "selected": "True",
+            "stroke": 4,
+            "label": [
+              {
+                "id": "I1361:336;1164:23",
+                "size": 16,
+                "height": 24,
+                "y": 12,
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,"
+              }
+            ],
+            "focus": [
+              {
+                "id": "I1361:336;1164:24",
+                "x": -4,
+                "y": -4,
+                "width": 95,
+                "height": 56,
+                "visible": true,
+                "constraints": {
+                  "horizontal": "STRETCH",
+                  "vertical": "STRETCH"
+                }
+              },
+              {
+                "id": "I1361:336;1164:25",
+                "x": -2,
+                "y": -2,
+                "width": 91,
+                "height": 52,
+                "visible": true,
+                "constraints": {
+                  "horizontal": "STRETCH",
+                  "vertical": "STRETCH"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1361:340",
+        "mode": "OwlA11y Tabs parity probe md",
+        "children": [
+          {
+            "id": "1361:341",
+            "width": 87,
+            "height": 48,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "selected": "False",
+            "stroke": 1,
+            "label": [
+              {
+                "id": "I1361:341;1164:14",
+                "size": 16,
+                "height": 24,
+                "y": 12,
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,"
+              }
+            ],
+            "focus": []
+          },
+          {
+            "id": "1361:345",
+            "width": 87,
+            "height": 48,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "selected": "True",
+            "stroke": 4,
+            "label": [
+              {
+                "id": "I1361:345;1164:23",
+                "size": 16,
+                "height": 24,
+                "y": 12,
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,"
+              }
+            ],
+            "focus": [
+              {
+                "id": "I1361:345;1164:24",
+                "x": -4,
+                "y": -4,
+                "width": 95,
+                "height": 56,
+                "visible": true,
+                "constraints": {
+                  "horizontal": "STRETCH",
+                  "vertical": "STRETCH"
+                }
+              },
+              {
+                "id": "I1361:345;1164:25",
+                "x": -2,
+                "y": -2,
+                "width": 91,
+                "height": 52,
+                "visible": true,
+                "constraints": {
+                  "horizontal": "STRETCH",
+                  "vertical": "STRETCH"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1361:349",
+        "mode": "OwlA11y Tabs parity probe lg",
+        "children": [
+          {
+            "id": "1361:350",
+            "width": 94,
+            "height": 51,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "selected": "False",
+            "stroke": 1,
+            "label": [
+              {
+                "id": "I1361:350;1164:14",
+                "size": 18,
+                "height": 27,
+                "y": 12,
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,"
+              }
+            ],
+            "focus": []
+          },
+          {
+            "id": "1361:354",
+            "width": 94,
+            "height": 51,
+            "pad": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "selected": "True",
+            "stroke": 4,
+            "label": [
+              {
+                "id": "I1361:354;1164:23",
+                "size": 18,
+                "height": 27,
+                "y": 12,
+                "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,"
+              }
+            ],
+            "focus": [
+              {
+                "id": "I1361:354;1164:24",
+                "x": -4,
+                "y": -4,
+                "width": 102,
+                "height": 59,
+                "visible": true,
+                "constraints": {
+                  "horizontal": "STRETCH",
+                  "vertical": "STRETCH"
+                }
+              },
+              {
+                "id": "I1361:354;1164:25",
+                "x": -2,
+                "y": -2,
+                "width": 98,
+                "height": 55,
+                "visible": true,
+                "constraints": {
+                  "horizontal": "STRETCH",
+                  "vertical": "STRETCH"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "final": {
+    "removedNodeIds": [
+      "1361:331",
+      "1361:340",
+      "1361:349"
+    ],
+    "variantIds": [
+      "1164:7",
+      "1164:8",
+      "1164:9",
+      "1164:10",
+      "1164:11",
+      "1164:12"
+    ],
+    "panelId": "1164:32",
+    "compositionId": "1164:36",
+    "reviewId": "1165:43",
+    "productionMutations": [],
+    "variables": [
+      {
+        "id": "VariableID:1160:4178",
+        "name": "component/tabs/spacing/tabPaddingBlock",
+        "scopes": [
+          "GAP"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-spacing-tab-padding-block)"
+        },
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          }
+        }
+      },
+      {
+        "id": "VariableID:1160:4179",
+        "name": "component/tabs/spacing/tabPaddingInline",
+        "scopes": [
+          "GAP"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-spacing-tab-padding-inline)"
+        },
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          }
+        }
+      },
+      {
+        "id": "VariableID:1160:4180",
+        "name": "component/tabs/spacing/tabGap",
+        "scopes": [
+          "GAP"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-spacing-tab-gap)"
+        },
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:112"
+          }
+        }
+      },
+      {
+        "id": "VariableID:1160:4181",
+        "name": "component/tabs/spacing/listToPanel",
+        "scopes": [
+          "GAP"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-spacing-list-to-panel)"
+        },
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:96"
+          }
+        }
+      },
+      {
+        "id": "VariableID:1160:4182",
+        "name": "component/tabs/indicator/thickness",
+        "scopes": [
+          "STROKE_FLOAT"
+        ],
+        "syntax": {
+          "WEB": "var(--component-tabs-indicator-thickness)"
+        },
+        "values": {
+          "8:0": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:6"
+          }
+        }
+      }
+    ],
+    "collections": [
+      {
+        "name": "global",
+        "count": 329,
+        "modes": [
+          {
+            "name": "global",
+            "modeId": "8:0"
+          }
+        ]
+      },
+      {
+        "name": "Breakpoint",
+        "count": 30,
+        "modes": [
+          {
+            "name": "base",
+            "modeId": "303:1"
+          },
+          {
+            "name": "md",
+            "modeId": "303:2"
+          },
+          {
+            "name": "lg",
+            "modeId": "303:3"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # OwlA11y React
 
-Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput and Dialog. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
+Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog and Tabs. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
 
 ```tsx
 import { Button, TextInput } from '@owla11y/react';
@@ -124,3 +124,29 @@ The default is medium/inset/dismissible with a close control. size is small/medi
 The native dialog ref supports focus/measurement; open is controlled through props and showModal is managed internally. One modal may be open per document. No descendant autoFocus or positive tabIndex. Browser-supported open shadow roots participate in tab boundaries; closed shadow roots are outside the inspected content contract. Native autofocus has a compatibility focus fallback, with manual screen-reader acceptance still pending. Use returnFocusRef for a logical destination when a trigger is removed/disabled; navigation flows own destination focus.
 
 Dialog uses the MIT tabbable runtime dependency. It locks underlying page overflow and restores original inline styles. Importing package CSS adds no global reset or fonts. The shared Modal backdrop is native ::backdrop CSS, not an additional React export. See the [comparison report](../../docs/validation/react-dialog-parity.md) and preview at ?dialogs.
+
+## Tabs
+
+```tsx
+import { Tabs } from '@owla11y/react';
+
+function ProfileSections() {
+  return <>
+    <h2 id="profile-sections">Profile information</h2>
+    <Tabs labelledBy="profile-sections" headingLevel={3} items={[
+      { id: 'details', label: 'Details', heading: 'Details', content: <p>Your current details.</p> },
+      { id: 'history', label: 'History', heading: 'History', content: <p>Earlier changes.</p> },
+    ]}/>
+  </>;
+}
+```
+
+Use at least two sections with unique stable IDs, distinct plain-text labels, heading strings and body content. The component renders the heading; do not repeat it at the start of content. headingLevel defaults to 3 (2–6 supported), with responsive H3 styling. Prefer labelledBy for an existing visible contextual heading; otherwise use label. The ref targets the root div.
+
+Selection defaults to the first item. defaultSelectedId is initial-only. For controlled selection, supply selectedId and onSelectedChange(id), omit defaultSelectedId, and keep ownership fixed. The owner may decline requests. Unknown explicit keys and invalid configuration throw actionable errors. If an uncontrolled selected key is removed, the first remaining item is used; the application owns focus when removing content.
+
+Automatic activation follows focus for content that displays immediately. activation=manual lets arrows/Home/End move focus while Enter/Space/click selects. Tab exits the list for the selected panel, its content, then the rest of the page. Hidden panel DOM stays mounted, retaining entered values and React state. Keep essential instructions and required cross-panel validation outside this initial API. Lazy loading, disabled/nested/vertical tabs and URL/history synchronization are not included.
+
+SSR starts with ordinary OwlA11y Link anchors and every section visible. Enhancement happens after measurement, only at/above 48rem when the full row fits its container. Missing layout/observer support retains the baseline. Narrow/overflow fallback removes widget semantics and preserves focus; re-enhancement selects the focus-containing section before hiding others. If a controlled owner declines that selection, all sections remain visible until the conflict ends. Print shows every section.
+
+See [source/Figma comparison and validation](../../docs/validation/react-tabs-parity.md) and the runnable ?tabs preview. Manual assistive-technology and broader browser checks remain release work.

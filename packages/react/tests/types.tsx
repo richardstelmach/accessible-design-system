@@ -98,3 +98,26 @@ import {Dialog} from '../src/index.js';
 <Dialog open={false} onOpenChange={()=>{}} title="Choose" dismissal="forced-decision">Content</Dialog>;
 // @ts-expect-error native dialog must not have tabIndex
 <Dialog open={false} onOpenChange={()=>{}} title="Edit" tabIndex={-1}>Content</Dialog>;
+
+import {Tabs} from '../src/index.js';
+import type {TabsItem} from '../src/index.js';
+const tabItems:TabsItem[]=[{id:'details',label:'Details',heading:'Details',content:<p>Details content</p>},{id:'history',label:'History',heading:'History',content:<p>History content</p>}];
+<Tabs ref={createRef<HTMLDivElement>()} label="Profile" items={tabItems} defaultSelectedId="history" onSelectedChange={id=>id.toUpperCase()}/>;
+<Tabs labelledBy="profile-heading" items={tabItems} selectedId="details" onSelectedChange={()=>{}} activation="manual" headingLevel={2}/>;
+// @ts-expect-error an accessible set name is required
+<Tabs items={tabItems}/>;
+// @ts-expect-error only one naming strategy
+<Tabs label="Profile" labelledBy="heading" items={tabItems}/>;
+// @ts-expect-error controlled selection requires a callback
+<Tabs label="Profile" items={tabItems} selectedId="details"/>;
+// @ts-expect-error ownership modes cannot be combined
+<Tabs label="Profile" items={tabItems} selectedId="details" defaultSelectedId="history" onSelectedChange={()=>{}}/>;
+// @ts-expect-error only horizontal tabs are supported
+<Tabs label="Profile" items={tabItems} orientation="vertical"/>;
+// @ts-expect-error each panel requires a plain heading
+<Tabs label="Profile" items={[{id:'one',label:'One',content:'Content'}]}/>;
+// @ts-expect-error structural roles are owned by the component
+<Tabs label="Profile" items={tabItems} role="tablist"/>;
+
+// @ts-expect-error raw HTML cannot replace Tabs-owned structure
+<Tabs label="Profile" items={tabItems} dangerouslySetInnerHTML={{__html:'<p>Other</p>'}}/>;

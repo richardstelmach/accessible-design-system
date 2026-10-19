@@ -4,8 +4,8 @@ version: 0.1.0
 status: draft
 
 phase:
-  current: figma-review
-  implementation: not-started
+  current: react-review
+  implementation: implemented-automated-checks-passed-manual-acceptance-pending
   figma: built-and-audited
   releaseReady: false
 
@@ -36,9 +36,9 @@ scope:
     - Page navigation, route switching and sequential process steps
     - Vertical, nested, closable, draggable or reorderable tab sets
     - Disabled tabs, icon-only labels, badges and tab menus
-    - Lazy-loading framework, controlled-state framework adapter and network requests
+    - Lazy-loading framework and network requests
     - Built-in URL history management
-    - Production code in this phase
+    - Package publication and final assistive-technology certification
 
 decisions:
   activationDefault:
@@ -133,7 +133,15 @@ anatomy:
       - Hidden content must not be exposed to focus, pointer input or the accessibility tree.
 
 publicApi:
-  status: framework-neutral-contract
+  status: framework-neutral-contract-with-react-adapter
+  react:
+    export: Tabs
+    status: implemented-automated-checks-passed-manual-acceptance-pending
+    selection: selectedId-or-defaultSelectedId-with-onSelectedChange
+    headingAdapter: heading-string-plus-content-body-at-headingLevel-2-through-6
+    baseline: ordinary-linked-sections-before-measured-enhancement
+    controlledFocusContinuity: defer-enhancement-until-owner-accepts-or-focus-conflict-ends
+    validationEvidence: docs/validation/react-tabs-parity.md
   items:
     type: ordered-list
     required: true
@@ -513,7 +521,7 @@ validation:
     - Calculate text, indicator and focus contrast from resolved source values.
     - Confirm accepted activation and responsive decisions agree across contract and documentation; do not claim runtime readiness.
   production:
-    status: future-implementation-acceptance-tests
+    status: implemented-automated-checks-passed-manual-acceptance-pending
     automated:
       - Unique IDs, non-empty names, matching controls/labelledby references and exactly one selection.
       - One list tab stop, correct initial selection and re-entry on the selected tab in both modes.
@@ -534,8 +542,8 @@ validation:
       - Right-to-left content and DOM-order navigation are understandable.
   limitations:
     - Token and contract validation is not runtime accessibility certification.
-    - No production Tabs implementation or browser test harness exists in this phase.
-    - Figma structure, variable bindings and design examples were audited on 2026-10-08; runtime behaviour remains untested.
+    - React and Chromium validation is recorded in docs/validation/react-tabs-parity.md; broader browser and manual assistive-technology acceptance remain open.
+    - The 2026-10-08 Figma audit is historical; the 2026-10-19 source/runtime comparison verifies existing masters without production changes.
     - Twenty text nodes in the two labelled stress examples intentionally override shared typography; production and ordinary documentation use shared styles.
     - Figma cannot reproduce the browser word-spacing override; complete that acceptance check in the implementation.
     - The corrected STROKE_FLOAT metadata requires a repeat Tokens Studio pull and routine export before round-trip acceptance.
