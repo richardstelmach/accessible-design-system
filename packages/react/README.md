@@ -1,6 +1,6 @@
 # OwlA11y React
 
-Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog and Tabs. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
+Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog and Tabs, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
 
 ```tsx
 import { Button, TextInput } from '@owla11y/react';
@@ -150,3 +150,39 @@ Automatic activation follows focus for content that displays immediately. activa
 SSR starts with ordinary OwlA11y Link anchors and every section visible. Enhancement happens after measurement, only at/above 48rem when the full row fits its container. Missing layout/observer support retains the baseline. Narrow/overflow fallback removes widget semantics and preserves focus; re-enhancement selects the focus-containing section before hiding others. If a controlled owner declines that selection, all sections remain visible until the conflict ends. Print shows every section.
 
 See [source/Figma comparison and validation](../../docs/validation/react-tabs-parity.md) and the runnable ?tabs preview. Manual assistive-technology and broader browser checks remain release work.
+
+
+## Toast
+
+```tsx
+import { Button, ToastProvider, ToastNotificationsButton, ToastRegion, useToast } from '@owla11y/react';
+
+function SaveFeedback() {
+  const { add } = useToast();
+  return <Button onClick={() => {
+    // Invoke after the save succeeds, with a distinct event ID.
+    add({ id: crypto.randomUUID(), state: 'success', titleText: 'Your changes were saved',
+      descriptionText: 'Your new settings are now active.',
+      dismissLabel: 'Dismiss notification: Your changes were saved' });
+  }}>Report completed save</Button>;
+}
+function AppShell() {
+  return <ToastProvider>
+    <SaveFeedback />
+    <ToastNotificationsButton />
+    <ToastRegion />
+  </ToastProvider>;
+}
+```
+
+Mount exactly one provider, region and entry per document, outside dialogs and changing route content. Both host parts stay visible/in flow, including the empty state. The provider retains active messages across route changes while it stays mounted; full document unload ends its lifetime. No historical or initial-message API is provided. Call add from a new event after the complete host mounts, not during render or a mount effect replay. `add(message)` returns its required stable ID; duplicate active IDs and unsupported message fields throw. `dismiss(id)` removes only that ID; unknown IDs are no-ops. Provider `onDismiss(id)` observes actual removals.
+
+All content is plain text; titles and contextual dismissLabel are required. State defaults to info; announcement defaults to polite independently of visual state. Assertive is an explicit urgent exception. No timer, duration, action slot, hidden close, replacement or count limit is supported. The 50ms delivery scheduler batches new events separately per priority and resets live text between separate identical announcements; it never removes messages. Dismissal does not republish the list. Burst summaries contain the event count and new outcomes (identical outcomes are spoken once within that burst), with all messages retained in chronological order. DOM delivery is not a guarantee that every assistive technology speaks every update.
+
+Arrival preserves focus. Explicit entry activation focuses the named region; normal Tab visits each close button. Escape only dismisses the focused Toast. Removing a focused item chooses the next close, then previous, then a usable recorded origin or persistent entry/region. Background removal preserves external focus. Keep the host mounted and usable; the application owns focus when removing its entire shell.
+
+Both announcement channels wait while a native modal owns the document. The list may already be mounted behind modal inertness, but no unreachable message is announced. Put immediate relevant/urgent feedback inside the modal with one announcement owner; an app-shell Toast is not a substitute. Native `dialog:modal` detection integrates with OwlA11y Dialog and external native dialogs; unsupported selectors conservatively defer for any open dialog. Custom ARIA modal systems must make the host inert and restore it on close. If hiding is controlled by stylesheet/media changes without DOM mutations, render the host visible or publish the outcome in an accessible local scope instead.
+
+Localise `regionLabel`, `emptyText`, the complete `stateLabels` map, `formatCountLabel(count)` and, if needed, `formatAnnouncement(newEvents)`. Custom announcement formatters receive only one priority's new messages and must return nonempty text including count and essential outcomes for bursts. They must be pure. Entry text is derived from the count; role, live, timing, icon and content overrides are deliberately unavailable. Style host containers through className and canonical token overrides.
+
+See [comparison and validation](../../docs/validation/react-toast-parity.md), the runnable `?toast` preview and the remaining manual screen-reader/browser release gates. No npm publication is performed.

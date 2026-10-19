@@ -208,3 +208,23 @@ export type TabsProps = Omit<ComponentPropsWithoutRef<'div'>,
   activation?: 'automatic' | 'manual';
   headingLevel?: 2 | 3 | 4 | 5 | 6;
 };
+
+export type ToastState = 'success' | 'info' | 'warning' | 'error';
+export type ToastMessage = {
+  id: string; state?: ToastState; titleText: string; descriptionText?: string;
+  announcement?: 'polite' | 'assertive'; dismissLabel: string;
+};
+export type ToastAPI = { add: (message: ToastMessage) => string; dismiss: (id: string) => void };
+export type ToastProviderProps = {
+  children: ReactNode;
+  regionLabel?: string;
+  emptyText?: string;
+  stateLabels?: Record<ToastState, string>;
+  formatCountLabel?: (count: number) => string;
+  /** Formats one channel's new events only. Include count and essential outcomes for bursts. */
+  formatAnnouncement?: (messages: readonly ToastMessage[]) => string;
+  onDismiss?: (id: string) => void;
+};
+/** Both host parts must remain mounted once, outside route content and modals. */
+export type ToastRegionProps = { className?: string };
+export type ToastNotificationsButtonProps = { className?: string };
