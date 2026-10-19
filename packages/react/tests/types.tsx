@@ -79,3 +79,22 @@ const dateIds = getDateInputIds('dob');
 <ErrorSummary errors={[{id:'dob',text:'Enter date',targetId:dateIds.day}]} tabIndex={0} />;
 // @ts-expect-error untested duplicate live-announcement strategies are excluded
 <ErrorSummary errors={[{id:'dob',text:'Enter date',targetId:dateIds.day}]} role="alert" />;
+
+import {Dialog} from '../src/index.js';
+<Dialog ref={createRef<HTMLDialogElement>()} open={false} onOpenChange={(next,detail)=>{const reason: 'close-button'|'escape'|'backdrop'|'action'=detail.reason;}} title="Edit" headingLevel={3}>Content</Dialog>;
+<Dialog open={false} onOpenChange={()=>{}} accessibleLabel="Information" showClose={false}>Content</Dialog>;
+<Dialog open={false} onOpenChange={()=>{}} title="Choose" dismissal="forced-decision" actions={<Button>Keep existing choice</Button>}>Consequences</Dialog>;
+// @ts-expect-error every Dialog has an accessible name
+<Dialog open={false} onOpenChange={()=>{}}>Content</Dialog>;
+// @ts-expect-error controlled ownership requires a callback
+<Dialog open={false} title="Edit">Content</Dialog>;
+// @ts-expect-error one naming strategy only
+<Dialog open={false} onOpenChange={()=>{}} title="Edit" accessibleLabel="Other">Content</Dialog>;
+// @ts-expect-error a hidden title requires an explicit accessible label
+<Dialog open={false} onOpenChange={()=>{}} title="Edit" showTitle={false}>Content</Dialog>;
+// @ts-expect-error forced decisions cannot expose a close control
+<Dialog open={false} onOpenChange={()=>{}} title="Choose" dismissal="forced-decision" showClose actions={<Button>Resolve</Button>}>Content</Dialog>;
+// @ts-expect-error forced decisions require actions
+<Dialog open={false} onOpenChange={()=>{}} title="Choose" dismissal="forced-decision">Content</Dialog>;
+// @ts-expect-error native dialog must not have tabIndex
+<Dialog open={false} onOpenChange={()=>{}} title="Edit" tabIndex={-1}>Content</Dialog>;

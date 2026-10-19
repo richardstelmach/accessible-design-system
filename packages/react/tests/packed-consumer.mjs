@@ -1,9 +1,15 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { hydrateRoot } from 'react-dom/client';
 import { JSDOM } from 'jsdom';
 import assert from 'node:assert/strict';
-import { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds } from '@owla11y/react';
+// Establish the DOM before loading the dependency's browser tab-order helpers.
+// renderToString still exercises server output; no effects run during that call.
+const dom = new JSDOM('<div id="root"></div>', { url:'https://example.test/' });
+globalThis.window=dom.window; globalThis.document=dom.window.document;
+globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Element;
+globalThis.getComputedStyle=dom.window.getComputedStyle;
+const {renderToString}=await import('react-dom/server');
+const {hydrateRoot}=await import('react-dom/client');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
@@ -21,7 +27,7 @@ const app = h('form', null,
   h(Button, null, 'Save'), h(IconButton, { 'aria-label': 'Add', icon: h('svg') }), h(Link, { href: '/help' }, 'Help'));
 
 const html = renderToString(app);
-const dom = new JSDOM('<div id="root">' + html + '</div>', { url: 'https://example.test/' });
+document.getElementById('root').innerHTML=html;
 globalThis.window = dom.window;
 globalThis.document = dom.window.document;
 globalThis.HTMLElement = dom.window.HTMLElement;
@@ -74,4 +80,19 @@ assert.equal(root.querySelector('[value=email]').checked, true);
 assert.equal(root.querySelector('#packed-date-year').value, '2000');
 await React.act(async () => hydrated.unmount());
 assert.equal(document.title, 'Packed example');
-console.log('Packed package: React ' + React.version + ' eleven components, date IDs, types, SSR, hydration, error routing, title and native reset passed');
+// Native modal APIs are stubbed here; real inertness, layout and focus use Chromium.
+const query=document.querySelector.bind(document);
+document.querySelector=selector=>selector==='dialog:modal'?null:query(selector);
+dom.window.HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','');};
+dom.window.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open');this.dispatchEvent(new dom.window.Event('close'));};
+let requested=[]; const modalRef=React.createRef();
+const modal=open=>h(Dialog,{ref:modalRef,open,onOpenChange:(next,detail)=>requested.push([next,detail.reason]),title:'Packed modal'},h('p',null,'Information'));
+root.innerHTML=renderToString(modal(false)); const titleId=root.querySelector('dialog').getAttribute('aria-labelledby');
+await React.act(async()=>{hydrated=hydrateRoot(root,modal(false),{onRecoverableError:error=>errors.push(error)});});
+assert.equal(modalRef.current.open,false);assert.equal(modalRef.current.querySelector('h2').id,titleId);
+await React.act(async()=>hydrated.render(modal(true)));assert.equal(modalRef.current.open,true);assert.equal(document.body.style.overflow,'hidden');
+const cancel=new dom.window.Event('cancel',{cancelable:true});await React.act(async()=>modalRef.current.dispatchEvent(cancel));
+assert.equal(cancel.defaultPrevented,true);assert.deepEqual(requested,[[false,'escape']]);assert.equal(modalRef.current.open,true);
+await React.act(async()=>hydrated.render(modal(false)));assert.equal(document.body.style.overflow,'');assert.deepEqual(errors,[]);
+await React.act(async()=>hydrated.unmount());
+console.log('Packed package: React ' + React.version + ' twelve components, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');

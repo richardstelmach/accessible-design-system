@@ -116,16 +116,16 @@
       "exports": [
         "Dialog"
       ],
-      "props": "open; onOpenChange(next,{reason}); title?; accessibleLabel?; showTitle=true; showClose=true; closeLabel; size=small|medium|large; presentation=inset|fullscreen; dismissal=dismissible|forced-decision; children; actions?; returnFocusRef?",
-      "behaviour": "Controlled native dialog ref. Require title or accessibleLabel. Forced decision forbids close control and requires enabled resolving action. Native showModal; contract initial focus and one tested boundary handler.",
-      "implementation": "not-implemented"
+      "props": "open; onOpenChange(next,{reason}); title or accessibleLabel; showTitle; showClose; closeLabel; size=small|medium|large; presentation=inset|fullscreen (mobile); headingLevel=2..6; dismissal=dismissible|forced-decision; children (Content); actions; returnFocusRef",
+      "behaviour": "Controlled native showModal/ref; container autofocus with compatibility fallback; one tabbable boundary handler; explicit close requests; forced decisions require enabled resolving actions. Restore page overflow and return focus. No native open attribute API.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "modal-backdrop",
       "exports": [],
       "props": "Dialog-owned ::backdrop CSS; no public React component",
       "behaviour": "Own public design contract retained; no extra presentation element or focus target required.",
-      "implementation": "not-implemented"
+      "implementation": "implemented-through-dialog-css"
     },
     {
       "id": "alert",

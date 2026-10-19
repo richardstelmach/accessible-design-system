@@ -1,6 +1,6 @@
 # Phosphor Icons
 
-The Select caret and Checkbox check/minus indicators reuse Phosphor Regular artwork from the existing design-system icon instances. Source: https://github.com/phosphor-icons/core
+The Dialog close icon, Select caret and Checkbox check/minus indicators reuse Phosphor Regular artwork from the existing design-system icon instances. Source: https://github.com/phosphor-icons/core
 
 MIT License
 
@@ -23,3 +23,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+# tabbable
+
+Dialog uses tabbable 6.5.0 as an external npm runtime dependency for tab order. Its MIT licence and copyright notice are distributed in that dependency: https://github.com/focus-trap/tabbable/blob/v6.5.0/LICENSE
