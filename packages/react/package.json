@@ -25,5 +25,8 @@
   "peerDependencies": {
     "react": ">=18.3.0 <20.0.0",
     "react-dom": ">=18.3.0 <20.0.0"
+  },
+  "dependencies": {
+    "tabbable": "6.5.0"
   }
 }

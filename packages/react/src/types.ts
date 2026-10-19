@@ -175,3 +175,25 @@ export type ErrorSummaryProps = Omit<ComponentPropsWithoutRef<'div'>,
   'aria-label'?: never;
   'aria-labelledby'?: never;
 };
+
+export type DialogCloseReason = 'close-button' | 'escape' | 'backdrop' | 'action';
+type DialogName = { title: string; showTitle?: true; accessibleLabel?: never } |
+  { title?: never; showTitle?: false; accessibleLabel: string } |
+  { title: string; showTitle: false; accessibleLabel: string };
+type DialogDismissal = { dismissal?: 'dismissible'; showClose?: boolean; actions?: ReactNode } |
+  { dismissal: 'forced-decision'; showClose?: false; actions: ReactNode };
+type DialogNative = Omit<ComponentPropsWithoutRef<'dialog'>,
+  'open' | 'children' | 'title' | 'autoFocus' | 'tabIndex' | 'role' | 'aria-modal' | 'aria-label' | 'aria-labelledby' |
+  'onCancel' | 'onClose' | 'onKeyDown' | 'onPointerDown' | 'onPointerUp' | 'onPointerCancel' | 'onSubmit' | 'onSubmitCapture' | 'closedby'>;
+/** Controlled native modal; children supply the canonical Content slot. */
+export type DialogProps = DialogNative & DialogName & DialogDismissal & {
+  open: boolean;
+  onOpenChange: (open: boolean, detail: { reason: DialogCloseReason }) => void;
+  closeLabel?: string;
+  size?: 'small' | 'medium' | 'large';
+  presentation?: 'inset' | 'fullscreen';
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
+  children: ReactNode;
+  /** Logical fallback/explicit destination when the opening trigger is unavailable. */
+  returnFocusRef?: { readonly current: HTMLElement | null };
+};

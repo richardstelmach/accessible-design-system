@@ -13,6 +13,8 @@ try {
   writeFileSync(join(dir,'package.json'),JSON.stringify({private:true,type:'module'}));
   const version=major==='18'?'18.3.1':'19';
   run('npm',['install','--ignore-scripts','--legacy-peer-deps','--no-audit','--no-fund',join(temp,packed.filename),`react@${version}`,`react-dom@${version}`,`@types/react@${major}`,`@types/react-dom@${major}`,'jsdom@26'],dir);
+  // Separate DOM-free process: public import/SSR must not require window or modal APIs.
+  run('node',['--input-type=module','-e',`import React from 'react';import {renderToString} from 'react-dom/server';import {Dialog} from '@owla11y/react';const html=renderToString(React.createElement(Dialog,{open:true,onOpenChange:()=>{},title:'Server modal'},'Content'));if(!html.includes('aria-labelledby=')||html.includes(' open='))throw Error('Dialog server output must be named and closed before hydration');`],dir);
   // Same compile-checked positive and negative examples, through package declarations.
   writeFileSync(join(dir,'types.tsx'),readFileSync('packages/react/tests/types.tsx','utf8').replaceAll("'../src/index.js'","'@owla11y/react'"));
   writeFileSync(join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{target:'ES2022',module:'NodeNext',moduleResolution:'NodeNext',jsx:'react-jsx',strict:true,noEmit:true,skipLibCheck:false},include:['types.tsx']}));

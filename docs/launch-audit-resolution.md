@@ -4,7 +4,7 @@
 
 | Finding | Resolution |
 | --- | --- |
-| A01 Package/runtime absent | Package layout and API inventory defined. Runnable private npm workspace and eleven components now exist, with type, interaction, package-consumer and automated accessibility checks. The remaining families and manual release checks are open. |
+| A01 Package/runtime absent | Package layout and API inventory defined. Runnable private npm workspace and twelve components now exist, with type, interaction, package-consumer and automated accessibility checks. The remaining families and manual release checks are open. |
 | A02 Button contract and guide | Root typography nesting corrected; draft status and Button/IconButton public adapter added; guide created. Core runtime and automated checks pass locally; manual release acceptance remains open. |
 | A03 Link guide/API | Guide and native-anchor adapter added. Core runtime and automated checks pass locally; manual release acceptance remains open. |
 | A04 Accordion stale status | Source and guide now acknowledge confirmed live masters. Round-trip completion remains unverified; no ready claim. |
@@ -19,3 +19,5 @@ Evidence for design status is the 18 October live inventory recorded in the rele
 The next [form-components batch](validation/react-forms-parity.md) adds Textarea, Select, Fieldset, Checkbox and Radio, with integrated native form checks and source-led Textarea/Select construction repairs in Figma. Runtime manual release acceptance remains open.
 
 The [date/error batch](validation/react-date-errors-parity.md) adds ErrorSummary and DateInput, a pure part-ID helper, and integrated failed-submit validation. Date Input's 39 copied controls now follow canonical responsive TextInput construction. Screen-reader and broader release acceptance remain open.
+
+The [Dialog batch](validation/react-dialog-parity.md) adds the twelfth component and native backdrop, with controlled lifecycle, keyboard/scroll handling and source-led Figma header/default repairs. Manual assistive-technology/browser acceptance and post-merge Tokens Studio repeat export remain open.

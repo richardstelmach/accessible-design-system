@@ -633,3 +633,7 @@ Focus containment is not a failure of 2.1.2 when users have a keyboard-operable 
 - Small, Medium and Large remain fluid below their maximum widths.
 - Technical and Figma Content slots share the same public name and intent.
 - The documented keyboard, pointer, screen-reader, reflow and focus-restoration checks pass.
+
+## React implementation
+
+The private beta implements Dialog and its native ::backdrop. See [React comparison and validation](../../docs/validation/react-dialog-parity.md) for API, Figma reconciliation, automated evidence and remaining manual acceptance. Design draft status is retained pending release checks.

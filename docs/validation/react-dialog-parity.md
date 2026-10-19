@@ -1,0 +1,50 @@
+# React Dialog and modal backdrop comparison
+
+19 October 2026. GitHub is authoritative. This batch adds Dialog as the twelfth React component and implements the Modal backdrop design contract through native `dialog::backdrop`; there is no redundant backdrop component or DOM object.
+
+## Source and scope
+
+The base is main commit `3b7ec93119c007b2e1ecb51f602f74462a7bc573`. Behaviour follows `components/dialog/dialog.yaml` and its guide, the shared Modal backdrop contract, heading/focus patterns, `tokens/components/dialog.json` and `color.overlay.modal`. Existing token values and aliases are unchanged. Source extensions now carry precise Figma scopes and the exact Web references for thirteen Dialog tokens and the shared overlay colour, and both compiled outputs are regenerated.
+
+Implemented: controlled native modal/ref, accessible naming, semantic title heading choice, structured Content/actions, three sizes, explicit mobile fullscreen, dismissible/forced-decision flows, native inertness, live tab boundaries, form integration, scroll locking and return focus. Tabs and Toast remain subsequent batches; their draft APIs are not exported. Publication stays disabled.
+
+## React adapter decisions
+
+- `open` and `onOpenChange` are required. Requests report `close-button`, `escape`, `backdrop` or `action`; prop reconciliation does not emit callbacks. Buttons supplied by the consumer can update its open state directly. `method="dialog"` submits request `action` after native validation and only if the form's own submit handler has not prevented submission. Consumer service validation can therefore keep the dialog open. Imperative native close emits `action`; use the controlled state API for ordinary closing.
+- A visible title names the dialog through a stable generated/supplied ID. Without a visible title, accessibleLabel is mandatory; no conflicting name or structural ARIA overrides. headingLevel defaults to 2; H2–H6 retain the canonical responsive H3 visual style. Short aria-describedby references may be supplied; long content is never automatically described.
+- The native autofocus attribute is set before showModal. React's client autoFocus handling does not reflect the attribute on dialog. The tested Chromium engine still selected the first descendant in an isolated native HTML reproduction with autofocus present; the adapter calls dialog.focus with preventScroll only when the native opening step missed the container. No tabindex is added. Assistive-technology announcements for this compatibility path remain manual acceptance work.
+- Dismissible mode uses native `closedby="closerequest"` and prevents the cancel event before requesting Escape closure. The adapter owns the pointer-down/up backdrop test. This is an intentional refinement of the framework-neutral `closedby="any"` example: browser-owned light dismissal would close a controlled dialog even when its owner declines the request, and would compete with the specified gesture guard. Forced decisions use none plus cancel prevention. The native cancel fallback is tested with closedby removed.
+- One boundary handler uses pinned `tabbable@6.5.0`, an external MIT runtime dependency. It recomputes actual order for every Tab, including radio groups, disabled fieldsets, hidden/inert ancestors, negative tabIndex and accessible open shadow roots; the active boundary comes from composedPath. No second trap is installed. Descendant autoFocus and positive tabIndex are rejected. Opaque closed shadow roots are outside this adapter's inspection surface.
+- Overflowing Content becomes a named, keyboard-focusable scrolling region, observed for content/size changes; short content does not add an extra tab stop. Its focus ring stays inset and PageDown scrolling is exercised in the browser.
+- Forced decisions omit the close control and require actions with at least one visible enabled native button. Runtime validation cannot prove business consequences: the host must keep a resolving action available and implement its handler. One modal is allowed per document; a second modal is rejected rather than silently nested.
+- Prop close releases the native modal and restores prior HTML/body overflow declarations, including priority. Strict Mode replay preserves the existing modal. Actual unmount releases after the disconnect commit, without a duplicate close request. returnFocusRef supplies a logical destination; otherwise the opening trigger is restored when still connected/focusable. The host must supply a fallback when it removes/disables the trigger or owns navigation focus.
+
+## Figma reconciliation
+
+File `dVFI0q1cXMtmjUAkdvSWkk`, Dialog page `1120:776`, set `1120:7712`; Modal backdrop `1124:160` and native Modal content slot `1124:161`.
+
+All twelve variant IDs and twelve native Content slot IDs are retained. Existing Presentation axis spelling and property IDs remain intact. Medium/Inset/Dismissible `1120:7604` is now the spatial default; the former default was Small `1120:7549`. Reordering children alone did not change Figma's spatial default, so those two existing variant positions were exchanged.
+
+Every title now fills its remaining header width and hugs multiline text. Close controls participate in the header's horizontal flow, aligned to the top. Fixed 16px header gaps are bound to the canonical spacing variable; the old absolute close placement and space-between fill behaviour did not reserve the required space. Header size grows with either title or close control. Inset Content slots now hug their content; fullscreen slots continue to fill the bounded surface. No slot replacement or destructive token reconciliation occurred.
+
+Responsive probes confirm H3 title sizes **20/24/30px**, 24px region padding, 16px header/action spacing, 44px close targets and the 512/640/896px size maxima. A 288px inset surface representing a 320px viewport was visually inspected with a long title: title width 178px, header height 216px, close target at x218/y24 and a true 16px gap, with no collision. Earlier probe receipts precede the final header alignment fix; the final measurements above supersede them. The responsive H3 text style and bindings were retained.
+
+Fourteen canonical variables now have exact Web code syntax and scopes. Existing noncanonical `component/dialog/viewportInset` was found unused on this page and retained, without deletion or a new duplicate; canonical consumers use `component/dialog/size/viewportInset`. Shared backdrop colour remains rgba(17,24,39,0.72). Inventory stays 329 global and 30 Breakpoint variables, with base/md/lg modes. All three recorded temporary probes were removed. Detailed receipts are in [Figma evidence](react-dialog-figma-evidence.json).
+
+## Validation
+
+- Build, package/example type checks, production example build and generated token checks pass.
+- 47 unit/integration tests, including five Dialog cases: invalid contracts, SSR/hydration IDs/ref, controlled requests, forced decisions, exact scroll-style restoration and real unmount versus Strict Mode replay. jsdom's modal/layout APIs are stubbed; it is not evidence of browser inertness or layout.
+- 26 Chromium checks, including eight Dialog cases: native modality/container focus; forward/reverse boundaries; actual radio navigation; disabled/hidden/inert/negative-tabindex/shadow content; dynamic controls; controlled dismissal refusal; inside-to-outside dragging; forced decisions; form validation and native dialog submission; removed-trigger fallback; no-control boundary; responsive sizes/type/backdrop; 320px reflow; keyboard PageDown content scrolling and fixed region visibility; mobile fullscreen; text-spacing overrides; forced colours; rendered axe including contrast; legacy cancellation and background scroll position/style restoration. Prior eighteen component checks remain included.
+- Independent packed React 18.3.1 and React 19.3.1 consumers each verify a separate DOM-free import/SSR process, compile positive/negative declarations and exercise twelve components, Dialog SSR/hydration/ref, controlled cancellation, modal lifecycle and style restoration alongside the existing form tests. The archive contains 40 intended files. Native APIs are explicitly stubbed in this fixture; Chromium supplies the real-browser evidence.
+- Tokens remain 407 raw, 335 Studio, 24 mapped groups, zero unmapped groups and zero broken retained aliases. Only source metadata/compiled metadata changes; runtime CSS values are unchanged.
+
+Reproduce with npm ci, npm run build, npm run typecheck, npm test, npm run build:example, npm run test:browser and npm run verify:package. Install Playwright Chromium or select a local browser with OWLA11Y_BROWSER_EXECUTABLE. Packed consumers require registry access. Local examples: `?dialogs` plus all existing routes.
+
+## Remaining acceptance and sync
+
+Manual VoiceOver/NVDA/TalkBack checks remain open, particularly container-focus announcements, structured content, dynamic controls and return focus. Native desktop Firefox/Safari, mobile viewport/keyboard/scroll locking, real Windows high contrast, full browser zoom and navigation integration remain release checks. Open-shadow coverage does not imply closed-shadow support. No package or Figma library has been published; no complete accessibility certification or Next.js RSC acceptance is claimed.
+
+After merge, pull the updated Studio JSON from GitHub main and use the existing non-destructive Tokens Studio export settings. The source now preserves the metadata applied directly to the existing Figma variables. That repeat export still requires a human checkpoint; it has not been claimed complete here.
+
+References used for implementation decisions: [tabbable maintained documentation](https://github.com/focus-trap/tabbable/tree/v6.5.0) and [HTML Dialog standard](https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element). Repository contracts continue to define OwlA11y behaviour.

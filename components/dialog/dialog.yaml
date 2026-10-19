@@ -602,3 +602,14 @@ aiGenerationRules:
   - Keep content in the Content slot and actions in their action properties.
   - Reuse Button and registered icon components.
   - Report unsupported native Figma slots and use the named fallback without inventing a different API.
+
+publicApi:
+  react:
+    export: Dialog
+    status: implemented-automated-checks-passed-manual-acceptance-pending
+    contentAdapter: children
+    actionsAdapter: ReactNode-of-native-Button-compositions
+    headingLevel: 2-through-6-default-2
+    controlledLightDismissal: closedby-closerequest-with-pointer-down-up-guard
+    containerFocusCompatibility: native-autofocus-then-focus-only-if-container-was-missed
+    validationEvidence: docs/validation/react-dialog-parity.md

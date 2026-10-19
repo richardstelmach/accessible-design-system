@@ -1,6 +1,6 @@
 # OwlA11y React
 
-Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary and DateInput. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
+Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput and Dialog. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
 
 ```tsx
 import { Button, TextInput } from '@owla11y/react';
@@ -100,3 +100,27 @@ See [core parity report](../../docs/validation/react-core-parity.md) for source 
 The next five components have a separate [form comparison report](../../docs/validation/react-forms-parity.md) and a runnable ?forms preview with integrated submission/reset, shared errors, disabled states and long content. Phosphor Regular indicator artwork and its licence are recorded in THIRD_PARTY_NOTICES.md.
 
 ErrorSummary and DateInput have a [date/error comparison report](../../docs/validation/react-date-errors-parity.md) and a runnable ?date-errors preview. Type checks now include the actual examples as well as package consumers.
+
+## Dialog
+
+```tsx
+const [open, setOpen] = useState(false);
+<Button onClick={() => setOpen(true)}>Edit profile</Button>
+<Dialog open={open} onOpenChange={setOpen} title="Edit profile"
+  actions={<><Button onClick={() => setOpen(false)}>Cancel changes</Button>
+    <Button variant="primary" form="profile" type="submit">Save profile</Button></>}>
+  <form id="profile" method="dialog" onSubmit={event => {
+    // Prevent submission here if service validation fails.
+  }}>
+    <TextInput name="display-name" label="Display name"/>
+  </form>
+</Dialog>
+```
+
+Import Dialog with the other named exports; this snippet belongs inside a React component. Native field validation runs before submission. A prevented method=dialog submit leaves the modal open. Other forms can submit normally; the application closes only after successful work. Close requests report close-button/escape/backdrop/action; prop changes and consumer-owned action callbacks do not manufacture another request. No dismissal commits data.
+
+The default is medium/inset/dismissible with a close control. size is small/medium/large; presentation=fullscreen fills the viewport below 48rem and respects safe areas. Title typography is responsive H3 (20/24/30px), while headingLevel=2..6 selects semantics. Supply accessibleLabel when showTitle=false or there is no title. Forced decisions require dismissal=forced-decision, no close control, and actions with an enabled native button that resolves the flow. You own that handler and must keep it available.
+
+The native dialog ref supports focus/measurement; open is controlled through props and showModal is managed internally. One modal may be open per document. No descendant autoFocus or positive tabIndex. Browser-supported open shadow roots participate in tab boundaries; closed shadow roots are outside the inspected content contract. Native autofocus has a compatibility focus fallback, with manual screen-reader acceptance still pending. Use returnFocusRef for a logical destination when a trigger is removed/disabled; navigation flows own destination focus.
+
+Dialog uses the MIT tabbable runtime dependency. It locks underlying page overflow and restores original inline styles. Importing package CSS adds no global reset or fonts. The shared Modal backdrop is native ::backdrop CSS, not an additional React export. See the [comparison report](../../docs/validation/react-dialog-parity.md) and preview at ?dialogs.

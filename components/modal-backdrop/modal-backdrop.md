@@ -49,3 +49,7 @@ The owning modal pattern determines whether outside pointer interaction dismisse
 - Figma compositions use the shared Modal backdrop component rather than one-off frames.
 - The component exposes a native **Modal content** slot.
 - Native Dialog implementations style `dialog::backdrop` without adding redundant DOM.
+
+## React implementation
+
+The private beta implements Dialog and its native ::backdrop. See [React comparison and validation](../../docs/validation/react-dialog-parity.md) for API, Figma reconciliation, automated evidence and remaining manual acceptance. Design draft status is retained pending release checks.

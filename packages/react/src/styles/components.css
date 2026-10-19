@@ -299,3 +299,53 @@
   .owla11y-error-summary a { color:LinkText; }
   .owla11y-error-summary a:focus-visible { outline-color:Highlight; box-shadow:none; }
 }
+
+/* Native modal Dialog. Keep the user-agent hidden state when closed. */
+.owla11y-dialog {
+  box-sizing:border-box;
+  padding:0;
+  margin:auto;
+  inline-size:calc(100dvi - 2 * var(--component-dialog-size-viewportInset));
+  max-inline-size:var(--component-dialog-size-medium);
+  max-block-size:calc(100dvb - 2 * var(--component-dialog-size-viewportInset));
+  border:var(--border-width-thin) solid var(--component-dialog-surface-border);
+  border-radius:var(--component-dialog-surface-radius);
+  background:var(--component-dialog-surface-background);
+  color:var(--color-text-default);
+  font-family:var(--typography-body-default-fontFamily);
+  font-size:var(--typography-body-default-fontSize);
+  font-weight:var(--typography-body-default-fontWeight);
+  line-height:var(--typography-body-default-lineHeight);
+  letter-spacing:var(--typography-body-default-letterSpacing);
+  overflow-wrap:anywhere;
+}
+.owla11y-dialog[open] { display:flex; flex-direction:column; overflow:hidden; }
+.owla11y-dialog[data-size="small"] { max-inline-size:var(--component-dialog-size-small); }
+.owla11y-dialog[data-size="large"] { max-inline-size:var(--component-dialog-size-large); }
+.owla11y-dialog::backdrop { background:var(--component-dialog-backdrop-background); }
+.owla11y-dialog:focus { outline:var(--border-width-medium) solid var(--color-interactive-focus-ring); outline-offset:var(--border-width-medium); }
+.owla11y-dialog__header { display:flex; flex:none; align-items:flex-start; gap:var(--spacing-inline-md); padding:var(--component-dialog-spacing-header); }
+.owla11y-dialog__title { flex:1; min-inline-size:0; margin:0; color:var(--color-text-heading);
+  font-family:var(--typography-heading-h3-fontFamily); font-size:var(--typography-heading-h3-fontSize);
+  font-weight:var(--typography-heading-h3-fontWeight); line-height:var(--typography-heading-h3-lineHeight);
+  letter-spacing:var(--typography-heading-h3-letterSpacing); }
+.owla11y-dialog__close { margin-inline-start:auto; }
+.owla11y-dialog__content { display:flex; flex-direction:column; gap:var(--component-dialog-spacing-sectionGap); padding:var(--component-dialog-spacing-content); min-block-size:0; overflow-x:hidden; overflow-y:auto; }
+.owla11y-dialog__content > * { flex-shrink:0; min-inline-size:0; max-inline-size:100%; }
+.owla11y-dialog__content > p { margin:0; }
+.owla11y-dialog__actions { display:flex; flex:none; flex-wrap:wrap; justify-content:flex-end; gap:var(--component-dialog-spacing-actionGap); padding:var(--component-dialog-spacing-footer); }
+@media (width < 48rem) {
+  .owla11y-dialog__actions { flex-direction:column; }
+  .owla11y-dialog__actions > * { inline-size:100%; }
+  .owla11y-dialog[data-presentation="fullscreen"] { inline-size:100dvi; block-size:100dvb; max-inline-size:none; max-block-size:none; border-radius:var(--radius-none); }
+  .owla11y-dialog[data-presentation="fullscreen"] .owla11y-dialog__content { flex:1; }
+  .owla11y-dialog[data-presentation="fullscreen"] :is(.owla11y-dialog__header,.owla11y-dialog__content,.owla11y-dialog__actions) { padding-inline-start:max(var(--component-dialog-spacing-content), env(safe-area-inset-left)); padding-inline-end:max(var(--component-dialog-spacing-content), env(safe-area-inset-right)); }
+  .owla11y-dialog[data-presentation="fullscreen"] .owla11y-dialog__header { padding-block-start:max(var(--component-dialog-spacing-header), env(safe-area-inset-top)); }
+  .owla11y-dialog[data-presentation="fullscreen"] .owla11y-dialog__content:first-child { padding-block-start:max(var(--component-dialog-spacing-content), env(safe-area-inset-top)); }
+  .owla11y-dialog[data-presentation="fullscreen"] .owla11y-dialog__content:last-child { padding-block-end:max(var(--component-dialog-spacing-content), env(safe-area-inset-bottom)); }
+  .owla11y-dialog[data-presentation="fullscreen"] .owla11y-dialog__actions { padding-block-end:max(var(--component-dialog-spacing-footer), env(safe-area-inset-bottom)); }
+}
+@media (forced-colors:active) { .owla11y-dialog { border-color:CanvasText; } .owla11y-dialog::backdrop { background:Canvas; opacity:.75; } .owla11y-dialog:focus { outline-color:Highlight; } }
+
+.owla11y-dialog__content:focus-visible { outline:var(--border-width-medium) solid var(--color-interactive-focus-ring); outline-offset:calc(-2 * var(--border-width-medium)); }
+@media (forced-colors:active) { .owla11y-dialog__content:focus-visible { outline-color:Highlight; } }
