@@ -138,6 +138,27 @@ test('320px reflow, scrolling content, full screen, text overrides and rendered 
   await page.emulateMedia({ forcedColors:'active' }); await dialog.focus(); await expect(dialog).toHaveCSS('outline-style','solid');
 });
 
+test('preview settings use library controls and empty selections restore canonical defaults', async ({ page }) => {
+  const size=page.getByRole('combobox', { name:'Dialog size (optional)' });
+  const presentation=page.getByRole('combobox', { name:'Mobile presentation (optional)' });
+  await size.selectOption('large'); await presentation.selectOption('fullscreen');
+  await size.selectOption(''); await presentation.selectOption('');
+  await expect(size).toHaveValue(''); await expect(presentation).toHaveValue('');
+  await page.setViewportSize({ width:600, height:900 });
+  await page.getByRole('button', { name:'Edit profile', exact:true }).click();
+  const dialog=page.getByRole('dialog');
+  await expect(dialog).toHaveAttribute('data-size','medium');
+  await expect(dialog).toHaveAttribute('data-presentation','inset');
+  await expect(dialog).toHaveCSS('width','568px');
+  await page.keyboard.press('Escape');
+  await page.setViewportSize({ width:320, height:800 });
+  expect(await page.locator('main').evaluate(n=>n.scrollWidth<=n.clientWidth)).toBe(true);
+  const require=createRequire(import.meta.url);
+  await page.addScriptTag({ content:readFileSync(require.resolve('axe-core/axe.min.js'),'utf8') });
+  const violations=await page.evaluate(async () => (await (window as any).axe.run(document.querySelector('main'), { runOnly:{ type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa'] } })).violations.map((v:any)=>v.id));
+  expect(violations).toEqual([]);
+});
+
 test('legacy closedby fallback and scroll locking preserve page position and existing styles', async ({ page }) => {
   await page.evaluate(() => {
     document.documentElement.style.overflow='scroll'; document.body.style.overflow='auto';

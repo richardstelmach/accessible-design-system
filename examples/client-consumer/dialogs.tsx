@@ -1,5 +1,5 @@
 import React, { StrictMode, useRef, useState } from 'react';
-import { Button, Dialog, Fieldset, Radio, TextInput } from '@owla11y/react';
+import { Button, Checkbox, Dialog, Fieldset, Radio, Select, TextInput } from '@owla11y/react';
 import type { DialogProps } from '@owla11y/react';
 
 export function Dialogs() {
@@ -7,8 +7,8 @@ export function Dialogs() {
 }
 function DialogExamples() {
   const [mode, setMode] = useState<string | null>(null);
-  const [size, setSize] = useState<NonNullable<DialogProps['size']>>('medium');
-  const [presentation, setPresentation] = useState<NonNullable<DialogProps['presentation']>>('inset');
+  const [size, setSize] = useState<NonNullable<DialogProps['size']> | ''>('medium');
+  const [presentation, setPresentation] = useState<NonNullable<DialogProps['presentation']> | ''>('inset');
   const [reason, setReason] = useState('None');
   const [extra, setExtra] = useState(false);
   const [removed, setRemoved] = useState(false);
@@ -19,9 +19,17 @@ function DialogExamples() {
   return <main className="owla11y-preview" style={{ maxWidth:'40rem', padding:'1rem', margin:'2rem auto', overflowWrap:'anywhere' }}>
     <h1>OwlA11y dialogs</h1>
     <p>Native modal examples. Content is preserved when closed; Escape and backdrop dismissal never save changes.</p>
-    <p><label>Dialog size <select value={size} onChange={e => setSize(e.target.value as typeof size)}><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select></label></p>
-    <p><label>Mobile presentation <select value={presentation} onChange={e => setPresentation(e.target.value as typeof presentation)}><option value="inset">Inset</option><option value="fullscreen">Full screen</option></select></label></p>
-    <p><label><input type="checkbox" checked={acceptDismissal} onChange={e => setAcceptDismissal(e.target.checked)}/>Accept dismissal requests</label></p>
+    <div style={{ display:'grid', gap:'var(--form-field-gap-controlToNextField)', marginBlock:'1.5rem' }}>
+      <Select label="Dialog size" name="preview-dialog-size" requirement="optional" value={size} onChange={e => setSize(e.target.value as typeof size)}>
+        <option value="">Use default size (Medium)</option>
+        <option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option>
+      </Select>
+      <Select label="Mobile presentation" name="preview-dialog-presentation" requirement="optional" value={presentation} onChange={e => setPresentation(e.target.value as typeof presentation)}>
+        <option value="">Use default presentation (Inset)</option>
+        <option value="inset">Inset</option><option value="fullscreen">Full screen</option>
+      </Select>
+      <Checkbox label="Accept dismissal requests" name="preview-accept-dismissal" value="yes" checked={acceptDismissal} onChange={e => setAcceptDismissal(e.target.checked)}/>
+    </div>
     <div style={{ display:'flex', flexWrap:'wrap', gap:16 }}>
       <Button onClick={() => setMode('edit')}>Edit profile</Button>
       <Button onClick={() => setMode('forced')}>Review decision</Button>
@@ -38,7 +46,7 @@ function DialogExamples() {
         showClose:mode !== 'empty', actions:mode === 'empty' || mode === 'unnamed' ? undefined : mode === 'long' ? <Button variant="primary" onClick={close}>Close information</Button> : <><Button onClick={close}>Cancel changes</Button><Button variant="primary" form="dialog-profile" type="submit">Save profile</Button></>
       })}
       {...(mode === 'unnamed' || mode === 'empty' ? { accessibleLabel:'About your profile', showTitle:false as const } : { title:mode === 'long' ? 'Important information about updating your profile and keeping your contact details safe' : mode === 'forced' ? 'Choose how to continue' : 'Edit profile' })}
-      size={size} presentation={presentation}
+      size={size || 'medium'} presentation={presentation || 'inset'}
       returnFocusRef={removed ? fallback : undefined}>
       {mode === 'forced' ? <p>Choose whether to keep the current details or confirm the update. Neither Escape nor the backdrop makes this decision.</p> : mode === 'long' ? Array.from({ length:30 }, (_, i) => <p key={i}>Profile information {i + 1}. Keep your contact details up to date so that you receive important messages. This content scrolls within the dialog.</p>) : mode === 'empty' ? <p>There are no controls. Escape or the backdrop can dismiss this information.</p> : <form id="dialog-profile" method="dialog" onSubmit={() => {}} style={{ display:'grid', gap:24 }}>
         <TextInput name="dialog-name" label="Display name" defaultValue="Ada Lovelace"/>
