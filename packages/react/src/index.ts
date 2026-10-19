@@ -13,3 +13,5 @@ export type { TextareaProps, SelectProps, FieldsetProps, CheckboxProps, RadioPro
 export type { ButtonProps, IconButtonProps, LinkProps, TextInputProps, FieldError, ButtonVariant, ControlSize } from './types.js';
 export { Dialog } from './components/Dialog.js';
 export type { DialogProps, DialogCloseReason } from './types.js';
+export { Tabs } from './components/Tabs.js';
+export type { TabsProps, TabsItem } from './types.js';

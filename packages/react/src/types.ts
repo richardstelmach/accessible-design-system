@@ -197,3 +197,14 @@ export type DialogProps = DialogNative & DialogName & DialogDismissal & {
   /** Logical fallback/explicit destination when the opening trigger is unavailable. */
   returnFocusRef?: { readonly current: HTMLElement | null };
 };
+
+export type TabsItem = { id: string; label: string; heading: string; content: ReactNode };
+type TabsName = { label: string; labelledBy?: never } | { label?: never; labelledBy: string };
+type TabsSelection = { selectedId: string; defaultSelectedId?: never; onSelectedChange: (id: string) => void } |
+  { selectedId?: never; defaultSelectedId?: string; onSelectedChange?: (id: string) => void };
+export type TabsProps = Omit<ComponentPropsWithoutRef<'div'>,
+  'children' | 'role' | 'aria-label' | 'aria-labelledby' | 'onChange' | 'tabIndex' | 'dangerouslySetInnerHTML'> & TabsName & TabsSelection & {
+  items: readonly TabsItem[];
+  activation?: 'automatic' | 'manual';
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
+};

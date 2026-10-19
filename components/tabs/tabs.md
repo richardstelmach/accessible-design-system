@@ -1,6 +1,6 @@
 # Tabs
 
-**Status:** Draft — Figma built and audited; repeat token export pending
+**Status:** Draft — React implemented with automated evidence; manual release checks and repeat token export pending
 
 **Version:** 0.1.0
 
@@ -12,7 +12,7 @@
 
 Tabs presents related sections in a shared space, with one panel visible in its enhanced presentation. Users enter the tab list once with Tab, move between tabs using arrow keys, and use Tab again to reach the selected panel.
 
-The source defines tokens, behaviour and acceptance criteria for the Figma implementation. A production web component and runtime accessibility validation remain future work.
+The source defines tokens, behaviour and acceptance criteria. The React package implements this contract; [comparison and validation](../../docs/validation/react-tabs-parity.md) records the API adapter, current automated evidence and remaining manual release checks.
 
 ## Accepted decisions
 
@@ -69,7 +69,7 @@ Start from usable HTML: a contents list linking to visible sections. Add widget 
 
 Each panel begins with a heading, so the visible panel is a `tabindex="0"` stop. Give it visible keyboard focus. Hide inactive panels with `hidden`; `aria-hidden` alone does not prevent focus reaching their controls. Preserve the hidden attribute's display behaviour in component CSS. Keep panel DOM mounted to retain local values.
 
-These are illustrative states, not a runnable implementation:
+These states illustrate the framework-neutral markup; the React package and ?tabs preview provide the runnable implementation:
 
 ```html
 <!-- Baseline: every section is visible. -->
@@ -178,7 +178,7 @@ Print all sections with headings. Without JavaScript, all sections and their lin
 - [ ] Fallback and print expose all sections.
 - [ ] Switching preserves local content state and introduces no unnecessary animation.
 
-These are implementation acceptance checks, not completed runtime results. Test with NVDA and Firefox or Chrome, VoiceOver and Safari, mobile touch navigation, and Windows forced colours. The complete automated/manual matrix is in the YAML contract.
+This checklist remains the release acceptance matrix; automated React/Chromium results are recorded in the comparison report and do not complete the manual checks. Test with NVDA and Firefox or Chrome, VoiceOver and Safari, mobile touch navigation, and Windows forced colours. The complete automated/manual matrix is in the YAML contract.
 
 ## Figma handoff
 
@@ -203,3 +203,7 @@ After the source changes are reviewed and merged to GitHub `main`, pull `tokens/
 ## References
 
 Reviewed 8 October 2026. The [W3C APG Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and its examples guide behaviour. [WCAG 2.2](https://www.w3.org/TR/WCAG22/) defines conformance requirements. [GOV.UK Tabs](https://design-system.service.gov.uk/components/tabs/) informs content and fallback guidance. These sources do not determine this system's token names, appearance or Figma architecture.
+
+## React adapter
+
+Import Tabs and TabsItem from @owla11y/react. label or labelledBy names the set; each item supplies id, label, heading and content body. The adapter renders the heading with configurable semantics and responsive H3 style. Controlled selectedId/onSelectedChange and uncontrolled defaultSelectedId are alternatives. See the [public React API](../../docs/react-api.md) for ownership, focus continuity, unsupported integrations and error policy.
