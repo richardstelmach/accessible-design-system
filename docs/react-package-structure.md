@@ -1,6 +1,6 @@
 # OwlA11y package structure
 
-Accepted baseline: React 18.3 and 19; styled components with token overrides; light theme at launch. The workspace implements thirteen components: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog and Tabs. Publication remains disabled.
+Accepted baseline: React 18.3 and 19; styled components with token overrides; light theme at launch. The workspace implements thirteen components: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog and Tabs, plus the Toast notification host (ToastProvider, ToastRegion, ToastNotificationsButton and useToast). Publication remains disabled.
 
 ## Repository layout
 
@@ -40,7 +40,7 @@ Before adding dependency versions, verify current official tool documentation an
 4. Implement ErrorSummary and DateInput with native error routing, explicit part IDs and a complete failed-submit example.
 5. Implement Dialog and its native modal backdrop with focus/lifecycle and Figma comparison evidence.
 6. Implement Tabs baseline/enhancement, responsive focus continuity and Figma parity.
-7. Investigate Toast host integration before stabilising its typed interface.
+7. Implement Toast host ownership, announcement delivery, modal deferral and focus recovery; retain manual assistive-technology acceptance as a release gate.
 8. Complete the remaining families and release evidence from the readiness audit.
 
 ## Scaffold verification

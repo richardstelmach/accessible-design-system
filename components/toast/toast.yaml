@@ -4,8 +4,8 @@ version: 0.1.0
 status: draft
 
 phase:
-  current: token-roundtrip-complete
-  implementation: not-started
+  current: react-implemented-manual-acceptance-pending
+  implementation: react-implemented
   figma: built-and-audited
   releaseReady: false
 
@@ -33,7 +33,7 @@ scope:
     - Hidden close controls, swipe-only dismissal and global Escape shortcuts
     - Actions, links, undo deadlines, rich content and progress indicators
     - Required acknowledgement, blocking failures and modal interaction
-    - Notification history service, server event transport and framework runtime
+    - Notification history service and server event transport (React adapter is documented separately)
     - Field-validation and Error Summary replacement
 
 decisions:
@@ -200,3 +200,11 @@ acceptanceCriteria:
 wcag:
   baseline: WCAG 2.2 AA
   criteria: ['1.3.1', '1.4.1', '1.4.3', '1.4.4', '1.4.10', '1.4.11', '1.4.12', '2.1.1', '2.1.2', '2.2.1', '2.4.3', '2.4.7', '2.4.11', '2.5.2', '2.5.8', '4.1.2', '4.1.3']
+
+reactAdapter:
+  exports: [ToastProvider, ToastRegion, ToastNotificationsButton, useToast]
+  ownership: One persistent app-shell provider and one region/entry per document, outside dialogs and route content.
+  delivery: Empty implicit live roles; 50ms batching/reset window only, never timed removal; both priority channels defer during native modal ownership.
+  dismissal: Targeted ID; provider onDismiss(id); next/previous/origin/entry focus recovery; scoped Escape.
+  evidence: docs/validation/react-toast-parity.md
+  manualAcceptance: NVDA, JAWS, VoiceOver and broader native-browser acceptance remain required before release.

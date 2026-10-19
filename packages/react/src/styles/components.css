@@ -387,3 +387,35 @@
   .owla11y-tabs > .owla11y-tabs__panel[hidden] { display:flex; flex-direction:column; gap:var(--spacing-stack-sm); }
   .owla11y-tabs > .owla11y-tabs__panel + .owla11y-tabs__panel { margin-block-start:var(--component-tabs-spacing-list-to-panel); }
 }
+
+/* Toast lives in document flow: no overlay, timers, clipping or capacity limit. */
+.owla11y-toast-region { container-type:inline-size; min-inline-size:0; scroll-margin-block:var(--spacing-4); }
+.owla11y-toast-list { display:flex; flex-direction:column; gap:var(--component-toast-spacing-stack); list-style:none; margin:0; padding:0; }
+.owla11y-toast { box-sizing:border-box; display:flex; align-items:flex-start; gap:var(--component-toast-spacing-icon-to-content); padding:var(--component-toast-spacing-inset); border-radius:var(--component-toast-surface-radius); min-inline-size:0; }
+.owla11y-toast, .owla11y-toast-empty { font-family:var(--typography-body-default-fontFamily); font-size:var(--typography-body-default-fontSize); font-weight:var(--typography-body-default-fontWeight); line-height:var(--typography-body-default-lineHeight); letter-spacing:var(--typography-body-default-letterSpacing); }
+.owla11y-toast__icon { flex:none; inline-size:var(--component-toast-icon-size); block-size:var(--component-toast-icon-size); }
+.owla11y-toast__message { flex:1; min-inline-size:0; display:flex; flex-direction:column; gap:var(--component-toast-spacing-title-to-description); overflow-wrap:anywhere; }
+.owla11y-toast__message p { margin:0; }
+.owla11y-toast__title { font-weight:var(--typography-emphasis-strong); }
+.owla11y-toast[data-state="success"] { background:var(--color-status-success-background); color:var(--color-status-success-foreground); }
+.owla11y-toast[data-state="info"] { background:var(--color-status-info-background); color:var(--color-status-info-foreground); }
+.owla11y-toast[data-state="warning"] { background:var(--color-status-warning-background); color:var(--color-status-warning-foreground); }
+.owla11y-toast[data-state="error"] { background:var(--color-status-error-background); color:var(--color-status-error-foreground); }
+.owla11y-toast[data-state="success"] .owla11y-toast__icon { color:var(--color-icon-success); }
+.owla11y-toast[data-state="info"] .owla11y-toast__icon { color:var(--color-icon-info); }
+.owla11y-toast[data-state="warning"] .owla11y-toast__icon { color:var(--color-icon-warning); }
+.owla11y-toast[data-state="error"] .owla11y-toast__icon { color:var(--color-icon-error); }
+.owla11y-toast-region:focus-visible { outline:var(--border-width-medium) solid var(--color-interactive-focus-ring); outline-offset:var(--border-width-medium); box-shadow:0 0 0 var(--border-width-medium) var(--color-interactive-focus-separator); }
+.owla11y-toast-sr, .owla11y-toast-announcers { position:absolute; inline-size:1px; block-size:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media (forced-colors:active) {
+  .owla11y-toast { border:var(--border-width-thin) solid CanvasText; background:Canvas; color:CanvasText; }
+  .owla11y-toast .owla11y-toast__icon { color:CanvasText; }
+  .owla11y-toast-region:focus-visible { outline:2px solid Highlight; box-shadow:none; }
+}
+
+/* When enlarged text leaves no usable message column, preserve DOM/visual order
+   vertically instead of squeezing the text between fixed-size controls. */
+@container (max-width:15em) {
+  .owla11y-toast { flex-direction:column; }
+  .owla11y-toast__message { flex:initial; align-self:stretch; }
+}

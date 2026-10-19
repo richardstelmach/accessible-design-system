@@ -9,7 +9,7 @@ globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Ele
 globalThis.getComputedStyle=dom.window.getComputedStyle;
 const {renderToString}=await import('react-dom/server');
 const {hydrateRoot}=await import('react-dom/client');
-const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs } = await import('@owla11y/react');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
@@ -120,4 +120,19 @@ assert.equal(root.querySelector('[role=tab]'),null);assert.equal(root.querySelec
 await React.act(async()=>notes.focus());await React.act(async()=>{wide=true;resized.forEach(callback=>callback());});
 assert.equal(root.querySelector('[role=tab][aria-selected=true]').textContent,'Details');assert.equal(notes.value,'Edited note');assert.ok(document.activeElement===notes);
 assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
-console.log('Packed package: React ' + React.version + ' thirteen components, Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');
+let toastAPI;
+function ToastEvents(){toastAPI=useToast();return h('button',null,'Event origin');}
+const toastApp=h(React.StrictMode,null,h(ToastProvider,null,h(ToastEvents),h(ToastNotificationsButton),h(ToastRegion)));
+root.innerHTML=renderToString(toastApp);assert.equal(root.querySelector('[role=status]').textContent,'');assert.equal(root.querySelector('[role=alert]').textContent,'');
+const notificationId=root.querySelector('section').id;
+await React.act(async()=>{hydrated=hydrateRoot(root,toastApp,{onRecoverableError:error=>errors.push(error)});});
+assert.equal(root.querySelector('section').id,notificationId);
+await React.act(async()=>{toastAPI.add({id:'packed-save',state:'success',titleText:'Saved',dismissLabel:'Dismiss packed save'});});
+for(let tries=0;tries<100&&!root.querySelector('[role=status]').textContent.includes('Saved');tries++)await React.act(async()=>{await new Promise(resolve=>setTimeout(resolve,10));});
+assert.equal(root.querySelector('[role=status]').textContent,'Success: Saved');assert.equal(root.querySelectorAll('[data-toast-id]').length,1);
+assert.equal(root.querySelector('[aria-live],[aria-atomic]'),null);
+await React.act(async()=>root.querySelector('[aria-controls]').click());assert.ok(document.activeElement===root.querySelector('section'));
+await React.act(async()=>root.querySelector('[data-toast-id] button').focus());await React.act(async()=>toastAPI.dismiss('packed-save'));
+assert.equal(root.querySelectorAll('[data-toast-id]').length,0);assert.ok(document.activeElement===root.querySelector('[aria-controls]'));
+assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
+console.log('Packed package: React ' + React.version + ' thirteen components plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');

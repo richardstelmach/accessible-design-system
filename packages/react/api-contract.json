@@ -198,9 +198,9 @@
         "ToastNotificationsButton",
         "useToast"
       ],
-      "props": "provider labels; useToast(): add(message), dismiss(id); message={id,state=info,titleText,descriptionText?,announcement=polite,dismissLabel}",
-      "behaviour": "One provider owns queue and announcers. Region and entry button required once in app shell. Persistent messages, no timers/eviction; add duplicate active ID rejected; removal focus handled by host.",
-      "implementation": "not-implemented"
+      "props": "ToastProvider: regionLabel, emptyText, stateLabels, formatCountLabel, formatAnnouncement, onDismiss(id); required ToastRegion and ToastNotificationsButton; useToast(): add(message):id, dismiss(id); message={id,state=info,titleText,descriptionText?,announcement=polite,dismissLabel}",
+      "behaviour": "One document/app-shell owner; empty implicit status/alert announcers; 50ms delivery batching only; chronological persistent in-flow list; duplicate active ID rejected; scoped dismissal with focus recovery; defer both announcement channels during native modals; no duration or eviction.",
+      "implementation": "implemented-manual-release-checks-pending"
     }
   ]
 }

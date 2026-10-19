@@ -121,3 +121,19 @@ const tabItems:TabsItem[]=[{id:'details',label:'Details',heading:'Details',conte
 
 // @ts-expect-error raw HTML cannot replace Tabs-owned structure
 <Tabs label="Profile" items={tabItems} dangerouslySetInnerHTML={{__html:'<p>Other</p>'}}/>;
+
+import {ToastProvider,ToastRegion,ToastNotificationsButton,useToast} from '../src/index.js';
+import type {ToastMessage,ToastAPI} from '../src/index.js';
+const toastMessage:ToastMessage={id:'save-1',state:'success',titleText:'Saved',dismissLabel:'Dismiss saved notification'};
+<ToastProvider regionLabel="Updates" formatCountLabel={count=>`${count} updates`} formatAnnouncement={messages=>`${messages.length} events`} onDismiss={id=>id.toUpperCase()}><ToastNotificationsButton/><ToastRegion className="rail"/></ToastProvider>;
+function ToastTypes(){const api:ToastAPI=useToast();const id:string=api.add(toastMessage);api.dismiss(id);return null;}
+// @ts-expect-error required contextual dismiss label
+const unnamedToast:ToastMessage={id:'one',titleText:'Saved'};
+// @ts-expect-error messages must be plain text
+const richToast:ToastMessage={...toastMessage,titleText:<b>Saved</b>};
+// @ts-expect-error automatic dismissal is unsupported
+const timedToast:ToastMessage={...toastMessage,duration:5000};
+// @ts-expect-error visible region semantics belong to the host
+<ToastRegion role="alert"/>;
+// @ts-expect-error entry text is generated from the active count
+<ToastNotificationsButton>Custom</ToastNotificationsButton>;

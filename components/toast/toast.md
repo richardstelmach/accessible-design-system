@@ -145,3 +145,10 @@ The structural audit passed eight Toast masters, three close-control masters, 19
 Status text contrast ranges from 7.43:1 to 7.52:1. Close-icon contrast ranges from 7.01:1 at rest to 3.42:1 when pressed; the shared focus ring has 4.52:1 contrast against its separator. Token compilation and an unchanged repeat build pass. No unrelated token values changed.
 
 Source merged in PR #36. Richard completed the Tokens Studio pull/export on 18 October 2026 and reported no new variables. The post-export audit confirmed all six existing variable IDs, aliases, scopes, descriptions and Web references match the merged source. All eight Toast and three close-control masters remain intact, with no broken bindings, duplicate Toast variable names or visible overflow. This is a successful unchanged round-trip. Browser implementation and assistive-technology testing remain separate release gates.
+
+
+## React implementation record
+
+The package implements ToastProvider, ToastRegion, ToastNotificationsButton and useToast against this contract. Keep all three host parts mounted in the application shell; add new events after mount. The visible list stays in flow and preserves chronological messages without timers or eviction. One empty status and alert announcer own delivery; a 50ms batching/reset window affects speech publication only. Both urgency channels wait during a native modal, so immediate modal feedback needs its own accessible local owner. Provider onDismiss receives the removed ID.
+
+The React adapter and Figma comparison are documented in [Toast validation](../../docs/validation/react-toast-parity.md), with usage in the package README. Figma masters and tokens required no changes. Automated DOM announcements do not establish spoken delivery: manual NVDA, JAWS, VoiceOver and broader-browser acceptance remain release gates. The earlier completed token round-trip remains valid.

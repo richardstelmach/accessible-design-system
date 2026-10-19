@@ -23,3 +23,5 @@ The [date/error batch](validation/react-date-errors-parity.md) adds ErrorSummary
 The [Dialog batch](validation/react-dialog-parity.md) adds the twelfth component and native backdrop, with controlled lifecycle, keyboard/scroll handling and source-led Figma header/default repairs. Manual assistive-technology/browser acceptance and post-merge Tokens Studio repeat export remain open.
 
 The [Tabs batch](validation/react-tabs-parity.md) adds the thirteenth component, with linked-section SSR/fallback, automatic/manual activation, controlled ownership and preserved panel state. Live Figma comparison passed without production mutations. A05 repeat export and manual release acceptance remain open.
+
+The [Toast batch](validation/react-toast-parity.md) adds the persistent notification host to the thirteen existing components: provider, region, Notifications entry and useToast. Source/Figma comparison, automated announcement DOM delivery, focus, modal integration and package checks are recorded there. Real speech output in NVDA/JAWS/VoiceOver and broader-browser release checks remain open. No new token migration is needed; Toast already completed its token round-trip.
