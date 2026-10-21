@@ -152,9 +152,9 @@ No animation is required. Future motion must respect reduced-motion preferences 
 
 ## Figma handoff
 
-Read-only preflight on 8 October 2026 confirmed the existing Tabs page, native slots, five responsive heading styles, `global` and `Breakpoint` collections, and the local caret masters (`61:635` down, `61:629` up). No Accordion page or variables existed. No Figma content has been changed.
+Read-only preflight on 8 October 2026 confirmed the existing Tabs page, native slots, five responsive heading styles, `global` and `Breakpoint` collections, and the local caret masters (`61:635` down, `61:629` up). At that preflight no Accordion page or variables existed. The live audit on 21 October 2026 confirms the later-built masters and five geometry aliases; see the [React comparison evidence](../../docs/validation/react-controls-parity.md). No production Accordion Figma changes were needed in this batch.
 
-Planned page: **21 - Components - Accordion** in the [Accessible Design System file](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk/Accessible-Design-System).
+Existing page `1176:101`: **21 - Components - Accordion** in the [Accessible Design System file](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk/Accessible-Design-System).
 
 - **Accordion / Title:** five visual style variants H2–H6 and a Title text property.
 - **Accordion / Item:** six variants, Expanded=False/True × State=Default/Hover/Pressed; independent Focus boolean, native Content slot and exposed nested Title / Title style properties.
@@ -165,6 +165,10 @@ Splitting the nested title keeps typography separate from the interaction matrix
 Follow the [documentation template](../../patterns/component-documentation-page.yaml): separate component masters, documentation examples, QA and accessibility areas; reuse shared headers and cards. Include a compact instance review showing a chosen non-first item open on page load, several items open, all closed, independent focus, a documented H2/H4 visual exception, and populated content slots. QA includes every visual style, narrow long titles, RTL, responsive modes, text stress and slot retention.
 
 Source review and merge to GitHub `main` precede Figma construction and the Tokens Studio pull. Pull `tokens/compiled/tokens.studio.json` into **global**, then use the [routine non-destructive export](../../docs/token-sync-workflow.md). Keep **Breakpoint** manually managed. Finish with a binding/metadata audit and repeat export before accepting the round-trip.
+
+## React adapter
+
+The beta package exports Accordion. Explicit headingLevel is required; titleStyle defaults to the matching heading. defaultExpandedIds maps initialExpandedIds without resetting later choices. expandedIds/onExpandedChange provides controlled independent expansion. No-JavaScript/server output shows ordinary headings and every body; enhancement adds native buttons only when handlers are ready. Content stays mounted, initial focus is protected, and external collapse restores focus before hiding an active panel. The preview demonstrates reveal-before-focus by observing the actual panel visibility before focusing its input. See [API details](../../docs/react-api.md) and [automated evidence](../../docs/validation/react-controls-parity.md).
 
 ## Validation and remaining acceptance
 
@@ -178,7 +182,7 @@ Source checks cover YAML/JSON parsing, token references, aliases, metadata, cont
 - [ ] Verify form values and panel content survive collapse/reopen.
 - [ ] Test no-JavaScript, initial focus preservation, print and reveal-before-focus integrations.
 - [ ] Test NVDA, VoiceOver, mobile touch navigation, forced colours, reflow and text-spacing overrides.
-- [ ] Build and audit Figma component structure, bindings, slots, examples and appearance.
+- [x] Audit the existing Figma component structure, bindings, slots and responsive appearance (21 October 2026).
 - [ ] Complete source merge, token export and repeat-export audit before publication.
 
 ## References

@@ -1,0 +1,5568 @@
+{
+  "date": "2026-10-21",
+  "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
+  "baseCommit": "b21742fc3984f7f3b10539f1a10c8ea28a140e50",
+  "stepperInitial": [
+    {
+      "page": "922:6",
+      "frames": [
+        {
+          "id": "922:7",
+          "name": "01 - Component set"
+        },
+        {
+          "id": "922:9",
+          "name": "02 - Documentation examples"
+        },
+        {
+          "id": "922:11",
+          "name": "03 - QA and responsive tests"
+        },
+        {
+          "id": "922:13",
+          "name": "04 - Accessibility notes"
+        }
+      ],
+      "sets": [
+        {
+          "id": "931:5765",
+          "name": "Stepper",
+          "count": 40,
+          "properties": {
+            "Helper text#931:0": {
+              "type": "BOOLEAN",
+              "defaultValue": false
+            },
+            "Label text#931:1": {
+              "type": "TEXT",
+              "defaultValue": "Number of rooms"
+            },
+            "Value text#931:2": {
+              "type": "TEXT",
+              "defaultValue": "2"
+            },
+            "Helper text content#931:3": {
+              "type": "TEXT",
+              "defaultValue": "Choose a number from 1 to 10."
+            },
+            "Error text#931:4": {
+              "type": "TEXT",
+              "defaultValue": "Error: Enter a whole number from 1 to 10."
+            },
+            "State": {
+              "type": "VARIANT",
+              "defaultValue": "default",
+              "variantOptions": [
+                "default",
+                "focus",
+                "error",
+                "errorFocus",
+                "disabled"
+              ]
+            },
+            "Requirement": {
+              "type": "VARIANT",
+              "defaultValue": "required",
+              "variantOptions": [
+                "required",
+                "optional"
+              ]
+            },
+            "Boundary": {
+              "type": "VARIANT",
+              "defaultValue": "none",
+              "variantOptions": [
+                "none",
+                "minimum",
+                "maximum",
+                "both"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "927:90",
+              "name": "State=default, Requirement=required, Boundary=none",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:98",
+              "name": "State=default, Requirement=required, Boundary=minimum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:126",
+              "name": "State=default, Requirement=required, Boundary=maximum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:154",
+              "name": "State=default, Requirement=required, Boundary=both",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:182",
+              "name": "State=default, Requirement=optional, Boundary=none",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:200",
+              "name": "State=default, Requirement=optional, Boundary=minimum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:228",
+              "name": "State=default, Requirement=optional, Boundary=maximum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:256",
+              "name": "State=default, Requirement=optional, Boundary=both",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:4869",
+              "name": "State=focus, Requirement=required, Boundary=none",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:4897",
+              "name": "State=focus, Requirement=required, Boundary=minimum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:4925",
+              "name": "State=focus, Requirement=required, Boundary=maximum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:4953",
+              "name": "State=focus, Requirement=required, Boundary=both",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:4981",
+              "name": "State=focus, Requirement=optional, Boundary=none",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5009",
+              "name": "State=focus, Requirement=optional, Boundary=minimum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5037",
+              "name": "State=focus, Requirement=optional, Boundary=maximum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5065",
+              "name": "State=focus, Requirement=optional, Boundary=both",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5093",
+              "name": "State=error, Requirement=required, Boundary=none",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5121",
+              "name": "State=error, Requirement=required, Boundary=minimum",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5149",
+              "name": "State=error, Requirement=required, Boundary=maximum",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5177",
+              "name": "State=error, Requirement=required, Boundary=both",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5205",
+              "name": "State=error, Requirement=optional, Boundary=none",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5233",
+              "name": "State=error, Requirement=optional, Boundary=minimum",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5261",
+              "name": "State=error, Requirement=optional, Boundary=maximum",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5289",
+              "name": "State=error, Requirement=optional, Boundary=both",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5317",
+              "name": "State=errorFocus, Requirement=required, Boundary=none",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5345",
+              "name": "State=errorFocus, Requirement=required, Boundary=minimum",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5373",
+              "name": "State=errorFocus, Requirement=required, Boundary=maximum",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5401",
+              "name": "State=errorFocus, Requirement=required, Boundary=both",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5429",
+              "name": "State=errorFocus, Requirement=optional, Boundary=none",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5457",
+              "name": "State=errorFocus, Requirement=optional, Boundary=minimum",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5485",
+              "name": "State=errorFocus, Requirement=optional, Boundary=maximum",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5513",
+              "name": "State=errorFocus, Requirement=optional, Boundary=both",
+              "width": 256,
+              "height": 149
+            },
+            {
+              "id": "931:5541",
+              "name": "State=disabled, Requirement=required, Boundary=none",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5569",
+              "name": "State=disabled, Requirement=required, Boundary=minimum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5597",
+              "name": "State=disabled, Requirement=required, Boundary=maximum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5625",
+              "name": "State=disabled, Requirement=required, Boundary=both",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5653",
+              "name": "State=disabled, Requirement=optional, Boundary=none",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5681",
+              "name": "State=disabled, Requirement=optional, Boundary=minimum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5709",
+              "name": "State=disabled, Requirement=optional, Boundary=maximum",
+              "width": 256,
+              "height": 91
+            },
+            {
+              "id": "931:5737",
+              "name": "State=disabled, Requirement=optional, Boundary=both",
+              "width": 256,
+              "height": 91
+            }
+          ],
+          "sample": [
+            {
+              "id": "927:91",
+              "name": "Field copy",
+              "type": "FRAME",
+              "width": 256,
+              "height": 27,
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:109"
+                }
+              }
+            },
+            {
+              "id": "927:92",
+              "name": "Label text",
+              "type": "TEXT",
+              "width": 256,
+              "height": 27,
+              "bound": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:251:104"
+                  }
+                ],
+                "letterSpacing": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:134"
+                  }
+                ],
+                "fontSize": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:303:6773"
+                  }
+                ],
+                "fontFamily": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:240:98"
+                  }
+                ],
+                "fontWeight": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:117"
+                  }
+                ]
+              },
+              "text": "Number of rooms",
+              "style": ""
+            },
+            {
+              "id": "927:93",
+              "name": "Helper text",
+              "type": "TEXT",
+              "width": 256,
+              "height": 24,
+              "bound": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:251:106"
+                  }
+                ],
+                "letterSpacing": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:134"
+                  }
+                ],
+                "fontSize": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:303:6778"
+                  }
+                ],
+                "fontFamily": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:240:98"
+                  }
+                ],
+                "fontWeight": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:116"
+                  }
+                ]
+              },
+              "text": "Choose a number from 1 to 10.",
+              "style": ""
+            },
+            {
+              "id": "927:94",
+              "name": "Error text",
+              "type": "TEXT",
+              "width": 256,
+              "height": 54,
+              "bound": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:251:107"
+                  }
+                ],
+                "letterSpacing": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:134"
+                  }
+                ],
+                "fontSize": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:303:6780"
+                  }
+                ],
+                "fontFamily": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:240:98"
+                  }
+                ],
+                "fontWeight": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:116"
+                  }
+                ]
+              },
+              "text": "Error: Enter a whole number from 1 to 10.",
+              "style": ""
+            },
+            {
+              "id": "930:4685",
+              "name": "Control row",
+              "type": "FRAME",
+              "width": 200,
+              "height": 56,
+              "bound": {}
+            },
+            {
+              "id": "927:95",
+              "name": "_Stepper/Control row instance",
+              "type": "INSTANCE",
+              "width": 200,
+              "height": 56,
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:100"
+                }
+              },
+              "main": "924:15",
+              "properties": {
+                "Value text#930:0": {
+                  "type": "TEXT",
+                  "value": ""
+                },
+                "State": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "Boundary": {
+                  "value": "none",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                }
+              }
+            },
+            {
+              "id": "I927:95;924:16",
+              "name": "Minus Icon Button",
+              "type": "INSTANCE",
+              "width": 44,
+              "height": 44,
+              "bound": {
+                "width": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "height": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "strokeTopWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeLeftWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeRightWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:85:1495"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:58"
+                  }
+                ]
+              },
+              "main": "95:868",
+              "properties": {
+                "Variant": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "Size": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "State": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                }
+              }
+            },
+            {
+              "id": "I927:95;924:16;95:869",
+              "name": "Icon/minus",
+              "type": "INSTANCE",
+              "width": 20,
+              "height": 20,
+              "bound": {
+                "width": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:46:25"
+                }
+              },
+              "main": "61:691",
+              "properties": {}
+            },
+            {
+              "id": "I927:95;924:4613",
+              "name": "Value text",
+              "type": "TEXT",
+              "width": 0,
+              "height": 27,
+              "bound": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:251:116"
+                  }
+                ],
+                "letterSpacing": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:134"
+                  }
+                ],
+                "fontSize": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:303:6776"
+                  }
+                ],
+                "fontFamily": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:240:98"
+                  }
+                ],
+                "fontWeight": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:116"
+                  }
+                ]
+              },
+              "text": "",
+              "style": ""
+            },
+            {
+              "id": "I927:95;924:20",
+              "name": "Plus Icon Button",
+              "type": "INSTANCE",
+              "width": 44,
+              "height": 44,
+              "bound": {
+                "width": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "height": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "strokeTopWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeLeftWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeRightWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:85:1495"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:58"
+                  }
+                ]
+              },
+              "main": "95:868",
+              "properties": {
+                "Variant": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "Size": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "State": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                }
+              }
+            },
+            {
+              "id": "I927:95;924:20;95:869",
+              "name": "Icon/plus",
+              "type": "INSTANCE",
+              "width": 20,
+              "height": 20,
+              "bound": {
+                "width": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:46:25"
+                }
+              },
+              "main": "61:682",
+              "properties": {}
+            },
+            {
+              "id": "930:4686",
+              "name": "Value text",
+              "type": "TEXT",
+              "width": 96,
+              "height": 24,
+              "bound": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:251:116"
+                  }
+                ],
+                "letterSpacing": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:134"
+                  }
+                ],
+                "fontSize": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:303:6776"
+                  }
+                ],
+                "fontFamily": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:240:98"
+                  }
+                ],
+                "fontWeight": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:116"
+                  }
+                ]
+              },
+              "text": "2",
+              "style": ""
+            }
+          ]
+        },
+        {
+          "id": "925:4854",
+          "name": "_Stepper/Control row",
+          "count": 20,
+          "properties": {
+            "Value text#930:0": {
+              "type": "TEXT",
+              "defaultValue": "2"
+            },
+            "State": {
+              "type": "VARIANT",
+              "defaultValue": "default",
+              "variantOptions": [
+                "default",
+                "focus",
+                "error",
+                "errorFocus",
+                "disabled"
+              ]
+            },
+            "Boundary": {
+              "type": "VARIANT",
+              "defaultValue": "none",
+              "variantOptions": [
+                "none",
+                "minimum",
+                "maximum",
+                "both"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "924:15",
+              "name": "State=default, Boundary=none",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:11",
+              "name": "State=default, Boundary=minimum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:25",
+              "name": "State=default, Boundary=maximum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:38",
+              "name": "State=default, Boundary=both",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4638",
+              "name": "State=focus, Boundary=none",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4649",
+              "name": "State=focus, Boundary=minimum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4662",
+              "name": "State=focus, Boundary=maximum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4675",
+              "name": "State=focus, Boundary=both",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4690",
+              "name": "State=error, Boundary=none",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4701",
+              "name": "State=error, Boundary=minimum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4714",
+              "name": "State=error, Boundary=maximum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4727",
+              "name": "State=error, Boundary=both",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4742",
+              "name": "State=errorFocus, Boundary=none",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4753",
+              "name": "State=errorFocus, Boundary=minimum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4766",
+              "name": "State=errorFocus, Boundary=maximum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4779",
+              "name": "State=errorFocus, Boundary=both",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4794",
+              "name": "State=disabled, Boundary=none",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4809",
+              "name": "State=disabled, Boundary=minimum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4824",
+              "name": "State=disabled, Boundary=maximum",
+              "width": 200,
+              "height": 56
+            },
+            {
+              "id": "925:4839",
+              "name": "State=disabled, Boundary=both",
+              "width": 200,
+              "height": 56
+            }
+          ],
+          "sample": [
+            {
+              "id": "924:16",
+              "name": "Minus Icon Button",
+              "type": "INSTANCE",
+              "width": 44,
+              "height": 44,
+              "bound": {
+                "width": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "height": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "strokeTopWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeLeftWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeRightWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:85:1495"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:58"
+                  }
+                ]
+              },
+              "main": "95:868",
+              "properties": {
+                "Variant": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "Size": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "State": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                }
+              }
+            },
+            {
+              "id": "I924:16;95:869",
+              "name": "Icon/minus",
+              "type": "INSTANCE",
+              "width": 20,
+              "height": 20,
+              "bound": {
+                "width": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:46:25"
+                }
+              },
+              "main": "61:691",
+              "properties": {}
+            },
+            {
+              "id": "924:4612",
+              "name": "Numeric input",
+              "type": "FRAME",
+              "width": 96,
+              "height": 44,
+              "bound": {
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:121"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:120"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:121"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:120"
+                },
+                "height": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:119"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:119"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:119"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:119"
+                },
+                "strokeTopWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:118"
+                },
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:118"
+                },
+                "strokeLeftWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:118"
+                },
+                "strokeRightWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:251:118"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:251:115"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:251:117"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "924:4613",
+              "name": "Value text",
+              "type": "TEXT",
+              "width": 11,
+              "height": 27,
+              "bound": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:251:116"
+                  }
+                ],
+                "letterSpacing": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:134"
+                  }
+                ],
+                "fontSize": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:303:6776"
+                  }
+                ],
+                "fontFamily": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:240:98"
+                  }
+                ],
+                "fontWeight": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:116"
+                  }
+                ]
+              },
+              "text": "2",
+              "style": ""
+            },
+            {
+              "id": "924:20",
+              "name": "Plus Icon Button",
+              "type": "INSTANCE",
+              "width": 44,
+              "height": 44,
+              "bound": {
+                "width": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "height": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:150"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:76"
+                },
+                "strokeTopWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeLeftWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "strokeRightWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:85:1495"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:58"
+                  }
+                ]
+              },
+              "main": "95:868",
+              "properties": {
+                "Variant": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "Size": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                },
+                "State": {
+                  "value": "default",
+                  "type": "VARIANT",
+                  "boundVariables": {}
+                }
+              }
+            },
+            {
+              "id": "I924:20;95:869",
+              "name": "Icon/plus",
+              "type": "INSTANCE",
+              "width": 20,
+              "height": 20,
+              "bound": {
+                "width": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:46:25"
+                }
+              },
+              "main": "61:682",
+              "properties": {}
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "accordionInitial": [
+    {
+      "page": "1176:101",
+      "frames": [
+        {
+          "id": "1176:227",
+          "name": "01 - Component set"
+        },
+        {
+          "id": "1176:233",
+          "name": "02 - Documentation examples"
+        },
+        {
+          "id": "1176:239",
+          "name": "03 - QA and responsive tests"
+        },
+        {
+          "id": "1176:245",
+          "name": "04 - Accessibility notes"
+        }
+      ],
+      "sets": [
+        {
+          "id": "1176:107",
+          "name": "Accordion / Title",
+          "properties": {
+            "Title#1176:11": {
+              "type": "TEXT",
+              "defaultValue": "Section title"
+            },
+            "Title style": {
+              "type": "VARIANT",
+              "defaultValue": "H2",
+              "variantOptions": [
+                "H2",
+                "H3",
+                "H4",
+                "H5",
+                "H6"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "1176:102",
+              "name": "Title style=H2",
+              "width": 280,
+              "height": 43,
+              "bound": {},
+              "children": [
+                {
+                  "id": "1176:108",
+                  "name": "Title",
+                  "type": "TEXT",
+                  "width": 280,
+                  "height": 43,
+                  "visible": true,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:57"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:133"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6942"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:119"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "1176:108",
+                  "text": "Section title",
+                  "style": "S:6f4d73374de168016819e2625fd9f97307ca5ee1,",
+                  "font": 36,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 120.00000476837158
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:103",
+              "name": "Title style=H3",
+              "width": 280,
+              "height": 36,
+              "bound": {},
+              "children": [
+                {
+                  "id": "1176:109",
+                  "name": "Title",
+                  "type": "TEXT",
+                  "width": 280,
+                  "height": 36,
+                  "visible": true,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:57"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6948"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6943"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:118"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "1176:109",
+                  "text": "Section title",
+                  "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+                  "font": 30,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 120.00000476837158
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:104",
+              "name": "Title style=H4",
+              "width": 280,
+              "height": 29,
+              "bound": {},
+              "children": [
+                {
+                  "id": "1176:110",
+                  "name": "Title",
+                  "type": "TEXT",
+                  "width": 280,
+                  "height": 29,
+                  "visible": true,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:57"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6948"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6944"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "lineHeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6949"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:118"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "1176:110",
+                  "text": "Section title",
+                  "style": "S:247378385d67ba3e5112891e6541b255b3489976,",
+                  "font": 24,
+                  "line": {
+                    "unit": "PIXELS",
+                    "value": 28.799999237060547
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:105",
+              "name": "Title style=H5",
+              "width": 280,
+              "height": 24,
+              "bound": {},
+              "children": [
+                {
+                  "id": "1176:111",
+                  "name": "Title",
+                  "type": "TEXT",
+                  "width": 280,
+                  "height": 24,
+                  "visible": true,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:57"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6948"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6946"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "lineHeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:312:7735"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:118"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "1176:111",
+                  "text": "Section title",
+                  "style": "S:e2c1feb4aee689f97f936a43eb77545771f4791f,",
+                  "font": 20,
+                  "line": {
+                    "unit": "PIXELS",
+                    "value": 24
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:106",
+              "name": "Title style=H6",
+              "width": 280,
+              "height": 27,
+              "bound": {},
+              "children": [
+                {
+                  "id": "1176:112",
+                  "name": "Title",
+                  "type": "TEXT",
+                  "width": 280,
+                  "height": 27,
+                  "visible": true,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:57"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6947"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:118"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "1176:112",
+                  "text": "Section title",
+                  "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,",
+                  "font": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1176:182",
+          "name": "Accordion / Item",
+          "properties": {
+            "Focus#1176:19": {
+              "type": "BOOLEAN",
+              "defaultValue": false
+            },
+            "Content#1176:20": {
+              "type": "SLOT",
+              "description": "Flexible panel content: prose, lists, links and controls. Panel height grows; preserve content when toggling Expanded.",
+              "slotSettings": {
+                "stretchChildOnInsert": true,
+                "displayEmptyByDefault": false,
+                "minChildren": null,
+                "maxChildren": null,
+                "allowPreferredValuesOnly": false
+              },
+              "preferredValues": []
+            },
+            "Expanded": {
+              "type": "VARIANT",
+              "defaultValue": "False",
+              "variantOptions": [
+                "False",
+                "True"
+              ]
+            },
+            "State": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default",
+                "Hover",
+                "Pressed"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "1176:113",
+              "name": "Expanded=False, State=Default",
+              "width": 340,
+              "height": 60,
+              "bound": {
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:51"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:55"
+                  }
+                ]
+              },
+              "children": [
+                {
+                  "id": "1176:114",
+                  "name": "Trigger",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 60,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4526"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "minWidth": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:148"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:85:1495"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1176:121",
+                  "name": "Panel",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 80,
+                  "visible": false,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:105"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:51"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "I1176:115;1176:109",
+                  "text": "Section title",
+                  "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+                  "font": 30,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 120.00000476837158
+                  }
+                },
+                {
+                  "id": "1176:123",
+                  "text": "Add the details people need for this section.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "font": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:124",
+              "name": "Expanded=False, State=Hover",
+              "width": 340,
+              "height": 60,
+              "bound": {
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:51"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:55"
+                  }
+                ]
+              },
+              "children": [
+                {
+                  "id": "1176:125",
+                  "name": "Trigger",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 60,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4526"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "minWidth": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:148"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:85:1496"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1176:130",
+                  "name": "Panel",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 80,
+                  "visible": false,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:105"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:51"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "I1176:126;1176:109",
+                  "text": "Section title",
+                  "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+                  "font": 30,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 120.00000476837158
+                  }
+                },
+                {
+                  "id": "1176:132",
+                  "text": "Add the details people need for this section.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "font": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:135",
+              "name": "Expanded=False, State=Pressed",
+              "width": 340,
+              "height": 60,
+              "bound": {
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:51"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:55"
+                  }
+                ]
+              },
+              "children": [
+                {
+                  "id": "1176:136",
+                  "name": "Trigger",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 60,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4526"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "minWidth": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:148"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:85:1499"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1176:141",
+                  "name": "Panel",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 80,
+                  "visible": false,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:105"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:51"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "I1176:137;1176:109",
+                  "text": "Section title",
+                  "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+                  "font": 30,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 120.00000476837158
+                  }
+                },
+                {
+                  "id": "1176:143",
+                  "text": "Add the details people need for this section.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "font": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:146",
+              "name": "Expanded=True, State=Default",
+              "width": 340,
+              "height": 146,
+              "bound": {
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:51"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:55"
+                  }
+                ]
+              },
+              "children": [
+                {
+                  "id": "1176:147",
+                  "name": "Trigger",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 60,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4526"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "minWidth": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:148"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:85:1495"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1176:152",
+                  "name": "Panel",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 86,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:105"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:51"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "I1176:148;1176:109",
+                  "text": "Section title",
+                  "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+                  "font": 30,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 120.00000476837158
+                  }
+                },
+                {
+                  "id": "1176:154",
+                  "text": "Add the details people need for this section.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "font": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:158",
+              "name": "Expanded=True, State=Hover",
+              "width": 340,
+              "height": 146,
+              "bound": {
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:51"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:55"
+                  }
+                ]
+              },
+              "children": [
+                {
+                  "id": "1176:159",
+                  "name": "Trigger",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 60,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4526"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "minWidth": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:148"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:85:1496"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1176:164",
+                  "name": "Panel",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 86,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:105"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:51"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "I1176:160;1176:109",
+                  "text": "Section title",
+                  "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+                  "font": 30,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 120.00000476837158
+                  }
+                },
+                {
+                  "id": "1176:166",
+                  "text": "Add the details people need for this section.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "font": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1176:170",
+              "name": "Expanded=True, State=Pressed",
+              "width": 340,
+              "height": 146,
+              "bound": {
+                "strokeBottomWeight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:4"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:51"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:55"
+                  }
+                ]
+              },
+              "children": [
+                {
+                  "id": "1176:171",
+                  "name": "Trigger",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 60,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4526"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4524"
+                    },
+                    "topLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "topRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomLeftRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "bottomRightRadius": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:70"
+                    },
+                    "minWidth": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:148"
+                    },
+                    "minHeight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:150"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:85:1499"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1176:176",
+                  "name": "Panel",
+                  "type": "FRAME",
+                  "width": 340,
+                  "height": 86,
+                  "visible": true,
+                  "bound": {
+                    "itemSpacing": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:105"
+                    },
+                    "paddingLeft": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingTop": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "paddingRight": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4525"
+                    },
+                    "paddingBottom": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1161:4527"
+                    },
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:51"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "texts": [
+                {
+                  "id": "I1176:172;1176:109",
+                  "text": "Section title",
+                  "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+                  "font": 30,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 120.00000476837158
+                  }
+                },
+                {
+                  "id": "1176:178",
+                  "text": "Add the details people need for this section.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "font": 18,
+                  "line": {
+                    "unit": "PERCENT",
+                    "value": 150
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "id": "1176:183",
+          "name": "Accordion",
+          "properties": {
+            "Items#1176:21": {
+              "type": "SLOT",
+              "description": "Independent Accordion / Item instances in reading order. Any number may start open; no exclusive behaviour.",
+              "slotSettings": {
+                "stretchChildOnInsert": true,
+                "displayEmptyByDefault": false,
+                "minChildren": 1,
+                "maxChildren": null,
+                "allowPreferredValuesOnly": true
+              },
+              "preferredValues": [
+                {
+                  "type": "COMPONENT_SET",
+                  "key": "8ea485bdde8b6c310f24999204d5b2f9da47c5c7"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "vars": [
+        {
+          "id": "VariableID:1161:4524",
+          "name": "component/accordion/spacing/triggerPaddingBlock",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-trigger-padding-block)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:107"
+            }
+          }
+        },
+        {
+          "id": "VariableID:1161:4525",
+          "name": "component/accordion/spacing/paddingInline",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-padding-inline)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:110"
+            }
+          }
+        },
+        {
+          "id": "VariableID:1161:4526",
+          "name": "component/accordion/spacing/triggerGap",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-trigger-gap)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:112"
+            }
+          }
+        },
+        {
+          "id": "VariableID:1161:4527",
+          "name": "component/accordion/spacing/panelPaddingBlock",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-panel-padding-block)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:91"
+            }
+          }
+        },
+        {
+          "id": "VariableID:1161:4528",
+          "name": "component/accordion/spacing/itemGap",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-item-gap)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:95"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "stepperRepair": [
+    {
+      "changedIds": [
+        "927:92",
+        "927:93",
+        "927:94",
+        "930:4686",
+        "931:100",
+        "931:101",
+        "931:102",
+        "931:105",
+        "931:128",
+        "931:129",
+        "931:130",
+        "931:133",
+        "931:156",
+        "931:157",
+        "931:158",
+        "931:161",
+        "931:184",
+        "931:185",
+        "931:186",
+        "931:189",
+        "931:202",
+        "931:203",
+        "931:204",
+        "931:207",
+        "931:230",
+        "931:231",
+        "931:232",
+        "931:235",
+        "931:258",
+        "931:259",
+        "931:260",
+        "931:263",
+        "931:4871",
+        "931:4872",
+        "931:4873",
+        "931:4876",
+        "931:4899",
+        "931:4900",
+        "931:4901",
+        "931:4904",
+        "931:4927",
+        "931:4928",
+        "931:4929",
+        "931:4932",
+        "931:4955",
+        "931:4956",
+        "931:4957",
+        "931:4960",
+        "931:4983",
+        "931:4984",
+        "931:4985",
+        "931:4988",
+        "931:5011",
+        "931:5012",
+        "931:5013",
+        "931:5016",
+        "931:5039",
+        "931:5040",
+        "931:5041",
+        "931:5044",
+        "931:5067",
+        "931:5068",
+        "931:5069",
+        "931:5072",
+        "931:5095",
+        "931:5096",
+        "931:5097",
+        "931:5100",
+        "931:5123",
+        "931:5124",
+        "931:5125",
+        "931:5128",
+        "931:5151",
+        "931:5152",
+        "931:5153",
+        "931:5156",
+        "931:5179",
+        "931:5180",
+        "931:5181",
+        "931:5184",
+        "931:5207",
+        "931:5208",
+        "931:5209",
+        "931:5212",
+        "931:5235",
+        "931:5236",
+        "931:5237",
+        "931:5240",
+        "931:5263",
+        "931:5264",
+        "931:5265",
+        "931:5268",
+        "931:5291",
+        "931:5292",
+        "931:5293",
+        "931:5296",
+        "931:5319",
+        "931:5320",
+        "931:5321",
+        "931:5324",
+        "931:5347",
+        "931:5348",
+        "931:5349",
+        "931:5352",
+        "931:5375",
+        "931:5376",
+        "931:5377",
+        "931:5380",
+        "931:5403",
+        "931:5404",
+        "931:5405",
+        "931:5408",
+        "931:5431",
+        "931:5432",
+        "931:5433",
+        "931:5436",
+        "931:5459",
+        "931:5460",
+        "931:5461",
+        "931:5464",
+        "931:5487",
+        "931:5488",
+        "931:5489",
+        "931:5492",
+        "931:5515",
+        "931:5516",
+        "931:5517",
+        "931:5520",
+        "931:5543",
+        "931:5544",
+        "931:5545",
+        "931:5548",
+        "931:5571",
+        "931:5572",
+        "931:5573",
+        "931:5576",
+        "931:5599",
+        "931:5600",
+        "931:5601",
+        "931:5604",
+        "931:5627",
+        "931:5628",
+        "931:5629",
+        "931:5632",
+        "931:5655",
+        "931:5656",
+        "931:5657",
+        "931:5660",
+        "931:5683",
+        "931:5684",
+        "931:5685",
+        "931:5688",
+        "931:5711",
+        "931:5712",
+        "931:5713",
+        "931:5716",
+        "931:5739",
+        "931:5740",
+        "931:5741",
+        "931:5744",
+        "924:4613",
+        "925:14",
+        "925:28",
+        "925:41",
+        "925:4641",
+        "925:4652",
+        "925:4665",
+        "925:4678",
+        "925:4693",
+        "925:4704",
+        "925:4717",
+        "925:4730",
+        "925:4745",
+        "925:4756",
+        "925:4769",
+        "925:4782",
+        "925:4797",
+        "925:4812",
+        "925:4827",
+        "925:4842",
+        "924:4612",
+        "924:15",
+        "925:13",
+        "925:11",
+        "925:27",
+        "925:25",
+        "925:40",
+        "925:38",
+        "925:4640",
+        "925:4638",
+        "925:4651",
+        "925:4649",
+        "925:4664",
+        "925:4662",
+        "925:4677",
+        "925:4675",
+        "925:4692",
+        "925:4690",
+        "925:4703",
+        "925:4701",
+        "925:4716",
+        "925:4714",
+        "925:4729",
+        "925:4727",
+        "925:4744",
+        "925:4742",
+        "925:4755",
+        "925:4753",
+        "925:4768",
+        "925:4766",
+        "925:4781",
+        "925:4779",
+        "925:4796",
+        "925:4794",
+        "925:4811",
+        "925:4809",
+        "925:4826",
+        "925:4824",
+        "925:4841",
+        "925:4839",
+        "927:90",
+        "930:4685",
+        "927:95",
+        "931:98",
+        "931:103",
+        "931:104",
+        "931:126",
+        "931:131",
+        "931:132",
+        "931:154",
+        "931:159",
+        "931:160",
+        "931:182",
+        "931:187",
+        "931:188",
+        "931:200",
+        "931:205",
+        "931:206",
+        "931:228",
+        "931:233",
+        "931:234",
+        "931:256",
+        "931:261",
+        "931:262",
+        "931:4869",
+        "931:4874",
+        "931:4875",
+        "931:4897",
+        "931:4902",
+        "931:4903",
+        "931:4925",
+        "931:4930",
+        "931:4931",
+        "931:4953",
+        "931:4958",
+        "931:4959",
+        "931:4981",
+        "931:4986",
+        "931:4987",
+        "931:5009",
+        "931:5014",
+        "931:5015",
+        "931:5037",
+        "931:5042",
+        "931:5043",
+        "931:5065",
+        "931:5070",
+        "931:5071",
+        "931:5093",
+        "931:5098",
+        "931:5099",
+        "931:5121",
+        "931:5126",
+        "931:5127",
+        "931:5149",
+        "931:5154",
+        "931:5155",
+        "931:5177",
+        "931:5182",
+        "931:5183",
+        "931:5205",
+        "931:5210",
+        "931:5211",
+        "931:5233",
+        "931:5238",
+        "931:5239",
+        "931:5261",
+        "931:5266",
+        "931:5267",
+        "931:5289",
+        "931:5294",
+        "931:5295",
+        "931:5317",
+        "931:5322",
+        "931:5323",
+        "931:5345",
+        "931:5350",
+        "931:5351",
+        "931:5373",
+        "931:5378",
+        "931:5379",
+        "931:5401",
+        "931:5406",
+        "931:5407",
+        "931:5429",
+        "931:5434",
+        "931:5435",
+        "931:5457",
+        "931:5462",
+        "931:5463",
+        "931:5485",
+        "931:5490",
+        "931:5491",
+        "931:5513",
+        "931:5518",
+        "931:5519",
+        "931:5541",
+        "931:5546",
+        "931:5547",
+        "931:5569",
+        "931:5574",
+        "931:5575",
+        "931:5597",
+        "931:5602",
+        "931:5603",
+        "931:5625",
+        "931:5630",
+        "931:5631",
+        "931:5653",
+        "931:5658",
+        "931:5659",
+        "931:5681",
+        "931:5686",
+        "931:5687",
+        "931:5709",
+        "931:5714",
+        "931:5715",
+        "931:5737",
+        "931:5742",
+        "931:5743"
+      ],
+      "publicCount": 40,
+      "privateCount": 20,
+      "samples": [
+        {
+          "id": "927:90",
+          "name": "State=default, Requirement=required, Boundary=none",
+          "height": 84,
+          "gap": 4,
+          "wrapper": 53
+        },
+        {
+          "id": "931:5093",
+          "name": "State=error, Requirement=required, Boundary=none",
+          "height": 146,
+          "gap": 8,
+          "wrapper": 53
+        },
+        {
+          "id": "931:5317",
+          "name": "State=errorFocus, Requirement=required, Boundary=none",
+          "height": 146,
+          "gap": 8,
+          "wrapper": 53
+        },
+        {
+          "id": "931:5541",
+          "name": "State=disabled, Requirement=required, Boundary=none",
+          "height": 84,
+          "gap": 4,
+          "wrapper": 53
+        }
+      ],
+      "row": [
+        {
+          "id": "924:16",
+          "name": "Minus Icon Button",
+          "width": 44,
+          "height": 44,
+          "minHeight": null,
+          "bindings": {
+            "width": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:150"
+            },
+            "height": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:150"
+            },
+            "topLeftRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            },
+            "topRightRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            },
+            "bottomLeftRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            },
+            "bottomRightRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            },
+            "strokeTopWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "strokeLeftWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "strokeRightWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:85:1495"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:58"
+              }
+            ]
+          }
+        },
+        {
+          "id": "924:4612",
+          "name": "Numeric input",
+          "width": 96,
+          "height": 53,
+          "minHeight": 44,
+          "bindings": {
+            "paddingLeft": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:121"
+            },
+            "paddingTop": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:120"
+            },
+            "paddingRight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:121"
+            },
+            "paddingBottom": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:120"
+            },
+            "topLeftRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:119"
+            },
+            "topRightRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:119"
+            },
+            "bottomLeftRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:119"
+            },
+            "bottomRightRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:119"
+            },
+            "strokeTopWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:118"
+            },
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:118"
+            },
+            "strokeLeftWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:118"
+            },
+            "strokeRightWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:251:118"
+            },
+            "minHeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:150"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:251:115"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:251:117"
+              }
+            ]
+          }
+        },
+        {
+          "id": "924:20",
+          "name": "Plus Icon Button",
+          "width": 44,
+          "height": 44,
+          "minHeight": null,
+          "bindings": {
+            "width": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:150"
+            },
+            "height": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:150"
+            },
+            "topLeftRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            },
+            "topRightRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            },
+            "bottomLeftRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            },
+            "bottomRightRadius": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            },
+            "strokeTopWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "strokeLeftWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "strokeRightWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:85:1495"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:58"
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "Helper text#931:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "Label text#931:1": {
+          "type": "TEXT",
+          "defaultValue": "Number of rooms"
+        },
+        "Value text#931:2": {
+          "type": "TEXT",
+          "defaultValue": "2"
+        },
+        "Helper text content#931:3": {
+          "type": "TEXT",
+          "defaultValue": "Choose a number from 1 to 10."
+        },
+        "Error text#931:4": {
+          "type": "TEXT",
+          "defaultValue": "Error: Enter a whole number from 1 to 10."
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "variantOptions": [
+            "default",
+            "focus",
+            "error",
+            "errorFocus",
+            "disabled"
+          ]
+        },
+        "Requirement": {
+          "type": "VARIANT",
+          "defaultValue": "required",
+          "variantOptions": [
+            "required",
+            "optional"
+          ]
+        },
+        "Boundary": {
+          "type": "VARIANT",
+          "defaultValue": "none",
+          "variantOptions": [
+            "none",
+            "minimum",
+            "maximum",
+            "both"
+          ]
+        }
+      }
+    }
+  ],
+  "stepperFocus": [
+    [
+      {
+        "id": "1449:1538",
+        "copy": [
+          {
+            "name": "Label text",
+            "height": 24,
+            "visible": true,
+            "font": 16,
+            "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,"
+          }
+        ],
+        "fields": [
+          {
+            "id": "I1449:1538;927:95;924:4612",
+            "name": "Numeric input",
+            "x": 52,
+            "y": 0,
+            "width": 96,
+            "height": 50,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1538;927:95;924:4613",
+            "name": "Value text",
+            "x": 48,
+            "y": 13,
+            "width": 0,
+            "height": 24,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1538;930:4686",
+            "name": "Value text",
+            "x": 52,
+            "y": 12,
+            "width": 96,
+            "height": 24,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "CENTER"
+            },
+            "visible": true
+          }
+        ]
+      },
+      {
+        "id": "1449:1556",
+        "copy": [
+          {
+            "name": "Label text",
+            "height": 24,
+            "visible": true,
+            "font": 16,
+            "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,"
+          },
+          {
+            "name": "Error text",
+            "height": 48,
+            "visible": true,
+            "font": 16,
+            "style": "S:5abf96e4c0598354a0c2ba856d1017912f27a2dd,"
+          }
+        ],
+        "fields": [
+          {
+            "id": "I1449:1556;931:5491;925:4768",
+            "name": "Numeric input",
+            "x": 52,
+            "y": 0,
+            "width": 96,
+            "height": 50,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1556;931:5491;925:4769",
+            "name": "Value text",
+            "x": 48,
+            "y": 13,
+            "width": 0,
+            "height": 24,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1556;931:5491;925:4770",
+            "name": "Focus separator",
+            "x": -3,
+            "y": -3,
+            "width": 102,
+            "height": 50,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1556;931:5491;925:4771",
+            "name": "Focus ring",
+            "x": -6,
+            "y": -6,
+            "width": 108,
+            "height": 56,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1556;931:5492",
+            "name": "Value text",
+            "x": 52,
+            "y": 12,
+            "width": 96,
+            "height": 24,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "CENTER"
+            },
+            "visible": true
+          }
+        ]
+      },
+      {
+        "id": "1449:1574",
+        "copy": [
+          {
+            "name": "Label text",
+            "height": 24,
+            "visible": true,
+            "font": 16,
+            "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,"
+          }
+        ],
+        "fields": [
+          {
+            "id": "I1449:1574;927:95;924:4612",
+            "name": "Numeric input",
+            "x": 52,
+            "y": 0,
+            "width": 96,
+            "height": 50,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1574;927:95;924:4613",
+            "name": "Value text",
+            "x": 48,
+            "y": 13,
+            "width": 0,
+            "height": 24,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1574;930:4686",
+            "name": "Value text",
+            "x": 52,
+            "y": 12,
+            "width": 96,
+            "height": 24,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "CENTER"
+            },
+            "visible": true
+          }
+        ]
+      },
+      {
+        "id": "1449:1592",
+        "copy": [
+          {
+            "name": "Label text",
+            "height": 24,
+            "visible": true,
+            "font": 16,
+            "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,"
+          },
+          {
+            "name": "Error text",
+            "height": 48,
+            "visible": true,
+            "font": 16,
+            "style": "S:5abf96e4c0598354a0c2ba856d1017912f27a2dd,"
+          }
+        ],
+        "fields": [
+          {
+            "id": "I1449:1592;931:5491;925:4768",
+            "name": "Numeric input",
+            "x": 52,
+            "y": 0,
+            "width": 96,
+            "height": 50,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1592;931:5491;925:4769",
+            "name": "Value text",
+            "x": 48,
+            "y": 13,
+            "width": 0,
+            "height": 24,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1592;931:5491;925:4770",
+            "name": "Focus separator",
+            "x": -3,
+            "y": -3,
+            "width": 102,
+            "height": 50,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1592;931:5491;925:4771",
+            "name": "Focus ring",
+            "x": -6,
+            "y": -6,
+            "width": 108,
+            "height": 56,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1592;931:5492",
+            "name": "Value text",
+            "x": 52,
+            "y": 12,
+            "width": 96,
+            "height": 24,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "CENTER"
+            },
+            "visible": true
+          }
+        ]
+      },
+      {
+        "id": "1449:1610",
+        "copy": [
+          {
+            "name": "Label text",
+            "height": 27,
+            "visible": true,
+            "font": 18,
+            "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,"
+          }
+        ],
+        "fields": [
+          {
+            "id": "I1449:1610;927:95;924:4612",
+            "name": "Numeric input",
+            "x": 52,
+            "y": 0,
+            "width": 96,
+            "height": 53,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1610;927:95;924:4613",
+            "name": "Value text",
+            "x": 48,
+            "y": 13,
+            "width": 0,
+            "height": 27,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1610;930:4686",
+            "name": "Value text",
+            "x": 52,
+            "y": 13,
+            "width": 96,
+            "height": 27,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "CENTER"
+            },
+            "visible": true
+          }
+        ]
+      },
+      {
+        "id": "1449:1628",
+        "copy": [
+          {
+            "name": "Label text",
+            "height": 27,
+            "visible": true,
+            "font": 18,
+            "style": "S:fd144f3dbc622a215839cb13a81058be486c6a8b,"
+          },
+          {
+            "name": "Error text",
+            "height": 54,
+            "visible": true,
+            "font": 18,
+            "style": "S:5abf96e4c0598354a0c2ba856d1017912f27a2dd,"
+          }
+        ],
+        "fields": [
+          {
+            "id": "I1449:1628;931:5491;925:4768",
+            "name": "Numeric input",
+            "x": 52,
+            "y": 0,
+            "width": 96,
+            "height": 53,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1628;931:5491;925:4769",
+            "name": "Value text",
+            "x": 48,
+            "y": 13,
+            "width": 0,
+            "height": 27,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1628;931:5491;925:4770",
+            "name": "Focus separator",
+            "x": -3,
+            "y": -3,
+            "width": 102,
+            "height": 50,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1628;931:5491;925:4771",
+            "name": "Focus ring",
+            "x": -6,
+            "y": -6,
+            "width": 108,
+            "height": 56,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "MIN"
+            },
+            "visible": true
+          },
+          {
+            "id": "I1449:1628;931:5492",
+            "name": "Value text",
+            "x": 52,
+            "y": 13,
+            "width": 96,
+            "height": 27,
+            "constraints": {
+              "horizontal": "MIN",
+              "vertical": "CENTER"
+            },
+            "visible": true
+          }
+        ]
+      }
+    ]
+  ],
+  "stepperFocusRepair": [
+    {
+      "createdIds": [
+        "1450:1083",
+        "1450:1084",
+        "1450:1085",
+        "1450:1086",
+        "1450:1087",
+        "1450:1088",
+        "1450:1089",
+        "1450:1090",
+        "1450:1091",
+        "1450:1092",
+        "1450:1093",
+        "1450:1094",
+        "1450:1095",
+        "1450:1096",
+        "1450:1097",
+        "1450:1098",
+        "1450:1099",
+        "1450:1100",
+        "1450:1101",
+        "1450:1102",
+        "1450:1103",
+        "1450:1104",
+        "1450:1105",
+        "1450:1106",
+        "1450:1107",
+        "1450:1108",
+        "1450:1109",
+        "1450:1110",
+        "1450:1111",
+        "1450:1112",
+        "1450:1113",
+        "1450:1114",
+        "1450:1115",
+        "1450:1116",
+        "1450:1117",
+        "1450:1118",
+        "1450:1119",
+        "1450:1120",
+        "1450:1121",
+        "1450:1122"
+      ],
+      "changedIds": [
+        "924:4614",
+        "924:4615",
+        "925:15",
+        "925:16",
+        "925:29",
+        "925:30",
+        "925:42",
+        "925:43",
+        "925:4642",
+        "925:4643",
+        "925:4653",
+        "925:4654",
+        "925:4666",
+        "925:4667",
+        "925:4679",
+        "925:4680",
+        "925:4694",
+        "925:4695",
+        "925:4705",
+        "925:4706",
+        "925:4718",
+        "925:4719",
+        "925:4731",
+        "925:4732",
+        "925:4746",
+        "925:4747",
+        "925:4757",
+        "925:4758",
+        "925:4770",
+        "925:4771",
+        "925:4783",
+        "925:4784",
+        "925:4798",
+        "925:4799",
+        "925:4813",
+        "925:4814",
+        "925:4828",
+        "925:4829",
+        "925:4843",
+        "925:4844",
+        "930:4685",
+        "930:4686",
+        "931:103",
+        "931:105",
+        "931:131",
+        "931:133",
+        "931:159",
+        "931:161",
+        "931:187",
+        "931:189",
+        "931:205",
+        "931:207",
+        "931:233",
+        "931:235",
+        "931:261",
+        "931:263",
+        "931:4874",
+        "931:4876",
+        "931:4902",
+        "931:4904",
+        "931:4930",
+        "931:4932",
+        "931:4958",
+        "931:4960",
+        "931:4986",
+        "931:4988",
+        "931:5014",
+        "931:5016",
+        "931:5042",
+        "931:5044",
+        "931:5070",
+        "931:5072",
+        "931:5098",
+        "931:5100",
+        "931:5126",
+        "931:5128",
+        "931:5154",
+        "931:5156",
+        "931:5182",
+        "931:5184",
+        "931:5210",
+        "931:5212",
+        "931:5238",
+        "931:5240",
+        "931:5266",
+        "931:5268",
+        "931:5294",
+        "931:5296",
+        "931:5322",
+        "931:5324",
+        "931:5350",
+        "931:5352",
+        "931:5378",
+        "931:5380",
+        "931:5406",
+        "931:5408",
+        "931:5434",
+        "931:5436",
+        "931:5462",
+        "931:5464",
+        "931:5490",
+        "931:5492",
+        "931:5518",
+        "931:5520",
+        "931:5546",
+        "931:5548",
+        "931:5574",
+        "931:5576",
+        "931:5602",
+        "931:5604",
+        "931:5630",
+        "931:5632",
+        "931:5658",
+        "931:5660",
+        "931:5686",
+        "931:5688",
+        "931:5714",
+        "931:5716",
+        "931:5742",
+        "931:5744"
+      ],
+      "rows": [
+        {
+          "height": 53,
+          "field": [
+            {
+              "name": "Value text",
+              "height": 27,
+              "x": 42.5,
+              "y": 13
+            },
+            {
+              "name": "Focus separator",
+              "height": 57,
+              "x": -2,
+              "y": -2
+            },
+            {
+              "name": "Focus ring",
+              "height": 61,
+              "x": -4,
+              "y": -4
+            }
+          ]
+        }
+      ],
+      "publicDefault": {
+        "height": 84,
+        "children": [
+          {
+            "id": "927:95",
+            "name": "_Stepper/Control row instance",
+            "height": 53,
+            "y": 0
+          },
+          {
+            "id": "1450:1083",
+            "name": "Value alignment",
+            "height": 53,
+            "y": 0
+          }
+        ]
+      }
+    }
+  ],
+  "stepperProbes": [
+    {
+      "probeFrameId": "1449:1537",
+      "createdIds": [
+        "1449:1537",
+        "1449:1538",
+        "I1449:1538;927:91",
+        "I1449:1538;927:92",
+        "I1449:1538;930:4685",
+        "I1449:1538;927:95",
+        "I1449:1538;927:95;924:16",
+        "I1449:1538;927:95;924:16;95:869",
+        "I1449:1538;927:95;924:16;95:869;61:689",
+        "I1449:1538;927:95;924:4612",
+        "I1449:1538;927:95;924:4613",
+        "I1449:1538;927:95;924:20",
+        "I1449:1538;927:95;924:20;95:869",
+        "I1449:1538;927:95;924:20;95:869;61:680",
+        "I1449:1538;930:4686",
+        "1449:1556",
+        "I1449:1556;931:5486",
+        "I1449:1556;931:5487",
+        "I1449:1556;931:5489",
+        "I1449:1556;931:5490",
+        "I1449:1556;931:5491",
+        "I1449:1556;931:5491;925:4767",
+        "I1449:1556;931:5491;925:4767;95:869",
+        "I1449:1556;931:5491;925:4767;95:869;61:689",
+        "I1449:1556;931:5491;925:4768",
+        "I1449:1556;931:5491;925:4769",
+        "I1449:1556;931:5491;925:4770",
+        "I1449:1556;931:5491;925:4771",
+        "I1449:1556;931:5491;925:4772",
+        "I1449:1556;931:5491;925:4772;95:881",
+        "I1449:1556;931:5491;925:4772;95:881;61:680",
+        "I1449:1556;931:5492",
+        "1449:1574",
+        "I1449:1574;927:91",
+        "I1449:1574;927:92",
+        "I1449:1574;930:4685",
+        "I1449:1574;927:95",
+        "I1449:1574;927:95;924:16",
+        "I1449:1574;927:95;924:16;95:869",
+        "I1449:1574;927:95;924:16;95:869;61:689",
+        "I1449:1574;927:95;924:4612",
+        "I1449:1574;927:95;924:4613",
+        "I1449:1574;927:95;924:20",
+        "I1449:1574;927:95;924:20;95:869",
+        "I1449:1574;927:95;924:20;95:869;61:680",
+        "I1449:1574;930:4686",
+        "1449:1592",
+        "I1449:1592;931:5486",
+        "I1449:1592;931:5487",
+        "I1449:1592;931:5489",
+        "I1449:1592;931:5490",
+        "I1449:1592;931:5491",
+        "I1449:1592;931:5491;925:4767",
+        "I1449:1592;931:5491;925:4767;95:869",
+        "I1449:1592;931:5491;925:4767;95:869;61:689",
+        "I1449:1592;931:5491;925:4768",
+        "I1449:1592;931:5491;925:4769",
+        "I1449:1592;931:5491;925:4770",
+        "I1449:1592;931:5491;925:4771",
+        "I1449:1592;931:5491;925:4772",
+        "I1449:1592;931:5491;925:4772;95:881",
+        "I1449:1592;931:5491;925:4772;95:881;61:680",
+        "I1449:1592;931:5492",
+        "1449:1610",
+        "I1449:1610;927:91",
+        "I1449:1610;927:92",
+        "I1449:1610;930:4685",
+        "I1449:1610;927:95",
+        "I1449:1610;927:95;924:16",
+        "I1449:1610;927:95;924:16;95:869",
+        "I1449:1610;927:95;924:16;95:869;61:689",
+        "I1449:1610;927:95;924:4612",
+        "I1449:1610;927:95;924:4613",
+        "I1449:1610;927:95;924:20",
+        "I1449:1610;927:95;924:20;95:869",
+        "I1449:1610;927:95;924:20;95:869;61:680",
+        "I1449:1610;930:4686",
+        "1449:1628",
+        "I1449:1628;931:5486",
+        "I1449:1628;931:5487",
+        "I1449:1628;931:5489",
+        "I1449:1628;931:5490",
+        "I1449:1628;931:5491",
+        "I1449:1628;931:5491;925:4767",
+        "I1449:1628;931:5491;925:4767;95:869",
+        "I1449:1628;931:5491;925:4767;95:869;61:689",
+        "I1449:1628;931:5491;925:4768",
+        "I1449:1628;931:5491;925:4769",
+        "I1449:1628;931:5491;925:4770",
+        "I1449:1628;931:5491;925:4771",
+        "I1449:1628;931:5491;925:4772",
+        "I1449:1628;931:5491;925:4772;95:881",
+        "I1449:1628;931:5491;925:4772;95:881;61:680",
+        "I1449:1628;931:5492"
+      ],
+      "results": [
+        {
+          "id": "1449:1538",
+          "mode": "base",
+          "variant": "State=default, Requirement=required, Boundary=none",
+          "height": 78,
+          "gap": 4,
+          "rowHeight": 50,
+          "inputHeight": 50,
+          "value": {
+            "height": 24,
+            "y": 12,
+            "fontSize": 16,
+            "lineHeight": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "textStyleId": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,"
+          },
+          "buttons": [
+            {
+              "width": 44,
+              "height": 44
+            },
+            {
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        {
+          "id": "1449:1556",
+          "mode": "base",
+          "variant": "State=errorFocus, Requirement=optional, Boundary=maximum",
+          "height": 134,
+          "gap": 8,
+          "rowHeight": 50,
+          "inputHeight": 50,
+          "value": {
+            "height": 24,
+            "y": 12,
+            "fontSize": 16,
+            "lineHeight": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "textStyleId": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,"
+          },
+          "buttons": [
+            {
+              "width": 44,
+              "height": 44
+            },
+            {
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        {
+          "id": "1449:1574",
+          "mode": "md",
+          "variant": "State=default, Requirement=required, Boundary=none",
+          "height": 78,
+          "gap": 4,
+          "rowHeight": 50,
+          "inputHeight": 50,
+          "value": {
+            "height": 24,
+            "y": 12,
+            "fontSize": 16,
+            "lineHeight": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "textStyleId": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,"
+          },
+          "buttons": [
+            {
+              "width": 44,
+              "height": 44
+            },
+            {
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        {
+          "id": "1449:1592",
+          "mode": "md",
+          "variant": "State=errorFocus, Requirement=optional, Boundary=maximum",
+          "height": 134,
+          "gap": 8,
+          "rowHeight": 50,
+          "inputHeight": 50,
+          "value": {
+            "height": 24,
+            "y": 12,
+            "fontSize": 16,
+            "lineHeight": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "textStyleId": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,"
+          },
+          "buttons": [
+            {
+              "width": 44,
+              "height": 44
+            },
+            {
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        {
+          "id": "1449:1610",
+          "mode": "lg",
+          "variant": "State=default, Requirement=required, Boundary=none",
+          "height": 84,
+          "gap": 4,
+          "rowHeight": 53,
+          "inputHeight": 53,
+          "value": {
+            "height": 27,
+            "y": 13,
+            "fontSize": 18,
+            "lineHeight": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "textStyleId": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,"
+          },
+          "buttons": [
+            {
+              "width": 44,
+              "height": 44
+            },
+            {
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        {
+          "id": "1449:1628",
+          "mode": "lg",
+          "variant": "State=errorFocus, Requirement=optional, Boundary=maximum",
+          "height": 146,
+          "gap": 8,
+          "rowHeight": 53,
+          "inputHeight": 53,
+          "value": {
+            "height": 27,
+            "y": 13,
+            "fontSize": 18,
+            "lineHeight": {
+              "unit": "PERCENT",
+              "value": 150
+            },
+            "textStyleId": "S:7254b214e710a7e6946dca7e9fb8cd1da6bed409,"
+          },
+          "buttons": [
+            {
+              "width": 44,
+              "height": 44
+            },
+            {
+              "width": 44,
+              "height": 44
+            }
+          ]
+        }
+      ],
+      "stylelessProduction": [],
+      "setDefault": "927:90"
+    }
+  ],
+  "stepperFinalProbes": [
+    [
+      {
+        "id": "1449:1538",
+        "mode": {
+          "VariableCollectionId:303:6772": "303:1"
+        },
+        "inputHeight": 50,
+        "alignmentHeight": 50,
+        "valueHeight": 24,
+        "valueY": 13,
+        "centerError": 0,
+        "rings": []
+      },
+      {
+        "id": "1449:1556",
+        "mode": {
+          "VariableCollectionId:303:6772": "303:1"
+        },
+        "inputHeight": 50,
+        "alignmentHeight": 50,
+        "valueHeight": 24,
+        "valueY": 13,
+        "centerError": 0,
+        "rings": [
+          {
+            "name": "Focus separator",
+            "width": 100,
+            "height": 54,
+            "x": -2,
+            "y": -2,
+            "stroke": 2
+          },
+          {
+            "name": "Focus ring",
+            "width": 104,
+            "height": 58,
+            "x": -4,
+            "y": -4,
+            "stroke": 2
+          }
+        ]
+      },
+      {
+        "id": "1449:1574",
+        "mode": {
+          "VariableCollectionId:303:6772": "303:2"
+        },
+        "inputHeight": 50,
+        "alignmentHeight": 50,
+        "valueHeight": 24,
+        "valueY": 13,
+        "centerError": 0,
+        "rings": []
+      },
+      {
+        "id": "1449:1592",
+        "mode": {
+          "VariableCollectionId:303:6772": "303:2"
+        },
+        "inputHeight": 50,
+        "alignmentHeight": 50,
+        "valueHeight": 24,
+        "valueY": 13,
+        "centerError": 0,
+        "rings": [
+          {
+            "name": "Focus separator",
+            "width": 100,
+            "height": 54,
+            "x": -2,
+            "y": -2,
+            "stroke": 2
+          },
+          {
+            "name": "Focus ring",
+            "width": 104,
+            "height": 58,
+            "x": -4,
+            "y": -4,
+            "stroke": 2
+          }
+        ]
+      },
+      {
+        "id": "1449:1610",
+        "mode": {
+          "VariableCollectionId:303:6772": "303:3"
+        },
+        "inputHeight": 53,
+        "alignmentHeight": 53,
+        "valueHeight": 27,
+        "valueY": 13,
+        "centerError": 0,
+        "rings": []
+      },
+      {
+        "id": "1449:1628",
+        "mode": {
+          "VariableCollectionId:303:6772": "303:3"
+        },
+        "inputHeight": 53,
+        "alignmentHeight": 53,
+        "valueHeight": 27,
+        "valueY": 13,
+        "centerError": 0,
+        "rings": [
+          {
+            "name": "Focus separator",
+            "width": 100,
+            "height": 57,
+            "x": -2,
+            "y": -2,
+            "stroke": 2
+          },
+          {
+            "name": "Focus ring",
+            "width": 104,
+            "height": 61,
+            "x": -4,
+            "y": -4,
+            "stroke": 2
+          }
+        ]
+      }
+    ]
+  ],
+  "accordionAudit": [
+    {
+      "families": [
+        {
+          "id": "1176:107",
+          "name": "Accordion / Title",
+          "properties": {
+            "Title#1176:11": {
+              "type": "TEXT",
+              "defaultValue": "Section title"
+            },
+            "Title style": {
+              "type": "VARIANT",
+              "defaultValue": "H2",
+              "variantOptions": [
+                "H2",
+                "H3",
+                "H4",
+                "H5",
+                "H6"
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": "1176:102",
+              "name": "Title style=H2",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:103",
+              "name": "Title style=H3",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:104",
+              "name": "Title style=H4",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:105",
+              "name": "Title style=H5",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:106",
+              "name": "Title style=H6",
+              "type": "COMPONENT"
+            }
+          ],
+          "bindings": {}
+        },
+        {
+          "id": "1176:102",
+          "name": "Title style=H2",
+          "children": [
+            {
+              "id": "1176:108",
+              "name": "Title",
+              "type": "TEXT",
+              "style": "S:6f4d73374de168016819e2625fd9f97307ca5ee1,"
+            }
+          ],
+          "bindings": {}
+        },
+        {
+          "id": "1176:103",
+          "name": "Title style=H3",
+          "children": [
+            {
+              "id": "1176:109",
+              "name": "Title",
+              "type": "TEXT",
+              "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,"
+            }
+          ],
+          "bindings": {}
+        },
+        {
+          "id": "1176:104",
+          "name": "Title style=H4",
+          "children": [
+            {
+              "id": "1176:110",
+              "name": "Title",
+              "type": "TEXT",
+              "style": "S:247378385d67ba3e5112891e6541b255b3489976,"
+            }
+          ],
+          "bindings": {}
+        },
+        {
+          "id": "1176:105",
+          "name": "Title style=H5",
+          "children": [
+            {
+              "id": "1176:111",
+              "name": "Title",
+              "type": "TEXT",
+              "style": "S:e2c1feb4aee689f97f936a43eb77545771f4791f,"
+            }
+          ],
+          "bindings": {}
+        },
+        {
+          "id": "1176:106",
+          "name": "Title style=H6",
+          "children": [
+            {
+              "id": "1176:112",
+              "name": "Title",
+              "type": "TEXT",
+              "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+            }
+          ],
+          "bindings": {}
+        },
+        {
+          "id": "1176:182",
+          "name": "Accordion / Item",
+          "properties": {
+            "Focus#1176:19": {
+              "type": "BOOLEAN",
+              "defaultValue": false
+            },
+            "Content#1176:20": {
+              "type": "SLOT",
+              "description": "Flexible panel content: prose, lists, links and controls. Panel height grows; preserve content when toggling Expanded.",
+              "slotSettings": {
+                "stretchChildOnInsert": true,
+                "displayEmptyByDefault": false,
+                "minChildren": null,
+                "maxChildren": null,
+                "allowPreferredValuesOnly": false
+              },
+              "preferredValues": []
+            },
+            "Expanded": {
+              "type": "VARIANT",
+              "defaultValue": "False",
+              "variantOptions": [
+                "False",
+                "True"
+              ]
+            },
+            "State": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default",
+                "Hover",
+                "Pressed"
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": "1176:113",
+              "name": "Expanded=False, State=Default",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:124",
+              "name": "Expanded=False, State=Hover",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:135",
+              "name": "Expanded=False, State=Pressed",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:146",
+              "name": "Expanded=True, State=Default",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:158",
+              "name": "Expanded=True, State=Hover",
+              "type": "COMPONENT"
+            },
+            {
+              "id": "1176:170",
+              "name": "Expanded=True, State=Pressed",
+              "type": "COMPONENT"
+            }
+          ],
+          "bindings": {}
+        },
+        {
+          "id": "1176:113",
+          "name": "Expanded=False, State=Default",
+          "children": [
+            {
+              "id": "1176:114",
+              "name": "Trigger",
+              "type": "FRAME"
+            },
+            {
+              "id": "1176:121",
+              "name": "Panel",
+              "type": "FRAME"
+            }
+          ],
+          "bindings": {
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:51"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:55"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1176:124",
+          "name": "Expanded=False, State=Hover",
+          "children": [
+            {
+              "id": "1176:125",
+              "name": "Trigger",
+              "type": "FRAME"
+            },
+            {
+              "id": "1176:130",
+              "name": "Panel",
+              "type": "FRAME"
+            }
+          ],
+          "bindings": {
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:51"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:55"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1176:135",
+          "name": "Expanded=False, State=Pressed",
+          "children": [
+            {
+              "id": "1176:136",
+              "name": "Trigger",
+              "type": "FRAME"
+            },
+            {
+              "id": "1176:141",
+              "name": "Panel",
+              "type": "FRAME"
+            }
+          ],
+          "bindings": {
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:51"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:55"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1176:146",
+          "name": "Expanded=True, State=Default",
+          "children": [
+            {
+              "id": "1176:147",
+              "name": "Trigger",
+              "type": "FRAME"
+            },
+            {
+              "id": "1176:152",
+              "name": "Panel",
+              "type": "FRAME"
+            }
+          ],
+          "bindings": {
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:51"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:55"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1176:158",
+          "name": "Expanded=True, State=Hover",
+          "children": [
+            {
+              "id": "1176:159",
+              "name": "Trigger",
+              "type": "FRAME"
+            },
+            {
+              "id": "1176:164",
+              "name": "Panel",
+              "type": "FRAME"
+            }
+          ],
+          "bindings": {
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:51"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:55"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1176:170",
+          "name": "Expanded=True, State=Pressed",
+          "children": [
+            {
+              "id": "1176:171",
+              "name": "Trigger",
+              "type": "FRAME"
+            },
+            {
+              "id": "1176:176",
+              "name": "Panel",
+              "type": "FRAME"
+            }
+          ],
+          "bindings": {
+            "strokeBottomWeight": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:4"
+            },
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:51"
+              }
+            ],
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:55"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1176:183",
+          "name": "Accordion",
+          "properties": {
+            "Items#1176:21": {
+              "type": "SLOT",
+              "description": "Independent Accordion / Item instances in reading order. Any number may start open; no exclusive behaviour.",
+              "slotSettings": {
+                "stretchChildOnInsert": true,
+                "displayEmptyByDefault": false,
+                "minChildren": 1,
+                "maxChildren": null,
+                "allowPreferredValuesOnly": true
+              },
+              "preferredValues": [
+                {
+                  "type": "COMPONENT_SET",
+                  "key": "8ea485bdde8b6c310f24999204d5b2f9da47c5c7"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": "1176:184",
+              "name": "Items",
+              "type": "SLOT"
+            }
+          ],
+          "bindings": {}
+        }
+      ],
+      "geometry": [
+        {
+          "id": "VariableID:1161:4524",
+          "name": "component/accordion/spacing/triggerPaddingBlock",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-trigger-padding-block)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:107"
+            }
+          }
+        },
+        {
+          "id": "VariableID:1161:4525",
+          "name": "component/accordion/spacing/paddingInline",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-padding-inline)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:110"
+            }
+          }
+        },
+        {
+          "id": "VariableID:1161:4526",
+          "name": "component/accordion/spacing/triggerGap",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-trigger-gap)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:112"
+            }
+          }
+        },
+        {
+          "id": "VariableID:1161:4527",
+          "name": "component/accordion/spacing/panelPaddingBlock",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-panel-padding-block)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:91"
+            }
+          }
+        },
+        {
+          "id": "VariableID:1161:4528",
+          "name": "component/accordion/spacing/itemGap",
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-accordion-spacing-item-gap)"
+          },
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:95"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "accordionProbes": [
+    {
+      "probeFrameId": "1450:9943",
+      "createdIds": [
+        "1450:9943",
+        "1450:9944",
+        "I1450:9944;1176:108",
+        "1450:9946",
+        "I1450:9946;1176:109",
+        "1450:9948",
+        "I1450:9948;1176:110",
+        "1450:9950",
+        "I1450:9950;1176:111",
+        "1450:9952",
+        "I1450:9952;1176:112",
+        "1450:9954",
+        "I1450:9954;1176:147",
+        "I1450:9954;1176:148",
+        "I1450:9954;1176:148;1176:109",
+        "I1450:9954;1176:149",
+        "I1450:9954;1176:149;61:624",
+        "I1450:9954;1176:152",
+        "I1450:9954;1176:153",
+        "I1450:9954;1176:154",
+        "1450:9965",
+        "I1450:9965;1176:108",
+        "1450:9967",
+        "I1450:9967;1176:109",
+        "1450:9969",
+        "I1450:9969;1176:110",
+        "1450:9971",
+        "I1450:9971;1176:111",
+        "1450:9973",
+        "I1450:9973;1176:112",
+        "1450:9975",
+        "I1450:9975;1176:147",
+        "I1450:9975;1176:148",
+        "I1450:9975;1176:148;1176:109",
+        "I1450:9975;1176:149",
+        "I1450:9975;1176:149;61:624",
+        "I1450:9975;1176:152",
+        "I1450:9975;1176:153",
+        "I1450:9975;1176:154",
+        "1450:9986",
+        "I1450:9986;1176:108",
+        "1450:9988",
+        "I1450:9988;1176:109",
+        "1450:9990",
+        "I1450:9990;1176:110",
+        "1450:9992",
+        "I1450:9992;1176:111",
+        "1450:9994",
+        "I1450:9994;1176:112",
+        "1450:9996",
+        "I1450:9996;1176:147",
+        "I1450:9996;1176:148",
+        "I1450:9996;1176:148;1176:109",
+        "I1450:9996;1176:149",
+        "I1450:9996;1176:149;61:624",
+        "I1450:9996;1176:152",
+        "I1450:9996;1176:153",
+        "I1450:9996;1176:154"
+      ],
+      "results": [
+        {
+          "id": "1450:9944",
+          "mode": "base",
+          "style": "Title style=H2",
+          "font": 24,
+          "line": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "height": 29,
+          "textStyle": "S:6f4d73374de168016819e2625fd9f97307ca5ee1,"
+        },
+        {
+          "id": "1450:9946",
+          "mode": "base",
+          "style": "Title style=H3",
+          "font": 20,
+          "line": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "height": 24,
+          "textStyle": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,"
+        },
+        {
+          "id": "1450:9948",
+          "mode": "base",
+          "style": "Title style=H4",
+          "font": 18,
+          "line": {
+            "unit": "PIXELS",
+            "value": 27
+          },
+          "height": 27,
+          "textStyle": "S:247378385d67ba3e5112891e6541b255b3489976,"
+        },
+        {
+          "id": "1450:9950",
+          "mode": "base",
+          "style": "Title style=H5",
+          "font": 16,
+          "line": {
+            "unit": "PIXELS",
+            "value": 24
+          },
+          "height": 24,
+          "textStyle": "S:e2c1feb4aee689f97f936a43eb77545771f4791f,"
+        },
+        {
+          "id": "1450:9952",
+          "mode": "base",
+          "style": "Title style=H6",
+          "font": 16,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "height": 24,
+          "textStyle": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+        },
+        {
+          "id": "1450:9954",
+          "mode": "base",
+          "kind": "expanded item",
+          "height": 128,
+          "trigger": {
+            "height": 48,
+            "padding": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 8,
+            "children": [
+              {
+                "name": "Title",
+                "type": "INSTANCE",
+                "width": 280,
+                "height": 24
+              },
+              {
+                "name": "Expansion indicator",
+                "type": "INSTANCE",
+                "width": 20,
+                "height": 20
+              }
+            ]
+          },
+          "panel": {
+            "height": 80,
+            "padding": [
+              16,
+              16,
+              16,
+              16
+            ]
+          }
+        },
+        {
+          "id": "1450:9965",
+          "mode": "md",
+          "style": "Title style=H2",
+          "font": 30,
+          "line": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "height": 36,
+          "textStyle": "S:6f4d73374de168016819e2625fd9f97307ca5ee1,"
+        },
+        {
+          "id": "1450:9967",
+          "mode": "md",
+          "style": "Title style=H3",
+          "font": 24,
+          "line": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "height": 29,
+          "textStyle": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,"
+        },
+        {
+          "id": "1450:9969",
+          "mode": "md",
+          "style": "Title style=H4",
+          "font": 20,
+          "line": {
+            "unit": "PIXELS",
+            "value": 24
+          },
+          "height": 24,
+          "textStyle": "S:247378385d67ba3e5112891e6541b255b3489976,"
+        },
+        {
+          "id": "1450:9971",
+          "mode": "md",
+          "style": "Title style=H5",
+          "font": 18,
+          "line": {
+            "unit": "PIXELS",
+            "value": 27
+          },
+          "height": 27,
+          "textStyle": "S:e2c1feb4aee689f97f936a43eb77545771f4791f,"
+        },
+        {
+          "id": "1450:9973",
+          "mode": "md",
+          "style": "Title style=H6",
+          "font": 16,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "height": 24,
+          "textStyle": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+        },
+        {
+          "id": "1450:9975",
+          "mode": "md",
+          "kind": "expanded item",
+          "height": 133,
+          "trigger": {
+            "height": 53,
+            "padding": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 8,
+            "children": [
+              {
+                "name": "Title",
+                "type": "INSTANCE",
+                "width": 280,
+                "height": 29
+              },
+              {
+                "name": "Expansion indicator",
+                "type": "INSTANCE",
+                "width": 20,
+                "height": 20
+              }
+            ]
+          },
+          "panel": {
+            "height": 80,
+            "padding": [
+              16,
+              16,
+              16,
+              16
+            ]
+          }
+        },
+        {
+          "id": "1450:9986",
+          "mode": "lg",
+          "style": "Title style=H2",
+          "font": 36,
+          "line": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "height": 43,
+          "textStyle": "S:6f4d73374de168016819e2625fd9f97307ca5ee1,"
+        },
+        {
+          "id": "1450:9988",
+          "mode": "lg",
+          "style": "Title style=H3",
+          "font": 30,
+          "line": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "height": 36,
+          "textStyle": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,"
+        },
+        {
+          "id": "1450:9990",
+          "mode": "lg",
+          "style": "Title style=H4",
+          "font": 24,
+          "line": {
+            "unit": "PIXELS",
+            "value": 28.799999237060547
+          },
+          "height": 29,
+          "textStyle": "S:247378385d67ba3e5112891e6541b255b3489976,"
+        },
+        {
+          "id": "1450:9992",
+          "mode": "lg",
+          "style": "Title style=H5",
+          "font": 20,
+          "line": {
+            "unit": "PIXELS",
+            "value": 24
+          },
+          "height": 24,
+          "textStyle": "S:e2c1feb4aee689f97f936a43eb77545771f4791f,"
+        },
+        {
+          "id": "1450:9994",
+          "mode": "lg",
+          "style": "Title style=H6",
+          "font": 18,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "height": 27,
+          "textStyle": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+        },
+        {
+          "id": "1450:9996",
+          "mode": "lg",
+          "kind": "expanded item",
+          "height": 146,
+          "trigger": {
+            "height": 60,
+            "padding": [
+              12,
+              16,
+              12,
+              16
+            ],
+            "gap": 8,
+            "children": [
+              {
+                "name": "Title",
+                "type": "INSTANCE",
+                "width": 280,
+                "height": 36
+              },
+              {
+                "name": "Expansion indicator",
+                "type": "INSTANCE",
+                "width": 20,
+                "height": 20
+              }
+            ]
+          },
+          "panel": {
+            "height": 86,
+            "padding": [
+              16,
+              16,
+              16,
+              16
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "stepperFinalAudit": [
+    {
+      "publicCount": 40,
+      "privateCount": 20,
+      "defaultId": "927:90",
+      "issues": [],
+      "removedIds": [
+        "1449:1537",
+        "1449:1538",
+        "I1449:1538;927:91",
+        "I1449:1538;927:92",
+        "I1449:1538;930:4685",
+        "I1449:1538;927:95",
+        "I1449:1538;927:95;924:16",
+        "I1449:1538;927:95;924:16;95:869",
+        "I1449:1538;927:95;924:16;95:869;61:689",
+        "I1449:1538;927:95;924:4612",
+        "I1449:1538;927:95;924:4613",
+        "I1449:1538;927:95;924:20",
+        "I1449:1538;927:95;924:20;95:869",
+        "I1449:1538;927:95;924:20;95:869;61:680",
+        "I1449:1538;1450:1083",
+        "I1449:1538;930:4686",
+        "1449:1556",
+        "I1449:1556;931:5486",
+        "I1449:1556;931:5487",
+        "I1449:1556;931:5489",
+        "I1449:1556;931:5490",
+        "I1449:1556;931:5491",
+        "I1449:1556;931:5491;925:4767",
+        "I1449:1556;931:5491;925:4767;95:869",
+        "I1449:1556;931:5491;925:4767;95:869;61:689",
+        "I1449:1556;931:5491;925:4768",
+        "I1449:1556;931:5491;925:4769",
+        "I1449:1556;931:5491;925:4770",
+        "I1449:1556;931:5491;925:4771",
+        "I1449:1556;931:5491;925:4772",
+        "I1449:1556;931:5491;925:4772;95:881",
+        "I1449:1556;931:5491;925:4772;95:881;61:680",
+        "I1449:1556;1450:1113",
+        "I1449:1556;931:5492",
+        "1449:1574",
+        "I1449:1574;927:91",
+        "I1449:1574;927:92",
+        "I1449:1574;930:4685",
+        "I1449:1574;927:95",
+        "I1449:1574;927:95;924:16",
+        "I1449:1574;927:95;924:16;95:869",
+        "I1449:1574;927:95;924:16;95:869;61:689",
+        "I1449:1574;927:95;924:4612",
+        "I1449:1574;927:95;924:4613",
+        "I1449:1574;927:95;924:20",
+        "I1449:1574;927:95;924:20;95:869",
+        "I1449:1574;927:95;924:20;95:869;61:680",
+        "I1449:1574;1450:1083",
+        "I1449:1574;930:4686",
+        "1449:1592",
+        "I1449:1592;931:5486",
+        "I1449:1592;931:5487",
+        "I1449:1592;931:5489",
+        "I1449:1592;931:5490",
+        "I1449:1592;931:5491",
+        "I1449:1592;931:5491;925:4767",
+        "I1449:1592;931:5491;925:4767;95:869",
+        "I1449:1592;931:5491;925:4767;95:869;61:689",
+        "I1449:1592;931:5491;925:4768",
+        "I1449:1592;931:5491;925:4769",
+        "I1449:1592;931:5491;925:4770",
+        "I1449:1592;931:5491;925:4771",
+        "I1449:1592;931:5491;925:4772",
+        "I1449:1592;931:5491;925:4772;95:881",
+        "I1449:1592;931:5491;925:4772;95:881;61:680",
+        "I1449:1592;1450:1113",
+        "I1449:1592;931:5492",
+        "1449:1610",
+        "I1449:1610;927:91",
+        "I1449:1610;927:92",
+        "I1449:1610;930:4685",
+        "I1449:1610;927:95",
+        "I1449:1610;927:95;924:16",
+        "I1449:1610;927:95;924:16;95:869",
+        "I1449:1610;927:95;924:16;95:869;61:689",
+        "I1449:1610;927:95;924:4612",
+        "I1449:1610;927:95;924:4613",
+        "I1449:1610;927:95;924:20",
+        "I1449:1610;927:95;924:20;95:869",
+        "I1449:1610;927:95;924:20;95:869;61:680",
+        "I1449:1610;1450:1083",
+        "I1449:1610;930:4686",
+        "1449:1628",
+        "I1449:1628;931:5486",
+        "I1449:1628;931:5487",
+        "I1449:1628;931:5489",
+        "I1449:1628;931:5490",
+        "I1449:1628;931:5491",
+        "I1449:1628;931:5491;925:4767",
+        "I1449:1628;931:5491;925:4767;95:869",
+        "I1449:1628;931:5491;925:4767;95:869;61:689",
+        "I1449:1628;931:5491;925:4768",
+        "I1449:1628;931:5491;925:4769",
+        "I1449:1628;931:5491;925:4770",
+        "I1449:1628;931:5491;925:4771",
+        "I1449:1628;931:5491;925:4772",
+        "I1449:1628;931:5491;925:4772;95:881",
+        "I1449:1628;931:5491;925:4772;95:881;61:680",
+        "I1449:1628;1450:1113",
+        "I1449:1628;931:5492"
+      ],
+      "variableCollections": [
+        {
+          "name": "global",
+          "count": 329
+        },
+        {
+          "name": "Breakpoint",
+          "count": 30
+        }
+      ]
+    }
+  ],
+  "accordionFinalAudit": [
+    {
+      "probeFrameAbsent": false,
+      "removedFrameId": "1450:9943",
+      "root": {
+        "id": "1176:183",
+        "items": [
+          {
+            "name": "Items",
+            "type": "SLOT",
+            "gap": 8,
+            "bindings": {
+              "itemSpacing": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4528"
+              }
+            }
+          }
+        ]
+      },
+      "item": {
+        "id": "1176:146",
+        "children": [
+          {
+            "id": "1176:147",
+            "name": "Trigger",
+            "bindings": {
+              "itemSpacing": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4526"
+              },
+              "paddingLeft": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4525"
+              },
+              "paddingTop": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4524"
+              },
+              "paddingRight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4525"
+              },
+              "paddingBottom": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4524"
+              },
+              "topLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "topRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomLeftRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "bottomRightRadius": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:70"
+              },
+              "minWidth": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:148"
+              },
+              "minHeight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:150"
+              },
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:85:1495"
+                }
+              ]
+            },
+            "children": [
+              {
+                "id": "1176:148",
+                "name": "Title",
+                "type": "INSTANCE",
+                "isExposedInstance": true,
+                "bindings": {}
+              },
+              {
+                "id": "1176:149",
+                "name": "Expansion indicator",
+                "type": "INSTANCE",
+                "isExposedInstance": false,
+                "bindings": {
+                  "width": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:46:25"
+                  }
+                }
+              },
+              {
+                "id": "1176:150",
+                "name": "Focus ring",
+                "type": "RECTANGLE",
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:8:61"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "1176:151",
+                "name": "Focus separator",
+                "type": "RECTANGLE",
+                "bindings": {
+                  "topLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "topRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomLeftRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "bottomRightRadius": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:70"
+                  },
+                  "strokeTopWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeBottomWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeLeftWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokeRightWeight": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:5"
+                  },
+                  "strokes": [
+                    {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:120:1923"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "1176:152",
+            "name": "Panel",
+            "bindings": {
+              "itemSpacing": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:8:105"
+              },
+              "paddingLeft": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4525"
+              },
+              "paddingTop": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4527"
+              },
+              "paddingRight": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4525"
+              },
+              "paddingBottom": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1161:4527"
+              },
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:51"
+                }
+              ]
+            },
+            "children": [
+              {
+                "id": "1176:153",
+                "name": "Content",
+                "type": "SLOT",
+                "bindings": {
+                  "itemSpacing": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:105"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "accordionCleanup": [
+    {
+      "removedIds": [
+        "1450:9943",
+        "1450:9944",
+        "I1450:9944;1176:108",
+        "1450:9946",
+        "I1450:9946;1176:109",
+        "1450:9948",
+        "I1450:9948;1176:110",
+        "1450:9950",
+        "I1450:9950;1176:111",
+        "1450:9952",
+        "I1450:9952;1176:112",
+        "1450:9954",
+        "I1450:9954;1176:147",
+        "I1450:9954;1176:148",
+        "I1450:9954;1176:148;1176:109",
+        "I1450:9954;1176:149",
+        "I1450:9954;1176:149;61:624",
+        "I1450:9954;1176:152",
+        "I1450:9954;1176:153",
+        "I1450:9954;1176:154",
+        "1450:9965",
+        "I1450:9965;1176:108",
+        "1450:9967",
+        "I1450:9967;1176:109",
+        "1450:9969",
+        "I1450:9969;1176:110",
+        "1450:9971",
+        "I1450:9971;1176:111",
+        "1450:9973",
+        "I1450:9973;1176:112",
+        "1450:9975",
+        "I1450:9975;1176:147",
+        "I1450:9975;1176:148",
+        "I1450:9975;1176:148;1176:109",
+        "I1450:9975;1176:149",
+        "I1450:9975;1176:149;61:624",
+        "I1450:9975;1176:152",
+        "I1450:9975;1176:153",
+        "I1450:9975;1176:154",
+        "1450:9986",
+        "I1450:9986;1176:108",
+        "1450:9988",
+        "I1450:9988;1176:109",
+        "1450:9990",
+        "I1450:9990;1176:110",
+        "1450:9992",
+        "I1450:9992;1176:111",
+        "1450:9994",
+        "I1450:9994;1176:112",
+        "1450:9996",
+        "I1450:9996;1176:147",
+        "I1450:9996;1176:148",
+        "I1450:9996;1176:148;1176:109",
+        "I1450:9996;1176:149",
+        "I1450:9996;1176:149;61:624",
+        "I1450:9996;1176:152",
+        "I1450:9996;1176:153",
+        "I1450:9996;1176:154"
+      ]
+    }
+  ]
+}

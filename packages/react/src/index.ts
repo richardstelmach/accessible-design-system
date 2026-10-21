@@ -20,3 +20,6 @@ export type { ToastMessage, ToastState, ToastAPI, ToastProviderProps, ToastRegio
 export { Alert } from './components/Alert.js';
 export { Badge } from './components/Badge.js';
 export type { AlertProps, AlertState, BadgeProps, BadgeTone } from './types.js';
+export { Stepper } from './components/Stepper.js';
+export { Accordion } from './components/Accordion.js';
+export type { StepperProps, StepperChangeDetail, AccordionProps, AccordionItem } from './types.js';

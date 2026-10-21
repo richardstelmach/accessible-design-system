@@ -1,6 +1,6 @@
 # Phosphor Icons
 
-Alert and Toast status icons, Toast close icons, the Dialog close icon, Select caret and Checkbox check/minus indicators reuse Phosphor Regular artwork from the existing design-system icon instances. Source: https://github.com/phosphor-icons/core
+Alert and Toast status icons, Toast close icons, the Dialog close icon, Select and Accordion carets, Stepper plus/minus icons and Checkbox check/minus indicators reuse Phosphor Regular artwork from the existing design-system icon instances. Source: https://github.com/phosphor-icons/core
 
 MIT License
 

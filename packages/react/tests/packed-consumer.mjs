@@ -9,7 +9,7 @@ globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Ele
 globalThis.getComputedStyle=dom.window.getComputedStyle;
 const {renderToString}=await import('react-dom/server');
 const {hydrateRoot}=await import('react-dom/client');
-const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge } = await import('@owla11y/react');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
@@ -146,4 +146,18 @@ assert.equal(root.innerHTML,feedbackHTML);assert.equal(alertRef.current.textCont
 await React.act(async()=>hydrated.render(feedbackApp('polite',3)));
 assert.equal(alertRef.current.getAttribute('role'),'status');assert.equal(alertRef.current.querySelector('h3').textContent,'Error: Review the application');assert.equal(root.querySelector('[aria-live],[aria-atomic],[tabindex]'),null);
 assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
-console.log('Packed package: React ' + React.version + ' fifteen components including Alert/Badge plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');
+const controlsRef=React.createRef();const requests=[];
+const controlsApp=h(React.StrictMode,null,h('form',null,
+ h(Stepper,{ref:controlsRef,id:'packed-quantity',label:'Quantity',name:'quantity',step:0.1,min:0,max:1,defaultValue:'0.2',incrementLabel:'Increase quantity',decrementLabel:'Decrease quantity',onValueChange:(value,detail)=>requests.push([value,detail.source])}),
+ h(Accordion,{id:'packed-disclosure',headingLevel:3,items:[{id:'one',title:'First section',content:h('input',{'aria-label':'Panel note',defaultValue:'Saved'})},{id:'two',title:'Second section',content:h('p',null,'Second body')}]})
+));
+root.innerHTML=renderToString(controlsApp);assert.equal(root.querySelector('.owla11y-accordion button'),null);assert.equal(root.querySelector('.owla11y-accordion [hidden]'),null);
+const controlIds=[...root.querySelectorAll('[id]')].map(n=>n.id);
+await React.act(async()=>{hydrated=hydrateRoot(root,controlsApp,{onRecoverableError:error=>errors.push(error)});});
+assert.deepEqual([...root.querySelectorAll('[id]')].map(n=>n.id),controlIds);assert.equal(controlsRef.current.type,'number');
+await React.act(async()=>root.querySelector('[aria-label="Increase quantity"]').click());assert.equal(controlsRef.current.value,'0.3');assert.deepEqual(requests,[['0.3','increment']]);assert.equal(root.querySelector('[role=status]').textContent,'Quantity: 0.3');
+await React.act(async()=>root.querySelector('form').reset());assert.equal(controlsRef.current.value,'0.2');assert.equal(root.querySelector('[role=status]').textContent,'');
+const disclosure=root.querySelector('.owla11y-accordion button');await React.act(async()=>disclosure.click());assert.equal(disclosure.getAttribute('aria-expanded'),'true');
+const panelNote=root.querySelector('[aria-label="Panel note"]');panelNote.value='Edited';await React.act(async()=>disclosure.click());assert.equal(panelNote.closest('.owla11y-accordion__panel').hidden,true);assert.equal(panelNote.value,'Edited');
+assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
+console.log('Packed package: React ' + React.version + ' seventeen components including Stepper/Accordion plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');
