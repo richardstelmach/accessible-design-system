@@ -1,6 +1,6 @@
 # OwlA11y React
 
-Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert, Badge, Stepper and Accordion, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
+Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert, Badge, Stepper, Accordion, Card, Breadcrumb and Pagination, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. All current component families are implemented, including the native Dialog backdrop through CSS. Manual release acceptance remains open. This package stays private until release review.
 
 ```tsx
 import { Button, TextInput } from '@owla11y/react';
@@ -231,3 +231,34 @@ Accordion uses explicit headingLevel=2..6 and independent expansion: none, one o
 Server/no-JavaScript content consists of ordinary headings with every body visible. After enhancement, native buttons use normal Tab/Enter/Space; there is no roving/arrow navigation. Hidden panels remain mounted, retaining form and React state. Enhancement protects focused baseline content in addition to the requested defaults. External collapse moves focus to the panel's trigger before hiding it. Print shows every body without changing expansion state. To reveal an error/deep-link target, the application must expand its section and wait for actual visibility before focusing; the preview demonstrates this. Keep essential instructions and cross-section required validation outside hidden panels. Single-open mode, disabled items, arbitrary header slots, nesting, lazy loading and animation are outside this initial API.
 
 See [source/Figma comparison and validation](../../docs/validation/react-controls-parity.md) and the runnable `?controls` preview. Settings use OwlA11y Select, Checkbox and Button. Automated results do not close manual screen-reader, Safari/Firefox or release acceptance.
+
+## Card, Breadcrumb and Pagination
+
+```tsx
+import { Badge, Breadcrumb, Card, Pagination } from '@owla11y/react';
+
+<Card title="Accessible resources" headingLevel={3} titleHref="/resources"
+  wholeCardClickable layout="horizontal"
+  image={{ src: '/resources.jpg', alt: '', width: 800, height: 450 }}
+  imageBadge={<Badge label="New" tone="info" />}>
+  <p>Guidance and practical examples.</p>
+</Card>;
+<Breadcrumb ancestors={[
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'resources', label: 'Resources', href: '/resources' },
+]} currentPage="Guidance" />;
+<Pagination currentPage={3} totalPages={10000}
+  pageHref={page => `/results?filter=accessible&page=${page}`}
+  pageJump jumpForm={{ action: '/results', pageName: 'page',
+    hiddenFields: [{ name: 'filter', value: 'accessible' }] }} />;
+```
+
+Card's ref targets its ordinary div. headingLevel defaults to none (strong body title); explicit levels 2–6 follow page structure. titleStyle=compact uses H5 appearance without changing semantics. titleHref requires title and wholeCardClickable requires that real title link. The enhanced surface forwards only eligible completed pointer activation; text selection, slow clicks, scrolling/drag/cancelled gestures, modifiers, native controls and opt-out regions remain independent. Native title attributes/events belong in titleLinkAttributes. No root action, widget role or tab stop is provided. Use data-owla11y-card-ignore on opaque integration/shadow hosts when needed. Intrinsic images reserve space, may cover or contain, and use explicit alt. One OwlA11y Badge may overlay an image. Horizontal layout requires the canonical 32rem of available inner container width; smaller/unsupported containers use vertical layout. Slots own internal paragraph spacing; absent sections leave no gap.
+
+Breadcrumb's ref targets nav. Supply the complete meaningful hierarchy as unique keyed ancestor links, with optional plain currentPage. Empty ancestors omit the landmark. The component keeps every ancestor, measures actual overflow and offers native scrolling with Show full path. Expanded presentation wraps the same anchors in place. Controlled expanded/onExpandedChange excludes defaultExpanded; uncontrolled preference defaults false and survives resizing. A focused toggle remains until blur if overflow ends. Labels can localise the landmark and both toggle states. SSR/no-JS, missing measurement support and print retain the complete wrapping path. Native keyboard/link behaviour remains intact; there is no ellipsis menu, roving navigation or live repetition of the trail.
+
+Pagination's nav ref exposes known-total native navigation. currentPage and totalPages must be safe integers and in range; zero uses sentinel currentPage=1 and zero/one page renders nothing. The seven-position window stays bounded for huge totals. presentation=auto uses measured label widths; compact retains summary, Previous/Next and First/Last, while explicit numbered may wrap. Focused numbered controls are not hidden during resize. Exactly one visible current marker identifies the page. labels can localise text and number/page/summary/help/error/no-op formatters; formatPageLabel includes the complete displayed number. No unknown-total or cursor approximation is supplied.
+
+Optional pageJump requires the explicit jumpForm GET configuration in the example; preserve filters/sorting through hiddenFields and never nest the generated form. The required text field has numeric inputMode and 20ch maximum content width. Before enhancement native required/pattern validation applies. Enhanced validation checks the entire trimmed ASCII integer, associates/focuses errors, and politely reports a current-page no-op without moving focus. Formatting numbers does not add a localised-digit parser. All navigation uses pageHref. Native anchors remain the fallback. Optional onNavigate(page,{href,source}) handles ordinary enhanced link/jump requests; the consuming application owns currentPage, loading/failure/stale requests, URL/history, titles, success focus and history restoration. Alternate-target, modified and download links remain native. linkAttributes(page) supplies native link integration.
+
+See [source/Figma comparison and validation](../../docs/validation/react-navigation-parity.md) and the runnable `?navigation` preview, including explicit success/failure/history integration. All current component families are now implemented; the package remains private pending manual release acceptance.

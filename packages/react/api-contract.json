@@ -169,8 +169,8 @@
         "Card"
       ],
       "props": "layout=vertical|horizontal; title?; headingLevel=none; titleStyle=auto|compact; titleHref?; titleLinkAttributes?; wholeCardClickable=false; image?; children?; actions?; imageBadge?",
-      "behaviour": "Div ref; children maps canonical content slot; image requires alt and intrinsic dimensions; whole-card enhancement requires title link, preserves selection and secondary controls.",
-      "implementation": "not-implemented"
+      "behaviour": "Ordinary div ref; semantic title and compact visual heading independent; intrinsic image and one Badge; container-responsive layout. Surface enhancement delegates completed eligible pointer activation to the real title link, preserving native controls, selection and cancellation. SSR retains native links.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "breadcrumb",
@@ -178,17 +178,17 @@
         "Breadcrumb"
       ],
       "props": "label=Breadcrumb; ancestors: {id,label,href,linkAttributes?}[]; currentPage?; expanded/defaultExpanded=false; onExpandedChange; showFullPathLabel; showCompactPathLabel",
-      "behaviour": "Nav ref; current page plain text; no ancestors means omit landmark; observer-based overflow preserves focus and user choice.",
-      "implementation": "not-implemented"
+      "behaviour": "Native named nav ref, complete ordered ancestors and optional plain current text. Measured compact overflow, native scrolling, persistent expanded preference, retained nodes/focused toggle, full wrapping SSR/print. Controlled expanded requires onExpandedChange; otherwise defaultExpanded.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "pagination",
       "exports": [
         "Pagination"
       ],
-      "props": "label=Pagination; currentPage; totalPages; pageHref(page); presentation=auto; pageJump=false; labels",
-      "behaviour": "Nav ref; known safe-integer totals only; no controlled current state inside component; application owns URL/results/history. Constant-size window and explicit jump.",
-      "implementation": "not-implemented"
+      "props": "label=Pagination; currentPage; exact totalPages; pageHref(page); presentation=auto|numbered|compact; labels?; linkAttributes(page)?; onNavigate(page,{href,source})?; pageJump=false; pageJump=true requires jumpForm={action,pageName,hiddenFields?}",
+      "behaviour": "Native nav ref; bounded seven-position window and real current href; measured compact layout defers while a numbered link is focused. Optional page entry validates whole ASCII integers, focuses errors and announces current-page no-op. Explicit native GET fallback retains filters; application owns results, history and success focus.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "toast",

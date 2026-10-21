@@ -9,7 +9,7 @@ globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Ele
 globalThis.getComputedStyle=dom.window.getComputedStyle;
 const {renderToString}=await import('react-dom/server');
 const {hydrateRoot}=await import('react-dom/client');
-const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion } = await import('@owla11y/react');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion, Card, Breadcrumb, Pagination } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
@@ -160,4 +160,18 @@ await React.act(async()=>root.querySelector('form').reset());assert.equal(contro
 const disclosure=root.querySelector('.owla11y-accordion button');await React.act(async()=>disclosure.click());assert.equal(disclosure.getAttribute('aria-expanded'),'true');
 const panelNote=root.querySelector('[aria-label="Panel note"]');panelNote.value='Edited';await React.act(async()=>disclosure.click());assert.equal(panelNote.closest('.owla11y-accordion__panel').hidden,true);assert.equal(panelNote.value,'Edited');
 assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
-console.log('Packed package: React ' + React.version + ' seventeen components including Stepper/Accordion plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');
+const cardRef=React.createRef();const trailRef=React.createRef();const pagingRef=React.createRef();const navigationRequests=[];
+const navigationApp=h(React.StrictMode,null,
+ h(Card,{ref:cardRef,title:'Packed resource',headingLevel:3,titleHref:'/resource',wholeCardClickable:true,image:{src:'/photo.jpg',alt:'',width:800,height:450},imageBadge:h(Badge,{label:'New'})},h('p',null,'Resource details')),
+ h(Breadcrumb,{ref:trailRef,id:'packed-path',ancestors:[{id:'home',label:'Home',href:'/'},{id:'resources',label:'Resources',href:'/resources'}],currentPage:'Current'}),
+ h(Pagination,{ref:pagingRef,id:'packed-pages',currentPage:500,totalPages:10000,pageHref:page=>'/results?filter=accessible&page='+page,pageJump:true,jumpForm:{action:'/results',pageName:'page',hiddenFields:[{name:'filter',value:'accessible'}]},onNavigate:(page,detail)=>navigationRequests.push([page,detail.source])})
+);
+root.innerHTML=renderToString(navigationApp);assert.equal(root.querySelector('[data-clickable]'),null);assert.equal(root.querySelector('.owla11y-breadcrumb button'),null);assert.equal(root.querySelector('.owla11y-pagination__numbered').hidden,false);
+const navigationIds=[...root.querySelectorAll('[id]')].map(n=>n.id);
+await React.act(async()=>{hydrated=hydrateRoot(root,navigationApp,{onRecoverableError:error=>errors.push(error)});});
+assert.deepEqual([...root.querySelectorAll('[id]')].map(n=>n.id),navigationIds);assert.equal(cardRef.current.getAttribute('role'),null);assert.equal(cardRef.current.getAttribute('data-clickable'),'true');assert.equal(trailRef.current.tagName,'NAV');assert.equal(pagingRef.current.tagName,'NAV');
+assert.equal(root.querySelectorAll('.owla11y-pagination__numbered [aria-current=page]').length,1);assert.equal(root.querySelector('.owla11y-pagination__numbered [aria-current=page]').getAttribute('href'),'/results?filter=accessible&page=500');
+await React.act(async()=>root.querySelector('.owla11y-pagination__numbered a[rel=next]').click());assert.deepEqual(navigationRequests,[[501,'link']]);
+await React.act(async()=>root.querySelector('.owla11y-pagination__jump').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})));assert.equal(root.querySelector('#packed-pages-jump').getAttribute('aria-invalid'),'true');assert.ok(document.activeElement===root.querySelector('#packed-pages-jump'));assert.equal(new dom.window.FormData(root.querySelector('.owla11y-pagination__jump')).get('filter'),'accessible');
+assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
+console.log('Packed package: React ' + React.version + ' twenty standalone components including Card/Breadcrumb/Pagination plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');

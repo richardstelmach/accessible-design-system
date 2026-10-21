@@ -5,9 +5,14 @@ status: draft
 
 phase:
   current: token-roundtrip-complete
-  implementation: not-started
+  implementation: react-beta-automated-checks-passed
   figma: built-and-audited
   releaseReady: false
+
+reactAdapter:
+  status: beta-automated-checks-passed
+  documentation: docs/react-api.md
+  evidence: docs/validation/react-navigation-parity.md
 
 description: >
   A visually bounded container grouping related content about one subject.
@@ -36,7 +41,6 @@ scope:
     - Selection, expansion, dragging, dismissal, disabled and loading cards
     - Video, carousels and interactive image overlays
     - Nested cards, nested whole-card click targets and arbitrary root click actions
-    - Framework adapters and production JavaScript in this contract/Figma phase
     - Separate product, article, event or marketing card components
 
 decisions:

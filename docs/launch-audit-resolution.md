@@ -4,13 +4,13 @@
 
 | Finding | Resolution |
 | --- | --- |
-| A01 Package/runtime absent | Package layout and API inventory defined. Runnable private npm workspace, seventeen standalone components and the Toast notification host now exist, with type, interaction, package-consumer and automated accessibility checks. The remaining families and manual release checks are open. |
+| A01 Package/runtime absent | Package layout and API inventory defined. Runnable private npm workspace, twenty standalone components and the Toast notification host now exist, with type, interaction, package-consumer and automated accessibility checks. All current families are implemented; manual release checks remain open. |
 | A02 Button contract and guide | Root typography nesting corrected; draft status and Button/IconButton public adapter added; guide created. Core runtime and automated checks pass locally; manual release acceptance remains open. |
 | A03 Link guide/API | Guide and native-anchor adapter added. Core runtime and automated checks pass locally; manual release acceptance remains open. |
 | A04 Accordion stale status | Source and guide now acknowledge confirmed live masters. Round-trip completion remains unverified; no ready claim. |
 | A05 Tabs repeat export | Still open. Existing source explicitly records pending repeat export; no new durable completion evidence established. |
 | A06 Date Input stale status | Source records confirmed master ID and 13 variants. Full design/round-trip verification remains open. |
-| A07 Framework adapter | Initial interfaces for all 21 families documented and machine-readable. Seventeen standalone components and the Toast host are typed and implemented; date part IDs and Toast host ownership are resolved. Remaining family implementations and manual acceptance stay open. |
+| A07 Framework adapter | Initial interfaces for all 21 families documented and machine-readable. Twenty standalone components and the Toast host are typed and implemented; date part IDs and Toast host ownership are resolved. All current families now have implementations; manual acceptance stays open. |
 | A08 Public distribution | Open; publication and external access not performed. |
 | A09 Runtime accessibility | Open for every family. Token/source verification cannot close it. |
 
@@ -29,3 +29,5 @@ The [Toast batch](validation/react-toast-parity.md) adds the persistent notifica
 The [Alert/Badge batch](validation/react-feedback-parity.md) adds two contextual feedback components with all states/tones, semantic heading choices, wrapping and automated contrast checks. It corrects the existing Figma Alert default to Info and shared H6 line height to canonical 150%, preserving IDs and bindings. The H6 repair should be confirmed by the next routine Tokens Studio typography export; no new token values or variables are introduced. Manual speech and broader-browser acceptance stay open.
 
 The [Stepper/Accordion batch](validation/react-controls-parity.md) adds native quantity controls and independent disclosure. It reconciles Stepper's Figma styles, content-driven field height, spacing, value alignment and focus bounds while preserving its 60 variants. Existing Accordion assets match source after structural/visual inspection; stale historical documentation is now distinguished from the live audit. Accordion token repeat-export and manual runtime acceptance remain open.
+
+The [Card/Breadcrumb/Pagination batch](validation/react-navigation-parity.md) completes React implementations for the current family inventory (twenty standalone components plus the Toast host, with backdrop through Dialog CSS). It adds native pointer-safe cards, full-path breadcrumb overflow/expansion and bounded pagination with explicit GET page-entry fallback. Figma's composed Card linked-H6 style is aligned to canonical 150% line height; existing Breadcrumb/Pagination assets pass comparison. Automated package/browser validation does not close A08/A09 or manual release gates. This batch is stacked on the still-open PR #45; neither PR is merged implicitly.

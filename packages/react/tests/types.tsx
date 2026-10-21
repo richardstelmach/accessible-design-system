@@ -183,3 +183,25 @@ const accordionItems=[{id:'one',title:'One',content:<p>Content</p>}];
 <Stepper label="Quantity" name="quantity" step={1} incrementLabel="Increase" decrementLabel="Decrease" readOnly/>;
 // @ts-expect-error single value owner
 <Stepper label="Quantity" name="quantity" step={1} incrementLabel="Increase" decrementLabel="Decrease" onChange={()=>{}}/>;
+
+import {Card,Breadcrumb,Pagination} from '../src/index.js';
+<Card title="Resource" titleHref="/resource" headingLevel={3} wholeCardClickable image={{src:'/image.jpg',alt:'',width:800,height:450}} imageBadge={<Badge label="New"/>} actions={<Button>Save</Button>}>Description</Card>;
+<Card ref={createRef<HTMLDivElement>()} title="Heading" headingLevel={2} titleStyle="compact"/>;
+<Breadcrumb ancestors={[{id:'home',label:'Home',href:'/'}]} currentPage="Here" ref={createRef<HTMLElement>()} defaultExpanded/>;
+<Breadcrumb ancestors={[]} expanded={false} onExpandedChange={()=>{}}/>;
+<Pagination currentPage={3} totalPages={10000} pageHref={n=>`?page=${n}`} ref={createRef<HTMLElement>()}/>;
+<Pagination currentPage={3} totalPages={10000} pageHref={n=>`?page=${n}`} pageJump jumpForm={{action:'/search',pageName:'page',hiddenFields:[{name:'sort',value:'title'}]}} onNavigate={(page,detail)=>{const source:'link'|'jump'=detail.source;detail.href.toUpperCase();}}/>;
+// @ts-expect-error roots are not link widgets
+<Card title="Resource" role="link"/>;
+// @ts-expect-error image dimensions are required
+<Card image={{src:'/a.jpg',alt:''}}/>;
+// @ts-expect-error semantic heading excludes h1
+<Card headingLevel={1}/>;
+// @ts-expect-error controlled expansion requires callback
+<Breadcrumb ancestors={[]} expanded/>;
+// @ts-expect-error page entry needs an explicit GET fallback
+<Pagination currentPage={1} totalPages={8} pageHref={n=>`?page=${n}`} pageJump/>;
+// @ts-expect-error navigation is not a tablist
+<Pagination currentPage={1} totalPages={8} pageHref={n=>`?page=${n}`} role="tablist"/>;
+// @ts-expect-error current location belongs to the component
+<Breadcrumb ancestors={[{id:'home',label:'Home',href:'/',linkAttributes:{'aria-current':'page'}}]}/>;

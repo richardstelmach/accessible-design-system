@@ -5,9 +5,14 @@ status: draft
 
 phase:
   current: token-roundtrip-complete
-  implementation: not-started
+  implementation: react-beta-automated-checks-passed
   figma: built-and-audited
   releaseReady: false
+
+reactAdapter:
+  status: beta-automated-checks-passed
+  documentation: docs/react-api.md
+  evidence: docs/validation/react-navigation-parity.md
 
 description: Named navigation between addressable pages of a known, finite result set.
 
@@ -30,7 +35,6 @@ scope:
     - Unknown totals, cursor-only APIs and estimated last-page links
     - Load more, infinite scrolling, carousels, tabs and process steppers
     - Page-size selector, filtering controls and result rendering
-    - Framework adapters and production JavaScript in this contract/Figma phase
 
 decisions:
   explicitUserRequirement: Native navigation landmark with aria-label; consider very large page counts.

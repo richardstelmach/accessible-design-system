@@ -3,9 +3,7 @@
 Pagination provides named navigation between addressable pages of a known result
 set. It keeps the visible page window small even when thousands of pages exist.
 
-Status: draft contract, tokens and Figma work. This repository does not contain a
-production implementation. Browser and assistive-technology checks remain release
-requirements.
+Status: React beta implemented with automated browser/package evidence. Manual browser and assistive-technology checks remain release requirements.
 
 ## Research and when to use
 
@@ -217,3 +215,14 @@ masters, all six Current state/focus combinations, the composed Link style,
 centred wrapping Pages and Breakpoint modes remain intact. The design and token
 round-trip is complete; production implementation acceptance and Figma library
 publication remain separate.
+
+
+## React adapter and comparison
+
+The beta package exports Pagination with currentPage, totalPages and pageHref, plus a native nav ref. The bounded window is computed without allocating one item per page. Actual label/target widths choose compact mode; a focused numbered control defers hiding until focus leaves. The complete wrapping numbered baseline remains usable before enhancement or when measurements are unavailable.
+
+pageJump=true additionally requires jumpForm={action,pageName,hiddenFields?}, an explicit native GET fallback instead of guessing a query parameter from arbitrary URLs. Preserve filters/sort in hiddenFields. Do not nest the generated form inside another form. Enhanced submission uses pageHref, validates the entire trimmed ASCII integer, focuses associated errors, and announces a current-page no-op without moving focus. Native required/pattern validation remains enabled before enhancement. The Go button uses the existing compact Button; the field reserves canonical 20ch plus padding and is constrained to the available column.
+
+Optional onNavigate(page,{href,source}) intercepts eligible ordinary link activations and valid jump submissions. Without it anchors navigate natively and enhanced jump uses the URL builder. Modified/new-tab/download link activation stays native. The consuming application owns loading, stale-request handling, committing page/URL/title/results after success, focus and history restoration; the runnable preview demonstrates these responsibilities. labels localises text and formatters. Formatting displayed numbers does not enable localised digit entry.
+
+The 21 October 2026 Figma comparison confirms the ten masters, current-state aliases, composed link style, shared field/button and responsive geometry without production mutations. An empty native Auxiliary slot retains a 1px Figma authoring placeholder and its preceding gap; omit that placeholder in production when no auxiliary content exists. It is not a runtime spacing requirement. See [React API](../../docs/react-api.md) and [validation/evidence](../../docs/validation/react-navigation-parity.md). Existing token round-trip remains complete; no new token or variable changes are needed.
