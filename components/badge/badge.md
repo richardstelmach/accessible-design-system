@@ -167,3 +167,10 @@ Source and implementation checks:
 8. Verify all five tones with the same label are announced identically.
 9. Verify a long translated label at 320 CSS pixels, 400% zoom and WCAG text-spacing overrides.
 10. Verify a dynamic status change is announced once only when the surrounding application provides a suitable live region.
+
+
+## React implementation record
+
+`@owla11y/react` exports Badge with an ordinary span ref, required plain-text label and optional tone (neutral by default). It accepts id, className, style, lang, dir and data attributes. Interactions, ARIA/role/focus overrides, icons and arbitrary slots are rejected. The label is escaped and no tone-derived hidden text is added. Applications own any dynamic announcement through one appropriate pre-existing live region.
+
+The 19 October comparison confirms the five existing Figma masters, small-body text style, content hugging, wrapping and four geometry aliases; Badge required no production Figma changes. See [React comparison and validation](../../docs/validation/react-feedback-parity.md). Manual assistive-technology, real zoom and broader-browser release checks remain open.

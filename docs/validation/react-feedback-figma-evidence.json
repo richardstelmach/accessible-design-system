@@ -1,0 +1,3298 @@
+{
+  "date": "2026-10-19",
+  "sourceBase": "3af47a18778972dd8ff25caa2f449f270820ef34",
+  "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
+  "alert": {
+    "page": "1132:53",
+    "initial": {
+      "children": [
+        {
+          "id": "1137:76",
+          "name": "01 - Component set",
+          "type": "FRAME"
+        },
+        {
+          "id": "1137:82",
+          "name": "02 - Documentation examples",
+          "type": "FRAME"
+        },
+        {
+          "id": "1137:105",
+          "name": "03 - QA and responsive tests",
+          "type": "FRAME"
+        },
+        {
+          "id": "1137:128",
+          "name": "04 - Accessibility notes",
+          "type": "FRAME"
+        }
+      ],
+      "sets": [
+        {
+          "id": "1132:69",
+          "name": "_Alert/Title",
+          "props": {
+            "Title text#1132:20": {
+              "type": "TEXT",
+              "defaultValue": "Alert title"
+            },
+            "Title style": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default",
+                "H2",
+                "H3",
+                "H4",
+                "H5",
+                "H6"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "1132:57",
+              "name": "Title style=Default",
+              "width": 400,
+              "height": 27,
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "bound": {},
+              "texts": [
+                {
+                  "id": "1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 400,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:59",
+              "name": "Title style=H2",
+              "width": 400,
+              "height": 43,
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "bound": {},
+              "texts": [
+                {
+                  "id": "1132:60",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:6f4d73374de168016819e2625fd9f97307ca5ee1,",
+                  "width": 400,
+                  "height": 43,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:133"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6942"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:119"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:61",
+              "name": "Title style=H3",
+              "width": 400,
+              "height": 36,
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "bound": {},
+              "texts": [
+                {
+                  "id": "1132:62",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:ec6c88ceba32f16eb7ea9e2d3bca7e9f2cf4addb,",
+                  "width": 400,
+                  "height": 36,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6948"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6943"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:118"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:63",
+              "name": "Title style=H4",
+              "width": 400,
+              "height": 29,
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "bound": {},
+              "texts": [
+                {
+                  "id": "1132:64",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:247378385d67ba3e5112891e6541b255b3489976,",
+                  "width": 400,
+                  "height": 29,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6948"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6944"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "lineHeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6949"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:118"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:65",
+              "name": "Title style=H5",
+              "width": 400,
+              "height": 24,
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "bound": {},
+              "texts": [
+                {
+                  "id": "1132:66",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:e2c1feb4aee689f97f936a43eb77545771f4791f,",
+                  "width": 400,
+                  "height": 24,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6948"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6946"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "lineHeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:312:7735"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:118"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:67",
+              "name": "Title style=H6",
+              "width": 400,
+              "height": 22,
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "bound": {},
+              "texts": [
+                {
+                  "id": "1132:68",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,",
+                  "width": 400,
+                  "height": 22,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6947"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:118"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1132:155",
+          "name": "Alert",
+          "props": {
+            "Description text#1132:30": {
+              "type": "TEXT",
+              "defaultValue": "Supporting information about this alert."
+            },
+            "State": {
+              "type": "VARIANT",
+              "defaultValue": "Success",
+              "variantOptions": [
+                "Success",
+                "Info",
+                "Warning",
+                "Error"
+              ]
+            },
+            "Description": {
+              "type": "VARIANT",
+              "defaultValue": "False",
+              "variantOptions": [
+                "False",
+                "True"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "1132:99",
+              "name": "State=Success, Description=False",
+              "width": 480,
+              "height": 59,
+              "gap": 12,
+              "padding": [
+                16,
+                16,
+                16,
+                16
+              ],
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3915"
+                },
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:64"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "I1132:103;1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:65"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1132:105",
+                  "name": "Description",
+                  "text": "Supporting information about this alert.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:65"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:106",
+              "name": "State=Success, Description=True",
+              "width": 480,
+              "height": 90,
+              "gap": 12,
+              "padding": [
+                16,
+                16,
+                16,
+                16
+              ],
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3915"
+                },
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:64"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "I1132:110;1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:65"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1132:112",
+                  "name": "Description",
+                  "text": "Supporting information about this alert.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:65"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:113",
+              "name": "State=Info, Description=False",
+              "width": 480,
+              "height": 59,
+              "gap": 12,
+              "padding": [
+                16,
+                16,
+                16,
+                16
+              ],
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3915"
+                },
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1129:3911"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "I1132:117;1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1132:119",
+                  "name": "Description",
+                  "text": "Supporting information about this alert.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "width": 305,
+                  "height": 54,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:120",
+              "name": "State=Info, Description=True",
+              "width": 480,
+              "height": 90,
+              "gap": 12,
+              "padding": [
+                16,
+                16,
+                16,
+                16
+              ],
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3915"
+                },
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1129:3911"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "I1132:124;1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1132:126",
+                  "name": "Description",
+                  "text": "Supporting information about this alert.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:127",
+              "name": "State=Warning, Description=False",
+              "width": 480,
+              "height": 59,
+              "gap": 12,
+              "padding": [
+                16,
+                16,
+                16,
+                16
+              ],
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3915"
+                },
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:66"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "I1132:131;1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:67"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1132:133",
+                  "name": "Description",
+                  "text": "Supporting information about this alert.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "width": 292,
+                  "height": 54,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:67"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:134",
+              "name": "State=Warning, Description=True",
+              "width": 480,
+              "height": 90,
+              "gap": 12,
+              "padding": [
+                16,
+                16,
+                16,
+                16
+              ],
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3915"
+                },
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:66"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "I1132:138;1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:67"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1132:140",
+                  "name": "Description",
+                  "text": "Supporting information about this alert.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:67"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:141",
+              "name": "State=Error, Description=False",
+              "width": 480,
+              "height": 59,
+              "gap": 12,
+              "padding": [
+                16,
+                16,
+                16,
+                16
+              ],
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3915"
+                },
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:68"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "I1132:145;1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:69"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1132:147",
+                  "name": "Description",
+                  "text": "Supporting information about this alert.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "width": 466,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:69"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1132:148",
+              "name": "State=Error, Description=True",
+              "width": 480,
+              "height": 90,
+              "gap": 12,
+              "padding": [
+                16,
+                16,
+                16,
+                16
+              ],
+              "bound": {
+                "itemSpacing": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3915"
+                },
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3914"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1129:3918"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:68"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "I1132:152;1132:58",
+                  "name": "Title",
+                  "text": "Alert title",
+                  "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:69"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:136"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "1132:154",
+                  "name": "Description",
+                  "text": "Supporting information about this alert.",
+                  "style": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+                  "width": 412,
+                  "height": 27,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:69"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6951"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "defaultRepair": {
+      "mutatedNodeIds": [
+        "1132:113",
+        "1132:99",
+        "1132:120",
+        "1132:106"
+      ],
+      "defaultVariant": "1132:113",
+      "properties": {
+        "Description text#1132:30": {
+          "type": "TEXT",
+          "defaultValue": "Supporting information about this alert."
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Success",
+            "Info",
+            "Warning",
+            "Error"
+          ]
+        },
+        "Description": {
+          "type": "VARIANT",
+          "defaultValue": "False",
+          "variantOptions": [
+            "False",
+            "True"
+          ]
+        }
+      },
+      "variants": [
+        {
+          "id": "1132:99",
+          "name": "State=Success, Description=False",
+          "x": 0,
+          "y": 160
+        },
+        {
+          "id": "1132:106",
+          "name": "State=Success, Description=True",
+          "x": 540,
+          "y": 160
+        },
+        {
+          "id": "1132:113",
+          "name": "State=Info, Description=False",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "1132:120",
+          "name": "State=Info, Description=True",
+          "x": 540,
+          "y": 0
+        },
+        {
+          "id": "1132:127",
+          "name": "State=Warning, Description=False",
+          "x": 0,
+          "y": 320
+        },
+        {
+          "id": "1132:134",
+          "name": "State=Warning, Description=True",
+          "x": 540,
+          "y": 320
+        },
+        {
+          "id": "1132:141",
+          "name": "State=Error, Description=False",
+          "x": 0,
+          "y": 480
+        },
+        {
+          "id": "1132:148",
+          "name": "State=Error, Description=True",
+          "x": 540,
+          "y": 480
+        }
+      ]
+    },
+    "responsiveProbe": {
+      "probeId": "1366:130",
+      "createdNodeIds": [
+        "1366:130",
+        "1366:131",
+        "1366:132",
+        "I1366:132;1132:121",
+        "I1366:132;1132:121;62:860",
+        "I1366:132;1132:123",
+        "I1366:132;1132:124",
+        "I1366:132;1132:124;1132:58",
+        "I1366:132;1132:126",
+        "1366:139",
+        "I1366:139;1132:121",
+        "I1366:139;1132:121;62:860",
+        "I1366:139;1132:123",
+        "I1366:139;1132:124",
+        "I1366:139;1132:124;1132:60",
+        "I1366:139;1132:126",
+        "1366:147",
+        "I1366:147;1132:121",
+        "I1366:147;1132:121;62:860",
+        "I1366:147;1132:123",
+        "I1366:147;1132:124",
+        "I1366:147;1132:124;1132:62",
+        "I1366:147;1132:126",
+        "1366:155",
+        "I1366:155;1132:121",
+        "I1366:155;1132:121;62:860",
+        "I1366:155;1132:123",
+        "I1366:155;1132:124",
+        "I1366:155;1132:124;1132:64",
+        "I1366:155;1132:126",
+        "1366:163",
+        "I1366:163;1132:121",
+        "I1366:163;1132:121;62:860",
+        "I1366:163;1132:123",
+        "I1366:163;1132:124",
+        "I1366:163;1132:124;1132:66",
+        "I1366:163;1132:126",
+        "1366:171",
+        "I1366:171;1132:121",
+        "I1366:171;1132:121;62:860",
+        "I1366:171;1132:123",
+        "I1366:171;1132:124",
+        "I1366:171;1132:124;1132:68",
+        "I1366:171;1132:126",
+        "1366:179",
+        "1366:180",
+        "I1366:180;1132:121",
+        "I1366:180;1132:121;62:860",
+        "I1366:180;1132:123",
+        "I1366:180;1132:124",
+        "I1366:180;1132:124;1132:58",
+        "I1366:180;1132:126",
+        "1366:187",
+        "I1366:187;1132:121",
+        "I1366:187;1132:121;62:860",
+        "I1366:187;1132:123",
+        "I1366:187;1132:124",
+        "I1366:187;1132:124;1132:60",
+        "I1366:187;1132:126",
+        "1366:195",
+        "I1366:195;1132:121",
+        "I1366:195;1132:121;62:860",
+        "I1366:195;1132:123",
+        "I1366:195;1132:124",
+        "I1366:195;1132:124;1132:62",
+        "I1366:195;1132:126",
+        "1366:203",
+        "I1366:203;1132:121",
+        "I1366:203;1132:121;62:860",
+        "I1366:203;1132:123",
+        "I1366:203;1132:124",
+        "I1366:203;1132:124;1132:64",
+        "I1366:203;1132:126",
+        "1366:211",
+        "I1366:211;1132:121",
+        "I1366:211;1132:121;62:860",
+        "I1366:211;1132:123",
+        "I1366:211;1132:124",
+        "I1366:211;1132:124;1132:66",
+        "I1366:211;1132:126",
+        "1366:219",
+        "I1366:219;1132:121",
+        "I1366:219;1132:121;62:860",
+        "I1366:219;1132:123",
+        "I1366:219;1132:124",
+        "I1366:219;1132:124;1132:68",
+        "I1366:219;1132:126",
+        "1366:227",
+        "1366:228",
+        "I1366:228;1132:121",
+        "I1366:228;1132:121;62:860",
+        "I1366:228;1132:123",
+        "I1366:228;1132:124",
+        "I1366:228;1132:124;1132:58",
+        "I1366:228;1132:126",
+        "1366:235",
+        "I1366:235;1132:121",
+        "I1366:235;1132:121;62:860",
+        "I1366:235;1132:123",
+        "I1366:235;1132:124",
+        "I1366:235;1132:124;1132:60",
+        "I1366:235;1132:126",
+        "1366:243",
+        "I1366:243;1132:121",
+        "I1366:243;1132:121;62:860",
+        "I1366:243;1132:123",
+        "I1366:243;1132:124",
+        "I1366:243;1132:124;1132:62",
+        "I1366:243;1132:126",
+        "1366:251",
+        "I1366:251;1132:121",
+        "I1366:251;1132:121;62:860",
+        "I1366:251;1132:123",
+        "I1366:251;1132:124",
+        "I1366:251;1132:124;1132:64",
+        "I1366:251;1132:126",
+        "1366:259",
+        "I1366:259;1132:121",
+        "I1366:259;1132:121;62:860",
+        "I1366:259;1132:123",
+        "I1366:259;1132:124",
+        "I1366:259;1132:124;1132:66",
+        "I1366:259;1132:126",
+        "1366:267",
+        "I1366:267;1132:121",
+        "I1366:267;1132:121;62:860",
+        "I1366:267;1132:123",
+        "I1366:267;1132:124",
+        "I1366:267;1132:124;1132:68",
+        "I1366:267;1132:126"
+      ],
+      "values": [
+        {
+          "mode": "base",
+          "style": "Default",
+          "instanceId": "1366:132",
+          "wrapperHeight": 24,
+          "textHeight": 24,
+          "titleFont": 16,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "base",
+          "style": "H2",
+          "instanceId": "1366:139",
+          "wrapperHeight": 29,
+          "textHeight": 29,
+          "titleFont": 24,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "base",
+          "style": "H3",
+          "instanceId": "1366:147",
+          "wrapperHeight": 24,
+          "textHeight": 24,
+          "titleFont": 20,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "base",
+          "style": "H4",
+          "instanceId": "1366:155",
+          "wrapperHeight": 27,
+          "textHeight": 27,
+          "titleFont": 18,
+          "titleLine": {
+            "unit": "PIXELS",
+            "value": 27
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "base",
+          "style": "H5",
+          "instanceId": "1366:163",
+          "wrapperHeight": 24,
+          "textHeight": 24,
+          "titleFont": 16,
+          "titleLine": {
+            "unit": "PIXELS",
+            "value": 24
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "base",
+          "style": "H6",
+          "instanceId": "1366:171",
+          "wrapperHeight": 19,
+          "textHeight": 19,
+          "titleFont": 16,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "md",
+          "style": "Default",
+          "instanceId": "1366:180",
+          "wrapperHeight": 24,
+          "textHeight": 24,
+          "titleFont": 16,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "md",
+          "style": "H2",
+          "instanceId": "1366:187",
+          "wrapperHeight": 36,
+          "textHeight": 36,
+          "titleFont": 30,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "md",
+          "style": "H3",
+          "instanceId": "1366:195",
+          "wrapperHeight": 29,
+          "textHeight": 29,
+          "titleFont": 24,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "md",
+          "style": "H4",
+          "instanceId": "1366:203",
+          "wrapperHeight": 24,
+          "textHeight": 24,
+          "titleFont": 20,
+          "titleLine": {
+            "unit": "PIXELS",
+            "value": 24
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "md",
+          "style": "H5",
+          "instanceId": "1366:211",
+          "wrapperHeight": 27,
+          "textHeight": 27,
+          "titleFont": 18,
+          "titleLine": {
+            "unit": "PIXELS",
+            "value": 27
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "md",
+          "style": "H6",
+          "instanceId": "1366:219",
+          "wrapperHeight": 19,
+          "textHeight": 19,
+          "titleFont": 16,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "lg",
+          "style": "Default",
+          "instanceId": "1366:228",
+          "wrapperHeight": 27,
+          "textHeight": 27,
+          "titleFont": 18,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "lg",
+          "style": "H2",
+          "instanceId": "1366:235",
+          "wrapperHeight": 43,
+          "textHeight": 43,
+          "titleFont": 36,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "lg",
+          "style": "H3",
+          "instanceId": "1366:243",
+          "wrapperHeight": 36,
+          "textHeight": 36,
+          "titleFont": 30,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "lg",
+          "style": "H4",
+          "instanceId": "1366:251",
+          "wrapperHeight": 29,
+          "textHeight": 29,
+          "titleFont": 24,
+          "titleLine": {
+            "unit": "PIXELS",
+            "value": 28.799999237060547
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "lg",
+          "style": "H5",
+          "instanceId": "1366:259",
+          "wrapperHeight": 24,
+          "textHeight": 24,
+          "titleFont": 20,
+          "titleLine": {
+            "unit": "PIXELS",
+            "value": 24
+          },
+          "descriptionGap": 4
+        },
+        {
+          "mode": "lg",
+          "style": "H6",
+          "instanceId": "1366:267",
+          "wrapperHeight": 22,
+          "textHeight": 22,
+          "titleFont": 18,
+          "titleLine": {
+            "unit": "PERCENT",
+            "value": 120.00000476837158
+          },
+          "descriptionGap": 4
+        }
+      ]
+    },
+    "final": {
+      "defaultVariant": "1132:113",
+      "variants": [
+        {
+          "id": "1132:99",
+          "name": "State=Success, Description=False",
+          "icons": [
+            {
+              "id": "1132:100",
+              "main": "1132:91",
+              "name": "Icon/check-circle",
+              "width": 24,
+              "height": 24
+            }
+          ],
+          "titleExposed": true
+        },
+        {
+          "id": "1132:106",
+          "name": "State=Success, Description=True",
+          "icons": [
+            {
+              "id": "1132:107",
+              "main": "1132:91",
+              "name": "Icon/check-circle",
+              "width": 24,
+              "height": 24
+            }
+          ],
+          "titleExposed": true
+        },
+        {
+          "id": "1132:113",
+          "name": "State=Info, Description=False",
+          "icons": [
+            {
+              "id": "1132:114",
+              "main": "1132:93",
+              "name": "Icon/info",
+              "width": 24,
+              "height": 24
+            }
+          ],
+          "titleExposed": true
+        },
+        {
+          "id": "1132:120",
+          "name": "State=Info, Description=True",
+          "icons": [
+            {
+              "id": "1132:121",
+              "main": "1132:93",
+              "name": "Icon/info",
+              "width": 24,
+              "height": 24
+            }
+          ],
+          "titleExposed": true
+        },
+        {
+          "id": "1132:127",
+          "name": "State=Warning, Description=False",
+          "icons": [
+            {
+              "id": "1132:128",
+              "main": "1132:95",
+              "name": "Icon/warning-circle",
+              "width": 24,
+              "height": 24
+            }
+          ],
+          "titleExposed": true
+        },
+        {
+          "id": "1132:134",
+          "name": "State=Warning, Description=True",
+          "icons": [
+            {
+              "id": "1132:135",
+              "main": "1132:95",
+              "name": "Icon/warning-circle",
+              "width": 24,
+              "height": 24
+            }
+          ],
+          "titleExposed": true
+        },
+        {
+          "id": "1132:141",
+          "name": "State=Error, Description=False",
+          "icons": [
+            {
+              "id": "1132:142",
+              "main": "1132:97",
+              "name": "Icon/x-circle",
+              "width": 24,
+              "height": 24
+            }
+          ],
+          "titleExposed": true
+        },
+        {
+          "id": "1132:148",
+          "name": "State=Error, Description=True",
+          "icons": [
+            {
+              "id": "1132:149",
+              "main": "1132:97",
+              "name": "Icon/x-circle",
+              "width": 24,
+              "height": 24
+            }
+          ],
+          "titleExposed": true
+        }
+      ],
+      "variables": [
+        {
+          "id": "VariableID:1129:3914",
+          "name": "component/alert/spacing/inset",
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:91"
+            }
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-alert-spacing-inset)"
+          }
+        },
+        {
+          "id": "VariableID:1129:3915",
+          "name": "component/alert/spacing/iconToContent",
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:80"
+            }
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-alert-spacing-icon-to-content)"
+          }
+        },
+        {
+          "id": "VariableID:1129:3916",
+          "name": "component/alert/spacing/titleToDescription",
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:94"
+            }
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-alert-spacing-title-to-description)"
+          }
+        },
+        {
+          "id": "VariableID:1129:3917",
+          "name": "component/alert/icon/size",
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:46:26"
+            }
+          },
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "syntax": {
+            "WEB": "var(--component-alert-icon-size)"
+          }
+        },
+        {
+          "id": "VariableID:1129:3918",
+          "name": "component/alert/surface/radius",
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:73"
+            }
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "syntax": {
+            "WEB": "var(--component-alert-surface-radius)"
+          }
+        }
+      ],
+      "removedNodeIds": [
+        "1366:130",
+        "1366:131",
+        "1366:132",
+        "I1366:132;1132:121",
+        "I1366:132;1132:121;62:860",
+        "I1366:132;1132:123",
+        "I1366:132;1132:124",
+        "I1366:132;1132:124;1132:58",
+        "I1366:132;1132:126",
+        "1366:139",
+        "I1366:139;1132:121",
+        "I1366:139;1132:121;62:860",
+        "I1366:139;1132:123",
+        "I1366:139;1132:124",
+        "I1366:139;1132:124;1132:60",
+        "I1366:139;1132:126",
+        "1366:147",
+        "I1366:147;1132:121",
+        "I1366:147;1132:121;62:860",
+        "I1366:147;1132:123",
+        "I1366:147;1132:124",
+        "I1366:147;1132:124;1132:62",
+        "I1366:147;1132:126",
+        "1366:155",
+        "I1366:155;1132:121",
+        "I1366:155;1132:121;62:860",
+        "I1366:155;1132:123",
+        "I1366:155;1132:124",
+        "I1366:155;1132:124;1132:64",
+        "I1366:155;1132:126",
+        "1366:163",
+        "I1366:163;1132:121",
+        "I1366:163;1132:121;62:860",
+        "I1366:163;1132:123",
+        "I1366:163;1132:124",
+        "I1366:163;1132:124;1132:66",
+        "I1366:163;1132:126",
+        "1366:171",
+        "I1366:171;1132:121",
+        "I1366:171;1132:121;62:860",
+        "I1366:171;1132:123",
+        "I1366:171;1132:124",
+        "I1366:171;1132:124;1132:68",
+        "I1366:171;1132:126",
+        "1366:179",
+        "1366:180",
+        "I1366:180;1132:121",
+        "I1366:180;1132:121;62:860",
+        "I1366:180;1132:123",
+        "I1366:180;1132:124",
+        "I1366:180;1132:124;1132:58",
+        "I1366:180;1132:126",
+        "1366:187",
+        "I1366:187;1132:121",
+        "I1366:187;1132:121;62:860",
+        "I1366:187;1132:123",
+        "I1366:187;1132:124",
+        "I1366:187;1132:124;1132:60",
+        "I1366:187;1132:126",
+        "1366:195",
+        "I1366:195;1132:121",
+        "I1366:195;1132:121;62:860",
+        "I1366:195;1132:123",
+        "I1366:195;1132:124",
+        "I1366:195;1132:124;1132:62",
+        "I1366:195;1132:126",
+        "1366:203",
+        "I1366:203;1132:121",
+        "I1366:203;1132:121;62:860",
+        "I1366:203;1132:123",
+        "I1366:203;1132:124",
+        "I1366:203;1132:124;1132:64",
+        "I1366:203;1132:126",
+        "1366:211",
+        "I1366:211;1132:121",
+        "I1366:211;1132:121;62:860",
+        "I1366:211;1132:123",
+        "I1366:211;1132:124",
+        "I1366:211;1132:124;1132:66",
+        "I1366:211;1132:126",
+        "1366:219",
+        "I1366:219;1132:121",
+        "I1366:219;1132:121;62:860",
+        "I1366:219;1132:123",
+        "I1366:219;1132:124",
+        "I1366:219;1132:124;1132:68",
+        "I1366:219;1132:126",
+        "1366:227",
+        "1366:228",
+        "I1366:228;1132:121",
+        "I1366:228;1132:121;62:860",
+        "I1366:228;1132:123",
+        "I1366:228;1132:124",
+        "I1366:228;1132:124;1132:58",
+        "I1366:228;1132:126",
+        "1366:235",
+        "I1366:235;1132:121",
+        "I1366:235;1132:121;62:860",
+        "I1366:235;1132:123",
+        "I1366:235;1132:124",
+        "I1366:235;1132:124;1132:60",
+        "I1366:235;1132:126",
+        "1366:243",
+        "I1366:243;1132:121",
+        "I1366:243;1132:121;62:860",
+        "I1366:243;1132:123",
+        "I1366:243;1132:124",
+        "I1366:243;1132:124;1132:62",
+        "I1366:243;1132:126",
+        "1366:251",
+        "I1366:251;1132:121",
+        "I1366:251;1132:121;62:860",
+        "I1366:251;1132:123",
+        "I1366:251;1132:124",
+        "I1366:251;1132:124;1132:64",
+        "I1366:251;1132:126",
+        "1366:259",
+        "I1366:259;1132:121",
+        "I1366:259;1132:121;62:860",
+        "I1366:259;1132:123",
+        "I1366:259;1132:124",
+        "I1366:259;1132:124;1132:66",
+        "I1366:259;1132:126",
+        "1366:267",
+        "I1366:267;1132:121",
+        "I1366:267;1132:121;62:860",
+        "I1366:267;1132:123",
+        "I1366:267;1132:124",
+        "I1366:267;1132:124;1132:68",
+        "I1366:267;1132:126"
+      ],
+      "remainingProbe": false
+    },
+    "h6Before": {
+      "style": {
+        "id": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,",
+        "name": "typography/heading/h6",
+        "fontName": {
+          "family": "Inter",
+          "style": "Semi Bold",
+          "variationSettings": {
+            "slnt": 0,
+            "wght": 600
+          }
+        },
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 120.00000476837158
+        }
+      },
+      "node": {
+        "id": "1132:68",
+        "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,",
+        "font": {
+          "family": "Inter",
+          "style": "Semi Bold",
+          "variationSettings": {
+            "wght": 600,
+            "slnt": 0
+          }
+        },
+        "line": {
+          "unit": "PERCENT",
+          "value": 120.00000476837158
+        },
+        "bound": {
+          "fills": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:1129:3912"
+            }
+          ],
+          "letterSpacing": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:134"
+            }
+          ],
+          "fontSize": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:305:6947"
+            }
+          ],
+          "fontFamily": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:240:98"
+            }
+          ],
+          "fontWeight": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:118"
+            }
+          ]
+        }
+      }
+    },
+    "h6Repair": {
+      "mutatedStyleIds": [
+        "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+      ],
+      "mutatedNodeIds": [],
+      "inheritedNodes": [
+        {
+          "id": "1132:68",
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "height": 27,
+          "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+        },
+        {
+          "id": "I1132:285;1132:68",
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "height": 27,
+          "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+        }
+      ],
+      "style": {
+        "id": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,",
+        "name": "typography/heading/h6",
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 150
+        }
+      }
+    },
+    "h6Final": {
+      "style": {
+        "id": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,",
+        "line": {
+          "unit": "PERCENT",
+          "value": 150
+        }
+      },
+      "values": [
+        {
+          "mode": "base",
+          "font": 16,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "wrapper": 24,
+          "text": 24,
+          "gap": 4,
+          "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+        },
+        {
+          "mode": "md",
+          "font": 16,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "wrapper": 24,
+          "text": 24,
+          "gap": 4,
+          "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+        },
+        {
+          "mode": "lg",
+          "font": 18,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "wrapper": 27,
+          "text": 27,
+          "gap": 4,
+          "style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+        }
+      ],
+      "createdNodeIds": [
+        "1369:130",
+        "1369:131",
+        "I1369:131;1132:121",
+        "I1369:131;1132:121;62:860",
+        "I1369:131;1132:123",
+        "I1369:131;1132:124",
+        "I1369:131;1132:124;1132:68",
+        "I1369:131;1132:126",
+        "1369:139",
+        "I1369:139;1132:121",
+        "I1369:139;1132:121;62:860",
+        "I1369:139;1132:123",
+        "I1369:139;1132:124",
+        "I1369:139;1132:124;1132:68",
+        "I1369:139;1132:126",
+        "1369:147",
+        "I1369:147;1132:121",
+        "I1369:147;1132:121;62:860",
+        "I1369:147;1132:123",
+        "I1369:147;1132:124",
+        "I1369:147;1132:124;1132:68",
+        "I1369:147;1132:126"
+      ],
+      "removedNodeIds": [
+        "1369:130",
+        "1369:131",
+        "I1369:131;1132:121",
+        "I1369:131;1132:121;62:860",
+        "I1369:131;1132:123",
+        "I1369:131;1132:124",
+        "I1369:131;1132:124;1132:68",
+        "I1369:131;1132:126",
+        "1369:139",
+        "I1369:139;1132:121",
+        "I1369:139;1132:121;62:860",
+        "I1369:139;1132:123",
+        "I1369:139;1132:124",
+        "I1369:139;1132:124;1132:68",
+        "I1369:139;1132:126",
+        "1369:147",
+        "I1369:147;1132:121",
+        "I1369:147;1132:121;62:860",
+        "I1369:147;1132:123",
+        "I1369:147;1132:124",
+        "I1369:147;1132:124;1132:68",
+        "I1369:147;1132:126"
+      ],
+      "remainingProbe": false
+    }
+  },
+  "badge": {
+    "page": "1139:11",
+    "initial": {
+      "children": [
+        {
+          "id": "1139:23",
+          "name": "01 - Component set",
+          "type": "FRAME"
+        },
+        {
+          "id": "1139:29",
+          "name": "02 - Documentation examples",
+          "type": "FRAME"
+        },
+        {
+          "id": "1139:63",
+          "name": "03 - QA and responsive tests",
+          "type": "FRAME"
+        },
+        {
+          "id": "1139:103",
+          "name": "04 - Accessibility notes",
+          "type": "FRAME"
+        }
+      ],
+      "sets": [
+        {
+          "id": "1139:22",
+          "name": "Badge",
+          "props": {
+            "Label#1139:0": {
+              "type": "TEXT",
+              "defaultValue": "Status"
+            },
+            "Tone": {
+              "type": "VARIANT",
+              "defaultValue": "Neutral",
+              "variantOptions": [
+                "Neutral",
+                "Info",
+                "Success",
+                "Warning",
+                "Error"
+              ]
+            }
+          },
+          "variants": [
+            {
+              "id": "1139:12",
+              "name": "Tone=Neutral",
+              "width": 65,
+              "height": 32,
+              "maxWidth": 240,
+              "padding": [
+                4,
+                8,
+                4,
+                8
+              ],
+              "radius": 9999,
+              "bound": {
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "maxWidth": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1149:65"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1139:6"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "1139:13",
+                  "text": "Status",
+                  "style": "S:6d2de3629c6c46a92281f96d275e0c905b82bcc9,",
+                  "width": 49,
+                  "height": 24,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1139:7"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6950"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1139:14",
+              "name": "Tone=Info",
+              "width": 65,
+              "height": 32,
+              "maxWidth": 240,
+              "padding": [
+                4,
+                8,
+                4,
+                8
+              ],
+              "radius": 9999,
+              "bound": {
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "maxWidth": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1149:65"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1129:3911"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "1139:15",
+                  "text": "Status",
+                  "style": "S:6d2de3629c6c46a92281f96d275e0c905b82bcc9,",
+                  "width": 49,
+                  "height": 24,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:1129:3912"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6950"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1139:16",
+              "name": "Tone=Success",
+              "width": 65,
+              "height": 32,
+              "maxWidth": 240,
+              "padding": [
+                4,
+                8,
+                4,
+                8
+              ],
+              "radius": 9999,
+              "bound": {
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "maxWidth": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1149:65"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:64"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "1139:17",
+                  "text": "Status",
+                  "style": "S:6d2de3629c6c46a92281f96d275e0c905b82bcc9,",
+                  "width": 49,
+                  "height": 24,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:65"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6950"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1139:18",
+              "name": "Tone=Warning",
+              "width": 65,
+              "height": 32,
+              "maxWidth": 240,
+              "padding": [
+                4,
+                8,
+                4,
+                8
+              ],
+              "radius": 9999,
+              "bound": {
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "maxWidth": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1149:65"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:66"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "1139:19",
+                  "text": "Status",
+                  "style": "S:6d2de3629c6c46a92281f96d275e0c905b82bcc9,",
+                  "width": 49,
+                  "height": 24,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:67"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6950"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "1139:20",
+              "name": "Tone=Error",
+              "width": 65,
+              "height": 32,
+              "maxWidth": 240,
+              "padding": [
+                4,
+                8,
+                4,
+                8
+              ],
+              "radius": 9999,
+              "bound": {
+                "paddingLeft": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingTop": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "paddingRight": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:9"
+                },
+                "paddingBottom": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:8"
+                },
+                "topLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "topRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomLeftRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "bottomRightRadius": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1139:10"
+                },
+                "maxWidth": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1149:65"
+                },
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:8:68"
+                  }
+                ]
+              },
+              "texts": [
+                {
+                  "id": "1139:21",
+                  "text": "Status",
+                  "style": "S:6d2de3629c6c46a92281f96d275e0c905b82bcc9,",
+                  "width": 49,
+                  "height": 24,
+                  "bound": {
+                    "fills": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:69"
+                      }
+                    ],
+                    "letterSpacing": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:134"
+                      }
+                    ],
+                    "fontSize": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:305:6950"
+                      }
+                    ],
+                    "fontFamily": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:240:98"
+                      }
+                    ],
+                    "fontWeight": [
+                      {
+                        "type": "VARIABLE_ALIAS",
+                        "id": "VariableID:8:116"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "final": {
+      "defaultVariant": "1139:12",
+      "variables": [
+        {
+          "id": "VariableID:1139:8",
+          "name": "component/badge/spacing/paddingBlock",
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:78"
+            }
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-badge-spacing-padding-block)"
+          }
+        },
+        {
+          "id": "VariableID:1139:9",
+          "name": "component/badge/spacing/paddingInline",
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:79"
+            }
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "syntax": {
+            "WEB": "var(--component-badge-spacing-padding-inline)"
+          }
+        },
+        {
+          "id": "VariableID:1139:10",
+          "name": "component/badge/surface/radius",
+          "values": {
+            "8:0": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:76"
+            }
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "syntax": {
+            "WEB": "var(--component-badge-surface-radius)"
+          }
+        },
+        {
+          "id": "VariableID:1149:65",
+          "name": "component/badge/sizing/maxWidth",
+          "values": {
+            "8:0": 240
+          },
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "syntax": {
+            "WEB": "var(--component-badge-sizing-max-width)"
+          }
+        }
+      ],
+      "collections": [
+        {
+          "id": "VariableCollectionId:8:2",
+          "name": "global",
+          "count": 329,
+          "modes": [
+            {
+              "name": "global",
+              "modeId": "8:0"
+            }
+          ]
+        },
+        {
+          "id": "VariableCollectionId:303:6772",
+          "name": "Breakpoint",
+          "count": 30,
+          "modes": [
+            {
+              "name": "base",
+              "modeId": "303:1"
+            },
+            {
+              "name": "md",
+              "modeId": "303:2"
+            },
+            {
+              "name": "lg",
+              "modeId": "303:3"
+            }
+          ]
+        }
+      ],
+      "values": [
+        {
+          "mode": "base",
+          "label": "Status",
+          "width": 59,
+          "height": 29,
+          "font": 14,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "maxWidth": 240,
+          "labelHeight": 21
+        },
+        {
+          "mode": "base",
+          "label": "Awaiting additional application information",
+          "width": 240,
+          "height": 50,
+          "font": 14,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "maxWidth": 240,
+          "labelHeight": 42
+        },
+        {
+          "mode": "md",
+          "label": "Status",
+          "width": 59,
+          "height": 29,
+          "font": 14,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "maxWidth": 240,
+          "labelHeight": 21
+        },
+        {
+          "mode": "md",
+          "label": "Awaiting additional application information",
+          "width": 240,
+          "height": 50,
+          "font": 14,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "maxWidth": 240,
+          "labelHeight": 42
+        },
+        {
+          "mode": "lg",
+          "label": "Status",
+          "width": 65,
+          "height": 32,
+          "font": 16,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "maxWidth": 240,
+          "labelHeight": 24
+        },
+        {
+          "mode": "lg",
+          "label": "Awaiting additional application information",
+          "width": 240,
+          "height": 56,
+          "font": 16,
+          "line": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "maxWidth": 240,
+          "labelHeight": 48
+        }
+      ],
+      "createdNodeIds": [
+        "1367:300",
+        "1367:301",
+        "1367:302",
+        "I1367:302;1139:13",
+        "1367:304",
+        "I1367:304;1139:13",
+        "1367:306",
+        "1367:307",
+        "I1367:307;1139:13",
+        "1367:309",
+        "I1367:309;1139:13",
+        "1367:311",
+        "1367:312",
+        "I1367:312;1139:13",
+        "1367:314",
+        "I1367:314;1139:13"
+      ],
+      "removedNodeIds": [
+        "1367:300",
+        "1367:301",
+        "1367:302",
+        "I1367:302;1139:13",
+        "1367:304",
+        "I1367:304;1139:13",
+        "1367:306",
+        "1367:307",
+        "I1367:307;1139:13",
+        "1367:309",
+        "I1367:309;1139:13",
+        "1367:311",
+        "1367:312",
+        "I1367:312;1139:13",
+        "1367:314",
+        "I1367:314;1139:13"
+      ],
+      "remainingProbe": false
+    }
+  },
+  "screenshotsInspected": [
+    "1137:82",
+    "1137:105",
+    "1139:29"
+  ],
+  "pending": "Confirm repaired shared H6 style through the next routine Tokens Studio typography export. No export/publication performed in this batch."
+}

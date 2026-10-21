@@ -6,7 +6,7 @@ import type { ToastAPI, ToastMessage, ToastProviderProps, ToastRegionProps, Toas
 import { Button, IconButton } from './Button.js';
 import { classes, oneOf, text } from '../internal/validation.js';
 import { rejectProps } from '../internal/forms.js';
-import { toastPaths, toastClosePath } from '../internal/toast-icons.js';
+import { statusPaths, closePath } from '../internal/feedback-icons.js';
 
 const states: ToastState[] = ['success', 'info', 'warning', 'error'];
 const defaultLabels = { success: 'Success:', info: 'Information:', warning: 'Warning:', error: 'Error:' };
@@ -163,10 +163,10 @@ export function ToastRegion({ className, ...unsupported }: ToastRegionProps) {
           event.preventDefault(); event.stopPropagation(); host.dismiss(message.id);
         }
       }}>
-        <svg className="owla11y-toast__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" transform="translate(2.25 2.25)" d={toastPaths[state]}/></svg>
+        <svg className="owla11y-toast__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" transform="translate(2.25 2.25)" d={statusPaths[state]}/></svg>
         <div className="owla11y-toast__message"><p className="owla11y-toast__title"><span className="owla11y-toast-sr">{host.labels[state]} </span>{message.titleText}</p>
           {message.descriptionText?.trim() && <p>{message.descriptionText}</p>}</div>
-        <IconButton size="compact" aria-label={message.dismissLabel} onClick={() => host.dismiss(message.id)} icon={<svg viewBox="0 0 20 20" focusable="false"><path fill="currentColor" transform="translate(3.74965 3.74965)" d={toastClosePath}/></svg>}/>
+        <IconButton size="compact" aria-label={message.dismissLabel} onClick={() => host.dismiss(message.id)} icon={<svg viewBox="0 0 20 20" focusable="false"><path fill="currentColor" transform="translate(3.74965 3.74965)" d={closePath}/></svg>}/>
       </li>;
     })}</ol> : <p className="owla11y-toast-empty">{host.emptyText}</p>}
   </section>;

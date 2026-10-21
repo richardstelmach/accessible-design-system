@@ -1,6 +1,6 @@
 # OwlA11y package structure
 
-Accepted baseline: React 18.3 and 19; styled components with token overrides; light theme at launch. The workspace implements thirteen components: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog and Tabs, plus the Toast notification host (ToastProvider, ToastRegion, ToastNotificationsButton and useToast). Publication remains disabled.
+Accepted baseline: React 18.3 and 19; styled components with token overrides; light theme at launch. The workspace implements fifteen components: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert and Badge, plus the Toast notification host (ToastProvider, ToastRegion, ToastNotificationsButton and useToast). Publication remains disabled.
 
 ## Repository layout
 
@@ -28,7 +28,7 @@ Scope component styles with owla11y classes. Offer documented CSS-variable overr
 
 ## Build and test contract
 
-Build canonical tokens, generate browser CSS, compile React/types, assemble styles and pack the artifact. CI must install that artifact into both fixtures, exercise production builds and test hydration. Test both React versions, native form behaviour, focus and accessibility. Include Strict Mode lifecycle cases. Never publish an empty index or manifest that advertises unimplemented components.
+Clear generated package dist, build canonical tokens, generate browser CSS, compile React/types, assemble styles and pack the artifact. Clearing dist prevents renamed private modules from leaking into later package builds. CI must install that artifact into both fixtures, exercise production builds and test hydration. Test both React versions, native form behaviour, focus and accessibility. Include Strict Mode lifecycle cases. Never publish an empty index or manifest that advertises unimplemented components.
 
 Before adding dependency versions, verify current official tool documentation and lock the chosen versions. A build-tool selection is an implementation choice; it must preserve per-component use-client boundaries so static components remain usable in server-rendered applications. Do not mark the entire library client-only by default.
 
@@ -41,7 +41,8 @@ Before adding dependency versions, verify current official tool documentation an
 5. Implement Dialog and its native modal backdrop with focus/lifecycle and Figma comparison evidence.
 6. Implement Tabs baseline/enhancement, responsive focus continuity and Figma parity.
 7. Implement Toast host ownership, announcement delivery, modal deferral and focus recovery; retain manual assistive-technology acceptance as a release gate.
-8. Complete the remaining families and release evidence from the readiness audit.
+8. Implement Alert and Badge contextual feedback, semantic headings, wrapping and source/Figma validation.
+9. Complete the remaining Stepper, Accordion, Card, Breadcrumb and Pagination families and release evidence.
 
 ## Scaffold verification
 

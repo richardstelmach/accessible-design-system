@@ -1,6 +1,6 @@
 # OwlA11y React
 
-Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog and Tabs, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
+Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert and Badge, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
 
 ```tsx
 import { Button, TextInput } from '@owla11y/react';
@@ -186,3 +186,24 @@ Both announcement channels wait while a native modal owns the document. The list
 Localise `regionLabel`, `emptyText`, the complete `stateLabels` map, `formatCountLabel(count)` and, if needed, `formatAnnouncement(newEvents)`. Custom announcement formatters receive only one priority's new messages and must return nonempty text including count and essential outcomes for bursts. They must be pure. Entry text is derived from the count; role, live, timing, icon and content overrides are deliberately unavailable. Style host containers through className and canonical token overrides.
 
 See [comparison and validation](../../docs/validation/react-toast-parity.md), the runnable `?toast` preview and the remaining manual screen-reader/browser release gates. No npm publication is performed.
+
+
+## Alert and Badge
+
+```tsx
+import { Alert, Badge } from '@owla11y/react';
+
+<Alert state="info" titleText="Applications close on Friday"
+  descriptionText="You can save your answers and return before the deadline." />;
+<Badge tone="success" label="Completed" />;
+```
+
+Alert defaults to info, a strong paragraph title and announcement=none. Its fixed decorative icon and one visually hidden state prefix convey the state without relying on colour. Required titleText and optional descriptionText are escaped strings; blank descriptionText omits the paragraph. Use headingLevel=2 through 6 only when the title introduces a real section; matching responsive heading tokens supply its appearance. H1 is forbidden. A complete stateLabels map can localise each prefix including punctuation. Ref targets the ordinary div; Alert never moves focus or dismisses itself.
+
+Alert's announcement can explicitly select polite (status) or assertive (alert), independently of visual state. Use these for appropriate new outcomes, never to announce historical/static content. A newly mounted populated polite region does not guarantee speech. For reliable update structure, keep an empty application announcement container mounted before the event, then render/update Alert inside it with announcement=none. This preview strategy is shown at ?feedback; exactly one element owns the live role. Do not also announce the outcome through Toast or validation feedback. Manual screen-reader acceptance remains necessary.
+
+Badge defaults to neutral and supports info/success/warning/error tones. Its visible nonempty string label supplies all meaning; no hidden tone text, icon, live role or interaction is added. The span ref targets ordinary phrasing content. Keep labels concise and meaningful without colour; do not use it as a counter, link, button or removable chip. Small-body text wraps without truncation within min(parent width, 15rem). The application owns any needed announcement of a dynamic status change.
+
+Both components accept id, className, style, lang, dir and data attributes for layout/testing. Native behavioural props, event handlers, ARIA/role/focus overrides, polymorphism and arbitrary children/HTML slots are intentionally unavailable. Container styles and token overrides must preserve accessibility. Invalid text, enum values and unsupported runtime props throw actionable configuration errors.
+
+See [source/Figma comparison and validation](../../docs/validation/react-feedback-parity.md). Figma's Alert default and shared H6 line height were reconciled to GitHub; Badge required no production repair. All IDs remain intact. Package publication and manual release acceptance remain separate steps.

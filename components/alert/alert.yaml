@@ -293,7 +293,7 @@ figma:
   internalComponents:
     title:
       name: _Alert/Title
-      variantProperty: Style
+      variantProperty: Title style
       layout:
         direction: vertical
         width: fill-available
@@ -491,3 +491,14 @@ acceptanceCriteria:
   - Shared semantic info tokens complete the status and icon families.
   - Alert-specific tokens contain geometry only.
   - Figma uses the global Tokens Studio collection and existing Breakpoint modes without a parallel token source.
+
+reactAdapter:
+  implementation: implemented-manual-release-checks-pending
+  export: Alert
+  ref: HTMLDivElement
+  props: titleText, optional descriptionText, state=info, headingLevel=none or 2 through 6, announcement=none, complete stateLabels for localisation.
+  descriptionMapping: Omit the visual Description Boolean; absent or blank descriptionText omits its paragraph.
+  containerMetadata: id, className, style, lang, dir and data attributes; no handlers, focus, role, ARIA overrides or content slots.
+  announcementOwner: Explicit role on Alert, or a pre-existing application live container with Alert announcement=none; never both.
+  figmaReconciliation: Info is the default variant; shared H6 style uses the existing canonical 150 percent line height. IDs and token bindings preserved.
+  evidence: docs/validation/react-feedback-parity.md

@@ -230,3 +230,12 @@ Avoid vague labels such as “Notice” or “Important” without the actual me
 - [ ] The component remains readable at 320px.
 - [ ] One compact review frame shows every state with and without a description.
 - [ ] Applied text styles respond to `base`, `md` and `lg` parent `Breakpoint` modes.
+
+
+## React implementation and reconciliation
+
+`@owla11y/react` exports Alert with a div ref. The adapter uses optional descriptionText instead of a separate Description Boolean; absent or blank text omits the description. Defaults are info, paragraph title and no announcement role. `headingLevel` accepts none or 2–6 and uses the matching responsive heading style. A complete optional `stateLabels` map localises the hidden prefixes, including punctuation. Container metadata is supported; event handlers, ARIA/focus/role overrides and content slots are rejected.
+
+Use one announcement owner. A pre-existing application live container can publish new Alert content with Alert's announcement left at none. Explicit polite/assertive values put the corresponding role on Alert itself; mounting populated polite content alone does not guarantee speech. Do not combine these strategies or announce restored/static content as a new event. Alert manages neither focus nor notification queues/timers.
+
+The 19 October React comparison corrected Figma's Alert default from Success to the specified Info, preserving all variant IDs. It also repaired the existing shared `typography/heading/h6` style from 120% to the canonical 150% line height, retaining its ID, font and bindings. The private title property's source label is now explicitly `Title style`, consistent with its required exposed label. See [validation and exact Figma receipts](../../docs/validation/react-feedback-parity.md). Manual speech and broader-browser release checks remain open; no token values changed or new export/publication occurred.

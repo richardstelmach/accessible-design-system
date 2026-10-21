@@ -228,3 +228,17 @@ export type ToastProviderProps = {
 /** Both host parts must remain mounted once, outside route content and modals. */
 export type ToastRegionProps = { className?: string };
 export type ToastNotificationsButtonProps = { className?: string };
+
+export type AlertState = 'success' | 'info' | 'warning' | 'error';
+export type BadgeTone = 'neutral' | AlertState;
+type FeedbackContainerProps = Pick<ComponentPropsWithoutRef<'div'>, 'id' | 'className' | 'style' | 'lang' | 'dir'>;
+export type AlertProps = FeedbackContainerProps & {
+  state?: AlertState;
+  titleText: string;
+  descriptionText?: string;
+  headingLevel?: 'none' | 2 | 3 | 4 | 5 | 6;
+  announcement?: 'none' | 'polite' | 'assertive';
+  /** Complete localised equivalents, including punctuation, for the fixed states. */
+  stateLabels?: Record<AlertState, string>;
+};
+export type BadgeProps = FeedbackContainerProps & { label: string; tone?: BadgeTone };

@@ -17,3 +17,6 @@ export { Tabs } from './components/Tabs.js';
 export type { TabsProps, TabsItem } from './types.js';
 export { ToastProvider, ToastRegion, ToastNotificationsButton, useToast } from './components/Toast.js';
 export type { ToastMessage, ToastState, ToastAPI, ToastProviderProps, ToastRegionProps, ToastNotificationsButtonProps } from './types.js';
+export { Alert } from './components/Alert.js';
+export { Badge } from './components/Badge.js';
+export type { AlertProps, AlertState, BadgeProps, BadgeTone } from './types.js';
