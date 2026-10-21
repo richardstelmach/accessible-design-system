@@ -1,6 +1,6 @@
 # Breadcrumb
 
-**Status:** Draft — contract, tokens and Figma built; production implementation not started.
+**Status:** React beta implemented and automated checks passed; manual production acceptance remains open.
 
 **Version:** 0.1.0
 
@@ -197,8 +197,7 @@ to the labelled stress examples. Layout and pointer-state changes preserve conte
 Text contrast on white is 7:1 for body, 4.52:1 for default links, 7:1 for hover and
 10.87:1 for pressed links. The focus ring is 4.52:1 against its white separator.
 
-This repository contains contracts and tokens rather than a runnable Breadcrumb
-implementation. Keep `releaseReady` false until native scrolling, overflow detection,
+The React beta and automated evidence now cover the native hierarchy, measured overflow and focus/print behaviour. Keep `releaseReady` false until the remaining manual checks for native scrolling, overflow detection,
 keyboard handling, touch cancellation, screen-reader semantics, focus preservation,
 320px reflow, 400% zoom, text resizing, all four text-spacing overrides, RTL and forced
 colours pass in a browser. Figma appearance alone cannot certify those behaviours.
@@ -223,3 +222,10 @@ separate checkpoint, and browser implementation acceptance is still outstanding.
 - [W3C full-layout alternative technique](https://www.w3.org/WAI/WCAG22/Techniques/general/G206)
 - [Component documentation page](../../patterns/component-documentation-page.yaml)
 - [Token sync workflow](../../docs/token-sync-workflow.md)
+
+
+## React adapter and comparison
+
+The beta package exports Breadcrumb with ancestors/currentPage and a native nav ref. Controlled expanded requires onExpandedChange and excludes defaultExpanded; uncontrolled preference defaults false. The same anchors remain mounted through scrolling/expanded layout. An inert text-only width sample detects compact overflow independently of expanded wrapping; ResizeObserver, fonts, prop changes and focus updates recheck the layout. A focused overflow toggle remains until blur even when the path fits. Unsupported measurement retains the full wrapping baseline. Print wraps and omits the toggle.
+
+Existing Figma masters, composed link style, seven aliases and responsive target geometry passed the 21 October 2026 comparison without production mutations. See [React API](../../docs/react-api.md) and [validation/evidence](../../docs/validation/react-navigation-parity.md). No new token or sync operation is required.

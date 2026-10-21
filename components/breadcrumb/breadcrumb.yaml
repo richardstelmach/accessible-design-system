@@ -5,9 +5,14 @@ status: draft
 
 phase:
   current: token-roundtrip-complete
-  implementation: not-started
+  implementation: react-beta-automated-checks-passed
   figma: built-and-audited
   releaseReady: false
+
+reactAdapter:
+  status: beta-automated-checks-passed
+  documentation: docs/react-api.md
+  evidence: docs/validation/react-navigation-parity.md
 
 description: >
   Hierarchical navigation to ancestor pages. A compact overflowing trail can
@@ -33,7 +38,6 @@ scope:
     - History trails, Back to results, previous-page links and steppers
     - Ellipsis menus, omitted middle ancestors and label truncation
     - Disabled or loading items, icon-only labels and arbitrary interactive item content
-    - Framework adapters and production JavaScript in this contract/Figma phase
 
 acceptedDecisions:
   approvedBy: Richard

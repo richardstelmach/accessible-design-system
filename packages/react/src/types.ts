@@ -251,3 +251,43 @@ type StepperValue = { value: string; defaultValue?: never; onValueChange: (value
 export type StepperProps = Omit<ComponentPropsWithoutRef<'input'>, 'children' | 'type' | 'value' | 'defaultValue' | 'onChange' | 'onInput' | 'readOnly' | 'min' | 'max' | 'step' | 'required' | 'placeholder' | 'role' | 'aria-label' | 'aria-labelledby' | 'aria-valuenow' | 'aria-valuemin' | 'aria-valuemax'> & StepperValue & {
   label: string; name: string; helperText?: string; error?: FieldError; errorDescribedBy?: string; requirement?: 'required' | 'optional'; optionalLabel?: string; min?: number; max?: number; step: number; incrementLabel: string; decrementLabel: string; formatValueAnnouncement?: (value: string, label: string) => string;
 };
+
+/** Native anchor integration cannot replace the component's text, destination or semantics. */
+export type NavigationLinkAttributes = Omit<ComponentPropsWithoutRef<'a'>,
+  'href' | 'children' | 'role' | 'tabIndex' | 'aria-label' | 'aria-labelledby' | 'aria-current' | 'dangerouslySetInnerHTML'>;
+export type CardImage = {
+  src: string; alt: string; width: number; height: number;
+  fit?: 'cover' | 'contain'; position?: string; srcSet?: string; sizes?: string;
+  loading?: 'eager' | 'lazy'; decoding?: 'sync' | 'async' | 'auto';
+};
+export type CardProps = FeedbackContainerProps & {
+  layout?: 'vertical' | 'horizontal'; title?: string; headingLevel?: 'none' | 2 | 3 | 4 | 5 | 6;
+  titleStyle?: 'auto' | 'compact'; titleHref?: string; titleLinkAttributes?: NavigationLinkAttributes;
+  wholeCardClickable?: boolean; image?: CardImage; children?: ReactNode; actions?: ReactNode;
+  imageBadge?: import('react').ReactElement<BadgeProps>;
+};
+export type BreadcrumbAncestor = { id: string; label: string; href: string; linkAttributes?: NavigationLinkAttributes };
+type BreadcrumbExpansion = { expanded: boolean; defaultExpanded?: never; onExpandedChange: (expanded: boolean) => void } |
+  { expanded?: never; defaultExpanded?: boolean; onExpandedChange?: (expanded: boolean) => void };
+export type BreadcrumbProps = FeedbackContainerProps & BreadcrumbExpansion & {
+  label?: string; ancestors: readonly BreadcrumbAncestor[]; currentPage?: string;
+  showFullPathLabel?: string; showCompactPathLabel?: string;
+};
+export type PaginationLabels = {
+  previous: string; next: string; first: string; last: string; omissions: string; goToPage: string; go: string;
+  formatNumber: (page: number) => string; formatPageLabel: (page: number) => string;
+  formatSummary: (page: number, total: number) => string;
+  formatHelp: (total: number) => string; formatError: (total: number) => string;
+  formatAlreadyOnPage: (page: number) => string;
+};
+export type PaginationJumpForm = {
+  /** Explicit native GET fallback; include the existing filters/sort in hiddenFields. */
+  action: string; pageName: string; hiddenFields?: readonly { name: string; value: string }[];
+};
+export type PaginationProps = FeedbackContainerProps & {
+  label?: string; currentPage: number; totalPages: number; pageHref: (page: number) => string;
+  presentation?: 'auto' | 'numbered' | 'compact'; labels?: Partial<PaginationLabels>;
+  linkAttributes?: (page: number) => NavigationLinkAttributes;
+  /** Intercepts only unmodified primary activation. Commit currentPage after success. */
+  onNavigate?: (page: number, detail: { href: string; source: 'link' | 'jump' }) => void;
+} & ({ pageJump?: false; jumpForm?: never } | { pageJump: true; jumpForm: PaginationJumpForm });

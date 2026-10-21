@@ -1,6 +1,6 @@
 # Card
 
-**Status:** Draft — contract and Figma phase; production implementation not started.
+**Status:** React beta implemented and automated checks passed; manual production acceptance remains open.
 
 **Version:** 0.1.0
 
@@ -235,3 +235,10 @@ collection intact with `base`, `md` and `lg` modes. Production acceptance checks
 - [NHS Card](https://service-manual.nhs.uk/design-system/components/card) — navigation and non-clickable examples.
 - [WCAG keyboard](https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html) and
   [pointer cancellation](https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html).
+
+
+## React adapter and comparison
+
+The beta package exports Card with a native div ref, optional title/image/actions and one OwlA11y Badge over an image. headingLevel and compact appearance are independent. The compiled container query resolves component.card.layout.horizontalMinWidth to a literal; the CSS baseline remains vertical. The pointer target enhances only after mount, delegates to the real title anchor, and preserves native controls, selection, scroll/drag/cancellation, modifiers and opt-out regions. Integrations using opaque shadow hosts should mark the host data-owla11y-card-ignore when its interaction cannot be exposed through the event path.
+
+The 21 October 2026 Figma comparison preserves all 22 masters and corrects only the composed linked H6 style from 120% to canonical 150% line height. Its ID and underline/bindings are retained. See [React API](../../docs/react-api.md) and [validation/evidence](../../docs/validation/react-navigation-parity.md). The existing token round-trip remains valid; no token values or variables change. Confirm the composed style through the normal post-export style audit.

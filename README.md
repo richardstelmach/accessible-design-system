@@ -67,7 +67,7 @@ See [`docs/token-sync-workflow.md`](docs/token-sync-workflow.md) for the complet
 
 ## OwlA11y React development
 
-The runnable package contains Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert and Badge, plus the Toast host. See [package usage and commands](packages/react/README.md), [React interfaces](docs/react-api.md) and [package architecture](docs/react-package-structure.md). Run `npm ci`, `npm run build`, `npm test` and `npm run dev` from this directory. Use `?forms` for the new form-component comparison. The package remains private and unpublished during beta preparation.
+The runnable package contains Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert, Badge, Stepper, Accordion, Card, Breadcrumb and Pagination, plus the Toast host and Dialog backdrop CSS. See [package usage and commands](packages/react/README.md), [React interfaces](docs/react-api.md) and [package architecture](docs/react-package-structure.md). Run `npm ci`, `npm run build`, `npm test` and `npm run dev` from this directory. Use `?navigation` for Card/Breadcrumb/Pagination, `?controls` for Stepper/Accordion, or the other documented routes for earlier batches. The package remains private and unpublished during beta preparation.
 
 Review the [audit resolutions](docs/launch-audit-resolution.md), [source and Figma comparison](docs/validation/react-core-parity.md), and [completed Figma reconciliation](docs/validation/figma-core-reconciliation.md) for validation results and remaining launch checks.
 

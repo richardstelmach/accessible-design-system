@@ -1,6 +1,6 @@
 # OwlA11y package structure
 
-Accepted baseline: React 18.3 and 19; styled components with token overrides; light theme at launch. The workspace implements seventeen components: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert, Badge, Stepper and Accordion, plus the Toast notification host (ToastProvider, ToastRegion, ToastNotificationsButton and useToast). Publication remains disabled.
+Accepted baseline: React 18.3 and 19; styled components with token overrides; light theme at launch. The workspace implements twenty components: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert, Badge, Stepper, Accordion, Card, Breadcrumb and Pagination, plus the Toast notification host (ToastProvider, ToastRegion, ToastNotificationsButton and useToast). Publication remains disabled.
 
 ## Repository layout
 
@@ -43,7 +43,8 @@ Before adding dependency versions, verify current official tool documentation an
 7. Implement Toast host ownership, announcement delivery, modal deferral and focus recovery; retain manual assistive-technology acceptance as a release gate.
 8. Implement Alert and Badge contextual feedback, semantic headings, wrapping and source/Figma validation.
 9. Implement Stepper and Accordion with native quantity behaviour, progressive disclosure and source/Figma validation.
-10. Complete Card, Breadcrumb and Pagination, then finish release evidence.
+10. Implement Card, Breadcrumb and Pagination with source/Figma evidence and native navigation.
+11. Complete manual accessibility/browser acceptance and release preparation.
 
 ## Scaffold verification
 

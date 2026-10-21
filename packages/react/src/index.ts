@@ -23,3 +23,7 @@ export type { AlertProps, AlertState, BadgeProps, BadgeTone } from './types.js';
 export { Stepper } from './components/Stepper.js';
 export { Accordion } from './components/Accordion.js';
 export type { StepperProps, StepperChangeDetail, AccordionProps, AccordionItem } from './types.js';
+export {Card} from './components/Card.js';
+export {Breadcrumb} from './components/Breadcrumb.js';
+export {Pagination} from './components/Pagination.js';
+export type {CardProps,CardImage,BreadcrumbProps,BreadcrumbAncestor,PaginationProps,PaginationLabels,PaginationJumpForm,NavigationLinkAttributes} from './types.js';
