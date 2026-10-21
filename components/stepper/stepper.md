@@ -517,3 +517,10 @@ Document and test each of the following using the fixed Minus → numeric input
 - [ ] No duplicate status announcement after input focus fallback
 - [ ] No new Stepper tokens or Tokens Studio sync
 - [ ] No public Stepper Group or read-only Stepper
+
+
+## React adapter and responsive Figma reconciliation
+
+The beta package exports Stepper with native input ref, raw-string value/defaultValue and onValueChange(raw,{source}). Required positive step and contextual incrementLabel/decrementLabel preserve the canonical quantity contract. formatValueAnnouncement localises button-change text. See [API details](../../docs/react-api.md) and the runnable ?controls preview. Native number-input editing, stepping, constraint validation, form reset and focus behaviour are covered by automated browser checks; manual assistive-technology acceptance remains open.
+
+The 21 October 2026 Figma reconciliation preserves all 40 public and 20 private variants and their IDs. Text uses existing form label/helper/error/control styles. The value field hugs responsive content with 12px vertical padding and 1px inside border: 50px base/md and 53px lg; 44px is its minimum, not a fixed height. Buttons remain 44px. The old 56px row is now content-driven. Normal field-copy gap is 4px; error-to-control gap is 8px. Existing value-property text stays intact inside a new alignment wrapper, centring it at every mode. Focus separator/ring have 2px strokes at 2px/4px extents and stretch with the field. Figma's 96px value-field width is illustrative; production uses canonical 5ch plus padding/borders and retains native spinners. No new tokens or variables are introduced.

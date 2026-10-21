@@ -3,6 +3,14 @@ id: stepper
 version: 0.1.0
 status: active
 
+reactAdapter:
+  status: beta-automated-checks-passed
+  documentation: docs/react-api.md
+  evidence: docs/validation/react-controls-parity.md
+  valuePolicy: raw-string-native-number-input
+  ownership: controlled-value-onValueChange-or-uncontrolled-defaultValue
+  figmaReconciliation: shared-text-styles-content-driven-height-spacing-and-focus-geometry
+
 description: >
   Stepper is a numeric quantity control for changing one mathematical value by
   direct entry or adjacent decrement and increment buttons. It is not a

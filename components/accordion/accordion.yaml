@@ -5,7 +5,7 @@ status: draft
 
 phase:
   current: figma-built-roundtrip-evidence-pending
-  implementation: not-started
+  implementation: react-beta-automated-checks-passed
   figma: masters-present
   releaseReady: false
 
@@ -30,9 +30,8 @@ scope:
     - Native h2 through h6 semantics and independently selectable visual heading styles
     - Collapsed and expanded presentation with default, hover, pressed and independent focus
     - Independent expansion; opening or closing an item never changes another item
-    - Framework-neutral contract, tokens, documentation and planned Figma inventory
+    - Framework-neutral contract, tokens, documentation and audited existing Figma inventory
   excludes:
-    - Production implementation and framework-specific controlled-state adapters
     - Disabled items or a requirement to keep one panel open
     - Single-open mode, built-in expand-all controls, URL history, async loading and animation
     - Nested accordions and arbitrary interactive title content
@@ -195,7 +194,7 @@ publicApi:
     - ariaCollapsed
   rules:
     - The root owns expanded item keys; do not introduce competing independent item flags.
-    - Framework-controlled values and callbacks require a later adapter contract.
+    - The React adapter maps initialExpandedIds to defaultExpandedIds and adds expandedIds/onExpandedChange; see docs/react-api.md.
 
 semantics:
   trigger:
@@ -359,6 +358,15 @@ figma:
     headingStyles: [typography/heading/h2, typography/heading/h3, typography/heading/h4, typography/heading/h5, typography/heading/h6]
     nativeSlotsVerified: true
     mutationsPerformed: false
+  liveAudit:
+    date: "2026-10-21"
+    pageId: "1176:101"
+    titleSetId: "1176:107"
+    itemSetId: "1176:182"
+    rootComponentId: "1176:183"
+    evidence: docs/validation/react-controls-figma-evidence.json
+    result: existing-structure-bindings-slots-and-responsive-typography-match-source
+    productionMutations: false
   inventory:
     title:
       componentSet: Accordion / Title
@@ -447,9 +455,9 @@ validation:
       - Forced colours, reduced motion, RTL, text resizing and text-spacing overrides.
       - 320px reflow and 400 percent zoom; visible focus near sticky headers.
   limitations:
-    - No production Accordion implementation or browser test harness exists in this phase.
+    - React beta and automated browser evidence exist; manual assistive-technology and broader-browser acceptance remain pending.
     - Source/token checks do not establish runtime accessibility conformance.
-    - Figma was inspected read-only; Accordion assets have not been built or visually audited.
+    - Existing Figma masters were structurally and visually audited on 21 October 2026; token round-trip completion remains unverified.
     - Independent expansion is confirmed by Richard; no exclusive mode is included.
 
 acceptanceCriteria:

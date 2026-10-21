@@ -1,6 +1,6 @@
 # OwlA11y React
 
-Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert and Badge, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
+Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert, Badge, Stepper and Accordion, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. The remaining design-system families are not exported yet. This package stays private until release review.
 
 ```tsx
 import { Button, TextInput } from '@owla11y/react';
@@ -207,3 +207,27 @@ Badge defaults to neutral and supports info/success/warning/error tones. Its vis
 Both components accept id, className, style, lang, dir and data attributes for layout/testing. Native behavioural props, event handlers, ARIA/role/focus overrides, polymorphism and arbitrary children/HTML slots are intentionally unavailable. Container styles and token overrides must preserve accessibility. Invalid text, enum values and unsupported runtime props throw actionable configuration errors.
 
 See [source/Figma comparison and validation](../../docs/validation/react-feedback-parity.md). Figma's Alert default and shared H6 line height were reconciled to GitHub; Badge required no production repair. All IDs remain intact. Package publication and manual release acceptance remain separate steps.
+
+## Stepper and Accordion
+
+```tsx
+import { Accordion, Stepper } from '@owla11y/react';
+
+<Stepper label="Number of rooms" name="rooms" min={1} max={10} step={1}
+  defaultValue="2" helperText="Choose a whole number from 1 to 10."
+  incrementLabel="Add a room" decrementLabel="Remove a room" />;
+<Accordion headingLevel={3} defaultExpandedIds={['delivery']} items={[
+  { id: 'delivery', title: 'Delivery information', content: <p>Delivery details.</p> },
+  { id: 'returns', title: 'Returns', content: <p>Return instructions.</p> },
+]} />;
+```
+
+Stepper is a native number field between decrement/increment IconButtons. Supply a positive finite step and contextual button names. Its ref targets the input; requirement defaults to required, with the usual optional/helper/error policy. min/max are finite when supplied and min must not exceed max. Initial nonempty values must be finite, in range and step-aligned. Empty and later invalid edits stay editable; service validation belongs to the host. value and defaultValue are raw strings. Controlled value requires onValueChange(raw,{source:'input'|'increment'|'decrement'}); uncontrolled values support native form reset. A controlled host owns reset and may decline requests. No onChange/onInput second value owner, readOnly, placeholder or custom spinbutton ARIA is supported.
+
+Native stepUp/stepDown preserves browser decimal and step-base rules. Valid matching min/max values disable the corresponding button; whole-control and Fieldset disabling disable all three controls. Activation keeps button focus unless that button becomes unavailable, when focus returns to the input after commit. One mounted polite status announces eligible button changes; direct typing/Arrow changes and the input-focus fallback do not duplicate speech. formatValueAnnouncement(raw,label) can localise the complete result. The fixed Minus/input/Plus visual and DOM order is retained in RTL. Native number spinners remain available; platform appearance varies.
+
+Accordion uses explicit headingLevel=2..6 and independent expansion: none, one or all may be open. titleStyle defaults to the matching heading; a visual override does not change its semantic level. Every item needs a unique stable nonempty id, plain title and content. defaultExpandedIds is initial-only. For controlled expansion, supply expandedIds/onExpandedChange and omit defaults; the owner may decline. Ref targets the root div. panelLandmark=false uses ordinary div panels; true opts into named regions for substantial sections.
+
+Server/no-JavaScript content consists of ordinary headings with every body visible. After enhancement, native buttons use normal Tab/Enter/Space; there is no roving/arrow navigation. Hidden panels remain mounted, retaining form and React state. Enhancement protects focused baseline content in addition to the requested defaults. External collapse moves focus to the panel's trigger before hiding it. Print shows every body without changing expansion state. To reveal an error/deep-link target, the application must expand its section and wait for actual visibility before focusing; the preview demonstrates this. Keep essential instructions and cross-section required validation outside hidden panels. Single-open mode, disabled items, arbitrary header slots, nesting, lazy loading and animation are outside this initial API.
+
+See [source/Figma comparison and validation](../../docs/validation/react-controls-parity.md) and the runnable `?controls` preview. Settings use OwlA11y Select, Checkbox and Button. Automated results do not close manual screen-reader, Safari/Firefox or release acceptance.

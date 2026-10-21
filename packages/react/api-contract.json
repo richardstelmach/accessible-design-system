@@ -98,9 +98,9 @@
       "exports": [
         "Stepper"
       ],
-      "props": "label; name; id?; min?; max?; step (positive); helperText?; error?; requirement; incrementLabel; decrementLabel",
-      "behaviour": "Native numeric input ref; value/defaultValue are raw strings; onValueChange(raw, {source: input|increment|decrement}); use native stepUp/stepDown. No second value owner via onChange.",
-      "implementation": "not-implemented"
+      "props": "label; name; min?; max?; required positive finite step; value/defaultValue raw strings; onValueChange(raw,{source}); incrementLabel; decrementLabel; formatValueAnnouncement?",
+      "behaviour": "Native number-input ref and stepping; shared required/optional/error policy; native reset for uncontrolled values; boundary disables and focus fallback; one polite button-change announcer. No readonly, placeholder, custom spinbutton semantics or second value owner.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "date-input",
@@ -160,8 +160,8 @@
         "Accordion"
       ],
       "props": "items: {id,title,content}[]; headingLevel (2..6); titleStyle?; expandedIds/defaultExpandedIds; onExpandedChange; panelLandmark=false",
-      "behaviour": "Independent expansion only. defaultExpandedIds maps canonical initialExpandedIds; explicit controlled adapter, stable IDs, baseline visible before enhancement.",
-      "implementation": "not-implemented"
+      "behaviour": "Independent expansion; ordinary headings and all content visible for SSR/no-JS; native buttons after enhancement; retain panel DOM, protect initial focus, recover focused panel before external collapse. Explicit headingLevel; visual style independent. Consumer reveals before focus.",
+      "implementation": "implemented-automated-checks-passed"
     },
     {
       "id": "card",

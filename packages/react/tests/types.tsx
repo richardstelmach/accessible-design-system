@@ -160,3 +160,26 @@ import {Alert,Badge} from '../src/index.js';
 <Badge label="Pending" tabIndex={0}/>;
 // @ts-expect-error Badge labels are required
 <Badge tone="success"/>;
+
+import {Accordion,Stepper} from '../src/index.js';
+const accordionItems=[{id:'one',title:'One',content:<p>Content</p>}];
+<Accordion headingLevel={3} items={accordionItems} defaultExpandedIds={['one']} ref={createRef<HTMLDivElement>()}/>;
+<Accordion headingLevel={2} titleStyle="h4" panelLandmark items={accordionItems} expandedIds={[]} onExpandedChange={ids=>ids.map(id=>id.toUpperCase())}/>;
+<Stepper label="Quantity" name="quantity" step={1} incrementLabel="Increase quantity" decrementLabel="Decrease quantity" defaultValue="2" ref={createRef<HTMLInputElement>()}/>;
+<Stepper label="Quantity" name="quantity" step={0.1} incrementLabel="Increase quantity" decrementLabel="Decrease quantity" value="2" onValueChange={(raw,detail)=>{const source:'input'|'increment'|'decrement'=detail.source;raw.toUpperCase();}}/>;
+// @ts-expect-error semantic heading is required
+<Accordion items={accordionItems}/>;
+// @ts-expect-error controlled expansion requires a callback
+<Accordion headingLevel={3} items={accordionItems} expandedIds={[]}/>;
+// @ts-expect-error no single-open mode
+<Accordion headingLevel={3} items={accordionItems} singleOpen/>;
+// @ts-expect-error Stepper requires an explicit finite positive step
+<Stepper label="Quantity" name="quantity" incrementLabel="Increase" decrementLabel="Decrease"/>;
+// @ts-expect-error raw strings only
+<Stepper label="Quantity" name="quantity" step={1} incrementLabel="Increase" decrementLabel="Decrease" defaultValue={2}/>;
+// @ts-expect-error controlled value requires callback
+<Stepper label="Quantity" name="quantity" step={1} incrementLabel="Increase" decrementLabel="Decrease" value="2"/>;
+// @ts-expect-error no readOnly mode
+<Stepper label="Quantity" name="quantity" step={1} incrementLabel="Increase" decrementLabel="Decrease" readOnly/>;
+// @ts-expect-error single value owner
+<Stepper label="Quantity" name="quantity" step={1} incrementLabel="Increase" decrementLabel="Decrease" onChange={()=>{}}/>;
