@@ -20,6 +20,16 @@ sourceOfTruth:
 build:
   command: node scripts/build-tokens.mjs
   breakpointMapping: tokens/figma/breakpoint-mapping.json
+  fontFamilyMapping:
+    file: tokens/figma/font-family-mapping.json
+    appliesTo: tokens-studio-output-only
+    rawAndBrowserValues: preserved
+    rules:
+      - Every literal font-family stack requires an explicit mapping.
+      - Mapping source and expectedWebValue must match the canonical token.
+      - figmaValue names exactly one verified available Figma family.
+      - Preserve token paths, aliases, scopes and Web code syntax.
+      - Validate every mapping before writing either compiled output.
   responsiveGroupCoverage:
     detectionSource: complete-canonical-token-tree
     modesSource: tokens/figma/breakpoint-mapping.json#modes

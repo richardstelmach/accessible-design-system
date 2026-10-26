@@ -27,3 +27,6 @@ export {Card} from './components/Card.js';
 export {Breadcrumb} from './components/Breadcrumb.js';
 export {Pagination} from './components/Pagination.js';
 export type {CardProps,CardImage,BreadcrumbProps,BreadcrumbAncestor,PaginationProps,PaginationLabels,PaginationJumpForm,NavigationLinkAttributes} from './types.js';
+
+export { CodeBlock } from './components/CodeBlock.js';
+export type { CodeBlockProps, CodeBlockLabels } from './types.js';

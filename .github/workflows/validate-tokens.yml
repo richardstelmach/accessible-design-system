@@ -5,6 +5,7 @@ on:
     paths:
       - "tokens/**"
       - "scripts/build-tokens.mjs"
+      - "scripts/figma-font-families.mjs"
       - ".github/workflows/validate-tokens.yml"
 
   push:
@@ -13,6 +14,7 @@ on:
     paths:
       - "tokens/**"
       - "scripts/build-tokens.mjs"
+      - "scripts/figma-font-families.mjs"
       - ".github/workflows/validate-tokens.yml"
 
   workflow_dispatch:

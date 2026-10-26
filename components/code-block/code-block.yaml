@@ -1,0 +1,182 @@
+component: CodeBlock
+id: code-block
+version: 0.1.0
+status: draft
+
+description: >
+  Readable, selectable plain-text code with a visible context label, an optional
+  IconButton copy action and persistent visible polite feedback. Native pre/code
+  semantics and exact source text are retained.
+
+relatedDocumentation:
+  - components/code-block/code-block.md
+  - components/button/button.yaml
+  - patterns/iconography.yaml
+  - tokens/semantic/typography.semantic.json
+  - docs/validation/react-code-block-parity.md
+
+scope:
+  includes:
+    - Plain-text code, including empty strings and leading/trailing whitespace
+    - Required visible language or context label
+    - Optional copy action with registered Phosphor Regular copy icon
+    - Persistent ready, pending, success and manual-copy failure feedback
+    - Measured horizontal overflow and native keyboard scrolling
+    - Wrapping no-JavaScript and print fallback
+  excludes:
+    - Editing, syntax highlighting, line numbers and line selection
+    - Tabs, multiple files, expand/collapse and download actions
+    - HTML or ReactNode code content
+    - Analytics, application routing and automatic clipboard permissions prompts
+    - A public feedback component or arbitrary action slots
+
+api:
+  code: { type: string, required: true, emptyAllowed: true }
+  label: { type: nonempty-string, required: true }
+  copyable: { type: boolean, default: true }
+  labels:
+    type: partial-localisation-map
+    fields: [copy(label), scroll(label), ready, pending, success(attempt), failure(attempt)]
+    rules:
+      - Formatters return nonempty plain text.
+      - Attempt counts restart when code or copyable changes.
+      - Failure feedback must explain manual selection and copy.
+      - The label conveys language or context; it does not enable parsing/highlighting.
+  onCopy:
+    type: callback(code)
+    rules:
+      - Called after a successful current clipboard write only.
+      - Consumer owns analytics and callback failures.
+      - A pending completion for replaced code or an unmounted component is ignored.
+  ref: HTMLDivElement
+  containerMetadata: [id, className, style, lang, dir, data-attributes]
+  forbidden: [children, role, tabIndex, aria-overrides, arbitrary-event-handlers]
+
+anatomy:
+  root:
+    element: div
+    rules: [Fill available width, No outer clipping, No widget role or tab stop]
+    tokens:
+      surface: color.surface.default
+      foreground: color.text.default
+      border: color.border.default
+      borderWidth: border.width.thin
+      radius: radius.xl
+  header:
+    element: div
+    rules: [Wrapping layout, Label and copy group remain readable, No fixed block height]
+    tokens:
+      typography: typography.body.small
+      inlinePadding: spacing.inset.md
+      blockPadding: spacing.stack.sm
+      gap: spacing.inline.sm
+  label: { element: span, required: true, semantics: ordinary-text }
+  copy:
+    component: IconButton
+    size: compact
+    variant: default
+    icon: copy
+    rules:
+      - Native button type=button; never submit an enclosing form.
+      - Accessible name defaults to Copy {label} code.
+      - Feedback is referenced with aria-describedby.
+      - Omitted until client enhancement, and omitted for copyable=false.
+      - Focus remains on the button during and after clipboard outcomes.
+      - Reentrant activations are ignored while a write is pending.
+  feedback:
+    element: span
+    aria: { live: polite, atomic: true }
+    initialText: Ready to copy.
+    rules:
+      - One stable populated live region per copyable enhanced block.
+      - No role=status duplication and no empty status object.
+      - No timers, focus movement or colour-only state changes.
+      - Repeated outcomes include the attempt count to change the announcement text.
+      - Pending state is visible; it does not disable or replace the focused control.
+  codeViewport:
+    element: pre
+    child: code
+    tokens:
+      typography: typography.code
+      padding: spacing.inset.md
+      focusRing: color.interactive.focus.ring
+      focusSeparator: color.interactive.focus.separator
+      focusWidth: border.width.medium
+      focusInset: border.width.thick
+    rules:
+      - Copy the supplied string exactly; do not trim, normalise indentation or add labels.
+      - Preserve whitespace in the DOM, including initial newlines.
+      - Enhanced content uses white-space pre with native horizontal scrolling.
+      - Add tabindex=0 and a named region only when scrollWidth exceeds clientWidth by more than one CSS pixel.
+      - Retain focusability and region semantics until blur if a focused scroller stops overflowing.
+      - Nonoverflowing content has tabindex=-1 to suppress implicit browser scroll tab stops.
+      - Measure on code changes, viewport resize, element/content resize and font readiness.
+      - Use an inset focus ring inside the viewport; never clip the copy-button ring.
+      - Before enhancement and in print wrap long lines without changing copied text.
+
+accessibility:
+  baseline: WCAG-2.2-AA
+  semantics: Native pre/code; visible context label; ordinary document tab order.
+  keyboard:
+    - Enter/Space activates the native copy button.
+    - Tab reaches copy and then the code viewport only when it scrolls.
+    - Arrow keys scroll a focused overflowing viewport through browser-native behaviour.
+    - Manual text selection and platform copy shortcuts remain available.
+    - No custom key interception or focus movement on success/failure.
+  reflow:
+    - At 320 CSS pixels only code content may scroll horizontally.
+    - Long labels and feedback wrap and increase height.
+    - Verify doubled text, text spacing, RTL and 400 percent browser zoom.
+  contrast:
+    - Code, label and feedback use text/default on surface/default; minimum 4.5 to 1.
+    - Focus uses the existing focus ring and separator roles.
+    - Forced colours retain native text, boundary and visible focus.
+  announcementAcceptance:
+    - Manual VoiceOver or NVDA initial reading and tab order.
+    - Successful, repeated, denied and unavailable clipboard announcements.
+    - Repeated failure, delayed clipboard writes and multiple blocks.
+    - No empty status object or unexplained focus stop.
+    - Automated DOM and axe checks do not establish spoken delivery.
+
+figma:
+  page: 26 - Components - CodeBlock
+  component: CodeBlock
+  variants: { Copy: [False, True] }
+  properties:
+    - Label text
+    - Code text
+    - Feedback text
+    - Independent nested IconButton state and focus
+  rules:
+    - Two composition variants only; clipboard outcomes are text, not extra state axes.
+    - Reuse registered Icon/copy and existing Icon Button masters.
+    - Use existing variables, text styles, Breakpoint modes and standard four-area documentation page.
+    - Add typography/code foundation before dependent masters.
+    - System font glyph widths vary; Roboto Mono Regular is illustrative in Figma.
+    - Do not bind the web system-family list directly as an unavailable Figma font name.
+    - tokens/figma/font-family-mapping.json projects the family to Roboto Mono in Studio output only.
+    - Keep a receipt of the exported family, style and Web code syntax.
+    - No production Figma mutation before canonical source review and Tokens Studio checkpoint.
+
+qaExamples:
+  - Short installation command, with and without copy
+  - Empty code, leading newline, indentation, tabs, trailing newline and HTML-like characters
+  - Long code at 320px; actual Arrow scrolling and inset focus
+  - Long label and failure guidance at doubled text and text spacing
+  - Success, repeated success, denied/unavailable clipboard and stale completion
+  - Dynamic code replacement, resize, RTL, forced colours, print and no JavaScript
+
+acceptanceCriteria:
+  - Exact plain text survives rendering and clipboard writing.
+  - Label and all copy feedback remain readable and localisable.
+  - Keyboard overflow is measured, named and visibly focused without trapping focus.
+  - No copy control appears in the no-JavaScript baseline.
+  - Semantic typography and existing surface, border, spacing, radius and focus roles are used.
+  - React 18.3 and 19 packed consumers validate SSR, hydration, declarations and wrapper ref.
+  - Manual screen-reader acceptance remains explicitly pending until performed.
+
+reactAdapter:
+  implementation: implemented-manual-release-checks-pending
+  exports: [CodeBlock]
+  types: [CodeBlockProps, CodeBlockLabels]
+  evidence: docs/validation/react-code-block-parity.md

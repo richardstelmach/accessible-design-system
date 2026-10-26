@@ -9,11 +9,14 @@ globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Ele
 globalThis.getComputedStyle=dom.window.getComputedStyle;
 const {renderToString}=await import('react-dom/server');
 const {hydrateRoot}=await import('react-dom/client');
-const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion, Card, Breadcrumb, Pagination } = await import('@owla11y/react');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion, Card, Breadcrumb, Pagination, CodeBlock } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
+const codeBlockRef = React.createRef();
+const codeSource = '\n  <Button>Save</Button>\n';
 const app = h('form', null,
+  h(CodeBlock, { label:'React', code:codeSource, ref:codeBlockRef }),
   h(ErrorSummary, { errors: [{ id: 'date', text: 'Enter a year', targetId: dateIds.year }, { id: 'name', text: 'Check the name', targetId: 'packed-name' }], focusRequestKey: 1 }),
   h(TextInput, { id: 'packed-name', label: 'Name', name: 'name', defaultValue: 'Ada' }),
   h(DateInput, { id: dateIds.group, legend: 'Birth date', name: 'date', purpose: 'date-of-birth', defaultValue: { day: '01', month: '02', year: '2000' }, error: { message: 'Enter a year' }, errorAssociation: 'children', invalidParts: ['year'] }),
@@ -38,14 +41,20 @@ document.title = 'Packed example';
 const root = document.getElementById('root');
 const ids = [...root.querySelectorAll('[id]')].map(node => node.id);
 assert.equal(new Set(ids).size, ids.length);
+assert.equal(root.querySelector('.owla11y-code-block code').textContent, codeSource);
+assert.equal(root.querySelector('.owla11y-code-block button'), null);
 const errors = [];
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 let hydrated;
 await React.act(async () => {
   hydrated = hydrateRoot(root, app, { onRecoverableError: error => errors.push(error) });
 });
-assert.deepEqual([...root.querySelectorAll('[id]')].map(node => node.id), ids);
+assert.deepEqual([...root.querySelectorAll('[id]')].map(node => node.id).filter(id => ids.includes(id)), ids);
+assert.equal(new Set([...root.querySelectorAll('[id]')].map(node => node.id)).size, root.querySelectorAll('[id]').length);
 assert.deepEqual(errors, []);
+assert.equal(codeBlockRef.current, root.querySelector('.owla11y-code-block'));
+assert.equal(root.querySelector('.owla11y-code-block code').textContent, codeSource);
+assert.equal(root.querySelector('.owla11y-code-block button').getAttribute('aria-label'), 'Copy React code');
 for (const label of root.querySelectorAll('label')) assert.ok(document.getElementById(label.htmlFor));
 assert.equal(root.querySelector('button').type, 'button');
 assert.equal(root.querySelector('.owla11y-link').getAttribute('href'), '/help');
@@ -174,4 +183,4 @@ assert.equal(root.querySelectorAll('.owla11y-pagination__numbered [aria-current=
 await React.act(async()=>root.querySelector('.owla11y-pagination__numbered a[rel=next]').click());assert.deepEqual(navigationRequests,[[501,'link']]);
 await React.act(async()=>root.querySelector('.owla11y-pagination__jump').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})));assert.equal(root.querySelector('#packed-pages-jump').getAttribute('aria-invalid'),'true');assert.ok(document.activeElement===root.querySelector('#packed-pages-jump'));assert.equal(new dom.window.FormData(root.querySelector('.owla11y-pagination__jump')).get('filter'),'accessible');
 assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
-console.log('Packed package: React ' + React.version + ' twenty standalone components including Card/Breadcrumb/Pagination plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');
+console.log('Packed package: React ' + React.version + ' standalone components including CodeBlock (exact text, SSR, hydration, ref), Card/Breadcrumb/Pagination plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');

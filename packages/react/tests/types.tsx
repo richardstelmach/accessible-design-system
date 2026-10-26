@@ -205,3 +205,12 @@ import {Card,Breadcrumb,Pagination} from '../src/index.js';
 <Pagination currentPage={1} totalPages={8} pageHref={n=>`?page=${n}`} role="tablist"/>;
 // @ts-expect-error current location belongs to the component
 <Breadcrumb ancestors={[{id:'home',label:'Home',href:'/',linkAttributes:{'aria-current':'page'}}]}/>;
+
+import {CodeBlock} from '../src/index.js';
+const codeBlock = <CodeBlock label="React" code="const n = 1;" copyable labels={{success: n => `Copied ${n}`}} onCopy={code => code.toUpperCase()} />;
+// @ts-expect-error Plain text is the only code source; no arbitrary JSX.
+const invalidCodeBlock = <CodeBlock label="React" code={<b>code</b>}/>;
+// @ts-expect-error Required visible context label.
+const unlabelledCodeBlock = <CodeBlock code="text"/>;
+// @ts-expect-error Semantics are component-owned.
+const roleCodeBlock = <CodeBlock label="CSS" code="" role="button"/>;

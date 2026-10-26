@@ -1,6 +1,19 @@
 {
     "typography": {
       "family": {
+        "mono": {
+          "$value": "ui-monospace, SFMono-Regular, Consolas, monospace",
+          "$type": "fontFamily",
+          "$description": "System monospace stack for selectable code. No font download; the platform selects the available face. Figma uses Roboto Mono Regular as an illustrative metric reference, not a claim of identical glyph widths.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FONT_FAMILY"
+            ],
+            "com.figma.codeSyntax": {
+              "Web": "var(--typography-family-mono)"
+            }
+          }
+        },
         "sans": {
           "$value": "Inter",
           "$type": "fontFamily"
