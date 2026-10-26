@@ -1,5 +1,16 @@
 {
     "typography": {
+      "code": {
+        "$type": "typography",
+        "$description": "Readable fixed-size monospace text for code. Code glyph widths vary by platform; preserve source whitespace and provide horizontal scrolling after enhancement.",
+        "$value": {
+          "fontFamily": "{typography.family.mono}",
+          "fontWeight": "{typography.weight.regular}",
+          "fontSize": "{typography.size.md}",
+          "lineHeight": "{typography.lineHeight.normal}",
+          "letterSpacing": "{typography.letterSpacing.normal}"
+        }
+      },
       "heading": {
         "h1": {
           "base": {

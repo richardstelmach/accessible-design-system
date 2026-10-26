@@ -291,3 +291,22 @@ export type PaginationProps = FeedbackContainerProps & {
   /** Intercepts only unmodified primary activation. Commit currentPage after success. */
   onNavigate?: (page: number, detail: { href: string; source: 'link' | 'jump' }) => void;
 } & ({ pageJump?: false; jumpForm?: never } | { pageJump: true; jumpForm: PaginationJumpForm });
+
+/** Labels stay localisable; formatters must return nonempty text. */
+export type CodeBlockLabels = {
+  copy: (label: string) => string;
+  scroll: (label: string) => string;
+  ready: string;
+  pending: string;
+  success: (attempt: number) => string;
+  failure: (attempt: number) => string;
+};
+export type CodeBlockProps = Pick<ComponentPropsWithoutRef<'div'>, 'id' | 'className' | 'style' | 'lang' | 'dir'> & {
+  code: string;
+  label: string;
+  copyable?: boolean;
+  labels?: Partial<CodeBlockLabels>;
+  /** Successful clipboard write only; page analytics remain with the consumer. */
+  onCopy?: (code: string) => void;
+  children?: never;
+};

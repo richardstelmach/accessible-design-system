@@ -1,3 +1,5 @@
 import {readFileSync} from 'node:fs';
 import {expect,it} from 'vitest';
 it('ships complete CSS references and responsive font aliases',()=>{const css=readFileSync('packages/react/dist/styles.css','utf8');const refs=[...css.matchAll(/var\((--[\w-]+)/g)].map(m=>m[1]);const definitions=new Set([...css.matchAll(/(--[\w-]+)\s*:/g)].map(m=>m[1]));expect(refs.filter(ref=>!definitions.has(ref))).toEqual([]);expect(css).toContain('--component-button-typography-default-base-fontFamily: var(--typography-family-sans)');expect(css).toContain('@media (min-width: 48rem)');expect(css).toContain('@media (min-width: 64rem)');expect(css).not.toMatch(/"\{[^}]+\}"/);});
+
+it('preserves the monospace stack as a CSS family list',()=>{const css=readFileSync('packages/react/dist/styles.css','utf8');expect(css).toContain('--typography-family-mono: ui-monospace, SFMono-Regular, Consolas, monospace;');expect(css).not.toContain('"ui-monospace,');expect(css).toContain('--typography-code-fontFamily: var(--typography-family-mono)');});

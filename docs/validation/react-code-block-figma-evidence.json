@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-26",
+  "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
+  "status": "read-only-discovery-complete-production-build-pending-foundation-sync",
+  "sourceBase": "1790de9d656698dda8af0a9cd9729def67f12c9a",
+  "createdNodeIds": [],
+  "mutatedNodeIds": [],
+  "reusedAssets": {
+    "iconButtonSet": "95:943",
+    "copyIcon": "62:795",
+    "documentationTemplatePage": "14:585",
+    "recentDocumentationPage": "1238:6",
+    "documentationCard": "146:1996"
+  },
+  "collections": {
+    "global": {
+      "id": "VariableCollectionId:8:2",
+      "modes": [
+        "global"
+      ]
+    },
+    "Breakpoint": {
+      "id": "VariableCollectionId:303:6772",
+      "modes": [
+        "base",
+        "md",
+        "lg"
+      ]
+    }
+  },
+  "findings": [
+    "No existing CodeBlock page or typography/code style/variable in live inventory.",
+    "Roboto Mono Regular is available; it represents system monospace text illustratively, without a browser-width parity claim.",
+    "Existing Icon Button has 45 variants; CodeBlock should reuse it and registered Icon/copy.",
+    "Current numbered component pages end at 25 - Components - Toast."
+  ],
+  "plannedPage": "26 - Components - CodeBlock",
+  "plannedVariantAxes": {
+    "Copy": [
+      "False",
+      "True"
+    ]
+  },
+  "pending": [
+    "Review source contract/API",
+    "Merge source only on human approval",
+    "Validate system font stack to illustrative Figma font mapping in Tokens Studio before export",
+    "Non-destructive global-only export; preserve Breakpoint",
+    "Build bound component and four documentation areas",
+    "Final structural/visual and post-export audit"
+  ]
+}
