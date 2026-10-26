@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "families": [
+    {
+      "source": "typography.family.mono",
+      "expectedWebValue": "ui-monospace, SFMono-Regular, Consolas, monospace",
+      "figmaValue": "Roboto Mono",
+      "reason": "Richard confirmed the web system monospace policy with an explicitly documented illustrative Figma face. Tokens Studio exports only the first family to Figma; ui-monospace is a CSS generic, not an installed Figma font. Roboto Mono Regular is verified available. Widths remain illustrative, not browser pixel-parity criteria."
+    }
+  ]
+}

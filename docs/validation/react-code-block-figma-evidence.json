@@ -32,7 +32,8 @@
     "No existing CodeBlock page or typography/code style/variable in live inventory.",
     "Roboto Mono Regular is available; it represents system monospace text illustratively, without a browser-width parity claim.",
     "Existing Icon Button has 45 variants; CodeBlock should reuse it and registered Icon/copy.",
-    "Current numbered component pages end at 25 - Components - Toast."
+    "Current numbered component pages end at 25 - Components - Toast.",
+    "Official Tokens Studio documentation confirms only the first font family is exported; the compiler now projects the Studio mono token to Roboto Mono while leaving raw/browser values untouched."
   ],
   "plannedPage": "26 - Components - CodeBlock",
   "plannedVariantAxes": {
@@ -44,9 +45,10 @@
   "pending": [
     "Review source contract/API",
     "Merge source only on human approval",
-    "Validate system font stack to illustrative Figma font mapping in Tokens Studio before export",
+    "Pull merged source and verify mono=Roboto Mono with canonical metadata before export",
     "Non-destructive global-only export; preserve Breakpoint",
     "Build bound component and four documentation areas",
     "Final structural/visual and post-export audit"
-  ]
+  ],
+  "fontFamilyMapping": "tokens/figma/font-family-mapping.json"
 }

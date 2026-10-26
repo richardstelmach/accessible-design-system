@@ -6,7 +6,7 @@ Date: 26 October 2026. Source base: `1790de9d656698dda8af0a9cd9729def67f12c9a` (
 
 The public package previously had no CodeBlock export. A site-local `Code` helper now has a reusable main-system counterpart, with a canonical YAML/Markdown contract, API inventory, types, styled implementation and runnable comparison route. No website migration or package publication is included.
 
-This is a draft source implementation, not final Figma parity or release acceptance. The font choice was confirmed by Richard: system monospace stack on the web, with an explicitly documented illustrative Figma face. Source review, source merge, Tokens Studio font mapping/export, production Figma construction and manual screen-reader acceptance remain pending.
+This is a draft source implementation, not final Figma parity or release acceptance. The font choice was confirmed by Richard: system monospace stack on the web, with an explicitly documented illustrative Figma face. Source review, source merge, Tokens Studio pull/export verification, production Figma construction and manual screen-reader acceptance remain pending.
 
 ## Source discovery
 
@@ -30,7 +30,7 @@ No new component colour, geometry or responsive token groups. Existing surface/d
 
 Token build: **409 raw tokens, 337 Tokens Studio tokens, 72 mode-managed nodes excluded, 24 detected/mapped responsive groups, zero unmapped groups and zero broken retained aliases (220 checked)**. Generated outputs were built from canonical source. Repeat generation produced identical compiled files.
 
-A CSS system-family stack is not a literal installed Figma font name. Roboto Mono Regular was verified available and is the intended illustrative face. Validate the explicit resolved font treatment through Tokens Studio before export; do not bind an unavailable family list or claim font metrics match across platforms. No Figma-side temporary repair was made.
+A CSS system-family stack is not a literal installed Figma font name. Roboto Mono Regular was verified available and is the intended illustrative face. Official Tokens Studio documentation confirms it exports only the first comma-separated family, so the raw stack would incorrectly request ui-monospace in Figma. `tokens/figma/font-family-mapping.json` now explicitly projects the Studio-only value to Roboto Mono. The compiler validates source/expected web value, duplicate/missing mappings, one Figma family and a reason before writing outputs. Raw/browser values, aliases and metadata stay unchanged. Two regression cases verify projection and rejection without partial mutation. Verify the exported family/style after pull; no Figma-only repair is needed.
 
 ## Live Figma evidence
 
@@ -44,7 +44,7 @@ File: `dVFI0q1cXMtmjUAkdvSWkk`. Existing Icon Button `95:943`; registered `Icon/
 | --- | --- |
 | Token/package build | Passed |
 | Package and preview typecheck | Passed, including positive/prohibited public API examples |
-| Unit suite | 117 passed across 11 files, including 9 CodeBlock cases and font-stack generation regression |
+| Unit suite | 119 passed across 11 files, including 9 CodeBlock cases, font-stack generation and validated Studio projection |
 | Example production build | Passed |
 | Full browser regression suite | 79 passed in installed Google Chrome |
 | CodeBlock browser checks | 6 passed: clipboard outcomes/focus; actual keyboard scrolling; responsive/text/RTL/forced-colour/scoped-token checks; axe with contrast; print; package SSR without JavaScript |
@@ -60,12 +60,12 @@ Visual review: [desktop](code-block/desktop.png), [320px keyboard focus](code-bl
 
 ## GitHub delivery state
 
-Implementation is committed locally on `feat/code-block`. The attempted push was rejected by automatic approval review because the initial request was not treated as explicit authorisation to upload the branch. No branch was pushed, no PR was opened and remote CI has not run. A complete draft PR description is prepared outside the repository for the upload checkpoint.
+Richard explicitly authorised pushing the branch and creating a draft PR. The branch is published as [PR #47](https://github.com/richardstelmach/accessible-design-system/pull/47). It remains a draft and is not merged. Check its current head for CI results. The initial push was blocked before this explicit authorisation; no workaround was used.
 
 ## Remaining acceptance
 
 - Human contract/API review and source merge; no merge or publication was performed.
-- Validate system-family-to-Figma font handling and perform the established global-only Tokens Studio pull/export after merged source exists on main.
+- After source review and merge, verify the explicit Studio-only font projection and perform the established global-only Tokens Studio pull/export.
 - Build production CodeBlock with token-bound foundations, existing controls/icons and standard documentation; audit IDs, properties, bindings, layout and appearance after export.
 - Manual VoiceOver or NVDA: initial reading, populated ready feedback, successful/repeated/denied/unavailable clipboard announcements, multiple blocks and meaningful tab stops. DOM mutations and axe cannot establish spoken delivery.
 - Actual Safari/Firefox, 400% browser zoom and Windows high contrast acceptance. Chrome viewport and forced-colour emulation are the recorded automated evidence.

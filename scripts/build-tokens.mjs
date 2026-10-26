@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { projectFigmaFontFamilies } from "./figma-font-families.mjs";
 
 const repoRoot = process.cwd();
 
@@ -687,6 +688,10 @@ function buildTokens() {
   /*
    * Stop the build if a retained token points at an excluded token.
    */
+  const projectedFontFamilyCount = projectFigmaFontFamilies(
+    studioTokens,
+    readJsonFile(path.join(repoRoot, "tokens/figma/font-family-mapping.json"))
+  );
   const checkedAliasCount = validateRetainedAliases(studioTokens);
 
   const rawTokenPaths = collectTokenPaths(compiledTokens);
@@ -761,6 +766,7 @@ function buildTokens() {
     `Unmapped responsive groups: ${unmappedResponsiveGroupPaths.length}`
   );
 
+  console.log(`Figma font families projected: ${projectedFontFamilyCount}`);
   console.log(`Retained aliases checked: ${checkedAliasCount}`);
   console.log("Broken retained aliases: 0");
 

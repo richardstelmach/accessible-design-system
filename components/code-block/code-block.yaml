@@ -154,7 +154,8 @@ figma:
     - Add typography/code foundation before dependent masters.
     - System font glyph widths vary; Roboto Mono Regular is illustrative in Figma.
     - Do not bind the web system-family list directly as an unavailable Figma font name.
-    - Keep a receipt for any Figma-side resolved font mapping.
+    - tokens/figma/font-family-mapping.json projects the family to Roboto Mono in Studio output only.
+    - Keep a receipt of the exported family, style and Web code syntax.
     - No production Figma mutation before canonical source review and Tokens Studio checkpoint.
 
 qaExamples:

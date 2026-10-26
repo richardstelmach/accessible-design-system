@@ -1526,3 +1526,14 @@ For now:
 - `breakpoint-mapping.json` defines the GitHub-to-Figma responsive bridge;
 - Tokens Studio manages the `global` collection;
 - the `Breakpoint` collection is maintained manually from GitHub.
+
+
+## Font family stacks in Figma
+
+Web font stacks remain canonical in `tokens/primitives/typography.json` and `tokens.raw.json`. Tokens Studio passes only the first family to Figma, including CSS generic names that are not installed fonts. See [Tokens Studio font fallbacks](https://docs.tokens.studio/manage-tokens/token-types/typography/font-fallback).
+
+`tokens/figma/font-family-mapping.json` explicitly records the canonical token path, expected web value, one Figma family and reason. The compiler applies this projection only to `tokens.studio.json`; browser CSS is generated from unchanged raw tokens. Mismatched/stale/duplicate mappings or unmapped literal stacks fail before outputs are written. Token paths, aliases and metadata stay unchanged, so repeat exports preserve variable identity and Web syntax.
+
+For CodeBlock, `typography.family.mono` remains `ui-monospace, SFMono-Regular, Consolas, monospace` on the web and exports as `Roboto Mono` for Figma. `typography.code` retains its family alias in both outputs. Roboto Mono Regular was verified available; its glyph widths illustrate the role rather than guarantee browser pixel parity.
+
+After merge and provider pull, inspect `typography.family.mono`: Tokens Studio should show `Roboto Mono` with FONT_FAMILY scope and `var(--typography-family-mono)` Web syntax. Export only `global` using the routine non-destructive settings, with Typography styles enabled. Verify `typography/code` resolves to Roboto Mono Regular at 16px / 150% line height. Never repair the family only in Figma or push plugin state back to GitHub.

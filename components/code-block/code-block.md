@@ -55,7 +55,7 @@ Before JavaScript runs, all code remains visible and long lines wrap; there is n
 
 Reuse `color.surface.default`, `color.text.default`, `color.border.default`, `border.width.thin`, `radius.xl`, `spacing.inset.md`, `spacing.stack.sm`, `spacing.inline.sm` and the existing focus roles. Label/feedback use `typography.body.small`; code uses the new fixed 16px, 150% `typography.code` role and the `typography.family.mono` system stack. The role reuses existing size, weight, line-height and letter-spacing primitives. No extra component aliases are needed for this first anatomy.
 
-The system stack preserves the existing website policy without fetching fonts. Platform glyph widths can differ. Figma uses Roboto Mono Regular as an explicit illustrative reference, so string widths are not a pixel-parity acceptance criterion. The production Figma font mapping and Tokens Studio handling must be verified before the foundation is exported.
+The system stack preserves the existing website policy without fetching fonts. Platform glyph widths can differ. Figma uses Roboto Mono Regular as an explicit illustrative reference, so string widths are not a pixel-parity acceptance criterion. The source-backed mapping in `tokens/figma/font-family-mapping.json` projects only the Tokens Studio family value to Roboto Mono, preserving the raw/browser system stack and semantic aliases. Verify the exported foundation after the provider pull.
 
 ## Figma and documentation
 
