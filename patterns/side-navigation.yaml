@@ -136,3 +136,9 @@ compositionOwnership:
   sectionButton: Local contextual control; do not relocate into the global header.
   inFlowHeader: Remains local to its Accordion panel, regardless of primary/section context.
   triggerSafety: Maintain one control, one navigation tree and one open-state owner; keep the host mounted while focused/open and return focus to the actual trigger.
+
+spacingAndSizing:
+  flatLinks: No additional list gap; existing target padding provides internal spacing.
+  groups: Use spacing.stack.md after a group only when another item follows; no trailing space after the final group.
+  targetMinimum: size.target.comfortable in both width and height; grow for content.
+  drawerViewport: Surface fills viewport height and caps width at existing component.dialog.size.small; navigation scrolls below its header.

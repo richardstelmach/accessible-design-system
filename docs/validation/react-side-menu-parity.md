@@ -46,13 +46,29 @@ The Link set has six Current × State variants and independent Focus. Label rema
 
 Existing Accordion, Accordion / Item / Title, Link, Button, Dialog, IconButton, Modal backdrop and documentation components remain linked instances. Only the existing Accordion root description (`1176:183`) changed, to align its API and bounded navigation nesting guidance; its visual masters/runtime were not changed.
 
-Documentation uses four existing Page Header instances and fifteen existing Card instances in wrapping grids. Examples cover documentation-primary, B2B-primary, account-section, page-owned divider, header/local triggers and both compact presentations. QA covers selected pointer/focus states, flat/static/mixed groups, 320/390px wrapping, RTL links, enlarged text/spacing and a 768px viewport with the existing backdrop and a 512px maximum drawer surface.
+Documentation uses four existing Page Header instances and seventeen existing Card instances in wrapping grids. Examples cover documentation-primary, B2B-primary, account-section, page-owned divider, header/local triggers and both compact presentations. QA covers selected pointer/focus states, flat/static/mixed groups, 320/390px wrapping, RTL links, enlarged text/spacing and a 768px viewport with the existing backdrop and a 512px maximum drawer surface.
 
-The final structural audit found **1,541 editable nodes, zero image-filled nodes, Inter throughout, zero missing text styles and zero slot-limit violations**. All 102 referenced variable IDs resolve, including eighteen inherited remote references. Core padding is `[0,0,0,0]` with zero strokes. Ordinary/current underline treatment matches React. All six link masters are 51px high at lg, above the comfortable target minimum. Global and Breakpoint collections retain their existing IDs and base/md/lg modes.
+The final structural audit found **1,710 editable nodes, zero image-filled nodes, Inter throughout, zero missing text styles and zero slot-limit violations**. All 102 referenced variable IDs resolve, including eighteen inherited remote references. Core padding is `[0,0,0,0]` with zero strokes. Ordinary/current underline treatment matches React. All six link masters are 51px high at lg, above the comfortable target minimum. Global and Breakpoint collections retain their existing IDs and base/md/lg modes.
 
 No variables, tokens or production text styles were created. Ordinary links reuse the existing Pagination link text style, compatible with the local always-underlined navigation recipe; current links use the existing strong body style. One explicitly QA-only reference style represents intentional 200% text/spacing overrides. Existing legacy foundation metadata was preserved; no broad token migration was performed.
 
 Visual checks passed after targeted auto-layout and typography fixes. Reviewed IDs: primary desktop/mobile `1571:404`, B2B/section `1574:876`, QA `1571:742`, RTL/enlarged text `1574:1334`, tablet/backdrop `1575:1125`, accessibility `1571:1764`. The [machine-readable receipt](react-side-menu-figma-evidence.json) records exact IDs, bindings, variants, inherited variable resolution and counts. Figma states illustrate the contract; they do not implement native modal, routing or assistive-technology behaviour.
+
+## Prepublication parity repairs
+
+Final review found three Figma-only differences, now repaired without React, canonical-token or production-component changes:
+
+- **Drawer sizing:** the Dialog surface had no maximum width and retained a fixed 720px height. It now binds max width to existing `component.dialog.size.small` (512px) and fills the authoring viewport height. A scrollable layout frame in the existing Content slot keeps navigation beneath the reachable header/Close control. The tablet backdrop composition also fills its viewport correctly.
+- **Flat-list spacing:** Items previously applied 16px after every child. Its gap now binds to existing `spacing.0`. Existing static/Accordion group instances use layout wrappers with `spacing.stack.md` bottom padding only when another item follows; the final group has no trailing inset. The default grouped layout retains its previous positions and height.
+- **Target dimensions:** all six link masters now bind both minWidth and minHeight to existing `size.target.comfortable` (44px), matching React.
+
+Temporary-instance regressions passed at **320 × 560, 390 × 720, 512 × 400, 768 × 560 and 1280 × 900**. Surface widths were respectively **320, 390, 512, 512 and 512px**, with surface height equal to each viewport height. All six link variants clamped an undersized 32 × 24 request to 44 × 44. Existing flat QA rows now sit at y=0, 51 and 102 with zero gaps. Group spacing remains 16px after each non-final group. Every temporary instance was removed.
+
+Fresh local checks passed: library/token build, type checks, **130 unit tests** and **19/19 side-menu browser checks**, including axe/contrast, focus, reflow and responsive transitions. YAML/JSON parsing, local documentation links and diff checks passed; compiled tokens remain unchanged. The evidence PR runs the full GitHub suite separately.
+
+The updated live audit reports 1,710 editable nodes, 17 existing documentation Card instances, all 102 variable references resolved, zero missing text styles/component references/slot-limit violations and no image-filled nodes. Existing master IDs, six link variants, five responsive states, fonts and collections/modes are preserved. No token, production text style or component was added. Two group layout frames, a scrollable content frame and linked QA/documentation instances implement the repairs.
+
+Visual check passed for [the short-drawer/flat-list regression section](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1591-1432). The receipt records the repair mutations, current native-slot identities and full measured matrix. Publication remains pending Richard's final review.
 
 ## Sync and remaining checkpoints
 

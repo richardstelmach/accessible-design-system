@@ -15,7 +15,7 @@
       "19.3.1"
     ]
   },
-  "status": "constructed-audited-unpublished",
+  "status": "repaired-audited-unpublished-pending-final-review",
   "newTokens": 0,
   "newProductionTextStyles": 0,
   "newQAReferenceStyles": [
@@ -44,7 +44,7 @@
         "id": "1571:742",
         "name": "03 - QA and responsive tests",
         "width": 1440,
-        "height": 3494
+        "height": 4334
       },
       {
         "id": "1571:1764",
@@ -66,9 +66,14 @@
     "tablet": {
       "section": "1575:1125",
       "backdrop": "1575:1127",
-      "surface": "1575:1143"
+      "surface": "I1575:1127;1124:161;1575:1295"
     },
-    "existingAccordionDescription": "1176:183"
+    "existingAccordionDescription": "1176:183",
+    "repairFrames": [
+      "1588:1093",
+      "1588:1094",
+      "I1570:675;1120:7583;1588:1154"
+    ]
   },
   "audit": {
     "page": {
@@ -92,7 +97,7 @@
         "id": "1571:742",
         "name": "03 - QA and responsive tests",
         "width": 1440,
-        "height": 3494
+        "height": 4334
       },
       {
         "id": "1571:1764",
@@ -101,71 +106,67 @@
         "height": 1033
       }
     ],
+    "totalNodes": 1710,
     "nodeTypes": {
-      "FRAME": 233,
-      "INSTANCE": 520,
-      "TEXT": 239,
+      "FRAME": 281,
+      "INSTANCE": 570,
+      "TEXT": 262,
       "COMPONENT_SET": 2,
       "COMPONENT": 13,
-      "VECTOR": 145,
-      "RECTANGLE": 284,
-      "SLOT": 105
+      "VECTOR": 158,
+      "RECTANGLE": 308,
+      "SLOT": 116
     },
-    "totalNodes": 1541,
-    "imageNodes": [],
+    "componentOrigins": {
+      "_Documentation/Page Header": 4,
+      "Link": 124,
+      "Icon/arrow-square-out": 124,
+      "Side menu / Link": 118,
+      "Side menu / Static group": 14,
+      "Accordion": 30,
+      "Accordion / Item": 30,
+      "Accordion / Title": 30,
+      "Icon/caret-up": 17,
+      "Icon/caret-down": 13,
+      "Side menu": 17,
+      "Button": 11,
+      "Dialog": 4,
+      "Icon Button": 4,
+      "Icon/x": 4,
+      "_Documentation/Card": 17,
+      "Responsive side menu": 7,
+      "Modal backdrop": 2
+    },
+    "unresolvedComponents": [],
+    "boundVariableCount": 102,
+    "missingVariables": [],
+    "missingTextStyles": [],
+    "slotViolations": [],
+    "imageNodes": 0,
     "fonts": [
       "Inter"
     ],
-    "missingTextStyles": [],
-    "slotViolations": [],
-    "missingVariables": [],
-    "boundVariableCount": 102,
-    "componentOrigins": {
-      "_Documentation/Page Header": 4,
-      "Link": 114,
-      "Icon/arrow-square-out": 114,
-      "Side menu / Link": 108,
-      "Side menu / Static group": 13,
-      "Accordion": 28,
-      "Accordion / Item": 28,
-      "Accordion / Title": 28,
-      "Icon/caret-up": 16,
-      "Icon/caret-down": 12,
-      "Side menu": 15,
-      "Button": 9,
-      "Dialog": 3,
-      "Icon Button": 3,
-      "Icon/x": 3,
-      "_Documentation/Card": 15,
-      "Responsive side menu": 6,
-      "Modal backdrop": 1
-    },
-    "masters": {
-      "links": "1570:368",
-      "core": "1570:389",
-      "staticGroup": "1570:369",
-      "responsive": "1570:1258"
-    },
-    "corePadding": [
-      0,
-      0,
-      0,
-      0
-    ],
-    "coreStrokes": 0,
-    "coreProperties": {
-      "Items#1570:20": {
-        "type": "SLOT",
-        "description": null,
-        "preferredValues": []
+    "core": {
+      "id": "1570:389",
+      "padding": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "strokes": 0,
+      "gap": 0,
+      "gapBinding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:8:77"
       }
     },
     "linkVariants": [
       {
         "id": "1570:304",
         "name": "Current=False, State=Default",
-        "width": 280,
-        "height": 51,
+        "minWidth": 44,
+        "minHeight": 44,
         "bindings": {
           "paddingLeft": {
             "type": "VARIABLE_ALIAS",
@@ -199,6 +200,10 @@
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:71"
           },
+          "minWidth": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          },
           "minHeight": {
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:148"
@@ -206,48 +211,16 @@
         },
         "text": [
           {
-            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,",
             "decoration": "UNDERLINE",
-            "bindings": {
-              "fills": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:177:2878"
-                }
-              ],
-              "letterSpacing": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:134"
-                }
-              ],
-              "fontSize": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:305:6951"
-                }
-              ],
-              "fontFamily": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:240:98"
-                }
-              ],
-              "fontWeight": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:116"
-                }
-              ]
-            }
+            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,"
           }
         ]
       },
       {
         "id": "1570:312",
         "name": "Current=False, State=Hover",
-        "width": 280,
-        "height": 51,
+        "minWidth": 44,
+        "minHeight": 44,
         "bindings": {
           "paddingLeft": {
             "type": "VARIABLE_ALIAS",
@@ -281,6 +254,10 @@
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:71"
           },
+          "minWidth": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          },
           "minHeight": {
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:148"
@@ -288,48 +265,16 @@
         },
         "text": [
           {
-            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,",
             "decoration": "UNDERLINE",
-            "bindings": {
-              "fills": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:177:2879"
-                }
-              ],
-              "letterSpacing": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:134"
-                }
-              ],
-              "fontSize": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:305:6951"
-                }
-              ],
-              "fontFamily": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:240:98"
-                }
-              ],
-              "fontWeight": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:116"
-                }
-              ]
-            }
+            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,"
           }
         ]
       },
       {
         "id": "1570:324",
         "name": "Current=False, State=Pressed",
-        "width": 280,
-        "height": 51,
+        "minWidth": 44,
+        "minHeight": 44,
         "bindings": {
           "paddingLeft": {
             "type": "VARIABLE_ALIAS",
@@ -362,6 +307,10 @@
           "bottomRightRadius": {
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:71"
+          },
+          "minWidth": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
           },
           "minHeight": {
             "type": "VARIABLE_ALIAS",
@@ -370,48 +319,16 @@
         },
         "text": [
           {
-            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,",
             "decoration": "UNDERLINE",
-            "bindings": {
-              "fills": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:177:2880"
-                }
-              ],
-              "letterSpacing": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:134"
-                }
-              ],
-              "fontSize": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:305:6951"
-                }
-              ],
-              "fontFamily": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:240:98"
-                }
-              ],
-              "fontWeight": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:116"
-                }
-              ]
-            }
+            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,"
           }
         ]
       },
       {
         "id": "1570:336",
         "name": "Current=True, State=Default",
-        "width": 280,
-        "height": 51,
+        "minWidth": 44,
+        "minHeight": 44,
         "bindings": {
           "paddingLeft": {
             "type": "VARIABLE_ALIAS",
@@ -444,6 +361,10 @@
           "bottomRightRadius": {
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:71"
+          },
+          "minWidth": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
           },
           "minHeight": {
             "type": "VARIABLE_ALIAS",
@@ -458,48 +379,16 @@
         },
         "text": [
           {
-            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
             "decoration": "NONE",
-            "bindings": {
-              "fills": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:1215:640"
-                }
-              ],
-              "letterSpacing": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:134"
-                }
-              ],
-              "fontSize": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:305:6951"
-                }
-              ],
-              "fontFamily": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:240:98"
-                }
-              ],
-              "fontWeight": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:136"
-                }
-              ]
-            }
+            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,"
           }
         ]
       },
       {
         "id": "1570:344",
         "name": "Current=True, State=Hover",
-        "width": 280,
-        "height": 51,
+        "minWidth": 44,
+        "minHeight": 44,
         "bindings": {
           "paddingLeft": {
             "type": "VARIABLE_ALIAS",
@@ -532,6 +421,10 @@
           "bottomRightRadius": {
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:71"
+          },
+          "minWidth": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
           },
           "minHeight": {
             "type": "VARIABLE_ALIAS",
@@ -546,48 +439,16 @@
         },
         "text": [
           {
-            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
             "decoration": "NONE",
-            "bindings": {
-              "fills": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:1215:643"
-                }
-              ],
-              "letterSpacing": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:134"
-                }
-              ],
-              "fontSize": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:305:6951"
-                }
-              ],
-              "fontFamily": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:240:98"
-                }
-              ],
-              "fontWeight": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:136"
-                }
-              ]
-            }
+            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,"
           }
         ]
       },
       {
         "id": "1570:356",
         "name": "Current=True, State=Pressed",
-        "width": 280,
-        "height": 51,
+        "minWidth": 44,
+        "minHeight": 44,
         "bindings": {
           "paddingLeft": {
             "type": "VARIABLE_ALIAS",
@@ -621,6 +482,10 @@
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:71"
           },
+          "minWidth": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          },
           "minHeight": {
             "type": "VARIABLE_ALIAS",
             "id": "VariableID:8:148"
@@ -634,40 +499,8 @@
         },
         "text": [
           {
-            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
             "decoration": "NONE",
-            "bindings": {
-              "fills": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:1215:646"
-                }
-              ],
-              "letterSpacing": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:134"
-                }
-              ],
-              "fontSize": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:305:6951"
-                }
-              ],
-              "fontFamily": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:240:98"
-                }
-              ],
-              "fontWeight": [
-                {
-                  "type": "VARIABLE_ALIAS",
-                  "id": "VariableID:8:136"
-                }
-              ]
-            }
+            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,"
           }
         ]
       }
@@ -694,6 +527,34 @@
         "name": "Layout=Inline open"
       }
     ],
+    "drawer": {
+      "id": "1570:675",
+      "maxWidth": 512,
+      "maxWidthBinding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1120:767"
+      },
+      "heightSizing": "FILL",
+      "scrollViewport": "I1570:675;1120:7583;1588:1154"
+    },
+    "flat": {
+      "id": "I1571:1377;1570:390",
+      "gap": 0,
+      "positions": [
+        {
+          "y": 0,
+          "height": 51
+        },
+        {
+          "y": 51,
+          "height": 51
+        },
+        {
+          "y": 102,
+          "height": 51
+        }
+      ]
+    },
     "collections": [
       {
         "id": "VariableCollectionId:8:2",
@@ -724,8 +585,6 @@
         ]
       }
     ],
-    "newVariables": [],
-    "qaReferenceStyle": "S:e07f639e3ee1ebc7c19bfcaa4c9f1e779656d28f,",
     "remoteVariableReferences": [
       {
         "id": "VariableID:7eb719c1141bdc5400039b11b48abb8bee75d7c3/8:387",
@@ -817,63 +676,6 @@
         "name": "color/interactive/primary/foreground",
         "remote": true
       }
-    ],
-    "exposedResponsiveChildren": [
-      {
-        "id": "1570:580",
-        "name": "Layout=Persistent",
-        "children": [
-          {
-            "id": "1570:581",
-            "name": "Side menu",
-            "exposed": true
-          }
-        ]
-      },
-      {
-        "id": "1570:667",
-        "name": "Layout=Drawer closed",
-        "children": [
-          {
-            "id": "1570:668",
-            "name": "Button",
-            "exposed": true
-          }
-        ]
-      },
-      {
-        "id": "1570:670",
-        "name": "Layout=Drawer open",
-        "children": [
-          {
-            "id": "1570:675",
-            "name": "Dialog",
-            "exposed": true
-          }
-        ]
-      },
-      {
-        "id": "1570:838",
-        "name": "Layout=Inline closed",
-        "children": [
-          {
-            "id": "1570:839",
-            "name": "Accordion",
-            "exposed": true
-          }
-        ]
-      },
-      {
-        "id": "1570:1048",
-        "name": "Layout=Inline open",
-        "children": [
-          {
-            "id": "1570:1049",
-            "name": "Accordion",
-            "exposed": true
-          }
-        ]
-      }
     ]
   },
   "visualChecks": {
@@ -883,7 +685,8 @@
     "RTLAndEnlargedText": "1574:1334",
     "tabletDrawer": "1575:1125",
     "accessibility": "1571:1764",
-    "result": "passed after targeted auto-layout and typography fixes"
+    "result": "passed after prepublication drawer, flat-spacing and target-minimum repairs",
+    "repairRegression": "1591:1432"
   },
   "limitations": [
     "Figma authoring states do not implement native browser modal, routing or accessibility semantics.",
@@ -891,5 +694,282 @@
     "Richard reports successful screen-reader and keyboard use; platform and AT versions unspecified.",
     "Library publication and remaining actual zoom/device acceptance are separate checkpoints."
   ],
-  "tokensStudio": "No canonical token diff; no provider pull/export or destructive reconciliation required."
+  "tokensStudio": "No canonical or compiled token diff; all repairs bind existing tokens. No provider pull/export required.",
+  "initialDeliverySummary": {
+    "nodeCount": 1541,
+    "componentOrigins": {
+      "_Documentation/Page Header": 4,
+      "Link": 114,
+      "Icon/arrow-square-out": 114,
+      "Side menu / Link": 108,
+      "Side menu / Static group": 13,
+      "Accordion": 28,
+      "Accordion / Item": 28,
+      "Accordion / Title": 28,
+      "Icon/caret-up": 16,
+      "Icon/caret-down": 12,
+      "Side menu": 15,
+      "Button": 9,
+      "Dialog": 3,
+      "Icon Button": 3,
+      "Icon/x": 3,
+      "_Documentation/Card": 15,
+      "Responsive side menu": 6,
+      "Modal backdrop": 1
+    },
+    "supersededBy": "postReviewRepairs"
+  },
+  "postReviewRepairs": {
+    "repair": {
+      "createdNodeIds": [
+        "1588:1093",
+        "1588:1094",
+        "1588:1153"
+      ],
+      "mutatedNodeIds": [
+        "1570:390",
+        "1570:670",
+        "1570:675",
+        "1570:391",
+        "1570:415",
+        "I1570:675;1120:7583;1570:775",
+        "I1570:675;1120:7583",
+        "1570:304",
+        "1570:312",
+        "1570:324",
+        "1570:336",
+        "1570:344",
+        "1570:356",
+        "1570:389"
+      ],
+      "scrollViewport": "1588:1153",
+      "groupSpacing": {
+        "itemsGap": 0,
+        "wrappers": [
+          {
+            "id": "1588:1093",
+            "name": "Group \u2014 separation after",
+            "y": 0,
+            "h": 169,
+            "paddingBottom": 16
+          },
+          {
+            "id": "1588:1094",
+            "name": "Group \u2014 separation after",
+            "y": 169,
+            "h": 252,
+            "paddingBottom": 16
+          },
+          {
+            "id": "1570:502",
+            "name": "Accordion",
+            "y": 421,
+            "h": 51,
+            "paddingBottom": 0
+          }
+        ]
+      },
+      "drawer": {
+        "height": 720,
+        "surfaceHeight": 720,
+        "surfaceMaxWidth": 512,
+        "heightSizing": "FILL"
+      },
+      "targets": [
+        {
+          "id": "1570:304",
+          "name": "Current=False, State=Default",
+          "minWidth": 44,
+          "minHeight": 44
+        },
+        {
+          "id": "1570:312",
+          "name": "Current=False, State=Hover",
+          "minWidth": 44,
+          "minHeight": 44
+        },
+        {
+          "id": "1570:324",
+          "name": "Current=False, State=Pressed",
+          "minWidth": 44,
+          "minHeight": 44
+        },
+        {
+          "id": "1570:336",
+          "name": "Current=True, State=Default",
+          "minWidth": 44,
+          "minHeight": 44
+        },
+        {
+          "id": "1570:344",
+          "name": "Current=True, State=Hover",
+          "minWidth": 44,
+          "minHeight": 44
+        },
+        {
+          "id": "1570:356",
+          "name": "Current=True, State=Pressed",
+          "minWidth": 44,
+          "minHeight": 44
+        }
+      ],
+      "newTokens": 0,
+      "newComponents": 0
+    },
+    "regressions": {
+      "drawer": [
+        {
+          "width": 320,
+          "height": 560,
+          "surfaceWidth": 320,
+          "surfaceHeight": 560,
+          "scrollViewportHeight": 454,
+          "headerHeight": 80,
+          "pass": true
+        },
+        {
+          "width": 390,
+          "height": 720,
+          "surfaceWidth": 390,
+          "surfaceHeight": 720,
+          "scrollViewportHeight": 614,
+          "headerHeight": 80,
+          "pass": true
+        },
+        {
+          "width": 512,
+          "height": 400,
+          "surfaceWidth": 512,
+          "surfaceHeight": 400,
+          "scrollViewportHeight": 294,
+          "headerHeight": 80,
+          "pass": true
+        },
+        {
+          "width": 768,
+          "height": 560,
+          "surfaceWidth": 512,
+          "surfaceHeight": 560,
+          "scrollViewportHeight": 454,
+          "headerHeight": 80,
+          "pass": true
+        },
+        {
+          "width": 1280,
+          "height": 900,
+          "surfaceWidth": 512,
+          "surfaceHeight": 900,
+          "scrollViewportHeight": 794,
+          "headerHeight": 80,
+          "pass": true
+        }
+      ],
+      "targets": [
+        {
+          "variant": "Current=False, State=Default",
+          "width": 44,
+          "height": 44,
+          "pass": true
+        },
+        {
+          "variant": "Current=False, State=Hover",
+          "width": 44,
+          "height": 44,
+          "pass": true
+        },
+        {
+          "variant": "Current=False, State=Pressed",
+          "width": 44,
+          "height": 44,
+          "pass": true
+        },
+        {
+          "variant": "Current=True, State=Default",
+          "width": 44,
+          "height": 44,
+          "pass": true
+        },
+        {
+          "variant": "Current=True, State=Hover",
+          "width": 44,
+          "height": 44,
+          "pass": true
+        },
+        {
+          "variant": "Current=True, State=Pressed",
+          "width": 44,
+          "height": 44,
+          "pass": true
+        }
+      ],
+      "flat": {
+        "id": "I1571:1377;1570:390",
+        "gap": 0,
+        "measuredGaps": [
+          0,
+          0
+        ],
+        "pass": true
+      },
+      "groups": {
+        "id": "1570:390",
+        "gap": 0,
+        "wrappers": [
+          {
+            "id": "1588:1093",
+            "name": "Group \u2014 separation after",
+            "y": 0,
+            "h": 169,
+            "paddingBottom": 16
+          },
+          {
+            "id": "1588:1094",
+            "name": "Group \u2014 separation after",
+            "y": 169,
+            "h": 252,
+            "paddingBottom": 16
+          },
+          {
+            "id": "1570:502",
+            "name": "Accordion",
+            "y": 421,
+            "h": 51,
+            "paddingBottom": 0
+          }
+        ],
+        "pass": true
+      },
+      "temporaryCreatedAndRemovedIds": [
+        "1589:1114",
+        "1589:1216",
+        "1589:1318",
+        "1589:1420",
+        "1589:1522",
+        "1589:1624",
+        "1589:1632",
+        "1589:1640",
+        "1589:1648",
+        "1589:1656",
+        "1589:1664"
+      ],
+      "passed": true
+    },
+    "documentation": {
+      "regressionSection": "1591:1432",
+      "shortBackdrop": "1591:1435",
+      "changedIds": [
+        "1571:1795",
+        "I1575:1127;1124:161;1575:1295"
+      ]
+    },
+    "currentIdentities": {
+      "tabletSurface": "I1575:1127;1124:161;1575:1295",
+      "scrollViewport": "I1570:675;1120:7583;1588:1154",
+      "coreGroupFrames": [
+        "1588:1093",
+        "1588:1094"
+      ]
+    },
+    "nativeSlotIdentityNote": "Insertion can normalize native-slot descendant IDs. Use currentIdentities and audit for live lookups; mutation receipts retain the originally returned IDs."
+  }
 }
