@@ -1,12 +1,12 @@
 # CodeBlock source and validation review
 
-Date: 26 October 2026. Source base: `1790de9d656698dda8af0a9cd9729def67f12c9a` (current GitHub main at discovery). Branch: `feat/code-block`.
+Updated: 27 October 2026 (implementation validation: 26 October). Source base: `1790de9d656698dda8af0a9cd9729def67f12c9a` (current GitHub main at discovery). Branch: `feat/code-block`.
 
 ## Outcome and limits
 
 The public package previously had no CodeBlock export. A site-local `Code` helper now has a reusable main-system counterpart, with a canonical YAML/Markdown contract, API inventory, types, styled implementation and runnable comparison route. No website migration or package publication is included.
 
-This is a draft source implementation, not final Figma parity or release acceptance. The font choice was confirmed by Richard: system monospace stack on the web, with an explicitly documented illustrative Figma face. Source review, source merge, Tokens Studio pull/export verification, production Figma construction and manual screen-reader acceptance remain pending.
+Source PR #47 is merged at `16559f8c85d960d98d7e48c0da5859e7dded467a`. Richard completed the Tokens Studio export and reported one variable created. The live exported foundation and completed CodeBlock page were audited on 27 October. The web keeps its confirmed system monospace stack; Figma uses the source-declared illustrative Roboto Mono face. Manual release acceptance remains pending; Figma presentation is not a runtime accessibility certification.
 
 ## Source discovery
 
@@ -32,11 +32,31 @@ Token build: **409 raw tokens, 337 Tokens Studio tokens, 72 mode-managed nodes e
 
 A CSS system-family stack is not a literal installed Figma font name. Roboto Mono Regular was verified available and is the intended illustrative face. Official Tokens Studio documentation confirms it exports only the first comma-separated family, so the raw stack would incorrectly request ui-monospace in Figma. `tokens/figma/font-family-mapping.json` now explicitly projects the Studio-only value to Roboto Mono. The compiler validates source/expected web value, duplicate/missing mappings, one Figma family and a reason before writing outputs. Raw/browser values, aliases and metadata stay unchanged. Two regression cases verify projection and rejection without partial mutation. Verify the exported family/style after pull; no Figma-only repair is needed.
 
-## Live Figma evidence
+## Live Figma implementation and export audit
 
-File: `dVFI0q1cXMtmjUAkdvSWkk`. Existing Icon Button `95:943`; registered `Icon/copy` `62:795`. Read the live pages, body styles, collection modes and recent Toast documentation layout. No CodeBlock or code typography role exists. `global` and `Breakpoint` (base/md/lg) remain intact. Exact receipts are in [the Figma evidence file](react-code-block-figma-evidence.json).
+[26 - Components - CodeBlock](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1550-46) contains the completed production masters, usage documentation, QA/responsive examples and accessibility guidance.
 
-**Created objects: none. Changed objects: none.** Planned page: `26 - Components - CodeBlock`, two Copy composition variants, Label/Code/Feedback text properties and reused IconButton. Clipboard outcomes are documentation instances/text, not a production state matrix. Standard component, documentation, QA and accessibility areas remain required after the foundation checkpoint.
+| Object | ID / result |
+| --- | --- |
+| CodeBlock public set | `1550:49`; exactly Copy=True / Copy=False |
+| Public text properties | Label, Code, Feedback |
+| Internal copy control | `_CodeBlock/Copy` `1550:65`; Default/Hover/Pressed with independent Boolean Focus |
+| Component area | `1550:96`; 1440 × 1263 |
+| Documentation examples | `1550:102`; 1440 × 4015 |
+| QA and responsive tests | `1550:108`; 1440 × 4654 |
+| Accessibility notes | `1550:114`; 1440 × 1698 |
+| Exported mono variable | `VariableID:1547:7`; STRING Roboto Mono in global; FONT_FAMILY scope; `var(--typography-family-mono)` WEB syntax |
+| Exported code style | `S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,`; Roboto Mono Regular, 16px, 150%, zero tracking |
+
+Reused existing Icon Button masters (default/hover/active), registered `Icon/copy` `62:795`, `_Documentation/Page Header` `212:464` and `_Documentation/Card` `146:1996`. Existing masters and foundations were not modified. No variables were created by the agent. The two CodeBlock masters are 536 × 119 with copy and 536 × 99 without copy at lg; outer strokes are inside and participate in layout. Only the code viewport clips and scrolls; the root/header retain the copy focus ring.
+
+The four standard areas each have one shared page header. There are **21 CodeBlock instances, 15 documentation-card instances and 165 styled text nodes**. Audit found no unstyled text, unbound text fill, duplicate variable names, duplicate CodeBlock page or horizontally overflowing visible header labels/feedback/controls in the supplied fixtures. Global and Breakpoint collection IDs and base/md/lg modes remain intact. Text/default on surface/default is **7.00:1**; focus ring on separator is **4.52:1**.
+
+Examples cover optional copy, installation/CSS/React, whitespace/tabs/empty/literal markup, ready/pending/success/repeated/failure feedback, 320px viewport fixtures, independent pointer/focus states, inherited typography, doubled text, text spacing and wrapping no-JavaScript/print illustrations. Four named `_reference/CodeBlock/…` styles are QA-only text-stress styles; production code continues to use the exported semantic style.
+
+**Authoring limitation:** Figma uses constrained label/feedback columns so resized instances remain contained. Browser CSS wraps according to intrinsic content widths; long-feedback line breaks and resulting header heights can differ. The QA page states this explicitly. Roboto Mono glyph widths also differ from platform system fonts. Browser results remain authoritative for actual keyboard, reflow, clipboard and live-region behaviour. Figma no-JavaScript/print examples illustrate wrapping; they do not execute those modes.
+
+Visual review inspected all four areas after relevant corrections. Full object/style IDs and final measurements are in [the Figma evidence file](react-code-block-figma-evidence.json). The agent did not perform a second Tokens Studio export; the user's export and post-export audit are the recorded round-trip evidence. No Figma library publication was performed.
 
 ## Executed validation
 
@@ -60,13 +80,12 @@ Visual review: [desktop](code-block/desktop.png), [320px keyboard focus](code-bl
 
 ## GitHub delivery state
 
-Richard explicitly authorised pushing the branch and creating a draft PR. The branch is published as [PR #47](https://github.com/richardstelmach/accessible-design-system/pull/47). It remains a draft and is not merged. Check its current head for CI results. The initial push was blocked before this explicit authorisation; no workaround was used.
+Richard authorised source merge and branch cleanup. [PR #47](https://github.com/richardstelmach/accessible-design-system/pull/47) is merged; its head `457ffc45460419794253db2637b393ad49636e2d` passed both GitHub workflows. The feature branch was removed from GitHub and locally, and the three inspected main checkouts were synchronised to merge `16559f8`. This Figma completion receipt is a separate documentation-only follow-up; production package code and compiled tokens are unchanged by it.
 
 ## Remaining acceptance
 
-- Human contract/API review and source merge; no merge or publication was performed.
-- After source review and merge, verify the explicit Studio-only font projection and perform the established global-only Tokens Studio pull/export.
-- Build production CodeBlock with token-bound foundations, existing controls/icons and standard documentation; audit IDs, properties, bindings, layout and appearance after export.
+- Richard's visual review of the completed Figma component and documentation.
 - Manual VoiceOver or NVDA: initial reading, populated ready feedback, successful/repeated/denied/unavailable clipboard announcements, multiple blocks and meaningful tab stops. DOM mutations and axe cannot establish spoken delivery.
 - Actual Safari/Firefox, 400% browser zoom and Windows high contrast acceptance. Chrome viewport and forced-colour emulation are the recorded automated evidence.
+- Human Figma library and npm publication; neither was performed.
 - After acceptance, update the private site's pinned package/provenance, replace its local helper and rerun its checks. Basic Table, SideNavigation and Accordion boundary review remain subsequent work.

@@ -59,7 +59,7 @@ The system stack preserves the existing website policy without fetching fonts. P
 
 ## Figma and documentation
 
-The intended CodeBlock page follows the existing numbered component pages and standard four-area documentation template. Two Copy variants model composition; label, code and feedback are text properties. Reuse the existing Icon Button and registered Icon/copy. Outcomes and stress examples are instances rather than new production variant axes. Production construction awaits source review, merge and the Tokens Studio foundation checkpoint.
+The intended CodeBlock page follows the existing numbered component pages and standard four-area documentation template. Two Copy variants model composition; label, code and feedback are text properties. Reuse the existing Icon Button and registered Icon/copy. Outcomes and stress examples are instances rather than new production variant axes. The completed [Figma page](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1550-46) includes both masters, usage examples, QA fixtures and accessibility guidance. Source PR #47 is merged and the exported foundation was audited. The Figma header uses constrained authoring columns, so long-label/feedback line breaks can differ from browser intrinsic wrapping; runtime behaviour remains defined by this contract and the React implementation. See the validation report for IDs, measurements and remaining release checks.
 
 ## Validation and release
 

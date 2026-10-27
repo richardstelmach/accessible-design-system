@@ -1,54 +1,1284 @@
 {
-  "date": "2026-10-26",
+  "schemaVersion": 1,
+  "date": "2026-10-27",
   "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
-  "status": "read-only-discovery-complete-production-build-pending-foundation-sync",
-  "sourceBase": "1790de9d656698dda8af0a9cd9729def67f12c9a",
-  "createdNodeIds": [],
-  "mutatedNodeIds": [],
+  "status": "built-and-audited-manual-release-checks-pending",
+  "sourceBase": "16559f8c85d960d98d7e48c0da5859e7dded467a",
+  "sourcePR": "https://github.com/richardstelmach/accessible-design-system/pull/47",
+  "pageId": "1550:46",
+  "pageName": "26 - Components - CodeBlock",
+  "matchingPageCount": 1,
+  "publicSet": {
+    "id": "1550:49",
+    "variantCount": 2,
+    "properties": {
+      "Label#1550:17": {
+        "type": "TEXT",
+        "defaultValue": "React"
+      },
+      "Code#1550:20": {
+        "type": "TEXT",
+        "defaultValue": "import '@owla11y/react/styles.css';"
+      },
+      "Feedback#1550:23": {
+        "type": "TEXT",
+        "defaultValue": "Ready to copy."
+      },
+      "Copy": {
+        "type": "VARIANT",
+        "defaultValue": "True",
+        "variantOptions": [
+          "True",
+          "False"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "id": "1550:47",
+        "name": "Copy=True",
+        "width": 536,
+        "height": 119,
+        "layout": "VERTICAL",
+        "clip": false,
+        "exposedInstances": [
+          "1550:76"
+        ]
+      },
+      {
+        "id": "1550:48",
+        "name": "Copy=False",
+        "width": 536,
+        "height": 99,
+        "layout": "VERTICAL",
+        "clip": false,
+        "exposedInstances": [
+          "1550:88"
+        ]
+      }
+    ]
+  },
+  "copySet": {
+    "id": "1550:65",
+    "variantCount": 3,
+    "properties": {
+      "Focus#1550:13": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "State": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Hover",
+          "Pressed"
+        ]
+      }
+    },
+    "iconMasters": [
+      "62:795",
+      "62:795",
+      "62:795"
+    ]
+  },
+  "areas": [
+    {
+      "id": "1550:96",
+      "name": "01 - Component set",
+      "width": 1440,
+      "height": 1263,
+      "headerCount": 1
+    },
+    {
+      "id": "1550:102",
+      "name": "02 - Documentation examples",
+      "width": 1440,
+      "height": 4015,
+      "headerCount": 1
+    },
+    {
+      "id": "1550:108",
+      "name": "03 - QA and responsive tests",
+      "width": 1440,
+      "height": 4654,
+      "headerCount": 1
+    },
+    {
+      "id": "1550:114",
+      "name": "04 - Accessibility notes",
+      "width": 1440,
+      "height": 1698,
+      "headerCount": 1
+    }
+  ],
+  "sampleCount": 21,
+  "samples": [
+    {
+      "id": "1552:214",
+      "name": "Installation command",
+      "width": 536,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 250,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:227",
+      "name": "CSS without copy",
+      "width": 536,
+      "height": 99,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 250,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:243",
+      "name": "Multiline React source",
+      "width": 736,
+      "height": 263,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 385,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:260",
+      "name": "Ready",
+      "width": 536,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 250,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:274",
+      "name": "Pending",
+      "width": 536,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 250,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:288",
+      "name": "Success",
+      "width": 536,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 250,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:302",
+      "name": "Repeated success",
+      "width": 536,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 250,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:316",
+      "name": "Clipboard denied or unavailable",
+      "width": 536,
+      "height": 123,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 250,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:330",
+      "name": "Repeated failure",
+      "width": 536,
+      "height": 147,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 250,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:346",
+      "name": "Public API example",
+      "width": 736,
+      "height": 219,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 702,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:384",
+      "name": "Keyboard scroll focus example",
+      "width": 288,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 2691,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:401",
+      "name": "Long label and failed copy example",
+      "width": 288,
+      "height": 201,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 2691,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:416",
+      "name": "Copy keyboard focus example",
+      "width": 288,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 2691,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:435",
+      "name": "200% example",
+      "width": 288,
+      "height": 603,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 32,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 5382,
+          "style": "S:e63f84dd371c7fe330db306615161efc5d0777b2,"
+        }
+      ]
+    },
+    {
+      "id": "1552:450",
+      "name": "spacing example",
+      "width": 288,
+      "height": 222,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 3227,
+          "style": "S:95fae98b29db1f09e9764bcb6f45133fb1e5102a,"
+        }
+      ]
+    },
+    {
+      "id": "1552:519",
+      "name": "Empty code",
+      "width": 536,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 0,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:532",
+      "name": "Tabs and literal markup",
+      "width": 536,
+      "height": 147,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 308,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:548",
+      "name": "No-JavaScript wrapping baseline",
+      "width": 536,
+      "height": 243,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 502,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:565",
+      "name": "base typography",
+      "width": 288,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 337,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:579",
+      "name": "md typography",
+      "width": 536,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 337,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    },
+    {
+      "id": "1552:593",
+      "name": "lg typography",
+      "width": 536,
+      "height": 119,
+      "code": [
+        {
+          "font": {
+            "family": "Roboto Mono",
+            "style": "Regular",
+            "variationSettings": {
+              "wght": 400
+            }
+          },
+          "size": 16,
+          "lineHeight": {
+            "unit": "PERCENT",
+            "value": 150
+          },
+          "width": 337,
+          "style": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,"
+        }
+      ]
+    }
+  ],
+  "docCardCount": 15,
+  "textCount": 165,
+  "unstyledText": [],
+  "unboundTextFill": [],
+  "headerOverflow": [],
+  "duplicateVariableNames": [],
+  "contrast": {
+    "textOnSurface": 7.004728958482929,
+    "focusOnSeparator": 4.520501244469271
+  },
+  "exportedFoundation": {
+    "variable": {
+      "id": "VariableID:1547:7",
+      "name": "typography/family/mono",
+      "values": {
+        "8:0": "Roboto Mono"
+      },
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "codeSyntax": {
+        "WEB": "var(--typography-family-mono)"
+      }
+    },
+    "style": {
+      "id": "S:7ac5fa5232dea106cfe500a99a07df1de8e3ad11,",
+      "name": "typography/code",
+      "fontName": {
+        "family": "Roboto Mono",
+        "style": "Regular",
+        "variationSettings": {
+          "wght": 400
+        }
+      },
+      "fontSize": 16,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 150
+      },
+      "letterSpacing": {
+        "unit": "PIXELS",
+        "value": 0
+      }
+    }
+  },
+  "collections": [
+    {
+      "id": "VariableCollectionId:8:2",
+      "name": "global",
+      "modes": [
+        {
+          "name": "global",
+          "modeId": "8:0"
+        }
+      ]
+    },
+    {
+      "id": "VariableCollectionId:303:6772",
+      "name": "Breakpoint",
+      "modes": [
+        {
+          "name": "base",
+          "modeId": "303:1"
+        },
+        {
+          "name": "md",
+          "modeId": "303:2"
+        },
+        {
+          "name": "lg",
+          "modeId": "303:3"
+        }
+      ]
+    }
+  ],
+  "qaStyles": [
+    {
+      "id": "S:ebfb8d15925f410e9cc90c539321448cc318abd1,",
+      "name": "_reference/CodeBlock/body-small/200-percent"
+    },
+    {
+      "id": "S:e63f84dd371c7fe330db306615161efc5d0777b2,",
+      "name": "_reference/CodeBlock/code/200-percent"
+    },
+    {
+      "id": "S:f1e6b2acb7da817d0082de7f50c24b453aac79d9,",
+      "name": "_reference/CodeBlock/body-small/text-spacing"
+    },
+    {
+      "id": "S:95fae98b29db1f09e9764bcb6f45133fb1e5102a,",
+      "name": "_reference/CodeBlock/code/text-spacing"
+    }
+  ],
+  "createdNodeIds": [
+    "1550:46",
+    "1550:96",
+    "1550:97",
+    "1550:98",
+    "I1550:98;212:461",
+    "I1550:98;212:462",
+    "I1550:98;212:463",
+    "1550:120",
+    "1550:121",
+    "1550:122",
+    "1550:49",
+    "1550:47",
+    "1550:72",
+    "1550:73",
+    "1550:74",
+    "1550:75",
+    "1550:76",
+    "I1550:76;1550:51",
+    "I1550:76;1550:51;95:854",
+    "I1550:76;1550:51;95:854;62:793",
+    "1550:82",
+    "1550:83",
+    "1550:48",
+    "1550:84",
+    "1550:85",
+    "1550:86",
+    "1550:87",
+    "1550:88",
+    "I1550:88;1550:51",
+    "I1550:88;1550:51;95:854",
+    "I1550:88;1550:51;95:854;62:793",
+    "1550:94",
+    "1550:95",
+    "1550:123",
+    "1550:124",
+    "1550:125",
+    "1550:65",
+    "1550:50",
+    "1550:51",
+    "I1550:51;95:854",
+    "I1550:51;95:854;62:793",
+    "1550:66",
+    "1550:67",
+    "1550:55",
+    "1550:56",
+    "I1550:56;95:857",
+    "I1550:56;95:857;62:793",
+    "1550:68",
+    "1550:69",
+    "1550:60",
+    "1550:61",
+    "I1550:61;95:860",
+    "I1550:61;95:860;62:793",
+    "1550:70",
+    "1550:71",
+    "1550:102",
+    "1550:103",
+    "1550:104",
+    "I1550:104;212:461",
+    "I1550:104;212:462",
+    "I1550:104;212:463",
+    "1550:108",
+    "1550:109",
+    "1550:110",
+    "I1550:110;212:461",
+    "I1550:110;212:462",
+    "I1550:110;212:463",
+    "1550:114",
+    "1550:115",
+    "1550:116",
+    "I1550:116;212:461",
+    "I1550:116;212:462",
+    "I1550:116;212:463",
+    "1552:198",
+    "1552:199",
+    "I1552:199;146:1992",
+    "I1552:199;146:1993",
+    "I1552:199;146:1994",
+    "1552:203",
+    "I1552:203;146:1992",
+    "I1552:203;146:1993",
+    "I1552:203;146:1994",
+    "1552:207",
+    "I1552:207;146:1992",
+    "I1552:207;146:1993",
+    "I1552:207;146:1994",
+    "1552:211",
+    "1552:212",
+    "1552:213",
+    "1552:214",
+    "I1552:214;1550:72",
+    "I1552:214;1550:73",
+    "I1552:214;1550:74",
+    "I1552:214;1550:75",
+    "I1552:214;1550:76",
+    "I1552:214;1550:76;1550:51",
+    "I1552:214;1550:76;1550:51;95:854",
+    "I1552:214;1550:76;1550:51;95:854;62:793",
+    "I1552:214;1550:76;1550:66",
+    "I1552:214;1550:76;1550:67",
+    "I1552:214;1550:82",
+    "I1552:214;1550:83",
+    "1552:227",
+    "I1552:227;1550:84",
+    "I1552:227;1550:85",
+    "I1552:227;1550:86",
+    "I1552:227;1550:87",
+    "I1552:227;1550:88",
+    "I1552:227;1550:88;1550:51",
+    "I1552:227;1550:88;1550:51;95:854",
+    "I1552:227;1550:88;1550:51;95:854;62:793",
+    "I1552:227;1550:88;1550:66",
+    "I1552:227;1550:88;1550:67",
+    "I1552:227;1550:94",
+    "I1552:227;1550:95",
+    "1552:240",
+    "1552:241",
+    "1552:242",
+    "1552:243",
+    "I1552:243;1550:72",
+    "I1552:243;1550:73",
+    "I1552:243;1550:74",
+    "I1552:243;1550:75",
+    "I1552:243;1550:76",
+    "I1552:243;1550:76;1550:51",
+    "I1552:243;1550:76;1550:51;95:854",
+    "I1552:243;1550:76;1550:51;95:854;62:793",
+    "I1552:243;1550:76;1550:66",
+    "I1552:243;1550:76;1550:67",
+    "I1552:243;1550:82",
+    "I1552:243;1550:83",
+    "1552:256",
+    "1552:257",
+    "1552:258",
+    "1552:259",
+    "1552:260",
+    "I1552:260;1550:72",
+    "I1552:260;1550:73",
+    "I1552:260;1550:74",
+    "I1552:260;1550:75",
+    "I1552:260;1550:76",
+    "I1552:260;1550:76;1550:51",
+    "I1552:260;1550:76;1550:51;95:854",
+    "I1552:260;1550:76;1550:51;95:854;62:793",
+    "I1552:260;1550:76;1550:66",
+    "I1552:260;1550:76;1550:67",
+    "I1552:260;1550:82",
+    "I1552:260;1550:83",
+    "1552:273",
+    "1552:274",
+    "I1552:274;1550:72",
+    "I1552:274;1550:73",
+    "I1552:274;1550:74",
+    "I1552:274;1550:75",
+    "I1552:274;1550:76",
+    "I1552:274;1550:76;1550:51",
+    "I1552:274;1550:76;1550:51;95:854",
+    "I1552:274;1550:76;1550:51;95:854;62:793",
+    "I1552:274;1550:76;1550:66",
+    "I1552:274;1550:76;1550:67",
+    "I1552:274;1550:82",
+    "I1552:274;1550:83",
+    "1552:287",
+    "1552:288",
+    "I1552:288;1550:72",
+    "I1552:288;1550:73",
+    "I1552:288;1550:74",
+    "I1552:288;1550:75",
+    "I1552:288;1550:76",
+    "I1552:288;1550:76;1550:51",
+    "I1552:288;1550:76;1550:51;95:854",
+    "I1552:288;1550:76;1550:51;95:854;62:793",
+    "I1552:288;1550:76;1550:66",
+    "I1552:288;1550:76;1550:67",
+    "I1552:288;1550:82",
+    "I1552:288;1550:83",
+    "1552:301",
+    "1552:302",
+    "I1552:302;1550:72",
+    "I1552:302;1550:73",
+    "I1552:302;1550:74",
+    "I1552:302;1550:75",
+    "I1552:302;1550:76",
+    "I1552:302;1550:76;1550:51",
+    "I1552:302;1550:76;1550:51;95:854",
+    "I1552:302;1550:76;1550:51;95:854;62:793",
+    "I1552:302;1550:76;1550:66",
+    "I1552:302;1550:76;1550:67",
+    "I1552:302;1550:82",
+    "I1552:302;1550:83",
+    "1552:315",
+    "1552:316",
+    "I1552:316;1550:72",
+    "I1552:316;1550:73",
+    "I1552:316;1550:74",
+    "I1552:316;1550:75",
+    "I1552:316;1550:76",
+    "I1552:316;1550:76;1550:51",
+    "I1552:316;1550:76;1550:51;95:854",
+    "I1552:316;1550:76;1550:51;95:854;62:793",
+    "I1552:316;1550:76;1550:66",
+    "I1552:316;1550:76;1550:67",
+    "I1552:316;1550:82",
+    "I1552:316;1550:83",
+    "1552:329",
+    "1552:330",
+    "I1552:330;1550:72",
+    "I1552:330;1550:73",
+    "I1552:330;1550:74",
+    "I1552:330;1550:75",
+    "I1552:330;1550:76",
+    "I1552:330;1550:76;1550:51",
+    "I1552:330;1550:76;1550:51;95:854",
+    "I1552:330;1550:76;1550:51;95:854;62:793",
+    "I1552:330;1550:76;1550:66",
+    "I1552:330;1550:76;1550:67",
+    "I1552:330;1550:82",
+    "I1552:330;1550:83",
+    "1552:343",
+    "1552:344",
+    "1552:345",
+    "1552:346",
+    "I1552:346;1550:84",
+    "I1552:346;1550:85",
+    "I1552:346;1550:86",
+    "I1552:346;1550:87",
+    "I1552:346;1550:88",
+    "I1552:346;1550:88;1550:51",
+    "I1552:346;1550:88;1550:51;95:854",
+    "I1552:346;1550:88;1550:51;95:854;62:793",
+    "I1552:346;1550:88;1550:66",
+    "I1552:346;1550:88;1550:67",
+    "I1552:346;1550:94",
+    "I1552:346;1550:95",
+    "1552:359",
+    "1552:360",
+    "1552:361",
+    "1552:362",
+    "1552:363",
+    "1552:364",
+    "1552:365",
+    "1552:366",
+    "I1552:366;146:1992",
+    "I1552:366;146:1993",
+    "I1552:366;146:1994",
+    "1552:370",
+    "I1552:370;146:1992",
+    "I1552:370;146:1993",
+    "I1552:370;146:1994",
+    "1552:374",
+    "I1552:374;146:1992",
+    "I1552:374;146:1993",
+    "I1552:374;146:1994",
+    "1552:378",
+    "1552:379",
+    "1552:380",
+    "1552:381",
+    "1552:382",
+    "1552:383",
+    "1552:384",
+    "I1552:384;1550:72",
+    "I1552:384;1550:73",
+    "I1552:384;1550:74",
+    "I1552:384;1550:75",
+    "I1552:384;1550:76",
+    "I1552:384;1550:76;1550:51",
+    "I1552:384;1550:76;1550:51;95:854",
+    "I1552:384;1550:76;1550:51;95:854;62:793",
+    "I1552:384;1550:76;1550:66",
+    "I1552:384;1550:76;1550:67",
+    "I1552:384;1550:82",
+    "I1552:384;1550:83",
+    "1552:397",
+    "1552:398",
+    "1552:399",
+    "1552:400",
+    "1552:401",
+    "I1552:401;1550:72",
+    "I1552:401;1550:73",
+    "I1552:401;1550:74",
+    "I1552:401;1550:75",
+    "I1552:401;1550:76",
+    "I1552:401;1550:76;1550:51",
+    "I1552:401;1550:76;1550:51;95:854",
+    "I1552:401;1550:76;1550:51;95:854;62:793",
+    "I1552:401;1550:76;1550:66",
+    "I1552:401;1550:76;1550:67",
+    "I1552:401;1550:82",
+    "I1552:401;1550:83",
+    "1552:414",
+    "1552:415",
+    "1552:416",
+    "I1552:416;1550:72",
+    "I1552:416;1550:73",
+    "I1552:416;1550:74",
+    "I1552:416;1550:75",
+    "I1552:416;1550:76",
+    "I1552:416;1550:76;1550:51",
+    "I1552:416;1550:76;1550:51;95:854",
+    "I1552:416;1550:76;1550:51;95:854;62:793",
+    "I1552:416;1550:76;1550:66",
+    "I1552:416;1550:76;1550:67",
+    "I1552:416;1550:82",
+    "I1552:416;1550:83",
+    "1552:429",
+    "1552:430",
+    "1552:431",
+    "1552:432",
+    "1552:433",
+    "1552:434",
+    "1552:435",
+    "I1552:435;1550:72",
+    "I1552:435;1550:73",
+    "I1552:435;1550:74",
+    "I1552:435;1550:75",
+    "I1552:435;1550:76",
+    "I1552:435;1550:76;1550:51",
+    "I1552:435;1550:76;1550:51;95:854",
+    "I1552:435;1550:76;1550:51;95:854;62:793",
+    "I1552:435;1550:76;1550:66",
+    "I1552:435;1550:76;1550:67",
+    "I1552:435;1550:82",
+    "I1552:435;1550:83",
+    "1552:448",
+    "1552:449",
+    "1552:450",
+    "I1552:450;1550:72",
+    "I1552:450;1550:73",
+    "I1552:450;1550:74",
+    "I1552:450;1550:75",
+    "I1552:450;1550:76",
+    "I1552:450;1550:76;1550:51",
+    "I1552:450;1550:76;1550:51;95:854",
+    "I1552:450;1550:76;1550:51;95:854;62:793",
+    "I1552:450;1550:76;1550:66",
+    "I1552:450;1550:76;1550:67",
+    "I1552:450;1550:82",
+    "I1552:450;1550:83",
+    "1552:463",
+    "1552:464",
+    "1552:465",
+    "1552:466",
+    "1552:467",
+    "1552:468",
+    "1552:469",
+    "I1552:469;1550:51",
+    "I1552:469;1550:51;95:854",
+    "I1552:469;1550:51;95:854;62:793",
+    "I1552:469;1550:66",
+    "I1552:469;1550:67",
+    "1552:475",
+    "1552:476",
+    "1552:477",
+    "I1552:477;1550:56",
+    "I1552:477;1550:56;95:857",
+    "I1552:477;1550:56;95:857;62:793",
+    "I1552:477;1550:68",
+    "I1552:477;1550:69",
+    "1552:483",
+    "1552:484",
+    "1552:485",
+    "I1552:485;1550:61",
+    "I1552:485;1550:61;95:860",
+    "I1552:485;1550:61;95:860;62:793",
+    "I1552:485;1550:70",
+    "I1552:485;1550:71",
+    "1552:491",
+    "1552:492",
+    "1552:493",
+    "1552:494",
+    "I1552:494;1550:51",
+    "I1552:494;1550:51;95:854",
+    "I1552:494;1550:51;95:854;62:793",
+    "I1552:494;1550:66",
+    "I1552:494;1550:67",
+    "1552:500",
+    "1552:501",
+    "1552:502",
+    "I1552:502;1550:56",
+    "I1552:502;1550:56;95:857",
+    "I1552:502;1550:56;95:857;62:793",
+    "I1552:502;1550:68",
+    "I1552:502;1550:69",
+    "1552:508",
+    "1552:509",
+    "1552:510",
+    "I1552:510;1550:61",
+    "I1552:510;1550:61;95:860",
+    "I1552:510;1550:61;95:860;62:793",
+    "I1552:510;1550:70",
+    "I1552:510;1550:71",
+    "1552:516",
+    "1552:517",
+    "1552:518",
+    "1552:519",
+    "I1552:519;1550:72",
+    "I1552:519;1550:73",
+    "I1552:519;1550:74",
+    "I1552:519;1550:75",
+    "I1552:519;1550:76",
+    "I1552:519;1550:76;1550:51",
+    "I1552:519;1550:76;1550:51;95:854",
+    "I1552:519;1550:76;1550:51;95:854;62:793",
+    "I1552:519;1550:76;1550:66",
+    "I1552:519;1550:76;1550:67",
+    "I1552:519;1550:82",
+    "I1552:519;1550:83",
+    "1552:532",
+    "I1552:532;1550:84",
+    "I1552:532;1550:85",
+    "I1552:532;1550:86",
+    "I1552:532;1550:87",
+    "I1552:532;1550:88",
+    "I1552:532;1550:88;1550:51",
+    "I1552:532;1550:88;1550:51;95:854",
+    "I1552:532;1550:88;1550:51;95:854;62:793",
+    "I1552:532;1550:88;1550:66",
+    "I1552:532;1550:88;1550:67",
+    "I1552:532;1550:94",
+    "I1552:532;1550:95",
+    "1552:545",
+    "1552:546",
+    "1552:547",
+    "1552:548",
+    "I1552:548;1550:84",
+    "I1552:548;1550:85",
+    "I1552:548;1550:86",
+    "I1552:548;1550:87",
+    "I1552:548;1550:88",
+    "I1552:548;1550:88;1550:51",
+    "I1552:548;1550:88;1550:51;95:854",
+    "I1552:548;1550:88;1550:51;95:854;62:793",
+    "I1552:548;1550:88;1550:66",
+    "I1552:548;1550:88;1550:67",
+    "I1552:548;1550:94",
+    "I1552:548;1550:95",
+    "1552:561",
+    "1552:562",
+    "1552:563",
+    "1552:564",
+    "1552:565",
+    "I1552:565;1550:72",
+    "I1552:565;1550:73",
+    "I1552:565;1550:74",
+    "I1552:565;1550:75",
+    "I1552:565;1550:76",
+    "I1552:565;1550:76;1550:51",
+    "I1552:565;1550:76;1550:51;95:854",
+    "I1552:565;1550:76;1550:51;95:854;62:793",
+    "I1552:565;1550:76;1550:66",
+    "I1552:565;1550:76;1550:67",
+    "I1552:565;1550:82",
+    "I1552:565;1550:83",
+    "1552:578",
+    "1552:579",
+    "I1552:579;1550:72",
+    "I1552:579;1550:73",
+    "I1552:579;1550:74",
+    "I1552:579;1550:75",
+    "I1552:579;1550:76",
+    "I1552:579;1550:76;1550:51",
+    "I1552:579;1550:76;1550:51;95:854",
+    "I1552:579;1550:76;1550:51;95:854;62:793",
+    "I1552:579;1550:76;1550:66",
+    "I1552:579;1550:76;1550:67",
+    "I1552:579;1550:82",
+    "I1552:579;1550:83",
+    "1552:592",
+    "1552:593",
+    "I1552:593;1550:72",
+    "I1552:593;1550:73",
+    "I1552:593;1550:74",
+    "I1552:593;1550:75",
+    "I1552:593;1550:76",
+    "I1552:593;1550:76;1550:51",
+    "I1552:593;1550:76;1550:51;95:854",
+    "I1552:593;1550:76;1550:51;95:854;62:793",
+    "I1552:593;1550:76;1550:66",
+    "I1552:593;1550:76;1550:67",
+    "I1552:593;1550:82",
+    "I1552:593;1550:83",
+    "1552:606",
+    "1552:607",
+    "1552:608",
+    "1552:609",
+    "1552:610",
+    "I1552:610;146:1992",
+    "I1552:610;146:1993",
+    "I1552:610;146:1994",
+    "1552:614",
+    "I1552:614;146:1992",
+    "I1552:614;146:1993",
+    "I1552:614;146:1994",
+    "1552:618",
+    "I1552:618;146:1992",
+    "I1552:618;146:1993",
+    "I1552:618;146:1994",
+    "1552:622",
+    "I1552:622;146:1992",
+    "I1552:622;146:1993",
+    "I1552:622;146:1994",
+    "1552:626",
+    "I1552:626;146:1992",
+    "I1552:626;146:1993",
+    "I1552:626;146:1994",
+    "1552:630",
+    "I1552:630;146:1992",
+    "I1552:630;146:1993",
+    "I1552:630;146:1994",
+    "1552:634",
+    "I1552:634;146:1992",
+    "I1552:634;146:1993",
+    "I1552:634;146:1994",
+    "1552:638",
+    "I1552:638;146:1992",
+    "I1552:638;146:1993",
+    "I1552:638;146:1994",
+    "1552:642",
+    "I1552:642;146:1992",
+    "I1552:642;146:1993",
+    "I1552:642;146:1994",
+    "1552:646",
+    "1552:647",
+    "1552:648",
+    "1552:649",
+    "1552:650",
+    "1552:651"
+  ],
+  "createdStyleIds": [
+    "S:ebfb8d15925f410e9cc90c539321448cc318abd1,",
+    "S:e63f84dd371c7fe330db306615161efc5d0777b2,",
+    "S:f1e6b2acb7da817d0082de7f50c24b453aac79d9,",
+    "S:95fae98b29db1f09e9764bcb6f45133fb1e5102a,"
+  ],
   "reusedAssets": {
     "iconButtonSet": "95:943",
     "copyIcon": "62:795",
-    "documentationTemplatePage": "14:585",
-    "recentDocumentationPage": "1238:6",
+    "documentationHeader": "212:464",
     "documentationCard": "146:1996"
   },
-  "collections": {
-    "global": {
-      "id": "VariableCollectionId:8:2",
-      "modes": [
-        "global"
-      ]
-    },
-    "Breakpoint": {
-      "id": "VariableCollectionId:303:6772",
-      "modes": [
-        "base",
-        "md",
-        "lg"
-      ]
-    }
-  },
-  "findings": [
-    "No existing CodeBlock page or typography/code style/variable in live inventory.",
-    "Roboto Mono Regular is available; it represents system monospace text illustratively, without a browser-width parity claim.",
-    "Existing Icon Button has 45 variants; CodeBlock should reuse it and registered Icon/copy.",
-    "Current numbered component pages end at 25 - Components - Toast.",
-    "Official Tokens Studio documentation confirms only the first font family is exported; the compiler now projects the Studio mono token to Roboto Mono while leaving raw/browser values untouched."
-  ],
-  "plannedPage": "26 - Components - CodeBlock",
-  "plannedVariantAxes": {
-    "Copy": [
-      "False",
-      "True"
+  "foundationChangesByAgent": [],
+  "visualReview": {
+    "reviewed": true,
+    "areas": [
+      "1550:96",
+      "1550:102",
+      "1550:108",
+      "1550:114"
+    ],
+    "notes": [
+      "Narrow fixtures retain text/control containment and visible focus.",
+      "Figma header uses constrained label/feedback columns; browser intrinsic flex wrapping remains authoritative, so line breaks and heights are not a parity claim.",
+      "Roboto Mono is the source-declared illustrative Figma font; web remains a system monospace stack.",
+      "QA-only reference styles model 200 percent text and text spacing; no production typography/token changes were made."
     ]
   },
+  "tokenSync": {
+    "reportedByUser": "1 variable created",
+    "verifiedByAgent": true,
+    "repeatExportPerformed": false,
+    "mapping": "tokens/figma/font-family-mapping.json"
+  },
   "pending": [
-    "Review source contract/API",
-    "Merge source only on human approval",
-    "Pull merged source and verify mono=Roboto Mono with canonical metadata before export",
-    "Non-destructive global-only export; preserve Breakpoint",
-    "Build bound component and four documentation areas",
-    "Final structural/visual and post-export audit"
-  ],
-  "fontFamilyMapping": "tokens/figma/font-family-mapping.json"
+    "Manual VoiceOver or NVDA initial reading, successful/repeated/failed clipboard announcements and meaningful focus stops",
+    "Actual Safari/Firefox, 400 percent zoom and Windows high contrast acceptance",
+    "Human Figma library and npm publication",
+    "Private website package-pin update and migration after acceptance"
+  ]
 }
