@@ -1,0 +1,46 @@
+{
+  "scope": "read-only-local-candidate-discovery",
+  "date": "2026-10-27",
+  "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
+  "changedObjects": [],
+  "existing": {
+    "accordionPage": {
+      "id": "1176:101",
+      "name": "21 - Components - Accordion"
+    },
+    "accordionRoot": "1176:183",
+    "accordionItemSet": "1176:182",
+    "accordionTitleSet": "1176:107",
+    "bodyStyle": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
+    "h6Style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+  },
+  "collections": [
+    {
+      "name": "global",
+      "id": "VariableCollectionId:8:2",
+      "modes": [
+        "global"
+      ]
+    },
+    {
+      "name": "Breakpoint",
+      "id": "VariableCollectionId:303:6772",
+      "modes": [
+        "base",
+        "md",
+        "lg"
+      ]
+    }
+  ],
+  "proposedPage": "27 - Components - Side menu",
+  "construction": "deferred-until-local-review",
+  "revisionNote": "Current local candidate adds zero core nav padding, a page-owned divider, primary drawer Button placement in a host header slot, and local section/in-flow controls. Existing Accordion/Link/Button/Dialog and shared selected states are retained. Earlier read-only discovery is historical foundation evidence only; no new Figma parity audit, edit or export is claimed.",
+  "actualReuseFromSource": [
+    "Link",
+    "Accordion",
+    "Button (drawer trigger)",
+    "Dialog",
+    "IconButton (Dialog close)",
+    "Shared color.interactive.selected state family"
+  ]
+}

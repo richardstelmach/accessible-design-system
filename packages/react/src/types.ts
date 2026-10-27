@@ -310,3 +310,31 @@ export type CodeBlockProps = Pick<ComponentPropsWithoutRef<'div'>, 'id' | 'class
   onCopy?: (code: string) => void;
   children?: never;
 };
+
+/** Primary or section navigation, independent of placement. */
+export type SideMenuLink = { id: string; label: string; href: string; linkAttributes?: NavigationLinkAttributes; items?: never; expandable?: never };
+export type SideMenuGroup = { id: string; label: string; items: readonly SideMenuLink[]; expandable?: boolean; href?: never; linkAttributes?: never };
+export type SideMenuProps = FeedbackContainerProps & AccordionExpansion & {
+  /** Optional landmark name; distinguish navigation regions when several exist. */
+  'aria-label'?: string;
+  items: readonly (SideMenuLink | SideMenuGroup)[];
+  currentId?: string;
+  /** Required for expandable Accordion groups; optional for static captions. */
+  headingLevel?: 'none' | 2 | 3 | 4 | 5 | 6;
+};
+/** Controlled mobile shell, using the existing Dialog for its drawer lifecycle. */
+export type ResponsiveSideMenuProps = SideMenuProps & {
+  /** Visible drawer title, independent of the optional navigation aria-label. */
+  label: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  mobilePresentation?: 'drawer' | 'inline';
+  /** Required for inline presentation; group headingLevel must be deeper. */
+  inlineHeadingLevel?: 2 | 3 | 4 | 5;
+  toggleLabel?: string;
+  closeLabel?: string;
+  /** Mounted same-document slot for the existing drawer Button, for example in a page header. Inline Accordion stays local. */
+  drawerTriggerContainer?: HTMLElement | null;
+  /** Use a logical destination after accepted routing; otherwise omit to return to Menu. */
+  returnFocusRef?: { readonly current: HTMLElement | null };
+};

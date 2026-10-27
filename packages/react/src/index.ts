@@ -30,3 +30,8 @@ export type {CardProps,CardImage,BreadcrumbProps,BreadcrumbAncestor,PaginationPr
 
 export { CodeBlock } from './components/CodeBlock.js';
 export type { CodeBlockProps, CodeBlockLabels } from './types.js';
+
+export { SideMenu } from './components/SideMenu.js';
+export type { SideMenuProps, SideMenuLink, SideMenuGroup, ResponsiveSideMenuProps } from './types.js';
+
+export { ResponsiveSideMenu } from './components/ResponsiveSideMenu.js';

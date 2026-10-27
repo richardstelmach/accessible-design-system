@@ -9,13 +9,17 @@ globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Ele
 globalThis.getComputedStyle=dom.window.getComputedStyle;
 const {renderToString}=await import('react-dom/server');
 const {hydrateRoot}=await import('react-dom/client');
-const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion, Card, Breadcrumb, Pagination, CodeBlock } = await import('@owla11y/react');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion, Card, Breadcrumb, Pagination, CodeBlock, SideMenu, ResponsiveSideMenu } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
 const codeBlockRef = React.createRef();
+const sideMenuRef = React.createRef();
+const responsiveMenuRef = React.createRef();
 const codeSource = '\n  <Button>Save</Button>\n';
 const app = h('form', null,
+  h(ResponsiveSideMenu, {id:'packed-responsive-menu',ref:responsiveMenuRef,label:'Workspace',open:false,onOpenChange:()=>{},items:[{id:'home',label:'Home',href:'/workspace'}]}),
+  h(SideMenu, {id:'packed-side-menu',ref:sideMenuRef, 'aria-label':'Documentation', headingLevel:2, currentId:'one', items:[{id:'group',label:'Components',items:[{id:'one',label:'Overview',href:'/docs'}]}]}),
   h(CodeBlock, { label:'React', code:codeSource, ref:codeBlockRef }),
   h(ErrorSummary, { errors: [{ id: 'date', text: 'Enter a year', targetId: dateIds.year }, { id: 'name', text: 'Check the name', targetId: 'packed-name' }], focusRequestKey: 1 }),
   h(TextInput, { id: 'packed-name', label: 'Name', name: 'name', defaultValue: 'Ada' }),
@@ -43,6 +47,10 @@ const ids = [...root.querySelectorAll('[id]')].map(node => node.id);
 assert.equal(new Set(ids).size, ids.length);
 assert.equal(root.querySelector('.owla11y-code-block code').textContent, codeSource);
 assert.equal(root.querySelector('.owla11y-code-block button'), null);
+assert.equal(root.querySelector('#packed-side-menu [aria-current]').getAttribute('href'), '/docs');
+assert.equal(root.querySelector('#packed-side-menu button'), null);
+assert.equal(root.querySelector('#packed-side-menu').getAttribute('aria-label'),'Documentation');
+assert.equal(root.querySelector('#packed-responsive-menu').hasAttribute('aria-label'),false);
 const errors = [];
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 let hydrated;
@@ -53,11 +61,14 @@ assert.deepEqual([...root.querySelectorAll('[id]')].map(node => node.id).filter(
 assert.equal(new Set([...root.querySelectorAll('[id]')].map(node => node.id)).size, root.querySelectorAll('[id]').length);
 assert.deepEqual(errors, []);
 assert.equal(codeBlockRef.current, root.querySelector('.owla11y-code-block'));
+assert.equal(sideMenuRef.current, root.querySelector('#packed-side-menu'));
+assert.equal(responsiveMenuRef.current, root.querySelector('#packed-responsive-menu'));
+assert.equal(root.querySelector('#packed-responsive-menu').tagName,'NAV');
 assert.equal(root.querySelector('.owla11y-code-block code').textContent, codeSource);
 assert.equal(root.querySelector('.owla11y-code-block button').getAttribute('aria-label'), 'Copy React code');
 for (const label of root.querySelectorAll('label')) assert.ok(document.getElementById(label.htmlFor));
 assert.equal(root.querySelector('button').type, 'button');
-assert.equal(root.querySelector('.owla11y-link').getAttribute('href'), '/help');
+assert.equal(root.querySelector('.owla11y-link:not(.owla11y-side-menu__link)').getAttribute('href'), '/help');
 const fieldset = root.querySelector('#packed-contact');
 assert.equal(fieldset.firstElementChild.tagName, 'LEGEND');
 assert.ok(fieldset.getAttribute('aria-describedby').includes('contact-error'));

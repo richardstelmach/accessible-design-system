@@ -49,3 +49,9 @@ Before adding dependency versions, verify current official tool documentation an
 ## Scaffold verification
 
 The root commands build ESM and declarations with TypeScript, generate browser styles, run Vitest and compile the Vite consumer. scripts/verify-react-package.mjs packs the actual artifact and installs it into temporary independent React 18.3 and 19 consumers for declaration, SSR, hydration and native reset checks. The server consumer is generated temporarily by that script; it is not an additional published application. See packages/react/README.md for remaining manual accessibility checks.
+
+SideMenu and ResponsiveSideMenu are reviewed implementations exported with their props/link/group types. The core supports primary/section navigation and static groups and existing Accordion sections; the wrapper composes existing Dialog for a drawer or an outer Accordion for in-flow mobile use. Current-page presentation reuses the shared selected palette. Their `?side-menu` comparison and side-navigation pattern have passed local acceptance, with no new dependencies or design tokens.
+
+The local navigation core has no outer padding or divider. The responsive shell accepts a same-document header trigger slot for primary drawer navigation; local section and in-flow controls remain next to content. Header/sidebar/divider geometry is owned by the page composition.
+
+Side-menu navigation accepts optional native `aria-label`; distinct navigation purposes should have distinct names when multiple landmarks are present. Responsive `label` remains the required visible drawer title and is independent of the landmark name.

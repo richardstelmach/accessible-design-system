@@ -1,0 +1,138 @@
+pattern: Side navigation
+id: side-navigation
+status: draft
+usageScope: public-site-and-application-navigation
+
+purpose: >-
+  Choose and compose a vertical navigation system for a substantial hierarchy.
+  This pattern is consumer-neutral: documentation sites, B2B applications,
+  administration tools and large sections can use the same components.
+
+composes:
+  navigation: components/side-menu/side-menu.yaml
+  links: components/link/link.yaml
+  disclosureControls: components/accordion/accordion.yaml
+  drawerTrigger: components/button/button.yaml
+  modalContainer: components/dialog/dialog.yaml
+  surroundingLayout: patterns/page-layout.yaml
+  locationContext: components/breadcrumb/breadcrumb.yaml
+
+contexts:
+  primary:
+    purpose: Main destination hierarchy for the whole documentation site or application.
+    header: Identity, search and utilities may occupy a top header without duplicating the hierarchy; place the primary mobile drawer Menu button here.
+    landmark: Name for the user's context, such as Documentation or Workspace.
+    examples: [Documentation library, B2B project workspace, Administration console]
+  section:
+    purpose: Destinations within a substantial part of a larger website or application.
+    header: Global navigation may remain above; distinguish global and section landmarks. Keep section controls beside the section or in its local toolbar, not in the global header.
+    landmark: Specific name such as Account settings or Project administration.
+    examples: [Account settings, Product documentation, Organisation administration]
+  rule: Primary versus section is usage context, not a visual variant or a different ARIA role.
+
+chooseSideNavigationWhen:
+  - Users repeatedly move among many stable destinations or related tasks.
+  - Named groups and visible sibling destinations improve orientation and scanning.
+  - The desktop layout can retain a useful reading or working width beside navigation.
+  - The hierarchy is consistent across the relevant site or section.
+preferTopNavigationWhen:
+  - A short, shallow set of broad destinations fits comfortably in one row.
+  - The journey is focused and persistent navigation would distract from the task.
+  - The sidebar would consume useful space without helping repeated navigation.
+notSuitableFor:
+  - Sequential steps in a task; use task/progress patterns instead.
+  - Switching panels within the same page; consider Tabs.
+  - Linking to headings within a document; use a separately named table of contents.
+  - Choosing or manipulating arbitrary hierarchical data; assess a tree pattern separately.
+  - Commands, actions and settings that are not destinations; use appropriate controls.
+
+informationArchitecture:
+  - Prefer clear destination labels over icon-only rails.
+  - Show the current page with aria-current=page and the shared filled selected default/hover/active family already used by Pagination; no bespoke left bar.
+  - Keep labels and ordering consistent across destinations.
+  - Use a flat list or one level of link groups; deeper hierarchies require a new reviewed contract.
+  - Static labels are preferred for small, frequently used groups that benefit from continuous scanning.
+  - Make a group expandable only when reducing the initial list benefits users; do not collapse everything mechanically.
+  - Static and expandable groups can coexist; expansion is independent, never exclusive.
+  - Group labels are not destinations; provide Overview as a child if a landing page exists.
+  - Static-only captions may be ordinary text; expandable groups reuse Accordion and require explicit heading levels. The outer inline item requires a shallower explicit heading level.
+  - Search supplements the hierarchy; it does not compensate for unclear grouping.
+  - Breadcrumbs describe ancestry; avoid duplicating them as a second copy of the same navigation.
+
+componentBoundaries:
+  SideMenu:
+    owns: Native navigation with optional aria-label, native destination links, static captions, expandable groups, current-page presentation.
+    placement: Can be used persistently or composed in another appropriate container.
+  ResponsiveSideMenu:
+    owns: Existing Menu Button and Dialog composition, lg enhancement, outer inline Accordion and preserved group state.
+    state: Application controls open/onOpenChange and route destination focus via returnFocusRef.
+    limitation: Viewport-based shell for a page or app; narrow embedded layouts should use SideMenu with a host-owned composition.
+  application:
+    owns:
+      - Routing, valid destinations, currentId and success/failure state
+      - Skip-to-main, main landmark, page title and destination focus after accepted routing
+      - Brand header, search, account/workspace switching, utilities and permissions
+      - Column widths, page content, appropriate landmarks and application-specific ordering
+      - Outer sidebar insets, focus clearance and any vertical separator between sidebar/content
+      - Mounted header slot for primary drawer controls; local placement for section and in-flow controls
+      - Any sticky positioning and its focus-obscuration checks
+
+responsive:
+  threshold: Existing breakpoint.lg at 64rem; a candidate default, not a universal content-fit guarantee.
+  desktop: Persistent navigation beside flexible content; no modal, inertness or trap. No core nav padding or built-in divider; host composes any sidebar boundary.
+  mobileDefault:
+    type: Modal drawer anchored at logical inline-start.
+    triggerPlacement: Primary controls use a host header slot through drawerTriggerContainer; section controls remain local by default.
+    composition: Existing Dialog with scoped edge-placement CSS; its public API and implementation remain unchanged.
+    width: At most existing component.dialog.size.small, and at most the available viewport; full width on smaller phones.
+    behaviour: Dialog owns naming, initial container focus, Tab boundary, Escape/close/backdrop, scroll lock and return focus.
+    interaction: Remains open across responsive resizing until explicitly dismissed; no automatic modal interruption.
+  mobileAlternative:
+    type: Existing single-item in-flow Menu Accordion, with its header kept locally adjacent to content.
+    useWhen: Simpler integrations benefit from normal page flow and do not need a modal surface.
+    behaviour: Existing Accordion focus/expansion, normal Tab order, no backdrop/trap/scroll lock.
+    headingHierarchy: Explicit inlineHeadingLevel 2 through 5, with group headingLevel deeper.
+    nestingException: User-authorized local composition only; outer Menu and single-level group Accordions, independently controlled.
+  transitions:
+    - Never hide or reparent focused desktop navigation when crossing into compact mode; defer until focus leaves.
+    - Open inline navigation becomes persistent above lg once focus leaves its trigger and descendants; protect focused navigation in both resize directions.
+    - Keep an open drawer stable across lg; after closing, retain a focused Menu trigger until it blurs.
+    - Preserve independent group state across desktop/mobile placement and outer closing.
+    - Render exactly one navigation tree; never expose duplicate desktop/mobile landmarks or IDs.
+  fallback: Before enhancement, without scripts, missing CSS/observers or native modal support, retain complete in-flow navigation.
+  print: Expose all destinations and groups, including those in a closed drawer; hide shell controls.
+
+accessibility:
+  target: WCAG 2.2 AA
+  semantics: Native nav, ul/li, anchors, Accordion disclosures and native Dialog; no ARIA menu/menubar/tree roles.
+  landmarks: Optional nav aria-label; a clear single navigation region may be unnamed. Give different navigation purposes distinct contextual names when multiple landmarks exist, for example Main navigation and Account navigation. Drawer title is separate and required.
+  keyboard: Native Tab/Shift+Tab and Enter/Space; preserve arrows/Home/End scrolling. Escape dismisses the modal drawer.
+  groups: Expanded state, controlled panel IDs, hidden exclusion and focus recovery on external collapse.
+  current: Exactly one application-supplied current link per rendered navigation, or none when not applicable.
+  routeFocus: On success, close the controlled drawer and return focus to the new main/heading using returnFocusRef; on cancellation/failure preserve access.
+  modalLimit: Follow Dialog's one-modal-owner contract; do not open this drawer over another modal.
+  visibility: Full wrapping labels, comfortable 44px targets, unclipped focus, 320px reflow, 200 percent text and spacing support.
+  verification: Test manual screen-reader, real zoom, high contrast and touch use in the consuming application.
+
+tokens:
+  additionsRequired: false
+  reused: Existing Link/Accordion/Button, shared selected state, Dialog size/surface/backdrop/spacing, semantic inset/spacing, target sizes, focus and lg.
+  futureAliases: Add only when an evidenced independent width, indentation or current-state theming requirement warrants it.
+
+references:
+  - https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/
+  - https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+
+localReviewRefinements:
+  currentState: Reuse shared selected foreground/background states; remove the bespoke blue bar.
+  controls: Reuse neutral Accordion instances for both expandable sections and the outer inline Menu.
+  spacing: Remove compounded navigation/list padding; use existing small stack for drawer header-to-content separation and align labels with title.
+  preview: Remove the Direction selector from review UI; retain logical-direction support and regression coverage.
+
+compositionOwnership:
+  navPadding: Zero; preserve existing internal Link/Accordion target padding without stacking an additional nav inset.
+  divider: A page/sidebar-column boundary, never a menu variant or built-in border.
+  primaryDrawerButton: Existing Button rendered into a mounted same-document header slot; component still owns relationships and requests.
+  sectionButton: Local contextual control; do not relocate into the global header.
+  inFlowHeader: Remains local to its Accordion panel, regardless of primary/section context.
+  triggerSafety: Maintain one control, one navigation tree and one open-state owner; keep the host mounted while focused/open and return focus to the actual trigger.
