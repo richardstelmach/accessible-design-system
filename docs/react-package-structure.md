@@ -56,4 +56,4 @@ The local navigation core has no outer padding or divider. The responsive shell 
 
 Side-menu navigation accepts optional native `aria-label`; distinct navigation purposes should have distinct names when multiple landmarks are present. Responsive `label` remains the required visible drawer title and is independent of the landmark name.
 
-Side menu source is merged through PR 49. Figma page `27 - Components - Side menu` (`1570:296`) is constructed and audited; see the component guidance and validation receipt for exact IDs. Library publication remains separate.
+Side menu source is merged through PR 49. Figma page `27 - Components - Side menu` (`1570:296`) is audited and published to the library on 27 October 2026; see the component guidance and validation receipt for preserved asset keys and CURRENT status. npm package publication and remaining device acceptance remain separate.

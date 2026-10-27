@@ -278,4 +278,4 @@ For primary mobile drawer navigation, pass a mounted same-document header elemen
 
 Navigation `aria-label` is optional and omitted by default, independently of the required responsive drawer title. For multiple navigation regions with different purposes, provide distinct names such as `Main navigation` and `Account navigation`. Removed uncontrolled group state is discarded. Open inline navigation returns to desktop placement above lg once focus safely leaves its trigger and descendants.
 
-Side menu source is merged through PR 49. Figma page `27 - Components - Side menu` (`1570:296`) is constructed and audited; see the component guidance and validation receipt for exact IDs. Library publication remains separate.
+Side menu source is merged through PR 49. Figma page `27 - Components - Side menu` (`1570:296`) is audited and published to the library on 27 October 2026; see the component guidance and validation receipt for preserved asset keys and CURRENT status. npm package publication and remaining device acceptance remain separate.

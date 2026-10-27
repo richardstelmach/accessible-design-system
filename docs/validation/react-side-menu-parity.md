@@ -68,12 +68,24 @@ Fresh local checks passed: library/token build, type checks, **130 unit tests** 
 
 The updated live audit reports 1,710 editable nodes, 17 existing documentation Card instances, all 102 variable references resolved, zero missing text styles/component references/slot-limit violations and no image-filled nodes. Existing master IDs, six link variants, five responsive states, fonts and collections/modes are preserved. No token, production text style or component was added. Two group layout frames, a scrollable content frame and linked QA/documentation instances implement the repairs.
 
-Visual check passed for [the short-drawer/flat-list regression section](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1591-1432). The receipt records the repair mutations, current native-slot identities and full measured matrix. Publication remains pending Richard's final review.
+Visual check passed for [the short-drawer/flat-list regression section](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1591-1432). The receipt records the repair mutations, current native-slot identities and full measured matrix. Richard subsequently accepted the final review and authorized library publication; see the publication receipt below.
 
 ## Sync and remaining checkpoints
 
-GitHub source and Figma construction/audit are complete. Documentation/evidence delivery is recorded by the accompanying PR. Token sources and compiled outputs are unchanged, so no Tokens Studio provider pull/export or destructive reconciliation is required. No library/package publication occurred.
+GitHub source and Figma construction/audit are complete. Documentation/evidence delivery is recorded by the accompanying PR. Token sources and compiled outputs are unchanged, so no Tokens Studio provider pull/export or destructive reconciliation is required. Figma library publication is complete; no npm package publication occurred.
 
 Richard reports successful local screen-reader and keyboard testing; platform, browser and assistive-technology versions were not specified. Actual 400% browser zoom, real touch, Windows high contrast and targeted browser/AT combinations remain release acceptance where not already checked. Figma's forced-colour example is a structural reference, not an OS palette simulation.
 
 The viewport-based wrapper is intended for page/application shells. Hosts remain responsible for desktop working width, stable mounted header slots and focus when destinations/permissions change. Narrow embedded layouts can compose the core directly. Synced project references remain untouched.
+
+## Figma library publication
+
+On 27 October 2026, following Richard's acceptance, Figma published the four Side menu assets plus the existing Accordion description update. The publication review contained exactly these five component changes, with no style or variable changes selected; 132 unchanged and 48 hidden assets were excluded. The QA-only reference typography remains hidden.
+
+Figma displayed **Successfully published library updates**. A subsequent live API check returned **CURRENT** for Side menu / Link (`1570:368`), Side menu / Static group (`1570:369`), Side menu (`1570:389`), Responsive side menu (`1570:1258`) and Accordion (`1176:183`). Component IDs and keys are preserved in the [publication receipt](react-side-menu-figma-evidence.json).
+
+![Figma confirms successful library publication](side-menu-library-published-20261027.png)
+
+The source and Figma repairs remain covered by [PR 51](https://github.com/richardstelmach/accessible-design-system/pull/51), merge `255972e20dbd0c1daa5f2dd0f5f65d59de14391f`, with successful full CI run `40547140937` (130 unit tests, 98 browser tests and packed React 18/19 consumers). Publication changes no React implementation, tokens or dependency components. Contract/evidence parsing, relative documentation links, token rebuild and diff checks are rerun for this documentation update; the new PR runs the full CI suite independently.
+
+Publication does not change the remaining actual zoom/device/AT acceptance described above or publish the npm package.

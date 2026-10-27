@@ -1,6 +1,6 @@
 # Side menu
 
-Status: implemented in React and Figma; library publication remains separate, 27 October 2026. [Component contract](side-menu.yaml) · [Side-navigation design pattern](../../patterns/side-navigation.yaml).
+Status: implemented in React and published to the Figma library, 27 October 2026. [Component contract](side-menu.yaml) · [Side-navigation design pattern](../../patterns/side-navigation.yaml).
 
 ## Overview
 
@@ -145,7 +145,7 @@ Component aliases can be introduced later if independent navigation width, inden
 
 Figma page [27 - Components - Side menu](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1570-296) is constructed and audited. It contains the four standard areas, existing Page Header/Card instances and production Side menu / Link (six Current × State variants with independent Focus), Side menu / Static group, Side menu and Responsive side menu (five Layout states). Links retain existing Link instances and shared typography; actual Accordion, Dialog, Button and Modal backdrop instances remain linked. Core padding is zero and the divider stays in the host example. The source is merged through [PR 49](https://github.com/richardstelmach/accessible-design-system/pull/49).
 
-Existing selected-state variables and base/md/lg modes are preserved; no new token family or production text style was required. A QA-only reference style records the intentional 200% text/spacing stress case. Usage, primary/section placement, optional landmark naming and independent drawer title are aligned with this contract. [The audit receipt](../../docs/validation/react-side-menu-figma-evidence.json) records exact IDs, bindings, instance counts and visual checks. Library publication was not performed.
+Existing selected-state variables and base/md/lg modes are preserved; no new token family or production text style was required. A QA-only reference style records the intentional 200% text/spacing stress case. Usage, primary/section placement, optional landmark naming and independent drawer title are aligned with this contract. [The audit receipt](../../docs/validation/react-side-menu-figma-evidence.json) records exact IDs, bindings, instance counts and visual checks. The four Side menu assets and the existing Accordion guidance were published on 27 October 2026; all five report CURRENT. The QA-only reference style remains hidden from publication.
 
 ### Figma authoring constraints
 
@@ -153,8 +153,8 @@ The Items slot has zero gap, so direct links remain contiguous as in React. Keep
 
 Resize the Drawer open viewport wrapper to the desired device width and height. Its existing Dialog fills the height and caps its width through `component.dialog.size.small` (512px). A scrollable navigation frame sits in Dialog's Content slot beneath the header/Close control. All six link variants bind both minimum axes to `size.target.comfortable` (44px); larger content still grows.
 
-The [repair regression example](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1591-1432) shows a short 768 × 560 viewport with a 512 × 560 surface and an adjacent zero-gap flat list. Temporary-instance checks also cover 320 × 560, 390 × 720, 512 × 400 and 1280 × 900 viewports, plus undersized target requests. The library remains unpublished for final review.
+The [repair regression example](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1591-1432) shows a short 768 × 560 viewport with a 512 × 560 surface and an adjacent zero-gap flat list. Temporary-instance checks also cover 320 × 560, 390 × 720, 512 × 400 and 1280 × 900 viewports, plus undersized target requests. Richard accepted the final review and authorized publication; the repaired masters are now published.
 
 ## Validation and remaining acceptance
 
-The local comparison remains at `?side-menu`, with documentation-primary and B2B-primary header drawer controls, a locally labelled section control, a desktop composition divider, mobile presentation choices, long labels and simulated navigation failure. [The evidence report](../../docs/validation/react-side-menu-parity.md) records actual checks, exact files and remaining release work. Source and Figma construction are complete. Library publication and remaining device acceptance remain separate steps; automated checks do not establish accessibility certification.
+The local comparison remains at `?side-menu`, with documentation-primary and B2B-primary header drawer controls, a locally labelled section control, a desktop composition divider, mobile presentation choices, long labels and simulated navigation failure. [The evidence report](../../docs/validation/react-side-menu-parity.md) records actual checks, exact files and remaining release work. Source and Figma construction are complete. Figma library publication is complete. Remaining device acceptance and npm package publication are separate steps; automated checks do not establish accessibility certification.
