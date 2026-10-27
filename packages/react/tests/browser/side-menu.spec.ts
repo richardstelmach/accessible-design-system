@@ -78,14 +78,17 @@ test('inline navigation success, including the current destination, closes and f
  for(const name of ['Accordion','Accordion']){await page.getByRole('button',{name:'Menu',exact:true}).click();await page.getByRole('link',{name,exact:true}).click();await expect(page.locator('#side-menu-main')).toBeFocused();await expect(page.getByRole('button',{name:'Menu',exact:true})).toHaveAttribute('aria-expanded','false');}
 });
 
-test('uses neutral Accordion sections and the established current-page palette in all pointer states',async({page})=>{
+test('uses neutral Accordion sections and the selected leading-rule colours in all pointer states',async({page})=>{
  await expect(page.getByRole('combobox',{name:/^Direction/})).toHaveCount(0);
  const group=page.getByRole('button',{name:'Components',exact:true});await expect(group).toHaveClass('owla11y-accordion__trigger');
  await expect(group).toHaveCSS('color','rgb(89, 89, 89)');await expect(group).toHaveCSS('background-color','rgb(255, 255, 255)');
  const current=page.getByRole('link',{name:'Button',exact:true});
- await expect(current).toHaveCSS('background-color','rgb(1, 113, 242)');await expect(current).toHaveCSS('color','rgb(255, 255, 255)');await expect(current).toHaveCSS('border-inline-start-width','0px');
- await current.hover();await expect(current).toHaveCSS('background-color','rgb(0, 85, 185)');
- await page.mouse.down();await expect(current).toHaveCSS('background-color','rgb(0, 59, 127)');await page.mouse.move(1190,10);await page.mouse.up();
+ await expect(current).toHaveCSS('background-color','rgb(255, 255, 255)');await expect(current).toHaveCSS('color','rgb(61, 61, 61)');await expect(current).toHaveCSS('border-inline-start-width','0px');
+ const marker=()=>current.evaluate(n=>({colour:getComputedStyle(n,'::before').backgroundColor,width:getComputedStyle(n,'::before').width}));
+ expect(await marker()).toEqual({colour:'rgb(1, 113, 242)',width:'4px'});
+ await current.hover();await expect(current).toHaveCSS('background-color','rgb(214, 214, 214)');expect((await marker()).colour).toBe('rgb(0, 85, 185)');
+ await page.mouse.down();await expect(current).toHaveCSS('background-color','rgb(181, 181, 181)');expect((await marker()).colour).toBe('rgb(0, 59, 127)');await page.mouse.move(1190,10);await page.mouse.up();
+ await current.focus();await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');await expect(current).toBeFocused();await expect(current).toHaveCSS('outline-style','solid');
 });
 test('the outer and inner in-flow Accordions remain independent and recover focus at each boundary',async({page})=>{
  await page.getByRole('combobox',{name:/^Mobile presentation/}).selectOption('inline');await page.setViewportSize({width:390,height:800});
@@ -95,7 +98,7 @@ test('the outer and inner in-flow Accordions remain independent and recover focu
  await outer.click();await outer.click();await expect(inner).toHaveAttribute('aria-expanded','false');await expect(page.getByRole('button',{name:'Resources',exact:true})).toHaveAttribute('aria-expanded','true');
  await inner.click();await expect(outer).toHaveAttribute('aria-expanded','true');await expect(page.getByRole('link',{name:'Button',exact:true})).toBeVisible();
 });
-test('drawer removes stacked padding and keeps header, captions and destination labels aligned',async({page})=>{
+test('drawer aligns parent captions with its title and indents destination labels once',async({page})=>{
  await page.setViewportSize({width:390,height:800});await page.getByRole('button',{name:'Menu',exact:true}).click();
  const dimensions=await page.getByRole('dialog').evaluate(dialog=>{
   const title=dialog.querySelector('.owla11y-dialog__title')!.getBoundingClientRect();
@@ -104,7 +107,7 @@ test('drawer removes stacked padding and keeps header, captions and destination 
   const current=dialog.querySelector('[aria-current="page"] bdi')!.getBoundingClientRect();
   return {captionOffset:Math.abs(title.left-label.left),currentOffset:Math.abs(title.left-current.left),gap:label.top-title.bottom};
  });
- expect(dimensions.captionOffset).toBeLessThanOrEqual(1);expect(dimensions.currentOffset).toBeLessThanOrEqual(1);expect(dimensions.gap).toBeLessThanOrEqual(36);
+ expect(dimensions.captionOffset).toBeLessThanOrEqual(1);expect(dimensions.currentOffset).toBe(16);expect(dimensions.gap).toBeLessThanOrEqual(36);
 });
 
 test('core nav has no outer padding or divider; the page composes the desktop separator and header trigger',async({page})=>{
@@ -156,4 +159,33 @@ test('the empty mobile presentation prompt safely uses the default drawer',async
  await page.getByRole('button',{name:'Menu',exact:true}).click();
  await expect(page.getByRole('dialog',{name:'Documentation',exact:true})).toBeVisible();
  await expect(page.getByRole('navigation',{name:'Documentation'})).toBeVisible();expect(errors).toEqual([]);
+});
+
+
+test('static and Accordion children share one logical indent while top-level parents stay aligned',async({page})=>{
+ const nav=page.getByRole('navigation',{name:'Documentation'});
+ for(const direction of ['ltr','rtl']){
+  await nav.evaluate((n,dir)=>n.setAttribute('dir',dir),direction);
+  const positions=await nav.evaluate(n=>{
+   const rtl=getComputedStyle(n).direction==='rtl',sign=rtl?-1:1;
+   const edge=(el:Element)=>{const r=el.getBoundingClientRect();return rtl?r.right:r.left;};
+   const caption=n.querySelector('.owla11y-side-menu__caption')!,trigger=n.querySelector('.owla11y-accordion__trigger')!;
+   return {static:sign*(edge(n.querySelector('.owla11y-side-menu__group > ul a')!)-edge(caption)),accordion:sign*(edge(n.querySelector('.owla11y-side-menu__accordion-links a')!)-edge(trigger)),parents:Math.abs(edge(caption)-edge(trigger)),rule:getComputedStyle(n.querySelector('[aria-current="page"]')!,'::before').getPropertyValue(rtl?'right':'left')};
+  });
+  expect(positions).toEqual({static:16,accordion:16,parents:0,rule:'0px'});
+ }
+});
+test('touch activation never leaves a sticky current-row hover and preserves focus',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:390,height:800},isMobile:true,hasTouch:true});
+ const page=await context.newPage();await page.goto('http://127.0.0.1:4180/?side-menu');
+ await page.getByLabel('Mobile presentation',{exact:false}).selectOption('inline');
+ await page.getByLabel('Simulate failed navigation',{exact:true}).check();
+ await page.getByRole('button',{name:'Menu',exact:true}).tap();
+ const current=page.getByRole('link',{name:'Button',exact:true});
+ expect(await page.evaluate(()=>matchMedia('(hover:hover) and (pointer:fine)').matches)).toBe(false);
+ for(let i=0;i<2;i++){
+  await current.tap();await expect(current).toHaveCSS('background-color','rgb(255, 255, 255)');await expect(current).toBeFocused();
+  expect(await current.evaluate(n=>getComputedStyle(n,'::before').backgroundColor)).toBe('rgb(1, 113, 242)');
+ }
+ await context.close();
 });

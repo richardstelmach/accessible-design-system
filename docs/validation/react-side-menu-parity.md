@@ -1,4 +1,6 @@
-# Side menu — delivery and validation evidence
+# Side menu — original delivery and validation evidence
+
+The approved current-state and child-indent revision is documented in [the current treatment evidence](side-menu-current-treatment.md). Historical test counts and publication receipts below describe the original delivery.
 
 Date: 27 October 2026. Local review base: `d87d53f12597e573ea90769b38a6442b4478b3cb`.
 Implementation merged through [PR 49](https://github.com/richardstelmach/accessible-design-system/pull/49), merge `984e95215eb370a0129ab4baf45c968ab0af3a95`. GitHub Actions run `40534165465` passed every core job step. Richard accepted the local design/API review and authorized GitHub/Figma delivery.

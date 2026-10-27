@@ -565,9 +565,17 @@ h6.owla11y-alert__title { font-family:var(--typography-heading-h6-fontFamily); f
 .owla11y-side-menu [hidden],.owla11y-side-menu-layout [hidden] { display:none; }
 .owla11y-side-menu .owla11y-side-menu__link { display:flex; min-block-size:var(--size-target-comfortable); min-inline-size:var(--size-target-comfortable); padding:var(--spacing-control-paddingBlock-default) var(--spacing-control-paddingInline-default); border-radius:var(--radius-sm); text-decoration:underline; }
 .owla11y-side-menu__link bdi { min-inline-size:0; overflow-wrap:anywhere; }
-.owla11y-side-menu .owla11y-side-menu__link[aria-current="page"] { background:var(--color-interactive-selected-background); color:var(--color-interactive-selected-foreground); font-weight:var(--typography-emphasis-strong); text-decoration:none; }
-.owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]:hover { background:var(--color-interactive-selected-hover-background); color:var(--color-interactive-selected-hover-foreground); }
-.owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]:active { background:var(--color-interactive-selected-active-background); color:var(--color-interactive-selected-active-foreground); }
+/* Current destination: retain selected colours in the leading marker, with neutral row surfaces. */
+.owla11y-side-menu .owla11y-side-menu__link[aria-current="page"] { position:relative; background:var(--color-surface-default); color:var(--color-text-heading); font-weight:var(--typography-emphasis-strong); text-decoration:none; }
+.owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]::before { content:""; position:absolute; inset-inline-start:0; inset-block:var(--spacing-1); inline-size:var(--border-width-thick); border-radius:var(--radius-sm); background:var(--color-interactive-selected-background); }
+/* Touch browsers can retain :hover after activation; only hover-capable fine pointers get this state. */
+@media (hover:hover) and (pointer:fine) {
+ .owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]:hover { background:var(--color-interactive-default-hover-background); }
+ .owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]:hover::before { background:var(--color-interactive-selected-hover-background); }
+}
+.owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]:active { background:var(--color-interactive-default-active-background); }
+.owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]:active::before { background:var(--color-interactive-selected-active-background); }
+.owla11y-side-menu__group > .owla11y-side-menu__list, .owla11y-side-menu__accordion-links { padding-inline-start:var(--spacing-inset-md); }
 .owla11y-side-menu__group + li { margin-block-start:var(--spacing-stack-md); }
 .owla11y-side-menu__caption { margin:0; padding:var(--spacing-control-paddingBlock-default) var(--spacing-control-paddingInline-default); overflow-wrap:anywhere; font-family:var(--typography-body-default-fontFamily); font-size:var(--typography-body-default-fontSize); line-height:var(--typography-body-default-lineHeight); font-weight:var(--typography-emphasis-strong); }
 .owla11y-side-menu-layout { --owl-side-menu-compact:1; min-inline-size:0; }
@@ -577,8 +585,8 @@ h6.owla11y-alert__title { font-family:var(--typography-heading-h6-fontFamily); f
 .owla11y-side-menu-drawer .owla11y-dialog__content { flex:1; padding-block-start:0; padding-block-end:max(var(--component-dialog-spacing-content),env(safe-area-inset-bottom)); }
 .owla11y-side-menu-drawer .owla11y-dialog__header { align-items:center; padding-block-end:var(--spacing-stack-sm); padding-block-start:max(var(--component-dialog-spacing-header),env(safe-area-inset-top)); }
 .owla11y-side-menu-drawer .owla11y-dialog__header { padding-inline-start:max(var(--component-dialog-spacing-content),env(safe-area-inset-left)); padding-inline-end:max(var(--component-dialog-spacing-content),env(safe-area-inset-right)); }
-/* One shell inset; keep target text aligned with the Dialog title, without stacked list padding. */
+/* One shell inset; parent captions align with the Dialog title, and child links add one logical indent. */
 .owla11y-side-menu-drawer .owla11y-dialog__content { padding-inline-start:max(var(--spacing-stack-sm),env(safe-area-inset-left)); padding-inline-end:max(var(--spacing-stack-sm),env(safe-area-inset-right)); }
 .owla11y-side-menu__accordion-links { margin-inline:calc(-1 * var(--component-accordion-spacing-padding-inline)); }
-@media (forced-colors:active) { .owla11y-side-menu__link[aria-current="page"] { border:var(--border-width-medium) solid CanvasText; } }
+@media (forced-colors:active) { .owla11y-side-menu__link[aria-current="page"] { border:var(--border-width-medium) solid CanvasText; } .owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]::before { background:CanvasText; forced-color-adjust:none; } }
 @media print { .owla11y-side-menu-drawer-trigger { display:none; } .owla11y-side-menu [hidden],.owla11y-side-menu-layout [hidden] { display:block; } .owla11y-dialog.owla11y-side-menu-drawer { display:block; position:static; inline-size:auto; block-size:auto; max-block-size:none; max-inline-size:none; overflow:visible; border:0; } .owla11y-side-menu-drawer .owla11y-dialog__header { display:none; } .owla11y-side-menu-drawer .owla11y-dialog__content { overflow:visible; } }

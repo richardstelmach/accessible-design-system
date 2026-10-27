@@ -130,3 +130,6 @@ CodeBlock is implemented with required plain-text `code` and visible `label`, op
 SideMenu supplies no outer padding or sidebar divider. Hosts compose those boundaries. ResponsiveSideMenu can render its existing drawer Button in a mounted same-document `drawerTriggerContainer` (for primary header navigation); omit it for section-local controls. Inline Accordion headers always stay local. The component retains ownership of ARIA relationships and actual trigger focus restoration.
 
 Side menu source is merged through PR 49. Figma page `27 - Components - Side menu` (`1570:296`) is audited and published to the library on 27 October 2026; see the component guidance and validation receipt for preserved asset keys and CURRENT status. npm package publication and remaining device acceptance remain separate.
+
+
+SideMenu current destinations use `aria-current="page"`, strong dark text and a 4px logical leading rule. The rule consumes the unchanged selected background/hover/active tokens; row surfaces use existing neutral surface/interaction tokens. Hover requires a hover-capable fine pointer, while transient touch pressed feedback and independent focus remain. Static and Accordion child lists add one 16px `spacing.inset.md` leading indent; flat top-level links stay unindented. No public API or selected-token mappings change.
