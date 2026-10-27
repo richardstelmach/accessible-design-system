@@ -1,72 +1,63 @@
 # Side menu — delivery and validation evidence
 
-Date: 27 October 2026. Source base: `d87d53f12597e573ea90769b38a6442b4478b3cb`.
-Branch: `component/side-menu-local`. Local design/API review is accepted. GitHub delivery and Figma construction are now authorized and in progress.
+Date: 27 October 2026. Local review base: `d87d53f12597e573ea90769b38a6442b4478b3cb`.
+Implementation merged through [PR 49](https://github.com/richardstelmach/accessible-design-system/pull/49), merge `984e95215eb370a0129ab4baf45c968ab0af3a95`. GitHub Actions run `40534165465` passed every core job step. Richard accepted the local design/API review and authorized GitHub/Figma delivery.
 
-## Current result
+## Delivered behaviour and ownership
 
-Final local review fixes: removed uncontrolled groups now discard stored expansion in both exports; an open in-flow Menu returns to desktop placement above lg after focus safely leaves; the enabled empty presentation prompt resolves to the default drawer. Regression coverage includes retained peer expansion, focused descendants in both resize directions and the empty preview choice.
+- `SideMenu` provides native nav/list/link semantics, static groups and actual independent Accordion groups. One group level; no ARIA menu/tree roles. Core padding is zero, with no built-in sidebar divider.
+- Optional native `aria-label` is omitted by default. Different navigation purposes require distinct names, for example Main navigation and Account navigation. Responsive `label` remains the required visible drawer title and does not implicitly name its inner nav.
+- `ResponsiveSideMenu` composes existing Button/Dialog for the modal drawer and an existing outer Accordion for in-flow navigation. Group headings are explicit; the bounded outer H2/group H3 composition is documented in the Accordion contract. General recursive nesting remains excluded.
+- Primary drawer controls render in the host header through `drawerTriggerContainer`; section and in-flow controls remain local. The host owns column geometry, focus clearance, separators, valid destinations, route state, titles and destination focus. Successful routing can close and focus main; failed/cancelled routing retains access.
+- Current links use the shared selected default/hover/active family already used by Pagination, with strong text and aria-current=page. Ordinary links remain underlined; current links have no underline or decorative left bar. Accordion controls retain their neutral treatment.
+- Removed uncontrolled groups discard expansion state. Group choices otherwise survive placement and outer closing. Resizing preserves focused navigation in both directions; only an open modal pins compact placement. An open inline Menu becomes persistent above lg once focus safely leaves.
+- Baseline/no-JavaScript navigation exposes every destination; print reveals closed groups and hides shell controls. The preview's empty presentation prompt safely resolves to the default drawer.
 
-Navigation now accepts optional native `aria-label`, omitted by default. Different navigation purposes on a page need distinct names, such as Main navigation and Account navigation. Core `SideMenu` no longer requires `label`; responsive `label` remains the required visible drawer title and does not implicitly name the inner nav. The preview supplies both explicitly. Unit, declaration and packed-consumer checks cover named/unnamed nav and independent drawer naming.
+Usage boundaries are recorded in [the component guidance](../../components/side-menu/side-menu.md), [contract](../../components/side-menu/side-menu.yaml) and [side-navigation pattern](../../patterns/side-navigation.yaml): documentation-heavy sites, B2B applications and substantial sections; prefer top navigation for a short shallow hierarchy. This is not a generic sidebar, command menu, in-page contents list, tree or sequential task navigator.
 
-The core `SideMenu` now has **zero outer padding and no sidebar divider**. Existing Link targets, static captions and neutral Accordion triggers keep their internal padding. The host page owns column insets, focus clearance and any vertical separator between sidebar and main content. The preview draws its divider only on the persistent desktop sidebar wrapper; it is not a menu option and does not follow navigation into a drawer.
+## Source validation
 
-The default documentation-primary and B2B-primary preview contexts render the existing mobile drawer Menu Button in the page header near identity. The Account settings context keeps its explicitly labelled Account navigation control local. The in-flow Accordion stays local even for a primary hierarchy, adjacent to its own panel.
+- **130 unit tests across 12 files passed**; full browser suite **98/98 passed**, including nineteen SideMenu checks. GitHub CI independently passed build, typecheck, unit, preview build, browser, packed consumers and unchanged compiled-token checks.
+- Coverage includes controlled decline, independent groups, current-branch updates, removed/reinserted groups, explicit heading hierarchy, one mounted tree, unique IDs, optional landmark names and drawer-title independence.
+- Browser checks cover header/local placement, modal focus/inertness/Tab boundary, Close/Escape/backdrop, scroll and focus restoration, accepted/failed/modified/same-destination navigation, safe breakpoint transitions, empty preview selection, neutral controls and current default/hover/pressed states.
+- Geometry and accessibility checks cover zero core padding/border; page-only divider; drawer text alignment and bounded header gap; 320px RTL long labels; enlarged text and spacing; print; no JavaScript; forced colours; axe and rendered contrast.
+- Library and production preview builds, type declarations and packed **React 18.3.1 / 19.3.1** consumers passed, including imports, SSR/hydration, refs and public API fixtures. Package contains 72 files. No package publication occurred.
+- Text contrast for selected states: **4.52:1 default, 7.00:1 hover, 10.87:1 pressed**. Focus uses the existing ring/separator family; current state receives a full system-colour border in forced colours.
+- YAML/JSON parsing and diff whitespace checks passed. Canonical build retains 409 raw / 337 Studio tokens, 24 mapped responsive groups, zero unmapped groups and zero broken retained aliases. Compiled tokens have no diff; no dependencies changed.
 
-`ResponsiveSideMenu` accepts an optional `drawerTriggerContainer`: a mounted same-document HTMLElement supplied by the host. The component renders its existing Button in that slot while retaining ownership of accessible relationships, open requests and actual trigger ref. It does not create a duplicate trigger or second state owner. Omit the slot for local section controls. Inline presentation ignores it. The host must keep the target stable and mounted while focused/open. Direction/language metadata travels with the Button, and its print rule hides it even when rendered outside the navigation wrapper.
+The earlier responsive Breadcrumb/Pagination timeout did not recur in the complete passing run. No existing regression was weakened.
 
-The existing navigation design is preserved: static groups, actual neutral Accordion instances for expandable sections and the outer in-flow Menu, shared filled selected current-page states, no bespoke blue bar, no Direction selector, and existing Dialog for the drawer. No primitive, semantic or component tokens were added. Dialog and Accordion runtime implementations remain unchanged.
+## Figma implementation and audit
 
-Preview: `http://127.0.0.1:4181/?side-menu` while the local server runs. The generic comparison demonstrates documentation-primary, B2B-primary and section contexts, mobile drawer/in-flow choices, long labels and routing failure. It is not a production website, search, account or permissions implementation.
+[Figma page: 27 - Components - Side menu](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1570-296).
 
-## Responsibilities and state
+| Object | ID |
+| --- | --- |
+| Component area | `1570:297` |
+| Documentation examples | `1571:385` |
+| QA and responsive tests | `1571:742` |
+| Accessibility notes | `1571:1764` |
+| Side menu / Link | `1570:368` |
+| Side menu / Static group | `1570:369` |
+| Side menu | `1570:389` |
+| Responsive side menu | `1570:1258` |
 
-- `SideMenu` owns native nav/list/link semantics with optional aria-label and independent existing Accordion groups. Expandable groups require explicit heading levels 2–6; static-only navigation may omit headings. Group visual title style remains H6.
-- `ResponsiveSideMenu` owns controlled compact presentation and existing Dialog/Accordion composition. In-flow mode requires explicit outer heading level 2–5, with deeper group headings. One mounted tree and its group state are preserved through responsive placement; native descendant nodes may remount when they do not hold focus.
-- The bounded nesting exception remains documented in the Accordion contract: one outer Menu Accordion and one level of inner navigation-group Accordions, with independent owners. This does not grant general recursive Accordion support or a new visual variant.
-- Application owns primary/section context, host layout, header slot, separator, valid destinations, routing/current identity, skip-to-main, title and destination focus. Successful routing may use `returnFocusRef` to reach the new main/heading; ordinary dismissal returns to the actual trigger, including one in the header. Failed/cancelled routing leaves navigation available.
-- Breakpoints do not hide focused links, remove a focused header/local trigger, or dismiss an open modal. Focus listeners operate across the document, so the externally placed trigger retains the same safeguards. An open drawer remains stable during resizing until dismissal.
-- Before enhancement, or without scripts/CSS/required browser support, all destinations remain visible in flow and no inactive Menu control is exposed. Print reveals destinations and hides shell controls, including the externally placed Button.
+The Link set has six Current × State variants and independent Focus. Label remains an exposed existing Link property. Responsive Layout has Persistent, Drawer closed/open and Inline closed/open states, with reused nested controls exposed for editing. Native Items/Links/Content slots remain intact.
 
-## Validation
+Existing Accordion, Accordion / Item / Title, Link, Button, Dialog, IconButton, Modal backdrop and documentation components remain linked instances. Only the existing Accordion root description (`1176:183`) changed, to align its API and bounded navigation nesting guidance; its visual masters/runtime were not changed.
 
-- Library/token build and package/preview type checks: **passed**, including the mounted-element slot API and rejection of selector strings in declaration fixtures.
-- Unit suite: **130 tests across 12 files passed**. Navigation coverage includes actual Accordion composition, static/expandable state, controlled decline/external-collapse focus, route branch updates, explicit heading hierarchy and complete SSR relationships.
-- Full browser regression run after these fixes: **98/98 passed**, including all nineteen SideMenu checks and existing component regressions. The previous run's Breadcrumb/Pagination timeout did not recur.
-- New regression checks cover removed/reinserted uncontrolled groups in both exports while preserving peer choices; open inline resize with focus inside and outside navigation; safe empty presentation selection; optional unnamed landmarks and distinct explicit labels; and drawer title independence. Public type fixtures and React 18/19 packed consumers verify the optional landmark API.
-- New placement checks verify zero core nav padding/border; page-owned desktop divider; exactly one primary Menu control in the header; no local duplicate; local section control and focus return; header trigger retained during open-drawer resize and until blur; local in-flow Accordion despite a supplied header slot; and independent print hiding outside the wrapper.
-- Retained browser checks cover neutral Accordion controls, shared selected default/hover/pressed palette, no blue bar/RTL selector, modal focus/inertness/Tab boundary, Close/Escape/backdrop/scroll restoration, route success/failure/modifiers, group/outer state preservation, same-destination focus, 320px RTL long labels, doubled text/spacing, print, no JavaScript, forced colours, axe/contrast and drawer geometry.
-- Drawer captions and current-link text align with title within 1px; title-to-first-caption text gap remains bounded at 36px (32px in the fixture). Target padding and focus treatment remain intact after removing nav-level inset.
-- Packed library: **72 files**, verified in independent **React 18.3.1 and 19.3.1** consumers, including public slot declarations, both navigation refs, SSR/hydration and stable relationships. No publication occurred.
-- Preview production build: **passed**, with the existing Vite client-only bundle notices about ignoring `use client` directives.
-- YAML/JSON parsed, `git diff --check` passed and generated tokens have no diff. The canonical build still yields 409 raw / 337 Studio tokens, 24 mapped responsive groups, zero unmapped groups and zero broken retained aliases.
-- In-app visual review confirmed the primary Menu Button next to identity in the mobile header, no duplicate local trigger row and no Direction selector. Screenshot: `/private/tmp/owla11y-side-menu-header-v4.png`. Earlier drawer/in-flow visual receipts remain at `/private/tmp/owla11y-side-menu-drawer-v3.png` and `/private/tmp/owla11y-side-menu-inline-v3.png`; their internal state and geometry are unchanged.
+Documentation uses four existing Page Header instances and fifteen existing Card instances in wrapping grids. Examples cover documentation-primary, B2B-primary, account-section, page-owned divider, header/local triggers and both compact presentations. QA covers selected pointer/focus states, flat/static/mixed groups, 320/390px wrapping, RTL links, enlarged text/spacing and a 768px viewport with the existing backdrop and a 512px maximum drawer surface.
 
-The earlier print regression queried a hidden Button by accessible role; its corrected computed-style check remains in the passing full suite. Earlier targeted rechecks and the historical responsive timeout are superseded by the complete 98-test passing run. No existing regression was weakened.
+The final structural audit found **1,541 editable nodes, zero image-filled nodes, Inter throughout, zero missing text styles and zero slot-limit violations**. All 102 referenced variable IDs resolve, including eighteen inherited remote references. Core padding is `[0,0,0,0]` with zero strokes. Ordinary/current underline treatment matches React. All six link masters are 51px high at lg, above the comfortable target minimum. Global and Breakpoint collections retain their existing IDs and base/md/lg modes.
 
-## Reuse, contrast and sync state
+No variables, tokens or production text styles were created. Ordinary links reuse the existing Pagination link text style, compatible with the local always-underlined navigation recipe; current links use the existing strong body style. One explicitly QA-only reference style represents intentional 200% text/spacing overrides. Existing legacy foundation metadata was preserved; no broad token migration was performed.
 
-Current page continues to use shared selected white-on-blue states: default 4.52:1, hover 7.00:1, pressed 10.87:1, matching Pagination's semantic family. Neutral controls retain existing Accordion roles; focus retains the ring/separator, and forced colours use a complete system-colour border. Header placement reuses the same existing Button and controlled Dialog lifecycle. React DOM is already a peer dependency; no dependency or lock-file changes were needed.
+Visual checks passed after targeted auto-layout and typography fixes. Reviewed IDs: primary desktop/mobile `1571:404`, B2B/section `1574:876`, QA `1571:742`, RTL/enlarged text `1574:1334`, tablet/backdrop `1575:1125`, accessibility `1571:1764`. The [machine-readable receipt](react-side-menu-figma-evidence.json) records exact IDs, bindings, variants, inherited variable resolution and counts. Figma states illustrate the contract; they do not implement native modal, routing or assistive-technology behaviour.
 
-**Figma objects changed: none.** Earlier read-only discovery is preserved in [the receipt](react-side-menu-figma-evidence.json). It establishes existing Accordion inventory and foundations, not a new parity/post-export audit. After local acceptance, proposed page `27 - Components - Side menu` should use standard documentation areas, existing component instances and usage examples for primary header versus section-local placement, zero core inset, page-owned divider and bounded Accordion nesting.
+## Sync and remaining checkpoints
 
-No push, PR, merge, provider pull/export, remote write or library publication occurred. Synced project references are untouched. No token sync is needed for unchanged token sources.
+GitHub source and Figma construction/audit are complete. Documentation/evidence delivery is recorded by the accompanying PR. Token sources and compiled outputs are unchanged, so no Tokens Studio provider pull/export or destructive reconciliation is required. No library/package publication occurred.
 
-## Exact source inventory
+Richard reports successful local screen-reader and keyboard testing; platform, browser and assistive-technology versions were not specified. Actual 400% browser zoom, real touch, Windows high contrast and targeted browser/AT combinations remain release acceptance where not already checked. Figma's forced-colour example is a structural reference, not an OS palette simulation.
 
-- `components/side-menu/side-menu.yaml`, `side-menu.md`: component/API/accessibility/composition guidance, including optional native landmark label, independent drawer title, header/local placement and no core inset/divider.
-- `patterns/side-navigation.yaml`: consumer-neutral scope, choice over top navigation, host-owned separator/insets and primary/section/in-flow trigger rules.
-- `components/accordion/accordion.yaml`, `accordion.md`: previously requested bounded navigation-nesting exception; no Accordion runtime or Figma changes.
-- `packages/react/src/components/SideMenu.tsx`, `ResponsiveSideMenu.tsx`: existing navigation/Accordion/Drawer composition, optional landmark naming, discarded removed-group state, safe inline resize and host-slot rendering of the owned Button.
-- `packages/react/src/types.ts`, `index.ts`, `styles/components.css`: API/exports, zero core nav padding, selected-state reuse, scoped spacing and location-independent print hiding.
-- `scripts/assemble-react.mjs`: canonical lg projection into CSS.
-- `examples/client-consumer/side-menu.tsx`, `main.tsx`, `preview.css`: generic contexts, mounted header slot, local section controls, page-only divider and host clearance.
-- `packages/react/tests/side-menu.test.tsx`, `tests/browser/side-menu.spec.ts`, `tests/types.tsx`, `tests/packed-consumer.mjs`: unit/browser/type/packed-consumer evidence.
-- `packages/react/api-contract.json`, `packages/react/README.md`, `docs/react-api.md`, `docs/react-package-structure.md`: local candidate inventory and host integration guidance.
-- This report and `docs/validation/react-side-menu-figma-evidence.json`: current local validation and qualified earlier read-only Figma evidence.
-
-## Remaining acceptance
-
-Richard reports that local screen-reader and keyboard testing worked well. This is recorded as user acceptance evidence; browser, operating system and assistive-technology versions were not specified. Richard accepted the latest fixes for GitHub and Figma delivery. Before release, complete authorized GitHub delivery, Figma construction and any remaining targeted screen-reader/device acceptance: VoiceOver/Safari, NVDA with Firefox/Chrome, real touch, OS new-tab behaviour, actual 400% browser zoom and Windows high contrast. In particular, assess the two Accordion levels and primary-header versus section-local trigger announcements. Automated results do not establish spoken delivery or WCAG certification.
-
-The wrapper is viewport-based, not automatic container-fit logic. Hosts own adequate desktop content width, external trigger lifetime and focus when destinations/permissions change. Narrow embedded hosts can compose the core themselves. Source merge, Figma reconciliation, token round-trip and publication remain separate checkpoints.
+The viewport-based wrapper is intended for page/application shells. Hosts remain responsible for desktop working width, stable mounted header slots and focus when destinations/permissions change. Narrow embedded layouts can compose the core directly. Synced project references remain untouched.

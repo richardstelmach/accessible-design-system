@@ -266,7 +266,7 @@ See [source/Figma comparison and validation](../../docs/validation/react-navigat
 
 CodeBlock is implemented with required plain-text `code` and visible `label`, optional `copyable` (true), partial `labels` localisation and successful-copy `onCopy(code)`. Its ref targets the wrapper div. It reuses IconButton, preserves exact clipboard text, provides persistent visible polite feedback and adds a named code tab stop only for measured overflow. SSR and print wrap content; SSR omits inactive copy controls. See [the canonical CodeBlock contract](../../components/code-block/code-block.yaml) and the CodeBlock validation report. Source/Figma reconciliation and the exported token foundation are recorded in the CodeBlock validation report. Manual screen-reader acceptance and publication remain release gates.
 
-## Side menu (local candidate)
+## Side menu
 
 `SideMenu` supplies reusable primary or section navigation: required `items`, optional `aria-label` and `currentId` and an explicit semantic `headingLevel` (2..6) when expandable groups are present. Static-only menus can omit headings. Groups `{id,label,items}` are static by default; `expandable:true` opts into independent existing Accordion instances. Use `defaultExpandedIds` or controlled `expandedIds/onExpandedChange` for expandable group keys. Links `{id,label,href,linkAttributes?}` remain real anchors. The ref targets `nav`; it has zero outer padding and no built-in divider.
 
@@ -277,3 +277,5 @@ Review locally at `?side-menu`, including documentation-primary, B2B-primary and
 For primary mobile drawer navigation, pass a mounted same-document header element as `drawerTriggerContainer`; the component places its existing Button there with the correct relationships and lifecycle. Keep the slot mounted while focused/open. Omit it for locally labelled section controls. The in-flow Accordion always remains local. The host page owns sidebar insets, divider and focus clearance; the core nav has no outer padding or separator option.
 
 Navigation `aria-label` is optional and omitted by default, independently of the required responsive drawer title. For multiple navigation regions with different purposes, provide distinct names such as `Main navigation` and `Account navigation`. Removed uncontrolled group state is discarded. Open inline navigation returns to desktop placement above lg once focus safely leaves its trigger and descendants.
+
+Side menu source is merged through PR 49. Figma page `27 - Components - Side menu` (`1570:296`) is constructed and audited; see the component guidance and validation receipt for exact IDs. Library publication remains separate.

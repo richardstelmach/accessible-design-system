@@ -3,9 +3,9 @@ id: side-menu
 version: 0.4.0
 status: draft
 phase:
-  current: accepted-source-delivery
-  implementation: react-automated-checks-passed
-  figma: construction-in-progress
+  current: github-and-figma-delivered
+  implementation: react-ci-passed
+  figma: constructed-audited-unpublished
   releaseReady: false
 
 description: >-
@@ -53,7 +53,7 @@ usage:
 
 anatomy:
   SideMenu:
-    root: Native nav with optional aria-label with zero outer padding and no divider; public ref targets nav.
+    root: Native nav with optional aria-label, zero outer padding and no divider; public ref targets nav.
     list: ul/li hierarchy, one group level.
     caption: Noninteractive p by default; optional explicit native h2 through h6.
     disclosure: Existing neutral Accordion, H6 visual title style, explicit semantic heading level, standard caret and focus behaviour.
@@ -179,11 +179,21 @@ accessibility:
 
 figma:
   fileKey: dVFI0q1cXMtmjUAkdvSWkk
-  status: construction-in-progress
-  changedObjects: []
-  proposedPageName: 27 - Components - Side menu
+  status: constructed-audited-unpublished
+  pageId: '1570:296'
+  pageName: 27 - Components - Side menu
+  changedObjects:
+    linkSet: '1570:368'
+    staticGroup: '1570:369'
+    core: '1570:389'
+    responsiveSet: '1570:1258'
+    accordionDescription: '1176:183'
+  evidence: docs/validation/react-side-menu-figma-evidence.json
+  sourceMerge: 984e95215eb370a0129ab4baf45c968ab0af3a95
+  publication: Not performed; separate library checkpoint.
+  qaReferenceStyle: _reference/Side menu/current/200-percent-text-spacing
   requiredAreas: [01 - Component set, 02 - Documentation examples, 03 - QA and responsive tests, 04 - Accessibility notes]
-  proposedInventory:
+  inventory:
     SideMenu: Navigation with direct links, static captions and actual Accordion instances for expandable groups.
     ResponsiveSideMenu: Persistent, drawer-closed/open and inline-closed/open authoring compositions; no redundant breakpoint token axes.
   reuse: Existing Link, Accordion, Button and Dialog, with shared typography/variables and documentation components.
@@ -210,8 +220,8 @@ validation:
     - Both Accordion levels remain independent; drawer header/label alignment and bounded vertical gap
   releaseGates:
     - Richard local design/API review accepted on 27 October 2026
-    - Authorized GitHub delivery and source merge
-    - Figma construction and comparison after local review
+    - Source merged through PR 49; GitHub CI passed
+    - Figma construction and structural/visual comparison completed
     - Manual assistive-technology, zoom and real-device acceptance
 
 references:
