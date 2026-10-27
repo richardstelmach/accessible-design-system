@@ -330,5 +330,40 @@
   "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
   "sessionId": "0399e5db-ae40-4364-92a4-d5bb4deb984c",
   "newTokens": 0,
-  "selectedTokensChanged": false
+  "selectedTokensChanged": false,
+  "publication": {
+    "assets": [
+      {
+        "id": "1570:368",
+        "name": "Side menu / Link",
+        "key": "f5799b726ca07189365c2ff46afcad0a37814b65",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:369",
+        "name": "Side menu / Static group",
+        "key": "1aaeb26c88bfd6210f01558b27af3e449de2d007",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:389",
+        "name": "Side menu",
+        "key": "ae9a3880da704a5c8eaba9dbd95ed9b590bcdca0",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:1258",
+        "name": "Responsive side menu",
+        "key": "93bde298758fc6718aa8d6e0d0f74514efc45c7d",
+        "status": "CURRENT"
+      }
+    ],
+    "date": "2026-10-27",
+    "modifiedAssets": 4,
+    "stylesOrVariablesPublished": 0,
+    "unchangedExcluded": 133,
+    "hiddenExcluded": 48,
+    "method": "Figma desktop Publish library",
+    "selectedTokensChanged": false
+  }
 }

@@ -33,7 +33,7 @@ Focus remains independent. Forced colours retain the complete system-colour curr
 
 Figma cannot override the transform of a descendant inside an instance. Its RTL QA reference therefore retains the linked Link instance and mirrors its marker in a QA-only layout wrapper; React uses logical geometry directly. The forced-colour reference remains illustrative; runtime system colours are browser-owned.
 
-No token changes means no Tokens Studio pull/export is required. Publication status is recorded in the structural receipt after the scoped library update.
+No token changes means no Tokens Studio pull/export is required. The four modified Side menu assets were published on 27 October 2026 and all report CURRENT with their original keys. The 133 unchanged and 48 hidden assets were excluded; no styles or variables were published. See the structural receipt.
 
 ![React current destination and hierarchy](side-menu-current-react.png)
 

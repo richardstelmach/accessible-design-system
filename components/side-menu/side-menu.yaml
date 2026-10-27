@@ -190,7 +190,7 @@ figma:
     accordionDescription: '1176:183'
   evidence: docs/validation/side-menu-current-figma-evidence.json
   sourceMerge: 984e95215eb370a0129ab4baf45c968ab0af3a95
-  publication: Original assets published 2026-10-27; approved leading-rule and child-indent update tracked in the current treatment evidence.
+  publication: Leading-rule and child-indent update published 2026-10-27; all four Side menu assets report CURRENT with original keys. No styles or variables changed.
   qaReferenceStyle: _reference/Side menu/current/200-percent-text-spacing
   authoringConstraints:
     itemsGap: spacing.0; flat destinations are contiguous.
