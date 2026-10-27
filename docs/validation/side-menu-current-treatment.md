@@ -20,7 +20,7 @@ Focus remains independent. Forced colours retain the complete system-colour curr
 
 - Build, typecheck, 130 unit tests and 100 browser tests pass.
 - Browser regressions verify actual rest/hover/pressed marker and row colours, independent keyboard focus, repeated touch taps, equal static/Accordion indentation in LTR/RTL, and drawer title/parent/child geometry.
-- Existing suite covers 320px wrapping, enlarged text/spacing, no-JavaScript, print, forced colours, axe, modal lifecycle, accepted/cancelled routing and responsive focus safety.
+- A strengthened forced-colour regression also verifies the marker stays CanvasText while hovered and pressed. Existing suite covers 320px wrapping, enlarged text/spacing, no-JavaScript, print, forced colours, axe, modal lifecycle, accepted/cancelled routing and responsive focus safety.
 - Packed React 18.3.1 and 19.3.1 consumers pass; archive contains 72 files. No npm publication.
 - Token build and diff checks confirm all canonical and compiled tokens unchanged. Existing Vite ignored `use client` warnings remain.
 - Richard accepted the local appearance and previously reported successful component screen-reader/keyboard use. Real-device touch, platform-specific assistive technology and actual 400% zoom remain manual acceptance; emulation is not a substitute.

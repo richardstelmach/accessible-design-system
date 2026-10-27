@@ -62,6 +62,9 @@ test('axe, rendered contrast and forced colours cover desktop and open drawer',a
  const scan=()=>page.evaluate(async()=>{const axe=(window as unknown as {axe:{run:Function}}).axe;return(await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}})).violations;});expect(await scan()).toEqual([]);
  await page.setViewportSize({width:390,height:800});await page.getByRole('button',{name:'Menu',exact:true}).click();expect(await scan()).toEqual([]);
  await page.emulateMedia({forcedColors:'active'});await page.keyboard.press('Tab');const current=page.getByRole('link',{name:'Button',exact:true});await current.focus();await expect(current).toHaveCSS('outline-style','solid');await expect(current).toHaveCSS('border-inline-start-style','solid');
+ const systemText=await page.evaluate(()=>{const probe=document.createElement('span');probe.style.color='CanvasText';document.body.appendChild(probe);const colour=getComputedStyle(probe).color;probe.remove();return colour;});
+ await current.hover();expect(await current.evaluate(n=>getComputedStyle(n,'::before').backgroundColor)).toBe(systemText);
+ await page.mouse.down();expect(await current.evaluate(n=>getComputedStyle(n,'::before').backgroundColor)).toBe(systemText);await page.mouse.move(380,0);await page.mouse.up();
 });
 test('SSR without JavaScript retains the entire navigation and no inactive controls',async({browser})=>{
  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:320,height:700}});const page=await context.newPage();
