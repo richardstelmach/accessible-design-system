@@ -214,3 +214,32 @@ const invalidCodeBlock = <CodeBlock label="React" code={<b>code</b>}/>;
 const unlabelledCodeBlock = <CodeBlock code="text"/>;
 // @ts-expect-error Semantics are component-owned.
 const roleCodeBlock = <CodeBlock label="CSS" code="" role="button"/>;
+
+
+import {SideMenu,ResponsiveSideMenu} from '../src/index.js';
+<SideMenu aria-label="Primary" items={[{id:'one',label:'One',href:'/one'}]} ref={createRef<HTMLElement>()}/>;
+<SideMenu aria-label="Section" headingLevel={3} items={[{id:'group',label:'Group',expandable:true,items:[{id:'one',label:'One',href:'/one'}]}]}/>;
+<ResponsiveSideMenu label="Primary" open={false} onOpenChange={()=>{}} items={[{id:'one',label:'One',href:'/one'}]}/>;
+// @ts-expect-error explicit mobile ownership required
+<ResponsiveSideMenu label="Primary" items={[{id:'one',label:'One',href:'/one'}]}/>;
+// @ts-expect-error groups cannot both navigate and disclose
+<SideMenu aria-label="Primary" items={[{id:'group',label:'Group',href:'/group',items:[{id:'one',label:'One',href:'/one'}]}]}/>;
+// @ts-expect-error controlled group expansion requires callback
+<SideMenu aria-label="Primary" expandedIds={[]} items={[{id:'one',label:'One',href:'/one'}]}/>;
+// @ts-expect-error no ARIA menu override
+<SideMenu aria-label="Primary" items={[{id:'one',label:'One',href:'/one'}]} role="menu"/>;
+
+<ResponsiveSideMenu label="Primary" headingLevel={3} inlineHeadingLevel={2} mobilePresentation="inline" open={false} onOpenChange={()=>{}} items={[{id:'one',label:'One',href:'/one'}]}/>;
+// @ts-expect-error no heading level remains below h6 for nested menu sections
+<ResponsiveSideMenu label="Primary" inlineHeadingLevel={6} mobilePresentation="inline" open={false} onOpenChange={()=>{}} items={[{id:'one',label:'One',href:'/one'}]}/>;
+
+<ResponsiveSideMenu label="Primary" drawerTriggerContainer={null} open={false} onOpenChange={()=>{}} items={[{id:'one',label:'One',href:'/one'}]}/>;
+// @ts-expect-error a trigger host is a DOM element, not a selector or raw ID
+<ResponsiveSideMenu label="Primary" drawerTriggerContainer="#header" open={false} onOpenChange={()=>{}} items={[{id:'one',label:'One',href:'/one'}]}/>;
+
+<SideMenu items={[{id:'home',label:'Home',href:'/'}]}/>;
+<ResponsiveSideMenu label="Documentation" aria-label="Main navigation" open={false} onOpenChange={()=>{}} items={[{id:'home',label:'Home',href:'/'}]}/>;
+// @ts-expect-error Navigation aria-label must be text.
+<SideMenu aria-label={42} items={[{id:'home',label:'Home',href:'/'}]}/>;
+// @ts-expect-error Responsive drawer still needs its visible title.
+<ResponsiveSideMenu open={false} onOpenChange={()=>{}} items={[{id:'home',label:'Home',href:'/'}]}/>;

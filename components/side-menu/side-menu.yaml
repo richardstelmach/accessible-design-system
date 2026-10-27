@@ -1,0 +1,219 @@
+component: Side menu
+id: side-menu
+version: 0.4.0
+status: draft
+phase:
+  current: accepted-source-delivery
+  implementation: react-automated-checks-passed
+  figma: construction-in-progress
+  releaseReady: false
+
+description: >-
+  Reusable primary or section navigation for documentation-heavy websites,
+  B2B software and substantial application areas. Static and independently
+  expandable groups share native links. A separate responsive composition
+  provides a mobile modal drawer or in-flow disclosure.
+
+relatedDocumentation:
+  - components/side-menu/side-menu.md
+  - patterns/side-navigation.yaml
+  - components/link/link.yaml
+  - components/button/button.yaml
+  - components/dialog/dialog.yaml
+  - accessibility/focus-indicators.yaml
+  - patterns/component-documentation-page.yaml
+  - tokens/figma/sync-contract.yaml
+  - docs/validation/react-side-menu-parity.md
+
+scope:
+  includes:
+    - Whole-site or whole-application primary navigation
+    - Section navigation within a larger site or application
+    - Direct links and one level of mixed static/expandable groups
+    - Application-owned current link and controlled or uncontrolled group expansion
+    - Mobile modal drawer composed with existing Dialog and Button
+    - Optional in-flow mobile disclosure
+  excludes:
+    - Brand/search/account/permission systems, route matching and site implementation
+    - More than one group level, link-and-disclosure parent rows and disabled links
+    - ARIA menu, tree, tabs, commands, in-page contents and step navigation
+    - Icon-only rails, badges/counts, hover flyouts, resize handles and animation
+    - Sticky positioning, component-owned desktop column width or automatic content-fit detection
+
+usage:
+  pattern: patterns/side-navigation.yaml
+  primary: Main destination hierarchy; header can provide identity, search and utilities.
+  section: Destinations inside a substantial area; distinguish its landmark from global navigation.
+  sideOverTop: Repeated movement among many stable, grouped destinations with useful content space beside it.
+  topOverSide: Short shallow destination sets, focused journeys or little benefit from persistent grouping.
+  grouping:
+    static: Default; continuously visible links under a noninteractive caption.
+    expandable: Explicit opt-in where hiding a larger secondary list improves scanning.
+    mixed: Supported; groups expand independently, never exclusively.
+
+anatomy:
+  SideMenu:
+    root: Native nav with optional aria-label with zero outer padding and no divider; public ref targets nav.
+    list: ul/li hierarchy, one group level.
+    caption: Noninteractive p by default; optional explicit native h2 through h6.
+    disclosure: Existing neutral Accordion, H6 visual title style, explicit semantic heading level, standard caret and focus behaviour.
+    children: Named nested ul; mounted with native hidden while collapsed after enhancement.
+    link: Existing standalone Link, true href, wrapping visible label and permitted linkAttributes.
+    current: aria-current=page and shared filled color.interactive.selected foreground/background states, matching Pagination; no left bar.
+  ResponsiveSideMenu:
+    root: Runtime layout wrapper; navigation ref still targets nav.
+    trigger: Existing Menu Button for drawer, or the existing outer Menu Accordion for inline presentation.
+    drawer: Existing dismissible Dialog, visible navigation title, Close navigation IconButton and scoped inline-start placement.
+    inline: Existing single-item Accordion containing navigation; controlled by open/onOpenChange, independent of inner groups.
+
+publicApi:
+  SideMenu:
+    aria-label: Optional nonempty navigation landmark name; omit for a clear single region, use distinct names for multiple navigation purposes.
+    items:
+      link: '{id, label, href, linkAttributes?}'
+      group: '{id, label, items: link[], expandable?: boolean=false}'
+      rules:
+        - Require nonempty arrays, labels and globally unique IDs.
+        - Groups are static by default and cannot also navigate; use Overview as a child.
+        - Reject nested groups, executable destinations and semantics/content overrides.
+    currentId: Optional existing link ID; never infer from URL prefixes.
+    headingLevel: Explicit 2 through 6 required when groups expand; static-only menus may use none. Accordion visual titleStyle is h6.
+    expandedIds: Controlled expandable-group keys; requires onExpandedChange, forbids defaultExpandedIds and ownership switching.
+    defaultExpandedIds: Uncontrolled initial expandable-group keys only; reject static/unknown keys and duplicates.
+    onExpandedChange: Requests independent expansion; a controlled owner may decline.
+    metadata: id/className/style/lang/dir/data attributes; semantics are component-owned.
+  ResponsiveSideMenu:
+    inherits: SideMenu props and nav ref.
+    label: Required nonempty visible drawer title; independent of optional navigation aria-label.
+    open: Required application-owned boolean for compact navigation; ignored by persistent desktop visibility.
+    onOpenChange: Required handler for Menu and Dialog dismissal requests; no competing internal open owner.
+    mobilePresentation: drawer by default, or inline.
+    toggleLabel: Nonempty localisable text; defaults to Menu.
+    inlineHeadingLevel: Required 2 through 5 when mobilePresentation is inline; group headings must be deeper.
+    drawerTriggerContainer: Optional mounted HTMLElement in the same document; render the existing drawer Button there, otherwise keep it local. Ignored by inline presentation.
+    closeLabel: Nonempty localisable text; defaults to Close navigation.
+    returnFocusRef: Optional explicit destination for existing Dialog focus restoration, especially after accepted routing.
+    rules:
+      - Close before changing mobile presentation.
+      - Keep a supplied trigger container mounted and in the same document while the control is focused or drawer is open.
+      - Primary drawer triggers belong in the host header; section triggers and in-flow Accordion headers remain local.
+      - Host owns route completion, open changes and main/heading focus, including same-destination navigation.
+      - Group expansion survives internal placement changes; filtered removed uncontrolled groups do not reappear.
+
+behaviour:
+  expansion:
+    - Uncontrolled initial state includes the current expandable branch.
+    - Controlled initial state is explicit; include the current group if it should begin visible.
+    - When currentId changes, request its expandable group open without closing other groups.
+    - Users can subsequently collapse the current group.
+    - Keep the same group choices when switching responsive placement.
+    - Before hiding a focused group's links, return focus to its controlling Button.
+  navigation:
+    - Real links retain modifier/new-tab/context-menu behaviour and cancelled activation.
+    - No navigation on focus, hover, expansion or resizing.
+    - Do not close automatically on link click; application closes after accepted navigation.
+    - Failed/cancelled navigation preserves currentId and access to the open menu.
+    - Application owns document title, URL/history, valid targets, skip-to-main and post-route focus.
+  keyboard:
+    Tab: Native visible-link/button order, constrained to existing Dialog while modal.
+    ShiftTab: Reverse of the same order.
+    EnterSpace: Native link and Button behaviour.
+    Escape: Existing Dialog dismissal in drawer mode; no extra in-flow group-collapse shortcut.
+    arrowsHomeEnd: Native browser scrolling, no roving tabindex.
+  responsive:
+    breakpoint: Existing breakpoint.lg at 64rem, injected from canonical source during CSS assembly.
+    baseAndMd: Modal drawer by default, optional in-flow disclosure.
+    lg: Persistent navigation; host owns columns, outer insets, focus clearance and any divider. The nav itself has zero outer padding.
+    focusSafety:
+      - Defer compact placement while a desktop navigation descendant holds focus.
+      - Never dismiss/reparent an open modal during resize.
+      - Retain a focused Menu trigger or navigation descendant until blur when returning to desktop.
+      - An open in-flow Menu becomes persistent above lg once focus safely leaves; only an open modal pins compact placement.
+    drawer:
+      - Preserve existing Dialog naming, initial container focus, keyboard boundary, backdrop and Escape/Close dismissal.
+      - Preserve one modal owner, background inertness, scroll locking and focus restoration.
+      - Place at logical inline-start with existing small Dialog width and viewport height; respect safe-area insets.
+      - Dialog implementation, public presentation API and canonical tokens are unchanged.
+    inline:
+      - Bounded explicit nesting exception: outer Menu Accordion and one level of group Accordions, with independent owners and explicit heading hierarchy.
+      - Use existing Accordion for the outer disclosure; no modal role, backdrop, focus trap or scroll lock.
+      - Recover focus to Menu before an externally requested close hides focused navigation.
+    limitations:
+      - Wrapper serves viewport-level site/application shells; narrow embedded hosts can compose SideMenu themselves.
+      - Host is responsible for ensuring the desktop column leaves adequate working width.
+  baseline:
+    - SSR and no-JavaScript output show all destinations and static group labels, without inactive Menu/group buttons or dialogs.
+    - Missing CSS, ResizeObserver or native modal support retains in-flow navigation.
+  print: Reveal every group and closed drawer content; hide shell controls and caret icons.
+
+visuals:
+  captions: Existing body/default typography with strong weight; semantic heading choice does not imply large document-heading styling.
+  links: Existing standalone Link; comfortable 44px targets, wrapping labels and local always-underlined treatment.
+  disclosure: Existing Accordion with unmodified neutral states, caret, divider and focus treatment; no blue text-Button imitation.
+  current: Shared color.interactive.selected default/hover/active filled states with strong white text and aria-current=page; no underline or left bar.
+  spacing: No nav outer padding; host owns inset/clearance, targets retain existing control/Accordion padding and stack spacing; remove redundant navigation/list indentation; drawer label text aligns with title; header title centres against Close.
+  drawer: Existing Dialog tokens and scoped layout recipe; no animation.
+  forcedColors: Native system colours, visible outlines and a current-page border.
+
+tokens:
+  newPrimitiveTokens: []
+  newSemanticTokens: []
+  newComponentTokens: []
+  newResponsiveTokensRequired: false
+  rationale: >-
+    Existing Link/Accordion/semantic/target/focus/spacing and shared selected-state tokens cover navigation.
+    Existing Dialog tokens cover modal width, surface, padding and backdrop.
+    The private compact CSS signal is runtime state, not a design token.
+    Add future component aliases only for an independently evidenced design need.
+
+accessibility:
+  target: WCAG 2.2 AA
+  wcag: ['1.3.1', '1.3.2', '1.4.1', '1.4.3', '1.4.4', '1.4.10', '1.4.11', '1.4.12', '2.1.1', '2.1.2', '2.4.1', '2.4.3', '2.4.4', '2.4.6', '2.4.7', '2.4.11', '2.5.2', '2.5.3', '2.5.8', '3.2.1', '3.2.3', '4.1.2']
+  semantics: Native nav/list/link/disclosure/dialog; no ARIA menu/menubar/tree roles or redundant live announcements.
+  landmarks: One navigation tree per composition. Optional aria-label may be omitted for a clear single region; multiple navigation purposes require distinct contextual names such as Main navigation and Account navigation. Drawer title remains independently required.
+  contrast: Text at least 4.5 to 1; meaningful focus/current markers at least 3 to 1.
+  reflow: 320 CSS pixels, wrapping labels, 200 percent text and separate real 400 percent zoom acceptance.
+  textSpacing: Line height 1.5, paragraph spacing 2em, letter spacing .12em and word spacing .16em without lost content.
+  manualAcceptance: VoiceOver/Safari, NVDA/Firefox or Chrome, actual zoom, Windows high contrast and real touch devices.
+  userAcceptance: Richard reports successful local screen-reader and keyboard use; platform, browser and assistive-technology versions unspecified.
+
+figma:
+  fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  status: construction-in-progress
+  changedObjects: []
+  proposedPageName: 27 - Components - Side menu
+  requiredAreas: [01 - Component set, 02 - Documentation examples, 03 - QA and responsive tests, 04 - Accessibility notes]
+  proposedInventory:
+    SideMenu: Navigation with direct links, static captions and actual Accordion instances for expandable groups.
+    ResponsiveSideMenu: Persistent, drawer-closed/open and inline-closed/open authoring compositions; no redundant breakpoint token axes.
+  reuse: Existing Link, Accordion, Button and Dialog, with shared typography/variables and documentation components.
+  rules:
+    - Use actual Accordion instances for expandable groups and the outer inline item; explicit levels preserve heading hierarchy.
+    - Use component instances for usage/QA examples; retain the standard documentation template.
+    - Figma does not establish routing, native modal semantics or screen-reader conformance.
+
+validation:
+  examples:
+    - Documentation primary navigation with visible and expandable groups
+    - B2B workspace primary navigation and distinctly named section navigation
+    - Flat links, mixed groups, explicit optional heading levels and one current link
+    - Drawer keyboard boundary, inertness, Close/Escape/backdrop and scroll/focus restoration
+    - Accepted, failed, modified and same-destination navigation
+    - Desktop/mobile resize while a link, Menu trigger or open drawer owns focus
+    - State preservation across placement; single rendered tree and unique IDs
+    - 320px RTL by test-only direction setting, long labels, text scaling/spacing, print, no-JavaScript and forced colours
+    - Header placement and focus return for primary drawer triggers; local section/in-flow controls
+    - Zero core nav padding/border; desktop separator only in page composition
+    - Current default/hover/pressed filled palette with no left bar; neutral Accordion states
+    - Removed uncontrolled group state is discarded; open inline resize protects focus and returns to persistent layout; empty preview presentation uses drawer default
+    - Optional nav aria-label absent by default, distinct names when provided, independent named drawer title
+    - Both Accordion levels remain independent; drawer header/label alignment and bounded vertical gap
+  releaseGates:
+    - Richard local design/API review accepted on 27 October 2026
+    - Authorized GitHub delivery and source merge
+    - Figma construction and comparison after local review
+    - Manual assistive-technology, zoom and real-device acceptance
+
+references:
+  - https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/
+  - https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/

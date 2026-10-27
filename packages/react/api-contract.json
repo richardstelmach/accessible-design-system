@@ -210,6 +210,16 @@
       "props": "code:string; label:string; copyable=true; labels?; onCopy(code)?; wrapper div ref",
       "behaviour": "Exact pre/code text; progressive copy; persistent polite feedback; measured named overflow; wrapping SSR/print fallback. Manual screen-reader and Figma/token-sync acceptance pending.",
       "implementation": "implemented-manual-release-checks-pending"
+    },
+    {
+      "id": "side-menu",
+      "exports": [
+        "SideMenu",
+        "ResponsiveSideMenu"
+      ],
+      "props": "SideMenu: optional aria-label (nonempty if supplied; distinct names for multiple navigation purposes); items with static or expandable Accordion groups; currentId?; headingLevel=2..6 required for expandable groups (static-only may use none); expandedIds/onExpandedChange or defaultExpandedIds. ResponsiveSideMenu adds required visible drawer title label independent of nav aria-label; controlled open/onOpenChange, mobilePresentation=drawer|inline, inlineHeadingLevel=2..5 required for inline, toggleLabel, closeLabel, returnFocusRef. Optional drawerTriggerContainer: mounted same-document HTMLElement for primary header placement.",
+      "behaviour": "Native nav refs. Reuses neutral Accordion for groups and the outer in-flow Menu, existing Link/Button/Dialog, and shared filled selected current-page states. Explicit heading hierarchy and independent inner/outer ownership. Drawer alignment removes compounded padding. App owns routing and destination focus. Zero core nav padding or divider; host page owns separation. Primary drawer Button can render in a header slot, with focus return to that actual trigger; section/inline controls remain local.",
+      "implementation": "reviewed-implementation-automated-checks-passed"
     }
   ]
 }

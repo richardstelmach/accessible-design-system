@@ -34,10 +34,18 @@ scope:
   excludes:
     - Disabled items or a requirement to keep one panel open
     - Single-open mode, built-in expand-all controls, URL history, async loading and animation
-    - Nested accordions and arbitrary interactive title content
+    - General nested accordions outside the explicitly requested SideMenu in-flow composition, and arbitrary interactive title content
     - Built-in header action, badge or leading-icon slots in this first version
 
 decisions:
+  sideMenuComposition:
+    status: local-candidate-explicitly-requested
+    authority: Richard requested the existing Accordion for both the outer in-flow menu and expandable menu sections.
+    scope: One outer Menu Accordion containing SideMenu's single-level group Accordions; no arbitrary recursive nesting.
+    headingRule: Explicit outer heading level 2 through 5; inner group heading level must be deeper and at most 6.
+    stateRule: Outer and inner expansion owners remain independent; closing the outer panel preserves inner choices.
+    evidence: packages/react/tests/browser/side-menu.spec.ts
+    releaseGate: Local review and manual assistive-technology acceptance; existing Accordion implementation and Figma masters unchanged.
   expansionMode:
     status: accepted
     value: independent

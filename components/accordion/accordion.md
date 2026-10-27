@@ -150,6 +150,10 @@ Allow overrides of line height to 1.5 times font size, paragraph spacing to 2 ti
 
 No animation is required. Future motion must respect reduced-motion preferences and synchronise hidden content with focusability. Keep focused headers visible near sticky page furniture. [W3C focus not obscured](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html)
 
+## Side-menu composition — local candidate
+
+Richard explicitly requested reuse of this Accordion for expandable navigation sections and the outer in-flow mobile menu. The local SideMenu contract permits that bounded two-layer composition: one outer Menu item with a named navigation panel, containing at most one level of independently controlled group Accordions. Use explicit heading levels, such as outer H2 and group H3, and the existing H6 visual title style. Closing either level does not reset the other; focus recovery remains owned by each existing Accordion instance. No new visual variant, nested keyboard shortcut or general recursive Accordion support is introduced. See [SideMenu](../side-menu/side-menu.yaml), [the navigation pattern](../../patterns/side-navigation.yaml) and its browser evidence. The Accordion implementation and existing Figma masters remain unchanged; broader nesting stays outside scope.
+
 ## Figma handoff
 
 Read-only preflight on 8 October 2026 confirmed the existing Tabs page, native slots, five responsive heading styles, `global` and `Breakpoint` collections, and the local caret masters (`61:635` down, `61:629` up). At that preflight no Accordion page or variables existed. The live audit on 21 October 2026 confirms the later-built masters and five geometry aliases; see the [React comparison evidence](../../docs/validation/react-controls-parity.md). No production Accordion Figma changes were needed in this batch.
