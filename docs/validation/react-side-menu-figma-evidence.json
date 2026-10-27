@@ -15,7 +15,7 @@
       "19.3.1"
     ]
   },
-  "status": "repaired-audited-unpublished-pending-final-review",
+  "status": "published-and-audited",
   "newTokens": 0,
   "newProductionTextStyles": 0,
   "newQAReferenceStyles": [
@@ -692,7 +692,7 @@
     "Figma authoring states do not implement native browser modal, routing or accessibility semantics.",
     "QA-only forced-colour reference illustrates structure; OS palette acceptance remains separate.",
     "Richard reports successful screen-reader and keyboard use; platform and AT versions unspecified.",
-    "Library publication and remaining actual zoom/device acceptance are separate checkpoints."
+    "Figma library publication is complete; remaining actual zoom/device acceptance and npm package publication are separate checkpoints."
   ],
   "tokensStudio": "No canonical or compiled token diff; all repairs bind existing tokens. No provider pull/export required.",
   "initialDeliverySummary": {
@@ -971,5 +971,61 @@
       ]
     },
     "nativeSlotIdentityNote": "Insertion can normalize native-slot descendant IDs. Use currentIdentities and audit for live lookups; mutation receipts retain the originally returned IDs."
+  },
+  "publication": {
+    "date": "2026-10-27",
+    "approvedBy": "Richard, following final review",
+    "method": "Figma desktop Publish library review and Publish action",
+    "result": "Successfully published library updates",
+    "selection": {
+      "addedComponentAssets": 4,
+      "modifiedComponentAssets": 1,
+      "styleOrVariableChanges": 0,
+      "unchangedAssetsExcluded": 132,
+      "hiddenAssetsExcluded": 48
+    },
+    "assets": [
+      {
+        "id": "1570:368",
+        "name": "Side menu / Link",
+        "key": "f5799b726ca07189365c2ff46afcad0a37814b65",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:369",
+        "name": "Side menu / Static group",
+        "key": "1aaeb26c88bfd6210f01558b27af3e449de2d007",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:389",
+        "name": "Side menu",
+        "key": "ae9a3880da704a5c8eaba9dbd95ed9b590bcdca0",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:1258",
+        "name": "Responsive side menu",
+        "key": "93bde298758fc6718aa8d6e0d0f74514efc45c7d",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1176:183",
+        "name": "Accordion",
+        "key": "bbc653e4e2a3534f4ed785c955c9a8a39b4153d1",
+        "status": "CURRENT"
+      }
+    ],
+    "verification": "Live getPublishStatusAsync returned CURRENT for every selected asset after the UI success confirmation. Original IDs and keys preserved.",
+    "screenshot": "docs/validation/side-menu-library-published-20261027.png",
+    "qaReferenceStyle": "_reference/Side menu/current/200-percent-text-spacing remains hidden; no styles selected for publication.",
+    "sourceRepair": {
+      "pr": 51,
+      "mergeCommit": "255972e20dbd0c1daa5f2dd0f5f65d59de14391f",
+      "ciRun": 40547140937,
+      "ci": "passed"
+    },
+    "tokensStudio": "No token changes; no pull/export needed.",
+    "npmPackagePublished": false
   }
 }
