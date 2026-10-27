@@ -48,7 +48,7 @@ notSuitableFor:
 
 informationArchitecture:
   - Prefer clear destination labels over icon-only rails.
-  - Show the current page with aria-current=page and the shared filled selected default/hover/active family already used by Pagination; no bespoke left bar.
+  - Show the current page with aria-current=page, strong dark text and a logical leading rule using unchanged selected background states on neutral row surfaces. Hover is restricted to hover-capable fine pointers; preserve focus and transient touch pressed feedback.
   - Keep labels and ordering consistent across destinations.
   - Use a flat list or one level of link groups; deeper hierarchies require a new reviewed contract.
   - Static labels are preferred for small, frequently used groups that benefit from continuous scanning.
@@ -124,9 +124,9 @@ references:
   - https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 
 localReviewRefinements:
-  currentState: Reuse shared selected foreground/background states; remove the bespoke blue bar.
+  currentState: Use shared selected background states for the leading rule, dark heading text and neutral row surfaces; leave Pagination and form mappings unchanged.
   controls: Reuse neutral Accordion instances for both expandable sections and the outer inline Menu.
-  spacing: Remove compounded navigation/list padding; use existing small stack for drawer header-to-content separation and align labels with title.
+  spacing: Remove compounded navigation/list padding; use existing small stack for drawer header-to-content separation and align parent labels with title, with child lists indented by spacing.inset.md.
   preview: Remove the Direction selector from review UI; retain logical-direction support and regression coverage.
 
 compositionOwnership:
@@ -139,6 +139,7 @@ compositionOwnership:
 
 spacingAndSizing:
   flatLinks: No additional list gap; existing target padding provides internal spacing.
+  childIndent: spacing.inset.md (16px) at logical inline-start for static and Accordion child lists; keep top-level links unindented.
   groups: Use spacing.stack.md after a group only when another item follows; no trailing space after the final group.
   targetMinimum: size.target.comfortable in both width and height; grow for content.
   drawerViewport: Surface fills viewport height and caps width at existing component.dialog.size.small; navigation scrolls below its header.

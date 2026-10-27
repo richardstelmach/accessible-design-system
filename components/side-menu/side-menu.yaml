@@ -1,6 +1,6 @@
 component: Side menu
 id: side-menu
-version: 0.4.0
+version: 0.5.0
 status: draft
 phase:
   current: github-and-figma-delivered
@@ -59,7 +59,7 @@ anatomy:
     disclosure: Existing neutral Accordion, H6 visual title style, explicit semantic heading level, standard caret and focus behaviour.
     children: Named nested ul; mounted with native hidden while collapsed after enhancement.
     link: Existing standalone Link, true href, wrapping visible label and permitted linkAttributes.
-    current: aria-current=page and shared filled color.interactive.selected foreground/background states, matching Pagination; no left bar.
+    current: aria-current=page, strong dark text and a logical leading rule using existing color.interactive.selected background states; neutral row surfaces.
   ResponsiveSideMenu:
     root: Runtime layout wrapper; navigation ref still targets nav.
     trigger: Existing Menu Button for drawer, or the existing outer Menu Accordion for inline presentation.
@@ -150,10 +150,10 @@ visuals:
   captions: Existing body/default typography with strong weight; semantic heading choice does not imply large document-heading styling.
   links: Existing standalone Link; comfortable 44px targets, wrapping labels and local always-underlined treatment.
   disclosure: Existing Accordion with unmodified neutral states, caret, divider and focus treatment; no blue text-Button imitation.
-  current: Shared color.interactive.selected default/hover/active filled states with strong white text and aria-current=page; no underline or left bar.
-  spacing: No nav outer padding; host owns inset/clearance, targets retain existing control/Accordion padding and stack spacing; remove redundant navigation/list indentation; drawer label text aligns with title; header title centres against Close.
+  current: Strong color.text.heading text on color.surface.default; 4px logical leading rule uses color.interactive.selected background, hover.background and active.background. Neutral default hover/active row surfaces; no underline. Hover applies only to hover-capable fine pointers; active feedback remains transient on touch.
+  spacing: No nav outer padding; host owns inset/clearance, targets retain existing control/Accordion padding and stack spacing; indent child lists beneath static captions and inside Accordion by spacing.inset.md (16px), including their current marker; top-level rows stay unindented. Drawer captions align with title, children add one indent; header title centres against Close.
   drawer: Existing Dialog tokens and scoped layout recipe; no animation.
-  forcedColors: Native system colours, visible outlines and a current-page border.
+  forcedColors: Native system colours, visible outlines, a complete current-page border and CanvasText leading rule.
 
 tokens:
   newPrimitiveTokens: []
@@ -188,9 +188,9 @@ figma:
     core: '1570:389'
     responsiveSet: '1570:1258'
     accordionDescription: '1176:183'
-  evidence: docs/validation/react-side-menu-figma-evidence.json
+  evidence: docs/validation/side-menu-current-figma-evidence.json
   sourceMerge: 984e95215eb370a0129ab4baf45c968ab0af3a95
-  publication: Published 2026-10-27; four Side menu assets and the existing Accordion description. All five report CURRENT; see evidence receipt.
+  publication: Leading-rule and child-indent update published 2026-10-27; all four Side menu assets report CURRENT with original keys. No styles or variables changed.
   qaReferenceStyle: _reference/Side menu/current/200-percent-text-spacing
   authoringConstraints:
     itemsGap: spacing.0; flat destinations are contiguous.
@@ -223,7 +223,7 @@ validation:
     - 320px RTL by test-only direction setting, long labels, text scaling/spacing, print, no-JavaScript and forced colours
     - Header placement and focus return for primary drawer triggers; local section/in-flow controls
     - Zero core nav padding/border; desktop separator only in page composition
-    - Current default/hover/pressed filled palette with no left bar; neutral Accordion states
+    - Current default/hover/pressed leading-rule palette and dark text; touch hover does not stick; static and Accordion child indentation; neutral Accordion states
     - Removed uncontrolled group state is discarded; open inline resize protects focus and returns to persistent layout; empty preview presentation uses drawer default
     - Optional nav aria-label absent by default, distinct names when provided, independent named drawer title
     - Both Accordion levels remain independent; drawer header/label alignment and bounded vertical gap

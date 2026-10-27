@@ -1,0 +1,369 @@
+{
+  "variants": [
+    {
+      "id": "1570:336",
+      "name": "Current=True, State=Default",
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:8:51"
+            }
+          }
+        }
+      ],
+      "text": [
+        {
+          "id": "I1570:337;192:13",
+          "colour": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.239215686917305,
+                "g": 0.239215686917305,
+                "b": 0.239215686917305
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:18:814"
+                }
+              }
+            }
+          ],
+          "fontWeight": 600,
+          "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,"
+        }
+      ],
+      "marker": {
+        "id": "1604:1158",
+        "w": 4,
+        "h": 51,
+        "x": 0,
+        "y": 0,
+        "ink": [
+          {
+            "w": 4,
+            "h": 43,
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.003921568859368563,
+                  "g": 0.4431372582912445,
+                  "b": 0.9490196108818054
+                },
+                "boundVariables": {
+                  "color": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1215:639"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "1570:344",
+      "name": "Current=True, State=Hover",
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.8392156958580017,
+            "g": 0.8392156958580017,
+            "b": 0.8392156958580017
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1496"
+            }
+          }
+        }
+      ],
+      "text": [
+        {
+          "id": "I1570:345;192:18",
+          "colour": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.239215686917305,
+                "g": 0.239215686917305,
+                "b": 0.239215686917305
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:18:814"
+                }
+              }
+            }
+          ],
+          "fontWeight": 600,
+          "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,"
+        }
+      ],
+      "marker": {
+        "id": "1604:1160",
+        "w": 4,
+        "h": 51,
+        "x": 0,
+        "y": 0,
+        "ink": [
+          {
+            "w": 4,
+            "h": 43,
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0.3333333432674408,
+                  "b": 0.7254902124404907
+                },
+                "boundVariables": {
+                  "color": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1215:642"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "1570:356",
+      "name": "Current=True, State=Pressed",
+      "fill": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.7098039388656616,
+            "g": 0.7098039388656616,
+            "b": 0.7098039388656616
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:85:1499"
+            }
+          }
+        }
+      ],
+      "text": [
+        {
+          "id": "I1570:357;192:23",
+          "colour": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.239215686917305,
+                "g": 0.239215686917305,
+                "b": 0.239215686917305
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:18:814"
+                }
+              }
+            }
+          ],
+          "fontWeight": 600,
+          "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,"
+        }
+      ],
+      "marker": {
+        "id": "1604:1162",
+        "w": 4,
+        "h": 51,
+        "x": 0,
+        "y": 0,
+        "ink": [
+          {
+            "w": 4,
+            "h": 43,
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0.23137255012989044,
+                  "b": 0.49803921580314636
+                },
+                "boundVariables": {
+                  "color": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1215:645"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "slots": {
+    "count": 27,
+    "invalid": []
+  },
+  "reuse": {
+    "_Documentation/Page Header": 4,
+    "Link": 95,
+    "Side menu / Link": 89,
+    "Side menu / Static group": 13,
+    "Accordion": 28,
+    "Accordion / Item": 28,
+    "Accordion / Title": 28,
+    "Icon/caret-up": 16,
+    "Icon/caret-down": 12,
+    "Side menu": 16,
+    "Button": 3,
+    "Dialog": 4,
+    "Icon Button": 4,
+    "Icon/x": 4,
+    "_Documentation/Card": 17,
+    "Responsive side menu": 7,
+    "Modal backdrop": 2
+  },
+  "missingVariables": [],
+  "components": 15,
+  "areas": [
+    {
+      "id": "1570:297",
+      "w": 1440,
+      "h": 3088
+    },
+    {
+      "id": "1571:385",
+      "w": 1440,
+      "h": 2722
+    },
+    {
+      "id": "1571:742",
+      "w": 1440,
+      "h": 4358
+    },
+    {
+      "id": "1571:1764",
+      "w": 1440,
+      "h": 1033
+    }
+  ],
+  "core": {
+    "w": 320,
+    "h": 472,
+    "pad": [
+      0,
+      0
+    ]
+  },
+  "staleFilledGuidance": [],
+  "remoteVariablesResolved": [
+    "VariableID:7eb719c1141bdc5400039b11b48abb8bee75d7c3/8:387",
+    "VariableID:de808b087ee2961dec8903f8e73e8f8699b6b42c/8:143",
+    "VariableID:fffbb5520670c721f5aa97e17f31f422f2ccb371/8:4",
+    "VariableID:eac54ceddd7a017d2a33812bdd4f9620a687b3b4/85:201",
+    "VariableID:de19fd25ea9c42d6dd3f3bb06b67c71f4ab06c92/15:48",
+    "VariableID:c9f6e8ff3deb6957f0d240cf7adcdd5a80aff273/46:54",
+    "VariableID:8d3a5eafdff5d220f1e7262d4153feb15647294d/46:111"
+  ],
+  "remoteVariableResolutionNote": "All seven non-local aliases resolved through getVariableByIdAsync to existing remote variables.",
+  "qa": {
+    "createdNodeIds": [
+      "1604:1214",
+      "1604:1215",
+      "1604:1216"
+    ],
+    "mutatedNodeIds": [
+      "I1574:1337;1604:1158",
+      "1574:1337",
+      "1574:1335",
+      "I1574:1374;1604:1159"
+    ],
+    "rtlWrapper": "1604:1214",
+    "rtlReference": "Linked current Link instance retained; QA wrapper mirrors the marker because instance transforms are immutable. React uses logical inline-start.",
+    "forcedMarkerToken": "color/black"
+  },
+  "date": "2026-10-27",
+  "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
+  "sessionId": "0399e5db-ae40-4364-92a4-d5bb4deb984c",
+  "newTokens": 0,
+  "selectedTokensChanged": false,
+  "publication": {
+    "assets": [
+      {
+        "id": "1570:368",
+        "name": "Side menu / Link",
+        "key": "f5799b726ca07189365c2ff46afcad0a37814b65",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:369",
+        "name": "Side menu / Static group",
+        "key": "1aaeb26c88bfd6210f01558b27af3e449de2d007",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:389",
+        "name": "Side menu",
+        "key": "ae9a3880da704a5c8eaba9dbd95ed9b590bcdca0",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1570:1258",
+        "name": "Responsive side menu",
+        "key": "93bde298758fc6718aa8d6e0d0f74514efc45c7d",
+        "status": "CURRENT"
+      }
+    ],
+    "date": "2026-10-27",
+    "modifiedAssets": 4,
+    "stylesOrVariablesPublished": 0,
+    "unchangedExcluded": 133,
+    "hiddenExcluded": 48,
+    "method": "Figma desktop Publish library",
+    "selectedTokensChanged": false
+  }
+}
