@@ -5,7 +5,7 @@ status: draft
 phase:
   current: github-and-figma-delivered
   implementation: react-ci-passed
-  figma: constructed-audited-unpublished
+  figma: repaired-audited-unpublished-pending-final-review
   releaseReady: false
 
 description: >-
@@ -179,7 +179,7 @@ accessibility:
 
 figma:
   fileKey: dVFI0q1cXMtmjUAkdvSWkk
-  status: constructed-audited-unpublished
+  status: repaired-audited-unpublished-pending-final-review
   pageId: '1570:296'
   pageName: 27 - Components - Side menu
   changedObjects:
@@ -192,6 +192,15 @@ figma:
   sourceMerge: 984e95215eb370a0129ab4baf45c968ab0af3a95
   publication: Not performed; separate library checkpoint.
   qaReferenceStyle: _reference/Side menu/current/200-percent-text-spacing
+  authoringConstraints:
+    itemsGap: spacing.0; flat destinations are contiguous.
+    groupSeparation: A layout wrapper uses spacing.stack.md bottom padding only after a group that has a following item. No trailing inset on the final group.
+    drawerViewport: Fixed authoring viewport size; resize this wrapper to test device dimensions.
+    drawerSurface: Existing Dialog fills wrapper height; width fills available space up to component.dialog.size.small (512px).
+    drawerContent: Existing navigation inside a scrollable layout frame within the Dialog Content slot; header and Close stay reachable.
+    targetMinimumWidth: size.target.comfortable
+    targetMinimumHeight: size.target.comfortable
+  repairRegressionSection: '1591:1432'
   requiredAreas: [01 - Component set, 02 - Documentation examples, 03 - QA and responsive tests, 04 - Accessibility notes]
   inventory:
     SideMenu: Navigation with direct links, static captions and actual Accordion instances for expandable groups.
