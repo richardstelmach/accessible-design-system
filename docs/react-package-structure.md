@@ -55,3 +55,5 @@ SideMenu and ResponsiveSideMenu are reviewed implementations exported with their
 The local navigation core has no outer padding or divider. The responsive shell accepts a same-document header trigger slot for primary drawer navigation; local section and in-flow controls remain next to content. Header/sidebar/divider geometry is owned by the page composition.
 
 Side-menu navigation accepts optional native `aria-label`; distinct navigation purposes should have distinct names when multiple landmarks are present. Responsive `label` remains the required visible drawer title and is independent of the landmark name.
+
+Side menu source is merged through PR 49. Figma page `27 - Components - Side menu` (`1570:296`) is constructed and audited; see the component guidance and validation receipt for exact IDs. Library publication remains separate.

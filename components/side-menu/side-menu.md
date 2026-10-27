@@ -1,6 +1,6 @@
 # Side menu
 
-Status: local design/API review accepted; source delivery and Figma construction in progress, 27 October 2026. [Component contract](side-menu.yaml) · [Side-navigation design pattern](../../patterns/side-navigation.yaml).
+Status: implemented in React and Figma; library publication remains separate, 27 October 2026. [Component contract](side-menu.yaml) · [Side-navigation design pattern](../../patterns/side-navigation.yaml).
 
 ## Overview
 
@@ -141,10 +141,12 @@ No new tokens are required for this revision. Link, Accordion, strong body capti
 
 Component aliases can be introduced later if independent navigation width, indentation or current-item theming becomes an evidenced requirement. No new palette, type scale, breakpoint or speculative token family is introduced merely because this composition exists.
 
-## Figma handoff and local review
+## Figma implementation and local review
 
-No Figma objects have changed. Earlier read-only discovery confirmed the existing foundations and component inventory; it does not establish parity for the revised navigation/disclosure/drawer composition. After local acceptance, proposed page **27 - Components - Side menu** should follow the four-area documentation template, reusing Link, Accordion, Button, Dialog, caret icons and shared documentation components. Include primary/section contexts, mixed group types, drawer/inline states and the contract-defined accessibility/QA examples. Static captions remain static; expandable sections and the outer in-flow item use existing Accordion instances with explicit heading hierarchy. The bounded nesting exception requires its own QA examples.
+Figma page [27 - Components - Side menu](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1570-296) is constructed and audited. It contains the four standard areas, existing Page Header/Card instances and production Side menu / Link (six Current × State variants with independent Focus), Side menu / Static group, Side menu and Responsive side menu (five Layout states). Links retain existing Link instances and shared typography; actual Accordion, Dialog, Button and Modal backdrop instances remain linked. Core padding is zero and the divider stays in the host example. The source is merged through [PR 49](https://github.com/richardstelmach/accessible-design-system/pull/49).
+
+Existing selected-state variables and base/md/lg modes are preserved; no new token family or production text style was required. A QA-only reference style records the intentional 200% text/spacing stress case. Usage, primary/section placement, optional landmark naming and independent drawer title are aligned with this contract. [The audit receipt](../../docs/validation/react-side-menu-figma-evidence.json) records exact IDs, bindings, instance counts and visual checks. Library publication was not performed.
 
 ## Validation and remaining acceptance
 
-The local comparison remains at `?side-menu`, with documentation-primary and B2B-primary header drawer controls, a locally labelled section control, a desktop composition divider, mobile presentation choices, long labels and simulated navigation failure. [The evidence report](../../docs/validation/react-side-menu-parity.md) records actual checks, exact files and remaining release work. Local review is accepted and source/Figma delivery is in progress. Library publication and remaining device acceptance remain separate steps; automated checks do not establish accessibility certification.
+The local comparison remains at `?side-menu`, with documentation-primary and B2B-primary header drawer controls, a locally labelled section control, a desktop composition divider, mobile presentation choices, long labels and simulated navigation failure. [The evidence report](../../docs/validation/react-side-menu-parity.md) records actual checks, exact files and remaining release work. Source and Figma construction are complete. Library publication and remaining device acceptance remain separate steps; automated checks do not establish accessibility certification.

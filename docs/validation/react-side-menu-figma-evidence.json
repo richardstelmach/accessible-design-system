@@ -1,46 +1,895 @@
 {
-  "scope": "read-only-local-candidate-discovery",
+  "scope": "side-menu-source-and-figma-delivery",
   "date": "2026-10-27",
   "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
-  "changedObjects": [],
-  "existing": {
-    "accordionPage": {
-      "id": "1176:101",
-      "name": "21 - Components - Accordion"
-    },
-    "accordionRoot": "1176:183",
-    "accordionItemSet": "1176:182",
-    "accordionTitleSet": "1176:107",
-    "bodyStyle": "S:b7cf99f75b4b2a85f9b38578978d3398894a1803,",
-    "h6Style": "S:d2816c9479601ead49c6156b62aaec9dc9a7daf6,"
+  "sessionId": "3339d626-3143-470d-97b7-1d95c1f4131e",
+  "source": {
+    "pr": 49,
+    "mergeCommit": "984e95215eb370a0129ab4baf45c968ab0af3a95",
+    "ciRun": 40534165465,
+    "ci": "passed",
+    "unitTests": 130,
+    "browserTests": 98,
+    "reactConsumers": [
+      "18.3.1",
+      "19.3.1"
+    ]
   },
-  "collections": [
-    {
-      "name": "global",
-      "id": "VariableCollectionId:8:2",
-      "modes": [
-        "global"
-      ]
-    },
-    {
-      "name": "Breakpoint",
-      "id": "VariableCollectionId:303:6772",
-      "modes": [
-        "base",
-        "md",
-        "lg"
-      ]
-    }
+  "status": "constructed-audited-unpublished",
+  "newTokens": 0,
+  "newProductionTextStyles": 0,
+  "newQAReferenceStyles": [
+    "S:e07f639e3ee1ebc7c19bfcaa4c9f1e779656d28f,"
   ],
-  "proposedPage": "27 - Components - Side menu",
-  "construction": "deferred-until-local-review",
-  "revisionNote": "Current local candidate adds zero core nav padding, a page-owned divider, primary drawer Button placement in a host header slot, and local section/in-flow controls. Existing Accordion/Link/Button/Dialog and shared selected states are retained. Earlier read-only discovery is historical foundation evidence only; no new Figma parity audit, edit or export is claimed.",
-  "actualReuseFromSource": [
-    "Link",
-    "Accordion",
-    "Button (drawer trigger)",
-    "Dialog",
-    "IconButton (Dialog close)",
-    "Shared color.interactive.selected state family"
-  ]
+  "existingOrdinaryLinkTextStyle": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,",
+  "changedObjects": {
+    "page": {
+      "id": "1570:296",
+      "name": "27 - Components - Side menu"
+    },
+    "areas": [
+      {
+        "id": "1570:297",
+        "name": "01 - Component set",
+        "width": 1440,
+        "height": 3088
+      },
+      {
+        "id": "1571:385",
+        "name": "02 - Documentation examples",
+        "width": 1440,
+        "height": 2722
+      },
+      {
+        "id": "1571:742",
+        "name": "03 - QA and responsive tests",
+        "width": 1440,
+        "height": 3494
+      },
+      {
+        "id": "1571:1764",
+        "name": "04 - Accessibility notes",
+        "width": 1440,
+        "height": 1033
+      }
+    ],
+    "masters": {
+      "links": "1570:368",
+      "core": "1570:389",
+      "staticGroup": "1570:369",
+      "responsive": "1570:1258"
+    },
+    "extraExamples": {
+      "examples": "1574:876",
+      "stress": "1574:1334"
+    },
+    "tablet": {
+      "section": "1575:1125",
+      "backdrop": "1575:1127",
+      "surface": "1575:1143"
+    },
+    "existingAccordionDescription": "1176:183"
+  },
+  "audit": {
+    "page": {
+      "id": "1570:296",
+      "name": "27 - Components - Side menu"
+    },
+    "areas": [
+      {
+        "id": "1570:297",
+        "name": "01 - Component set",
+        "width": 1440,
+        "height": 3088
+      },
+      {
+        "id": "1571:385",
+        "name": "02 - Documentation examples",
+        "width": 1440,
+        "height": 2722
+      },
+      {
+        "id": "1571:742",
+        "name": "03 - QA and responsive tests",
+        "width": 1440,
+        "height": 3494
+      },
+      {
+        "id": "1571:1764",
+        "name": "04 - Accessibility notes",
+        "width": 1440,
+        "height": 1033
+      }
+    ],
+    "nodeTypes": {
+      "FRAME": 233,
+      "INSTANCE": 520,
+      "TEXT": 239,
+      "COMPONENT_SET": 2,
+      "COMPONENT": 13,
+      "VECTOR": 145,
+      "RECTANGLE": 284,
+      "SLOT": 105
+    },
+    "totalNodes": 1541,
+    "imageNodes": [],
+    "fonts": [
+      "Inter"
+    ],
+    "missingTextStyles": [],
+    "slotViolations": [],
+    "missingVariables": [],
+    "boundVariableCount": 102,
+    "componentOrigins": {
+      "_Documentation/Page Header": 4,
+      "Link": 114,
+      "Icon/arrow-square-out": 114,
+      "Side menu / Link": 108,
+      "Side menu / Static group": 13,
+      "Accordion": 28,
+      "Accordion / Item": 28,
+      "Accordion / Title": 28,
+      "Icon/caret-up": 16,
+      "Icon/caret-down": 12,
+      "Side menu": 15,
+      "Button": 9,
+      "Dialog": 3,
+      "Icon Button": 3,
+      "Icon/x": 3,
+      "_Documentation/Card": 15,
+      "Responsive side menu": 6,
+      "Modal backdrop": 1
+    },
+    "masters": {
+      "links": "1570:368",
+      "core": "1570:389",
+      "staticGroup": "1570:369",
+      "responsive": "1570:1258"
+    },
+    "corePadding": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "coreStrokes": 0,
+    "coreProperties": {
+      "Items#1570:20": {
+        "type": "SLOT",
+        "description": null,
+        "preferredValues": []
+      }
+    },
+    "linkVariants": [
+      {
+        "id": "1570:304",
+        "name": "Current=False, State=Default",
+        "width": 280,
+        "height": 51,
+        "bindings": {
+          "paddingLeft": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingTop": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "paddingRight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingBottom": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "topLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "topRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "minHeight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          }
+        },
+        "text": [
+          {
+            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,",
+            "decoration": "UNDERLINE",
+            "bindings": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:177:2878"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:305:6951"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:116"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "1570:312",
+        "name": "Current=False, State=Hover",
+        "width": 280,
+        "height": 51,
+        "bindings": {
+          "paddingLeft": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingTop": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "paddingRight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingBottom": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "topLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "topRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "minHeight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          }
+        },
+        "text": [
+          {
+            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,",
+            "decoration": "UNDERLINE",
+            "bindings": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:177:2879"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:305:6951"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:116"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "1570:324",
+        "name": "Current=False, State=Pressed",
+        "width": 280,
+        "height": 51,
+        "bindings": {
+          "paddingLeft": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingTop": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "paddingRight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingBottom": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "topLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "topRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "minHeight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          }
+        },
+        "text": [
+          {
+            "style": "S:c3a3b4516b4abf5c9604c29be04ace0a74bf6974,",
+            "decoration": "UNDERLINE",
+            "bindings": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:177:2880"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:305:6951"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:116"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "1570:336",
+        "name": "Current=True, State=Default",
+        "width": 280,
+        "height": 51,
+        "bindings": {
+          "paddingLeft": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingTop": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "paddingRight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingBottom": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "topLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "topRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "minHeight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          },
+          "fills": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:1215:639"
+            }
+          ]
+        },
+        "text": [
+          {
+            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+            "decoration": "NONE",
+            "bindings": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1215:640"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:305:6951"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:136"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "1570:344",
+        "name": "Current=True, State=Hover",
+        "width": 280,
+        "height": 51,
+        "bindings": {
+          "paddingLeft": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingTop": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "paddingRight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingBottom": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "topLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "topRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "minHeight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          },
+          "fills": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:1215:642"
+            }
+          ]
+        },
+        "text": [
+          {
+            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+            "decoration": "NONE",
+            "bindings": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1215:643"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:305:6951"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:136"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "1570:356",
+        "name": "Current=True, State=Pressed",
+        "width": 280,
+        "height": 51,
+        "bindings": {
+          "paddingLeft": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingTop": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "paddingRight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:110"
+          },
+          "paddingBottom": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:107"
+          },
+          "topLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "topRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomLeftRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "bottomRightRadius": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:71"
+          },
+          "minHeight": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:8:148"
+          },
+          "fills": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:1215:645"
+            }
+          ]
+        },
+        "text": [
+          {
+            "style": "S:5674a4a35065b4b239659acbc051d946d4fba4af,",
+            "decoration": "NONE",
+            "bindings": {
+              "fills": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:1215:646"
+                }
+              ],
+              "letterSpacing": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:134"
+                }
+              ],
+              "fontSize": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:305:6951"
+                }
+              ],
+              "fontFamily": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:240:98"
+                }
+              ],
+              "fontWeight": [
+                {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:8:136"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "responsiveVariants": [
+      {
+        "id": "1570:580",
+        "name": "Layout=Persistent"
+      },
+      {
+        "id": "1570:667",
+        "name": "Layout=Drawer closed"
+      },
+      {
+        "id": "1570:670",
+        "name": "Layout=Drawer open"
+      },
+      {
+        "id": "1570:838",
+        "name": "Layout=Inline closed"
+      },
+      {
+        "id": "1570:1048",
+        "name": "Layout=Inline open"
+      }
+    ],
+    "collections": [
+      {
+        "id": "VariableCollectionId:8:2",
+        "name": "global",
+        "modes": [
+          {
+            "name": "global",
+            "modeId": "8:0"
+          }
+        ]
+      },
+      {
+        "id": "VariableCollectionId:303:6772",
+        "name": "Breakpoint",
+        "modes": [
+          {
+            "name": "base",
+            "modeId": "303:1"
+          },
+          {
+            "name": "md",
+            "modeId": "303:2"
+          },
+          {
+            "name": "lg",
+            "modeId": "303:3"
+          }
+        ]
+      }
+    ],
+    "newVariables": [],
+    "qaReferenceStyle": "S:e07f639e3ee1ebc7c19bfcaa4c9f1e779656d28f,",
+    "remoteVariableReferences": [
+      {
+        "id": "VariableID:7eb719c1141bdc5400039b11b48abb8bee75d7c3/8:387",
+        "name": "size/control/minBlockSize/default",
+        "remote": true
+      },
+      {
+        "id": "VariableID:de808b087ee2961dec8903f8e73e8f8699b6b42c/8:143",
+        "name": "radius/full",
+        "remote": true
+      },
+      {
+        "id": "VariableID:fffbb5520670c721f5aa97e17f31f422f2ccb371/8:4",
+        "name": "border/width/thin",
+        "remote": true
+      },
+      {
+        "id": "VariableID:eac54ceddd7a017d2a33812bdd4f9620a687b3b4/85:201",
+        "name": "color/interactive/default/background",
+        "remote": true
+      },
+      {
+        "id": "VariableID:de19fd25ea9c42d6dd3f3bb06b67c71f4ab06c92/15:48",
+        "name": "color/interactive/default/border",
+        "remote": true
+      },
+      {
+        "id": "VariableID:c9f6e8ff3deb6957f0d240cf7adcdd5a80aff273/46:54",
+        "name": "size/icon/md",
+        "remote": true
+      },
+      {
+        "id": "VariableID:8d3a5eafdff5d220f1e7262d4153feb15647294d/46:111",
+        "name": "color/icon/default",
+        "remote": true
+      },
+      {
+        "id": "VariableID:24de0a6ea619a4792d5d748725b38bdca1175a11/8:375",
+        "name": "spacing/control/gap",
+        "remote": true
+      },
+      {
+        "id": "VariableID:c775704142ac1fb2358648676bff63e864638d1a/8:373",
+        "name": "spacing/control/paddingInline/default",
+        "remote": true
+      },
+      {
+        "id": "VariableID:4a0c0a3f1a4d83412108b37605416faac5e07c6b/8:370",
+        "name": "spacing/control/paddingBlock/default",
+        "remote": true
+      },
+      {
+        "id": "VariableID:ceadecfbf107793230d136417ab58d4e197b75ed/8:137",
+        "name": "radius/lg",
+        "remote": true
+      },
+      {
+        "id": "VariableID:d5b0399386e5c54286de4dd2b2644ab065641183/15:47",
+        "name": "color/interactive/default/foreground",
+        "remote": true
+      },
+      {
+        "id": "VariableID:b1a65cdfa0cf7896da96bfda2f88f3e2862bcdb7/8:283",
+        "name": "typography/letterSpacing/normal",
+        "remote": true
+      },
+      {
+        "id": "VariableID:02c7ece7363fe0b8306ccbfa82de2d36f67a48c5/305:935",
+        "name": "component/button/default/typography/fontSize",
+        "remote": true
+      },
+      {
+        "id": "VariableID:7e38f86ca164514ae1998025acc84c5434e12da1/240:1",
+        "name": "typography/family/sans",
+        "remote": true
+      },
+      {
+        "id": "VariableID:ab61b0454325e487962e2f93a11787ae982301ce/8:250",
+        "name": "typography/weight/medium",
+        "remote": true
+      },
+      {
+        "id": "VariableID:42619b9ededff31ceccddb883c6df75dd76f19f6/18:94",
+        "name": "color/interactive/primary/background",
+        "remote": true
+      },
+      {
+        "id": "VariableID:f2c281fef6e0238ae3e30631325e59d848feb778/18:95",
+        "name": "color/interactive/primary/foreground",
+        "remote": true
+      }
+    ],
+    "exposedResponsiveChildren": [
+      {
+        "id": "1570:580",
+        "name": "Layout=Persistent",
+        "children": [
+          {
+            "id": "1570:581",
+            "name": "Side menu",
+            "exposed": true
+          }
+        ]
+      },
+      {
+        "id": "1570:667",
+        "name": "Layout=Drawer closed",
+        "children": [
+          {
+            "id": "1570:668",
+            "name": "Button",
+            "exposed": true
+          }
+        ]
+      },
+      {
+        "id": "1570:670",
+        "name": "Layout=Drawer open",
+        "children": [
+          {
+            "id": "1570:675",
+            "name": "Dialog",
+            "exposed": true
+          }
+        ]
+      },
+      {
+        "id": "1570:838",
+        "name": "Layout=Inline closed",
+        "children": [
+          {
+            "id": "1570:839",
+            "name": "Accordion",
+            "exposed": true
+          }
+        ]
+      },
+      {
+        "id": "1570:1048",
+        "name": "Layout=Inline open",
+        "children": [
+          {
+            "id": "1570:1049",
+            "name": "Accordion",
+            "exposed": true
+          }
+        ]
+      }
+    ]
+  },
+  "visualChecks": {
+    "primaryDesktopAndMobile": "1571:404",
+    "B2BAndSection": "1574:876",
+    "responsiveQA": "1571:742",
+    "RTLAndEnlargedText": "1574:1334",
+    "tabletDrawer": "1575:1125",
+    "accessibility": "1571:1764",
+    "result": "passed after targeted auto-layout and typography fixes"
+  },
+  "limitations": [
+    "Figma authoring states do not implement native browser modal, routing or accessibility semantics.",
+    "QA-only forced-colour reference illustrates structure; OS palette acceptance remains separate.",
+    "Richard reports successful screen-reader and keyboard use; platform and AT versions unspecified.",
+    "Library publication and remaining actual zoom/device acceptance are separate checkpoints."
+  ],
+  "tokensStudio": "No canonical token diff; no provider pull/export or destructive reconciliation required."
 }

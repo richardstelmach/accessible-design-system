@@ -39,13 +39,13 @@ scope:
 
 decisions:
   sideMenuComposition:
-    status: local-candidate-explicitly-requested
+    status: accepted-side-menu-composition
     authority: Richard requested the existing Accordion for both the outer in-flow menu and expandable menu sections.
     scope: One outer Menu Accordion containing SideMenu's single-level group Accordions; no arbitrary recursive nesting.
     headingRule: Explicit outer heading level 2 through 5; inner group heading level must be deeper and at most 6.
     stateRule: Outer and inner expansion owners remain independent; closing the outer panel preserves inner choices.
     evidence: packages/react/tests/browser/side-menu.spec.ts
-    releaseGate: Local review and manual assistive-technology acceptance; existing Accordion implementation and Figma masters unchanged.
+    releaseGate: Local review accepted and user screen-reader/keyboard check passed; remaining device acceptance is separate. Accordion runtime and visual masters unchanged; root description aligned.
   expansionMode:
     status: accepted
     value: independent
