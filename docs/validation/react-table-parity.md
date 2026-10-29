@@ -1,6 +1,6 @@
-# Table — source and unpublished Figma review
+# Table — merged source and published Figma evidence
 
-Date: 29 October 2026. [PR 54](https://github.com/richardstelmach/accessible-design-system/pull/54) targets main from feat/table-local-candidate. Runtime and preview checks were run in an isolated checkout at 42992b38ae2da2d3841fc4b46f70a4f5d25550e4; subsequent changes add Figma receipts/documentation and isolate the native focus fallback from the optional :has selector so unsupported selector parsing cannot discard the baseline rule. The accepted branch contract is the source for this unpublished Figma candidate; Table is not on main until PR merge. No publication or site adoption has occurred.
+Date: 29 October 2026. [PR 54](https://github.com/richardstelmach/accessible-design-system/pull/54) merged as `c2ccbe50d4869e42ade43d859f947cf32355a732` after Richard accepted the final source/Figma review. [GitHub run 40869492358](https://github.com/richardstelmach/accessible-design-system/actions/runs/40869492358) passed on final head `0de1fe0540faa9b7ea12b0cd539822de375ffde2`. Runtime and preview checks were run in an isolated checkout at `42992b38ae2da2d3841fc4b46f70a4f5d25550e4`; subsequent documentation and native focus fallback changes are covered by the final GitHub checks. The three Table assets and shared inline-code-strong style are now published in Figma. Site adoption is a separate consumer update; deployment and npm publication remain separate.
 
 ## Source outcome
 
@@ -14,11 +14,11 @@ Richard confirmed the native-focus revision works with VoiceOver/Chrome. Earlier
 - The optional :has focus selector is isolated behind @supports, preserving a separately parsed native-table fallback. All ten Table browser checks passed again after this CSS-only refinement; GitHub checks the final PR head.
 - No dependencies changed; rebuilt compiled tokens have no diff. No npm publication.
 - Review axes: Standards found no hard documented violations; Spec found no runtime mismatch. A malformed test fragment introduced during diagnostic exclusion was corrected, and the isolated full browser suite passed. The preview's named section was also removed so its headings add no automatic region landmark.
-- Local colour experiments, VoiceOver diagnostic page, private recordings and extracted media remain outside the PR. The private site/logo checkout is unchanged by Table delivery.
+- Local colour experiments, VoiceOver diagnostic page, private recordings and extracted media remain outside the PR. The private site/logo checkout was unchanged during component delivery; later adoption is tracked separately.
 
 ## Figma result
 
-[28 - Components - Table](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1618-6) remains unpublished. [Machine-readable receipt](react-table-figma-evidence.json) includes the node ledger, responsive cases, reused components, bindings and derived style IDs.
+[28 - Components - Table](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1618-6) is published. [Machine-readable receipt](react-table-figma-evidence.json) includes the node ledger, responsive cases, reused components, bindings and derived style IDs.
 
 | Asset | ID |
 | --- | --- |
@@ -45,4 +45,13 @@ QA includes 320px base, 768px md, fitting lg, long caption/unbroken content, RTL
 
 ## Remaining gates
 
-Final PR/source/Figma review and merge; Figma library publication; site adoption. Wider manual checks remain VoiceOver/Safari, NVDA, actual zoom, touch devices and Windows high contrast. Existing token metadata was preserved, not broadly re-audited or reconciled. No Tokens Studio sync is required because token sources did not change.
+Source review, merge and Figma publication are complete. Site adoption is tracked separately. Wider manual checks remain VoiceOver/Safari, NVDA, actual zoom, touch devices and Windows high contrast. Existing token metadata was preserved, not broadly re-audited or reconciled. No Tokens Studio sync is required because token sources did not change.
+
+
+## Publication receipt
+
+On 29 October 2026, Richard authorized merge and publication. Figma’s review contained exactly **four changes**: Table, Table / Row, Table / Cell and `component/table/inline-code-strong`. The ten private Table QA styles remained hidden; no variables or unrelated assets were selected. After the Publish action, all three component assets reported **CURRENT**, with their original IDs and keys preserved. The publication review then showed **141 unchanged, 58 hidden, no changes**, and disabled Publish. Text styles have no publication-status method; style publication is established by its selected change and the empty post-publication review.
+
+![Figma library has no pending changes after Table publication](table-library-published-20261029.png)
+
+No tokens changed, so no Tokens Studio pull/export was needed. No npm release or deployment occurred.

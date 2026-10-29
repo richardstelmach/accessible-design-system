@@ -1240,7 +1240,54 @@
     "I1620:1209;146:1992",
     "I1620:1209;146:1993"
   ],
-  "publication": "unpublished-final-review",
+  "publication": {
+    "date": "2026-10-29",
+    "authorizedBy": "Richard, following accepted final source/Figma review",
+    "mergeCommit": "c2ccbe50d4869e42ade43d859f947cf32355a732",
+    "finalReviewedHead": "0de1fe0540faa9b7ea12b0cd539822de375ffde2",
+    "githubChecks": {
+      "run": 40869492358,
+      "conclusion": "success"
+    },
+    "method": "Figma desktop Publish library review and Publish action",
+    "selectedChanges": 4,
+    "assets": [
+      {
+        "id": "1618:56",
+        "name": "Table",
+        "key": "bf1f7915494108b73a9ebbdf3ce61aa1278b970f",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1618:42",
+        "name": "Table / Row",
+        "key": "f57b1f9dd5ea894fb963efb334007cf6bbf75322",
+        "status": "CURRENT"
+      },
+      {
+        "id": "1618:41",
+        "name": "Table / Cell",
+        "key": "0b6506caa4e6e7feb22561d2a78eb0d4be654b63",
+        "status": "CURRENT"
+      }
+    ],
+    "style": {
+      "id": "S:5791b394b2a74e2de60b1dd99a10df6bdcee83cb,",
+      "name": "component/table/inline-code-strong",
+      "verification": "Selected in four-change publication; subsequent review contains no changes. Text styles do not expose getPublishStatusAsync."
+    },
+    "postPublicationReview": {
+      "unchanged": 141,
+      "hidden": 58,
+      "pendingChanges": 0,
+      "publishDisabled": true
+    },
+    "screenshot": "docs/validation/table-library-published-20261029.png",
+    "tokensChanged": false,
+    "tokensStudioRequired": false,
+    "npmPackagePublished": false,
+    "deploymentPerformed": false
+  },
   "derivedStyles": [
     "S:5791b394b2a74e2de60b1dd99a10df6bdcee83cb,",
     "S:17ff077ee5da27964b26d745cf7cfcbe02cfc9b9,",
@@ -1277,5 +1324,6 @@
     "320/768px frames intentionally clip horizontally and grow to the full table height.",
     "Existing token-variable scopes and codeSyntax were preserved; no broad foundation metadata reconciliation was performed.",
     "After the isolated full-suite run, the optional :has focus selector was isolated behind @supports so unsupported selector parsing cannot discard the native-table fallback. All ten Table browser checks passed again; GitHub validates the final PR head."
-  ]
+  ],
+  "status": "published-and-audited"
 }
