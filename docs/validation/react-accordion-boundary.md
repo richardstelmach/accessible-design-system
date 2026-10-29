@@ -79,3 +79,13 @@ No additional token or Tokens Studio operation is introduced by these visual rep
 3. Restore candidate Items bindings to the updated existing component alias; repeat value/metadata, native-slot, focus, layout and publication-scope checks.
 4. Publish only the accepted component/dependent composition changes after approval; keep QA styles hidden. Update evidence to the published state.
 5. Update the site’s pinned package separately when authorised. Deployment remains separate.
+
+## Completed merge and token round-trip — 29 October 2026
+
+Richard accepted the corrected Figma visuals and authorised the next stage. PR #57 merged at `a5124be88baf14e016070dee63f3040d85bf9b6d`; local main was fast-forwarded while preserving local preview experiments. All three checks on the approved PR head passed before merge.
+
+Tokens Studio’s existing GitHub main provider was pulled. The editor confirmed `component.accordion.spacing.itemGap` → `{spacing.0}`, resolved 0, GAP scope and `var(--component-accordion-spacing-item-gap)`. The routine export selected only global: all four variable types on; colour styles off; typography/effects/gradients on; naming updates on; destructive removal off; style-prefix/reference options off. Breakpoint was excluded.
+
+After export, the existing root Items slot was rebound from the temporary primitive to `VariableID:1161:4528`; all 16 master/example Items slots now inherit that component binding at 0px. A repeat export and post-export audit confirmed 360 variables, zero duplicate names, unchanged global/Breakpoint IDs and modes, and all twelve native Content slots and transparent panels. No new tokens or manual canonical variable edits were needed. See [post-export receipt](accordion-boundary/token-roundtrip.json).
+
+This supersedes the pending merge/provider/rebinding checkpoints above. Figma library publication remains pending; the site package and deployment are unchanged.

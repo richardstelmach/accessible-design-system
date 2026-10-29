@@ -1,0 +1,243 @@
+{
+  "alias": {
+    "id": "VariableID:1161:4528",
+    "name": "component/accordion/spacing/itemGap",
+    "values": {
+      "8:0": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:8:77"
+      }
+    },
+    "scopes": [
+      "GAP"
+    ],
+    "codeSyntax": {
+      "WEB": "var(--component-accordion-spacing-item-gap)"
+    }
+  },
+  "variableCount": 360,
+  "duplicateNames": [],
+  "collections": [
+    {
+      "id": "VariableCollectionId:8:2",
+      "name": "global",
+      "modes": [
+        {
+          "name": "global",
+          "modeId": "8:0"
+        }
+      ]
+    },
+    {
+      "id": "VariableCollectionId:303:6772",
+      "name": "Breakpoint",
+      "modes": [
+        {
+          "name": "base",
+          "modeId": "303:1"
+        },
+        {
+          "name": "md",
+          "modeId": "303:2"
+        },
+        {
+          "name": "lg",
+          "modeId": "303:3"
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "1176:113",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1176:124",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1176:135",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1176:146",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1176:158",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1176:170",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1641:602",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1641:613",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1641:624",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1641:635",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1641:646",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    },
+    {
+      "id": "1641:657",
+      "panelTransparent": true,
+      "nativeContentSlot": true
+    }
+  ],
+  "items": [
+    {
+      "id": "1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1177:1009;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1177:1103;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1177:1197;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1177:1291;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:673;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:752;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:865;1180:639;1647:925;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:1007;1180:639;1647:1060;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:1142;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1177:1715;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1177:1806;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:1279;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:1357;1180:639;1647:1410;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:1491;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    },
+    {
+      "id": "I1647:1625;1176:184",
+      "gap": 0,
+      "binding": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:1161:4528"
+      }
+    }
+  ],
+  "publication": "unpublished"
+}
