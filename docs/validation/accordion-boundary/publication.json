@@ -1,0 +1,33 @@
+{
+  "assets": [
+    {
+      "id": "1176:107",
+      "name": "Accordion / Title",
+      "key": "37f845287700e6b2753c88b1a5899ad11e712677",
+      "status": "CURRENT"
+    },
+    {
+      "id": "1176:182",
+      "name": "Accordion / Item",
+      "key": "8ea485bdde8b6c310f24999204d5b2f9da47c5c7",
+      "status": "CURRENT"
+    },
+    {
+      "id": "1176:183",
+      "name": "Accordion",
+      "key": "bbc653e4e2a3534f4ed785c955c9a8a39b4153d1",
+      "status": "CURRENT"
+    }
+  ],
+  "gap": {
+    "id": "VariableID:1161:4528",
+    "values": {
+      "8:0": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:8:77"
+      }
+    }
+  },
+  "reportedPublishedBy": "Richard",
+  "date": "2026-10-29"
+}

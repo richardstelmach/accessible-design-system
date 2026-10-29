@@ -89,3 +89,9 @@ Tokens Studio’s existing GitHub main provider was pulled. The editor confirmed
 After export, the existing root Items slot was rebound from the temporary primitive to `VariableID:1161:4528`; all 16 master/example Items slots now inherit that component binding at 0px. A repeat export and post-export audit confirmed 360 variables, zero duplicate names, unchanged global/Breakpoint IDs and modes, and all twelve native Content slots and transparent panels. No new tokens or manual canonical variable edits were needed. See [post-export receipt](accordion-boundary/token-roundtrip.json).
 
 This supersedes the pending merge/provider/rebinding checkpoints above. Figma library publication remains pending; the site package and deployment are unchanged.
+
+## Publication confirmed — 29 October 2026
+
+Richard published the library after completing the Tokens Studio export. A subsequent live read confirms Accordion Title (`1176:107`), Item (`1176:182`) and root (`1176:183`) all report CURRENT with their original published keys. The existing gap alias still targets spacing/0. See [publication receipt](accordion-boundary/publication.json). This supersedes earlier unpublished/pending statements; no further Figma mutation was made by the publication check.
+
+The private OwlA11y site update is tracked in [site PR #5](https://github.com/richardstelmach/owla11y-site/pull/5), consuming the merged implementation at `0c0897569625704219bbae177fe41ed06c7c2156`. Website merge and deployment are separate from library publication.
