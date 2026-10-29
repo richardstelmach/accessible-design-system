@@ -1,6 +1,6 @@
 # Basic Table — local delivery plan
 
-Status: accepted local candidate, GitHub/Figma review, 29 October 2026. Contract, React implementation and automated validation are complete locally; see [the contract](../../components/table/table.yaml), [validation evidence](../validation/react-table-local-candidate.md) and the ?table preview. Richard accepted visual/API review and the revised VoiceOver/Chrome path. PR 54 is open and Figma page 28 is constructed but unpublished. Wider manual accessibility checks, merge, publication and site adoption remain separate.
+Status: delivered and published, 29 October 2026. Contract, React implementation, source/Figma review and automated validation are complete. PR 54 merged as c2ccbe50d4869e42ade43d859f947cf32355a732; the Table library assets are published and report CURRENT. See [publication evidence](../validation/react-table-parity.md). Richard accepted visual/API review and the revised VoiceOver/Chrome path. Wider manual accessibility checks, npm publication and deployment remain separate; website adoption is a consumer update.
 
 Decision update, 29 October: following the recorded VoiceOver comparison, use the native table as the measured keyboard scroll target, with a scroll description. The wrapper has no group, region, name or tabindex. Page headings/caption and host-owned landmarks supply content navigation.
 
