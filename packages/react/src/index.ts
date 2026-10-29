@@ -35,3 +35,6 @@ export { SideMenu } from './components/SideMenu.js';
 export type { SideMenuProps, SideMenuLink, SideMenuGroup, ResponsiveSideMenuProps } from './types.js';
 
 export { ResponsiveSideMenu } from './components/ResponsiveSideMenu.js';
+
+export { Table } from './components/Table.js';
+export type { TableProps } from './types.js';

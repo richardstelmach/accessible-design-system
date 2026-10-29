@@ -338,3 +338,17 @@ export type ResponsiveSideMenuProps = SideMenuProps & {
   /** Use a logical destination after accepted routing; otherwise omit to return to Menu. */
   returnFocusRef?: { readonly current: HTMLElement | null };
 };
+
+/** Simple native table sections; Table owns its caption and scroll semantics. */
+export type TableProps = Pick<ComponentPropsWithoutRef<'table'>, 'id' | 'className' | 'style' | 'lang' | 'dir' | 'aria-describedby'> & {
+  'aria-label'?: never;
+  'aria-labelledby'?: never;
+  'aria-hidden'?: never;
+  'aria-live'?: never;
+  role?: never;
+  tabIndex?: never;
+  caption: string;
+  captionVisibility?: 'visible' | 'visually-hidden';
+  scrollLabel?: (caption: string) => string;
+  children: ReactNode;
+};

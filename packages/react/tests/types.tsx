@@ -243,3 +243,15 @@ import {SideMenu,ResponsiveSideMenu} from '../src/index.js';
 <SideMenu aria-label={42} items={[{id:'home',label:'Home',href:'/'}]}/>;
 // @ts-expect-error Responsive drawer still needs its visible title.
 <ResponsiveSideMenu open={false} onOpenChange={()=>{}} items={[{id:'home',label:'Home',href:'/'}]}/>;
+
+import {Table} from '../src/index.js';
+<Table caption="Plan comparison" ref={React.createRef<HTMLTableElement>()}><tbody><tr><th scope="row">Plan</th><td>Starter</td></tr></tbody></Table>;
+<Table caption="Plans" captionVisibility="visually-hidden" scrollLabel={c=>`Scroll ${c}`}><tbody/></Table>;
+// @ts-expect-error caption is mandatory
+<Table><tbody/></Table>;
+// @ts-expect-error native table semantics cannot become a grid
+<Table caption="Plans" role="grid"><tbody/></Table>;
+// @ts-expect-error no widget tab stop on the table
+<Table caption="Plans" tabIndex={0}><tbody/></Table>;
+// @ts-expect-error caption name is component-owned
+<Table caption="Plans" aria-label="Other"><tbody/></Table>;

@@ -1,0 +1,7 @@
+.table-review { max-inline-size:var(--layout-container-maxWidth-wide); margin-inline:auto; padding:var(--layout-page-padding); }
+.table-review__controls { display:flex; flex-wrap:wrap; align-items:end; gap:var(--spacing-inline-md); margin-block:var(--spacing-stack-lg); }
+.table-review__sample { margin-block:var(--spacing-stack-md); }
+.table-review section + section { margin-block-start:var(--spacing-section); }
+.table-review h1 { font-size:var(--typography-heading-h1-fontSize); line-height:var(--typography-heading-h1-lineHeight); }
+.table-review h2 { font-size:var(--typography-heading-h2-fontSize); line-height:var(--typography-heading-h2-lineHeight); }
+.table-review code { font-family:var(--typography-code-fontFamily); font-size:inherit; }
