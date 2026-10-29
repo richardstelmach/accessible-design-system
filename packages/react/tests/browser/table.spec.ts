@@ -42,8 +42,6 @@ test('updated Table retains native semantics without creating a landmark',async(
  const table=page.getByRole('table',{name:'Button props and defaults'});await expect(table).toHaveAttribute('tabindex','0');
  await expect(table.getByRole('columnheader')).toHaveCount(4);await expect(table.getByRole('rowheader')).toHaveCount(3);
 });
- await expect(table.getByRole('columnheader')).toHaveCount(3);await expect(table.getByRole('rowheader')).toHaveCount(2);
-});
 test('resizing a focused viewport retains access until blur, then removes an unnecessary stop',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.getByLabel('Wide content',{exact:true}).check();const viewport=page.locator('.owla11y-table-viewport');await page.locator('.owla11y-table').focus();
  await page.setViewportSize({width:1440,height:900});await expect.poll(()=>viewport.evaluate(n=>n.scrollWidth<=n.clientWidth+1)).toBe(true);

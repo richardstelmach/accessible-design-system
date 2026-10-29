@@ -1,6 +1,6 @@
 # Table — local candidate evidence
 
-Date: 29 October 2026. Source base: `d04ab1e2cdcd9ff3309a197cb42bcd1a8e0299f1`; local branch `feat/table-local-candidate`. Uncommitted local candidate only. No GitHub delivery, Figma construction, library publication or consuming-site change has occurred.
+Date: 29 October 2026. Source base: `d04ab1e2cdcd9ff3309a197cb42bcd1a8e0299f1`; local branch `feat/table-local-candidate`. Local candidate accepted; preparing a focused GitHub review and unpublished Figma construction. No library publication or consuming-site change has occurred.
 
 ## Candidate
 
@@ -8,7 +8,7 @@ Date: 29 October 2026. Source base: `d04ab1e2cdcd9ff3309a197cb42bcd1a8e0299f1`; 
 
 Native Table with required caption, visible or explicitly visually hidden; author-owned row/column headers; native cell contents; ordinary links and Badge instances; measured bounded horizontal scrolling. Ref targets HTMLTableElement. No data-grid roles, sorting, row selection or new tokens. Uses existing responsive body typography, strong header emphasis, neutral surfaces, decorative outer border and row/column separators, spacing and focus roles.
 
-The current SSR/no-JavaScript/no-ResizeObserver baseline retains a native table tab stop and scroll description. Measurement removes that extra table stop/scroll description for fitting content. Earlier wrapper approaches are recorded chronologically below. A focused viewport retains focusability until blur after resizing. Authors can localise its name through scrollLabel(caption). The native caption separately names the table.
+The current SSR/no-JavaScript/no-ResizeObserver baseline retains a native table tab stop and scroll description. Measurement removes that extra table stop/scroll description for fitting content. Earlier wrapper approaches are recorded chronologically below. A native table focused while scrolling retains its tab stop until blur after resizing. Authors can localise its scroll description through scrollLabel(caption). The native caption separately names the table.
 
 ## Completed validation
 
@@ -87,3 +87,5 @@ Native-focus revision checks passed: library build, type checks, 137 unit tests,
 Richard confirms that the revised native-table focus behaviour now works and accepts the local candidate. This records a successful manual VoiceOver/Chrome check of the revised path, not a complete assistive-technology/device matrix or WCAG certification. Safari/VoiceOver, NVDA, actual zoom, touch devices and Windows high contrast remain separate acceptance checks.
 
 Richard authorizes GitHub review and unpublished Figma construction. Library publication and consuming-site adoption remain for final review. The selected-colour experiments and VoiceOver diagnostic comparison stay local; delivery includes the ordinary ?table candidate and regressions that exercise it directly. No recordings, private desktop files or speech extraction artifacts are included.
+
+Source review, 29 October: Standards found no hard documented violations. Spec review caught an orphan test fragment introduced while excluding the local diagnostic route; corrected before external delivery and rerun in an isolated delivery checkout. No runtime spec mismatch was found. Current evidence introduction aligned with native focus/description semantics; historical wrapper results remain chronological.
