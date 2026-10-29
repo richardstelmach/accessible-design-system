@@ -60,6 +60,18 @@ Examples use actual static Card instances, with heading inside or outside the co
 
 [React standalone](accordion-boundary/react-standalone.png) · [320px Card](accordion-boundary/react-mobile.png) · [Figma responsive/focus cases](accordion-boundary/figma-responsive.png)
 
+## Visual repair after Richard’s review
+
+Richard identified two paint-order defects missed by the earlier structural audit. All twelve Figma Panel frames now have no redundant opaque fill: the token-bound Item supplies the surface, so expanded bottom corners stay continuous without clipping focus. React already uses transparent panels and requires no change.
+
+The collapsed-first focus example (`1177:1291`) now includes named, absolute focus proof layers above the sibling paints, using the existing separator/ring bindings and geometry. This reproduces React’s existing focus `z-index`. **Figma authoring limitation:** these are static presentation layers; hide or reposition them if the sample’s focused item or layout changes. They do not add runtime behaviour or an automatic focus API. Other expanded-first/last focus examples retain native item focus geometry. The 320px Card, 768px outlined and 1152px divided examples were visually checked after the repair.
+
+No additional token or Tokens Studio operation is introduced by these visual repairs. The one existing gap-alias pull/export described above remains pending after merge. The earlier node-visibility audit was insufficient to detect painting over a visible focus node; the refreshed images are the visual evidence.
+
+![Repaired expanded corners](accordion-boundary/figma-expanded-outline.png)
+
+![Complete collapsed-first focus ring](accordion-boundary/figma-stacked-focus.png)
+
 ## Remaining workflow checkpoints
 
 1. Richard reviews the source and unpublished Figma update; merge the reviewed source.

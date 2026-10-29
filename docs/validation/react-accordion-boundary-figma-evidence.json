@@ -2629,5 +2629,51 @@
     "accordion-boundary/react-standalone.png",
     "accordion-boundary/react-compositions.png",
     "accordion-boundary/react-mobile.png"
-  ]
+  ],
+  "visualRepair": {
+    "date": "2026-10-29",
+    "reportedBy": "Richard, screenshots of expanded bottom corners and collapsed first-item focus",
+    "panelFix": {
+      "mutatedNodeIds": [
+        "1176:121",
+        "1176:130",
+        "1176:141",
+        "1176:152",
+        "1176:164",
+        "1176:176",
+        "1641:608",
+        "1641:619",
+        "1641:630",
+        "1641:641",
+        "1641:652",
+        "1641:663"
+      ],
+      "change": "Remove redundant opaque Panel fills; parent Item supplies token-bound surface. Preserve outline, native slots and unclipped focus."
+    },
+    "focusFix": {
+      "example": "1177:1291",
+      "overlayIds": [
+        "I1177:1291;1176:184;1661:1900",
+        "I1177:1291;1176:184;1661:1902"
+      ],
+      "change": "Static absolute focus separator/ring proof layers above sibling paints, copied from the existing token-bound focus geometry. Original item Focus boolean unchanged.",
+      "limitation": "Figma lacks CSS focus z-index. These named proof overlays are presentation-only and must be hidden or repositioned if the focused sample changes; they are not runtime logic or an automatic focus API."
+    },
+    "newTokens": 0,
+    "canonicalFigmaValuesChanged": 0,
+    "reactChanged": false,
+    "visualChecks": [
+      "Expanded outlined master has continuous bottom corners",
+      "Collapsed first-item focus has complete bottom edge",
+      "320px Card last-item focus encloses only the focused trigger",
+      "768px outlined and 1152px divided last-item focus remain visible"
+    ],
+    "evidence": [
+      "accordion-boundary/figma-expanded-outline.png",
+      "accordion-boundary/figma-stacked-focus.png",
+      "accordion-boundary/figma-compositions.png",
+      "accordion-boundary/figma-responsive.png"
+    ],
+    "supersedes": "Earlier structural visibility checks did not establish absence of paint occlusion."
+  }
 }
