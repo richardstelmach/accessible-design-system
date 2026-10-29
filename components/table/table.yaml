@@ -3,9 +3,9 @@ id: table
 version: 0.1.0
 status: draft
 phase:
-  current: github-figma-review
-  implementation: implemented-local-automated-checks-passed
-  figma: built-unpublished-review
+  current: source-merged-figma-published
+  implementation: react-beta-automated-checks-passed
+  figma: published-and-audited
   releaseReady: false
 
 description: >-
