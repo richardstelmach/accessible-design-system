@@ -1275,6 +1275,7 @@
     "Caption content, Rows and Cells slots are Figma authoring surfaces, not additional React properties.",
     "Shared code-strong style derives existing code font, responsive body size and strong weight; other derived styles are private QA stress references.",
     "320/768px frames intentionally clip horizontally and grow to the full table height.",
-    "Existing token-variable scopes and codeSyntax were preserved; no broad foundation metadata reconciliation was performed."
+    "Existing token-variable scopes and codeSyntax were preserved; no broad foundation metadata reconciliation was performed.",
+    "After the isolated full-suite run, the optional :has focus selector was isolated behind @supports so unsupported selector parsing cannot discard the native-table fallback. All ten Table browser checks passed again; GitHub validates the final PR head."
   ]
 }

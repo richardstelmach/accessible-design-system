@@ -1,6 +1,6 @@
 # Table — source and unpublished Figma review
 
-Date: 29 October 2026. [PR 54](https://github.com/richardstelmach/accessible-design-system/pull/54) targets main from feat/table-local-candidate. Runtime and preview checks were run in an isolated checkout at 42992b38ae2da2d3841fc4b46f70a4f5d25550e4; subsequent changes add Figma receipts/documentation only. The accepted branch contract is the source for this unpublished Figma candidate; Table is not on main until PR merge. No publication or site adoption has occurred.
+Date: 29 October 2026. [PR 54](https://github.com/richardstelmach/accessible-design-system/pull/54) targets main from feat/table-local-candidate. Runtime and preview checks were run in an isolated checkout at 42992b38ae2da2d3841fc4b46f70a4f5d25550e4; subsequent changes add Figma receipts/documentation and isolate the native focus fallback from the optional :has selector so unsupported selector parsing cannot discard the baseline rule. The accepted branch contract is the source for this unpublished Figma candidate; Table is not on main until PR merge. No publication or site adoption has occurred.
 
 ## Source outcome
 
@@ -11,6 +11,7 @@ Richard confirmed the native-focus revision works with VoiceOver/Chrome. Earlier
 ## Completed source checks
 
 - Exact isolated source: build, type checks, 137 unit tests across 13 files, all 110 browser checks, preview build and packed React 18.3.1/19.3.1 consumers passed. Package contains 74 files.
+- The optional :has focus selector is isolated behind @supports, preserving a separately parsed native-table fallback. All ten Table browser checks passed again after this CSS-only refinement; GitHub checks the final PR head.
 - No dependencies changed; rebuilt compiled tokens have no diff. No npm publication.
 - Review axes: Standards found no hard documented violations; Spec found no runtime mismatch. A malformed test fragment introduced during diagnostic exclusion was corrected, and the isolated full browser suite passed. The preview's named section was also removed so its headings add no automatic region landmark.
 - Local colour experiments, VoiceOver diagnostic page, private recordings and extracted media remain outside the PR. The private site/logo checkout is unchanged by Table delivery.
