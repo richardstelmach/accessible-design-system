@@ -245,7 +245,7 @@ export type BadgeProps = FeedbackContainerProps & { label: string; tone?: BadgeT
 
 export type AccordionItem = { id: string; title: string; content: ReactNode };
 type AccordionExpansion = { expandedIds: readonly string[]; defaultExpandedIds?: never; onExpandedChange: (ids: string[]) => void } | { expandedIds?: never; defaultExpandedIds?: readonly string[]; onExpandedChange?: (ids: string[]) => void };
-export type AccordionProps = Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'role' | 'tabIndex' | 'onChange' | 'dangerouslySetInnerHTML'> & AccordionExpansion & { items: readonly AccordionItem[]; headingLevel: 2 | 3 | 4 | 5 | 6; titleStyle?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6'; panelLandmark?: boolean };
+export type AccordionProps = Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'role' | 'tabIndex' | 'onChange' | 'dangerouslySetInnerHTML'> & AccordionExpansion & { items: readonly AccordionItem[]; headingLevel: 2 | 3 | 4 | 5 | 6; titleStyle?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6'; outlined?: boolean; panelLandmark?: boolean };
 export type StepperChangeDetail = { source: 'input' | 'increment' | 'decrement' };
 type StepperValue = { value: string; defaultValue?: never; onValueChange: (value: string, detail: StepperChangeDetail) => void } | { value?: never; defaultValue?: string; onValueChange?: (value: string, detail: StepperChangeDetail) => void };
 export type StepperProps = Omit<ComponentPropsWithoutRef<'input'>, 'children' | 'type' | 'value' | 'defaultValue' | 'onChange' | 'onInput' | 'readOnly' | 'min' | 'max' | 'step' | 'required' | 'placeholder' | 'role' | 'aria-label' | 'aria-labelledby' | 'aria-valuenow' | 'aria-valuemin' | 'aria-valuemax'> & StepperValue & {

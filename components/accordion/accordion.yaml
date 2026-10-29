@@ -4,9 +4,9 @@ version: 0.1.0
 status: draft
 
 phase:
-  current: figma-built-roundtrip-evidence-pending
+  current: optional-outline-source-and-figma-review
   implementation: react-beta-automated-checks-passed
-  figma: masters-present
+  figma: boundary-update-unpublished
   releaseReady: false
 
 description: >
@@ -38,6 +38,14 @@ scope:
     - Built-in header action, badge or leading-icon slots in this first version
 
 decisions:
+  boundaryTreatment:
+    status: accepted
+    authority: Richard approved the local optional-outline and gapless-stack comparison on 29 October 2026.
+    default: unoutlined
+    outlined: Optional per-item outline; standalone disclosures are the recommended main use case, without restricting consumer composition.
+    stacked: Zero gap; top and bottom edges with one shared divider between adjacent items, including when outlined.
+    container: Optional existing Card with title or content-only shell; the page owns section semantics and heading hierarchy. No new Panel component.
+    navigation: SideMenu and ResponsiveSideMenu preserve their reviewed bottom-only disclosure divider through package composition CSS.
   sideMenuComposition:
     status: accepted-side-menu-composition
     authority: Richard requested the existing Accordion for both the outer in-flow menu and expandable menu sections.
@@ -76,6 +84,7 @@ anatomy:
     rules:
       - No accordion, tablist, menu or listbox ARIA role.
       - Preserve supplied item order in visual and DOM order.
+      - Zero item gap; a visible focus ring may paint above neighbouring items. Never clip it.
   heading:
     elements: [h2, h3, h4, h5, h6]
     onlyChild: trigger-button
@@ -134,12 +143,25 @@ anatomy:
       - Protect the hidden attribute from display overrides in component CSS.
       - No default panel tabindex and no whole-panel live region.
   divider:
-    placement: item-block-end
+    placement: first-item-block-start-and-each-item-block-end
     tokens:
       thickness: border.width.thin
       color: color.border.default
     rules:
       - Decorative separation; trigger text and caret identify the control independently.
+      - One shared divider; never double adjoining borders or add gaps between stacked items.
+  optionalOutline:
+    controlledBy: outlined
+    target: each-item
+    tokens:
+      thickness: border.width.thin
+      color: color.border.default
+      radius: radius.lg
+    rules:
+      - Side borders join the existing top/bottom dividers; the first and last outer corners are rounded.
+      - A standalone item receives all four rounded corners.
+      - Contain the associated expanded content within the same item boundary.
+      - Round the trigger hover/pressed surface at exposed outer corners; keep expanded content and focus unclipped.
 
 publicApi:
   status: framework-neutral-contract
@@ -171,6 +193,14 @@ publicApi:
       - An override changes appearance only, never the DOM heading element.
       - Document semantic level and visual style when they differ.
       - Apply consistently to peer items and preserve clear visual hierarchy.
+  outlined:
+    type: boolean
+    default: false
+    rules:
+      - Optional item outline changes presentation only; it does not change semantics, focus or expansion ownership.
+      - Recommended mainly for standalone accordions, helping them remain identifiable among page content.
+      - Available for other consumer compositions, including stacked sets; never restrict it to one item.
+      - Apply consistently across the items in one React Accordion; separate compositions can choose independently.
   initialExpandedIds:
     type: item-key-list
     default: []
@@ -336,12 +366,18 @@ contrast:
     - {name: focus-surface, foreground: color.interactive.focus.ring, background: color.surface.default, minimum: 3}
 
 tokens:
-  newComponentTokens:
+  newComponentTokens: []
+  existingComponentTokens:
     - component.accordion.spacing.triggerPaddingBlock
     - component.accordion.spacing.paddingInline
     - component.accordion.spacing.triggerGap
     - component.accordion.spacing.panelPaddingBlock
     - component.accordion.spacing.itemGap
+  changedExistingTokens:
+    component.accordion.spacing.itemGap:
+      previousAlias: spacing.stack.sm
+      alias: spacing.0
+      reason: Adjacent items form a continuous stack with shared dividers and no gaps.
   newSharedTokens: []
   newResponsiveTokensRequired: false
   rules:
@@ -355,7 +391,7 @@ figma:
   pageName: 21 - Components - Accordion
   documentationPattern: patterns/component-documentation-page.yaml
   tokenRoundTrip: not-started
-  libraryPublication: not-published
+  libraryPublication: boundary-update-unpublished
   preflight:
     date: "2026-10-08"
     existingAccordionPage: false
@@ -366,6 +402,16 @@ figma:
     headingStyles: [typography/heading/h2, typography/heading/h3, typography/heading/h4, typography/heading/h5, typography/heading/h6]
     nativeSlotsVerified: true
     mutationsPerformed: false
+  boundaryAudit:
+    date: "2026-10-29"
+    evidence: docs/validation/react-accordion-boundary-figma-evidence.json
+    variantCount: 12
+    nativeContentSlots: 12
+    newTokenVariables: 0
+    textNodes: 298
+    unstyledTextNodes: 0
+    publication: pending-review
+    aliasSync: pending-source-merge-and-provider-pull
   liveAudit:
     date: "2026-10-21"
     pageId: "1176:101"
@@ -391,15 +437,23 @@ figma:
       variants:
         Expanded: ["False", "True"]
         State: [Default, Hover, Pressed]
-      expectedVariantCount: 6
+        Outlined: ["False", "True"]
+      expectedVariantCount: 12
       properties:
         Focus: {type: BOOLEAN, default: false}
         Content: {type: SLOT}
+        Top divider:
+          type: BOOLEAN
+          default: true
+          scope: figma-authoring-helper-only
+          rule: Show only the first divided top edge. Outlined items have their native top stroke; joined interior top strokes bind existing border.width.none. React derives boundaries automatically.
       nestedProperties: [Title, Title style]
       rules:
         - Expose nested Accordion / Title properties instead of multiplying state variants by typography.
         - Keep a populated native Content slot; hide the panel wrapper in collapsed variants.
         - Preserve content and title overrides when switching compatible variants.
+        - Native Content slots and Focus visibility references must survive outlined-variant construction; cloning alone can flatten or drop these bindings.
+        - Joined outlined examples use border.width.none on interior top edges and radius.none at interior corners; these are authoring overrides, not additional React props.
         - Caret glyph follows Expanded; do not expose a free choice of expansion indicator.
         - No arbitrary title slot; plain text preserves an unambiguous control name.
     composition:
@@ -408,11 +462,13 @@ figma:
         Items: {type: SLOT}
       rules:
         - Vertical native Items slot accepts Accordion / Item instances with no fixed-count variants.
+        - Gap uses existing spacing.0 while the changed component item-gap alias awaits GitHub merge and provider pull.
+        - Item outline selection and joined-edge helpers are Figma authoring controls; React exposes only outlined on the root.
         - Populate the default composition with three useful examples.
         - headingLevel is an implementation annotation, not a visual variant axis; expansion is always independent.
   constraints:
     - Reuse global variables and the existing manual Breakpoint collection.
-    - Add only the five source-defined spacing variables after source review and sync.
+    - No new variables. Existing itemGap changes from spacing.stack.sm to spacing.0 through the source-first sync workflow after merge.
     - Reuse existing caret masters; no new icons or heading styles.
     - Use shared documentation headers and card instances with wrapping grids.
     - Keep masters separate from documentation, QA and accessibility areas.
@@ -426,6 +482,7 @@ figma:
     - Matching semantic and visual h2 through h6 title treatments
     - Mixed prose, list and existing link or button instances inside the content slot
     - Focus alongside collapsed, expanded, hover and pressed states
+    - Optional standalone outline, gapless divided/outlined sets and existing Card compositions with heading or content only
   qaExamples:
     - 320px width with long wrapping titles and populated panels
     - base, md and lg heading styles inherited through parent mode
@@ -493,4 +550,5 @@ releaseAudit:
   figmaPageId: '1176:101'
   evidence: Live inventory confirmed title set, item set and root component.
   tokenRoundTrip: completion-evidence-required
-  runtime: not-implemented
+  runtime: react-beta-implemented-automated-acceptance
+  boundaryUpdate: Local source and unpublished Figma review; no merge, token-provider pull or library publication yet.

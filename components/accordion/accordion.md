@@ -116,9 +116,25 @@ Start with ordinary headings and all content visible. Introduce trigger buttons 
 
 Print every section with its heading, regardless of screen expansion. Hide decorative control indicators for print without changing stored interaction state. URL history, automatic search reveal and form-validation orchestration are integration responsibilities; never attempt to focus a hidden target.
 
+## Optional outlines and containing compositions
+
+`outlined` is an optional boolean, defaulting to `false`. The main recommended use is a **standalone Accordion**, whose complete outline helps it remain recognisable between other page content. This is guidance, not a one-item restriction: consumers may choose outlines in other compositions, including a stacked set.
+
+Every set is continuous: no gaps, a top and bottom boundary, and one shared divider between neighbouring items. Each item's expanded content stays inside its boundary. Outlined sets add side borders and round only the exposed first/last corners; a single outlined item has all four corners rounded. Hover/pressed surfaces follow those corners. The visual outline adds no role, landmark, Tab stop, expansion state or keyboard shortcut. Preserve the existing focus ring above adjacent surfaces; never clip the root, item or content to obtain rounded corners.
+
+```tsx
+<Accordion headingLevel={2} titleStyle="h5" outlined items={[
+  {id: 'contents', title: 'On this page', content: <ul><li><Link href="#install">Installation</Link></li></ul>}
+]}/>
+```
+
+The surrounding page owns section semantics and its heading hierarchy. Existing **Card** can contain a related topic, with an optional title/heading and flexible content, or as a content-only shell without title, image or actions. Card does not become a button or landmark merely by containing Accordion. A page section and Card can be composed where the content is a coherent group; do not wrap every section just to add a border. A separate Panel component is not required for these examples.
+
+SideMenu and ResponsiveSideMenu reuse Accordion behaviour but retain their reviewed bottom-only divider and geometry through package composition CSS. The new generic top boundary and outlines do not silently change navigation presentation.
+
 ## Tokens and visual states
 
-Five new tokens alias existing spacing decisions:
+The five existing component spacing aliases are reused. No new primitive, semantic or component token is needed for this update:
 
 | Token under `component.accordion.spacing` | Existing alias | Current value |
 |---|---|---:|
@@ -126,9 +142,9 @@ Five new tokens alias existing spacing decisions:
 | `paddingInline` | `spacing.control.paddingInline.default` | 16px |
 | `triggerGap` | `spacing.control.gap` | 8px |
 | `panelPaddingBlock` | `spacing.inset.md` | 16px |
-| `itemGap` | `spacing.stack.sm` | 8px |
+| `itemGap` | `spacing.0` | 0px |
 
-All five declare `GAP` scope and exact `Web` CSS syntax in canonical JSON. Reuse `radius.none`, `border.width.thin` with `color.border.default` for decorative item dividers, and `size.control.minBlockSize.default` / `size.target.comfortable` for 44px minimum block/inline target dimensions. The system's 44px preference exceeds the WCAG AA 24px minimum, which has exceptions. [W3C target size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)
+All five declare `GAP` scope and exact `Web` CSS syntax in canonical JSON. The existing `itemGap` alias changes from `spacing.stack.sm` (8px) to `spacing.0` (0px). Its precise GAP scope and Web syntax are preserved; merge the reviewed source before pulling the provider and performing the routine non-destructive export. The unpublished Figma candidate can bind the already-existing `spacing/0` directly until that round-trip. Reuse `radius.none` for divided items, `radius.lg` for exposed outlined corners, and `border.width.thin` with `color.border.default` for decorative boundaries, and `size.control.minBlockSize.default` / `size.target.comfortable` for 44px minimum block/inline target dimensions. The system's 44px preference exceeds the WCAG AA 24px minimum, which has exceptions. [W3C target size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)
 
 | Pointer state | Foreground | Background |
 |---|---|---|
@@ -152,7 +168,7 @@ No animation is required. Future motion must respect reduced-motion preferences 
 
 ## Side-menu composition
 
-Richard explicitly requested reuse of this Accordion for expandable navigation sections and the outer in-flow mobile menu. The reviewed SideMenu contract permits that bounded two-layer composition: one outer Menu item with a navigation panel and optional landmark name, containing at most one level of independently controlled group Accordions. Use explicit heading levels, such as outer H2 and group H3, and the existing H6 visual title style. Closing either level does not reset the other; focus recovery remains owned by each existing Accordion instance. No new visual variant, nested keyboard shortcut or general recursive Accordion support is introduced. See [SideMenu](../side-menu/side-menu.yaml), [the navigation pattern](../../patterns/side-navigation.yaml) and its browser evidence. Accordion runtime and visual masters remain unchanged; its Figma root description now records the bounded composition. Broader nesting stays outside scope.
+Richard explicitly requested reuse of this Accordion for expandable navigation sections and the outer in-flow mobile menu. The reviewed SideMenu contract permits that bounded two-layer composition: one outer Menu item with a navigation panel and optional landmark name, containing at most one level of independently controlled group Accordions. Use explicit heading levels, such as outer H2 and group H3, and the existing H6 visual title style. Closing either level does not reset the other; focus recovery remains owned by each existing Accordion instance. The navigation composition keeps its existing unoutlined visual treatment. No nested keyboard shortcut or general recursive Accordion support is introduced. See [SideMenu](../side-menu/side-menu.yaml), [the navigation pattern](../../patterns/side-navigation.yaml) and its browser evidence. Accordion runtime and visual masters remain unchanged; its Figma root description now records the bounded composition. Broader nesting stays outside scope.
 
 ## Figma handoff
 
@@ -161,7 +177,7 @@ Read-only preflight on 8 October 2026 confirmed the existing Tabs page, native s
 Existing page `1176:101`: **21 - Components - Accordion** in the [Accessible Design System file](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk/Accessible-Design-System).
 
 - **Accordion / Title:** five visual style variants H2–H6 and a Title text property.
-- **Accordion / Item:** six variants, Expanded=False/True × State=Default/Hover/Pressed; independent Focus boolean, native Content slot and exposed nested Title / Title style properties.
+- **Accordion / Item:** twelve variants, Expanded=False/True × State=Default/Hover/Pressed × Outlined=False/True; independent Focus boolean, native Content slot and exposed nested Title / Title style properties.
 - **Accordion:** a native vertical Items slot containing item instances, with no item-count variants.
 
 Splitting the nested title keeps typography separate from the interaction matrix. The HTML heading level is documented alongside the instance; a Figma text style cannot create browser semantics. Switching Expanded must preserve title and slot overrides. Figma instances illustrate state and do not implement runtime ARIA or keyboard behaviour.
@@ -192,3 +208,10 @@ Source checks cover YAML/JSON parsing, token references, aliases, metadata, cont
 ## References
 
 Reviewed 8 October 2026. W3C APG informs semantics and keyboard behaviour; WCAG defines conformance. Heading style choices, independent-only expansion, slot inventory and visual tokens are this design system's decisions. The [APG example](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/examples/accordion/) also calls for testing with real assistive technologies before production use.
+
+
+## Boundary update review
+
+29 October 2026: Richard accepted optional per-item outlines, primarily recommended for standalone disclosures, continuous zero-gap stacks, and independent existing Card composition. The package-backed review is `?accordion-boundary-review`; the earlier throwaway prototype is not the implementation. See [boundary validation](../../docs/validation/react-accordion-boundary.md) for current checks and unpublished Figma status. Historical preflight/round-trip notes above remain evidence of earlier work; final alias synchronisation and publication are separate approval checkpoints.
+
+Figma represents `outlined` as the Item set’s Outlined=False/True axis, alongside Expanded and State; Focus stays independent. The existing Items slot remains variable-length. Its Top divider property is an authoring helper, not a React prop: show the first divided top edge, suppress interior outlined top strokes with existing `border.width.none`, and use `radius.none` at interior joined corners. The examples demonstrate these joins. Native Content slots and focus visibility bindings are audited after cloning. Existing stress samples now use twelve private `_reference/Accordion/...` shared text styles; these document QA geometry and add no production typography tokens.

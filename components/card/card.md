@@ -38,6 +38,8 @@ in a collection. A static information card is valid; an image or action is not m
 Use a list or table where comparison or a reading sequence matters more than grouping.
 Do not wrap every section in a card merely to add a border.
 
+A related Accordion group can use the existing Card content shell, with an optional Card heading or a heading outside the Card. Section semantics and heading hierarchy remain page-owned; this does not introduce a Panel component, whole-card interaction or additional landmark. See [Accordion composition guidance](../accordion/accordion.md#optional-outlines-and-containing-compositions).
+
 Use the same composition and image treatment across peer cards. Article, product and
 event examples are compositions, not different public components. Do not use the internal
 `_Documentation/Card` for product interfaces.

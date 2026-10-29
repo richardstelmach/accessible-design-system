@@ -3,7 +3,7 @@ import { forwardRef, useEffect, useId, useRef, useState } from 'react';
 import type { AccordionProps } from '../types.js';
 import { classes, oneOf, text } from '../internal/validation.js';
 import { rejectProps } from '../internal/forms.js';
-export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Accordion({ items, headingLevel, titleStyle = `h${headingLevel}`, expandedIds, defaultExpandedIds, onExpandedChange, panelLandmark = false, className, id, ...props }, ref) {
+export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Accordion({ items, headingLevel, titleStyle = `h${headingLevel}`, expandedIds, defaultExpandedIds, onExpandedChange, panelLandmark = false, outlined = false, className, id, ...props }, ref) {
     if (!Array.isArray(items) || !items.length)
         throw new Error('OwlA11y: Accordion requires at least one item.');
     const keys = items.map(item => {
@@ -18,6 +18,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
         throw new Error('OwlA11y: Accordion item IDs must be unique.');
     if (![2, 3, 4, 5, 6].includes(headingLevel))
         throw new Error('OwlA11y: Accordion requires headingLevel 2 through 6.');
+    if (typeof outlined !== 'boolean') throw new Error('OwlA11y: Accordion outlined must be a boolean.');
     oneOf(titleStyle, ['h2', 'h3', 'h4', 'h5', 'h6'], 'Accordion titleStyle');
     rejectProps(props, ['children', 'role', 'tabIndex', 'aria-live', 'onChange', 'dangerouslySetInnerHTML', 'disabled', 'singleOpen', 'exclusive', 'requireOneOpen', 'initialExpandedIds'], 'Accordion');
     const controlled = expandedIds !== undefined;
@@ -78,7 +79,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
             setView({ enhanced: true, ids: next });
     });
     const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-    return <div {...props} id={prefix} className={classes('owla11y-accordion', className)} ref={node => {
+    return <div {...props} id={prefix} className={classes('owla11y-accordion', className)} data-outlined={outlined || undefined} ref={node => {
         root.current = node;
         if (typeof ref === 'function') ref(node);
         else if (ref) ref.current = node;
