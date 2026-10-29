@@ -135,6 +135,6 @@ Side menu source is merged through PR 49. Figma page `27 - Components - Side men
 SideMenu current destinations use `aria-current="page"`, strong dark text and a 4px logical leading rule. The rule consumes the unchanged selected background/hover/active tokens; row surfaces use existing neutral surface/interaction tokens. Hover requires a hover-capable fine pointer, while transient touch pressed feedback and independent focus remain. Static and Accordion child lists add one 16px `spacing.inset.md` leading indent; flat top-level links stay unindented. No public API or selected-token mappings change.
 
 
-## Table — local candidate
+## Table — review candidate
 
 `Table` requires a nonempty caption and native thead/tbody/tfoot/colgroup sections, including at least one tbody. captionVisibility is visible (default) or visually-hidden; scrollLabel(caption) localises a scroll description appended to the native table aria-describedby. HTMLTableElement ref and table metadata/aria-describedby are supported; role/tabIndex/name overrides and direct custom section components are unsupported. Authors own row/column scopes and native cell content. The wrapper adds no role, name or tabindex. The native table is the keyboard scroll target before measurement/no-JavaScript/no ResizeObserver; fitting measured tables lose that extra stop/scroll description, preserving author descriptions and retaining table focus until blur after resize. No group or region landmark. Existing tokens only. [Scope, API and accessibility](../components/table/table.md).

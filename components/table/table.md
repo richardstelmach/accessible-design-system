@@ -1,6 +1,6 @@
 # Table
 
-Accepted local candidate, 29 October 2026. [Contract](table.yaml) · [Planning and scope](../../docs/plans/basic-table.md). GitHub and unpublished Figma delivery in progress; wider manual release acceptance remains open.
+Accepted local candidate, 29 October 2026. [Contract](table.yaml) · [Planning and scope](../../docs/plans/basic-table.md). GitHub [PR 54](https://github.com/richardstelmach/accessible-design-system/pull/54) and [unpublished Figma candidate](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1618-6) are ready for final review; wider manual release acceptance remains open.
 
 Use a Table when information has meaningful relationships across rows and columns: references, comparisons and factual records. Use a list or description list for simpler content. This is not a layout tool or an interactive data grid.
 
@@ -50,4 +50,8 @@ The 12ch minimum is a local content-sizing rule, not a new colour/spacing token.
 
 The local `?table` candidate exercises short/wide content, row and column headers, native links and a Badge, caption visibility, long labels and RTL. Automated checks cover package declarations, SSR/hydration, actual keyboard scrolling, focus retention, text spacing, print and fallback states; they do not establish spoken screen-reader delivery.
 
-Richard accepted the local visual/API candidate and confirmed the revised native-focus path works with VoiceOver/Chrome. Figma construction follows source/API acceptance, reusing existing tokens, text styles and components plus the established four documentation areas. Figma construction and its evidence will be recorded during delivery. Screen-reader/actual zoom/device acceptance, GitHub delivery, Figma audit/publication and consuming-site adoption remain separate steps.
+Richard accepted the local visual/API candidate and confirmed the revised native-focus path works with VoiceOver/Chrome. [GitHub review](https://github.com/richardstelmach/accessible-design-system/pull/54) remains open. [Figma page 28](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1618-6) contains Table, Row and Header/Data Cell construction parts, actual Link/Badge and documentation component instances, plus the four standard documentation areas.
+
+Figma uses editable Caption content, Rows and Cells slots and a Show caption boolean. Caption content is a single plain-text authoring slot; React still requires one caption string. Example column widths are illustrative and must remain aligned across rows; browser 12ch/container measurement is runtime behaviour. Shared inline-code-strong styling derives existing typography roles; private QA stress styles do not add tokens. Existing variables and Breakpoint modes are preserved.
+
+[Source/Figma comparison and remaining checks](../../docs/validation/react-table-parity.md) and [machine-readable audit](../../docs/validation/react-table-figma-evidence.json) record the scoped validation. Wider screen-reader/actual zoom/device acceptance, PR merge, Figma publication and consuming-site adoption remain separate steps. The Figma library is unpublished for final review.

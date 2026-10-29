@@ -5,7 +5,7 @@ status: draft
 phase:
   current: github-figma-review
   implementation: implemented-local-automated-checks-passed
-  figma: construction-pending
+  figma: built-unpublished-review
   releaseReady: false
 
 description: >-
@@ -106,8 +106,15 @@ accessibility:
   manualAcceptance: VoiceOver/Safari and NVDA with Firefox or Chrome, actual zoom, real touch and Windows high contrast remain unverified.
 
 figma:
-  status: planned-local-review-first
+  status: built-unpublished-review
   fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  pageId: '1618:6'
+  tableMaster: '1618:56'
+  rowMaster: '1618:42'
+  cellSet: '1618:41'
+  evidence: docs/validation/react-table-figma-evidence.json
+  authoring: Caption content (one plain text node), Rows and Cells are Figma slots, not extra React props. Show caption is a boolean. Cell Role is Header or Data, not a Table variant.
+  textStyles: Existing body/strong/code roles; derived shared code-strong style and private QA stress styles use existing colours, fonts, sizes and weights. No new token or variable.
   construction: Existing token/style foundations; editable Table/Row/Cell anatomy as needed, actual nested component instances and four standard documentation areas.
   variants: One treatment; no data-count, column-count or breakpoint matrix. Caption visibility is a content property.
   rules:
