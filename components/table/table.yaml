@@ -1,0 +1,135 @@
+component: Table
+id: table
+version: 0.1.0
+status: draft
+phase:
+  current: github-figma-review
+  implementation: implemented-local-automated-checks-passed
+  figma: built-unpublished-review
+  releaseReady: false
+
+description: >-
+  A simple native data table for related row and column information, with an
+  owned caption and a progressively measured keyboard-accessible scroll viewport.
+  Uses native sections and existing components inside cells; not an ARIA grid.
+
+relatedDocumentation:
+  - components/table/table.md
+  - docs/plans/basic-table.md
+  - patterns/component-documentation-page.yaml
+  - accessibility/focus-indicators.yaml
+  - tokens/figma/sync-contract.yaml
+
+scope:
+  includes:
+    - Native column headers and optional row headers, with author-owned scope associations
+    - Required native caption, visible by default or explicitly visually hidden
+    - Wrapping cells with text, inline code and appropriate existing components
+    - Available-container overflow measurement, native horizontal scrolling and focus retention
+    - SSR/no-JavaScript/no-ResizeObserver keyboard fallback and full print content
+  excludes:
+    - Sorting, filtering, selection, editing, data fetching and pagination ownership
+    - ARIA grid roles, roving focus, clickable rows or custom cell keyboard commands
+    - Sticky or pinned rows/columns, resizing, reordering and virtualisation
+    - Complex spanning or multi-level headers, nested tables and automatic header inference
+    - Zebra, hover, selected-row, density or breakpoint variants
+
+usage:
+  appropriate: API references, factual records, comparisons and evidence with meaningful row/column relationships.
+  alternative: Use a list or description list when a grid does not improve comparison; never use a table for page layout.
+  composition: Existing Link, Badge, Button or appropriate controls retain their own semantics and targets inside cells.
+  hostOwns: Accurate data, header scope, meaningful caption, surrounding headings, empty-state content and outside filters/pagination.
+
+publicApi:
+  export: Table
+  caption: Required nonempty string, rendered as the table's first native caption and accessible name.
+  captionVisibility: visible (default) or visually-hidden; supply equivalent nearby visible context when hidden.
+  scrollLabel: Optional formatter(caption) returning a nonempty localised scroll description, joined to native table aria-describedby when keyboard scrolling is available. Default is caption followed by horizontally scrollable.
+  children:
+    topLevel: Native thead, tbody, tfoot and colgroup sections; arrays/fragments allowed. Require at least one tbody; at most one thead/tfoot.
+    rows: Authors supply native tr/th/td markup, explicit scope=col/row and appropriate content. Direct custom section components are unsupported.
+    validation: Validate section boundary only; do not inspect or transform arbitrary cell content or infer headers.
+  ref: HTMLTableElement
+  metadata: id, className, style, lang, dir, data attributes and aria-describedby belong to the table. Direction/language also reach the viewport.
+  forbidden: Accessible-name/role/tabIndex overrides, arbitrary root handlers, dangerous HTML, hidden/inert tables and a second child caption.
+
+anatomy:
+  viewport: Internal div; bounded horizontal overflow and container sizing. No outer page spacing or fixed height.
+  table: Native table, full available width unless the author explicitly supplies column/table geometry.
+  caption: Native table caption; no heading role. Modern container units keep a visible long caption within viewport width.
+  headers: th with author-supplied scope, heading foreground and strong body weight; no interactive surface.
+  cells: td with ordinary text role, top alignment, wrapping and existing inset padding.
+  separators: Rounded outer border plus thin row and logical column dividers; header semantics and weight identify relationships independently of low-contrast decoration.
+
+behaviour:
+  overflow:
+    - SSR begins with tabindex=0 on the native table plus a scroll description, so content remains keyboard reachable before enhancement.
+    - After ResizeObserver measurement, a fitting table loses its extra tab stop/scroll description; overflowing content retains both.
+    - Measure viewport and table resize, descendant text/attribute/content mutations, window resize, fonts ready and loadingdone.
+    - A one-CSS-pixel tolerance avoids fractional-width noise.
+    - When a focused table stops overflowing, retain its focusability/scroll description until blur; never move focus.
+    - Without ResizeObserver retain the conservative native-table keyboard fallback, even if the table fits.
+  keyboard: Native Tab order and arrow scrolling; no interception. Links/buttons in cells remain ordinarily keyboard accessible.
+  responsive:
+    - One table and one reading order at every width; natural wrapping, no hidden columns or card transformation.
+    - No fixed overall table width. Cells reserve 12ch text space plus insets, capped to container width; summed column minima trigger local scrolling before letter-stack collapse. Author wide geometry remains bounded by the viewport.
+    - Static cells have no 44px target requirement; interactive content retains its existing component's target rules.
+    - Use an ancestor for scoped token overrides that must affect the viewport and table.
+  print: Remove scroll clipping, reset author minimum width and wrap cells within a fixed-layout table; preserve caption policy.
+
+tokens:
+  newPrimitiveTokens: []
+  newSemanticTokens: []
+  newComponentTokens: []
+  surface: color.surface.default
+  foreground: color.text.default
+  headerAndCaptionForeground: color.text.heading
+  typography: typography.body.default, with existing base/md/lg inheritance
+  emphasis: typography.emphasis.strong
+  blockInset: spacing.inset.sm
+  inlineInset: spacing.inset.md
+  captionGap: spacing.stack.sm
+  divider: border.width.thin and color.border.default
+  radius: radius.lg for the outer table border
+  focus: Existing ring/separator colours and border.width.medium/thick, inset so scrolling cannot clip it.
+  rationale: No coloured header or selected state; no role needs a new palette or alias. No Tokens Studio export for this candidate.
+
+accessibility:
+  target: WCAG 2.2 AA
+  criteria: ['1.3.1', '1.3.2', '1.4.3', '1.4.4', '1.4.10', '1.4.11', '1.4.12', '2.1.1', '2.1.2', '2.4.3', '2.4.7', '2.4.11', '4.1.2']
+  semantics: Native caption/table/headers/data cells. Scroll viewport has no role, accessible name or tabindex. The native table is the keyboard scroll target; its caption remains the name and scroll description joins author aria-describedby IDs. No group or region. No redundant table role, live region or per-cell tab stops. Page headings/captions supply navigation; application owns meaningful page-level landmarks.
+  contrast: Text/default and heading on surface/default meet 4.5 to 1. Decorative dividers do not claim 3 to 1; meaningful focus remains visible.
+  reflow: 320 CSS pixels, long captions/headers/identifiers, RTL, doubled text and text spacing. Table two-dimensional exception does not exempt individual cell text or surrounding content.
+  forcedColors: Use system boundary/focus colours; keep native structure and readable text.
+  manualEvidence: Richard reports original plain-wrapper and named-region comparison cases worked with keyboard and VoiceOver in Chrome. This does not establish a root cause for the earlier failure.
+  revisedWrapperAcceptance: New recording confirms native table cell navigation succeeds and wrapper group interaction stalls. Wrapper group removed; native table now owns measured keyboard focus. Richard confirms the revised native-focus path works with VoiceOver/Chrome. Other manual AT/device acceptance remains open.
+  manualAcceptance: VoiceOver/Safari and NVDA with Firefox or Chrome, actual zoom, real touch and Windows high contrast remain unverified.
+
+figma:
+  status: built-unpublished-review
+  fileKey: dVFI0q1cXMtmjUAkdvSWkk
+  pageId: '1618:6'
+  tableMaster: '1618:56'
+  rowMaster: '1618:42'
+  cellSet: '1618:41'
+  evidence: docs/validation/react-table-figma-evidence.json
+  authoring: Caption content (one plain text node), Rows and Cells are Figma slots, not extra React props. Show caption is a boolean. Cell Role is Header or Data, not a Table variant.
+  textStyles: Existing body/strong/code roles; derived shared code-strong style and private QA stress styles use existing colours, fonts, sizes and weights. No new token or variable.
+  construction: Existing token/style foundations; editable Table/Row/Cell anatomy as needed, actual nested component instances and four standard documentation areas.
+  variants: One treatment; no data-count, column-count or breakpoint matrix. Caption visibility is a content property.
+  rules:
+    - Reinspect before construction and preserve existing variable/collection identities.
+    - Use existing Breakpoint modes, native content slots and Page Header/Card documentation components.
+    - Figma documents runtime semantics, keyboard overflow and AT acceptance; it does not prove them.
+
+validation:
+  examples: [Short reference, Wide comparison, Row and column headers, Visible and hidden captions, Long content, Links and Badge in cells]
+  checks: [SSR/hydration and ref, Declarations and forbidden props, Overflow entry/exit and actual Arrow scrolling, Focused resize retention, Dynamic content, No JS/observer fallback, RTL, 320px and text spacing, Print, Forced colours, Axe and rendered contrast, Packed React 18.3 and 19]
+  evidence: docs/validation/react-table-local-candidate.md
+  nextCheckpoint: GitHub source review and unpublished Figma parity review before library publication and site adoption.
+
+references:
+  - https://www.w3.org/WAI/tutorials/tables/
+  - https://www.w3.org/WAI/tutorials/tables/two-headers/
+  - https://www.w3.org/WAI/WCAG22/Understanding/reflow.html
+  - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow#accessibility

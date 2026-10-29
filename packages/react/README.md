@@ -1,6 +1,6 @@
 # OwlA11y React
 
-Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert, Badge, Stepper, Accordion, Card, Breadcrumb and Pagination, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. All current component families are implemented, including the native Dialog backdrop through CSS. Manual release acceptance remains open. This package stays private until release review.
+Local beta scaffold. Implemented exports: Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, ErrorSummary, DateInput, Dialog, Tabs, Alert, Badge, Stepper, Accordion, Card, Breadcrumb, Pagination, CodeBlock, SideMenu, ResponsiveSideMenu and Table, plus ToastProvider, ToastRegion, ToastNotificationsButton and useToast. React 18.3 and 19 are supported by the automated consumer checks. All current component families are implemented, including the native Dialog backdrop through CSS. Manual release acceptance remains open. This package stays private until release review.
 
 ```tsx
 import { Button, TextInput } from '@owla11y/react';
@@ -279,3 +279,7 @@ For primary mobile drawer navigation, pass a mounted same-document header elemen
 Navigation `aria-label` is optional and omitted by default, independently of the required responsive drawer title. For multiple navigation regions with different purposes, provide distinct names such as `Main navigation` and `Account navigation`. Removed uncontrolled group state is discarded. Open inline navigation returns to desktop placement above lg once focus safely leaves its trigger and descendants.
 
 Side menu source is merged through PR 49. Figma page `27 - Components - Side menu` (`1570:296`) is audited and published to the library on 27 October 2026; see the component guidance and validation receipt for preserved asset keys and CURRENT status. npm package publication and remaining device acceptance remain separate.
+
+## Table — review candidate
+
+`Table` takes a required native `caption`, native thead/tbody sections and optional `captionVisibility="visually-hidden"` and localisable `scrollLabel(caption)`. Its ref targets the table. It supplies measured keyboard overflow without sorting, selection or grid semantics. Its wrapper has no role, name or tabindex. When scrolling is needed, the native table is focusable and receives a scroll description alongside author aria-describedby IDs; its caption remains the accessible name. No group or region landmark. Before measurement or without ResizeObserver the native table retains this keyboard fallback. See [Table contract](../../components/table/table.md); Richard accepted local visual/API review and the revised VoiceOver/Chrome path. [PR 54](https://github.com/richardstelmach/accessible-design-system/pull/54) and the unpublished Figma Table candidate await final review; wider manual release checks remain pending.

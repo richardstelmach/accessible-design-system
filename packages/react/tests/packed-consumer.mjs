@@ -9,15 +9,17 @@ globalThis.HTMLElement=dom.window.HTMLElement; globalThis.Element=dom.window.Ele
 globalThis.getComputedStyle=dom.window.getComputedStyle;
 const {renderToString}=await import('react-dom/server');
 const {hydrateRoot}=await import('react-dom/client');
-const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion, Card, Breadcrumb, Pagination, CodeBlock, SideMenu, ResponsiveSideMenu } = await import('@owla11y/react');
+const { Button, IconButton, Link, TextInput, Textarea, Select, Fieldset, Checkbox, Radio, DateInput, ErrorSummary, getDateInputIds, Dialog, Tabs, ToastProvider, ToastRegion, ToastNotificationsButton, useToast, Alert, Badge, Stepper, Accordion, Card, Breadcrumb, Pagination, CodeBlock, SideMenu, ResponsiveSideMenu, Table } = await import('@owla11y/react');
 
 const h = React.createElement;
 const dateIds = getDateInputIds('packed-date');
 const codeBlockRef = React.createRef();
+const tableRef = React.createRef();
 const sideMenuRef = React.createRef();
 const responsiveMenuRef = React.createRef();
 const codeSource = '\n  <Button>Save</Button>\n';
 const app = h('form', null,
+  h(Table,{ref:tableRef,id:'packed-table',caption:'Component status'},h('thead',null,h('tr',null,h('th',{scope:'col'},'Name'))),h('tbody',null,h('tr',null,h('th',{scope:'row'},'Button')))),
   h(ResponsiveSideMenu, {id:'packed-responsive-menu',ref:responsiveMenuRef,label:'Workspace',open:false,onOpenChange:()=>{},items:[{id:'home',label:'Home',href:'/workspace'}]}),
   h(SideMenu, {id:'packed-side-menu',ref:sideMenuRef, 'aria-label':'Documentation', headingLevel:2, currentId:'one', items:[{id:'group',label:'Components',items:[{id:'one',label:'Overview',href:'/docs'}]}]}),
   h(CodeBlock, { label:'React', code:codeSource, ref:codeBlockRef }),
@@ -60,6 +62,8 @@ await React.act(async () => {
 assert.deepEqual([...root.querySelectorAll('[id]')].map(node => node.id).filter(id => ids.includes(id)), ids);
 assert.equal(new Set([...root.querySelectorAll('[id]')].map(node => node.id)).size, root.querySelectorAll('[id]').length);
 assert.deepEqual(errors, []);
+assert.equal(tableRef.current, root.querySelector('#packed-table'));
+assert.equal(tableRef.current.tagName,'TABLE');assert.equal(tableRef.current.caption.textContent,'Component status');assert.equal(tableRef.current.querySelector('th').scope,'col');
 assert.equal(codeBlockRef.current, root.querySelector('.owla11y-code-block'));
 assert.equal(sideMenuRef.current, root.querySelector('#packed-side-menu'));
 assert.equal(responsiveMenuRef.current, root.querySelector('#packed-responsive-menu'));
@@ -194,4 +198,4 @@ assert.equal(root.querySelectorAll('.owla11y-pagination__numbered [aria-current=
 await React.act(async()=>root.querySelector('.owla11y-pagination__numbered a[rel=next]').click());assert.deepEqual(navigationRequests,[[501,'link']]);
 await React.act(async()=>root.querySelector('.owla11y-pagination__jump').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})));assert.equal(root.querySelector('#packed-pages-jump').getAttribute('aria-invalid'),'true');assert.ok(document.activeElement===root.querySelector('#packed-pages-jump'));assert.equal(new dom.window.FormData(root.querySelector('.owla11y-pagination__jump')).get('filter'),'accessible');
 assert.deepEqual(errors,[]);await React.act(async()=>hydrated.unmount());
-console.log('Packed package: React ' + React.version + ' standalone components including CodeBlock (exact text, SSR, hydration, ref), Card/Breadcrumb/Pagination plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');
+console.log('Packed package: React ' + React.version + ' standalone components including Table (native caption, scopes, SSR, hydration, ref), CodeBlock (exact text, SSR, hydration, ref), Card/Breadcrumb/Pagination plus Toast host (announcement, focus, StrictMode), Tabs fallback/state, Dialog lifecycle, date IDs, types, SSR, hydration, error routing, title and native reset passed');

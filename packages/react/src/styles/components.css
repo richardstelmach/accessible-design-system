@@ -590,3 +590,21 @@ h6.owla11y-alert__title { font-family:var(--typography-heading-h6-fontFamily); f
 .owla11y-side-menu__accordion-links { margin-inline:calc(-1 * var(--component-accordion-spacing-padding-inline)); }
 @media (forced-colors:active) { .owla11y-side-menu__link[aria-current="page"] { border:var(--border-width-medium) solid CanvasText; } .owla11y-side-menu .owla11y-side-menu__link[aria-current="page"]::before { background:CanvasText !important; forced-color-adjust:none; } }
 @media print { .owla11y-side-menu-drawer-trigger { display:none; } .owla11y-side-menu [hidden],.owla11y-side-menu-layout [hidden] { display:block; } .owla11y-dialog.owla11y-side-menu-drawer { display:block; position:static; inline-size:auto; block-size:auto; max-block-size:none; max-inline-size:none; overflow:visible; border:0; } .owla11y-side-menu-drawer .owla11y-dialog__header { display:none; } .owla11y-side-menu-drawer .owla11y-dialog__content { overflow:visible; } }
+
+/* Native Table: no widget roles, selected rows, or breakpoint-specific remapping. */
+.owla11y-table-viewport { min-inline-size:0; max-inline-size:100%; overflow-x:auto; container-type:inline-size; background:var(--color-surface-default); }
+.owla11y-table { box-sizing:border-box; inline-size:100%; border-collapse:separate; border-spacing:0; border:var(--border-width-thin) solid var(--color-border-default); border-radius:var(--radius-lg); color:var(--color-text-default); background:var(--color-surface-default); font-family:var(--typography-body-default-fontFamily); font-size:var(--typography-body-default-fontSize); line-height:var(--typography-body-default-lineHeight); text-align:start; }
+.owla11y-table > caption { padding-block-end:var(--spacing-stack-sm); color:var(--color-text-heading); font-weight:var(--typography-emphasis-strong); text-align:start; overflow-wrap:anywhere; }
+/* Keep a long native caption within the viewport even when its table is wider. */
+@supports (inline-size:100cqi) { .owla11y-table > caption { inline-size:100cqi; } }
+.owla11y-table :is(th,td) { min-inline-size:12ch; min-inline-size:min(12ch,calc(100cqi - 2 * var(--spacing-inset-md) - 2 * var(--border-width-thin))); padding:var(--spacing-inset-sm) var(--spacing-inset-md); vertical-align:top; overflow-wrap:anywhere; border-block-end:var(--border-width-thin) solid var(--color-border-default); }
+.owla11y-table tr > :not(:last-child) { border-inline-end:var(--border-width-thin) solid var(--color-border-default); }
+.owla11y-table > :last-child > tr:last-child > :is(th,td) { border-block-end:0; }
+.owla11y-table th { color:var(--color-text-heading); font-weight:var(--typography-emphasis-strong); text-align:inherit; }
+.owla11y-table > caption.owla11y-table__caption--hidden { position:absolute; inline-size:1px; block-size:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.owla11y-table:focus-visible { outline:var(--border-width-medium) solid var(--color-interactive-focus-ring); outline-offset:calc(-1 * var(--border-width-thick)); box-shadow:inset 0 0 0 var(--border-width-thick) var(--color-interactive-focus-separator); }
+@supports selector(:has(*)) { .owla11y-table-viewport:has(> .owla11y-table:focus-visible) { outline:var(--border-width-medium) solid var(--color-interactive-focus-ring); outline-offset:calc(-1 * var(--border-width-thick)); box-shadow:inset 0 0 0 var(--border-width-thick) var(--color-interactive-focus-separator); } .owla11y-table:focus-visible { outline:none; box-shadow:none; } }
+/* Cell insets leave room for nested controls' existing focus rings. */
+@media (forced-colors:active) { .owla11y-table:focus-visible { outline-color:Highlight; box-shadow:none; } .owla11y-table, .owla11y-table :is(th,td) { border-color:CanvasText; } }
+@supports selector(:has(*)) { @media (forced-colors:active) { .owla11y-table-viewport:has(> .owla11y-table:focus-visible) { outline-color:Highlight; box-shadow:none; } } }
+@media print { .owla11y-table-viewport { overflow:visible; container-type:normal; } .owla11y-table { inline-size:100% !important; min-inline-size:0 !important; table-layout:fixed; } .owla11y-table > caption { inline-size:auto; } .owla11y-table :is(th,td) { min-inline-size:0; white-space:normal; overflow-wrap:anywhere; } }
