@@ -1,6 +1,6 @@
 # Table
 
-Accepted local candidate, 29 October 2026. [Contract](table.yaml) · [Planning and scope](../../docs/plans/basic-table.md). GitHub [PR 54](https://github.com/richardstelmach/accessible-design-system/pull/54) and [unpublished Figma candidate](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1618-6) are ready for final review; wider manual release acceptance remains open.
+Delivered and published in Figma, 29 October 2026. [Contract](table.yaml) · [Planning and scope](../../docs/plans/basic-table.md). GitHub [PR 54](https://github.com/richardstelmach/accessible-design-system/pull/54) is merged and the [Figma Table](https://www.figma.com/design/dVFI0q1cXMtmjUAkdvSWkk?node-id=1618-6) is published. [Publication evidence](../../docs/validation/react-table-parity.md) records the checks and asset identities. Wider manual release acceptance remains open; this is not a registry release or deployment.
 
 Use a Table when information has meaningful relationships across rows and columns: references, comparisons and factual records. Use a list or description list for simpler content. This is not a layout tool or an interactive data grid.
 
