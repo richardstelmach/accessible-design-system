@@ -2604,7 +2604,13 @@
     "pageId": "1570:296",
     "instancesPreserved": 28,
     "method": "Outlined=False; Top divider=False; strokesIncludedInLayout=false; preserve bottom-only inset divider.",
-    "sourceBrowserRegression": "packages/react/tests/browser/accordion-boundary.spec.ts"
+    "sourceBrowserRegression": "packages/react/tests/browser/accordion-boundary.spec.ts",
+    "explicitOverrideWrites": 28,
+    "finalAudit": {
+      "reviewedInstances": 30,
+      "includesHiddenDescendants": true,
+      "failures": []
+    }
   },
   "publicationPerformed": false,
   "siteUpdated": false,

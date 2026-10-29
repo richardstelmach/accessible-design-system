@@ -52,7 +52,7 @@ Outlined=False/True joins Expanded=False/True and State=Default/Hover/Pressed. F
 
 Examples use actual static Card instances, with heading inside or outside the content-only container. No new Card/Panel master. The existing documentation header/card pattern is retained. Source guidance is added to the existing Accordion/Card docs and accessibility cards.
 
-**298 text nodes, zero unstyled; 360 existing variables, zero added.** Twelve private `_reference/Accordion/...` styles replace pre-existing unstyled 200%/text-spacing illustrations without adding production typography roles or tokens. Existing global and Breakpoint IDs/modes remain intact; no live canonical variable values or metadata were changed. Side menu’s 28 embedded item instances retain bottom-only geometry, zero top/side strokes and no outline. Changes remain unpublished.
+**298 text nodes, zero unstyled; 360 existing variables, zero added.** Twelve private `_reference/Accordion/...` styles replace pre-existing unstyled 200%/text-spacing illustrations without adding production typography roles or tokens. Existing global and Breakpoint IDs/modes remain intact; no live canonical variable values or metadata were changed. Side menu received 28 explicit instance overrides; the final audit, including inherited hidden descendants, checked 30 instances with no failures. They retain bottom-only geometry, zero top/side strokes and no outline. Changes remain unpublished.
 
 ![Real package Accordion and existing Card compositions](accordion-boundary/react-compositions.png)
 
