@@ -1,6 +1,6 @@
 {
   "date": "2026-10-29",
-  "status": "unpublished-review",
+  "status": "merged-synced-unpublished",
   "fileKey": "dVFI0q1cXMtmjUAkdvSWkk",
   "sessionId": "cf403da2-db7f-465e-a29d-9431b34f4716",
   "sourceBase": "0ed62dbc2b2aa1320ef3794bd23f6faa9e65d9c9",
@@ -22,8 +22,8 @@
       "toPixels": 0
     },
     "figmaGlobalValuesChanged": 0,
-    "candidateGapBinding": "VariableID:8:77",
-    "pending": "Merge source; Tokens Studio provider pull and routine non-destructive global export; rebind candidate Items slots to VariableID:1161:4528, then repeat audit."
+    "candidateGapBinding": "VariableID:1161:4528",
+    "pending": "Library publication pending; merged alias has been pulled/exported and candidate bindings restored."
   },
   "masterMutation": {
     "createdNodeIds": [
@@ -2675,5 +2675,7 @@
       "accordion-boundary/figma-responsive.png"
     ],
     "supersedes": "Earlier structural visibility checks did not establish absence of paint occlusion."
-  }
+  },
+  "roundtripReceipt": "accordion-boundary/token-roundtrip.json",
+  "mergeCommit": "a5124be88baf14e016070dee63f3040d85bf9b6d"
 }
