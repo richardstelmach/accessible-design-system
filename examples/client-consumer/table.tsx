@@ -14,7 +14,7 @@ export function TablePreview() {
       <Checkbox name="table-long" value="yes" label="Long content" checked={long} onChange={e=>setLong(e.target.checked)}/>
       <Checkbox name="table-rtl" value="yes" label="Right-to-left layout" checked={rtl} onChange={e=>setRtl(e.target.checked)}/>
     </div>
-    <section aria-labelledby="table-example-title" dir={rtl?'rtl':'ltr'}>
+    <section dir={rtl?'rtl':'ltr'}>
       <h2 id="table-example-title">{example==='reference'?'Component reference':'Plan comparison'}</h2>
       <p>Cells wrap naturally. When the table needs more room, its viewport can scroll horizontally. Tab directly to an overflowing table and use the arrow keys; links and controls keep their normal keyboard behaviour.</p>
       <Button id="table-before">Before the table</Button>
