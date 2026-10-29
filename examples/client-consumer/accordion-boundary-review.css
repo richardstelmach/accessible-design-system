@@ -1,0 +1,28 @@
+/* Review-page composition only. Package CSS owns Accordion and Card styling. */
+.accordion-boundary-review { color:var(--color-text-default); max-inline-size:var(--layout-container-maxWidth-wide); margin-inline:auto; padding:var(--layout-page-padding); padding-block-end:calc(var(--spacing-section) + var(--spacing-stack-xl)); }
+.accordion-boundary-review h1 { font-family:var(--typography-heading-h1-fontFamily); font-size:var(--typography-heading-h1-fontSize); font-weight:var(--typography-heading-h1-fontWeight); line-height:var(--typography-heading-h1-lineHeight); letter-spacing:var(--typography-heading-h1-letterSpacing); margin-block:var(--spacing-stack-md); }
+.accordion-boundary-review h2 { font-family:var(--typography-heading-h3-fontFamily); font-size:var(--typography-heading-h3-fontSize); font-weight:var(--typography-heading-h3-fontWeight); line-height:var(--typography-heading-h3-lineHeight); letter-spacing:var(--typography-heading-h3-letterSpacing); margin-block:0 var(--spacing-content-headingToBody); }
+.accordion-boundary-review h3:not(.owla11y-card__title) { font-family:var(--typography-heading-h5-fontFamily); font-size:var(--typography-heading-h5-fontSize); font-weight:var(--typography-heading-h5-fontWeight); line-height:var(--typography-heading-h5-lineHeight); letter-spacing:var(--typography-heading-h5-letterSpacing); margin-block:0 var(--spacing-content-headingToBody); }
+.accordion-boundary-review p { margin-block:0 var(--spacing-stack-md); }
+.accordion-boundary-review__intro { max-inline-size:var(--layout-container-maxWidth-text); }
+.accordion-boundary-review__lead { font-size:var(--typography-body-large-fontSize); line-height:var(--typography-body-large-lineHeight); }
+.accordion-boundary-review__controls { display:flex; flex-wrap:wrap; gap:var(--spacing-stack-md) var(--spacing-inline-lg); margin-block:var(--spacing-stack-xl); padding-block:var(--spacing-inset-md); border-block:var(--border-width-thin) solid var(--color-border-light); }
+.accordion-boundary-review__controls p { flex-basis:100%; margin:0; font-size:var(--typography-body-small-fontSize); line-height:var(--typography-body-small-lineHeight); }
+.accordion-boundary-review__standalone, .accordion-boundary-review__compositions, .accordion-boundary-review__notes { margin-block-start:var(--spacing-section); }
+.accordion-boundary-review__document { max-inline-size:var(--layout-container-maxWidth-text); margin-block-start:var(--spacing-stack-lg); }
+.accordion-boundary-review__after { margin-block-start:var(--spacing-stack-lg)!important; }
+.accordion-boundary-review__contents { display:flex; flex-direction:column; gap:var(--spacing-stack-sm); padding-inline-start:var(--spacing-inset-lg); margin-block:0; }
+.accordion-boundary-review__grid { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--layout-grid-gutter); align-items:start; margin-block-start:var(--spacing-stack-lg); }
+@media (min-width:64rem) { .accordion-boundary-review__grid[data-comparison="true"] { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+.accordion-boundary-review__grid[data-comparison="false"] { max-inline-size:var(--layout-container-maxWidth-text); }
+.accordion-boundary-review__example { min-inline-size:0; scroll-margin-block-start:var(--spacing-stack-lg); }
+.accordion-boundary-review__label { color:var(--color-text-default); font-size:var(--typography-body-small-fontSize); line-height:var(--typography-body-small-lineHeight); font-weight:var(--typography-emphasis-strong); margin-block-end:var(--spacing-stack-lg); }
+.accordion-boundary-review .owla11y-card__content > p:last-child { margin-block-end:0; }
+.accordion-boundary-review__notes { max-inline-size:var(--layout-container-maxWidth-text); }
+.accordion-boundary-review__notes li + li { margin-block-start:var(--spacing-stack-sm); }
+.accordion-boundary-review__switcher { position:fixed; z-index:10; inset-block-end:var(--spacing-inset-md); inset-inline-start:50%; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:var(--spacing-inline-sm); inline-size:max-content; max-inline-size:calc(100% - 2 * var(--layout-page-padding)); padding:var(--spacing-inset-sm); background:var(--color-surface-default); border:var(--border-width-medium) solid var(--color-border-default); border-radius:var(--radius-lg); }
+.accordion-boundary-review__switcher span { min-inline-size:0; font-size:var(--typography-body-small-fontSize); line-height:var(--typography-body-small-lineHeight); }
+@media print { .accordion-boundary-review__controls, .accordion-boundary-review__switcher { display:none; } .accordion-boundary-review__grid { display:block; } .accordion-boundary-review__example + .accordion-boundary-review__example { margin-block-start:var(--spacing-stack-lg); } }
+
+.accordion-boundary-review :is(h1,h2,h3) { color:var(--color-text-heading); }
+.accordion-boundary-review :focus-visible { scroll-margin-block:var(--spacing-stack-lg) calc(3 * var(--spacing-stack-xl)); }

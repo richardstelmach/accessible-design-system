@@ -39,9 +39,9 @@
           }
         },
         "itemGap": {
-          "$value": "{spacing.stack.sm}",
+          "$value": "{spacing.0}",
           "$type": "spacing",
-          "$description": "Gap between accordion items, leaving room for external keyboard focus rings.",
+          "$description": "Zero gap between adjacent accordion items. Shared dividers join the items into a continuous stack; focus rings remain visible above their neighbours.",
           "$extensions": {
             "com.figma.scopes": ["GAP"],
             "com.figma.codeSyntax": {"Web": "var(--component-accordion-spacing-item-gap)"}

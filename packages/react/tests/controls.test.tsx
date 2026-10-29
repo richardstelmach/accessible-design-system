@@ -74,3 +74,16 @@ it('Stepper rejects invalid configuration and does not treat large mismatched qu
   for(const props of [{step:0},{step:Infinity},{min:4,max:2},{min:0,step:2,defaultValue:'3'},{defaultValue:'abc'},{defaultValue:'Infinity'},{defaultValue:2},{value:'2'},{value:'2',defaultValue:'2',onValueChange:()=>{}},{incrementLabel:''},{readOnly:true},{placeholder:'Enter'},{onChange:()=>{}},{tabIndex:-1}])expect(()=>renderToString(<Stepper {...base} {...props as any}/>)).toThrow(/OwlA11y/);
   expect(quantity('1000000000000.5',0,1000000000000.5,1,0).valid).toBe(false);
 });
+
+it('Accordion optional outline changes presentation without changing semantics, keys or ownership',async()=>{
+  const user=userEvent.setup();const ref=createRef<HTMLDivElement>();const view=render(<Accordion ref={ref} headingLevel={3} items={items}/>);
+  expect(ref.current).not.toHaveAttribute('data-outlined');const trigger=screen.getByRole('button',{name:items[0].title});const controls=trigger.getAttribute('aria-controls');
+  await user.click(trigger);expect(trigger).toHaveAttribute('aria-expanded','true');
+  view.rerender(<Accordion ref={ref} headingLevel={3} items={items} outlined/>);
+  expect(ref.current).toHaveAttribute('data-outlined','true');expect(trigger).toHaveAttribute('aria-controls',controls);expect(trigger).toHaveAttribute('aria-expanded','true');expect(ref.current!.querySelectorAll('[role=region]')).toHaveLength(0);
+  await user.click(trigger);expect(trigger).toHaveAttribute('aria-expanded','false');expect(trigger).toHaveFocus();
+  view.rerender(<Accordion ref={ref} headingLevel={3} items={items} outlined={false}/>);expect(ref.current).not.toHaveAttribute('data-outlined');
+});
+it('Accordion rejects non-boolean outline values at runtime',()=>{
+  for(const outlined of ['true',null,0])expect(()=>renderToString(<Accordion headingLevel={3} items={items} outlined={outlined as any}/>)).toThrow(/outlined must be a boolean/);
+});

@@ -255,3 +255,7 @@ import {Table} from '../src/index.js';
 <Table caption="Plans" tabIndex={0}><tbody/></Table>;
 // @ts-expect-error caption name is component-owned
 <Table caption="Plans" aria-label="Other"><tbody/></Table>;
+
+<Accordion headingLevel={3} items={accordionItems} outlined/>;
+// @ts-expect-error outline is a boolean, not a presentation string
+<Accordion headingLevel={3} items={accordionItems} outlined="true"/>;
